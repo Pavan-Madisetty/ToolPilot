@@ -98,7 +98,7 @@ const TemperatureConverter = lazy(() => import('@/pages/tools/conversion/Tempera
 export default function App() {
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/ToolPilot">
         <ToastContainer />
         <AnimatePresence mode="wait">
           <Routes>
