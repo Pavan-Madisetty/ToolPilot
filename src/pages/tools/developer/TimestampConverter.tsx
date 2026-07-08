@@ -1,12 +1,108 @@
+import { useState, useEffect } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
+import { Button, Input, StatCard } from '@/components/ui';
 
 export default function TimestampConverter() {
+  const [liveEpoch, setLiveEpoch] = useState<number>(Math.floor(Date.now() / 1000));
+  const [epochInput, setEpochInput] = useState<string>('');
+  const [epochResult, setEpochResult] = useState<string>('');
+
+  const [dateInput, setDateInput] = useState<string>('');
+  const [dateResult, setDateResult] = useState<string>('');
+
+  // Update live counter clock every second
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setLiveEpoch(Math.floor(Date.now() / 1000));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Epoch to Date translation
+  const handleEpochConvert = () => {
+    if (!epochInput) return;
+    try {
+      const ms = Number(epochInput) * 1000;
+      const date = new Date(ms);
+      if (isNaN(date.getTime())) {
+        setEpochResult('Invalid Unix timestamp');
+        return;
+      }
+      setEpochResult(
+        `Local: ${date.toLocaleString()}\nUTC: ${date.toUTCString()}\nISO: ${date.toISOString()}`
+      );
+    } catch (err) {
+      setEpochResult('Conversion error');
+    }
+  };
+
+  // Date to Epoch parsing
+  const handleDateConvert = () => {
+    if (!dateInput) return;
+    try {
+      const date = new Date(dateInput);
+      if (isNaN(date.getTime())) {
+        setDateResult('Invalid date string');
+        return;
+      }
+      setDateResult(Math.floor(date.getTime() / 1000).toString());
+    } catch (err) {
+      setDateResult('Conversion error');
+    }
+  };
+
   return (
     <ToolPageWrapper toolId="timestamp-converter">
-      <div className="text-center py-16 border rounded-xl bg-slate-50 dark:bg-slate-800/40" style={{ borderColor: 'var(--border-default)' }}>
-        <div className="text-6xl mb-4">🚧</div>
-        <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Coming Soon</h2>
-        <p style={{ color: 'var(--text-secondary)' }}>This tool is under development. Check back soon!</p>
+      <div className="space-y-8">
+        {/* Live Clock Card */}
+        <div className="grid grid-cols-1 gap-4 max-w-md">
+          <StatCard label="Current Unix Epoch Timestamp (p.s. updates live)" value={liveEpoch} highlight />
+        </div>
+
+        <div className="tool-layout lg:grid-cols-2">
+          {/* Epoch to Date conversion panel */}
+          <div className="space-y-4 p-6 border rounded-2xl bg-white dark:bg-slate-800" style={{ borderColor: 'var(--border-default)' }}>
+            <h3 className="text-base font-bold">Convert Unix Timestamp to Date</h3>
+            <Input
+              label="Unix Epoch Timestamp (seconds)"
+              placeholder="e.g. 1718000000"
+              value={epochInput}
+              onChange={(e) => setEpochInput(e.target.value)}
+            />
+            <Button onClick={handleEpochConvert} className="w-full">
+              Convert to Date
+            </Button>
+            {epochResult && (
+              <textarea
+                readOnly
+                rows={4}
+                value={epochResult}
+                className="input-base font-mono text-xs leading-relaxed resize-none mt-4 bg-slate-50/50 dark:bg-slate-900/30"
+                aria-label="Timestamp translation output"
+              />
+            )}
+          </div>
+
+          {/* Date to Epoch conversion panel */}
+          <div className="space-y-4 p-6 border rounded-2xl bg-white dark:bg-slate-800" style={{ borderColor: 'var(--border-default)' }}>
+            <h3 className="text-base font-bold">Convert Date to Unix Timestamp</h3>
+            <Input
+              label="Date / Time String"
+              type="datetime-local"
+              value={dateInput}
+              onChange={(e) => setDateInput(e.target.value)}
+            />
+            <Button onClick={handleDateConvert} className="w-full">
+              Convert to Epoch
+            </Button>
+            {dateResult && (
+              <div className="mt-4 p-4 border rounded-xl bg-slate-50/50 dark:bg-slate-900/30" style={{ borderColor: 'var(--border-default)' }}>
+                <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Epoch Timestamp (seconds)</span>
+                <p className="text-lg font-bold font-mono mt-1" style={{ color: 'var(--text-primary)' }}>{dateResult}</p>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </ToolPageWrapper>
   );
