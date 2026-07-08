@@ -1,7 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { FavoriteItem, HistoryItem } from '@/types';
-import { STORAGE_KEYS } from '@/types';
+import { FavoriteItem, HistoryItem, STORAGE_KEYS } from '@/types';
 
 // ─────────────────────────────────────────────
 // Favorites Store

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   MagnifyingGlassIcon,
@@ -19,7 +19,6 @@ export function Header() {
   const { setIsOpen: setSearchOpen } = useSearchStore();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const navigate = useNavigate();
 
   // Scroll detection for header shadow
   useEffect(() => {
@@ -28,10 +27,7 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on route change
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [navigate]);
+
 
   // Keyboard shortcut: Ctrl+K / Cmd+K
   useEffect(() => {

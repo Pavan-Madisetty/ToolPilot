@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Button, Slider, Switch, CopyButton } from '@/components/ui';
 
@@ -16,21 +16,22 @@ export default function PasswordGenerator() {
   const [useNumbers, setUseNumbers] = useState(true);
   const [useSymbols, setUseSymbols] = useState(true);
   const [excludeSimilar, setExcludeSimilar] = useState(false);
-  const [password, setPassword] = useState('');
-  const [passphrase, setPassphrase] = useState('');
   const [isPassphraseMode, setIsPassphraseMode] = useState(false);
+  const [trigger, setTrigger] = useState(0);
 
-  // Generate Handler
-  const generatePassword = () => {
+  // Compute password/passphrase purely during render using useMemo
+  const passwordVal = useMemo(() => {
+    void trigger;
     if (isPassphraseMode) {
       // Passphrase mode: join random dictionary words
       const list = [];
+      const array = new Uint32Array(4);
+      window.crypto.getRandomValues(array);
       for (let i = 0; i < 4; i++) {
-        const rand = Math.floor(Math.random() * PASSPHRASE_WORDS.length);
+        const rand = array[i] % PASSPHRASE_WORDS.length;
         list.push(PASSPHRASE_WORDS[rand]);
       }
-      setPassphrase(list.join('-'));
-      return;
+      return list.join('-');
     }
 
     let chars = '';
@@ -40,13 +41,11 @@ export default function PasswordGenerator() {
     if (useSymbols) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?';
 
     if (excludeSimilar) {
-      // Remove similar characters (e.g. i, l, 1, L, o, 0, O)
       chars = chars.replace(/[il1Lo0O!|]/g, '');
     }
 
     if (!chars) {
-      setPassword('');
-      return;
+      return '';
     }
 
     // Cryptographically secure values
@@ -56,20 +55,15 @@ export default function PasswordGenerator() {
     for (let i = 0; i < length; i++) {
       result += chars.charAt(array[i] % chars.length);
     }
-    setPassword(result);
-  };
-
-  // Auto-generate on parameters change
-  useEffect(() => {
-    generatePassword();
-  }, [length, useUpper, useLower, useNumbers, useSymbols, excludeSimilar, isPassphraseMode]);
+    return result;
+  }, [length, useUpper, useLower, useNumbers, useSymbols, excludeSimilar, isPassphraseMode, trigger]);
 
   // Calculate Entropy for strength meter
   const strengthInfo = useMemo(() => {
     if (isPassphraseMode) {
       return { score: 'Strong', color: 'bg-emerald-500', width: 'w-3/4' };
     }
-    if (!password) return { score: 'None', color: 'bg-gray-200', width: 'w-0' };
+    if (!passwordVal) return { score: 'None', color: 'bg-gray-200', width: 'w-0' };
 
     let pool = 0;
     if (useUpper) pool += 26;
@@ -77,7 +71,7 @@ export default function PasswordGenerator() {
     if (useNumbers) pool += 10;
     if (useSymbols) pool += 26;
 
-    const entropy = password.length * Math.log2(pool || 1);
+    const entropy = passwordVal.length * Math.log2(pool || 1);
     if (entropy < 40) {
       return { score: 'Weak', color: 'bg-red-500', width: 'w-1/4' };
     } else if (entropy < 65) {
@@ -87,7 +81,7 @@ export default function PasswordGenerator() {
     } else {
       return { score: 'Very Strong', color: 'bg-blue-600', width: 'w-full' };
     }
-  }, [password, useUpper, useLower, useNumbers, useSymbols, isPassphraseMode]);
+  }, [passwordVal, useUpper, useLower, useNumbers, useSymbols, isPassphraseMode]);
 
   return (
     <ToolPageWrapper toolId="password-generator">
@@ -130,7 +124,7 @@ export default function PasswordGenerator() {
             </p>
           )}
 
-          <Button onClick={generatePassword} className="w-full">
+          <Button onClick={() => setTrigger((t) => t + 1)} className="w-full">
             Regenerate
           </Button>
         </div>
@@ -140,12 +134,12 @@ export default function PasswordGenerator() {
           <div className="border rounded-2xl p-6 bg-white dark:bg-slate-800 space-y-4" style={{ borderColor: 'var(--border-default)' }}>
             <div className="flex items-center justify-between">
               <span className="label">Generated Result</span>
-              {(password || passphrase) && <CopyButton text={isPassphraseMode ? passphrase : password} />}
+              {passwordVal && <CopyButton text={passwordVal} />}
             </div>
 
             <input
               readOnly
-              value={isPassphraseMode ? passphrase : password}
+              value={passwordVal}
               className="input-base font-mono text-center text-lg font-bold select-all py-3 border-2 border-blue-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/30"
               aria-label="Generated password value"
             />
@@ -166,4 +160,3 @@ export default function PasswordGenerator() {
     </ToolPageWrapper>
   );
 }
-

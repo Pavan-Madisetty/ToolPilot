@@ -22,9 +22,9 @@ export default function GSTCalculator() {
     const amt = amount || 0;
     const rate = gstRate || 0;
 
-    let baseAmount = 0;
-    let gstAmount = 0;
-    let totalAmount = 0;
+    let baseAmount: number;
+    let gstAmount: number;
+    let totalAmount: number;
 
     if (isExclusive) {
       // Add GST: Amount is base price

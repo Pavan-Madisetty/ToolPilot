@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { SearchResult } from '@/types';
+import { SearchResult, ToastMessage } from '@/types';
 import { TOOLS } from '@/config/tools';
 
 // ─────────────────────────────────────────────
@@ -76,7 +76,6 @@ export const useSearchStore = create<SearchStore>()((set) => ({
 // ─────────────────────────────────────────────
 // UI Store (toasts, modals, sidebar)
 // ─────────────────────────────────────────────
-import type { ToastMessage } from '@/types';
 
 interface UIStore {
   toasts: ToastMessage[];

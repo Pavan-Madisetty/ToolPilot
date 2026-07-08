@@ -29,7 +29,7 @@ export default function SIPCalculator() {
     const totalInvested = P * n;
     
     // Future Value formula: FV = P * [ ( (1 + i)^n - 1 ) / i ] * (1 + i)
-    let totalValue = 0;
+    let totalValue: number;
     if (i === 0) {
       totalValue = totalInvested;
     } else {
@@ -99,7 +99,7 @@ export default function SIPCalculator() {
           color: 'var(--border-subtle)',
         },
         ticks: {
-          callback: (value: any) => formatCurrency(Number(value)),
+          callback: (value: string | number) => formatCurrency(Number(value)),
         },
       },
       x: {

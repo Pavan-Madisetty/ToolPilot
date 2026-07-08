@@ -18,6 +18,7 @@ function base64UrlDecode(str: string): string {
 
 export default function JwtDecoder() {
   const [token, setToken] = useState('');
+  const [currentTimestamp] = useState(() => Date.now());
   const [decoded, setDecoded] = useState<{
     header: string;
     payload: string;
@@ -47,7 +48,7 @@ export default function JwtDecoder() {
         payload: JSON.stringify(JSON.parse(payloadDecoded), null, 2),
         signature: parts[2],
       });
-    } catch (err: any) {
+    } catch {
       setError('Failed to decode token claims. Ensure the token is a valid base64url string.');
     }
   };
@@ -66,7 +67,7 @@ export default function JwtDecoder() {
       
       if (payloadObj.exp) {
         const expDate = new Date(payloadObj.exp * 1000);
-        const isExpired = expDate.getTime() < Date.now();
+        const isExpired = expDate.getTime() < currentTimestamp;
         claims.push({
           label: 'Expiration Time (exp)',
           value: `${expDate.toLocaleString()} (${isExpired ? 'Expired' : 'Valid'})`,
@@ -81,10 +82,10 @@ export default function JwtDecoder() {
       }
 
       return claims;
-    } catch (err) {
+    } catch {
       return null;
     }
-  }, [decoded]);
+  }, [decoded, currentTimestamp]);
 
   return (
     <ToolPageWrapper toolId="jwt-decoder">

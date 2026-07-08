@@ -27,7 +27,7 @@ export default function Base64Tool() {
       }
 
       setOutput(base64);
-    } catch (err: any) {
+    } catch {
       setError('Encoding failed. Invalid characters detected.');
     }
   };
@@ -59,7 +59,7 @@ export default function Base64Tool() {
 
       const decoded = new TextDecoder().decode(bytes);
       setOutput(decoded);
-    } catch (err: any) {
+    } catch {
       setError('Decoding failed. The input is not a valid Base64 string.');
       setOutput('');
     }

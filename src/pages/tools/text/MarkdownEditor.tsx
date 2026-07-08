@@ -19,7 +19,7 @@ export default function MarkdownEditor() {
     html = html.replace(/\*(.*)\*/gim, '<em>$1</em>');
 
     // Unordered lists
-    html = html.replace(/^\- (.*$)/gim, '<ul><li>$1</li></ul>');
+    html = html.replace(/^- (.*$)/gim, '<ul><li>$1</li></ul>');
     html = html.replace(/<\/ul>\s*<ul>/g, ''); // merge lists
 
     // Paragraph lines

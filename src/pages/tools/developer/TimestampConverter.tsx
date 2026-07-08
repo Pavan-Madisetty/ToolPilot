@@ -3,7 +3,7 @@ import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Button, Input, StatCard } from '@/components/ui';
 
 export default function TimestampConverter() {
-  const [liveEpoch, setLiveEpoch] = useState<number>(Math.floor(Date.now() / 1000));
+  const [liveEpoch, setLiveEpoch] = useState<number>(() => Math.floor(Date.now() / 1000));
   const [epochInput, setEpochInput] = useState<string>('');
   const [epochResult, setEpochResult] = useState<string>('');
 
@@ -31,7 +31,7 @@ export default function TimestampConverter() {
       setEpochResult(
         `Local: ${date.toLocaleString()}\nUTC: ${date.toUTCString()}\nISO: ${date.toISOString()}`
       );
-    } catch (err) {
+    } catch {
       setEpochResult('Conversion error');
     }
   };
@@ -46,7 +46,7 @@ export default function TimestampConverter() {
         return;
       }
       setDateResult(Math.floor(date.getTime() / 1000).toString());
-    } catch (err) {
+    } catch {
       setDateResult('Conversion error');
     }
   };

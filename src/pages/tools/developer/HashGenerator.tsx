@@ -7,17 +7,19 @@ function md5(string: string) {
   function k(n: number) {
     return Math.abs(Math.sin(n)) * 4294967296 | 0;
   }
-  let s = [7, 12, 17, 22, 5, 9, 14, 20, 4, 11, 16, 23, 6, 10, 15, 21];
-  let a = [1732584193, 4023233417, 2562383102, 271733878], x = [a[0], a[1], a[2], a[3]];
-  let blocks = [], i, l = string.length, n = (l + 8 >> 6) + 1;
+  const s = [7, 12, 17, 22, 5, 9, 14, 20, 4, 11, 16, 23, 6, 10, 15, 21];
+  const a = [1732584193, 4023233417, 2562383102, 271733878], x = [a[0], a[1], a[2], a[3]];
+  const blocks = [];
+  let i;
+  const l = string.length, n = (l + 8 >> 6) + 1;
   for (i = 0; i < n * 16; blocks[i++] = 0);
   for (i = 0; i < l; blocks[i >> 2] |= string.charCodeAt(i) << (i % 4 << 3), i++);
   blocks[i >> 2] |= 0x80 << (i % 4 << 3);
   blocks[n * 16 - 2] = l * 8;
   for (i = 0; i < blocks.length; i += 16) {
-    let old = [x[0], x[1], x[2], x[3]], r = [0, 0, 0, 0];
+    const old = [x[0], x[1], x[2], x[3]]; let r = [0, 0, 0, 0];
     for (let j = 0; j < 64; j++) {
-      let div = j >> 4;
+      const div = j >> 4;
       if (div === 0) {
         r = [x[1] & x[2] | ~x[1] & x[3], 0, 1, 7];
       } else if (div === 1) {
@@ -27,12 +29,12 @@ function md5(string: string) {
       } else if (div === 3) {
         r = [x[2] ^ (x[1] | ~x[3]), 3, 7, 14];
       }
-      let index = (r[1] * j + r[2]) % 16;
-      let temp = x[3];
+      const index = (r[1] * j + r[2]) % 16;
+      const temp = x[3];
       x[3] = x[2];
       x[2] = x[1];
-      let add = x[0] + r[0] + k(j + 1) + blocks[i + index];
-      let shift = s[r[3] + (j % 4)];
+      const add = x[0] + r[0] + k(j + 1) + blocks[i + index];
+      const shift = s[r[3] + (j % 4)];
       x[1] = x[1] + (add << shift | add >>> 32 - shift);
       x[0] = temp;
     }
@@ -79,7 +81,7 @@ export default function HashGenerator() {
         sha256: computedSha256,
         sha512: computedSha512,
       });
-    } catch (err) {
+    } catch {
       // Graceful error ignore
     }
   };

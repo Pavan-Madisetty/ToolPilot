@@ -4,9 +4,8 @@ import { Breadcrumb } from '@/components/ui/Breadcrumb';
 import { RelatedTools } from './RelatedTools';
 import { TOOL_BY_ID } from '@/config/tools';
 import { useHistoryStore, useFavoritesStore } from '@/stores/userStore';
-import { HeartIcon } from '@heroicons/react/24/outline';
+import { HeartIcon, ShareIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
-import { ShareIcon } from '@heroicons/react/24/outline';
 import { useUIStore } from '@/stores/uiStore';
 
 interface ToolPageWrapperProps {
@@ -45,7 +44,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
           text: tool.description,
           url,
         });
-      } catch (err) {
+      } catch {
         // Ignored or handled gracefully
       }
     } else {
@@ -56,7 +55,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
           title: 'Link Copied',
           message: 'Tool link copied to clipboard!',
         });
-      } catch (err) {
+      } catch {
         addToast({
           type: 'error',
           title: 'Copy Failed',

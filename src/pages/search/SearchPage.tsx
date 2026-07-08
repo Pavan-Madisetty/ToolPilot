@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { MagnifyingGlassIcon, SparklesIcon, XMarkIcon } from '@heroicons/react/24/outline';
@@ -35,12 +35,13 @@ export default function SearchPage() {
   const queryParam = searchParams.get('q') ?? '';
   const moduleParam = searchParams.get('module') ?? '';
 
+  const [prevQuery, setPrevQuery] = useState(queryParam);
   const [inputVal, setInputVal] = useState(queryParam);
 
-  // Sync inputs with URL parameter updates (e.g. from header search bar)
-  useEffect(() => {
+  if (queryParam !== prevQuery) {
+    setPrevQuery(queryParam);
     setInputVal(queryParam);
-  }, [queryParam]);
+  }
 
   const filteredTools = useMemo(() => {
     return performSearch(queryParam, moduleParam);

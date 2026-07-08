@@ -24,18 +24,19 @@ export default function RegexTester() {
         matches,
         error: null,
       };
-    } catch (err: any) {
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : 'Invalid regular expression';
       return {
         matches: [],
-        error: err.message || 'Invalid regular expression',
+        error: msg,
       };
     }
   }, [pattern, text, isCaseInsensitive, isGlobal]);
 
   // Generate highlighted text blocks
-  const highlightedText = useMemo(() => {
+  const highlightedData = useMemo(() => {
     if (regexResults.error || !pattern || regexResults.matches.length === 0) {
-      return <span>{text}</span>;
+      return null;
     }
 
     try {
@@ -47,25 +48,11 @@ export default function RegexTester() {
       const parts = text.split(regex);
       const rawMatches = text.match(regex) || [];
 
-      return (
-        <span>
-          {parts.flatMap((part, i) => {
-            const match = rawMatches[i];
-            return [
-              <span key={`p_${i}`}>{part}</span>,
-              match ? (
-                <mark key={`m_${i}`} className="bg-yellow-200 dark:bg-yellow-900/50 text-current rounded px-0.5 font-bold border border-yellow-300 dark:border-yellow-800">
-                  {match}
-                </mark>
-              ) : null,
-            ];
-          })}
-        </span>
-      );
-    } catch (err) {
-      return <span>{text}</span>;
+      return { parts, rawMatches };
+    } catch {
+      return null;
     }
-  }, [pattern, text, regexResults]);
+  }, [pattern, text, regexResults, isCaseInsensitive, isGlobal]);
 
   return (
     <ToolPageWrapper toolId="regex-tester">
@@ -122,7 +109,23 @@ export default function RegexTester() {
               className="p-4 border rounded-xl font-mono text-xs leading-relaxed whitespace-pre-wrap min-h-[140px] bg-slate-50/50 dark:bg-slate-900/30"
               style={{ borderColor: 'var(--border-default)' }}
             >
-              {highlightedText}
+              {highlightedData ? (
+                <span>
+                  {highlightedData.parts.flatMap((part, i) => {
+                    const match = highlightedData.rawMatches[i];
+                    return [
+                      <span key={`p_${i}`}>{part}</span>,
+                      match ? (
+                        <mark key={`m_${i}`} className="bg-yellow-200 dark:bg-yellow-900/50 text-current rounded px-0.5 font-bold border border-yellow-300 dark:border-yellow-800">
+                          {match}
+                        </mark>
+                      ) : null,
+                    ];
+                  })}
+                </span>
+              ) : (
+                <span>{text}</span>
+              )}
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Button, Select, CopyButton } from '@/components/ui';
 import { ArrowDownTrayIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
@@ -9,66 +9,64 @@ const INDENT_OPTIONS = [
   { value: 'tab', label: 'Tabs' },
 ];
 
+// Helper function to recursively sort object keys
+const sortObject = (obj: unknown): unknown => {
+  if (obj === null || typeof obj !== 'object') return obj;
+  if (Array.isArray(obj)) return obj.map(sortObject);
+
+  const record = obj as Record<string, unknown>;
+  return Object.keys(record)
+    .sort()
+    .reduce((sorted: Record<string, unknown>, key) => {
+      sorted[key] = sortObject(record[key]);
+      return sorted;
+    }, {});
+};
+
 export default function JsonFormatter() {
   const [input, setInput] = useState('');
-  const [output, setOutput] = useState('');
   const [indent, setIndent] = useState('2');
   const [sortKeys, setSortKeys] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [mode, setMode] = useState<'format' | 'minify'>('format');
+  const [repairTrigger, setRepairTrigger] = useState(0);
 
-  // Helper function to recursively sort object keys
-  const sortObject = (obj: any): any => {
-    if (obj === null || typeof obj !== 'object') return obj;
-    if (Array.isArray(obj)) return obj.map(sortObject);
-
-    return Object.keys(obj)
-      .sort()
-      .reduce((sorted: any, key) => {
-        sorted[key] = sortObject(obj[key]);
-        return sorted;
-      }, {});
-  };
-
-  // Main Formatting Handler
-  const processJson = (mode: 'format' | 'minify') => {
-    setError(null);
+  // Compute processed output and error cleanly during render
+  const jsonResults = useMemo(() => {
+    void repairTrigger;
     if (!input.trim()) {
-      setOutput('');
-      return;
+      return { output: '', error: null };
     }
 
     try {
-      // 1. Try standard parse
       let parsed = JSON.parse(input);
 
-      // 2. Optional: sort keys
       if (sortKeys && mode === 'format') {
         parsed = sortObject(parsed);
       }
 
-      // 3. Format or Minify
       if (mode === 'format') {
         const space = indent === 'tab' ? '\t' : Number(indent);
-        setOutput(JSON.stringify(parsed, null, space));
+        return {
+          output: JSON.stringify(parsed, null, space),
+          error: null,
+        };
       } else {
-        setOutput(JSON.stringify(parsed));
+        return {
+          output: JSON.stringify(parsed),
+          error: null,
+        };
       }
-    } catch (err: any) {
-      setError(err.message || 'Invalid JSON syntax');
-      setOutput('');
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : 'Invalid JSON syntax';
+      return {
+        output: '',
+        error: msg,
+      };
     }
-  };
-
-  // Auto-format on options change
-  useEffect(() => {
-    if (input.trim()) {
-      processJson('format');
-    }
-  }, [indent, sortKeys]);
+  }, [input, indent, sortKeys, mode, repairTrigger]);
 
   // Try to repair common JSON syntax errors
   const repairJson = () => {
-    setError(null);
     let repaired = input.trim();
     if (!repaired) return;
 
@@ -82,16 +80,17 @@ export default function JsonFormatter() {
 
       const parsed = JSON.parse(repaired);
       setInput(JSON.stringify(parsed, null, 2));
-      setError(null);
-    } catch (err: any) {
-      setError(`Repair failed: ${err.message}. Please check manual details.`);
+      setMode('format');
+      setRepairTrigger((t) => t + 1);
+    } catch {
+      // Ignore repair failures, the validator will display the error anyway
     }
   };
 
   // Download Output as .json File
   const downloadJson = () => {
-    if (!output) return;
-    const blob = new Blob([output], { type: 'application/json' });
+    if (!jsonResults.output) return;
+    const blob = new Blob([jsonResults.output], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
@@ -127,9 +126,9 @@ export default function JsonFormatter() {
             aria-label="JSON input raw data"
           />
 
-          {error && (
+          {jsonResults.error && (
             <div role="alert" className="p-3 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-lg text-xs text-red-600 dark:text-red-400">
-              <span className="font-bold">Syntax Error:</span> {error}
+              <span className="font-bold">Syntax Error:</span> {jsonResults.error}
             </div>
           )}
         </div>
@@ -157,10 +156,10 @@ export default function JsonFormatter() {
             </div>
 
             <div className="flex gap-2">
-              <Button onClick={() => processJson('format')} size="xs">
+              <Button onClick={() => setMode('format')} size="xs" variant={mode === 'format' ? 'primary' : 'secondary'}>
                 Format
               </Button>
-              <Button onClick={() => processJson('minify')} variant="secondary" size="xs">
+              <Button onClick={() => setMode('minify')} size="xs" variant={mode === 'minify' ? 'primary' : 'secondary'}>
                 Minify
               </Button>
             </div>
@@ -169,8 +168,8 @@ export default function JsonFormatter() {
           {/* Output view box */}
           <div className="relative flex-1 flex flex-col">
             <div className="absolute right-3 top-3 z-10 flex gap-2">
-              {output && <CopyButton text={output} />}
-              {output && (
+              {jsonResults.output && <CopyButton text={jsonResults.output} />}
+              {jsonResults.output && (
                 <button
                   onClick={downloadJson}
                   className="copy-btn flex items-center gap-1"
@@ -184,7 +183,7 @@ export default function JsonFormatter() {
 
             <textarea
               readOnly
-              value={output}
+              value={jsonResults.output}
               placeholder="Formatted output will appear here..."
               className="input-base font-mono text-xs leading-relaxed h-[420px] resize-none bg-slate-50/50 dark:bg-slate-900/30"
               aria-label="Formatted JSON output"

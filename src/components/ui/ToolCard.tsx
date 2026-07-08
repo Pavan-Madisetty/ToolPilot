@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import type { ToolConfig } from '@/types';
-import { getModuleColors } from './ModuleCard';
+import { getModuleColors } from '@/config/modules';
 
 interface ToolCardProps {
   tool: ToolConfig;
   compact?: boolean;
 }
 
-export function getToolEmoji(icon: string): string {
+function getToolEmoji(icon: string): string {
   const emojiMap: Record<string, string> = {
     CurrencyRupeeIcon: '₹', HomeIcon: '🏠', TruckIcon: '🚗', UserIcon: '👤',
     AcademicCapIcon: '🎓', CheckBadgeIcon: '✅', ChartBarIcon: '📊', BanknotesIcon: '💳',
