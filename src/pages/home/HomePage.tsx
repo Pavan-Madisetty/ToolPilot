@@ -7,8 +7,10 @@ import { Search, Zap, Shield, Wifi, ArrowRight, Star, Clock } from 'lucide-react
 import { useSearchStore } from '@/stores/uiStore';
 import { useFavoritesStore, useHistoryStore } from '@/stores/userStore';
 import { MODULES } from '@/config/modules';
-import { POPULAR_TOOLS, TOOLS_BY_MODULE, TOOL_BY_ID } from '@/config/tools';
-import type { ToolConfig, ModuleConfig } from '@/types';
+import { POPULAR_TOOLS, TOOL_BY_ID } from '@/config/tools';
+import type { ToolConfig } from '@/types';
+import { ModuleCard } from '@/components/ui/ModuleCard';
+import { ToolCard } from '@/components/ui/ToolCard';
 
 // ─────────────────────────────────────────────
 // Animation Variants
@@ -68,131 +70,7 @@ const FEATURES = [
   },
 ];
 
-// ─────────────────────────────────────────────
-// Module color map (CSS-custom-property safe)
-// ─────────────────────────────────────────────
-const MODULE_COLOR_MAP: Record<string, { accent: string; bg: string; border: string }> = {
-  finance:      { accent: '#10b981', bg: 'rgba(16,185,129,0.08)',  border: 'rgba(16,185,129,0.2)'  },
-  developer:    { accent: '#8b5cf6', bg: 'rgba(139,92,246,0.08)',  border: 'rgba(139,92,246,0.2)'  },
-  pdf:          { accent: '#ef4444', bg: 'rgba(239,68,68,0.08)',   border: 'rgba(239,68,68,0.2)'   },
-  image:        { accent: '#f59e0b', bg: 'rgba(245,158,11,0.08)',  border: 'rgba(245,158,11,0.2)'  },
-  text:         { accent: '#06b6d4', bg: 'rgba(6,182,212,0.08)',   border: 'rgba(6,182,212,0.2)'   },
-  ai:           { accent: '#ec4899', bg: 'rgba(236,72,153,0.08)',  border: 'rgba(236,72,153,0.2)'  },
-  business:     { accent: '#3b82f6', bg: 'rgba(59,130,246,0.08)',  border: 'rgba(59,130,246,0.2)'  },
-  productivity: { accent: '#f97316', bg: 'rgba(249,115,22,0.08)',  border: 'rgba(249,115,22,0.2)'  },
-  education:    { accent: '#84cc16', bg: 'rgba(132,204,22,0.08)',  border: 'rgba(132,204,22,0.2)'  },
-  travel:       { accent: '#14b8a6', bg: 'rgba(20,184,166,0.08)',  border: 'rgba(20,184,166,0.2)'  },
-  health:       { accent: '#22c55e', bg: 'rgba(34,197,94,0.08)',   border: 'rgba(34,197,94,0.2)'   },
-  utilities:    { accent: '#6366f1', bg: 'rgba(99,102,241,0.08)',  border: 'rgba(99,102,241,0.2)'  },
-  conversion:   { accent: '#64748b', bg: 'rgba(100,116,139,0.08)', border: 'rgba(100,116,139,0.2)' },
-  calculators:  { accent: '#a855f7', bg: 'rgba(168,85,247,0.08)',  border: 'rgba(168,85,247,0.2)'  },
-};
 
-function getModuleColors(key: string) {
-  return MODULE_COLOR_MAP[key] ?? { accent: '#3b82f6', bg: 'rgba(59,130,246,0.08)', border: 'rgba(59,130,246,0.2)' };
-}
-
-// ─────────────────────────────────────────────
-// ModuleCard
-// ─────────────────────────────────────────────
-interface ModuleCardProps {
-  module: ModuleConfig;
-}
-
-function ModuleCard({ module }: ModuleCardProps) {
-  const { accent, bg, border } = getModuleColors(module.key);
-  const toolCount = (TOOLS_BY_MODULE[module.key] ?? []).length;
-
-  return (
-    <motion.div variants={cardVariant} whileHover={{ y: -4, scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-      <Link
-        to={module.slug}
-        className="module-card"
-        style={{ '--accent': accent, '--bg': bg, '--border': border } as React.CSSProperties}
-        aria-label={`${module.name} — ${module.description}`}
-      >
-        <div className="module-card__icon-wrap">
-          <span className="module-card__emoji" aria-hidden="true">
-            {getModuleEmoji(module.key)}
-          </span>
-        </div>
-        <div className="module-card__body">
-          <h3 className="module-card__name">{module.name}</h3>
-          <p className="module-card__desc">{module.description}</p>
-          <span className="module-card__count">{toolCount} tools</span>
-        </div>
-        <ArrowRight className="module-card__arrow" size={16} aria-hidden="true" />
-      </Link>
-    </motion.div>
-  );
-}
-
-function getModuleEmoji(key: string): string {
-  const map: Record<string, string> = {
-    finance: '💰', developer: '⚡', pdf: '📄', image: '🖼️', text: '✍️',
-    ai: '🤖', business: '💼', productivity: '⏰', education: '🎓', travel: '✈️',
-    health: '❤️', utilities: '🔧', conversion: '🔄', calculators: '🧮',
-  };
-  return map[key] ?? '🔧';
-}
-
-// ─────────────────────────────────────────────
-// ToolCard
-// ─────────────────────────────────────────────
-interface ToolCardProps {
-  tool: ToolConfig;
-  compact?: boolean;
-}
-
-function ToolCard({ tool, compact = false }: ToolCardProps) {
-  const { accent, bg } = getModuleColors(tool.module);
-
-  return (
-    <motion.div variants={cardVariant} whileHover={{ y: -3, scale: 1.015 }} whileTap={{ scale: 0.98 }}>
-      <Link
-        to={tool.slug}
-        className={`tool-card ${compact ? 'tool-card--compact' : ''}`}
-        aria-label={`${tool.name}: ${tool.description}`}
-      >
-        <div className="tool-card__icon" style={{ background: bg, color: accent }} aria-hidden="true">
-          {getToolEmoji(tool.icon)}
-        </div>
-        <div className="tool-card__content">
-          <div className="tool-card__header">
-            <h4 className="tool-card__name">{tool.name}</h4>
-            {tool.isNew && <span className="tool-card__badge tool-card__badge--new">New</span>}
-            {tool.isPopular && !tool.isNew && (
-              <span className="tool-card__badge tool-card__badge--popular">Popular</span>
-            )}
-          </div>
-          {!compact && <p className="tool-card__desc">{tool.description}</p>}
-          <span className="tool-card__module">{tool.module}</span>
-        </div>
-      </Link>
-    </motion.div>
-  );
-}
-
-function getToolEmoji(icon: string): string {
-  const emojiMap: Record<string, string> = {
-    CurrencyRupeeIcon: '₹', HomeIcon: '🏠', TruckIcon: '🚗', UserIcon: '👤',
-    AcademicCapIcon: '🎓', CheckBadgeIcon: '✅', ChartBarIcon: '📊', BanknotesIcon: '💳',
-    ArrowTrendingUpIcon: '📈', ShieldCheckIcon: '🛡', BuildingOfficeIcon: '🏢',
-    SunIcon: '☀️', ReceiptPercentIcon: '🧾', DocumentChartBarIcon: '📃', CreditCardIcon: '💳',
-    HomeModernIcon: '🏡', CalculatorIcon: '🧮', GlobeAltIcon: '🌍', GiftIcon: '🎁',
-    ChartBarSquareIcon: '📊', ArrowsRightLeftIcon: '↔️', UsersIcon: '👥',
-    ClipboardDocumentListIcon: '📋', PresentationChartBarIcon: '📑', ScaleIcon: '⚖️',
-    StarIcon: '⭐', CurrencyBitcoinIcon: '₿', ArrowPathIcon: '🔄', ChartPieIcon: '🥧',
-    CodeBracketIcon: '{ }', LinkIcon: '🔗', ShieldCheck: '🔒', FingerPrintIcon: '🔑',
-    LockClosedIcon: '🔒', MagnifyingGlassIcon: '🔍', ClockIcon: '⏰', SwatchIcon: '🎨',
-    CircleStackIcon: '🗄', DocumentDuplicateIcon: '📋', KeyIcon: '🔑', DocumentTextIcon: '📝',
-    PaintBrushIcon: '🖌', ArrowsPointingOutIcon: '↔', ArchiveBoxIcon: '📦',
-    ScissorsIcon: '✂️', QrCodeIcon: '⬛', PhotoIcon: '🖼', WindowIcon: '🖥',
-    SparklesIcon: '✨', HeartIcon: '❤️', WrenchScrewdriverIcon: '🔧',
-    MapIcon: '🗺', BriefcaseIcon: '💼', DocumentIcon: '📄', PresentationChartLineIcon: '📉',
-  };
-  return emojiMap[icon] ?? '🔧';
-}
 
 // ─────────────────────────────────────────────
 // JSON-LD Schema
