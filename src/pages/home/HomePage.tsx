@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -6,10 +6,9 @@ import { Search, Zap, Shield, Wifi, ArrowRight, Star, Clock } from 'lucide-react
 
 import { useSearchStore } from '@/stores/uiStore';
 import { useFavoritesStore, useHistoryStore } from '@/stores/userStore';
-import { MODULES } from '@/config/modules';
-import { POPULAR_TOOLS, TOOL_BY_ID } from '@/config/tools';
+import { MODULES, getModuleEmoji } from '@/config/modules';
+import { POPULAR_TOOLS, TOOL_BY_ID, TOOLS_BY_MODULE } from '@/config/tools';
 import type { ToolConfig } from '@/types';
-import { ModuleCard } from '@/components/ui/ModuleCard';
 import { ToolCard } from '@/components/ui/ToolCard';
 
 // ─────────────────────────────────────────────
@@ -90,6 +89,7 @@ export default function HomePage() {
   const setIsOpen = useSearchStore((s) => s.setIsOpen);
   const { favorites } = useFavoritesStore();
   const { history } = useHistoryStore();
+  const [activeModuleKey, setActiveModuleKey] = useState<string>(MODULES[0]?.key || 'finance');
 
   const openSearch = useCallback(() => setIsOpen(true), [setIsOpen]);
 
@@ -248,8 +248,8 @@ export default function HomePage() {
           )}
         </AnimatePresence>
 
-        {/* ── Explore by Category ───────────────── */}
-        <section className="section container" aria-labelledby="modules-heading">
+        {/* ── Workspace Categories & Tools Grid ── */}
+        <section className="section container" aria-labelledby="workspace-tools-heading">
           <motion.div
             className="section__header"
             initial="hidden"
@@ -258,58 +258,63 @@ export default function HomePage() {
             variants={fadeUp}
           >
             <div>
-              <h2 id="modules-heading" className="section__title">Explore by Category</h2>
-              <p className="section__subtitle">14 powerful modules covering every digital need</p>
+              <h2 id="workspace-tools-heading" className="section__title">Workspace Categories</h2>
+              <p className="section__subtitle">Select a category to explore secure, browser-based productivity tools</p>
             </div>
-            <Link to="/search" className="section__view-all" aria-label="Browse all categories">
-              All categories <ArrowRight size={16} aria-hidden="true" />
+            <Link to="/search" className="section__view-all" aria-label="Browse all tools index">
+              Search index <ArrowRight size={16} aria-hidden="true" />
             </Link>
           </motion.div>
 
+          {/* Module Selector Tabs */}
+          <div className="workspace-tabs-container">
+            <div className="workspace-tabs" role="tablist" aria-label="Tool modules">
+              <button
+                type="button"
+                onClick={() => setActiveModuleKey('popular')}
+                className={`workspace-tab ${activeModuleKey === 'popular' ? 'workspace-tab--active' : ''}`}
+                aria-selected={activeModuleKey === 'popular'}
+                role="tab"
+              >
+                <span className="workspace-tab__emoji" aria-hidden="true">🔥</span>
+                <span className="workspace-tab__name">Popular Tools</span>
+              </button>
+              {MODULES.map((mod) => {
+                const isActive = activeModuleKey === mod.key;
+                return (
+                  <button
+                    key={mod.key}
+                    type="button"
+                    onClick={() => setActiveModuleKey(mod.key)}
+                    className={`workspace-tab ${isActive ? 'workspace-tab--active' : ''}`}
+                    aria-selected={isActive}
+                    role="tab"
+                  >
+                    <span className="workspace-tab__emoji" aria-hidden="true">
+                      {getModuleEmoji(mod.key)}
+                    </span>
+                    <span className="workspace-tab__name">{mod.name}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Tools Grid */}
           <motion.div
-            className="modules-grid"
+            key={activeModuleKey}
+            className="tools-grid mt-6"
             variants={staggerContainer}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
+            animate="visible"
           >
-            {MODULES.map((mod) => (
-              <ModuleCard key={mod.key} module={mod} />
+            {(activeModuleKey === 'popular'
+              ? POPULAR_TOOLS.slice(0, 12)
+              : TOOLS_BY_MODULE[activeModuleKey] || []
+            ).map((tool) => (
+              <ToolCard key={tool.id} tool={tool} />
             ))}
           </motion.div>
-        </section>
-
-        {/* ── Popular Tools ─────────────────────── */}
-        <section className="section section--alt" aria-labelledby="popular-heading">
-          <div className="container">
-            <motion.div
-              className="section__header"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-80px' }}
-              variants={fadeUp}
-            >
-              <div>
-                <h2 id="popular-heading" className="section__title">Most Popular Tools</h2>
-                <p className="section__subtitle">Trusted by millions of users every day</p>
-              </div>
-              <Link to="/search?filter=popular" className="section__view-all" aria-label="View all popular tools">
-                View all <ArrowRight size={16} aria-hidden="true" />
-              </Link>
-            </motion.div>
-
-            <motion.div
-              className="tools-grid"
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-60px' }}
-            >
-              {POPULAR_TOOLS.slice(0, 12).map((tool) => (
-                <ToolCard key={tool.id} tool={tool} />
-              ))}
-            </motion.div>
-          </div>
         </section>
 
         {/* ── Feature Highlights ────────────────── */}
@@ -506,11 +511,53 @@ export default function HomePage() {
         }
         .section__view-all:hover { gap: 0.5rem; }
 
-        /* ── Module Grid ─────────────────────── */
-        .modules-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-          gap: 1rem;
+        /* ── Workspace Tabs ────────────────────── */
+        .workspace-tabs-container {
+          width: 100%;
+          border-bottom: 1px solid var(--border-default);
+          margin-bottom: 2rem;
+          padding-bottom: 0.5rem;
+          overflow-x: auto;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+        .workspace-tabs-container::-webkit-scrollbar {
+          display: none;
+        }
+        .workspace-tabs {
+          display: flex;
+          gap: 0.5rem;
+          padding-inline: 0.25rem;
+          min-width: max-content;
+        }
+        .workspace-tab {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.6rem 1rem;
+          border-radius: 10px;
+          border: 1.5px solid transparent;
+          background: transparent;
+          cursor: pointer;
+          font-family: var(--font-sans);
+          font-size: 0.875rem;
+          font-weight: 500;
+          color: var(--text-secondary);
+          transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+          white-space: nowrap;
+        }
+        .workspace-tab:hover {
+          color: var(--text-primary);
+          background: var(--bg-surface);
+        }
+        .workspace-tab--active {
+          color: var(--text-link);
+          background: rgba(79, 70, 229, 0.08);
+          border-color: rgba(79, 70, 229, 0.15);
+          font-weight: 600;
+        }
+        .workspace-tab__emoji {
+          font-size: 1.1rem;
         }
         .module-card {
           display: flex; align-items: center; gap: 1rem;
