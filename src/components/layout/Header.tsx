@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   MagnifyingGlassIcon,
@@ -19,14 +19,15 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
+  const menuRef = useRef<HTMLDivElement>(null);
+  const toggleBtnRef = useRef<HTMLButtonElement>(null);
+
   // Scroll detection for header shadow
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 8);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-
 
   // Keyboard shortcut: Ctrl+K / Cmd+K
   useEffect(() => {
@@ -40,15 +41,45 @@ export function Header() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [setSearchOpen]);
 
-  const navItems = [
-    { label: 'All Tools', href: '/' },
-    { label: 'Finance', href: '/finance' },
-    { label: 'Developer', href: '/developer' },
-    { label: 'PDF', href: '/pdf' },
-    { label: 'Image', href: '/image' },
-    { label: 'Text', href: '/text' },
-    { label: 'AI', href: '/ai' },
-  ];
+  // Lock body scroll when universal mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
+  // Click outside & Escape key listeners for closing menu
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(e.target as Node) &&
+        toggleBtnRef.current &&
+        !toggleBtnRef.current.contains(e.target as Node)
+      ) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    if (isMobileMenuOpen) {
+      document.addEventListener('mousedown', handleOutsideClick);
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isMobileMenuOpen]);
 
   return (
     <>
@@ -85,56 +116,30 @@ export function Header() {
               </span>
             </Link>
 
-            {/* Desktop Navigation */}
-            <nav
-              className="hidden lg:flex items-center gap-1 ml-4"
-              aria-label="Main navigation"
-            >
-              {navItems.map((item) => (
-                <NavLink
-                  key={item.href}
-                  to={item.href}
-                  className={({ isActive }) =>
-                    clsx(
-                      "px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-150",
-                      isActive
-                        ? "bg-[rgba(79,70,229,0.08)] text-[var(--text-link)] font-semibold"
-                        : "text-[var(--text-secondary)] hover:bg-gray-100 dark:hover:bg-gray-800"
-                    )
-                  }
-                  end={item.href === '/'}
-                >
-                  {item.label}
-                </NavLink>
-              ))}
-
-
-            </nav>
-
             {/* Spacer */}
             <div className="flex-1" />
 
             {/* Search Bar — Desktop */}
             <button
               onClick={() => setSearchOpen(true)}
-              className="hidden md:flex items-center gap-2.5 px-3.5 py-1.5 rounded-[10px] text-sm transition-all duration-200 border hover:border-[var(--border-focus)] focus-visible:ring-2 focus-visible:ring-[var(--border-focus)]"
+              className="hidden md:flex items-center gap-2.5 px-4 py-2 rounded-full text-xs font-normal transition-all duration-200 border cursor-text hover:bg-slate-50 dark:hover:bg-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--border-focus)]"
               style={{
                 background: 'var(--bg-elevated)',
-                border: '1px solid var(--border-default)',
+                borderColor: 'var(--border-default)',
                 color: 'var(--text-tertiary)',
-                minWidth: '280px',
+                minWidth: '260px',
                 boxShadow: 'var(--shadow-xs)',
               }}
               aria-label="Search tools (Ctrl+K)"
             >
-              <MagnifyingGlassIcon className="w-4.5 h-4.5 shrink-0" style={{ color: 'var(--text-tertiary)' }} aria-hidden="true" />
-              <span className="flex-1 text-left text-xs font-normal">Search 500+ tools or tools index...</span>
+              <MagnifyingGlassIcon className="w-4 h-4 shrink-0 text-slate-400 dark:text-slate-500" aria-hidden="true" />
+              <span className="flex-1 text-left text-slate-400 dark:text-slate-500">Search tools...</span>
               <kbd
-                className="hidden lg:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] rounded-[6px] border font-mono"
+                className="hidden lg:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[9px] rounded-md border font-sans font-medium"
                 style={{
                   background: 'var(--bg-surface)',
-                  border: '1px solid var(--border-default)',
-                  color: 'var(--text-secondary)',
+                  borderColor: 'var(--border-default)',
+                  color: 'var(--text-tertiary)',
                 }}
               >
                 ⌘K
@@ -173,10 +178,11 @@ export function Header() {
                 </motion.div>
               </button>
 
-              {/* Mobile Menu Toggle */}
+              {/* Universal Menu Toggle */}
               <button
+                ref={toggleBtnRef}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="lg:hidden btn btn-icon btn-ghost"
+                className="btn btn-icon btn-ghost"
                 aria-expanded={isMobileMenuOpen}
                 aria-controls="mobile-menu"
                 aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
@@ -191,57 +197,44 @@ export function Header() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Universal Menu */}
         {isMobileMenuOpen && (
           <motion.div
+            ref={menuRef}
             id="mobile-menu"
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.15 }}
-            className="lg:hidden border-t"
+            className="border-t animate-in fade-in slide-in-from-top-2 duration-200"
             style={{
               borderColor: 'var(--border-default)',
               background: 'var(--bg-elevated)',
             }}
           >
-            <nav className="container-app py-4" aria-label="Mobile navigation">
+            <nav className="container-app py-4" aria-label="Navigation Menu">
               {/* Search */}
               <button
                 onClick={() => { setSearchOpen(true); setIsMobileMenuOpen(false); }}
-                className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg mb-2 text-sm"
+                className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg mb-2 text-sm text-left hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors"
                 style={{ background: 'var(--bg-surface)', color: 'var(--text-secondary)' }}
               >
-                <MagnifyingGlassIcon className="w-4 h-4" aria-hidden="true" />
-                Search 500+ tools...
+                <MagnifyingGlassIcon className="w-4 h-4 text-slate-400 dark:text-slate-500" aria-hidden="true" />
+                <span>Search 500+ tools...</span>
               </button>
 
-              <div className="grid grid-cols-2 gap-1">
-                {navItems.slice(1).map((item) => (
-                  <Link
-                    key={item.href}
-                    to={item.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="px-3 py-2.5 rounded-lg text-sm font-medium transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
-                    style={{ color: 'var(--text-secondary)' }}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-
-              <div className="mt-3 pt-3 border-t" style={{ borderColor: 'var(--border-default)' }}>
+              <div className="mt-2 pt-3 border-t" style={{ borderColor: 'var(--border-default)' }}>
                 <p className="px-3 text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--text-tertiary)' }}>
                   All Modules
                 </p>
-                <div className="grid grid-cols-3 gap-1">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
                   {MODULES.map((mod) => (
                     <Link
                       key={mod.key}
                       to={mod.slug}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="px-2 py-2 rounded-lg text-xs font-medium text-center transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
-                      style={{ color: 'var(--text-secondary)' }}
+                      className="px-3 py-2.5 rounded-lg text-xs font-medium text-center transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+                      style={{ color: 'var(--text-secondary)', background: 'var(--bg-surface)' }}
                     >
                       {mod.name}
                     </Link>
