@@ -30,15 +30,7 @@ const cardVariant = {
   visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as const } },
 };
 
-// ─────────────────────────────────────────────
-// Stats
-// ─────────────────────────────────────────────
-const STATS: { label: string; value: string }[] = [
-  { value: '500+', label: 'Tools' },
-  { value: '14', label: 'Modules' },
-  { value: '100%', label: 'Free' },
-  { value: 'Offline', label: 'Works Offline' },
-];
+
 
 // ─────────────────────────────────────────────
 // Feature Highlights
@@ -143,59 +135,45 @@ export default function HomePage() {
       </Helmet>
 
       <main id="main-content" className="homepage">
-        {/* ── Hero ─────────────────────────────── */}
-        <section className="hero" aria-labelledby="hero-headline">
-          <div className="hero__bg-pattern" aria-hidden="true" />
-          <div className="hero__glow hero__glow--left" aria-hidden="true" />
-          <div className="hero__glow hero__glow--right" aria-hidden="true" />
-
+        {/* ── Workspace Header ─────────────────── */}
+        <section className="workspace-header" aria-labelledby="workspace-title">
+          <div className="workspace-header__pattern" aria-hidden="true" />
           <motion.div
-            className="hero__content container"
+            className="workspace-header__content container"
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
           >
-            <motion.div variants={fadeUp} className="hero__eyebrow">
-              <span className="hero__badge">
+            <div className="workspace-header__top-row">
+              <motion.div variants={fadeUp} className="workspace-header__badge">
                 <Star size={12} aria-hidden="true" />
-                500+ Free Tools
-              </span>
-            </motion.div>
+                Workspace
+              </motion.div>
+            </div>
 
-            <motion.h1 variants={fadeUp} id="hero-headline" className="hero__headline">
-              Your Complete{' '}
-              <span className="hero__gradient-text">Digital Toolkit</span>
+            <motion.h1 variants={fadeUp} id="workspace-title" className="workspace-header__title">
+              ToolPilot Workspace
             </motion.h1>
 
-            <motion.p variants={fadeUp} className="hero__subheadline">
-              500+ free browser tools. No signup. No tracking. Works offline.
+            <motion.p variants={fadeUp} className="workspace-header__desc">
+              Search and access 500+ secure, local developer, finance, text, and productivity tools.
             </motion.p>
 
             {/* Search trigger */}
-            <motion.div variants={fadeUp} className="hero__search-wrap">
+            <motion.div variants={fadeUp} className="workspace-header__search-wrap">
               <button
                 type="button"
-                className="hero__search-bar"
+                className="workspace-header__search-bar"
                 onClick={openSearch}
                 aria-label="Open search — search for any tool"
                 id="hero-search-btn"
               >
-                <Search size={20} className="hero__search-icon" aria-hidden="true" />
-                <span className="hero__search-placeholder">Search 500+ tools…</span>
-                <kbd className="hero__search-kbd" aria-label="Keyboard shortcut: Control K">
+                <Search size={18} className="workspace-header__search-icon" aria-hidden="true" />
+                <span className="workspace-header__search-placeholder">Search tools or start typing (⌘K)…</span>
+                <kbd className="workspace-header__search-kbd" aria-label="Keyboard shortcut: Control K">
                   ⌘K
                 </kbd>
               </button>
-            </motion.div>
-
-            {/* Stats */}
-            <motion.div variants={fadeUp} className="hero__stats" role="list" aria-label="Platform statistics">
-              {STATS.map((stat) => (
-                <div key={stat.label} className="hero__stat" role="listitem">
-                  <span className="hero__stat-value">{stat.value}</span>
-                  <span className="hero__stat-label">{stat.label}</span>
-                </div>
-              ))}
             </motion.div>
           </motion.div>
         </section>
@@ -408,124 +386,99 @@ export default function HomePage() {
       </main>
 
       <style>{`
-        /* ── Hero ──────────────────────────────── */
-        .hero {
+        /* ── Workspace Header ──────────────────── */
+        .workspace-header {
           position: relative;
           overflow: hidden;
-          padding: 6rem 1.5rem 5rem;
+          padding: 3.5rem 1.5rem 2.5rem;
           background: var(--bg-base);
           text-align: center;
+          border-bottom: 1px solid var(--border-subtle);
         }
-        .hero__bg-pattern {
+        .workspace-header__pattern {
           position: absolute; inset: 0;
           background-image:
             radial-gradient(circle at 1px 1px, var(--border-default) 1px, transparent 0);
-          background-size: 40px 40px;
-          opacity: 0.4;
+          background-size: 32px 32px;
+          opacity: 0.3;
           pointer-events: none;
         }
-        .hero__glow {
-          position: absolute;
-          width: 500px; height: 500px;
-          border-radius: 50%;
-          filter: blur(120px);
-          pointer-events: none;
-          opacity: 0.15;
-        }
-        .hero__glow--left  { top: -100px; left: -100px;  background: #3b82f6; }
-        .hero__glow--right { top: -100px; right: -100px; background: #8b5cf6; }
-
-        .hero__content {
+        .workspace-header__content {
           position: relative;
           z-index: 1;
-          max-width: 800px;
+          max-width: 640px;
           margin: 0 auto;
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 1.5rem;
+          gap: 1rem;
         }
-        .hero__eyebrow { display: flex; justify-content: center; }
-        .hero__badge {
+        .workspace-header__top-row {
+          display: flex; justify-content: center;
+        }
+        .workspace-header__badge {
           display: inline-flex; align-items: center; gap: 0.375rem;
-          padding: 0.35rem 0.9rem;
-          background: rgba(59,130,246,0.1);
-          border: 1px solid rgba(59,130,246,0.25);
+          padding: 0.25rem 0.75rem;
+          background: rgba(79, 70, 229, 0.08);
+          border: 1px solid rgba(79, 70, 229, 0.15);
           border-radius: 9999px;
-          color: #3b82f6;
-          font-size: 0.8rem; font-weight: 600;
+          color: var(--text-link);
+          font-size: 0.75rem; font-weight: 600;
           letter-spacing: 0.02em;
+          text-transform: uppercase;
         }
-        .hero__headline {
-          font-size: clamp(2.2rem, 6vw, 4rem);
+        .workspace-header__title {
+          font-size: clamp(1.6rem, 4vw, 2.2rem);
           font-weight: 800;
-          line-height: 1.1;
+          line-height: 1.2;
           color: var(--text-primary);
-          letter-spacing: -0.025em;
+          letter-spacing: -0.02em;
           margin: 0;
         }
-        .hero__gradient-text {
-          background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-        .hero__subheadline {
-          font-size: clamp(1rem, 2.5vw, 1.25rem);
+        .workspace-header__desc {
+          font-size: 0.9rem;
           color: var(--text-secondary);
-          max-width: 550px;
-          line-height: 1.6;
+          max-width: 480px;
+          line-height: 1.5;
           margin: 0;
         }
-
-        /* Search bar */
-        .hero__search-wrap { width: 100%; max-width: 580px; }
-        .hero__search-bar {
-          display: flex; align-items: center; gap: 0.75rem;
+        .workspace-header__search-wrap { width: 100%; max-width: 500px; }
+        .workspace-header__search-bar {
+          display: flex; align-items: center; gap: 0.6rem;
           width: 100%;
-          padding: 0.9rem 1.25rem;
+          padding: 0.75rem 1rem;
           background: var(--bg-elevated);
-          border: 1.5px solid var(--border-default);
-          border-radius: 14px;
+          border: 1px solid var(--border-default);
+          border-radius: 12px;
           cursor: pointer;
           transition: all 0.2s ease;
-          box-shadow: var(--shadow-md);
+          box-shadow: var(--shadow-sm);
         }
-        .hero__search-bar:hover {
+        .workspace-header__search-bar:hover {
           border-color: var(--border-focus);
-          box-shadow: var(--shadow-lg), 0 0 0 3px rgba(59,130,246,0.1);
+          box-shadow: var(--shadow-md), 0 0 0 3px rgba(79, 70, 229, 0.08);
         }
-        .hero__search-bar:focus-visible {
+        .workspace-header__search-bar:focus-visible {
           outline: 2px solid var(--border-focus);
           outline-offset: 2px;
         }
-        .hero__search-icon { color: var(--text-tertiary); flex-shrink: 0; }
-        .hero__search-placeholder {
+        .workspace-header__search-icon { color: var(--text-tertiary); flex-shrink: 0; }
+        .workspace-header__search-placeholder {
           flex: 1;
           text-align: left;
           color: var(--text-tertiary);
-          font-size: 1rem;
+          font-size: 0.875rem;
         }
-        .hero__search-kbd {
-          padding: 0.2rem 0.5rem;
+        .workspace-header__search-kbd {
+          padding: 0.15rem 0.4rem;
           background: var(--bg-surface);
           border: 1px solid var(--border-default);
           border-radius: 6px;
-          font-size: 0.75rem;
+          font-size: 0.7rem;
           color: var(--text-secondary);
           font-family: var(--font-mono);
           white-space: nowrap;
         }
-
-        /* Stats */
-        .hero__stats {
-          display: flex; flex-wrap: wrap;
-          justify-content: center; gap: 0.5rem 2.5rem;
-          margin-top: 0.5rem;
-        }
-        .hero__stat { display: flex; flex-direction: column; align-items: center; gap: 0.1rem; }
-        .hero__stat-value { font-size: 1.6rem; font-weight: 800; color: var(--text-primary); letter-spacing: -0.02em; }
-        .hero__stat-label { font-size: 0.78rem; color: var(--text-secondary); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
 
         /* ── Sections ─────────────────────────── */
         .section { padding: 4rem 1.5rem; }
@@ -736,15 +689,11 @@ export default function HomePage() {
 
         /* ── Responsive ──────────────────────── */
         @media (max-width: 640px) {
-          .hero { padding: 4rem 1rem 3rem; }
+          .workspace-header { padding: 2.5rem 1rem 1.5rem; }
           .modules-grid { grid-template-columns: 1fr; }
           .tools-grid { grid-template-columns: 1fr; }
           .features-grid { grid-template-columns: 1fr; }
           .section__header { flex-direction: column; align-items: flex-start; }
-        }
-        @media (max-width: 768px) {
-          .hero__stats { gap: 0.5rem 1.5rem; }
-          .hero__stat-value { font-size: 1.3rem; }
         }
       `}</style>
     </>
