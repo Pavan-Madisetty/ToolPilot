@@ -78,8 +78,8 @@ export default function EMICalculator() {
     datasets: [
       {
         data: [principal, emiData.totalInterest],
-        backgroundColor: ['#3B82F6', '#EF4444'],
-        hoverBackgroundColor: ['#2563EB', '#DC2626'],
+        backgroundColor: ['#4F46E5', '#EF4444'],
+        hoverBackgroundColor: ['#4338CA', '#DC2626'],
         borderWidth: 1,
         borderColor: 'var(--border-default)',
       },
@@ -172,7 +172,7 @@ export default function EMICalculator() {
               <h3 className="font-bold mb-2">Loan Breakup Proportions</h3>
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-blue-500" />
+                  <span className="w-3 h-3 rounded-full bg-[var(--text-link)]" />
                   Principal Loan Amount
                 </span>
                 <span className="font-semibold">{formatCurrency(principal)}</span>

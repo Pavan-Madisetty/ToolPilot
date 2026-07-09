@@ -46,11 +46,11 @@ export function PageLoader() {
           width: 56,
           height: 56,
           borderRadius: 16,
-          background: 'linear-gradient(135deg, #3B82F6 0%, #6366F1 100%)',
+          background: 'linear-gradient(135deg, var(--text-link) 0%, rgba(79, 70, 229, 0.6) 100%)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          boxShadow: '0 8px 32px rgba(99, 102, 241, 0.35)',
+          boxShadow: '0 8px 32px rgba(79, 70, 229, 0.25)',
         }}
       >
         <svg
@@ -82,7 +82,7 @@ export function PageLoader() {
             inset: 0,
             borderRadius: '50%',
             border: '3px solid var(--border-default)',
-            borderTopColor: '#3B82F6',
+            borderTopColor: 'var(--text-link)',
           }}
           animate={{ rotate: 360 }}
           transition={{
@@ -132,7 +132,7 @@ export function PageLoader() {
                 width: 5,
                 height: 5,
                 borderRadius: '50%',
-                background: '#3B82F6',
+                background: 'var(--text-link)',
               }}
             />
           ))}

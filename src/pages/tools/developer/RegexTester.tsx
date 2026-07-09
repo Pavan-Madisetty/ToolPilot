@@ -100,7 +100,7 @@ export default function RegexTester() {
           <div className="p-6 card space-y-4">
             <div className="flex items-center justify-between">
               <span className="label">Matches Highlighted</span>
-              <span className="text-xs font-semibold px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/20 text-blue-500">
+               <span className="text-xs font-semibold px-2 py-0.5 rounded bg-[rgba(79,70,229,0.08)] text-[var(--text-link)]">
                 {regexResults.matches.length} Matches Found
               </span>
             </div>

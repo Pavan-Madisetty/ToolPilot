@@ -73,7 +73,7 @@ export default function GSTCalculator() {
                   key={rate}
                   type="button"
                   onClick={() => setGstRate(rate)}
-                  className={`btn btn-secondary btn-sm ${gstRate === rate ? 'bg-blue-50 border-blue-400 font-semibold' : ''}`}
+                  className={`btn btn-secondary btn-sm ${gstRate === rate ? 'bg-[rgba(79,70,229,0.08)] border-[var(--text-link)] font-semibold' : ''}`}
                 >
                   {rate}%
                 </button>

@@ -55,9 +55,9 @@ const FEATURES = [
     icon: Wifi,
     title: 'Works Offline',
     description: 'Full PWA support — install ToolPilot on your device and use all 500+ tools without an internet connection.',
-    color: '#3b82f6',
-    bg: 'rgba(59, 130, 246, 0.08)',
-    border: 'rgba(59, 130, 246, 0.2)',
+    color: 'var(--text-link)',
+    bg: 'rgba(79, 70, 229, 0.08)',
+    border: 'rgba(79, 70, 229, 0.2)',
   },
 ];
 
@@ -464,7 +464,7 @@ export default function HomePage() {
         .section__subtitle { font-size: 0.95rem; color: var(--text-secondary); margin: 0; }
         .section__view-all {
           display: inline-flex; align-items: center; gap: 0.3rem;
-          color: #3b82f6; font-size: 0.9rem; font-weight: 600;
+          color: var(--text-link); font-size: 0.9rem; font-weight: 600;
           text-decoration: none; white-space: nowrap;
           transition: gap 0.2s ease;
         }

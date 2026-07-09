@@ -27,8 +27,8 @@ export default function NotFoundPage() {
         <div
           className="w-24 h-24 rounded-full flex items-center justify-center mb-6 text-4xl"
           style={{
-            background: 'rgba(59, 130, 246, 0.08)',
-            color: '#3B82F6',
+            background: 'rgba(79, 70, 229, 0.08)',
+            color: 'var(--text-link)',
           }}
           aria-hidden="true"
         >

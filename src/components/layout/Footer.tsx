@@ -52,13 +52,13 @@ export function Footer() {
             >
               <div
                 className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-black"
-                style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)' }}
+                style={{ background: 'linear-gradient(135deg, var(--text-link) 0%, rgba(79, 70, 229, 0.6) 100%)' }}
                 aria-hidden="true"
               >
                 T
               </div>
               <span style={{ color: 'var(--text-primary)' }}>
-                Tool<span style={{ color: '#3B82F6' }}>Pilot</span>
+                Tool<span style={{ color: 'var(--text-link)' }}>Pilot</span>
               </span>
             </Link>
 
