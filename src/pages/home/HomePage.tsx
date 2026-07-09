@@ -135,48 +135,7 @@ export default function HomePage() {
       </Helmet>
 
       <main id="main-content" className="homepage">
-        {/* ── Workspace Header ─────────────────── */}
-        <section className="workspace-header" aria-labelledby="workspace-title">
-          <div className="workspace-header__pattern" aria-hidden="true" />
-          <motion.div
-            className="workspace-header__content container"
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-          >
-            <div className="workspace-header__top-row">
-              <motion.div variants={fadeUp} className="workspace-header__badge">
-                <Star size={12} aria-hidden="true" />
-                Workspace
-              </motion.div>
-            </div>
-
-            <motion.h1 variants={fadeUp} id="workspace-title" className="workspace-header__title">
-              ToolPilot Workspace
-            </motion.h1>
-
-            <motion.p variants={fadeUp} className="workspace-header__desc">
-              Search and access 500+ secure, local developer, finance, text, and productivity tools.
-            </motion.p>
-
-            {/* Search trigger */}
-            <motion.div variants={fadeUp} className="workspace-header__search-wrap">
-              <button
-                type="button"
-                className="workspace-header__search-bar"
-                onClick={openSearch}
-                aria-label="Open search — search for any tool"
-                id="hero-search-btn"
-              >
-                <Search size={18} className="workspace-header__search-icon" aria-hidden="true" />
-                <span className="workspace-header__search-placeholder">Search tools or start typing (⌘K)…</span>
-                <kbd className="workspace-header__search-kbd" aria-label="Keyboard shortcut: Control K">
-                  ⌘K
-                </kbd>
-              </button>
-            </motion.div>
-          </motion.div>
-        </section>
+        {/* Workspace section */}
 
         {/* ── Recently Used ─────────────────────── */}
         <AnimatePresence>

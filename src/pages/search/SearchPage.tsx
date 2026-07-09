@@ -141,7 +141,7 @@ export default function SearchPage() {
               <button
                 key={kw}
                 onClick={() => handleQueryChange(kw)}
-                className="px-2.5 py-1 text-xs rounded-lg border hover:border-blue-400 dark:hover:border-blue-500 hover:text-blue-500 transition-colors"
+                className="px-2.5 py-1 text-xs rounded-lg border hover:border-[var(--border-focus)] hover:text-[var(--text-link)] transition-colors"
                 style={{
                   background: 'var(--bg-surface)',
                   borderColor: 'var(--border-default)',
@@ -159,7 +159,7 @@ export default function SearchPage() {
           {/* Filters Sidebar */}
           <div className="lg:col-span-1">
             <div
-              className="p-5 border rounded-xl shadow-xs sticky top-24"
+              className="p-5 border rounded-xl shadow-xs lg:sticky lg:top-24"
               style={{
                 background: 'var(--bg-elevated)',
                 borderColor: 'var(--border-default)',
@@ -179,7 +179,7 @@ export default function SearchPage() {
                       style={{
                         background: isActive ? 'var(--bg-surface)' : 'transparent',
                         color: isActive ? 'var(--text-link)' : 'var(--text-secondary)',
-                        border: isActive ? '1px solid var(--border-focus)' : '1px solid transparent',
+                        border: isActive ? '1.5px solid var(--border-focus)' : '1.5px solid transparent',
                       }}
                     >
                       <span>{mod.name}</span>

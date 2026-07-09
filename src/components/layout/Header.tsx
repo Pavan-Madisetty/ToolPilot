@@ -76,13 +76,13 @@ export function Header() {
             >
               <div
                 className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-black"
-                style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)' }}
+                style={{ background: 'linear-gradient(135deg, var(--text-link) 0%, rgba(79, 70, 229, 0.6) 100%)' }}
                 aria-hidden="true"
               >
                 T
               </div>
               <span style={{ color: 'var(--text-primary)' }}>
-                Tool<span style={{ color: '#3B82F6' }}>Pilot</span>
+                Tool<span style={{ color: 'var(--text-link)' }}>Pilot</span>
               </span>
             </Link>
 
@@ -119,23 +119,24 @@ export function Header() {
             {/* Search Bar — Desktop */}
             <button
               onClick={() => setSearchOpen(true)}
-              className="hidden md:flex items-center gap-3 px-3 py-2 rounded-lg border text-sm transition-all duration-150 hover:border-blue-400 group"
+              className="hidden md:flex items-center gap-2.5 px-3.5 py-1.5 rounded-[10px] text-sm transition-all duration-200 border hover:border-[var(--border-focus)] focus-visible:ring-2 focus-visible:ring-[var(--border-focus)]"
               style={{
-                background: 'var(--bg-surface)',
+                background: 'var(--bg-elevated)',
                 border: '1px solid var(--border-default)',
                 color: 'var(--text-tertiary)',
-                minWidth: '220px',
+                minWidth: '280px',
+                boxShadow: 'var(--shadow-xs)',
               }}
               aria-label="Search tools (Ctrl+K)"
             >
-              <MagnifyingGlassIcon className="w-4 h-4 shrink-0" aria-hidden="true" />
-              <span className="flex-1 text-left">Search 500+ tools...</span>
+              <MagnifyingGlassIcon className="w-4.5 h-4.5 shrink-0" style={{ color: 'var(--text-tertiary)' }} aria-hidden="true" />
+              <span className="flex-1 text-left text-xs font-normal">Search 500+ tools or tools index...</span>
               <kbd
-                className="hidden lg:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-xs rounded border"
+                className="hidden lg:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] rounded-[6px] border font-mono"
                 style={{
-                  background: 'var(--bg-elevated)',
+                  background: 'var(--bg-surface)',
                   border: '1px solid var(--border-default)',
-                  color: 'var(--text-tertiary)',
+                  color: 'var(--text-secondary)',
                 }}
               >
                 ⌘K
