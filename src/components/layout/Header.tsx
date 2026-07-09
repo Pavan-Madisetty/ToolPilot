@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   MagnifyingGlassIcon,
@@ -92,14 +92,21 @@ export function Header() {
               aria-label="Main navigation"
             >
               {navItems.map((item) => (
-                <Link
+                <NavLink
                   key={item.href}
                   to={item.href}
-                  className="px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-150 hover:bg-gray-100 dark:hover:bg-gray-800"
-                  style={{ color: 'var(--text-secondary)' }}
+                  className={({ isActive }) =>
+                    clsx(
+                      "px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-150",
+                      isActive
+                        ? "bg-[rgba(79,70,229,0.08)] text-[var(--text-link)] font-semibold"
+                        : "text-[var(--text-secondary)] hover:bg-gray-100 dark:hover:bg-gray-800"
+                    )
+                  }
+                  end={item.href === '/'}
                 >
                   {item.label}
-                </Link>
+                </NavLink>
               ))}
 
               {/* All Modules dropdown trigger */}

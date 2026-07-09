@@ -3,6 +3,7 @@ import { Breadcrumb } from '@/components/ui/Breadcrumb';
 import { TOOLS } from '@/config/tools';
 import { ToolCard } from '@/components/ui/ToolCard';
 import { CodeBracketIcon } from '@heroicons/react/24/outline';
+import { ModuleHeader } from '@/components/shared/ModuleHeader';
 
 const MODULE_COLOR_THEME = {
   accent: '#8b5cf6',
@@ -43,37 +44,14 @@ export default function DeveloperModule() {
         <Breadcrumb items={[{ label: 'Developer' }]} />
 
         {/* Hero Banner Header */}
-        <div
-          className="p-8 rounded-2xl border flex flex-col md:flex-row items-center justify-between gap-6 mb-12 mt-4"
-          style={{
-            borderColor: 'var(--border-default)',
-            background: `linear-gradient(135deg, ${MODULE_COLOR_THEME.bg} 0%, transparent 100%)`,
-          }}
-        >
-          <div className="max-w-xl">
-            <div
-              className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 text-purple-500"
-              style={{ background: 'var(--bg-elevated)' }}
-              aria-hidden="true"
-            >
-              <CodeBracketIcon className="w-6 h-6" />
-            </div>
-            <h1 className="text-3xl font-extrabold" style={{ color: 'var(--text-primary)' }}>
-              Developer Module
-            </h1>
-            <p className="text-sm mt-2" style={{ color: 'var(--text-secondary)' }}>
-              Format raw JSON configurations, encode binary data, compute cryptographic checksum digests, generate cryptographically secure passwords, and parse epoch dates.
-            </p>
-          </div>
-          <div className="text-right">
-            <span
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold"
-              style={{ background: 'rgba(139, 92, 246, 0.12)', color: '#7c3aed' }}
-            >
-              {devTools.length} Utilities Online
-            </span>
-          </div>
-        </div>
+        <ModuleHeader
+          title="Developer Tools"
+          description="Format raw JSON configurations, encode binary data, compute cryptographic checksum digests, generate cryptographically secure passwords, and parse epoch dates."
+          icon={<CodeBracketIcon className="w-6 h-6" />}
+          iconColorClass="text-purple-500"
+          accentBgColor={MODULE_COLOR_THEME.bg}
+          toolCount={devTools.length}
+        />
 
         {/* Categories of Tools */}
         <div className="space-y-12">

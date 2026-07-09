@@ -38,10 +38,10 @@ export function ToolCard({ tool, compact = false }: ToolCardProps) {
   const { accent, bg } = getModuleColors(tool.module);
 
   return (
-    <motion.div variants={cardVariant} whileHover={{ y: -3, scale: 1.015 }} whileTap={{ scale: 0.98 }}>
+    <motion.div variants={cardVariant} whileHover={{ y: -3, scale: 1.015 }} whileTap={{ scale: 0.98 }} className="h-full">
       <Link
         to={tool.slug}
-        className={`tool-card ${compact ? 'tool-card--compact' : ''}`}
+        className={`tool-card h-full ${compact ? 'tool-card--compact' : ''}`}
         aria-label={`${tool.name}: ${tool.description}`}
       >
         <div className="tool-card__icon" style={{ background: bg, color: accent }} aria-hidden="true">
