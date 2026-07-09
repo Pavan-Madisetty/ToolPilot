@@ -96,9 +96,13 @@ const WeightConverter = lazy(() => import('@/pages/tools/conversion/WeightConver
 const TemperatureConverter = lazy(() => import('@/pages/tools/conversion/TemperatureConverter'));
 
 export default function App() {
+  const basename = typeof window !== 'undefined' && window.location.hostname.endsWith('.github.io')
+    ? '/ToolPilot'
+    : '';
+
   return (
     <HelmetProvider>
-      <BrowserRouter basename="/ToolPilot">
+      <BrowserRouter basename={basename}>
         <ToastContainer />
         <AnimatePresence mode="wait">
           <Routes>
