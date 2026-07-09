@@ -149,7 +149,7 @@ export default function JsonFormatter() {
                   type="checkbox"
                   checked={sortKeys}
                   onChange={(e) => setSortKeys(e.target.checked)}
-                  className="rounded text-blue-500 border-gray-300 focus:ring-blue-500"
+                  className="rounded text-[var(--text-link)] border-[var(--border-default)] focus:ring-[var(--border-focus)] bg-transparent"
                 />
                 <span>Sort Keys</span>
               </label>

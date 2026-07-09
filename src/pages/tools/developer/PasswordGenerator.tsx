@@ -79,7 +79,7 @@ export default function PasswordGenerator() {
     } else if (entropy < 85) {
       return { score: 'Strong', color: 'bg-emerald-500', width: 'w-3/4' };
     } else {
-      return { score: 'Very Strong', color: 'bg-blue-600', width: 'w-full' };
+      return { score: 'Very Strong', color: 'bg-[var(--text-link)]', width: 'w-full' };
     }
   }, [passwordVal, useUpper, useLower, useNumbers, useSymbols, isPassphraseMode]);
 
