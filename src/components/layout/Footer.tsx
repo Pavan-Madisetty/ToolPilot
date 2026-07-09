@@ -42,9 +42,9 @@ export function Footer() {
     >
       {/* Main Footer */}
       <div className="container-app py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-12">
           {/* Brand Column */}
-          <div className="lg:col-span-1">
+          <div className="md:col-span-3 lg:col-span-2">
             <Link
               to="/"
               className="inline-flex items-center gap-2 font-bold text-xl mb-4"
@@ -62,7 +62,7 @@ export function Footer() {
               </span>
             </Link>
 
-            <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--text-secondary)' }}>
+            <p className="text-sm leading-relaxed mb-4 max-w-sm" style={{ color: 'var(--text-secondary)' }}>
               The world's largest browser-based productivity platform with {TOTAL_TOOL_COUNT}+ free tools.
               No signup. No tracking. Always free.
             </p>

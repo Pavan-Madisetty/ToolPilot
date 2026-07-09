@@ -137,16 +137,16 @@ export default function FinanceModule() {
         {/* FAQs */}
         <section className="mt-16 pt-8 border-t" style={{ borderColor: 'var(--border-default)' }} aria-labelledby="faq-heading">
           <h3 id="faq-heading" className="text-lg font-bold mb-6">Frequently Asked Questions</h3>
-          <div className="space-y-4 max-w-3xl">
-            <div className="p-4 border rounded-xl" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)' }}>
-              <h4 className="font-bold text-sm mb-1">Is my financial data secure?</h4>
-              <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+          <div className="max-w-3xl">
+            <div className="faq-card">
+              <h4 className="faq-question">Is my financial data secure?</h4>
+              <p className="faq-answer">
                 Yes, absolutely. ToolPilot processes all financial computations entirely client-side. No inputs, interest rate quotes, or principal values are ever transmitted to external servers.
               </p>
             </div>
-            <div className="p-4 border rounded-xl" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)' }}>
-              <h4 className="font-bold text-sm mb-1">What is an amortization schedule?</h4>
-              <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+            <div className="faq-card">
+              <h4 className="faq-question">What is an amortization schedule?</h4>
+              <p className="faq-answer">
                 An amortization schedule is a complete table detailing each periodic payment on an amortizing loan. It shows the amount of interest and principal component applied to each payment, alongside the outstanding balance.
               </p>
             </div>

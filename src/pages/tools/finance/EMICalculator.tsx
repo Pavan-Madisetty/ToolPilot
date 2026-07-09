@@ -114,7 +114,7 @@ export default function EMICalculator() {
     <ToolPageWrapper toolId="emi-calculator">
       <div className="tool-layout">
         {/* Inputs panel */}
-        <div className="space-y-6 p-6 border rounded-2xl bg-white dark:bg-slate-800" style={{ borderColor: 'var(--border-default)' }}>
+        <div className="space-y-6 p-6 card">
           <Slider
             label="Loan Amount (₹)"
             min={10000}
@@ -161,7 +161,7 @@ export default function EMICalculator() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center border rounded-2xl p-6 bg-white dark:bg-slate-800" style={{ borderColor: 'var(--border-default)' }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center p-6 card">
             {/* Chart */}
             <div className="max-w-[240px] mx-auto">
               <Pie data={chartData} options={{ plugins: { legend: { position: 'bottom' } } }} />

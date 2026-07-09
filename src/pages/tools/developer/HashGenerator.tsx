@@ -115,7 +115,7 @@ export default function HashGenerator() {
 
           <div className="grid grid-cols-1 gap-4">
             {/* MD5 */}
-            <div className="border rounded-xl p-4 bg-white dark:bg-slate-800" style={{ borderColor: 'var(--border-default)' }}>
+            <div className="p-4 card">
               <div className="flex items-center justify-between gap-4 mb-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-blue-500">MD5 Checksum</span>
                 {hashes.md5 && <CopyButton text={hashes.md5} />}
@@ -130,7 +130,7 @@ export default function HashGenerator() {
             </div>
 
             {/* SHA-1 */}
-            <div className="border rounded-xl p-4 bg-white dark:bg-slate-800" style={{ borderColor: 'var(--border-default)' }}>
+            <div className="p-4 card">
               <div className="flex items-center justify-between gap-4 mb-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-purple-500">SHA-1 Checksum</span>
                 {hashes.sha1 && <CopyButton text={hashes.sha1} />}
@@ -145,7 +145,7 @@ export default function HashGenerator() {
             </div>
 
             {/* SHA-256 */}
-            <div className="border rounded-xl p-4 bg-white dark:bg-slate-800" style={{ borderColor: 'var(--border-default)' }}>
+            <div className="p-4 card">
               <div className="flex items-center justify-between gap-4 mb-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-emerald-500">SHA-256 Checksum</span>
                 {hashes.sha256 && <CopyButton text={hashes.sha256} />}
@@ -160,7 +160,7 @@ export default function HashGenerator() {
             </div>
 
             {/* SHA-512 */}
-            <div className="border rounded-xl p-4 bg-white dark:bg-slate-800" style={{ borderColor: 'var(--border-default)' }}>
+            <div className="p-4 card">
               <div className="flex items-center justify-between gap-4 mb-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-orange-500">SHA-512 Checksum</span>
                 {hashes.sha512 && <CopyButton text={hashes.sha512} />}

@@ -87,7 +87,7 @@ export default function PasswordGenerator() {
     <ToolPageWrapper toolId="password-generator">
       <div className="tool-layout lg:grid-cols-3">
         {/* Parameters Panel */}
-        <div className="lg:col-span-1 space-y-6 p-6 border rounded-2xl bg-white dark:bg-slate-800" style={{ borderColor: 'var(--border-default)' }}>
+        <div className="lg:col-span-1 space-y-6 p-6 card">
           <Switch
             label="Passphrase Mode"
             checked={isPassphraseMode}
@@ -131,7 +131,7 @@ export default function PasswordGenerator() {
 
         {/* Results Panel */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="border rounded-2xl p-6 bg-white dark:bg-slate-800 space-y-4" style={{ borderColor: 'var(--border-default)' }}>
+          <div className="p-6 card space-y-4">
             <div className="flex items-center justify-between">
               <span className="label">Generated Result</span>
               {passwordVal && <CopyButton text={passwordVal} />}

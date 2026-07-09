@@ -59,7 +59,7 @@ export default function TextDiff() {
         </div>
 
         {/* Diff Output Panel */}
-        <div className="border rounded-2xl p-6 bg-white dark:bg-slate-800 space-y-4" style={{ borderColor: 'var(--border-default)' }}>
+        <div className="p-6 card space-y-4">
           <h3 className="text-sm font-bold">Line Comparison (Diff Output)</h3>
           <div className="p-4 rounded-xl font-mono text-xs leading-relaxed whitespace-pre-wrap bg-slate-50/50 dark:bg-slate-900/30 border" style={{ borderColor: 'var(--border-default)' }}>
             {diffLines.map((line, idx) => (

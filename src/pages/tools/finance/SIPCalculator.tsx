@@ -114,7 +114,7 @@ export default function SIPCalculator() {
     <ToolPageWrapper toolId="sip-calculator">
       <div className="tool-layout">
         {/* Sliders sidebar */}
-        <div className="space-y-6 p-6 border rounded-2xl bg-white dark:bg-slate-800" style={{ borderColor: 'var(--border-default)' }}>
+        <div className="space-y-6 p-6 card">
           <Slider
             label="Monthly Investment (₹)"
             min={500}
@@ -161,10 +161,7 @@ export default function SIPCalculator() {
           </div>
 
           {/* Line Chart */}
-          <div
-            className="border rounded-2xl p-6 bg-white dark:bg-slate-800 h-[320px] relative"
-            style={{ borderColor: 'var(--border-default)' }}
-          >
+          <div className="p-6 card h-[320px] relative">
             <Line data={chartData} options={chartOptions} />
           </div>
         </div>

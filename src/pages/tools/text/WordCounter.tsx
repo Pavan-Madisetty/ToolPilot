@@ -63,19 +63,19 @@ export default function WordCounter() {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="border rounded-xl p-4 text-center bg-white dark:bg-slate-800" style={{ borderColor: 'var(--border-default)' }}>
+          <div className="p-4 text-center card">
             <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Words</span>
             <p className="text-xl font-bold mt-1">{stats.words}</p>
           </div>
-          <div className="border rounded-xl p-4 text-center bg-white dark:bg-slate-800" style={{ borderColor: 'var(--border-default)' }}>
+          <div className="p-4 text-center card">
             <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Characters</span>
             <p className="text-xl font-bold mt-1">{stats.chars}</p>
           </div>
-          <div className="border rounded-xl p-4 text-center bg-white dark:bg-slate-800" style={{ borderColor: 'var(--border-default)' }}>
+          <div className="p-4 text-center card">
             <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Sentences</span>
             <p className="text-xl font-bold mt-1">{stats.sentences}</p>
           </div>
-          <div className="border rounded-xl p-4 text-center bg-white dark:bg-slate-800" style={{ borderColor: 'var(--border-default)' }}>
+          <div className="p-4 text-center card">
             <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Reading Time</span>
             <p className="text-xl font-bold mt-1">~{stats.readingTime} min</p>
           </div>
@@ -83,7 +83,7 @@ export default function WordCounter() {
 
         {/* Word Density */}
         {stats.wordDensity.length > 0 && (
-          <div className="border rounded-2xl p-6 bg-white dark:bg-slate-800" style={{ borderColor: 'var(--border-default)' }}>
+          <div className="p-6 card">
             <h3 className="text-sm font-bold mb-4">Keyword Density (Top 5 Words)</h3>
             <div className="space-y-3">
               {stats.wordDensity.map(({ word, count, percentage }) => (

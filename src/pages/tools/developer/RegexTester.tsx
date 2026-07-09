@@ -58,7 +58,7 @@ export default function RegexTester() {
     <ToolPageWrapper toolId="regex-tester">
       <div className="tool-layout lg:grid-cols-3">
         {/* Parameters Panel */}
-        <div className="lg:col-span-1 space-y-6 p-6 border rounded-2xl bg-white dark:bg-slate-800" style={{ borderColor: 'var(--border-default)' }}>
+        <div className="lg:col-span-1 space-y-6 p-6 card">
           <h3 className="text-base font-bold">Regex Parameters</h3>
           <Input
             label="Expression Pattern"
@@ -97,7 +97,7 @@ export default function RegexTester() {
             />
           </div>
 
-          <div className="border rounded-2xl p-6 bg-white dark:bg-slate-800 space-y-4" style={{ borderColor: 'var(--border-default)' }}>
+          <div className="p-6 card space-y-4">
             <div className="flex items-center justify-between">
               <span className="label">Matches Highlighted</span>
               <span className="text-xs font-semibold px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/20 text-blue-500">

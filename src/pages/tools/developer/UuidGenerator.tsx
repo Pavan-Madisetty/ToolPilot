@@ -79,7 +79,7 @@ export default function UuidGenerator() {
     <ToolPageWrapper toolId="uuid-generator">
       <div className="tool-layout lg:grid-cols-3">
         {/* Controls Panel */}
-        <div className="lg:col-span-1 space-y-6 p-6 border rounded-2xl bg-white dark:bg-slate-800" style={{ borderColor: 'var(--border-default)' }}>
+        <div className="lg:col-span-1 space-y-6 p-6 card">
           <Select
             label="UUID Version"
             options={VERSION_OPTIONS}

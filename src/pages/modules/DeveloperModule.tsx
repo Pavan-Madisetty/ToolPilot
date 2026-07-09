@@ -137,16 +137,16 @@ export default function DeveloperModule() {
         {/* FAQs */}
         <section className="mt-16 pt-8 border-t" style={{ borderColor: 'var(--border-default)' }} aria-labelledby="faq-heading">
           <h3 id="faq-heading" className="text-lg font-bold mb-6">Frequently Asked Questions</h3>
-          <div className="space-y-4 max-w-3xl">
-            <div className="p-4 border rounded-xl" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)' }}>
-              <h4 className="font-bold text-sm mb-1">Is my input code sent to any servers?</h4>
-              <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+          <div className="max-w-3xl">
+            <div className="faq-card">
+              <h4 className="faq-question">Is my input code sent to any servers?</h4>
+              <p className="faq-answer">
                 No. All formatting, encoding, regular expressions testing, and hash calculation processes are executed locally using browser JavaScript and built-in Web APIs. No logs leave your machine.
               </p>
             </div>
-            <div className="p-4 border rounded-xl" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)' }}>
-              <h4 className="font-bold text-sm mb-1">What is entropy in password strength?</h4>
-              <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+            <div className="faq-card">
+              <h4 className="faq-question">What is entropy in password strength?</h4>
+              <p className="faq-answer">
                 Entropy measures the mathematical unpredictability of a password. Higher character pools (mixing upper, lower, numbers, symbols) and longer lengths increase entropy exponentially, making passwords computationally impractical to brute force.
               </p>
             </div>

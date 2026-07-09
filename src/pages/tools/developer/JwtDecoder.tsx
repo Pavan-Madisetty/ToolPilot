@@ -121,7 +121,7 @@ export default function JwtDecoder() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Header & Payload */}
             <div className="space-y-4">
-              <div className="border rounded-xl p-4 bg-white dark:bg-slate-800" style={{ borderColor: 'var(--border-default)' }}>
+              <div className="p-4 card">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs font-bold uppercase tracking-wider text-pink-500">Header</span>
                   <CopyButton text={decoded.header} />
@@ -135,7 +135,7 @@ export default function JwtDecoder() {
                 />
               </div>
 
-              <div className="border rounded-xl p-4 bg-white dark:bg-slate-800" style={{ borderColor: 'var(--border-default)' }}>
+              <div className="p-4 card">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs font-bold uppercase tracking-wider text-blue-500">Payload</span>
                   <CopyButton text={decoded.payload} />
@@ -152,7 +152,7 @@ export default function JwtDecoder() {
 
             {/* Claims Inspector */}
             {claimsInfo && claimsInfo.length > 0 && (
-              <div className="border rounded-xl p-6 bg-white dark:bg-slate-800 h-fit" style={{ borderColor: 'var(--border-default)' }}>
+              <div className="p-6 card h-fit">
                 <h3 className="text-sm font-bold mb-4">Claims Metadata</h3>
                 <div className="space-y-3">
                   {claimsInfo.map((claim) => (

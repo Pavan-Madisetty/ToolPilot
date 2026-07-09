@@ -55,7 +55,7 @@ export default function GSTCalculator() {
     <ToolPageWrapper toolId="gst-calculator">
       <div className="tool-layout">
         {/* Input parameters panel */}
-        <div className="space-y-6 p-6 border rounded-2xl bg-white dark:bg-slate-800" style={{ borderColor: 'var(--border-default)' }}>
+        <div className="space-y-6 p-6 card">
           <Input
             label="Amount (₹)"
             type="number"
@@ -114,7 +114,7 @@ export default function GSTCalculator() {
           </div>
 
           {/* Tax breakup breakdown box */}
-          <div className="border rounded-2xl p-6 bg-white dark:bg-slate-800 space-y-4" style={{ borderColor: 'var(--border-default)' }}>
+          <div className="p-6 card space-y-4">
             <h3 className="text-base font-bold">Tax Breakup Details</h3>
             
             {isInterstate ? (

@@ -48,7 +48,7 @@ export default function CompoundInterestCalculator() {
     <ToolPageWrapper toolId="compound-interest-calculator">
       <div className="tool-layout">
         {/* Sliders panel */}
-        <div className="space-y-6 p-6 border rounded-2xl bg-white dark:bg-slate-800" style={{ borderColor: 'var(--border-default)' }}>
+        <div className="space-y-6 p-6 card">
           <Slider
             label="Principal Amount (₹)"
             min={1000}
@@ -91,7 +91,7 @@ export default function CompoundInterestCalculator() {
             <StatCard label="Interest Earned" value={formatCurrency(calculations.interestEarned)} highlight />
           </div>
 
-          <div className="border rounded-2xl p-6 bg-white dark:bg-slate-800 space-y-4" style={{ borderColor: 'var(--border-default)' }}>
+          <div className="p-6 card space-y-4">
             <h3 className="text-base font-bold">Investment Growth Breakdown</h3>
 
             <div className="flex items-center justify-between text-sm py-2 border-b" style={{ borderColor: 'var(--border-subtle)' }}>

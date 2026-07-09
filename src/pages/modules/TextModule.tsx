@@ -71,16 +71,16 @@ export default function TextModule() {
         {/* FAQs */}
         <section className="mt-16 pt-8 border-t" style={{ borderColor: 'var(--border-default)' }} aria-labelledby="faq-heading">
           <h3 id="faq-heading" className="text-lg font-bold mb-6">Frequently Asked Questions</h3>
-          <div className="space-y-4 max-w-3xl">
-            <div className="p-4 border rounded-xl" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)' }}>
-              <h4 className="font-bold text-sm mb-1">How is the reading speed computed?</h4>
-              <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+          <div className="max-w-3xl">
+            <div className="faq-card">
+              <h4 className="faq-question">How is the reading speed computed?</h4>
+              <p className="faq-answer">
                 Reading speed projections assume an average reading pace of 200 words per minute (WPM). This standard allows visitors to estimate reading session time frames for written content.
               </p>
             </div>
-            <div className="p-4 border rounded-xl" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)' }}>
-              <h4 className="font-bold text-sm mb-1">What markdown elements are supported in the preview editor?</h4>
-              <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+            <div className="faq-card">
+              <h4 className="faq-question">What markdown elements are supported in the preview editor?</h4>
+              <p className="faq-answer">
                 The preview editor parses headings, list items (`-`), strong bold tags (`**`), and emphasis highlights (`*`) dynamically in the browser, showing raw HTML syntax exports as well.
               </p>
             </div>

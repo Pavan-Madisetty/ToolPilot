@@ -61,7 +61,7 @@ export default function TimestampConverter() {
 
         <div className="tool-layout lg:grid-cols-2">
           {/* Epoch to Date conversion panel */}
-          <div className="space-y-4 p-6 border rounded-2xl bg-white dark:bg-slate-800" style={{ borderColor: 'var(--border-default)' }}>
+          <div className="space-y-4 p-6 card">
             <h3 className="text-base font-bold">Convert Unix Timestamp to Date</h3>
             <Input
               label="Unix Epoch Timestamp (seconds)"
@@ -84,7 +84,7 @@ export default function TimestampConverter() {
           </div>
 
           {/* Date to Epoch conversion panel */}
-          <div className="space-y-4 p-6 border rounded-2xl bg-white dark:bg-slate-800" style={{ borderColor: 'var(--border-default)' }}>
+          <div className="space-y-4 p-6 card">
             <h3 className="text-base font-bold">Convert Date to Unix Timestamp</h3>
             <Input
               label="Date / Time String"
