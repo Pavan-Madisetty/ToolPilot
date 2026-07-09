@@ -13,6 +13,25 @@ import { useSearchStore } from '@/stores/uiStore';
 import { MODULES } from '@/config/modules';
 import { clsx } from 'clsx';
 
+function getCategoryEmoji(moduleKey: string): string {
+  const emojis: Record<string, string> = {
+    finance: '💵',
+    developer: '💻',
+    pdf: '📄',
+    image: '🖼️',
+    text: '✍️',
+    ai: '🤖',
+    business: '💼',
+    productivity: '⏱️',
+    education: '🎓',
+    travel: '✈️',
+    health: '❤️',
+    utilities: '⚙️',
+    conversion: '⚖️',
+  };
+  return emojis[moduleKey] || '🔧';
+}
+
 export function Header() {
   const { theme, toggleTheme } = useThemeStore();
   const { setIsOpen: setSearchOpen } = useSearchStore();
@@ -182,7 +201,10 @@ export function Header() {
               <button
                 ref={toggleBtnRef}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="btn btn-icon btn-ghost"
+                className={clsx(
+                  "btn btn-icon btn-ghost focus:outline-none transition-colors",
+                  isMobileMenuOpen ? "bg-slate-100 dark:bg-slate-800 text-[var(--text-link)]" : ""
+                )}
                 aria-expanded={isMobileMenuOpen}
                 aria-controls="mobile-menu"
                 aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
@@ -206,37 +228,40 @@ export function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.15 }}
-            className="border-t animate-in fade-in slide-in-from-top-2 duration-200"
+            className="absolute left-4 right-4 md:left-auto md:right-6 lg:right-8 top-16 md:top-[68px] w-[calc(100vw-32px)] md:w-[380px] border rounded-2xl shadow-xl z-50 overflow-hidden"
             style={{
               borderColor: 'var(--border-default)',
               background: 'var(--bg-elevated)',
             }}
           >
-            <nav className="container-app py-4" aria-label="Navigation Menu">
-              {/* Search */}
+            <nav className="p-4" aria-label="Navigation Menu">
+              {/* Search — Mobile Only */}
               <button
                 onClick={() => { setSearchOpen(true); setIsMobileMenuOpen(false); }}
-                className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg mb-2 text-sm text-left hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors"
+                className="md:hidden flex items-center gap-3 w-full px-3 py-2.5 rounded-lg mb-4 text-sm text-left hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors"
                 style={{ background: 'var(--bg-surface)', color: 'var(--text-secondary)' }}
               >
                 <MagnifyingGlassIcon className="w-4 h-4 text-slate-400 dark:text-slate-500" aria-hidden="true" />
                 <span>Search 500+ tools...</span>
               </button>
 
-              <div className="mt-2 pt-3 border-t" style={{ borderColor: 'var(--border-default)' }}>
-                <p className="px-3 text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--text-tertiary)' }}>
+              <div>
+                <p className="px-2 text-[10px] font-bold uppercase tracking-wider text-[var(--text-tertiary)] mb-2">
                   All Modules
                 </p>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
+                <div className="grid grid-cols-2 gap-2">
                   {MODULES.map((mod) => (
                     <Link
                       key={mod.key}
                       to={mod.slug}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="px-3 py-2.5 rounded-lg text-xs font-medium text-center transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+                      className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all duration-150 hover:bg-slate-50 dark:hover:bg-slate-900 hover:text-[var(--text-link)]"
                       style={{ color: 'var(--text-secondary)', background: 'var(--bg-surface)' }}
                     >
-                      {mod.name}
+                      <span className="text-base shrink-0" aria-hidden="true">
+                        {getCategoryEmoji(mod.key)}
+                      </span>
+                      <span className="truncate">{mod.name}</span>
                     </Link>
                   ))}
                 </div>
