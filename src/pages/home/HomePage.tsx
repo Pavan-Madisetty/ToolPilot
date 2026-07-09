@@ -137,40 +137,7 @@ export default function HomePage() {
       <main id="main-content" className="homepage">
         {/* Workspace section */}
 
-        {/* ── Recently Used ─────────────────────── */}
-        <AnimatePresence>
-          {recentTools.length > 0 && (
-            <motion.section
-              className="section container"
-              aria-labelledby="recent-heading"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
-            >
-              <div className="section__header">
-                <div>
-                  <h2 id="recent-heading" className="section__title">
-                    <Clock size={20} aria-hidden="true" className="section__title-icon" />
-                    Recently Used
-                  </h2>
-                  <p className="section__subtitle">Pick up where you left off</p>
-                </div>
-              </div>
-              <motion.div
-                className="tools-grid tools-grid--compact"
-                variants={staggerContainer}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: '-50px' }}
-              >
-                {recentTools.map((tool) => (
-                  <ToolCard key={tool.id} tool={tool} compact />
-                ))}
-              </motion.div>
-            </motion.section>
-          )}
-        </AnimatePresence>
+
 
         {/* ── Favorites ─────────────────────────── */}
         <AnimatePresence>
@@ -319,6 +286,41 @@ export default function HomePage() {
             ))}
           </motion.div>
         </section>
+
+        {/* ── Recently Used (Bottom) ────────────── */}
+        <AnimatePresence>
+          {recentTools.length > 0 && (
+            <motion.section
+              className="section container"
+              aria-labelledby="recent-heading"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <div className="section__header">
+                <div>
+                  <h2 id="recent-heading" className="section__title">
+                    <Clock size={20} aria-hidden="true" className="section__title-icon" />
+                    Recently Used
+                  </h2>
+                  <p className="section__subtitle">Pick up where you left off</p>
+                </div>
+              </div>
+              <motion.div
+                className="tools-grid tools-grid--compact"
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-50px' }}
+              >
+                {recentTools.map((tool) => (
+                  <ToolCard key={tool.id} tool={tool} compact />
+                ))}
+              </motion.div>
+            </motion.section>
+          )}
+        </AnimatePresence>
 
         {/* ── CTA Banner ────────────────────────── */}
         <section className="cta-banner" aria-labelledby="cta-heading">

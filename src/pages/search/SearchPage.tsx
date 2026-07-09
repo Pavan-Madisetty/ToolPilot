@@ -165,27 +165,41 @@ export default function SearchPage() {
                 borderColor: 'var(--border-default)',
               }}
             >
-              <h3 className="text-sm font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>
+              <div className="text-xs font-bold uppercase tracking-wider mb-4" style={{ color: 'var(--text-tertiary)', letterSpacing: '0.05em' }}>
                 Filter by Category
-              </h3>
-              <div className="space-y-1.5">
+              </div>
+              <div className="space-y-1">
                 {MODULES.map((mod) => {
                   const isActive = moduleParam === mod.key;
                   return (
                     <button
                       key={mod.key}
                       onClick={() => handleModuleSelect(mod.key)}
-                      className="w-full flex items-center justify-between px-3 py-2 text-xs font-medium rounded-lg text-left transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+                      className="w-full flex items-center justify-between px-3 py-2.5 text-xs font-medium rounded-lg text-left transition-all duration-150"
                       style={{
-                        background: isActive ? 'var(--bg-surface)' : 'transparent',
+                        background: isActive ? 'rgba(79, 70, 229, 0.08)' : 'transparent',
                         color: isActive ? 'var(--text-link)' : 'var(--text-secondary)',
-                        border: isActive ? '1.5px solid var(--border-focus)' : '1.5px solid transparent',
+                      }}
+                      onMouseEnter={(e) => {
+                        if (!isActive) {
+                          e.currentTarget.style.background = 'var(--bg-surface)';
+                          e.currentTarget.style.color = 'var(--text-primary)';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!isActive) {
+                          e.currentTarget.style.background = 'transparent';
+                          e.currentTarget.style.color = 'var(--text-secondary)';
+                        }
                       }}
                     >
                       <span>{mod.name}</span>
                       <span
-                        className="px-1.5 py-0.5 rounded text-[10px] bg-gray-100 dark:bg-gray-700"
-                        style={{ color: 'var(--text-tertiary)' }}
+                        className="px-2 py-0.5 rounded-full text-[10px] font-bold"
+                        style={{
+                          background: isActive ? 'rgba(79, 70, 229, 0.15)' : 'var(--bg-surface)',
+                          color: isActive ? 'var(--text-link)' : 'var(--text-tertiary)',
+                        }}
                       >
                         {mod.toolCount}
                       </span>

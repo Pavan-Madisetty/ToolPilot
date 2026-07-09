@@ -7,7 +7,6 @@ import {
   MoonIcon,
   Bars3Icon,
   XMarkIcon,
-  Squares2X2Icon,
 } from '@heroicons/react/24/outline';
 import { useThemeStore } from '@/stores/themeStore';
 import { useSearchStore } from '@/stores/uiStore';
@@ -109,15 +108,7 @@ export function Header() {
                 </NavLink>
               ))}
 
-              {/* All Modules dropdown trigger */}
-              <Link
-                to="/"
-                className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-150 hover:bg-gray-100 dark:hover:bg-gray-800"
-                style={{ color: 'var(--text-secondary)' }}
-              >
-                <Squares2X2Icon className="w-4 h-4" aria-hidden="true" />
-                More
-              </Link>
+
             </nav>
 
             {/* Spacer */}
