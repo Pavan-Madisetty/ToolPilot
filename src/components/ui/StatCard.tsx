@@ -61,11 +61,11 @@ export function StatCard({
         padding: '20px 24px',
         borderRadius: 16,
         background: highlight
-          ? 'linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(99, 102, 241, 0.08) 100%)'
+          ? 'linear-gradient(135deg, rgba(79, 70, 229, 0.08) 0%, rgba(79, 70, 229, 0.03) 100%)'
           : 'var(--bg-surface)',
-        border: `1.5px solid ${highlight ? 'rgba(59, 130, 246, 0.25)' : 'var(--border-default)'}`,
+        border: `1.5px solid ${highlight ? 'rgba(79, 70, 229, 0.25)' : 'var(--border-default)'}`,
         boxShadow: highlight
-          ? '0 4px 20px rgba(59, 130, 246, 0.12)'
+          ? '0 4px 20px rgba(79, 70, 229, 0.08)'
           : 'var(--shadow-xs)',
         transition: 'box-shadow 0.2s ease, border-color 0.2s ease',
         position: 'relative',
@@ -82,7 +82,7 @@ export function StatCard({
             left: 0,
             right: 0,
             height: 3,
-            background: 'linear-gradient(90deg, #3B82F6, #6366F1)',
+            background: 'linear-gradient(90deg, var(--text-link), rgba(79, 70, 229, 0.6))',
             borderRadius: '16px 16px 0 0',
           }}
         />
@@ -95,7 +95,7 @@ export function StatCard({
           fontWeight: 600,
           letterSpacing: '0.06em',
           textTransform: 'uppercase',
-          color: highlight ? 'rgba(59, 130, 246, 0.9)' : 'var(--text-tertiary)',
+          color: highlight ? 'var(--text-link)' : 'var(--text-tertiary)',
           fontFamily: 'var(--font-sans)',
         }}
       >
@@ -108,7 +108,7 @@ export function StatCard({
           display: 'flex',
           alignItems: 'baseline',
           gap: 2,
-          color: highlight ? '#3B82F6' : 'var(--text-primary)',
+          color: highlight ? 'var(--text-link)' : 'var(--text-primary)',
           fontFamily: 'var(--font-sans)',
         }}
       >
@@ -118,7 +118,7 @@ export function StatCard({
             style={{
               fontSize: '1.125rem',
               fontWeight: 600,
-              color: highlight ? '#3B82F6' : 'var(--text-secondary)',
+              color: highlight ? 'var(--text-link)' : 'var(--text-secondary)',
             }}
           >
             {prefix}

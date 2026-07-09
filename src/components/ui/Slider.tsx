@@ -66,9 +66,9 @@ export function Slider({
           step={step}
           value={value}
           onChange={(e) => onChange(Number(e.target.value))}
-          className="flex-1 h-1.5 rounded-lg bg-gray-200 dark:bg-gray-700 appearance-none cursor-pointer accent-blue-500 focus:outline-none"
+          className="flex-1 h-1.5 rounded-lg bg-gray-200 dark:bg-gray-800 appearance-none cursor-pointer accent-[var(--text-link)] focus:outline-none"
           style={{
-            background: `linear-gradient(to right, #3B82F6 0%, #3B82F6 ${
+            background: `linear-gradient(to right, var(--text-link) 0%, var(--text-link) ${
               ((value - min) / (max - min)) * 100
             }%, var(--border-default) ${((value - min) / (max - min)) * 100}%, var(--border-default) 100%)`,
           }}

@@ -36,12 +36,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             'btn-primary': variant === 'primary',
             'btn-secondary': variant === 'secondary',
             'btn-ghost': variant === 'ghost',
-            'bg-red-600 hover:bg-red-700 text-white font-medium shadow-sm hover:shadow-md': variant === 'danger',
-            'bg-emerald-600 hover:bg-emerald-700 text-white font-medium shadow-sm hover:shadow-md': variant === 'success',
+            'btn-danger': variant === 'danger',
+            'btn-success': variant === 'success',
             'btn-sm': size === 'sm',
             'btn-lg': size === 'lg',
             'btn-xl': size === 'xl',
-            'px-2 py-1 text-xs rounded': size === 'xs',
+            'px-2.5 py-1 text-xs rounded-[8px]': size === 'xs',
           },
           className
         )}
