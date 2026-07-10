@@ -97,11 +97,22 @@ const WordCounter = lazy(() => import('@/pages/tools/text/WordCounter'));
 const CaseConverter = lazy(() => import('@/pages/tools/text/CaseConverter'));
 const TextDiff = lazy(() => import('@/pages/tools/text/TextDiff'));
 const MarkdownEditor = lazy(() => import('@/pages/tools/text/MarkdownEditor'));
+const SlugGenerator = lazy(() => import('@/pages/tools/text/SlugGenerator'));
+
+// AI Tools
+const PromptBuilder = lazy(() => import('@/pages/tools/ai/PromptBuilder'));
+const EmailWriter = lazy(() => import('@/pages/tools/ai/EmailWriter'));
+const ResumeBuilder = lazy(() => import('@/pages/tools/ai/ResumeBuilder'));
+const CoverLetter = lazy(() => import('@/pages/tools/ai/CoverLetter'));
 
 // Productivity Tools
 const PomodoroTimer = lazy(() => import('@/pages/tools/productivity/PomodoroTimer'));
 const TodoList = lazy(() => import('@/pages/tools/productivity/TodoList'));
 const HabitTracker = lazy(() => import('@/pages/tools/productivity/HabitTracker'));
+const Stopwatch = lazy(() => import('@/pages/tools/productivity/Stopwatch'));
+const Countdown = lazy(() => import('@/pages/tools/productivity/Countdown'));
+const Checklist = lazy(() => import('@/pages/tools/productivity/Checklist'));
+const Notes = lazy(() => import('@/pages/tools/productivity/Notes'));
 
 // Education Tools
 const ScientificCalculator = lazy(() => import('@/pages/tools/education/ScientificCalculator'));
@@ -218,9 +229,14 @@ export default function App() {
               <Route path="text/case-converter" element={<Suspense fallback={<PageLoader />}><CaseConverter /></Suspense>} />
               <Route path="text/text-diff" element={<Suspense fallback={<PageLoader />}><TextDiff /></Suspense>} />
               <Route path="text/markdown-editor" element={<Suspense fallback={<PageLoader />}><MarkdownEditor /></Suspense>} />
+              <Route path="text/slug-generator" element={<Suspense fallback={<PageLoader />}><SlugGenerator /></Suspense>} />
 
               {/* AI Module */}
               <Route path="ai" element={<Suspense fallback={<PageLoader />}><AiModule /></Suspense>} />
+              <Route path="ai/prompt-builder" element={<Suspense fallback={<PageLoader />}><PromptBuilder /></Suspense>} />
+              <Route path="ai/email-writer" element={<Suspense fallback={<PageLoader />}><EmailWriter /></Suspense>} />
+              <Route path="ai/resume-builder" element={<Suspense fallback={<PageLoader />}><ResumeBuilder /></Suspense>} />
+              <Route path="ai/cover-letter" element={<Suspense fallback={<PageLoader />}><CoverLetter /></Suspense>} />
 
               {/* Business Module */}
               <Route path="business" element={<Suspense fallback={<PageLoader />}><BusinessModule /></Suspense>} />
@@ -232,6 +248,10 @@ export default function App() {
               <Route path="productivity/pomodoro" element={<Suspense fallback={<PageLoader />}><PomodoroTimer /></Suspense>} />
               <Route path="productivity/todo" element={<Suspense fallback={<PageLoader />}><TodoList /></Suspense>} />
               <Route path="productivity/habit-tracker" element={<Suspense fallback={<PageLoader />}><HabitTracker /></Suspense>} />
+              <Route path="productivity/stopwatch" element={<Suspense fallback={<PageLoader />}><Stopwatch /></Suspense>} />
+              <Route path="productivity/countdown" element={<Suspense fallback={<PageLoader />}><Countdown /></Suspense>} />
+              <Route path="productivity/checklist" element={<Suspense fallback={<PageLoader />}><Checklist /></Suspense>} />
+              <Route path="productivity/notes" element={<Suspense fallback={<PageLoader />}><Notes /></Suspense>} />
 
               {/* Education Module */}
               <Route path="education" element={<Suspense fallback={<PageLoader />}><EducationModule /></Suspense>} />
