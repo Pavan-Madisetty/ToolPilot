@@ -26,9 +26,11 @@ export type ModuleKey =
   | 'browser';
 
 // ─────────────────────────────────────────────
-// Theme
+// Theme & Design
 // ─────────────────────────────────────────────
 export type ThemeMode = 'light' | 'dark';
+export type DesignMode = 'default' | 'minimal';
+
 
 // ─────────────────────────────────────────────
 // Tool Registry
@@ -177,6 +179,7 @@ export interface JsonFormatterState {
 // ─────────────────────────────────────────────
 export const STORAGE_KEYS = {
   THEME: 'toolpilot_theme',
+  DESIGN: 'toolpilot_design',
   FAVORITES: 'toolpilot_favorites',
   HISTORY: 'toolpilot_history',
   RECENTLY_USED: 'toolpilot_recently_used',

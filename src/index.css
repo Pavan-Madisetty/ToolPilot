@@ -1050,3 +1050,239 @@ a:focus-visible,
   line-height: 1.55;
   margin: 0;
 }
+
+/* ============================================================
+   Minimalism Design Theme Override
+   ============================================================ */
+
+[data-design="minimal"] {
+  /* Flat typography and colors */
+  --bg-base: #ffffff;
+  --bg-surface: #ffffff;
+  --bg-elevated: #ffffff;
+  --bg-overlay: rgba(0, 0, 0, 0.8);
+  --bg-code: #f4f4f5;
+
+  --text-primary: #09090b;
+  --text-secondary: #27272a;
+  --text-tertiary: #71717a;
+  --text-disabled: #a1a1aa;
+  --text-inverse: #ffffff;
+  --text-link: #09090b;
+  --text-link-hover: #71717a;
+  --text-code: #09090b;
+
+  --border-subtle: #e4e4e7;
+  --border-default: #27272a;
+  --border-strong: #09090b;
+  --border-focus: #09090b;
+
+  --header-bg: #ffffff;
+  --header-border: #27272a;
+
+  font-family: var(--font-sans);
+  letter-spacing: 0.015em;
+}
+
+[data-design="minimal"].dark,
+[data-design="minimal"] [data-theme="dark"],
+[data-design="minimal"] .dark {
+  --bg-base: #09090b;
+  --bg-surface: #09090b;
+  --bg-elevated: #09090b;
+  --bg-overlay: rgba(0, 0, 0, 0.9);
+  --bg-code: #18181b;
+
+  --text-primary: #fafafa;
+  --text-secondary: #d4d4d8;
+  --text-tertiary: #a1a1aa;
+  --text-disabled: #3f3f46;
+  --text-inverse: #09090b;
+  --text-link: #fafafa;
+  --text-link-hover: #a1a1aa;
+  --text-code: #fafafa;
+
+  --border-subtle: #27272a;
+  --border-default: #3f3f46;
+  --border-strong: #fafafa;
+  --border-focus: #fafafa;
+
+  --header-bg: #09090b;
+  --header-border: #3f3f46;
+}
+
+/* Structural Reset - Zero Rounded Corners, Shadows, Gradients */
+[data-design="minimal"] *,
+[data-design="minimal"] *::before,
+[data-design="minimal"] *::after {
+  border-radius: 0px !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  transition-duration: 0.05s !important;
+  animation-duration: 0.05s !important;
+}
+
+/* Disable gradients */
+[data-design="minimal"] [style*="background: linear-gradient"],
+[data-design="minimal"] [style*="background-image: linear-gradient"] {
+  background: var(--text-primary) !important;
+  color: var(--bg-base) !important;
+}
+
+/* Logo Color override */
+[data-design="minimal"] [aria-label*="ToolPilot"] > div {
+  background: var(--text-primary) !important;
+}
+[data-design="minimal"] [aria-label*="ToolPilot"] span span {
+  color: var(--text-primary) !important;
+}
+
+/* Cards & Grid Overrides */
+[data-design="minimal"] .card,
+[data-design="minimal"] .module-card,
+[data-design="minimal"] .tool-card,
+[data-design="minimal"] .faq-card {
+  border: 1px solid var(--border-default) !important;
+  background: var(--bg-elevated) !important;
+}
+
+[data-design="minimal"] .module-card::before {
+  display: none !important;
+}
+
+[data-design="minimal"] .module-card:hover,
+[data-design="minimal"] .tool-card:hover,
+[data-design="minimal"] .faq-card:hover {
+  border-color: var(--border-strong) !important;
+  background: var(--bg-base) !important;
+}
+
+/* Clean tabs */
+[data-design="minimal"] .workspace-tab {
+  border: 1px solid var(--border-default) !important;
+  border-radius: 0 !important;
+}
+
+[data-design="minimal"] .workspace-tab--active {
+  background: var(--text-primary) !important;
+  color: var(--bg-base) !important;
+  border-color: var(--text-primary) !important;
+}
+
+/* Badge override */
+[data-design="minimal"] .badge,
+[data-design="minimal"] [class*="module-badge-"],
+[data-design="minimal"] [class*="bg-green-500"] {
+  background: transparent !important;
+  border: 1px solid var(--border-default) !important;
+  color: var(--text-secondary) !important;
+  text-transform: uppercase;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+/* Input, select, textarea */
+[data-design="minimal"] input,
+[data-design="minimal"] select,
+[data-design="minimal"] textarea,
+[data-design="minimal"] .input,
+[data-design="minimal"] .select {
+  border: 1px solid var(--border-default) !important;
+  background: var(--bg-elevated) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-design="minimal"] input:focus,
+[data-design="minimal"] select:focus,
+[data-design="minimal"] textarea:focus {
+  border-color: var(--border-strong) !important;
+  outline: 2px solid var(--border-strong) !important;
+  outline-offset: 0px !important;
+}
+
+/* Buttons */
+[data-design="minimal"] .btn,
+[data-design="minimal"] button:not(.btn-icon) {
+  border-radius: 0 !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+[data-design="minimal"] .btn-primary {
+  background: var(--text-primary) !important;
+  color: var(--bg-base) !important;
+  border: 1px solid var(--text-primary) !important;
+}
+
+[data-design="minimal"] .btn-primary:hover {
+  background: var(--text-secondary) !important;
+  color: var(--bg-base) !important;
+  transform: none !important;
+}
+
+[data-design="minimal"] .btn-secondary {
+  background: transparent !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-default) !important;
+}
+
+[data-design="minimal"] .btn-secondary:hover {
+  background: var(--border-subtle) !important;
+  transform: none !important;
+}
+
+[data-design="minimal"] .btn-ghost:hover {
+  background: var(--border-subtle) !important;
+}
+
+/* Module card specific overrides */
+[data-design="minimal"] .module-card__icon-wrap {
+  background: transparent !important;
+  border: 1px solid var(--border-default) !important;
+}
+
+[data-design="minimal"] .module-card__count {
+  color: var(--text-tertiary) !important;
+}
+
+/* Feature / Stats visual simplification */
+[data-design="minimal"] .feature-highlight,
+[data-design="minimal"] .stat-card {
+  border: 1px solid var(--border-default) !important;
+  background: var(--bg-elevated) !important;
+}
+
+/* Clean background transparency overlays */
+[data-design="minimal"] [style*="background: rgba"],
+[data-design="minimal"] [style*="background-color: rgba"] {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Remove colored status markers, use plain borders */
+[data-design="minimal"] [style*="border-color"] {
+  border-color: var(--border-default) !important;
+}
+
+[data-design="minimal"] .text-indigo-600,
+[data-design="minimal"] .text-indigo-400 {
+  color: var(--text-primary) !important;
+}
+
+/* Header & navigation items */
+[data-design="minimal"] header {
+  border-bottom: 2px solid var(--border-default) !important;
+}
+
+[data-design="minimal"] footer {
+  border-top: 2px solid var(--border-default) !important;
+}
+
+/* Dialog & Overlays */
+[data-design="minimal"] [role="dialog"],
+[data-design="minimal"] .dialog-content {
+  border: 2px solid var(--border-default) !important;
+  background: var(--bg-elevated) !important;
+}
+
