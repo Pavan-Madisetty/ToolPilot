@@ -1092,6 +1092,54 @@ export const TOOLS: ToolConfig[] = [
   },
 
   // ─────────────────────────────────────────────
+  // PDF MODULE
+  // ─────────────────────────────────────────────
+  {
+    id: 'html-to-pdf',
+    name: 'HTML to PDF Converter',
+    description: 'Convert HTML and CSS code to a downloadable PDF document',
+    module: 'pdf',
+    slug: '/pdf/html-to-pdf',
+    icon: 'CodeIcon',
+    tags: ['pdf', 'html', 'css', 'converter', 'export'],
+    metaTitle: 'HTML to PDF Converter - Convert HTML & CSS to PDF | ToolPilot',
+    metaDescription:
+      'Free online HTML to PDF converter. Paste HTML and CSS to render and export to a clean PDF instantly.',
+    keywords: ['html to pdf', 'convert html to pdf', 'html css to pdf', 'code to pdf'],
+    relatedTools: ['markdown-to-pdf', 'image-to-pdf'],
+  },
+  {
+    id: 'image-to-pdf',
+    name: 'Image to PDF Converter',
+    description: 'Convert JPG, PNG, and WebP images to a single PDF document',
+    module: 'pdf',
+    slug: '/pdf/image-to-pdf',
+    icon: 'PhotoIcon',
+    tags: ['pdf', 'image', 'jpg to pdf', 'png to pdf', 'webp to pdf', 'merge'],
+    isPopular: true,
+    isFeatured: true,
+    metaTitle: 'Image to PDF Converter - Convert JPG, PNG to PDF | ToolPilot',
+    metaDescription:
+      'Convert your images (JPG, PNG, WebP) to PDF. Combine multiple images into a single clean PDF document online.',
+    keywords: ['image to pdf', 'jpg to pdf', 'png to pdf', 'combine images to pdf'],
+    relatedTools: ['html-to-pdf', 'markdown-to-pdf'],
+  },
+  {
+    id: 'markdown-to-pdf',
+    name: 'Markdown to PDF Converter',
+    description: 'Convert Markdown documents into clean, styled PDF reports',
+    module: 'pdf',
+    slug: '/pdf/markdown-to-pdf',
+    icon: 'DocumentTextIcon',
+    tags: ['pdf', 'markdown', 'md to pdf', 'export', 'editor'],
+    metaTitle: 'Markdown to PDF Converter - Export MD to PDF | ToolPilot',
+    metaDescription:
+      'Write markdown and download as a formatted PDF report. Standard styling and print layout supported.',
+    keywords: ['markdown to pdf', 'export md to pdf', 'md converter', 'pdf report'],
+    relatedTools: ['html-to-pdf', 'image-to-pdf'],
+  },
+
+  // ─────────────────────────────────────────────
   // PRODUCTIVITY MODULE
   // ─────────────────────────────────────────────
   {
@@ -1745,6 +1793,10 @@ export const IMPLEMENTED_TOOL_IDS = new Set<string>([
   'profit-margin',
   'break-even',
   'quotation-generator',
+  // PDF
+  'html-to-pdf',
+  'image-to-pdf',
+  'markdown-to-pdf',
 ]);
 
 /** True when a catalog tool has no working implementation yet. */

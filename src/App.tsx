@@ -172,6 +172,11 @@ const DataStorageConverter = lazy(() => import('@/pages/tools/conversion/DataSto
 const TimezoneConverter = lazy(() => import('@/pages/tools/travel/TimezoneConverter'));
 const FuelCostCalculator = lazy(() => import('@/pages/tools/travel/FuelCostCalculator'));
 
+// PDF Tools
+const HtmlToPdf = lazy(() => import('@/pages/tools/pdf/HtmlToPdf'));
+const ImageToPdf = lazy(() => import('@/pages/tools/pdf/ImageToPdf'));
+const MarkdownToPdf = lazy(() => import('@/pages/tools/pdf/MarkdownToPdf'));
+
 export default function App() {
   const basename =
     typeof window !== 'undefined' && window.location.hostname.endsWith('.github.io')
@@ -646,6 +651,30 @@ export default function App() {
                 element={
                   <Suspense fallback={<PageLoader />}>
                     <PdfModule />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="pdf/html-to-pdf"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <HtmlToPdf />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="pdf/image-to-pdf"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <ImageToPdf />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="pdf/markdown-to-pdf"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <MarkdownToPdf />
                   </Suspense>
                 }
               />
