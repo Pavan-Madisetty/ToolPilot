@@ -1499,6 +1499,18 @@ export const IMPLEMENTED_TOOL_IDS = new Set<string>([
   'favicon-generator',
   // Text
   'word-counter', 'case-converter', 'text-diff', 'markdown-editor',
+  // Education
+  'gpa-calculator', 'unit-converter',
+  // Health
+  'bmr-calculator', 'calorie-calculator',
+  // Utilities
+  'random-number',
+  // Conversion
+  'data-storage-converter',
+  // Travel
+  'timezone-converter', 'fuel-cost',
+  // Business
+  'gst-invoice', 'profit-margin', 'break-even', 'quotation-generator',
 ]);
 
 /** True when a catalog tool has no working implementation yet. */
