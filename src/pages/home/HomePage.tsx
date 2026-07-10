@@ -82,6 +82,22 @@ const JSON_LD_WEBSITE = {
   },
 };
 
+const JSON_LD_ORGANIZATION = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'ToolPilot',
+  url: 'https://toolpilot.app',
+  logo: 'https://toolpilot.app/favicon.svg',
+  sameAs: [
+    'https://github.com/Pavan-Madisetty/ToolPilot'
+  ],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer support',
+    email: 'support@toolpilot.app'
+  }
+};
+
 // ─────────────────────────────────────────────
 // HomePage
 // ─────────────────────────────────────────────
@@ -132,6 +148,7 @@ export default function HomePage() {
 
         {/* JSON-LD */}
         <script type="application/ld+json">{JSON.stringify(JSON_LD_WEBSITE)}</script>
+        <script type="application/ld+json">{JSON.stringify(JSON_LD_ORGANIZATION)}</script>
       </Helmet>
 
       <main id="main-content" className="homepage">

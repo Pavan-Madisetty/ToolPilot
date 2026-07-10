@@ -51,6 +51,12 @@ export interface ToolConfig {
   metaDescription: string;
   keywords: string[];
   relatedTools?: string[]; // Array of tool IDs
+  faq?: { question: string; answer: string }[];
+  howToSteps?: { name: string; text: string }[];
+  benefits?: string[];
+  features?: string[];
+  tips?: string[];
+  examples?: { input: string; output: string }[];
 }
 
 export interface ModuleConfig {
