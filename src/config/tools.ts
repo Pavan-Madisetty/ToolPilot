@@ -1721,32 +1721,43 @@ export const NEW_TOOLS = TOOLS.filter((t) => t.isNew);
 // When you ship a tool, add its id here (and its route in App.tsx).
 // ─────────────────────────────────────────────
 export const IMPLEMENTED_TOOL_IDS = new Set<string>([
-  // Finance
+  // FINANCE
   'emi-calculator',
-  'sip-calculator',
-  'fd-calculator',
-  'gst-calculator',
-  'income-tax-calculator',
-  'salary-calculator',
-  'compound-interest-calculator',
-  'currency-converter',
-  'budget-planner',
-  'ppf-calculator',
-  'tip-calculator',
   'home-loan-calculator',
   'car-loan-calculator',
   'personal-loan-calculator',
   'education-loan-calculator',
   'loan-eligibility-calculator',
+  'sip-calculator',
+  'fd-calculator',
   'rd-calculator',
+  'ppf-calculator',
   'epf-calculator',
   'retirement-calculator',
+  'gst-calculator',
+  'income-tax-calculator',
+  'salary-calculator',
   'hra-calculator',
+  'compound-interest-calculator',
+  'simple-interest-calculator',
+  'currency-converter',
+  'inflation-calculator',
+  'budget-planner',
+  'gratuity-calculator',
+  'stock-average-calculator',
+  'brokerage-calculator',
+  'tip-calculator',
   'bill-splitter',
   'expense-tracker',
-  'loan-comparison',
+  'savings-planner',
+  'net-worth-calculator',
+  'gold-investment-calculator',
+  'crypto-profit-calculator',
+  'subscription-tracker',
+  'credit-card-emi',
   'mutual-fund-calculator',
-  // Developer
+  'loan-comparison',
+  // DEVELOPER
   'json-formatter',
   'base64',
   'url-encoder',
@@ -1754,49 +1765,77 @@ export const IMPLEMENTED_TOOL_IDS = new Set<string>([
   'uuid-generator',
   'hash-generator',
   'regex-tester',
-  'password-generator',
+  'timestamp-converter',
   'color-picker',
   'sql-formatter',
   'diff-checker',
+  'password-generator',
   'lorem-ipsum',
-  'timestamp-converter',
-  // Image
+  'gradient-generator',
+  'cron-builder',
+  'markdown-preview',
+  // IMAGE
   'image-resize',
   'image-compress',
-  'qr-generator',
   'image-crop',
+  'qr-generator',
   'barcode-generator',
   'jpg-converter',
   'webp-converter',
   'color-palette',
   'favicon-generator',
-  // Text
+  // TEXT
   'word-counter',
   'case-converter',
+  'slug-generator',
   'text-diff',
   'markdown-editor',
-  // Education
-  'gpa-calculator',
-  'unit-converter',
-  // Health
-  'bmr-calculator',
-  'calorie-calculator',
-  // Utilities
-  'random-number',
-  // Conversion
-  'data-storage-converter',
-  // Travel
-  'timezone-converter',
-  'fuel-cost',
-  // Business
-  'gst-invoice',
-  'profit-margin',
-  'break-even',
-  'quotation-generator',
+  // AI
+  'prompt-builder',
+  'email-writer',
+  'resume-builder',
+  'cover-letter',
   // PDF
   'html-to-pdf',
   'image-to-pdf',
   'markdown-to-pdf',
+  // PRODUCTIVITY
+  'stopwatch',
+  'countdown',
+  'checklist',
+  'notes',
+  'habit-tracker',
+  // EDUCATION
+  'scientific-calculator',
+  'age-calculator',
+  'percentage-calculator',
+  'cgpa-calculator',
+  'gpa-calculator',
+  'unit-converter',
+  // HEALTH
+  'bmi-calculator',
+  'bmr-calculator',
+  'calorie-calculator',
+  // UTILITIES
+  'random-number',
+  'color-converter',
+  'date-difference',
+  'discount-calculator',
+  // CONVERSION
+  'length-converter',
+  'weight-converter',
+  'temperature-converter',
+  'data-storage-converter',
+  // TRAVEL
+  'timezone-converter',
+  'fuel-cost',
+  // BUSINESS
+  'invoice-generator',
+  'gst-invoice',
+  'roi-calculator',
+  'profit-margin',
+  'break-even',
+  'quotation-generator',
 ]);
 
 /** True when a catalog tool has no working implementation yet. */
