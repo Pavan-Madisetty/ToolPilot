@@ -141,7 +141,7 @@ export function Header() {
           </div>
 
           {/* RIGHT ZONE: Icons Cluster & Theme toggle */}
-          <div className="hidden md:flex items-center gap-4 shrink-0">
+          <nav aria-label="Site actions" className="hidden md:flex items-center gap-4 shrink-0">
             {/* Favorites heart */}
             <Link
               to="/#favorites"
@@ -182,10 +182,10 @@ export function Header() {
             >
               <Menu size={20} strokeWidth={2} aria-hidden="true" />
             </button>
-          </div>
+          </nav>
 
           {/* Mobile Actions Right */}
-          <div className="flex md:hidden items-center gap-4 shrink-0">
+          <nav aria-label="Site actions" className="flex md:hidden items-center gap-4 shrink-0">
             <button
               type="button"
               onClick={() => setSearchOpen(true)}
@@ -204,7 +204,7 @@ export function Header() {
             >
               <Menu size={20} strokeWidth={2} aria-hidden="true" />
             </button>
-          </div>
+          </nav>
         </div>
       </header>
 

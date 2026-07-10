@@ -99,6 +99,11 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
     applicationCategory: 'UtilityApplication',
     operatingSystem: 'All',
     browserRequirements: 'Requires JavaScript. Requires HTML5.',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
   };
 
   const breadcrumbSchema = {
@@ -172,11 +177,14 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
         <meta property="og:description" content={tool.metaDescription} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={`https://toolpilot.app${tool.slug}`} />
+        <meta property="og:image" content="https://toolpilot.app/og-image.png" />
+        <meta property="og:site_name" content="ToolPilot" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={tool.metaTitle} />
         <meta name="twitter:description" content={tool.metaDescription} />
+        <meta name="twitter:image" content="https://toolpilot.app/og-image.png" />
 
         {/* Structured Data Scripts */}
         <script type="application/ld+json">{JSON.stringify(webAppSchema)}</script>

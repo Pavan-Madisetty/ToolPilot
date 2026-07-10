@@ -9,8 +9,16 @@ const DOMAIN = 'https://toolpilot.app';
 function generateSitemap() {
   console.log('Generating sitemap.xml...');
 
+  const today = new Date().toISOString().split('T')[0];
+
   const pages = [
-    { loc: `${DOMAIN}/`, changefreq: 'daily', priority: '1.0' }
+    { loc: `${DOMAIN}/`, changefreq: 'daily', priority: '1.0', lastmod: today },
+    // Company / static pages
+    { loc: `${DOMAIN}/about`, changefreq: 'monthly', priority: '0.5', lastmod: today },
+    { loc: `${DOMAIN}/blog`, changefreq: 'weekly', priority: '0.6', lastmod: today },
+    { loc: `${DOMAIN}/privacy`, changefreq: 'yearly', priority: '0.3', lastmod: today },
+    { loc: `${DOMAIN}/terms`, changefreq: 'yearly', priority: '0.3', lastmod: today },
+    { loc: `${DOMAIN}/contact`, changefreq: 'monthly', priority: '0.4', lastmod: today }
   ];
 
   // Category/Module pages
@@ -18,7 +26,8 @@ function generateSitemap() {
     pages.push({
       loc: `${DOMAIN}/${mod.key}`,
       changefreq: 'weekly',
-      priority: '0.8'
+      priority: '0.8',
+      lastmod: today
     });
   }
 
@@ -29,13 +38,15 @@ function generateSitemap() {
     pages.push({
       loc: `${DOMAIN}${tool.slug}`,
       changefreq: 'weekly',
-      priority: '0.7'
+      priority: '0.7',
+      lastmod: today
     });
   }
 
   const xmlItems = pages.map(page => `
   <url>
     <loc>${page.loc}</loc>
+    <lastmod>${page.lastmod}</lastmod>
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
   </url>`).join('');

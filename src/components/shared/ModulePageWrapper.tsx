@@ -78,11 +78,14 @@ export function ModulePageWrapper({
         <meta property="og:description" content={description} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={`https://toolpilot.app/${moduleKey}`} />
+        <meta property="og:image" content="https://toolpilot.app/og-image.png" />
+        <meta property="og:site_name" content="ToolPilot" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content="https://toolpilot.app/og-image.png" />
 
         {/* Structured Data */}
         <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>

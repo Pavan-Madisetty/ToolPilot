@@ -23,6 +23,7 @@ export default function NotFoundPage() {
           name="description"
           content="The page you are looking for does not exist. Use search to find standard calculators, JSON formatters, image resizers, and other tools."
         />
+        <meta name="robots" content="noindex, follow" />
       </Helmet>
 
       <div className="container-app py-16 flex flex-col items-center justify-center text-center max-w-2xl mx-auto">

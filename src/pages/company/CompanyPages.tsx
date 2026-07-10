@@ -10,6 +10,28 @@ export function AboutPage() {
           name="description"
           content="Learn about ToolPilot, the private, offline-first client-side web toolbox."
         />
+        <link rel="canonical" href="https://toolpilot.app/about" />
+        <meta name="robots" content="index, follow" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="About | ToolPilot" />
+        <meta
+          property="og:description"
+          content="Learn about ToolPilot, the private, offline-first client-side web toolbox."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://toolpilot.app/about" />
+        <meta property="og:image" content="https://toolpilot.app/og-image.png" />
+        <meta property="og:site_name" content="ToolPilot" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="About | ToolPilot" />
+        <meta
+          name="twitter:description"
+          content="Learn about ToolPilot, the private, offline-first client-side web toolbox."
+        />
+        <meta name="twitter:image" content="https://toolpilot.app/og-image.png" />
       </Helmet>
       <div className="container-app py-12 max-w-3xl mx-auto">
         <Breadcrumb items={[{ label: 'About' }]} />
@@ -43,6 +65,28 @@ export function BlogPage() {
           name="description"
           content="Read the latest updates and developer tutorials on the ToolPilot blog."
         />
+        <link rel="canonical" href="https://toolpilot.app/blog" />
+        <meta name="robots" content="index, follow" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Blog | ToolPilot" />
+        <meta
+          property="og:description"
+          content="Read the latest updates and developer tutorials on the ToolPilot blog."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://toolpilot.app/blog" />
+        <meta property="og:image" content="https://toolpilot.app/og-image.png" />
+        <meta property="og:site_name" content="ToolPilot" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Blog | ToolPilot" />
+        <meta
+          name="twitter:description"
+          content="Read the latest updates and developer tutorials on the ToolPilot blog."
+        />
+        <meta name="twitter:image" content="https://toolpilot.app/og-image.png" />
       </Helmet>
       <div className="container-app py-12 max-w-3xl mx-auto">
         <Breadcrumb items={[{ label: 'Blog' }]} />
@@ -77,6 +121,28 @@ export function PrivacyPage() {
           name="description"
           content="Read our privacy policy. ToolPilot is a client-side platform that never sends your data to servers."
         />
+        <link rel="canonical" href="https://toolpilot.app/privacy" />
+        <meta name="robots" content="index, follow" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Privacy Policy | ToolPilot" />
+        <meta
+          property="og:description"
+          content="Read our privacy policy. ToolPilot is a client-side platform that never sends your data to servers."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://toolpilot.app/privacy" />
+        <meta property="og:image" content="https://toolpilot.app/og-image.png" />
+        <meta property="og:site_name" content="ToolPilot" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Privacy Policy | ToolPilot" />
+        <meta
+          name="twitter:description"
+          content="Read our privacy policy. ToolPilot is a client-side platform that never sends your data to servers."
+        />
+        <meta name="twitter:image" content="https://toolpilot.app/og-image.png" />
       </Helmet>
       <div className="container-app py-12 max-w-3xl mx-auto">
         <Breadcrumb items={[{ label: 'Privacy' }]} />
@@ -105,6 +171,22 @@ export function TermsPage() {
       <Helmet>
         <title>Terms of Service | ToolPilot</title>
         <meta name="description" content="Review the Terms of Service for ToolPilot." />
+        <link rel="canonical" href="https://toolpilot.app/terms" />
+        <meta name="robots" content="index, follow" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Terms of Service | ToolPilot" />
+        <meta property="og:description" content="Review the Terms of Service for ToolPilot." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://toolpilot.app/terms" />
+        <meta property="og:image" content="https://toolpilot.app/og-image.png" />
+        <meta property="og:site_name" content="ToolPilot" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Terms of Service | ToolPilot" />
+        <meta name="twitter:description" content="Review the Terms of Service for ToolPilot." />
+        <meta name="twitter:image" content="https://toolpilot.app/og-image.png" />
       </Helmet>
       <div className="container-app py-12 max-w-3xl mx-auto">
         <Breadcrumb items={[{ label: 'Terms' }]} />
@@ -129,6 +211,22 @@ export function ContactPage() {
       <Helmet>
         <title>Contact Us | ToolPilot</title>
         <meta name="description" content="Contact the ToolPilot project maintainers." />
+        <link rel="canonical" href="https://toolpilot.app/contact" />
+        <meta name="robots" content="index, follow" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Contact Us | ToolPilot" />
+        <meta property="og:description" content="Contact the ToolPilot project maintainers." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://toolpilot.app/contact" />
+        <meta property="og:image" content="https://toolpilot.app/og-image.png" />
+        <meta property="og:site_name" content="ToolPilot" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Contact Us | ToolPilot" />
+        <meta name="twitter:description" content="Contact the ToolPilot project maintainers." />
+        <meta name="twitter:image" content="https://toolpilot.app/og-image.png" />
       </Helmet>
       <div className="container-app py-12 max-w-3xl mx-auto">
         <Breadcrumb items={[{ label: 'Contact' }]} />
