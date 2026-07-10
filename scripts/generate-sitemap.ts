@@ -24,7 +24,7 @@ function generateSitemap() {
   // Category/Module pages
   for (const mod of MODULES) {
     pages.push({
-      loc: `${DOMAIN}/${mod.key}`,
+      loc: `${DOMAIN}${mod.slug}`,
       changefreq: 'weekly',
       priority: '0.8',
       lastmod: today

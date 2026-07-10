@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Breadcrumb } from '@/components/ui/Breadcrumb';
 import { TOOLS } from '@/config/tools';
+import { MODULES } from '@/config/modules';
 
 interface ModulePageWrapperProps {
   moduleKey: string;
@@ -17,6 +18,8 @@ export function ModulePageWrapper({
   children,
 }: ModulePageWrapperProps) {
   const moduleTools = TOOLS.filter((t) => t.module === moduleKey);
+  const moduleConfig = MODULES.find((m) => m.key === moduleKey);
+  const moduleSlug = moduleConfig ? moduleConfig.slug : `/${moduleKey}`;
 
   // ─────────────────────────────────────────────
   // Structured Data Schema Generators
@@ -35,7 +38,7 @@ export function ModulePageWrapper({
         '@type': 'ListItem',
         position: 2,
         name: moduleName,
-        item: `https://toolpilot.app/${moduleKey}`,
+        item: `https://toolpilot.app${moduleSlug}`,
       },
     ],
   };
@@ -45,7 +48,7 @@ export function ModulePageWrapper({
     '@type': 'CollectionPage',
     name: `${moduleName} Tools`,
     description,
-    url: `https://toolpilot.app/${moduleKey}`,
+    url: `https://toolpilot.app${moduleSlug}`,
     about: {
       '@type': 'Thing',
       name: `${moduleName} Utilities`,
@@ -68,7 +71,7 @@ export function ModulePageWrapper({
       <Helmet>
         <title>{title}</title>
         <meta name="description" content={description} />
-        <link rel="canonical" href={`https://toolpilot.app/${moduleKey}`} />
+        <link rel="canonical" href={`https://toolpilot.app${moduleSlug}`} />
 
         {/* Robots */}
         <meta name="robots" content="index, follow" />
@@ -77,7 +80,7 @@ export function ModulePageWrapper({
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`https://toolpilot.app/${moduleKey}`} />
+        <meta property="og:url" content={`https://toolpilot.app${moduleSlug}`} />
         <meta property="og:image" content="https://toolpilot.app/og-image.png" />
         <meta property="og:site_name" content="ToolPilot" />
 

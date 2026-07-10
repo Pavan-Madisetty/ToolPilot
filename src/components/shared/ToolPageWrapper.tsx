@@ -10,6 +10,7 @@ import { clsx } from 'clsx';
 import { useUIStore } from '@/stores/uiStore';
 import { SEO_CONTENTS } from '@/config/seoContents';
 import { getFallbackSEOContent } from '@/utils/seoGenerator';
+import { MODULE_MAP } from '@/config/modules';
 
 interface ToolPageWrapperProps {
   toolId: string;
@@ -81,8 +82,12 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
     }
   };
 
+  const moduleConfig = MODULE_MAP[tool.module as keyof typeof MODULE_MAP];
+  const moduleName = moduleConfig ? moduleConfig.name : tool.module.charAt(0).toUpperCase() + tool.module.slice(1);
+  const moduleSlug = moduleConfig ? moduleConfig.slug : `/${tool.module}`;
+
   const breadcrumbItems = [
-    { label: tool.module.charAt(0).toUpperCase() + tool.module.slice(1), href: `/${tool.module}` },
+    { label: moduleName, href: moduleSlug },
     { label: tool.name },
   ];
 
@@ -119,8 +124,8 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
       {
         '@type': 'ListItem',
         position: 2,
-        name: tool.module.charAt(0).toUpperCase() + tool.module.slice(1),
-        item: `https://toolpilot.app/${tool.module}`,
+        name: moduleName,
+        item: `https://toolpilot.app${moduleSlug}`,
       },
       {
         '@type': 'ListItem',
