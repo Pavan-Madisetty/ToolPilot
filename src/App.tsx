@@ -184,6 +184,8 @@ function AnalyticsTracker() {
   return null;
 }
 
+import { RuntimeConfigProvider } from '@/context/RuntimeConfigContext';
+
 export default function App() {
   const basename =
     typeof window !== 'undefined' && window.location.hostname.endsWith('.github.io')
@@ -191,7 +193,8 @@ export default function App() {
       : '';
 
   return (
-    <HelmetProvider>
+    <RuntimeConfigProvider>
+      <HelmetProvider>
       <BrowserRouter basename={basename}>
         <AnalyticsTracker />
         <ToastContainer />
@@ -1202,5 +1205,6 @@ export default function App() {
         </AnimatePresence>
       </BrowserRouter>
     </HelmetProvider>
+    </RuntimeConfigProvider>
   );
 }

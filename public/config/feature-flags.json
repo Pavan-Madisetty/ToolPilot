@@ -1,0 +1,11 @@
+{
+  "darkMode": true,
+  "resumeBuilder": true,
+  "aiTools": true,
+  "developerTools": true,
+  "financeTools": true,
+  "experimentalFeatures": false,
+  "betaFeatures": false,
+  "maintenanceMode": false,
+  "futureReleases": false
+}

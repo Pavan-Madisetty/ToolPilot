@@ -2,8 +2,10 @@ import { useState, useMemo } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Button, Card, CopyButton, Input, Textarea } from '@/components/ui';
 import { Printer } from 'lucide-react';
+import { useRuntimeConfig } from '@/context/RuntimeConfigContext';
 
 export default function ResumeBuilder() {
+  const { getFeatureFlag } = useRuntimeConfig();
   // Contact Info states
   const [name, setName] = useState('Jane Doe');
   const [title, setTitle] = useState('Senior Software Engineer');
@@ -420,6 +422,22 @@ ${
       )}
     </div>
   );
+
+  if (!getFeatureFlag('resumeBuilder')) {
+    return (
+      <ToolPageWrapper toolId="resume-builder">
+        <div className="text-center py-16">
+          <div className="text-6xl mb-4">🚧</div>
+          <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+            Tool Under Construction
+          </h2>
+          <p style={{ color: 'var(--text-secondary)' }}>
+            This feature is temporarily disabled. Please check back later!
+          </p>
+        </div>
+      </ToolPageWrapper>
+    );
+  }
 
   return (
     <ToolPageWrapper toolId="resume-builder">

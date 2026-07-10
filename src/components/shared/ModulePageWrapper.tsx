@@ -11,15 +11,49 @@ interface ModulePageWrapperProps {
   children: ReactNode;
 }
 
+import { useRuntimeConfig } from '@/context/RuntimeConfigContext';
+import { FeatureFlags } from '@/types/runtimeConfig';
+
 export function ModulePageWrapper({
   moduleKey,
   moduleName,
   description,
   children,
 }: ModulePageWrapperProps) {
+  const { config } = useRuntimeConfig();
+
+  const flagMap: Record<string, keyof FeatureFlags> = {
+    finance: 'financeTools',
+    developer: 'developerTools',
+    ai: 'aiTools',
+  };
+
+  const flagKey = flagMap[moduleKey];
+  const isEnabled = flagKey ? config.featureFlags?.[flagKey] : true;
+
   const moduleTools = TOOLS.filter((t) => t.module === moduleKey);
   const moduleConfig = MODULES.find((m) => m.key === moduleKey);
   const moduleSlug = moduleConfig ? moduleConfig.slug : `/${moduleKey}`;
+
+  if (!isEnabled) {
+    return (
+      <div className="container-app py-16 text-center">
+        <Breadcrumb items={[{ label: moduleName }]} />
+        <div
+          className="py-20 text-center border rounded-2xl bg-white dark:bg-slate-800 mt-8"
+          style={{ borderColor: 'var(--border-default)' }}
+        >
+          <div className="text-6xl mb-4">🚧</div>
+          <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+            Category Under Construction
+          </h2>
+          <p className="text-sm max-w-md mx-auto" style={{ color: 'var(--text-secondary)' }}>
+            This category is temporarily disabled. Please check back later!
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   // ─────────────────────────────────────────────
   // Structured Data Schema Generators

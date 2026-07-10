@@ -1,0 +1,26 @@
+{
+  "hero": {
+    "title": "Your Complete Digital Toolkit",
+    "subtitle": "500+ free browser tools. No signup. No tracking. Works offline."
+  },
+  "visibleSections": {
+    "hero": true,
+    "categories": true,
+    "popularTools": true,
+    "recentlyUsed": true,
+    "favorites": true,
+    "highlights": true
+  },
+  "trendingTools": [
+    "emi-calculator",
+    "json-formatter",
+    "resume-builder",
+    "sip-calculator"
+  ],
+  "featuredTools": [
+    "base64",
+    "password-generator",
+    "uuid-generator",
+    "word-counter"
+  ]
+}

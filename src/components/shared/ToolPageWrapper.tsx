@@ -2,6 +2,7 @@ import { ReactNode, useEffect, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Breadcrumb } from '@/components/ui/Breadcrumb';
 import { RelatedTools } from './RelatedTools';
+import { AdRenderer } from './AdRenderer';
 import { TOOL_BY_ID, isComingSoon } from '@/config/tools';
 import { useHistoryStore, useFavoritesStore } from '@/stores/userStore';
 import { Heart, Share2, FileText, Sliders, Eye, Download } from 'lucide-react';
@@ -522,6 +523,9 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
             )}
           </article>
         )}
+
+        {/* Dynamic Ad Slot */}
+        <AdRenderer slotId="tools-sidebar-top" className="mt-12" />
 
         {/* Related Tools */}
         {tool.relatedTools && tool.relatedTools.length > 0 && (

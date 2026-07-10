@@ -1,0 +1,31 @@
+{
+  "global": {
+    "enabled": true,
+    "testMode": false
+  },
+  "slots": {
+    "homepage-hero-bottom": {
+      "enabled": true,
+      "type": "custom-html",
+      "html": "<div class=\"p-4 border rounded-xl bg-slate-50 dark:bg-slate-800 text-center border-dashed border-slate-200 dark:border-slate-700\"><span class=\"text-[10px] uppercase font-bold tracking-widest text-slate-400 block mb-1\">Advertisement</span><p class=\"text-sm font-semibold text-slate-700 dark:text-slate-300\">Get Premium Vector Icons & Mockups on IconPilot</p><a href=\"https://iconpilot.app\" target=\"_blank\" class=\"text-xs text-blue-500 hover:underline font-bold\">Learn More &rarr;</a></div>"
+    },
+    "tools-sidebar-top": {
+      "enabled": true,
+      "type": "image",
+      "imageUrl": "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=400&auto=format&fit=crop",
+      "linkUrl": "https://toolpilot.app/premium",
+      "alt": "Unlock ToolPilot Pro Access"
+    },
+    "header-banner": {
+      "enabled": false,
+      "type": "adsense",
+      "slot": "1234567890",
+      "client": "ca-pub-1234567890123456"
+    },
+    "footer-sticky": {
+      "enabled": false,
+      "type": "custom-html",
+      "html": "<div class=\"fixed bottom-0 left-0 right-0 p-3 bg-blue-600 text-white text-center z-50 flex items-center justify-center gap-4\"><span>🚀 Unlock full premium templates for PDF/Resumes offline!</span><a href=\"#\" class=\"bg-white text-blue-600 px-3 py-1 rounded-md text-xs font-bold\">Get Access</a></div>"
+    }
+  }
+}

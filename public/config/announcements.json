@@ -1,0 +1,24 @@
+{
+  "banners": [
+    {
+      "id": "welcome_notice",
+      "enabled": true,
+      "text": "🎉 Welcome to ToolPilot! 100+ fully-functional offline-first browser tools are now active. No signup, no tracking.",
+      "type": "info",
+      "dismissible": true,
+      "priority": 10,
+      "startDate": "2026-07-01T00:00:00Z",
+      "endDate": "2026-12-31T23:59:59Z"
+    },
+    {
+      "id": "maintenance_alert",
+      "enabled": false,
+      "text": "⚠️ Scheduled database maintenance tomorrow from 2 AM to 4 AM UTC. Offline caching is unaffected.",
+      "type": "warning",
+      "dismissible": true,
+      "priority": 100,
+      "startDate": "2026-07-15T00:00:00Z",
+      "endDate": "2026-07-16T23:59:59Z"
+    }
+  ]
+}
