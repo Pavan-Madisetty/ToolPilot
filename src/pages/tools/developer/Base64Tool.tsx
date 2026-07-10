@@ -5,6 +5,7 @@ import { Button, Switch, CopyButton } from '@/components/ui';
 export default function Base64Tool() {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
+  const [mode, setMode] = useState<'encode' | 'decode'>('encode');
   const [isUrlSafe, setIsUrlSafe] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -17,12 +18,10 @@ export default function Base64Tool() {
     }
 
     try {
-      // Use standard btoa with utf-8 encoding support
       const utf8Bytes = new TextEncoder().encode(input);
       let base64 = btoa(String.fromCharCode(...utf8Bytes));
 
       if (isUrlSafe) {
-        // Swap symbols and remove padding
         base64 = base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
       }
 
@@ -44,7 +43,6 @@ export default function Base64Tool() {
       let base64 = input.trim();
 
       if (isUrlSafe) {
-        // Restore standard padding and symbols
         base64 = base64.replace(/-/g, '+').replace(/_/g, '/');
         while (base64.length % 4) {
           base64 += '=';
@@ -65,6 +63,20 @@ export default function Base64Tool() {
     }
   };
 
+  const handleProcess = () => {
+    if (mode === 'encode') {
+      handleEncode();
+    } else {
+      handleDecode();
+    }
+  };
+
+  const clearInput = () => {
+    setInput('');
+    setOutput('');
+    setError(null);
+  };
+
   return (
     <ToolPageWrapper toolId="base64">
       <div className="tool-layout lg:grid-cols-2">
@@ -72,7 +84,7 @@ export default function Base64Tool() {
         <div className="flex flex-col gap-4">
           <div className="flex items-center justify-between">
             <span className="label">Raw Input</span>
-            <Button onClick={() => setInput('')} variant="ghost" size="xs">
+            <Button onClick={clearInput} variant="ghost" size="xs">
               Clear
             </Button>
           </div>
@@ -80,7 +92,7 @@ export default function Base64Tool() {
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Enter text here to encode or decode..."
+            placeholder={mode === 'encode' ? "Enter plain text here to encode..." : "Enter Base64 text here to decode..."}
             className="input-base font-mono text-xs leading-relaxed h-[300px] resize-none"
             aria-label="Base64 input textarea"
           />
@@ -92,15 +104,29 @@ export default function Base64Tool() {
               onChange={setIsUrlSafe}
               description="Use - and _ symbols, trim padding"
             />
-            <div className="flex gap-2">
-              <Button onClick={handleEncode} size="sm">
+            
+            {/* Segmented Mode Control */}
+            <div className="segmented-control">
+              <button
+                type="button"
+                onClick={() => setMode('encode')}
+                className={`segmented-control__btn ${mode === 'encode' ? 'segmented-control__btn--active' : ''}`}
+              >
                 Encode
-              </Button>
-              <Button onClick={handleDecode} variant="secondary" size="sm">
+              </button>
+              <button
+                type="button"
+                onClick={() => setMode('decode')}
+                className={`segmented-control__btn ${mode === 'decode' ? 'segmented-control__btn--active' : ''}`}
+              >
                 Decode
-              </Button>
+              </button>
             </div>
           </div>
+
+          <Button onClick={handleProcess} className="w-full mt-2">
+            {mode === 'encode' ? 'Encode to Base64' : 'Decode from Base64'}
+          </Button>
 
           {error && (
             <div role="alert" className="p-3 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-lg text-xs text-red-600 dark:text-red-400">
@@ -113,14 +139,14 @@ export default function Base64Tool() {
         <div className="flex flex-col gap-4">
           <div className="flex items-center justify-between">
             <span className="label">Calculated Result</span>
-            {output && <CopyButton text={output} />}
+            {output && <CopyButton text={output} variant="ghost" size="xs" />}
           </div>
 
           <textarea
             readOnly
             value={output}
             placeholder="Result will appear here..."
-            className="input-base font-mono text-xs leading-relaxed h-[300px] resize-none bg-slate-50/50 dark:bg-slate-900/30"
+            className="input-base font-mono text-xs leading-relaxed h-[356px] resize-none bg-slate-50/50 dark:bg-slate-900/30"
             aria-label="Base64 processed output"
           />
         </div>

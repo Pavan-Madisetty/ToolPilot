@@ -77,13 +77,13 @@ export function getFallbackSEOContent(tool: ToolConfig): Partial<ToolConfig> {
       'Productivity Booster: Simple hotkeys and one-click operations speed up debugging workflows.'
     ];
     features = [
-      'Syntax Highlighting: Clear color schemes representing data keys, strings, and variables.',
-      'Multi-Format Settings: Customize indent spaces, tab configurations, or token cases.',
-      'Validator Checks: Instant validation badges notifying you of syntax compliance.'
+      'Offline Processing: Computes operations instantly in your local browser client.',
+      'One-Click Copy: Instantly copy inputs or outputs to your clipboard.',
+      'Precision Outputs: Processes inputs immediately to provide clean, error-free results.'
     ];
     tips = [
-      'Use the Minify feature to reduce final data transfer sizes before uploading to your databases or APIs.',
-      'Use case converters to quickly match naming conventions (camelCase, snake_case) across code repos.'
+      'Bookmark this utility for immediate access during network outages or offline tasks.',
+      'Double-click inside the result viewport area to quickly highlight the entire output.'
     ];
     faq.push({
       question: 'Is it safe to paste API tokens or private JSON data here?',

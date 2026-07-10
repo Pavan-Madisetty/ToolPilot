@@ -15,12 +15,21 @@ interface CopyButtonProps {
   /** Optional button label (default: 'Copy') */
   label?: string;
   /** Size variant */
-  size?: 'sm' | 'md';
+  size?: 'xs' | 'sm' | 'md';
+  /** Styling variant */
+  variant?: 'outline' | 'ghost';
   /** Optional additional class names */
   className?: string;
 }
 
 const SIZE_STYLES = {
+  xs: {
+    button: 'copy-btn copy-btn--xs',
+    iconSize: 12,
+    fontSize: '0.75rem',
+    padding: '2.5px 6px',
+    gap: 3,
+  },
   sm: {
     button: 'copy-btn copy-btn--sm',
     iconSize: 14,
@@ -41,6 +50,7 @@ export function CopyButton({
   text,
   label = 'Copy',
   size = 'md',
+  variant = 'outline',
   className,
 }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
@@ -62,6 +72,8 @@ export function CopyButton({
 
   const sizeConfig = SIZE_STYLES[size];
 
+  const isGhost = variant === 'ghost';
+
   return (
     <button
       type="button"
@@ -78,14 +90,16 @@ export function CopyButton({
         fontSize: sizeConfig.fontSize,
         fontWeight: 500,
         fontFamily: 'var(--font-sans)',
-        border: '1px solid var(--border-default)',
-        borderRadius: 8,
+        border: isGhost ? '1px solid transparent' : '1px solid var(--border-default)',
+        borderRadius: 6,
         cursor: copied ? 'default' : 'pointer',
         background: copied
           ? 'rgba(34, 197, 94, 0.08)'
           : error
             ? 'rgba(239, 68, 68, 0.08)'
-            : 'var(--bg-elevated)',
+            : isGhost
+              ? 'transparent'
+              : 'var(--bg-elevated)',
         color: copied
           ? 'rgb(22, 163, 74)'
           : error
@@ -95,7 +109,9 @@ export function CopyButton({
           ? 'rgba(34, 197, 94, 0.3)'
           : error
             ? 'rgba(239, 68, 68, 0.3)'
-            : 'var(--border-default)',
+            : isGhost
+              ? 'transparent'
+              : 'var(--border-default)',
         transition: 'all 0.18s ease',
         userSelect: 'none',
         whiteSpace: 'nowrap',

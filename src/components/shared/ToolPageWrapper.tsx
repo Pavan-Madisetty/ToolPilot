@@ -243,7 +243,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                 <h2 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
                   About {tool.name}
                 </h2>
-                <p className="text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                <p className="text-base leading-relaxed max-w-3xl" style={{ color: 'var(--text-secondary)' }}>
                   {tool.longDescription}
                 </p>
               </section>
@@ -260,7 +260,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                     <ul className="flex flex-col gap-2">
                       {tool.benefits.map((benefit, idx) => (
                         <li key={idx} className="flex items-start gap-2 text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                          <span className="text-emerald-500 font-bold">✓</span>
+                          <span className="text-emerald-500 font-bold shrink-0">✓</span>
                           <span>{benefit}</span>
                         </li>
                       ))}
@@ -275,7 +275,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                     <ul className="flex flex-col gap-2">
                       {tool.features.map((feature, idx) => (
                         <li key={idx} className="flex items-start gap-2 text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                          <span className="text-indigo-500 font-bold">•</span>
+                          <span className="text-indigo-500 font-bold shrink-0">✓</span>
                           <span>{feature}</span>
                         </li>
                       ))}
@@ -295,7 +295,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                   {tool.howToSteps.map((step, idx) => (
                     <div
                       key={idx}
-                      className="border rounded-2xl p-4 flex flex-col gap-2 bg-slate-50/50 dark:bg-slate-900/10"
+                      className="border rounded-xl p-4 flex flex-col gap-2 bg-slate-50/50 dark:bg-slate-900/10"
                       style={{ borderColor: 'var(--border-default)' }}
                     >
                       <span className="text-xs font-bold text-indigo-500 uppercase font-mono">
@@ -317,7 +317,10 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
             {(tool.tips || tool.examples) && (
               <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {tool.tips && (
-                  <div className="border rounded-2xl p-5 bg-amber-50/20 dark:bg-amber-950/5 border-amber-200/40 flex flex-col gap-3">
+                  <div
+                    className="border rounded-xl p-5 bg-amber-50/10 dark:bg-amber-950/5 flex flex-col gap-3 border-l-4"
+                    style={{ borderColor: 'var(--border-default)', borderLeftColor: '#F59E0B' }}
+                  >
                     <h3 className="text-sm font-bold text-amber-800 dark:text-amber-400 flex items-center gap-1.5">
                       <span>💡</span>
                       <span>Pro Tips</span>
@@ -333,7 +336,10 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                 )}
 
                 {tool.examples && (
-                  <div className="border rounded-2xl p-5 bg-blue-50/20 dark:bg-blue-950/5 border-blue-200/40 flex flex-col gap-3">
+                  <div
+                    className="border rounded-xl p-5 bg-blue-50/10 dark:bg-blue-950/5 flex flex-col gap-3 border-l-4"
+                    style={{ borderColor: 'var(--border-default)', borderLeftColor: '#3B82F6' }}
+                  >
                     <h3 className="text-sm font-bold text-blue-800 dark:text-blue-400 flex items-center gap-1.5">
                       <span>📊</span>
                       <span>Calculation Examples</span>
@@ -359,27 +365,27 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                 <h2 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
                   Frequently Asked Questions
                 </h2>
-                <div className="flex flex-col border rounded-2xl overflow-hidden" style={{ borderColor: 'var(--border-default)' }}>
+                <div className="flex flex-col gap-3">
                   {tool.faq.map((item, idx) => {
                     const isExpanded = expandedFaqIndex === idx;
                     return (
                       <div
                         key={idx}
-                        className="border-b last:border-b-0"
+                        className="border rounded-xl overflow-hidden bg-slate-50/30 dark:bg-slate-900/5 transition-all duration-200"
                         style={{ borderColor: 'var(--border-default)' }}
                       >
                         <button
                           onClick={() => setExpandedFaqIndex(isExpanded ? null : idx)}
-                          className="w-full px-5 py-4 flex items-center justify-between text-left font-bold text-sm hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors"
+                          className="w-full px-5 py-4 flex items-center justify-between text-left font-bold text-sm hover:bg-slate-100 dark:hover:bg-slate-900/30 transition-colors"
                           style={{ color: 'var(--text-primary)' }}
                         >
-                          <span>{item.question}</span>
+                          <span className="pr-4">{item.question}</span>
                           <ChevronDownIcon
-                            className={`w-4 h-4 text-slate-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+                            className={`w-4 h-4 text-slate-400 shrink-0 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
                           />
                         </button>
                         {isExpanded && (
-                          <div className="px-5 pb-5 pt-1 text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                          <div className="px-5 pb-5 pt-3 text-sm leading-relaxed border-t" style={{ borderColor: 'var(--border-default)', color: 'var(--text-secondary)' }}>
                             {item.answer}
                           </div>
                         )}
@@ -395,7 +401,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
 
         {/* Related Tools */}
         {tool.relatedTools && tool.relatedTools.length > 0 && (
-          <div className="mt-16">
+          <div className="mt-16 pb-16">
             <RelatedTools toolIds={tool.relatedTools} />
           </div>
         )}

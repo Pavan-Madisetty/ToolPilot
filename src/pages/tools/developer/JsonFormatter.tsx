@@ -135,7 +135,20 @@ export default function JsonFormatter() {
 
         {/* Controls and Output Panel */}
         <div className="flex flex-col gap-4">
-          <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center justify-between">
+            <span className="label">Formatted Output</span>
+            <div className="flex gap-2">
+              {jsonResults.output && <CopyButton text={jsonResults.output} variant="ghost" size="xs" />}
+              {jsonResults.output && (
+                <Button onClick={downloadJson} variant="ghost" size="xs" className="flex items-center gap-1">
+                  <ArrowDownTrayIcon className="w-3.5 h-3.5" />
+                  <span>Download</span>
+                </Button>
+              )}
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-4" style={{ borderColor: 'var(--border-default)' }}>
             <div className="flex items-center gap-3">
               <Select
                 options={INDENT_OPTIONS}
@@ -167,25 +180,11 @@ export default function JsonFormatter() {
 
           {/* Output view box */}
           <div className="relative flex-1 flex flex-col">
-            <div className="absolute right-3 top-3 z-10 flex gap-2">
-              {jsonResults.output && <CopyButton text={jsonResults.output} />}
-              {jsonResults.output && (
-                <button
-                  onClick={downloadJson}
-                  className="copy-btn flex items-center gap-1"
-                  title="Download File"
-                  aria-label="Download JSON output file"
-                >
-                  <ArrowDownTrayIcon className="w-4 h-4" />
-                </button>
-              )}
-            </div>
-
             <textarea
               readOnly
               value={jsonResults.output}
               placeholder="Formatted output will appear here..."
-              className="input-base font-mono text-xs leading-relaxed h-[420px] resize-none bg-slate-50/50 dark:bg-slate-900/30"
+              className="input-base font-mono text-xs leading-relaxed h-[360px] resize-none bg-slate-50/50 dark:bg-slate-900/30"
               aria-label="Formatted JSON output"
             />
           </div>

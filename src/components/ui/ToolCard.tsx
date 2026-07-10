@@ -47,13 +47,15 @@ export function ToolCard({ tool, compact = false }: ToolCardProps) {
         <div className="tool-card__icon" style={{ background: bg, color: accent }} aria-hidden="true">
           {getToolEmoji(tool.icon)}
         </div>
-        <div className="tool-card__content">
-          <div className="tool-card__header">
-            <h4 className="tool-card__name">{tool.name}</h4>
-            {tool.isNew && <span className="tool-card__badge tool-card__badge--new">New</span>}
-            {tool.isPopular && !tool.isNew && (
-              <span className="tool-card__badge tool-card__badge--popular">Popular</span>
-            )}
+        <div className="tool-card__content w-full">
+          <div className="tool-card__header flex items-start justify-between gap-2 w-full">
+            <h4 className="tool-card__name flex-1">{tool.name}</h4>
+            <div className="flex items-center gap-1 shrink-0">
+              {tool.isNew && <span className="tool-card__badge tool-card__badge--new">New</span>}
+              {tool.isPopular && !tool.isNew && (
+                <span className="tool-card__badge tool-card__badge--popular">Popular</span>
+              )}
+            </div>
           </div>
           {!compact && <p className="tool-card__desc">{tool.description}</p>}
           <span className="tool-card__module">{tool.module}</span>

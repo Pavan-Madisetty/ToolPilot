@@ -161,6 +161,19 @@ export const SEO_CONTENTS: Record<string, Partial<ToolConfig>> = {
       'Browser Native: Fast operations processed directly by browser APIs.',
       'File Upload Encoder: Encode icons or small attachments directly into base64 text for embedding in HTML/CSS.'
     ],
+    features: [
+      'Bidirectional Operations: Smoothly toggle between encoding raw strings and decoding base64 hashes.',
+      'URL-Safe Toggles: Swap standard characters to URL-safe hyphen/underscore characters and trim layout paddings.',
+      'Local Storage Processing: Completely offline execution ensures full compliance with privacy.'
+    ],
+    tips: [
+      'Activate URL-Safe mode when generating strings to be passed as part of REST API query parameters.',
+      'For large documents, double-click the output area to copy the whole block instantly.'
+    ],
+    examples: [
+      { input: 'Hello World', output: 'SGVsbG8gV29ybGQ=' },
+      { input: 'ToolPilot', output: 'VG9vbFBpbG90' }
+    ],
     howToSteps: [
       { name: 'Select Mode', text: 'Choose Encode to turn text to base64, or Decode to convert it back.' },
       { name: 'Paste Input', text: 'Input your raw string or drag-and-drop a file.' },

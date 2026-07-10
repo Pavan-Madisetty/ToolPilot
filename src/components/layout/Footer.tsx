@@ -92,8 +92,8 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       to={link.href}
-                      className="text-sm transition-colors duration-150 hover:text-blue-500"
-                      style={{ color: 'var(--text-secondary)' }}
+                      className="text-sm transition-colors duration-150 hover:text-[var(--text-link)]"
+                      style={{ color: 'var(--text-tertiary)' }}
                     >
                       {link.label}
                     </Link>
@@ -116,8 +116,8 @@ export function Footer() {
           </p>
           <div className="flex items-center gap-4 text-xs" style={{ color: 'var(--text-tertiary)' }}>
             <span>Made with ❤️ for productivity</span>
-            <Link to="/privacy" className="hover:text-blue-500 transition-colors">Privacy</Link>
-            <Link to="/terms" className="hover:text-blue-500 transition-colors">Terms</Link>
+            <Link to="/privacy" className="hover:text-[var(--text-link)] transition-colors">Privacy</Link>
+            <Link to="/terms" className="hover:text-[var(--text-link)] transition-colors">Terms</Link>
           </div>
         </div>
       </div>
