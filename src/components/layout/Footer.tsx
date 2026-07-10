@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { TOTAL_TOOL_COUNT } from '@/config/tools';
+import { TOOL_COUNT_LABEL } from '@/config/tools';
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -65,7 +65,7 @@ export function Footer() {
             </Link>
 
             <p className="text-sm leading-relaxed mb-4 max-w-xs" style={{ color: 'var(--text-secondary)' }}>
-              The world's largest browser-based productivity platform with {TOTAL_TOOL_COUNT}+ free tools.
+              The world's largest browser-based productivity platform with {TOOL_COUNT_LABEL} free tools.
               No signup. No tracking. Always free.
             </p>
 

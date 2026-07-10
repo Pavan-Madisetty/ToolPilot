@@ -1,7 +1,8 @@
 import type { ToolConfig } from '@/types';
 
 // ============================================================
-// Tool Registry — All 277+ V1 Tools
+// Tool Registry — see LIVE_TOOL_COUNT / TOTAL_TOOL_COUNT at the bottom of this file
+// for the authoritative, self-updating counts (do not hardcode tool totals in copy).
 // ============================================================
 
 export const TOOLS: ToolConfig[] = [
@@ -1469,4 +1470,49 @@ export const FEATURED_TOOLS = TOOLS.filter((t) => t.isFeatured);
 export const POPULAR_TOOLS = TOOLS.filter((t) => t.isPopular);
 export const NEW_TOOLS = TOOLS.filter((t) => t.isNew);
 
+// ─────────────────────────────────────────────
+// Implemented-tool Registry (single source of truth for "is this live?")
+//
+// The catalog above lists more tools than are actually built. This set is the
+// allowlist of tools that have a real, working page. Anything in the catalog
+// but NOT in this set is treated as "coming soon": it renders the shared
+// <ComingSoon /> placeholder and is excluded from the indexed, advertised count.
+//
+// When you ship a tool, add its id here (and its route in App.tsx).
+// ─────────────────────────────────────────────
+export const IMPLEMENTED_TOOL_IDS = new Set<string>([
+  // Finance
+  'emi-calculator', 'sip-calculator', 'fd-calculator', 'gst-calculator',
+  'income-tax-calculator', 'salary-calculator', 'compound-interest-calculator',
+  'currency-converter', 'budget-planner', 'ppf-calculator', 'tip-calculator',
+  'home-loan-calculator', 'car-loan-calculator', 'personal-loan-calculator',
+  'education-loan-calculator', 'loan-eligibility-calculator', 'rd-calculator',
+  'epf-calculator', 'retirement-calculator', 'hra-calculator', 'bill-splitter',
+  'expense-tracker', 'loan-comparison', 'mutual-fund-calculator',
+  // Developer
+  'json-formatter', 'base64', 'url-encoder', 'jwt-decoder', 'uuid-generator',
+  'hash-generator', 'regex-tester', 'password-generator', 'color-picker',
+  'sql-formatter', 'diff-checker', 'lorem-ipsum', 'timestamp-converter',
+  // Image
+  'image-resize', 'image-compress', 'qr-generator', 'image-crop',
+  'barcode-generator', 'jpg-converter', 'webp-converter', 'color-palette',
+  'favicon-generator',
+  // Text
+  'word-counter', 'case-converter', 'text-diff', 'markdown-editor',
+]);
+
+/** True when a catalog tool has no working implementation yet. */
+export const isComingSoon = (toolId: string): boolean =>
+  !IMPLEMENTED_TOOL_IDS.has(toolId);
+
+// Total number of tools registered in the catalog (incl. placeholders).
 export const TOTAL_TOOL_COUNT = TOOLS.length;
+
+// Number of fully implemented, usable tools — the honest, self-updating count.
+export const LIVE_TOOL_COUNT = TOOLS.filter((t) =>
+  IMPLEMENTED_TOOL_IDS.has(t.id)
+).length;
+
+// Human-friendly label for marketing copy — rounds down to the nearest 10
+// so it reads cleanly ("50+") and never over-promises.
+export const TOOL_COUNT_LABEL = `${Math.floor(LIVE_TOOL_COUNT / 10) * 10}+`;

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { MagnifyingGlassIcon, HomeIcon, QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
-import { POPULAR_TOOLS } from '@/config/tools';
+import { POPULAR_TOOLS, TOOL_COUNT_LABEL } from '@/config/tools';
 
 export default function NotFoundPage() {
   const [query, setQuery] = useState('');
@@ -57,7 +57,7 @@ export default function NotFoundPage() {
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search 500+ tools..."
+              placeholder={`Search ${TOOL_COUNT_LABEL} tools...`}
               className="flex-1 bg-transparent border-none outline-none text-sm"
               style={{ color: 'var(--text-primary)' }}
               aria-label="Search tools"

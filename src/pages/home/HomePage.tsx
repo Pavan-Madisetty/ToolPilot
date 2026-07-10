@@ -7,7 +7,7 @@ import { Search, Zap, Shield, Wifi, ArrowRight, Star, Clock } from 'lucide-react
 import { useSearchStore } from '@/stores/uiStore';
 import { useFavoritesStore, useHistoryStore } from '@/stores/userStore';
 import { MODULES, getModuleEmoji } from '@/config/modules';
-import { POPULAR_TOOLS, TOOL_BY_ID, TOOLS_BY_MODULE } from '@/config/tools';
+import { POPULAR_TOOLS, TOOL_BY_ID, TOOLS_BY_MODULE, TOOL_COUNT_LABEL } from '@/config/tools';
 import type { ToolConfig } from '@/types';
 import { ToolCard } from '@/components/ui/ToolCard';
 
@@ -54,7 +54,7 @@ const FEATURES = [
   {
     icon: Wifi,
     title: 'Works Offline',
-    description: 'Full PWA support — install ToolPilot on your device and use all 500+ tools without an internet connection.',
+    description: `Full PWA support — install ToolPilot on your device and use every tool without an internet connection.`,
     color: 'var(--text-link)',
     bg: 'rgba(79, 70, 229, 0.08)',
     border: 'rgba(79, 70, 229, 0.2)',
@@ -71,7 +71,7 @@ const JSON_LD_WEBSITE = {
   '@type': 'WebSite',
   name: 'ToolPilot',
   url: 'https://toolpilot.app',
-  description: '500+ free browser tools for finance, developer, PDF, image, text and more.',
+  description: 'Free browser tools for finance, developer, PDF, image, text and more.',
   potentialAction: {
     '@type': 'SearchAction',
     target: {
@@ -121,10 +121,10 @@ export default function HomePage() {
   return (
     <>
       <Helmet>
-        <title>ToolPilot — 500+ Free Online Tools for Finance, Developer, PDF &amp; More</title>
+        <title>{`ToolPilot — ${TOOL_COUNT_LABEL} Free Online Tools for Finance, Developer, PDF & More`}</title>
         <meta
           name="description"
-          content="ToolPilot offers 500+ free browser tools — EMI calculators, JSON formatters, PDF tools, image compressors, text utilities, and more. No signup. No tracking. Works offline."
+          content={`ToolPilot offers ${TOOL_COUNT_LABEL} free browser tools — EMI calculators, JSON formatters, PDF tools, image compressors, text utilities, and more. No signup. No tracking. Works offline.`}
         />
         <meta name="keywords" content="free online tools, emi calculator, json formatter, pdf tools, image compressor, text tools, developer tools" />
         <link rel="canonical" href="https://toolpilot.app/" />
@@ -132,18 +132,18 @@ export default function HomePage() {
         {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://toolpilot.app/" />
-        <meta property="og:title" content="ToolPilot — 500+ Free Online Tools" />
+        <meta property="og:title" content={`ToolPilot — ${TOOL_COUNT_LABEL} Free Online Tools`} />
         <meta
           property="og:description"
-          content="500+ free browser tools. No signup. No tracking. Works offline."
+          content={`${TOOL_COUNT_LABEL} free browser tools. No signup. No tracking. Works offline.`}
         />
         <meta property="og:image" content="https://toolpilot.app/og-image.png" />
         <meta property="og:site_name" content="ToolPilot" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="ToolPilot — 500+ Free Online Tools" />
-        <meta name="twitter:description" content="500+ free browser tools. No signup. No tracking. Works offline." />
+        <meta name="twitter:title" content={`ToolPilot — ${TOOL_COUNT_LABEL} Free Online Tools`} />
+        <meta name="twitter:description" content={`${TOOL_COUNT_LABEL} free browser tools. No signup. No tracking. Works offline.`} />
         <meta name="twitter:image" content="https://toolpilot.app/og-image.png" />
 
         {/* JSON-LD */}
@@ -151,7 +151,7 @@ export default function HomePage() {
         <script type="application/ld+json">{JSON.stringify(JSON_LD_ORGANIZATION)}</script>
       </Helmet>
 
-      <main id="main-content" className="homepage">
+      <div className="homepage">
         {/* Workspace section / Hero */}
         <section className="workspace-header" aria-label="Hero">
           <div className="workspace-header__pattern" aria-hidden="true" />
@@ -160,7 +160,7 @@ export default function HomePage() {
               <span>🚀 browser-based</span>
             </div>
             <h1 className="workspace-header__title text-h1">
-              500+ Free Online Tools
+              {TOOL_COUNT_LABEL} Free Online Tools
             </h1>
             <p className="workspace-header__desc text-body-large">
               Secure, fast, and local browser-based utility tools. No signup, no tracking, works completely offline.
@@ -173,7 +173,7 @@ export default function HomePage() {
                 aria-label="Search all tools"
               >
                 <Search className="workspace-header__search-icon w-5 h-5" aria-hidden="true" />
-                <span className="workspace-header__search-placeholder">Search 500+ tools...</span>
+                <span className="workspace-header__search-placeholder">Search {TOOL_COUNT_LABEL} tools...</span>
                 <kbd className="workspace-header__search-kbd">⌘K</kbd>
               </button>
             </div>
@@ -376,7 +376,7 @@ export default function HomePage() {
             variants={fadeUp}
           >
             <h2 id="cta-heading" className="cta-banner__title">
-              Ready to explore 500+ tools?
+              Ready to explore {TOOL_COUNT_LABEL} tools?
             </h2>
             <p className="cta-banner__desc">
               All free. All private. All right here in your browser.
@@ -393,7 +393,7 @@ export default function HomePage() {
             </button>
           </motion.div>
         </section>
-      </main>
+      </div>
     </>
   );
 }

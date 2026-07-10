@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useState, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Breadcrumb } from '@/components/ui/Breadcrumb';
 import { RelatedTools } from './RelatedTools';
-import { TOOL_BY_ID } from '@/config/tools';
+import { TOOL_BY_ID, isComingSoon } from '@/config/tools';
 import { useHistoryStore, useFavoritesStore } from '@/stores/userStore';
 import { HeartIcon, ShareIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
@@ -162,8 +162,11 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
         <meta name="keywords" content={tool.keywords.join(', ')} />
         <link rel="canonical" href={`https://toolpilot.app${tool.slug}`} />
 
-        {/* Robots */}
-        <meta name="robots" content="index, follow" />
+        {/* Robots — placeholder tools stay out of the index until shipped */}
+        <meta
+          name="robots"
+          content={isComingSoon(tool.id) ? 'noindex, follow' : 'index, follow'}
+        />
 
         {/* Open Graph */}
         <meta property="og:title" content={tool.metaTitle} />

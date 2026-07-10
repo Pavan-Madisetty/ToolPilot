@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { writeFileSync, mkdirSync, existsSync } from 'fs';
 import { resolve } from 'path';
-import { TOOLS } from '../src/config/tools';
+import { TOOLS, isComingSoon } from '../src/config/tools';
 import { MODULES } from '../src/config/modules';
 
 const DOMAIN = 'https://toolpilot.app';
@@ -22,8 +22,10 @@ function generateSitemap() {
     });
   }
 
-  // Tool pages
+  // Tool pages — skip "coming soon" placeholders (they are noindex'd,
+  // so keep them out of the sitemap to send a consistent SEO signal).
   for (const tool of TOOLS) {
+    if (isComingSoon(tool.id)) continue;
     pages.push({
       loc: `${DOMAIN}${tool.slug}`,
       changefreq: 'weekly',

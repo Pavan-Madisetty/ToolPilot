@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { SparklesIcon } from '@heroicons/react/24/outline';
-import { TOOLS } from '@/config/tools';
+import { TOOLS, TOOL_COUNT_LABEL } from '@/config/tools';
 import { MODULES } from '@/config/modules';
 import { ToolCard } from '@/components/ui/ToolCard';
 import type { ToolConfig } from '@/types';
@@ -58,7 +58,7 @@ export default function SearchPage() {
 
   const pageTitle = queryParam
     ? `Search Results for "${queryParam}" | ToolPilot`
-    : 'Search 500+ Free Online Tools | ToolPilot';
+    : `Search ${TOOL_COUNT_LABEL} Free Online Tools | ToolPilot`;
 
   return (
     <>
