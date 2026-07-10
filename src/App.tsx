@@ -60,6 +60,12 @@ const TimestampConverter = lazy(() => import('@/pages/tools/developer/TimestampC
 const ImageResizer = lazy(() => import('@/pages/tools/image/ImageResizer'));
 const ImageCompressor = lazy(() => import('@/pages/tools/image/ImageCompressor'));
 const QrGenerator = lazy(() => import('@/pages/tools/image/QrGenerator'));
+const ImageCropper = lazy(() => import('@/pages/tools/image/ImageCropper'));
+const BarcodeGenerator = lazy(() => import('@/pages/tools/image/BarcodeGenerator'));
+const JpgConverter = lazy(() => import('@/pages/tools/image/JpgConverter'));
+const WebpConverter = lazy(() => import('@/pages/tools/image/WebpConverter'));
+const ColorPalette = lazy(() => import('@/pages/tools/image/ColorPalette'));
+const FaviconGenerator = lazy(() => import('@/pages/tools/image/FaviconGenerator'));
 
 // Text Tools
 const WordCounter = lazy(() => import('@/pages/tools/text/WordCounter'));
@@ -151,6 +157,12 @@ export default function App() {
               <Route path="image/resize" element={<Suspense fallback={<PageLoader />}><ImageResizer /></Suspense>} />
               <Route path="image/compress" element={<Suspense fallback={<PageLoader />}><ImageCompressor /></Suspense>} />
               <Route path="image/qr-generator" element={<Suspense fallback={<PageLoader />}><QrGenerator /></Suspense>} />
+              <Route path="image/crop" element={<Suspense fallback={<PageLoader />}><ImageCropper /></Suspense>} />
+              <Route path="image/barcode-generator" element={<Suspense fallback={<PageLoader />}><BarcodeGenerator /></Suspense>} />
+              <Route path="image/jpg-converter" element={<Suspense fallback={<PageLoader />}><JpgConverter /></Suspense>} />
+              <Route path="image/webp-converter" element={<Suspense fallback={<PageLoader />}><WebpConverter /></Suspense>} />
+              <Route path="image/color-palette" element={<Suspense fallback={<PageLoader />}><ColorPalette /></Suspense>} />
+              <Route path="image/favicon-generator" element={<Suspense fallback={<PageLoader />}><FaviconGenerator /></Suspense>} />
 
               {/* Text Module */}
               <Route path="text" element={<Suspense fallback={<PageLoader />}><TextModule /></Suspense>} />
