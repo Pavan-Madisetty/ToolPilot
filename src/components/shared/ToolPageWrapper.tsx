@@ -8,6 +8,7 @@ import { HeartIcon, ShareIcon, ChevronDownIcon } from '@heroicons/react/24/outli
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import { useUIStore } from '@/stores/uiStore';
 import { SEO_CONTENTS } from '@/config/seoContents';
+import { getFallbackSEOContent } from '@/utils/seoGenerator';
 
 interface ToolPageWrapperProps {
   toolId: string;
@@ -15,11 +16,13 @@ interface ToolPageWrapperProps {
 }
 
 export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
-  // Merge core config with rich SEO text content
+  // Merge core config with fallback generated copy and rich override details
   const tool = useMemo(() => {
     const baseTool = TOOL_BY_ID[toolId];
-    const seoDetails = baseTool ? SEO_CONTENTS[baseTool.id] : undefined;
-    return baseTool ? { ...baseTool, ...seoDetails } : null;
+    if (!baseTool) return null;
+    const seoDetails = SEO_CONTENTS[baseTool.id] || {};
+    const fallbackDetails = getFallbackSEOContent(baseTool);
+    return { ...baseTool, ...fallbackDetails, ...seoDetails };
   }, [toolId]);
 
   const { recordVisit } = useHistoryStore();
