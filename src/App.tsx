@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AnimatePresence } from 'framer-motion';
 import { AppLayout } from '@/components/layout/AppLayout';
@@ -1117,6 +1117,7 @@ export default function App() {
                   </Suspense>
                 }
               />
+              <Route path="conversion" element={<Navigate to="/convert" replace />} />
               <Route
                 path="convert/length"
                 element={
