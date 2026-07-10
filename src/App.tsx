@@ -132,23 +132,37 @@ const ScientificCalculator = lazy(() => import('@/pages/tools/education/Scientif
 const AgeCalculator = lazy(() => import('@/pages/tools/education/AgeCalculator'));
 const CGPACalculator = lazy(() => import('@/pages/tools/education/CGPACalculator'));
 const PercentageCalculator = lazy(() => import('@/pages/tools/education/PercentageCalculator'));
+const GPACalculator = lazy(() => import('@/pages/tools/education/GPACalculator'));
+const UnitConverter = lazy(() => import('@/pages/tools/education/UnitConverter'));
 
 // Health Tools
 const BMICalculator = lazy(() => import('@/pages/tools/health/BMICalculator'));
+const BMRCalculator = lazy(() => import('@/pages/tools/health/BMRCalculator'));
+const CalorieCalculator = lazy(() => import('@/pages/tools/health/CalorieCalculator'));
 
 // Business Tools
 const InvoiceGenerator = lazy(() => import('@/pages/tools/business/InvoiceGenerator'));
 const ROICalculator = lazy(() => import('@/pages/tools/business/ROICalculator'));
+const GstInvoice = lazy(() => import('@/pages/tools/business/GstInvoice'));
+const ProfitMargin = lazy(() => import('@/pages/tools/business/ProfitMargin'));
+const BreakEven = lazy(() => import('@/pages/tools/business/BreakEven'));
+const QuotationGenerator = lazy(() => import('@/pages/tools/business/QuotationGenerator'));
 
 // Utility Tools
 const DiscountCalculator = lazy(() => import('@/pages/tools/utilities/DiscountCalculator'));
 const DateDifference = lazy(() => import('@/pages/tools/utilities/DateDifference'));
 const ColorConverter = lazy(() => import('@/pages/tools/utilities/ColorConverter'));
+const RandomNumber = lazy(() => import('@/pages/tools/utilities/RandomNumber'));
 
 // Conversion Tools
 const LengthConverter = lazy(() => import('@/pages/tools/conversion/LengthConverter'));
 const WeightConverter = lazy(() => import('@/pages/tools/conversion/WeightConverter'));
 const TemperatureConverter = lazy(() => import('@/pages/tools/conversion/TemperatureConverter'));
+const DataStorageConverter = lazy(() => import('@/pages/tools/conversion/DataStorageConverter'));
+
+// Travel Tools
+const TimezoneConverter = lazy(() => import('@/pages/tools/travel/TimezoneConverter'));
+const FuelCostCalculator = lazy(() => import('@/pages/tools/travel/FuelCostCalculator'));
 
 export default function App() {
   const basename = typeof window !== 'undefined' && window.location.hostname.endsWith('.github.io')
@@ -266,6 +280,10 @@ export default function App() {
               <Route path="business" element={<Suspense fallback={<PageLoader />}><BusinessModule /></Suspense>} />
               <Route path="business/invoice-generator" element={<Suspense fallback={<PageLoader />}><InvoiceGenerator /></Suspense>} />
               <Route path="business/roi-calculator" element={<Suspense fallback={<PageLoader />}><ROICalculator /></Suspense>} />
+              <Route path="business/gst-invoice" element={<Suspense fallback={<PageLoader />}><GstInvoice /></Suspense>} />
+              <Route path="business/profit-margin" element={<Suspense fallback={<PageLoader />}><ProfitMargin /></Suspense>} />
+              <Route path="business/break-even" element={<Suspense fallback={<PageLoader />}><BreakEven /></Suspense>} />
+              <Route path="business/quotation-generator" element={<Suspense fallback={<PageLoader />}><QuotationGenerator /></Suspense>} />
 
               {/* Productivity Module */}
               <Route path="productivity" element={<Suspense fallback={<PageLoader />}><ProductivityModule /></Suspense>} />
@@ -283,25 +301,33 @@ export default function App() {
               <Route path="education/age-calculator" element={<Suspense fallback={<PageLoader />}><AgeCalculator /></Suspense>} />
               <Route path="education/cgpa-calculator" element={<Suspense fallback={<PageLoader />}><CGPACalculator /></Suspense>} />
               <Route path="education/percentage-calculator" element={<Suspense fallback={<PageLoader />}><PercentageCalculator /></Suspense>} />
+              <Route path="education/gpa-calculator" element={<Suspense fallback={<PageLoader />}><GPACalculator /></Suspense>} />
+              <Route path="education/unit-converter" element={<Suspense fallback={<PageLoader />}><UnitConverter /></Suspense>} />
 
               {/* Health Module */}
               <Route path="health" element={<Suspense fallback={<PageLoader />}><HealthModule /></Suspense>} />
               <Route path="health/bmi-calculator" element={<Suspense fallback={<PageLoader />}><BMICalculator /></Suspense>} />
+              <Route path="health/bmr-calculator" element={<Suspense fallback={<PageLoader />}><BMRCalculator /></Suspense>} />
+              <Route path="health/calorie-calculator" element={<Suspense fallback={<PageLoader />}><CalorieCalculator /></Suspense>} />
 
               {/* Travel Module */}
               <Route path="travel" element={<Suspense fallback={<PageLoader />}><TravelModule /></Suspense>} />
+              <Route path="travel/timezone-converter" element={<Suspense fallback={<PageLoader />}><TimezoneConverter /></Suspense>} />
+              <Route path="travel/fuel-cost" element={<Suspense fallback={<PageLoader />}><FuelCostCalculator /></Suspense>} />
 
               {/* Utilities Module */}
               <Route path="utilities" element={<Suspense fallback={<PageLoader />}><UtilitiesModule /></Suspense>} />
               <Route path="utilities/discount-calculator" element={<Suspense fallback={<PageLoader />}><DiscountCalculator /></Suspense>} />
               <Route path="utilities/date-difference" element={<Suspense fallback={<PageLoader />}><DateDifference /></Suspense>} />
               <Route path="utilities/color-converter" element={<Suspense fallback={<PageLoader />}><ColorConverter /></Suspense>} />
+              <Route path="utilities/random-number" element={<Suspense fallback={<PageLoader />}><RandomNumber /></Suspense>} />
 
               {/* Conversion Module */}
               <Route path="convert" element={<Suspense fallback={<PageLoader />}><ConversionModule /></Suspense>} />
               <Route path="convert/length" element={<Suspense fallback={<PageLoader />}><LengthConverter /></Suspense>} />
               <Route path="convert/weight" element={<Suspense fallback={<PageLoader />}><WeightConverter /></Suspense>} />
               <Route path="convert/temperature" element={<Suspense fallback={<PageLoader />}><TemperatureConverter /></Suspense>} />
+              <Route path="convert/data-storage" element={<Suspense fallback={<PageLoader />}><DataStorageConverter /></Suspense>} />
 
               {/* Wildcard Fallback */}
               <Route path="*" element={<Suspense fallback={<PageLoader />}><ToolFallback /></Suspense>} />
