@@ -1,7 +1,7 @@
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { MagnifyingGlassIcon, SparklesIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { SparklesIcon } from '@heroicons/react/24/outline';
 import { TOOLS } from '@/config/tools';
 import { MODULES } from '@/config/modules';
 import { ToolCard } from '@/components/ui/ToolCard';
@@ -36,26 +36,11 @@ export default function SearchPage() {
   const queryParam = searchParams.get('q') ?? '';
   const moduleParam = searchParams.get('module') ?? '';
 
-  const [prevQuery, setPrevQuery] = useState(queryParam);
-  const [inputVal, setInputVal] = useState(queryParam);
-  const [isFocused, setIsFocused] = useState(false);
-
-  if (queryParam !== prevQuery) {
-    setPrevQuery(queryParam);
-    setInputVal(queryParam);
-  }
-
   const filteredTools = useMemo(() => {
     return performSearch(queryParam, moduleParam);
   }, [queryParam, moduleParam]);
 
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    updateSearchParams(inputVal, moduleParam);
-  };
-
   const handleQueryChange = (val: string) => {
-    setInputVal(val);
     updateSearchParams(val, moduleParam);
   };
 
@@ -100,63 +85,26 @@ export default function SearchPage() {
           </p>
         </div>
 
-        {/* Search input and keyword suggestion panel */}
-        <div className="mb-8 max-w-2xl">
-          <form onSubmit={handleSearchSubmit} className="flex gap-2">
-            <div
-              className="flex-1 flex items-center gap-3 px-4 h-12 rounded-[var(--radius-md)] border transition-all duration-150 shadow-sm"
+        {/* Trending suggestions */}
+        <div className="mb-8 flex flex-wrap items-center gap-2">
+          <span className="text-xs font-semibold flex items-center gap-1" style={{ color: 'var(--text-tertiary)' }}>
+            <SparklesIcon className="w-3.5 h-3.5 text-yellow-500" />
+            Trending:
+          </span>
+          {TRENDING_KEYWORDS.map((kw) => (
+            <button
+              key={kw}
+              onClick={() => handleQueryChange(kw)}
+              className="px-2.5 py-1 text-xs rounded-lg border hover:border-[var(--border-focus)] hover:text-[var(--text-link)] transition-colors cursor-pointer"
               style={{
-                background: 'var(--bg-elevated)',
-                borderColor: isFocused ? 'var(--border-focus)' : 'var(--border-default)',
-                boxShadow: isFocused ? '0 0 0 2px var(--bg-base), 0 0 0 4px var(--primary)' : 'none',
+                background: 'var(--bg-surface)',
+                borderColor: 'var(--border-default)',
+                color: 'var(--text-secondary)',
               }}
             >
-              <MagnifyingGlassIcon className="w-5 h-5 shrink-0" style={{ color: 'var(--text-tertiary)' }} />
-              <input
-                type="text"
-                value={inputVal}
-                onChange={(e) => handleQueryChange(e.target.value)}
-                onFocus={() => setIsFocused(true)}
-                onBlur={() => setIsFocused(false)}
-                placeholder="Search tools by name, description, tags..."
-                className="flex-1 bg-transparent border-none outline-none text-sm h-full"
-                style={{ color: 'var(--text-primary)' }}
-                aria-label="Search tools"
-              />
-              {inputVal && (
-                <button
-                  type="button"
-                  onClick={() => handleQueryChange('')}
-                  className="btn btn-icon btn-ghost btn-sm"
-                  aria-label="Clear query"
-                >
-                  <XMarkIcon className="w-4 h-4" />
-                </button>
-              )}
-            </div>
-          </form>
-
-          {/* Trending suggestions */}
-          <div className="mt-3 flex flex-wrap items-center gap-2">
-            <span className="text-xs font-semibold flex items-center gap-1" style={{ color: 'var(--text-tertiary)' }}>
-              <SparklesIcon className="w-3.5 h-3.5 text-yellow-500" />
-              Trending:
-            </span>
-            {TRENDING_KEYWORDS.map((kw) => (
-              <button
-                key={kw}
-                onClick={() => handleQueryChange(kw)}
-                className="px-2.5 py-1 text-xs rounded-lg border hover:border-[var(--border-focus)] hover:text-[var(--text-link)] transition-colors"
-                style={{
-                  background: 'var(--bg-surface)',
-                  borderColor: 'var(--border-default)',
-                  color: 'var(--text-secondary)',
-                }}
-              >
-                {kw}
-              </button>
-            ))}
-          </div>
+              {kw}
+            </button>
+          ))}
         </div>
 
         {/* Main Search Panel Layout */}
