@@ -8,19 +8,19 @@ import { TOOLS_BY_MODULE } from '@/config/tools';
 const financeTools = TOOLS_BY_MODULE['finance'] || [];
 
 const LOAN_TOOLS = financeTools.filter((t) =>
-  ['emi-calculator', 'home-loan-calculator', 'car-loan-calculator', 'personal-loan-calculator', 'loan-eligibility-calculator', 'loan-comparison'].includes(t.id)
+  ['emi-calculator', 'home-loan-calculator', 'car-loan-calculator', 'personal-loan-calculator', 'loan-eligibility-calculator', 'loan-comparison', 'credit-card-emi'].includes(t.id)
 );
 
 const INVESTMENT_TOOLS = financeTools.filter((t) =>
-  ['sip-calculator', 'fd-calculator', 'rd-calculator', 'ppf-calculator', 'retirement-calculator', 'mutual-fund-calculator', 'compound-interest-calculator'].includes(t.id)
+  ['sip-calculator', 'fd-calculator', 'rd-calculator', 'ppf-calculator', 'retirement-calculator', 'mutual-fund-calculator', 'compound-interest-calculator', 'simple-interest-calculator', 'stock-average-calculator', 'savings-planner', 'gold-investment-calculator', 'crypto-profit-calculator'].includes(t.id)
 );
 
 const TAX_TOOLS = financeTools.filter((t) =>
-  ['gst-calculator', 'income-tax-calculator', 'salary-calculator', 'hra-calculator'].includes(t.id)
+  ['gst-calculator', 'income-tax-calculator', 'salary-calculator', 'hra-calculator', 'gratuity-calculator', 'brokerage-calculator'].includes(t.id)
 );
 
 const UTILITY_TOOLS = financeTools.filter((t) =>
-  ['currency-converter', 'tip-calculator', 'bill-splitter', 'expense-tracker'].includes(t.id)
+  ['currency-converter', 'tip-calculator', 'bill-splitter', 'expense-tracker', 'inflation-calculator', 'net-worth-calculator', 'subscription-tracker'].includes(t.id)
 );
 
 export default function FinanceModule() {

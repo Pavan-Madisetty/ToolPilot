@@ -63,6 +63,19 @@ const ExpenseTracker = lazy(() => import('@/pages/tools/finance/ExpenseTracker')
 const LoanComparison = lazy(() => import('@/pages/tools/finance/LoanComparison'));
 const MutualFundCalculator = lazy(() => import('@/pages/tools/finance/MutualFundCalculator'));
 
+// New Finance Tools
+const SimpleInterestCalculator = lazy(() => import('@/pages/tools/finance/SimpleInterestCalculator'));
+const InflationCalculator = lazy(() => import('@/pages/tools/finance/InflationCalculator'));
+const GratuityCalculator = lazy(() => import('@/pages/tools/finance/GratuityCalculator'));
+const StockAverageCalculator = lazy(() => import('@/pages/tools/finance/StockAverageCalculator'));
+const BrokerageCalculator = lazy(() => import('@/pages/tools/finance/BrokerageCalculator'));
+const SavingsPlanner = lazy(() => import('@/pages/tools/finance/SavingsPlanner'));
+const NetWorthCalculator = lazy(() => import('@/pages/tools/finance/NetWorthCalculator'));
+const GoldInvestmentCalculator = lazy(() => import('@/pages/tools/finance/GoldInvestmentCalculator'));
+const CryptoProfitCalculator = lazy(() => import('@/pages/tools/finance/CryptoProfitCalculator'));
+const SubscriptionTracker = lazy(() => import('@/pages/tools/finance/SubscriptionTracker'));
+const CreditCardEMICalculator = lazy(() => import('@/pages/tools/finance/CreditCardEMICalculator'));
+
 // Developer Tools
 const JsonFormatter = lazy(() => import('@/pages/tools/developer/JsonFormatter'));
 const Base64Tool = lazy(() => import('@/pages/tools/developer/Base64Tool'));
@@ -177,6 +190,17 @@ export default function App() {
               <Route path="finance/expense-tracker" element={<Suspense fallback={<PageLoader />}><ExpenseTracker /></Suspense>} />
               <Route path="finance/loan-comparison" element={<Suspense fallback={<PageLoader />}><LoanComparison /></Suspense>} />
               <Route path="finance/mutual-fund-calculator" element={<Suspense fallback={<PageLoader />}><MutualFundCalculator /></Suspense>} />
+              <Route path="finance/simple-interest-calculator" element={<Suspense fallback={<PageLoader />}><SimpleInterestCalculator /></Suspense>} />
+              <Route path="finance/inflation-calculator" element={<Suspense fallback={<PageLoader />}><InflationCalculator /></Suspense>} />
+              <Route path="finance/gratuity-calculator" element={<Suspense fallback={<PageLoader />}><GratuityCalculator /></Suspense>} />
+              <Route path="finance/stock-average-calculator" element={<Suspense fallback={<PageLoader />}><StockAverageCalculator /></Suspense>} />
+              <Route path="finance/brokerage-calculator" element={<Suspense fallback={<PageLoader />}><BrokerageCalculator /></Suspense>} />
+              <Route path="finance/savings-planner" element={<Suspense fallback={<PageLoader />}><SavingsPlanner /></Suspense>} />
+              <Route path="finance/net-worth-calculator" element={<Suspense fallback={<PageLoader />}><NetWorthCalculator /></Suspense>} />
+              <Route path="finance/gold-investment-calculator" element={<Suspense fallback={<PageLoader />}><GoldInvestmentCalculator /></Suspense>} />
+              <Route path="finance/crypto-profit-calculator" element={<Suspense fallback={<PageLoader />}><CryptoProfitCalculator /></Suspense>} />
+              <Route path="finance/subscription-tracker" element={<Suspense fallback={<PageLoader />}><SubscriptionTracker /></Suspense>} />
+              <Route path="finance/credit-card-emi" element={<Suspense fallback={<PageLoader />}><CreditCardEMICalculator /></Suspense>} />
 
               {/* Developer Module */}
               <Route path="developer" element={<Suspense fallback={<PageLoader />}><DeveloperModule /></Suspense>} />
