@@ -88,18 +88,18 @@ export function Header() {
           boxShadow: isScrolled ? '0 1px 3px rgba(0,0,0,0.06)' : 'none',
         }}
       >
-        <div className="max-w-[1280px] mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="container-app h-16 flex items-center justify-between">
           
           {/* LEFT ZONE: Logo & Nav Links */}
           <div className="flex items-center gap-8 h-full shrink-0">
             {/* Logo */}
             <Link
               to="/"
-              className="flex items-center gap-2.5 font-bold text-xl select-none"
+              className="flex items-center gap-3 font-bold text-xl select-none cursor-pointer"
               aria-label="ToolPilot — Home"
             >
               <div
-                className="w-6 h-6 rounded-[6px] flex items-center justify-center text-white text-[10px] font-black shadow-sm shrink-0"
+                className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-black shadow-sm shrink-0"
                 style={{
                   background: 'var(--primary)',
                 }}
@@ -107,7 +107,7 @@ export function Header() {
               >
                 T
               </div>
-              <span className="font-bold text-xl tracking-tight leading-none">
+              <span className="font-bold text-xl tracking-tight leading-none flex items-center">
                 <span className="text-[var(--text-primary)]">Tool</span>
                 <span className="text-[var(--primary)]">Pilot</span>
               </span>
