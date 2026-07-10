@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
-import { Input, StatCard } from '@/components/ui';
+import { Input, ResultBox } from '@/components/ui';
 
 const formatCurrency = (val: number) => {
   return new Intl.NumberFormat('en-US', {
@@ -83,8 +83,8 @@ export default function TipCalculator() {
         {/* Output cards layout */}
         <div className="space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <StatCard label="Tip Amount (Total)" value={formatCurrency(calculations.tipAmount)} />
-            <StatCard label="Total Bill (with Tip)" value={formatCurrency(calculations.totalAmount)} />
+            <ResultBox align="left" label="Tip Amount (Total)" value={formatCurrency(calculations.tipAmount)} />
+            <ResultBox align="left" label="Total Bill (with Tip)" value={formatCurrency(calculations.totalAmount)} />
           </div>
 
           {/* Share details box */}

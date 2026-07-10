@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { MagnifyingGlassIcon, HomeIcon, QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
+import { Search, Home, HelpCircle } from 'lucide-react';
 import { POPULAR_TOOLS, TOOL_COUNT_LABEL } from '@/config/tools';
 
 export default function NotFoundPage() {
@@ -52,7 +52,7 @@ export default function NotFoundPage() {
               borderColor: 'var(--border-default)',
             }}
           >
-            <MagnifyingGlassIcon className="w-5 h-5 shrink-0" style={{ color: 'var(--text-tertiary)' }} />
+            <Search className="w-5 h-5 shrink-0" style={{ color: 'var(--text-tertiary)' }} />
             <input
               type="text"
               value={query}
@@ -71,7 +71,7 @@ export default function NotFoundPage() {
         {/* Popular Suggestions */}
         <div className="w-full text-left border rounded-xl p-6 mb-8" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)' }}>
           <h2 className="text-sm font-semibold mb-4 flex items-center gap-1.5" style={{ color: 'var(--text-primary)' }}>
-            <QuestionMarkCircleIcon className="w-4 h-4 text-blue-500" />
+            <HelpCircle className="w-4 h-4 text-blue-500" />
             Try one of these popular tools:
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -90,7 +90,7 @@ export default function NotFoundPage() {
 
         {/* Action Button */}
         <Link to="/" className="btn btn-secondary flex items-center gap-2">
-          <HomeIcon className="w-4 h-4" />
+          <Home className="w-4 h-4" />
           <span>Back to Home</span>
         </Link>
       </div>

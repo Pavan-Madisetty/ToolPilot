@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
-import { Button, Select, CopyButton } from '@/components/ui';
-import { ArrowDownTrayIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
+import { Button, Select, CopyButton, Textarea } from '@/components/ui';
+import { Download, RefreshCw } from 'lucide-react';
 
 const INDENT_OPTIONS = [
   { value: '2', label: '2 Spaces' },
@@ -112,17 +112,17 @@ export default function JsonFormatter() {
               <Button onClick={() => setInput('')} variant="ghost" size="xs">
                 Clear
               </Button>
-              <Button onClick={repairJson} variant="secondary" size="xs" leftIcon={<ArrowPathIcon className="w-3.5 h-3.5" />}>
+              <Button onClick={repairJson} variant="secondary" size="xs" leftIcon={<RefreshCw size={14} />}>
                 Auto-Fix
               </Button>
             </div>
           </div>
 
-          <textarea
+          <Textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder='Paste JSON here... e.g. {"name": "ToolPilot", "tags": ["utility", "free"]}'
-            className="input-base font-mono text-xs leading-relaxed h-[420px] resize-none"
+            className="font-mono text-xs leading-relaxed h-[420px] resize-none"
             aria-label="JSON input raw data"
           />
 
@@ -141,7 +141,7 @@ export default function JsonFormatter() {
               {jsonResults.output && <CopyButton text={jsonResults.output} variant="ghost" size="xs" />}
               {jsonResults.output && (
                 <Button onClick={downloadJson} variant="ghost" size="xs" className="flex items-center gap-1">
-                  <ArrowDownTrayIcon className="w-3.5 h-3.5" />
+                  <Download size={14} />
                   <span>Download</span>
                 </Button>
               )}
@@ -180,11 +180,11 @@ export default function JsonFormatter() {
 
           {/* Output view box */}
           <div className="relative flex-1 flex flex-col">
-            <textarea
+            <Textarea
               readOnly
               value={jsonResults.output}
               placeholder="Formatted output will appear here..."
-              className="input-base font-mono text-xs leading-relaxed h-[360px] resize-none bg-slate-50/50 dark:bg-slate-900/30"
+              className="font-mono text-xs leading-relaxed h-[360px] resize-none"
               aria-label="Formatted JSON output"
             />
           </div>

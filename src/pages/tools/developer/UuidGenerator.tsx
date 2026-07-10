@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
-import { Button, Select, Switch, CopyButton } from '@/components/ui';
+import { Button, Select, Switch, CopyButton, Textarea } from '@/components/ui';
 
 const QUANTITY_OPTIONS = [
   { value: '1', label: 'Generate 1' },
@@ -127,11 +127,11 @@ export default function UuidGenerator() {
             {results.length > 0 && <CopyButton text={results.join('\n')} />}
           </div>
 
-          <textarea
+          <Textarea
             readOnly
             value={results.join('\n')}
             placeholder="Click Generate to produce UUIDs..."
-            className="input-base font-mono text-xs leading-relaxed h-[360px] resize-none bg-slate-50/50 dark:bg-slate-900/30"
+            className="font-mono text-xs leading-relaxed h-[360px] resize-none"
             aria-label="UUID list output"
           />
         </div>

@@ -1,10 +1,10 @@
-import { TOOLS } from '@/config/tools';
 import { ToolCard } from '@/components/ui/ToolCard';
-import { PhotoIcon } from '@heroicons/react/24/outline';
+import { Image as ImageIcon } from 'lucide-react';
 import { ModuleHeader } from '@/components/shared/ModuleHeader';
 import { ModulePageWrapper } from '@/components/shared/ModulePageWrapper';
+import { TOOLS_BY_MODULE } from '@/config/tools';
 
-const imageTools = TOOLS.filter((t) => t.module === 'image');
+const imageTools = TOOLS_BY_MODULE['image'] || [];
 
 export default function ImageModule() {
   return (
@@ -15,11 +15,10 @@ export default function ImageModule() {
     >
       {/* Hero Banner Header */}
       <ModuleHeader
+        moduleKey="image"
         title="Image Tools"
         description="Resize photo dimensions, compress file sizes to fit thresholds, and compile personalized QR code graphics in your browser."
-        icon={<PhotoIcon className="w-6 h-6" />}
-        iconColorClass="text-red-500"
-        accentBgColor="rgba(239, 68, 68, 0.08)"
+        icon={<ImageIcon size={24} strokeWidth={2} />}
         toolCount={imageTools.length}
       />
 

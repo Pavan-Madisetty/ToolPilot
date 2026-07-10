@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, forwardRef } from 'react';
+import { InputHTMLAttributes, forwardRef, useId } from 'react';
 import { clsx } from 'clsx';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -10,7 +10,8 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className, type = 'text', label, error, helperText, requiredMark = false, id, ...props }, ref) => {
-    const inputId = id ?? `input_${Math.random().toString(36).substring(2, 9)}`;
+    const defaultId = useId();
+    const inputId = id ?? defaultId;
     const errorId = `${inputId}_error`;
     const helperId = `${inputId}_helper`;
 

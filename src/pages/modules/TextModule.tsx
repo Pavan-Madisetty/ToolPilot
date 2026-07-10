@@ -1,15 +1,10 @@
-import { TOOLS } from '@/config/tools';
 import { ToolCard } from '@/components/ui/ToolCard';
-import { DocumentTextIcon } from '@heroicons/react/24/outline';
+import { FileText } from 'lucide-react';
 import { ModuleHeader } from '@/components/shared/ModuleHeader';
 import { ModulePageWrapper } from '@/components/shared/ModulePageWrapper';
+import { TOOLS_BY_MODULE } from '@/config/tools';
 
-const MODULE_COLOR_THEME = {
-  accent: '#f59e0b',
-  bg: 'rgba(245, 158, 11, 0.08)',
-};
-
-const textTools = TOOLS.filter((t) => t.module === 'text');
+const textTools = TOOLS_BY_MODULE['text'] || [];
 
 export default function TextModule() {
   return (
@@ -20,11 +15,10 @@ export default function TextModule() {
     >
       {/* Hero Banner Header */}
       <ModuleHeader
+        moduleKey="text"
         title="Text Tools"
         description="Count words and paragraphs, convert text casings to standard formatting rules, review differences between paragraphs, and compile markdown previews."
-        icon={<DocumentTextIcon className="w-6 h-6" />}
-        iconColorClass="text-amber-500"
-        accentBgColor={MODULE_COLOR_THEME.bg}
+        icon={<FileText size={24} strokeWidth={2} />}
         toolCount={textTools.length}
       />
 
@@ -34,25 +28,6 @@ export default function TextModule() {
           {textTools.map((tool) => (
             <ToolCard key={tool.id} tool={tool} />
           ))}
-        </div>
-      </section>
-
-      {/* FAQs */}
-      <section className="mt-16 pt-8 border-t" style={{ borderColor: 'var(--border-default)' }} aria-labelledby="faq-heading">
-        <h3 id="faq-heading" className="text-lg font-bold mb-6">Frequently Asked Questions</h3>
-        <div className="max-w-3xl">
-          <div className="faq-card">
-            <h4 className="faq-question">How is the reading speed computed?</h4>
-            <p className="faq-answer">
-              Reading speed projections assume an average reading pace of 200 words per minute (WPM). This standard allows visitors to estimate reading session time frames for written content.
-            </p>
-          </div>
-          <div className="faq-card">
-            <h4 className="faq-question">What markdown elements are supported in the preview editor?</h4>
-            <p className="faq-answer">
-              Our editor parsed headings, bulleted lists, bold emphasis, italics, hyperlinks, code snippets, blockquotes, and tables inline locally using JavaScript.
-            </p>
-          </div>
         </div>
       </section>
     </ModulePageWrapper>

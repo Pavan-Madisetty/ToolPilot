@@ -12,6 +12,19 @@ export { StatCard } from './StatCard';
 export { ToastContainer } from './ToastContainer';
 export { ModuleCard } from './ModuleCard';
 export { ToolCard } from './ToolCard';
+
+// Phase 1 Additions
+export { Card } from './Card';
+export { Section, SectionHeader } from './Section';
+export { Textarea } from './Textarea';
+export { ResultBox } from './ResultBox';
+export { EmptyState } from './EmptyState';
+export { Badge } from './Badge';
+export { Callout } from './Callout';
+export { Accordion, AccordionItem } from './Accordion';
+export { Tabs } from './Tabs';
+export { Dropzone } from './Dropzone';
+
 export type { SelectOption } from './Select';
 export type { ButtonProps } from './Button';
 export type { InputProps } from './Input';
@@ -20,3 +33,12 @@ export type { SliderProps } from './Slider';
 export type { SwitchProps } from './Switch';
 export type { DialogProps } from './Dialog';
 export type { SkeletonProps } from './Skeleton';
+export type { CardProps } from './Card';
+export type { SectionProps, SectionHeaderProps } from './Section';
+export type { TextareaProps } from './Textarea';
+export type { ResultBoxProps } from './ResultBox';
+export type { EmptyStateProps } from './EmptyState';
+export type { BadgeProps } from './Badge';
+export type { CalloutProps } from './Callout';
+export type { AccordionProps, AccordionItemProps } from './Accordion';
+export type { TabsProps, TabOption } from './Tabs';

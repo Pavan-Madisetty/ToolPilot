@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
-import { Button, Switch, CopyButton } from '@/components/ui';
+import { Button, Switch, CopyButton, Textarea } from '@/components/ui';
 
 export default function UrlEncoder() {
   const [input, setInput] = useState('');
@@ -52,16 +52,12 @@ export default function UrlEncoder() {
             </Button>
           </div>
 
-          <textarea
+          <Textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={
-              mode === 'encode'
-                ? 'Enter plain text or URL to encode...'
-                : 'Enter percent-encoded URL to decode...'
-            }
-            className="input-base font-mono text-xs leading-relaxed h-[300px] resize-none"
-            aria-label="URL input string"
+            placeholder={mode === 'encode' ? "Enter URL or text to encode..." : "Enter encoded URL text to decode..."}
+            className="font-mono text-xs leading-relaxed h-[300px] resize-none"
+            aria-label="URL input query"
           />
 
           <div className="flex flex-wrap items-center justify-between gap-4 border-t pt-4" style={{ borderColor: 'var(--border-default)' }}>
@@ -109,11 +105,11 @@ export default function UrlEncoder() {
             {output && <CopyButton text={output} variant="ghost" size="xs" />}
           </div>
 
-          <textarea
+          <Textarea
             readOnly
             value={output}
             placeholder="Result will appear here..."
-            className="input-base font-mono text-xs leading-relaxed h-[356px] resize-none bg-slate-50/50 dark:bg-slate-900/30"
+            className="font-mono text-xs leading-relaxed h-[356px] resize-none"
             aria-label="URL output result"
           />
         </div>

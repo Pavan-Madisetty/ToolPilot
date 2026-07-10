@@ -1,10 +1,10 @@
-import { TOOLS } from '@/config/tools';
 import { ToolCard } from '@/components/ui/ToolCard';
-import { AcademicCapIcon } from '@heroicons/react/24/outline';
+import { GraduationCap } from 'lucide-react';
 import { ModuleHeader } from '@/components/shared/ModuleHeader';
 import { ModulePageWrapper } from '@/components/shared/ModulePageWrapper';
+import { TOOLS_BY_MODULE } from '@/config/tools';
 
-const educationTools = TOOLS.filter((t) => t.module === 'education');
+const educationTools = TOOLS_BY_MODULE['education'] || [];
 
 export default function EducationModule() {
   return (
@@ -15,11 +15,10 @@ export default function EducationModule() {
     >
       {/* Hero Banner Header */}
       <ModuleHeader
+        moduleKey="education"
         title="Education Tools"
         description="Calculate CGPA benchmarks, compute scientific formulas, estimate age breakdowns, and solve multi-mode percentage ratios."
-        icon={<AcademicCapIcon className="w-6 h-6" />}
-        iconColorClass="text-blue-500"
-        accentBgColor="rgba(59, 130, 246, 0.08)"
+        icon={<GraduationCap size={24} strokeWidth={2} />}
         toolCount={educationTools.length}
       />
 

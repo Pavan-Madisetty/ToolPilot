@@ -1,67 +1,9 @@
 import { useRef, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { TOOL_BY_ID } from '@/config/tools';
-import { getModuleColors } from '@/config/modules';
+import { ToolCard } from '@/components/ui/ToolCard';
 
 interface RelatedToolsProps {
   toolIds: string[];
-}
-
-function getToolEmoji(icon: string): string {
-  const emojiMap: Record<string, string> = {
-    CurrencyRupeeIcon: '₹', HomeIcon: '🏠', TruckIcon: '🚗', UserIcon: '👤',
-    AcademicCapIcon: '🎓', CheckBadgeIcon: '✅', ChartBarIcon: '📊', BanknotesIcon: '💳',
-    ArrowTrendingUpIcon: '📈', ShieldCheckIcon: '🛡', BuildingOfficeIcon: '🏢',
-    SunIcon: '☀️', ReceiptPercentIcon: '🧾', DocumentChartBarIcon: '📃', CreditCardIcon: '💳',
-    HomeModernIcon: '🏡', CalculatorIcon: '🧮', GlobeAltIcon: '🌍', GiftIcon: '🎁',
-    ChartBarSquareIcon: '📊', ArrowsRightLeftIcon: '↔️', UsersIcon: '👥',
-    ClipboardDocumentListIcon: '📋', PresentationChartBarIcon: '📑', ScaleIcon: '⚖️',
-    StarIcon: '⭐', CurrencyBitcoinIcon: '₿', ArrowPathIcon: '🔄', ChartPieIcon: '🥧',
-    CodeBracketIcon: '{ }', LinkIcon: '🔗', ShieldCheck: '🔒', FingerPrintIcon: '🔑',
-    LockClosedIcon: '🔒', MagnifyingGlassIcon: '🔍', ClockIcon: '⏰', SwatchIcon: '🎨',
-    CircleStackIcon: '🗄', DocumentDuplicateIcon: '📋', KeyIcon: '🔑', DocumentTextIcon: '📝',
-    PaintBrushIcon: '🖌', ArrowsPointingOutIcon: '↔', ArchiveBoxIcon: '📦',
-    ScissorsIcon: '✂️', QrCodeIcon: '⬛', PhotoIcon: '🖼', WindowIcon: '🖥',
-    SparklesIcon: '✨', HeartIcon: '❤️', WrenchScrewdriverIcon: '🔧',
-    MapIcon: '🗺', BriefcaseIcon: '💼', DocumentIcon: '📄', PresentationChartLineIcon: '📉',
-  };
-  return emojiMap[icon] ?? '🔧';
-}
-
-/** Shared card renderer for a single related tool */
-function ToolCard({ tool }: { tool: { id: string; slug: string; icon: string; name: string; module: string; description: string } }) {
-  const { accent, bg } = getModuleColors(tool.module);
-  return (
-    <Link
-      key={tool.id}
-      to={tool.slug}
-      className="flex items-center gap-4 p-4 rounded-xl border bg-white dark:bg-slate-900/40 hover:shadow-md hover:border-indigo-400 dark:hover:border-indigo-500 transition-all text-decoration-none group"
-      style={{ borderColor: 'var(--border-default)' }}
-    >
-      {/* Icon */}
-      <div
-        className="w-11 h-11 rounded-xl flex items-center justify-center font-bold text-lg shrink-0"
-        style={{ backgroundColor: bg, color: accent }}
-      >
-        {getToolEmoji(tool.icon)}
-      </div>
-
-      {/* Content */}
-      <div className="flex-1 min-w-0">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="text-sm font-bold group-hover:text-indigo-500 transition-colors" style={{ color: 'var(--text-primary)' }}>
-            {tool.name}
-          </span>
-          <span className={`badge module-badge-${tool.module} capitalize text-[10px] font-bold px-2 py-0.5 rounded-md`}>
-            {tool.module}
-          </span>
-        </div>
-        <p className="text-xs mt-1 line-clamp-2" style={{ color: 'var(--text-secondary)' }}>
-          {tool.description}
-        </p>
-      </div>
-    </Link>
-  );
 }
 
 export function RelatedTools({ toolIds }: RelatedToolsProps) {

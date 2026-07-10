@@ -3,7 +3,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider, Button } from '@/components/ui';
-import { ArrowDownTrayIcon } from '@heroicons/react/24/outline';
+import { Download } from 'lucide-react';
 
 // Register Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -190,7 +190,7 @@ export default function EMICalculator() {
                   variant="secondary"
                   size="sm"
                   className="w-full"
-                  leftIcon={<ArrowDownTrayIcon className="w-4 h-4" />}
+                  leftIcon={<Download size={16} />}
                 >
                   Download Schedule as CSV
                 </Button>

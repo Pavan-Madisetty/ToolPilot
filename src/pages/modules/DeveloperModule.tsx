@@ -1,16 +1,11 @@
-import { TOOLS } from '@/config/tools';
 import { ToolCard } from '@/components/ui/ToolCard';
-import { CodeBracketIcon } from '@heroicons/react/24/outline';
+import { Code } from 'lucide-react';
 import { ModuleHeader } from '@/components/shared/ModuleHeader';
 import { ModulePageWrapper } from '@/components/shared/ModulePageWrapper';
-
-const MODULE_COLOR_THEME = {
-  accent: '#8b5cf6',
-  bg: 'rgba(139, 92, 246, 0.08)',
-};
+import { TOOLS_BY_MODULE } from '@/config/tools';
 
 // Filter developer tools
-const devTools = TOOLS.filter((t) => t.module === 'developer');
+const devTools = TOOLS_BY_MODULE['developer'] || [];
 
 const FORMATTER_TOOLS = devTools.filter((t) =>
   ['json-formatter', 'sql-formatter', 'xml-formatter', 'yaml-formatter'].includes(t.id)
@@ -37,11 +32,10 @@ export default function DeveloperModule() {
     >
       {/* Hero Banner Header */}
       <ModuleHeader
+        moduleKey="developer"
         title="Developer Tools"
         description="Format raw JSON configurations, encode binary data, compute cryptographic checksum digests, generate cryptographically secure passwords, and parse epoch dates."
-        icon={<CodeBracketIcon className="w-6 h-6" />}
-        iconColorClass="text-purple-500"
-        accentBgColor={MODULE_COLOR_THEME.bg}
+        icon={<Code size={24} strokeWidth={2} />}
         toolCount={devTools.length}
       />
 
@@ -65,7 +59,7 @@ export default function DeveloperModule() {
         {ENCODER_TOOLS.length > 0 && (
           <section aria-labelledby="encoders-heading">
             <h2 id="encoders-heading" className="text-xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
-              Data Encoders & Decoders
+              Encoders, Decoders & Parsers
             </h2>
             <div className="tools-grid">
               {ENCODER_TOOLS.map((tool) => (
@@ -79,7 +73,7 @@ export default function DeveloperModule() {
         {CRYPTO_TOOLS.length > 0 && (
           <section aria-labelledby="crypto-heading">
             <h2 id="crypto-heading" className="text-xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
-              Cryptography, Security & Generators
+              Cryptography & Security Utilities
             </h2>
             <div className="tools-grid">
               {CRYPTO_TOOLS.map((tool) => (
@@ -89,11 +83,11 @@ export default function DeveloperModule() {
           </section>
         )}
 
-        {/* Utilities */}
+        {/* General Utilities */}
         {UTILITY_TOOLS.length > 0 && (
           <section aria-labelledby="utilities-heading">
             <h2 id="utilities-heading" className="text-xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
-              Daily Utilities & Conversions
+              General Developer Utilities
             </h2>
             <div className="tools-grid">
               {UTILITY_TOOLS.map((tool) => (
@@ -103,25 +97,6 @@ export default function DeveloperModule() {
           </section>
         )}
       </div>
-
-      {/* FAQs */}
-      <section className="mt-16 pt-8 border-t" style={{ borderColor: 'var(--border-default)' }} aria-labelledby="faq-heading">
-        <h3 id="faq-heading" className="text-lg font-bold mb-6">Frequently Asked Questions</h3>
-        <div className="max-w-3xl">
-          <div className="faq-card">
-            <h4 className="faq-question">Is my input code sent to any servers?</h4>
-            <p className="faq-answer">
-              No. All formatting, encoding, regular expressions testing, and hash calculation processes are executed locally using browser JavaScript and built-in Web APIs. No logs leave your machine.
-            </p>
-          </div>
-          <div className="faq-card">
-            <h4 className="faq-question">What is entropy in password strength?</h4>
-            <p className="faq-answer">
-              Entropy measures the mathematical unpredictability of a password. Higher character pools (mixing upper, lower, numbers, symbols) and longer lengths increase entropy exponentially, making passwords computationally impractical to brute force.
-            </p>
-          </div>
-        </div>
-      </section>
     </ModulePageWrapper>
   );
 }

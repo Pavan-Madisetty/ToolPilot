@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useTransition, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MagnifyingGlassIcon, XMarkIcon, SparklesIcon, ClockIcon } from '@heroicons/react/24/outline';
+import { Search, X, Sparkles, Clock } from 'lucide-react';
 import { useSearchStore } from '@/stores/uiStore';
 import { MODULE_MAP } from '@/config/modules';
 import { clsx } from 'clsx';
@@ -165,7 +165,7 @@ export function SearchDialog() {
                   <div className="w-4 h-4 border-2 border-t-transparent border-[var(--text-link)] rounded-full animate-spin" />
                 </div>
               ) : (
-                <MagnifyingGlassIcon
+                <Search
                   className="w-5 h-5 shrink-0 transition-colors"
                   style={{ color: isFocused ? 'var(--text-link)' : 'var(--text-tertiary)' }}
                 />
@@ -188,7 +188,7 @@ export function SearchDialog() {
                   className="btn btn-icon btn-ghost btn-sm"
                   aria-label="Clear query"
                 >
-                  <XMarkIcon className="w-4 h-4" />
+                  <X className="w-4 h-4" />
                 </button>
               )}
             </div>
@@ -201,7 +201,7 @@ export function SearchDialog() {
                     <div>
                       <div className="flex items-center justify-between px-3 py-1.5 mb-1.5">
                         <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--text-tertiary)] flex items-center gap-1.5">
-                          <ClockIcon className="w-3.5 h-3.5" />
+                          <Clock className="w-3.5 h-3.5" />
                           Recent Searches
                         </span>
                         <button
@@ -220,7 +220,7 @@ export function SearchDialog() {
                             className="w-full flex items-center gap-2.5 px-3 py-2 text-xs text-left rounded-lg hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors"
                             style={{ color: 'var(--text-secondary)' }}
                           >
-                            <ClockIcon className="w-3.5 h-3.5 text-slate-400" />
+                            <Clock className="w-3.5 h-3.5 text-slate-400" />
                             <span>{term}</span>
                           </button>
                         ))}
@@ -305,7 +305,7 @@ export function SearchDialog() {
               style={{ borderColor: 'var(--border-default)', color: 'var(--text-tertiary)' }}
             >
               <span className="flex items-center gap-1.5">
-                <SparklesIcon className="w-3.5 h-3.5 text-blue-500" />
+                <Sparkles className="w-3.5 h-3.5 text-blue-500" />
                 Find tools instantly
               </span>
               <span className="flex items-center gap-2.5">

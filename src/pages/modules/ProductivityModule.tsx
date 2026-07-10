@@ -1,10 +1,10 @@
-import { TOOLS } from '@/config/tools';
 import { ToolCard } from '@/components/ui/ToolCard';
-import { ClockIcon } from '@heroicons/react/24/outline';
+import { Clock } from 'lucide-react';
 import { ModuleHeader } from '@/components/shared/ModuleHeader';
 import { ModulePageWrapper } from '@/components/shared/ModulePageWrapper';
+import { TOOLS_BY_MODULE } from '@/config/tools';
 
-const productivityTools = TOOLS.filter((t) => t.module === 'productivity');
+const productivityTools = TOOLS_BY_MODULE['productivity'] || [];
 
 export default function ProductivityModule() {
   return (
@@ -15,11 +15,10 @@ export default function ProductivityModule() {
     >
       {/* Hero Banner Header */}
       <ModuleHeader
+        moduleKey="productivity"
         title="Productivity Tools"
         description="Maintain daily task lists, log focus sessions with Pomodoro count cycles, and track streaks on personal habits."
-        icon={<ClockIcon className="w-6 h-6" />}
-        iconColorClass="text-emerald-500"
-        accentBgColor="rgba(16, 185, 129, 0.08)"
+        icon={<Clock size={24} strokeWidth={2} />}
         toolCount={productivityTools.length}
       />
 

@@ -1,9 +1,5 @@
-import { ChevronRightIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
-
-// ─────────────────────────────────────────────
-// Breadcrumb — Semantic navigation trail
-// ─────────────────────────────────────────────
+import { ChevronRight } from 'lucide-react';
 
 export interface BreadcrumbItem {
   label: string;
@@ -19,88 +15,35 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
   const allItems: BreadcrumbItem[] = [{ label: 'Home', href: '/' }, ...items];
 
   return (
-    <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center' }}>
-      <ol
-        role="list"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: 0,
-          listStyle: 'none',
-          margin: 0,
-          padding: 0,
-          fontFamily: 'var(--font-sans)',
-        }}
-      >
+    <nav aria-label="Breadcrumb" className="breadcrumb-nav">
+      <ol role="list" className="breadcrumb-list">
         {allItems.map((item, index) => {
           const isLast = index === allItems.length - 1;
           const isFirst = index === 0;
 
           return (
-            <li
-              key={`${item.label}-${index}`}
-              style={{ display: 'flex', alignItems: 'center' }}
-            >
+            <li key={`${item.label}-${index}`} className="breadcrumb-item">
               {/* Separator (skip for first item) */}
               {!isFirst && (
-                <ChevronRightIcon
-                  width={14}
-                  height={14}
+                <ChevronRight
+                  size={14}
+                  strokeWidth={2}
+                  className="breadcrumb-separator"
                   aria-hidden="true"
-                  style={{
-                    color: 'var(--text-tertiary)',
-                    margin: '0 6px',
-                    flexShrink: 0,
-                  }}
                 />
               )}
 
               {/* Last item = current page */}
               {isLast ? (
-                <span
-                  aria-current="page"
-                  style={{
-                    fontSize: '0.8125rem',
-                    fontWeight: 500,
-                    color: 'var(--text-primary)',
-                    maxWidth: 220,
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                    whiteSpace: 'nowrap',
-                  }}
-                >
+                <span aria-current="page" className="breadcrumb-current">
                   {item.label}
                 </span>
               ) : item.href ? (
-                <Link
-                  to={item.href}
-                  style={{
-                    fontSize: '0.8125rem',
-                    fontWeight: 400,
-                    color: 'var(--text-secondary)',
-                    textDecoration: 'none',
-                    borderRadius: 4,
-                    padding: '1px 2px',
-                    transition: 'color 0.15s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = 'var(--text-link)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = 'var(--text-secondary)';
-                  }}
-                >
+                <Link to={item.href} className="breadcrumb-link">
                   {item.label}
                 </Link>
               ) : (
-                <span
-                  style={{
-                    fontSize: '0.8125rem',
-                    fontWeight: 400,
-                    color: 'var(--text-secondary)',
-                  }}
-                >
+                <span className="breadcrumb-static">
                   {item.label}
                 </span>
               )}
@@ -111,3 +54,5 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
     </nav>
   );
 }
+
+export default Breadcrumb;

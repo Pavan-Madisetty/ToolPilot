@@ -1,16 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  MagnifyingGlassIcon,
-  SunIcon,
-  MoonIcon,
-  Bars3Icon,
-  XMarkIcon,
-  HeartIcon,
-} from '@heroicons/react/24/outline';
+import { Search, Sun, Moon, Menu, X, Heart, Folder } from 'lucide-react';
 import { useThemeStore } from '@/stores/themeStore';
 import { useSearchStore } from '@/stores/uiStore';
+import { MODULES } from '@/config/modules';
 import { clsx } from 'clsx';
 
 export function Header() {
@@ -18,7 +12,6 @@ export function Header() {
   const { setIsOpen: setSearchOpen } = useSearchStore();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
   const drawerRef = useRef<HTMLDivElement>(null);
@@ -90,9 +83,8 @@ export function Header() {
       >
         <div className="container-app h-16 flex items-center justify-between">
           
-          {/* LEFT ZONE: Logo & Nav Links */}
+          {/* LEFT ZONE: Logo */}
           <div className="flex items-center gap-8 h-full shrink-0">
-            {/* Logo */}
             <Link
               to="/"
               className="flex items-center gap-3 font-bold text-xl select-none cursor-pointer"
@@ -130,11 +122,12 @@ export function Header() {
               )}
               style={{
                 boxShadow: isSearchFocused ? '0 0 0 3px rgba(99, 102, 241, 0.1)' : 'none',
-                background: isSearchFocused ? 'var(--bg-base)' : 'var(--bg-base)',
+                background: 'var(--bg-base)',
               }}
             >
-              <MagnifyingGlassIcon
-                className="w-4 h-4 shrink-0 text-slate-400 dark:text-slate-500"
+              <Search
+                size={16}
+                className="shrink-0 text-slate-400 dark:text-slate-500"
                 aria-hidden="true"
               />
               <span className="flex-1 text-left text-sm font-normal text-slate-400 dark:text-slate-500 ml-[12px]">
@@ -148,7 +141,7 @@ export function Header() {
             </button>
           </div>
 
-          {/* RIGHT ZONE: Icons Cluster & Sign in */}
+          {/* RIGHT ZONE: Icons Cluster & Theme toggle */}
           <div className="hidden md:flex items-center gap-4 shrink-0">
             {/* Favorites heart */}
             <Link
@@ -156,7 +149,7 @@ export function Header() {
               aria-label="View favorite tools"
               className="w-10 h-10 rounded-[8px] flex items-center justify-center hover:bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
             >
-              <HeartIcon className="w-5 h-5" aria-hidden="true" />
+              <Heart size={20} strokeWidth={2} aria-hidden="true" />
             </Link>
 
             {/* Theme toggle */}
@@ -173,16 +166,14 @@ export function Header() {
                 transition={{ duration: 0.18 }}
               >
                 {theme === 'light' ? (
-                  <MoonIcon className="w-5 h-5" aria-hidden="true" />
+                  <Moon size={20} strokeWidth={2} aria-hidden="true" />
                 ) : (
-                  <SunIcon className="w-5 h-5" aria-hidden="true" />
+                  <Sun size={20} strokeWidth={2} aria-hidden="true" />
                 )}
               </motion.div>
             </button>
 
-
-
-            {/* Tablet-only Hamburger Menu */}
+            {/* Tablet Hamburger Menu */}
             <button
               ref={toggleBtnRef}
               type="button"
@@ -190,56 +181,31 @@ export function Header() {
               aria-label="Open navigation menu"
               className="w-10 h-10 rounded-[8px] flex items-center justify-center hover:bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors lg:hidden shrink-0"
             >
-              <Bars3Icon className="w-5 h-5" aria-hidden="true" />
+              <Menu size={20} strokeWidth={2} aria-hidden="true" />
             </button>
           </div>
 
-          {/* MOBILE LAYOUT (<768px) */}
-          <div className="flex md:hidden items-center justify-between w-full h-full relative">
-            {/* Logo Left */}
-            <Link
-              to="/"
-              className="flex items-center gap-2.5 font-bold text-xl select-none"
-              aria-label="ToolPilot — Home"
+          {/* Mobile Actions Right */}
+          <div className="flex md:hidden items-center gap-4 shrink-0">
+            <button
+              type="button"
+              onClick={() => setSearchOpen(true)}
+              aria-label="Search tools"
+              className="w-10 h-10 rounded-[8px] flex items-center justify-center hover:bg-[var(--bg-surface)] text-[var(--text-secondary)]"
             >
-              <div
-                className="w-6 h-6 rounded-[6px] flex items-center justify-center text-white text-[10px] font-black shadow-sm shrink-0"
-                style={{
-                  background: 'var(--primary)',
-                }}
-                aria-hidden="true"
-              >
-                T
-              </div>
-              <span className="font-bold text-lg tracking-tight leading-none">
-                <span className="text-[var(--text-primary)]">Tool</span>
-                <span className="text-[var(--primary)]">Pilot</span>
-              </span>
-            </Link>
+              <Search size={20} strokeWidth={2} aria-hidden="true" />
+            </button>
 
-            {/* Mobile Actions Right: Search Icon + Hamburger */}
-            <div className="flex items-center gap-4 shrink-0">
-              <button
-                type="button"
-                onClick={() => setSearchOpen(true)}
-                aria-label="Search tools"
-                className="w-10 h-10 rounded-[8px] flex items-center justify-center hover:bg-[var(--bg-surface)] text-[var(--text-secondary)]"
-              >
-                <MagnifyingGlassIcon className="w-5 h-5" aria-hidden="true" />
-              </button>
-
-              <button
-                ref={toggleBtnRef}
-                type="button"
-                onClick={() => setIsDrawerOpen(true)}
-                aria-label="Open menu"
-                className="w-10 h-10 rounded-[8px] flex items-center justify-center hover:bg-[var(--bg-surface)] text-[var(--text-secondary)]"
-              >
-                <Bars3Icon className="w-5 h-5" aria-hidden="true" />
-              </button>
-            </div>
+            <button
+              ref={toggleBtnRef}
+              type="button"
+              onClick={() => setIsDrawerOpen(true)}
+              aria-label="Open menu"
+              className="w-10 h-10 rounded-[8px] flex items-center justify-center hover:bg-[var(--bg-surface)] text-[var(--text-secondary)]"
+            >
+              <Menu size={20} strokeWidth={2} aria-hidden="true" />
+            </button>
           </div>
-
         </div>
       </header>
 
@@ -247,7 +213,7 @@ export function Header() {
       <AnimatePresence>
         {isDrawerOpen && (
           <>
-            {/* backdrop */}
+            {/* Backdrop */}
             <motion.div
               key="drawer-backdrop"
               initial={{ opacity: 0 }}
@@ -259,7 +225,7 @@ export function Header() {
               onClick={() => setIsDrawerOpen(false)}
             />
 
-            {/* drawer panel */}
+            {/* Drawer Panel */}
             <motion.div
               ref={drawerRef}
               key="drawer-panel"
@@ -278,69 +244,88 @@ export function Header() {
                 boxShadow: '-8px 0 32px rgba(0,0,0,0.12)',
               }}
             >
-              {/* drawer header */}
+              {/* Drawer Header */}
               <div className="flex items-center justify-between px-5 h-16 shrink-0 border-b border-[var(--border-default)]">
                 <span className="font-bold text-base text-[var(--text-primary)]">Navigation</span>
                 <button
                   type="button"
                   onClick={() => setIsDrawerOpen(false)}
                   aria-label="Close menu"
-                  className="w-10 h-10 rounded-[8px] flex items-center justify-center hover:bg-[var(--bg-surface)] text-[var(--text-secondary)]"
+                  className="w-10 h-10 rounded-[8px] flex items-center justify-center hover:bg-[var(--bg-surface)] text-[var(--text-secondary)] cursor-pointer"
                 >
-                  <XMarkIcon className="w-5 h-5" />
+                  <X size={20} strokeWidth={2} />
                 </button>
               </div>
 
-              {/* drawer search */}
+              {/* Drawer Search */}
               <div className="px-4 pt-4">
                 <button
                   type="button"
                   onClick={() => { setSearchOpen(true); setIsDrawerOpen(false); }}
-                  className="flex items-center gap-3 w-full h-11 px-4 rounded-[8px] border border-[var(--border-default)] bg-[var(--bg-base)] text-left hover:border-indigo-400 transition-colors"
+                  className="flex items-center gap-3 w-full h-11 px-4 rounded-[8px] border border-[var(--border-default)] bg-[var(--bg-base)] text-left hover:border-indigo-400 transition-colors cursor-pointer"
                 >
-                  <MagnifyingGlassIcon className="w-4 h-4 text-slate-400 shrink-0" />
+                  <Search size={16} strokeWidth={2} className="text-slate-400 shrink-0" />
                   <span className="text-sm text-slate-400 dark:text-slate-500">Search tools…</span>
                 </button>
               </div>
 
-              {/* drawer modules & links */}
+              {/* Drawer Content */}
               <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-6">
+                {/* Favorites */}
                 <div>
                   <div className="flex flex-col gap-0.5">
                     <Link
                       to="/#favorites"
                       onClick={() => setIsDrawerOpen(false)}
-                      className="flex items-center gap-2.5 px-3 py-2.5 text-sm font-semibold text-slate-600 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400 hover:bg-[var(--bg-surface)] rounded-lg transition-colors"
+                      className="flex items-center gap-3 px-3 py-2.5 text-sm font-semibold text-slate-600 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400 hover:bg-[var(--bg-surface)] rounded-lg transition-colors cursor-pointer"
                     >
-                      <HeartIcon className="w-5 h-5 text-slate-400 shrink-0" />
+                      <Heart size={18} strokeWidth={2} className="text-slate-400 shrink-0" />
                       <span>Favorites</span>
                     </Link>
+                  </div>
+                </div>
 
+                {/* Explore Categories */}
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--text-tertiary)] px-3 mb-2">
+                    Explore Categories
+                  </div>
+                  <div className="flex flex-col gap-0.5">
+                    {MODULES.map((mod) => (
+                      <Link
+                        key={mod.key}
+                        to={mod.slug}
+                        onClick={() => setIsDrawerOpen(false)}
+                        className="flex items-center gap-3 px-3 py-2.5 text-sm font-semibold text-slate-600 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400 hover:bg-[var(--bg-surface)] rounded-lg transition-colors cursor-pointer"
+                      >
+                        <Folder size={18} strokeWidth={2} className="text-slate-400 shrink-0" />
+                        <span>{mod.name}</span>
+                      </Link>
+                    ))}
                   </div>
                 </div>
               </div>
 
-              {/* drawer footer */}
+              {/* Drawer Footer */}
               <div className="px-5 py-4 border-t border-[var(--border-default)] shrink-0 flex flex-col gap-2 bg-[var(--bg-surface)]">
                 <button
                   type="button"
                   onClick={toggleTheme}
-                  className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-600 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                  className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-600 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
                 >
                   {theme === 'light' ? (
                     <>
-                      <MoonIcon className="w-5 h-5 text-slate-500" />
+                      <Moon size={18} strokeWidth={2} className="text-slate-500" />
                       <span>Switch to Dark Mode</span>
                     </>
                   ) : (
                     <>
-                      <SunIcon className="w-5 h-5 text-slate-400" />
+                      <Sun size={18} strokeWidth={2} className="text-slate-400" />
                       <span>Switch to Light Mode</span>
                     </>
                   )}
                 </button>
               </div>
-
             </motion.div>
           </>
         )}

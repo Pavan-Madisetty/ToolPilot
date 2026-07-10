@@ -1,10 +1,10 @@
-import { TOOLS } from '@/config/tools';
 import { ToolCard } from '@/components/ui/ToolCard';
-import { HeartIcon } from '@heroicons/react/24/outline';
+import { Heart } from 'lucide-react';
 import { ModuleHeader } from '@/components/shared/ModuleHeader';
 import { ModulePageWrapper } from '@/components/shared/ModulePageWrapper';
+import { TOOLS_BY_MODULE } from '@/config/tools';
 
-const healthTools = TOOLS.filter((t) => t.module === 'health');
+const healthTools = TOOLS_BY_MODULE['health'] || [];
 
 export default function HealthModule() {
   return (
@@ -15,11 +15,10 @@ export default function HealthModule() {
     >
       {/* Hero Banner Header */}
       <ModuleHeader
+        moduleKey="health"
         title="Health Tools"
         description="Compute BMI (Body Mass Index) scores, determine healthy weight target scopes, and check baseline fitness metrics locally."
-        icon={<HeartIcon className="w-6 h-6" />}
-        iconColorClass="text-rose-500"
-        accentBgColor="rgba(244, 63, 94, 0.08)"
+        icon={<Heart size={24} strokeWidth={2} />}
         toolCount={healthTools.length}
       />
 

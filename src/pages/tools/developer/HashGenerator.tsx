@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
-import { Button, CopyButton } from '@/components/ui';
+import { Button, CopyButton, Textarea } from '@/components/ui';
 
 // ── Pure JS MD5 Implementation (Required for client-side MD5 without imports) ──
 function md5(string: string) {
@@ -91,17 +91,21 @@ export default function HashGenerator() {
       <div className="space-y-8">
         {/* Input */}
         <div className="space-y-3">
-          <div className="flex items-center justify-between">
-            <label className="label">Input String</label>
-            <Button onClick={() => setInput('')} variant="ghost" size="xs">
-              Clear
-            </Button>
-          </div>
-          <textarea
+          <Textarea
+            label={
+              <div className="flex items-center justify-between w-full">
+                <span>Input String</span>
+                {input && (
+                  <Button onClick={() => setInput('')} variant="ghost" size="xs">
+                    Clear
+                  </Button>
+                )}
+              </div>
+            }
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type or paste text here to compute hashes..."
-            className="input-base font-mono text-xs leading-relaxed h-[120px] resize-none"
+            className="font-mono text-xs leading-relaxed h-[120px] resize-none"
             aria-label="Input hashing string"
           />
           <Button onClick={handleCompute} className="w-full sm:w-auto">
@@ -124,7 +128,7 @@ export default function HashGenerator() {
                 readOnly
                 value={hashes.md5}
                 placeholder="Hash will be shown here..."
-                className="input-base font-mono text-xs select-all bg-slate-50/50 dark:bg-slate-900/30"
+                className="input-base font-mono text-xs select-all"
                 aria-label="MD5 hash checksum"
               />
             </div>
@@ -139,7 +143,7 @@ export default function HashGenerator() {
                 readOnly
                 value={hashes.sha1}
                 placeholder="Hash will be shown here..."
-                className="input-base font-mono text-xs select-all bg-slate-50/50 dark:bg-slate-900/30"
+                className="input-base font-mono text-xs select-all"
                 aria-label="SHA-1 hash checksum"
               />
             </div>
@@ -154,7 +158,7 @@ export default function HashGenerator() {
                 readOnly
                 value={hashes.sha256}
                 placeholder="Hash will be shown here..."
-                className="input-base font-mono text-xs select-all bg-slate-50/50 dark:bg-slate-900/30"
+                className="input-base font-mono text-xs select-all"
                 aria-label="SHA-256 hash checksum"
               />
             </div>
@@ -165,12 +169,12 @@ export default function HashGenerator() {
                 <span className="text-xs font-bold uppercase tracking-wider text-orange-500">SHA-512 Checksum</span>
                 {hashes.sha512 && <CopyButton text={hashes.sha512} />}
               </div>
-              <textarea
+              <Textarea
                 readOnly
                 rows={2}
                 value={hashes.sha512}
                 placeholder="Hash will be shown here..."
-                className="input-base font-mono text-xs select-all resize-none bg-slate-50/50 dark:bg-slate-900/30"
+                className="font-mono text-xs select-all resize-none min-h-[60px]"
                 aria-label="SHA-512 hash checksum"
               />
             </div>

@@ -1,6 +1,6 @@
 import { useEffect, useRef, ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { XMarkIcon } from '@heroicons/react/24/outline';
+import { X } from 'lucide-react';
 import { clsx } from 'clsx';
 
 export interface DialogProps {
@@ -92,7 +92,7 @@ export function Dialog({
                 className="btn btn-icon btn-ghost btn-sm"
                 aria-label="Close dialog"
               >
-                <XMarkIcon className="w-5 h-5" />
+                <X size={20} strokeWidth={2} />
               </button>
             </div>
 

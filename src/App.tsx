@@ -13,6 +13,15 @@ const HomePage = lazy(() => import('@/pages/home/HomePage'));
 const SearchPage = lazy(() => import('@/pages/search/SearchPage'));
 const ToolFallback = lazy(() => import('@/pages/tools/ToolFallback'));
 
+// Company Pages
+import {
+  AboutPage,
+  BlogPage,
+  PrivacyPage,
+  TermsPage,
+  ContactPage,
+} from '@/pages/company/CompanyPages';
+
 // Module Pages
 const FinanceModule = lazy(() => import('@/pages/modules/FinanceModule'));
 const DeveloperModule = lazy(() => import('@/pages/modules/DeveloperModule'));
@@ -131,6 +140,13 @@ export default function App() {
 
               {/* Search */}
               <Route path="search" element={<Suspense fallback={<PageLoader />}><SearchPage /></Suspense>} />
+
+              {/* Company Pages */}
+              <Route path="about" element={<AboutPage />} />
+              <Route path="blog" element={<BlogPage />} />
+              <Route path="privacy" element={<PrivacyPage />} />
+              <Route path="terms" element={<TermsPage />} />
+              <Route path="contact" element={<ContactPage />} />
 
               {/* Finance Module */}
               <Route path="finance" element={<Suspense fallback={<PageLoader />}><FinanceModule /></Suspense>} />

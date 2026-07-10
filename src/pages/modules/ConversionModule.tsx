@@ -1,10 +1,10 @@
-import { TOOLS } from '@/config/tools';
 import { ToolCard } from '@/components/ui/ToolCard';
-import { ScaleIcon } from '@heroicons/react/24/outline';
+import { Scale } from 'lucide-react';
 import { ModuleHeader } from '@/components/shared/ModuleHeader';
 import { ModulePageWrapper } from '@/components/shared/ModulePageWrapper';
+import { TOOLS_BY_MODULE } from '@/config/tools';
 
-const conversionTools = TOOLS.filter((t) => t.module === 'conversion');
+const conversionTools = TOOLS_BY_MODULE['conversion'] || [];
 
 export default function ConversionModule() {
   return (
@@ -15,11 +15,10 @@ export default function ConversionModule() {
     >
       {/* Hero Banner Header */}
       <ModuleHeader
+        moduleKey="conversion"
         title="Conversion Tools"
         description="Translate metric lengths, compare mass weight values, and convert Celsius/Fahrenheit temperature scales instantly."
-        icon={<ScaleIcon className="w-6 h-6" />}
-        iconColorClass="text-teal-500"
-        accentBgColor="rgba(20, 184, 166, 0.08)"
+        icon={<Scale size={24} strokeWidth={2} />}
         toolCount={conversionTools.length}
       />
 

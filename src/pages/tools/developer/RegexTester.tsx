@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
-import { Input, Switch } from '@/components/ui';
+import { Input, Switch, Textarea } from '@/components/ui';
 
 export default function RegexTester() {
   const [pattern, setPattern] = useState('[a-zA-Z]+');
@@ -86,16 +86,14 @@ export default function RegexTester() {
 
         {/* Inputs and Match Highlight Panel */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="space-y-2">
-            <span className="label">Test String</span>
-            <textarea
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              placeholder="Enter text here to test regex patterns..."
-              className="input-base font-mono text-xs leading-relaxed h-[120px] resize-none"
-              aria-label="Test string pattern input"
-            />
-          </div>
+          <Textarea
+            label="Test String"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder="Enter text here to test regex patterns..."
+            className="font-mono text-xs leading-relaxed h-[120px] resize-none"
+            aria-label="Test string pattern input"
+          />
 
           <div className="p-6 card space-y-4">
             <div className="flex items-center justify-between">
@@ -106,8 +104,8 @@ export default function RegexTester() {
             </div>
 
             <div
-              className="p-4 border rounded-xl font-mono text-xs leading-relaxed whitespace-pre-wrap min-h-[140px] bg-slate-50/50 dark:bg-slate-900/30"
-              style={{ borderColor: 'var(--border-default)' }}
+              className="p-4 border rounded-xl font-mono text-xs leading-relaxed whitespace-pre-wrap min-h-[140px]"
+              style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}
             >
               {highlightedData ? (
                 <span>

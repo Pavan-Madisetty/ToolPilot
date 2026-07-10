@@ -1,5 +1,13 @@
-import { useState, useRef, ChangeEvent } from 'react';
+import { useState, useRef } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
+import { Button, Dropzone, Card, Input, Select } from '@/components/ui';
+import { RefreshCw, CheckCircle, Download } from 'lucide-react';
+
+const FORMAT_OPTIONS = [
+  { value: 'image/png', label: 'PNG' },
+  { value: 'image/jpeg', label: 'JPEG (JPG)' },
+  { value: 'image/webp', label: 'WebP' },
+];
 
 export default function ImageResizer() {
   const [image, setImage] = useState<string | null>(null);
@@ -13,20 +21,16 @@ export default function ImageResizer() {
   const [isResizing, setIsResizing] = useState<boolean>(false);
 
   const imgRef = useRef<HTMLImageElement | null>(null);
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        if (event.target?.result) {
-          setImage(event.target.result as string);
-          setResizedUrl(null);
-        }
-      };
-      reader.readAsDataURL(file);
-    }
+  const handleFileSelect = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      if (event.target?.result) {
+        setImage(event.target.result as string);
+        setResizedUrl(null);
+      }
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleImageLoad = () => {
@@ -85,51 +89,40 @@ export default function ImageResizer() {
 
   return (
     <ToolPageWrapper toolId="image-resize">
-      <div className="flex flex-col gap-6 max-w-4xl mx-auto">
-        {/* Upload Box */}
+      <div className="w-full">
         {!image && (
-          <div
-            onClick={() => fileInputRef.current?.click()}
-            className="border-2 border-dashed border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-400 rounded-2xl p-12 text-center cursor-pointer transition-colors"
-            style={{ background: 'var(--bg-elevated)' }}
-          >
-            <input
-              type="file"
-              ref={fileInputRef}
-              onChange={handleFileChange}
-              accept="image/*"
-              className="hidden"
-            />
-            <div className="text-5xl mb-4 text-slate-400">🖼️</div>
-            <p className="text-base font-semibold" style={{ color: 'var(--text-primary)' }}>
-              Click to select or drag and drop an image
-            </p>
-            <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">
-              PNG, JPG, WebP, GIF up to 50MB
-            </p>
-          </div>
+          <Dropzone
+            onFileSelect={handleFileSelect}
+            accept="image/*"
+            icon={<RefreshCw size={32} className="text-[var(--text-tertiary)]" />}
+            title="Click to select or drag and drop an image to resize"
+            subtitle="Supports PNG, JPG, WebP, GIF up to 50MB."
+          />
         )}
 
         {image && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="tool-layout lg:grid-cols-2 gap-6">
             {/* Left: Original Preview */}
-            <div className="border rounded-2xl p-4 flex flex-col gap-4" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)' }}>
+            <Card className="flex flex-col gap-4">
               <div className="flex items-center justify-between">
                 <span className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>
                   Original Image
                 </span>
-                <button
+                <Button
                   onClick={() => {
                     setImage(null);
                     setResizedUrl(null);
                   }}
-                  className="px-3 py-1 text-xs border rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                  style={{ borderColor: 'var(--border-default)', color: 'var(--text-secondary)' }}
+                  variant="secondary"
+                  size="xs"
                 >
                   Change Image
-                </button>
+                </Button>
               </div>
-              <div className="flex-1 min-h-[250px] max-h-[350px] flex items-center justify-center bg-slate-100 dark:bg-slate-900/60 rounded-xl overflow-hidden p-2">
+              <div
+                className="flex-1 min-h-[250px] max-h-[350px] flex items-center justify-center rounded-xl overflow-hidden p-2 border"
+                style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}
+              >
                 <img
                   ref={imgRef}
                   src={image}
@@ -138,13 +131,13 @@ export default function ImageResizer() {
                   className="max-h-[330px] max-w-full object-contain"
                 />
               </div>
-              <div className="text-xs text-center text-slate-500 dark:text-slate-400">
+              <div className="text-xs text-center text-[var(--text-secondary)]">
                 Original Size: {originalWidth} × {originalHeight} px
               </div>
-            </div>
+            </Card>
 
             {/* Right: Controls & Resized Result */}
-            <div className="border rounded-2xl p-4 flex flex-col gap-5 justify-between" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)' }}>
+            <Card className="flex flex-col gap-5 justify-between">
               <div className="flex flex-col gap-4">
                 <span className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>
                   Resize Settings
@@ -152,26 +145,18 @@ export default function ImageResizer() {
 
                 {/* Width & Height */}
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-semibold text-slate-500">Width (px)</label>
-                    <input
-                      type="number"
-                      value={width}
-                      onChange={(e) => handleWidthChange(e.target.value)}
-                      className="px-3 py-2 border rounded-xl bg-transparent outline-none focus:border-indigo-500 transition-colors text-sm"
-                      style={{ borderColor: 'var(--border-default)', color: 'var(--text-primary)' }}
-                    />
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-semibold text-slate-500">Height (px)</label>
-                    <input
-                      type="number"
-                      value={height}
-                      onChange={(e) => handleHeightChange(e.target.value)}
-                      className="px-3 py-2 border rounded-xl bg-transparent outline-none focus:border-indigo-500 transition-colors text-sm"
-                      style={{ borderColor: 'var(--border-default)', color: 'var(--text-primary)' }}
-                    />
-                  </div>
+                  <Input
+                    label="Width (px)"
+                    type="number"
+                    value={width}
+                    onChange={(e) => handleWidthChange(e.target.value)}
+                  />
+                  <Input
+                    label="Height (px)"
+                    type="number"
+                    value={height}
+                    onChange={(e) => handleHeightChange(e.target.value)}
+                  />
                 </div>
 
                 {/* Lock aspect ratio */}
@@ -180,7 +165,7 @@ export default function ImageResizer() {
                     type="checkbox"
                     checked={lockRatio}
                     onChange={(e) => setLockRatio(e.target.checked)}
-                    className="accent-indigo-600 rounded"
+                    className="accent-[var(--primary)] rounded bg-transparent"
                   />
                   <span className="text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>
                     Lock Aspect Ratio ({originalWidth && originalHeight ? (originalWidth / originalHeight).toFixed(2) : '1.00'})
@@ -188,45 +173,40 @@ export default function ImageResizer() {
                 </label>
 
                 {/* Format selection */}
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-semibold text-slate-500">Output Format</label>
-                  <select
-                    value={format}
-                    onChange={(e) => setFormat(e.target.value)}
-                    className="px-3 py-2 border rounded-xl bg-transparent outline-none focus:border-indigo-500 transition-colors text-sm"
-                    style={{ borderColor: 'var(--border-default)', color: 'var(--text-primary)' }}
-                  >
-                    <option value="image/png">PNG</option>
-                    <option value="image/jpeg">JPEG (JPG)</option>
-                    <option value="image/webp">WebP</option>
-                  </select>
-                </div>
+                <Select
+                  label="Output Format"
+                  options={FORMAT_OPTIONS}
+                  value={format}
+                  onChange={(e) => setFormat(e.target.value)}
+                />
 
-                <button
+                <Button
                   onClick={handleResize}
                   disabled={isResizing}
-                  className="w-full btn btn-primary mt-2"
+                  className="w-full mt-2"
                 >
                   {isResizing ? 'Resizing...' : 'Resize Image'}
-                </button>
+                </Button>
               </div>
 
               {/* Download link */}
               {resizedUrl && (
                 <div className="pt-4 border-t flex flex-col gap-3" style={{ borderColor: 'var(--border-default)' }}>
-                  <div className="text-xs font-semibold text-green-600 dark:text-green-400 flex items-center gap-1.5 justify-center">
-                    <span>✓ Image resized successfully!</span>
+                  <div className="text-xs font-semibold text-[var(--success)] flex items-center gap-1.5 justify-center">
+                    <CheckCircle size={14} />
+                    <span>Image resized successfully!</span>
                   </div>
                   <a
                     href={resizedUrl}
                     download={`resized_image.${format.split('/')[1]}`}
-                    className="w-full btn btn-primary text-center flex items-center justify-center"
+                    className="w-full btn btn-primary text-center flex items-center justify-center gap-2"
                   >
-                    Download Resized Image
+                    <Download size={16} />
+                    <span>Download Resized Image</span>
                   </a>
                 </div>
               )}
-            </div>
+            </Card>
           </div>
         )}
       </div>

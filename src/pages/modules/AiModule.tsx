@@ -1,6 +1,9 @@
-import { CpuChipIcon } from '@heroicons/react/24/outline';
+import { Cpu } from 'lucide-react';
 import { ModuleHeader } from '@/components/shared/ModuleHeader';
 import { ModulePageWrapper } from '@/components/shared/ModulePageWrapper';
+import { TOOLS_BY_MODULE } from '@/config/tools';
+
+const aiTools = TOOLS_BY_MODULE['ai'] || [];
 
 export default function AiModule() {
   return (
@@ -11,11 +14,11 @@ export default function AiModule() {
     >
       {/* Hero Header */}
       <ModuleHeader
-        title="AI Writing Module"
+        moduleKey="ai"
+        title="AI Writing Tools"
         description="Leverage local browser LLMs to rewrite text copy, correct grammatical compositions, and optimize resume profiles securely."
-        icon={<CpuChipIcon className="w-6 h-6" />}
-        iconColorClass="text-pink-500"
-        accentBgColor="rgba(236, 72, 153, 0.08)"
+        icon={<Cpu size={24} strokeWidth={2} />}
+        toolCount={aiTools.length}
       />
 
       {/* Coming soon board */}

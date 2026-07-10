@@ -330,7 +330,10 @@ export default function ColorPicker() {
           {/* CSS Rule representation */}
           <div className="flex flex-col gap-2 border-t pt-4" style={{ borderColor: 'var(--border-default)' }}>
             <span className="label">CSS styling snippet</span>
-            <pre className="p-3 bg-slate-50 dark:bg-slate-900 border rounded-lg font-mono text-xs leading-relaxed select-all">
+            <pre
+              className="p-3 border rounded-lg font-mono text-xs leading-relaxed select-all"
+              style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)', color: 'var(--text-primary)' }}
+            >
               {`background-color: ${hex.toUpperCase()};\ncolor: ${hsl.l > 55 ? '#0F172A' : '#FFFFFF'};`}
             </pre>
           </div>

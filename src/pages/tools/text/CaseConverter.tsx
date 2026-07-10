@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
-import { Button, CopyButton } from '@/components/ui';
+import { Button, CopyButton, Textarea } from '@/components/ui';
 
 export default function CaseConverter() {
   const [text, setText] = useState('');
@@ -44,15 +44,19 @@ export default function CaseConverter() {
   return (
     <ToolPageWrapper toolId="case-converter">
       <div className="space-y-6">
-        <div className="flex items-center justify-between">
-          <label className="label">Input String</label>
-          <Button onClick={() => setText('')} variant="ghost" size="xs">Clear</Button>
-        </div>
-        <textarea
+        <Textarea
+          label={
+            <div className="flex items-center justify-between w-full">
+              <span>Input String</span>
+              {text && (
+                <Button onClick={() => setText('')} variant="ghost" size="xs">Clear</Button>
+              )}
+            </div>
+          }
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="Type or paste text here to convert casing formats..."
-          className="input-base font-mono text-xs leading-relaxed h-[180px] resize-none"
+          className="font-mono text-xs leading-relaxed h-[180px] resize-none"
           aria-label="Input case converter text"
         />
 

@@ -153,17 +153,6 @@ export const MODULES: ModuleConfig[] = [
     slug: '/convert',
     toolCount: 12,
   },
-  {
-    key: 'calculators',
-    name: 'Calculators',
-    description: 'Scientific, percentage, ratio, discount and math calculators',
-    icon: 'CalculatorIcon',
-    color: 'purple',
-    bgColor: 'bg-purple-50 dark:bg-purple-900/20',
-    textColor: 'text-purple-600 dark:text-purple-400',
-    slug: '/calculators',
-    toolCount: 15,
-  },
 ];
 
 export const MODULE_MAP: Record<ModuleKey, ModuleConfig> = MODULES.reduce(
@@ -198,7 +187,6 @@ export const MODULE_COLOR_MAP: Record<string, ColorMapping> = {
   health:       { accent: '#22c55e', bg: 'rgba(34,197,94,0.08)',   border: 'rgba(34,197,94,0.2)'   },
   utilities:    { accent: '#6366f1', bg: 'rgba(99,102,241,0.08)',  border: 'rgba(99,102,241,0.2)'  },
   conversion:   { accent: '#64748b', bg: 'rgba(100,116,139,0.08)', border: 'rgba(100,116,139,0.2)' },
-  calculators:  { accent: '#a855f7', bg: 'rgba(168,85,247,0.08)',  border: 'rgba(168,85,247,0.2)'  },
 };
 
 export function getModuleColors(key: string): ColorMapping {
@@ -209,7 +197,7 @@ export function getModuleEmoji(key: string): string {
   const map: Record<string, string> = {
     finance: '💰', developer: '⚡', pdf: '📄', image: '🖼️', text: '✍️',
     ai: '🤖', business: '💼', productivity: '⏰', education: '🎓', travel: '✈️',
-    health: '❤️', utilities: '🔧', conversion: '🔄', calculators: '🧮',
+    health: '❤️', utilities: '🔧', conversion: '🔄',
   };
   return map[key] ?? '🔧';
 }

@@ -1,6 +1,9 @@
-import { DocumentDuplicateIcon } from '@heroicons/react/24/outline';
+import { Copy } from 'lucide-react';
 import { ModuleHeader } from '@/components/shared/ModuleHeader';
 import { ModulePageWrapper } from '@/components/shared/ModulePageWrapper';
+import { TOOLS_BY_MODULE } from '@/config/tools';
+
+const pdfTools = TOOLS_BY_MODULE['pdf'] || [];
 
 export default function PdfModule() {
   return (
@@ -11,11 +14,11 @@ export default function PdfModule() {
     >
       {/* Hero Header */}
       <ModuleHeader
-        title="PDF Module"
+        moduleKey="pdf"
+        title="PDF Tools"
         description="Merge multiple document pages, split sheets into separate PDFs, optimize file compressions, and add annotations or digital signatures safely."
-        icon={<DocumentDuplicateIcon className="w-6 h-6" />}
-        iconColorClass="text-blue-500"
-        accentBgColor="rgba(59, 130, 246, 0.08)"
+        icon={<Copy size={24} strokeWidth={2} />}
+        toolCount={pdfTools.length}
       />
 
       {/* Coming soon board */}

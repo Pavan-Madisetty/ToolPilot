@@ -3,7 +3,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider, Button } from '@/components/ui';
-import { ArrowDownTrayIcon } from '@heroicons/react/24/outline';
+import { Download } from 'lucide-react';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -173,7 +173,7 @@ export default function PersonalLoanCalculator() {
                 onClick={downloadCSV}
                 className="flex items-center justify-center gap-2"
               >
-                <ArrowDownTrayIcon className="w-4 h-4" />
+                <Download size={16} />
                 Download Amortization Schedule
               </Button>
             </div>

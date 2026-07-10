@@ -1,10 +1,10 @@
-import { TOOLS } from '@/config/tools';
 import { ToolCard } from '@/components/ui/ToolCard';
-import { BriefcaseIcon } from '@heroicons/react/24/outline';
+import { Briefcase } from 'lucide-react';
 import { ModuleHeader } from '@/components/shared/ModuleHeader';
 import { ModulePageWrapper } from '@/components/shared/ModulePageWrapper';
+import { TOOLS_BY_MODULE } from '@/config/tools';
 
-const businessTools = TOOLS.filter((t) => t.module === 'business');
+const businessTools = TOOLS_BY_MODULE['business'] || [];
 
 export default function BusinessModule() {
   return (
@@ -15,11 +15,10 @@ export default function BusinessModule() {
     >
       {/* Hero Banner Header */}
       <ModuleHeader
+        moduleKey="business"
         title="Business Tools"
         description="Generate PDF invoices for clients, calculate return on investment metrics, and review business plan outlines locally."
-        icon={<BriefcaseIcon className="w-6 h-6" />}
-        iconColorClass="text-indigo-500"
-        accentBgColor="rgba(79, 70, 229, 0.08)"
+        icon={<Briefcase size={24} strokeWidth={2} />}
         toolCount={businessTools.length}
       />
 

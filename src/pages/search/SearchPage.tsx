@@ -1,10 +1,11 @@
 import { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { SparklesIcon } from '@heroicons/react/24/outline';
+import { Sparkles, Search } from 'lucide-react';
 import { TOOLS, TOOL_COUNT_LABEL } from '@/config/tools';
 import { MODULES } from '@/config/modules';
 import { ToolCard } from '@/components/ui/ToolCard';
+import { EmptyState } from '@/components/ui/EmptyState';
 import type { ToolConfig } from '@/types';
 import { Breadcrumb } from '@/components/ui/Breadcrumb';
 import { clsx } from 'clsx';
@@ -74,7 +75,7 @@ export default function SearchPage() {
         <Breadcrumb items={[{ label: 'Search' }]} />
 
         {/* Heading */}
-        <div className="mb-8 mt-4">
+        <div className="mb-6 mt-4">
           <h1 className="text-3xl font-extrabold" style={{ color: 'var(--text-primary)' }}>
             {queryParam ? 'Search Results' : 'Search Tools'}
           </h1>
@@ -85,10 +86,32 @@ export default function SearchPage() {
           </p>
         </div>
 
+        {/* Search input field */}
+        <div className="mb-6 w-full max-w-xl">
+          <div
+            className="flex items-center gap-3 px-4 py-3 border rounded-xl shadow-sm focus-within:ring-2 focus-within:ring-[var(--primary)]"
+            style={{
+              background: 'var(--bg-elevated)',
+              borderColor: 'var(--border-default)',
+            }}
+          >
+            <Search className="w-5 h-5 shrink-0 text-[var(--text-tertiary)]" />
+            <input
+              type="text"
+              value={queryParam}
+              onChange={(e) => handleQueryChange(e.target.value)}
+              placeholder={`Search ${TOOL_COUNT_LABEL} tools...`}
+              className="flex-1 bg-transparent border-none outline-none text-sm font-medium"
+              style={{ color: 'var(--text-primary)' }}
+              aria-label="Search tools input"
+            />
+          </div>
+        </div>
+
         {/* Trending suggestions */}
         <div className="mb-8 flex flex-wrap items-center gap-2">
           <span className="text-xs font-semibold flex items-center gap-1" style={{ color: 'var(--text-tertiary)' }}>
-            <SparklesIcon className="w-3.5 h-3.5 text-yellow-500" />
+            <Sparkles size={14} className="text-yellow-500" />
             Trending:
           </span>
           {TRENDING_KEYWORDS.map((kw) => (
@@ -150,15 +173,21 @@ export default function SearchPage() {
           {/* Tool Grid Results */}
           <div className="lg:col-span-3">
             {filteredTools.length === 0 ? (
-              <div className="card text-center py-16 hover:translate-y-0 hover:shadow-md">
-                <div className="text-6xl mb-4">🔍</div>
-                <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
-                  No tools found
-                </h3>
-                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-                  No matching tools found for your query. Try clearing filters or try other keywords.
-                </p>
-              </div>
+              <EmptyState
+                icon="🔍"
+                title="No tools found"
+                description="No matching tools found for your query. Try clearing filters or try other keywords."
+                action={
+                  (queryParam || moduleParam) && (
+                    <button
+                      onClick={() => setSearchParams({})}
+                      className="btn btn-secondary btn-sm cursor-pointer"
+                    >
+                      Clear Filters
+                    </button>
+                  )
+                }
+              />
             ) : (
               <div className="tools-grid">
                 {filteredTools.map((tool) => (

@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
-
+import { Textarea } from '@/components/ui';
 
 export default function TextDiff() {
   const [original, setOriginal] = useState('Welcome to ToolPilot.\nThis is a free platform.');
@@ -36,41 +36,43 @@ export default function TextDiff() {
       <div className="space-y-6">
         <div className="tool-layout lg:grid-cols-2">
           {/* Original */}
-          <div className="space-y-2">
-            <span className="label">Original Text</span>
-            <textarea
-              value={original}
-              onChange={(e) => setOriginal(e.target.value)}
-              className="input-base font-mono text-xs leading-relaxed h-[120px] resize-none"
-              aria-label="Original text input"
-            />
-          </div>
+          <Textarea
+            label="Original Text"
+            value={original}
+            onChange={(e) => setOriginal(e.target.value)}
+            className="font-mono text-xs leading-relaxed h-[120px] resize-none"
+            aria-label="Original text input"
+          />
 
           {/* Modified */}
-          <div className="space-y-2">
-            <span className="label">Modified Text</span>
-            <textarea
-              value={modified}
-              onChange={(e) => setModified(e.target.value)}
-              className="input-base font-mono text-xs leading-relaxed h-[120px] resize-none"
-              aria-label="Modified text input"
-            />
-          </div>
+          <Textarea
+            label="Modified Text"
+            value={modified}
+            onChange={(e) => setModified(e.target.value)}
+            className="font-mono text-xs leading-relaxed h-[120px] resize-none"
+            aria-label="Modified text input"
+          />
         </div>
 
         {/* Diff Output Panel */}
         <div className="p-6 card space-y-4">
-          <h3 className="text-sm font-bold">Line Comparison (Diff Output)</h3>
-          <div className="p-4 rounded-xl font-mono text-xs leading-relaxed whitespace-pre-wrap bg-slate-50/50 dark:bg-slate-900/30 border" style={{ borderColor: 'var(--border-default)' }}>
+          <h3 className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>Line Comparison (Diff Output)</h3>
+          <div
+            className="p-4 rounded-xl font-mono text-xs leading-relaxed whitespace-pre-wrap border"
+            style={{
+              borderColor: 'var(--border-default)',
+              background: 'var(--bg-surface)',
+            }}
+          >
             {diffLines.map((line, idx) => (
               <div
                 key={idx}
                 className={
                   line.type === 'added'
-                    ? 'text-green-600 dark:text-green-400 bg-green-50/50 dark:bg-green-950/20 px-1'
+                    ? 'text-[var(--success)] bg-[rgba(16,185,129,0.08)] px-1'
                     : line.type === 'removed'
-                    ? 'text-red-600 dark:text-red-400 bg-red-50/50 dark:bg-red-950/20 px-1'
-                    : 'text-gray-500'
+                    ? 'text-[var(--danger)] bg-[rgba(239,68,68,0.08)] px-1'
+                    : 'text-[var(--text-tertiary)]'
                 }
               >
                 {line.text}

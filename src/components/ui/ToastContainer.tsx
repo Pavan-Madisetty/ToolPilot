@@ -2,13 +2,7 @@ import { useEffect, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useUIStore } from '@/stores/uiStore';
 import type { ToastMessage } from '@/types';
-import {
-  CheckCircleIcon,
-  ExclamationCircleIcon,
-  ExclamationTriangleIcon,
-  InformationCircleIcon,
-  XMarkIcon,
-} from '@heroicons/react/24/outline';
+import { CheckCircle, AlertCircle, AlertTriangle, Info, X, LucideIcon } from 'lucide-react';
 
 // ─────────────────────────────────────────────
 // Toast Configuration
@@ -19,7 +13,7 @@ type ToastVariant = ToastMessage['type'];
 const VARIANT_CONFIG: Record<
   ToastVariant,
   {
-    icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+    icon: LucideIcon;
     bg: string;
     border: string;
     iconColor: string;
@@ -27,28 +21,28 @@ const VARIANT_CONFIG: Record<
   }
 > = {
   success: {
-    icon: CheckCircleIcon,
+    icon: CheckCircle,
     bg: 'rgba(22, 163, 74, 0.08)',
     border: 'rgba(22, 163, 74, 0.25)',
     iconColor: 'rgb(22, 163, 74)',
     labelColor: 'rgb(22, 163, 74)',
   },
   error: {
-    icon: ExclamationCircleIcon,
+    icon: AlertCircle,
     bg: 'rgba(220, 38, 38, 0.08)',
     border: 'rgba(220, 38, 38, 0.25)',
     iconColor: 'rgb(220, 38, 38)',
     labelColor: 'rgb(220, 38, 38)',
   },
   warning: {
-    icon: ExclamationTriangleIcon,
+    icon: AlertTriangle,
     bg: 'rgba(234, 179, 8, 0.08)',
     border: 'rgba(234, 179, 8, 0.3)',
     iconColor: 'rgb(202, 138, 4)',
     labelColor: 'rgb(161, 98, 7)',
   },
   info: {
-    icon: InformationCircleIcon,
+    icon: Info,
     bg: 'rgba(59, 130, 246, 0.08)',
     border: 'rgba(59, 130, 246, 0.25)',
     iconColor: 'rgb(59, 130, 246)',
@@ -198,7 +192,7 @@ function ToastItem({ toast, onDismiss }: ToastItemProps) {
           e.currentTarget.style.color = 'var(--text-tertiary)';
         }}
       >
-        <XMarkIcon width={14} height={14} strokeWidth={2.5} aria-hidden="true" />
+        <X size={14} strokeWidth={2.5} aria-hidden="true" />
       </button>
     </motion.div>
   );

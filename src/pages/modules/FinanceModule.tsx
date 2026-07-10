@@ -1,16 +1,11 @@
-import { TOOLS } from '@/config/tools';
 import { ToolCard } from '@/components/ui/ToolCard';
-import { CurrencyDollarIcon } from '@heroicons/react/24/outline';
+import { DollarSign } from 'lucide-react';
 import { ModuleHeader } from '@/components/shared/ModuleHeader';
 import { ModulePageWrapper } from '@/components/shared/ModulePageWrapper';
-
-const MODULE_COLOR_THEME = {
-  accent: '#10b981',
-  bg: 'rgba(16, 185, 129, 0.08)',
-};
+import { TOOLS_BY_MODULE } from '@/config/tools';
 
 // Filter finance tools
-const financeTools = TOOLS.filter((t) => t.module === 'finance');
+const financeTools = TOOLS_BY_MODULE['finance'] || [];
 
 const LOAN_TOOLS = financeTools.filter((t) =>
   ['emi-calculator', 'home-loan-calculator', 'car-loan-calculator', 'personal-loan-calculator', 'loan-eligibility-calculator', 'loan-comparison'].includes(t.id)
@@ -37,11 +32,10 @@ export default function FinanceModule() {
     >
       {/* Hero Banner Header */}
       <ModuleHeader
+        moduleKey="finance"
         title="Finance Tools"
         description="Perform complex mortgage calculations, project investment portfolios, compute direct and indirect tax amounts, and split restaurant checks instantly in your browser."
-        icon={<CurrencyDollarIcon className="w-6 h-6" />}
-        iconColorClass="text-emerald-500"
-        accentBgColor={MODULE_COLOR_THEME.bg}
+        icon={<DollarSign size={24} strokeWidth={2} />}
         toolCount={financeTools.length}
       />
 
@@ -61,11 +55,11 @@ export default function FinanceModule() {
           </section>
         )}
 
-        {/* Investments */}
+        {/* Investment */}
         {INVESTMENT_TOOLS.length > 0 && (
           <section aria-labelledby="investments-heading">
             <h2 id="investments-heading" className="text-xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
-              Investments & Savings Planners
+              Investment & Growth Planners
             </h2>
             <div className="tools-grid">
               {INVESTMENT_TOOLS.map((tool) => (
@@ -75,11 +69,11 @@ export default function FinanceModule() {
           </section>
         )}
 
-        {/* Tax & Salaries */}
+        {/* Taxes */}
         {TAX_TOOLS.length > 0 && (
-          <section aria-labelledby="tax-heading">
-            <h2 id="tax-heading" className="text-xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
-              Taxes & Salary Breakdown Utilities
+          <section aria-labelledby="taxes-heading">
+            <h2 id="taxes-heading" className="text-xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
+              Tax & Salary Calculators
             </h2>
             <div className="tools-grid">
               {TAX_TOOLS.map((tool) => (
@@ -89,11 +83,11 @@ export default function FinanceModule() {
           </section>
         )}
 
-        {/* Billing Utilities */}
+        {/* Utilities */}
         {UTILITY_TOOLS.length > 0 && (
           <section aria-labelledby="utilities-heading">
             <h2 id="utilities-heading" className="text-xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
-              Daily Expenses & Billing Splitters
+              General Financial Utilities
             </h2>
             <div className="tools-grid">
               {UTILITY_TOOLS.map((tool) => (
@@ -103,25 +97,6 @@ export default function FinanceModule() {
           </section>
         )}
       </div>
-
-      {/* FAQs */}
-      <section className="mt-16 pt-8 border-t" style={{ borderColor: 'var(--border-default)' }} aria-labelledby="faq-heading">
-        <h3 id="faq-heading" className="text-lg font-bold mb-6">Frequently Asked Questions</h3>
-        <div className="max-w-3xl">
-          <div className="faq-card">
-            <h4 className="faq-question">Is my financial data secure?</h4>
-            <p className="faq-answer">
-              Yes, absolutely. ToolPilot processes all financial computations entirely client-side. No inputs, interest rate quotes, or principal values are ever transmitted to external servers.
-            </p>
-          </div>
-          <div className="faq-card">
-            <h4 className="faq-question">What is an amortization schedule?</h4>
-            <p className="faq-answer">
-              An amortization schedule is a complete table detailing each periodic payment on an amortizing loan. It shows the amount of interest and principal component applied to each payment, alongside the outstanding balance.
-            </p>
-          </div>
-        </div>
-      </section>
     </ModulePageWrapper>
   );
 }

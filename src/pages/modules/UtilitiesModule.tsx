@@ -1,45 +1,35 @@
-import { Helmet } from 'react-helmet-async';
-import { Breadcrumb } from '@/components/ui/Breadcrumb';
-import { TOOLS } from '@/config/tools';
 import { ToolCard } from '@/components/ui/ToolCard';
-import { SparklesIcon } from '@heroicons/react/24/outline';
+import { Sparkles } from 'lucide-react';
 import { ModuleHeader } from '@/components/shared/ModuleHeader';
+import { ModulePageWrapper } from '@/components/shared/ModulePageWrapper';
+import { TOOLS_BY_MODULE } from '@/config/tools';
 
-const utilitiesTools = TOOLS.filter((t) => t.module === 'utilities');
+const utilitiesTools = TOOLS_BY_MODULE['utilities'] || [];
 
 export default function UtilitiesModule() {
   return (
-    <>
-      <Helmet>
-        <title>General Calculations & Utility Widgets | ToolPilot</title>
-        <meta
-          name="description"
-          content="Access free browser-based general utilities including discount calculators, date differences trackers, and hex color code tools."
-        />
-      </Helmet>
+    <ModulePageWrapper
+      moduleKey="utilities"
+      moduleName="Utilities"
+      description="Access free browser-based general utilities including discount calculators, date difference trackers, and hex color code tools."
+    >
+      {/* Hero Banner Header */}
+      <ModuleHeader
+        moduleKey="utilities"
+        title="Utility Tools"
+        description="Compute discount rates, check date intervals (days between dates), and translate digital color models."
+        icon={<Sparkles size={24} strokeWidth={2} />}
+        toolCount={utilitiesTools.length}
+      />
 
-      <div className="container-app py-8">
-        <Breadcrumb items={[{ label: 'Utilities' }]} />
-
-        {/* Hero Banner Header */}
-        <ModuleHeader
-          title="Utility Tools"
-          description="Compute discount rates, check date intervals (days between dates), and translate digital color models."
-          icon={<SparklesIcon className="w-6 h-6" />}
-          iconColorClass="text-yellow-500"
-          accentBgColor="rgba(234, 179, 8, 0.08)"
-          toolCount={utilitiesTools.length}
-        />
-
-        {/* Tools Grid */}
-        <section aria-label="Utilities tools list">
-          <div className="tools-grid">
-            {utilitiesTools.map((tool) => (
-              <ToolCard key={tool.id} tool={tool} />
-            ))}
-          </div>
-        </section>
-      </div>
-    </>
+      {/* Tools Grid */}
+      <section aria-label="Utilities tools list" className="mt-8">
+        <div className="tools-grid">
+          {utilitiesTools.map((tool) => (
+            <ToolCard key={tool.id} tool={tool} />
+          ))}
+        </div>
+      </section>
+    </ModulePageWrapper>
   );
 }

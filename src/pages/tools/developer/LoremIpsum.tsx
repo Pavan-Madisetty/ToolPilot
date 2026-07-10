@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
-import { Button, Select, Switch, CopyButton } from '@/components/ui';
+import { Button, Select, Switch, CopyButton, Textarea } from '@/components/ui';
 
 const LOREM_WORDS = [
   'lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing', 'elit', 'proin', 'in', 
@@ -168,11 +168,11 @@ export default function LoremIpsum() {
             {output && <CopyButton text={output} variant="ghost" size="xs" />}
           </div>
 
-          <textarea
+          <Textarea
             readOnly
             value={output}
             placeholder="Generated placeholder text will appear here..."
-            className="input-base font-sans text-sm leading-relaxed h-[420px] resize-none bg-slate-50/50 dark:bg-slate-900/30 p-4"
+            className="font-sans text-sm leading-relaxed h-[420px] resize-none p-4"
             aria-label="Generated Lorem Ipsum text"
           />
         </div>

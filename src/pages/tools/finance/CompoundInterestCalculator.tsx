@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
-import { Slider, Select, StatCard } from '@/components/ui';
+import { Slider, Select, ResultBox } from '@/components/ui';
 
 const formatCurrency = (val: number) => {
   return new Intl.NumberFormat('en-IN', {
@@ -87,8 +87,8 @@ export default function CompoundInterestCalculator() {
         {/* Results Layout */}
         <div className="space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <StatCard label="Invested Principal" value={formatCurrency(principal)} />
-            <StatCard label="Interest Earned" value={formatCurrency(calculations.interestEarned)} highlight />
+            <ResultBox align="left" label="Invested Principal" value={formatCurrency(principal)} />
+            <ResultBox align="left" label="Interest Earned" value={formatCurrency(calculations.interestEarned)} highlight />
           </div>
 
           <div className="p-6 card space-y-4">

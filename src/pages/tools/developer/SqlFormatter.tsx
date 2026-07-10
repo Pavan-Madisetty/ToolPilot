@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
-import { Button, Select, CopyButton } from '@/components/ui';
+import { Button, Select, CopyButton, Textarea } from '@/components/ui';
 
 const INDENT_OPTIONS = [
   { value: '2', label: '2 Spaces' },
@@ -96,11 +96,11 @@ export default function SqlFormatter() {
             </Button>
           </div>
 
-          <textarea
+          <Textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Paste your unformatted SQL query here...\ne.g. select id, name, email from users where active = 1 order by created_at desc"
-            className="input-base font-mono text-xs leading-relaxed h-[400px] resize-none"
+            className="font-mono text-xs leading-relaxed h-[400px] resize-none"
             aria-label="SQL input query"
           />
 
@@ -129,11 +129,11 @@ export default function SqlFormatter() {
             {output && <CopyButton text={output} variant="ghost" size="xs" />}
           </div>
 
-          <textarea
+          <Textarea
             readOnly
             value={output}
             placeholder="Formatted query will appear here..."
-            className="input-base font-mono text-xs leading-relaxed h-[456px] resize-none bg-slate-50/50 dark:bg-slate-900/30"
+            className="font-mono text-xs leading-relaxed h-[456px] resize-none"
             aria-label="Formatted SQL output query"
           />
         </div>

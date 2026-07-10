@@ -1,13 +1,6 @@
 import { useState, useCallback } from 'react';
-import {
-  ClipboardDocumentIcon,
-  CheckIcon,
-} from '@heroicons/react/24/outline';
+import { Clipboard, Check } from 'lucide-react';
 import clsx from 'clsx';
-
-// ─────────────────────────────────────────────
-// CopyButton — Copy text to clipboard
-// ─────────────────────────────────────────────
 
 interface CopyButtonProps {
   /** The text to copy to clipboard */
@@ -22,28 +15,10 @@ interface CopyButtonProps {
   className?: string;
 }
 
-const SIZE_STYLES = {
-  xs: {
-    button: 'copy-btn copy-btn--xs',
-    iconSize: 12,
-    fontSize: '0.75rem',
-    padding: '2.5px 6px',
-    gap: 3,
-  },
-  sm: {
-    button: 'copy-btn copy-btn--sm',
-    iconSize: 14,
-    fontSize: '0.75rem',
-    padding: '4px 8px',
-    gap: 4,
-  },
-  md: {
-    button: 'copy-btn copy-btn--md',
-    iconSize: 16,
-    fontSize: '0.875rem',
-    padding: '6px 12px',
-    gap: 6,
-  },
+const ICON_SIZES = {
+  xs: 12,
+  sm: 14,
+  md: 16,
 } as const;
 
 export function CopyButton({
@@ -70,9 +45,7 @@ export function CopyButton({
     }
   }, [text, copied]);
 
-  const sizeConfig = SIZE_STYLES[size];
-
-  const isGhost = variant === 'ghost';
+  const iconSize = ICON_SIZES[size];
 
   return (
     <button
@@ -81,42 +54,16 @@ export function CopyButton({
       aria-label={copied ? 'Copied to clipboard' : `Copy ${label} to clipboard`}
       aria-live="polite"
       disabled={copied}
-      className={clsx(className)}
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: sizeConfig.gap,
-        padding: sizeConfig.padding,
-        fontSize: sizeConfig.fontSize,
-        fontWeight: 500,
-        fontFamily: 'var(--font-sans)',
-        border: isGhost ? '1px solid transparent' : '1px solid var(--border-default)',
-        borderRadius: 'var(--radius-sm)',
-        cursor: copied ? 'default' : 'pointer',
-        background: copied
-          ? 'rgba(34, 197, 94, 0.08)'
-          : error
-            ? 'rgba(239, 68, 68, 0.08)'
-            : isGhost
-              ? 'transparent'
-              : 'var(--bg-elevated)',
-        color: copied
-          ? 'var(--success)'
-          : error
-            ? 'var(--danger)'
-            : 'var(--text-secondary)',
-        borderColor: copied
-          ? 'var(--success)'
-          : error
-            ? 'var(--danger)'
-            : isGhost
-              ? 'transparent'
-              : 'var(--border-default)',
-        transition: 'all 0.15s ease-in-out',
-        userSelect: 'none',
-        whiteSpace: 'nowrap',
-        outline: 'none',
-      }}
+      className={clsx(
+        'copy-btn',
+        `copy-btn--${size}`,
+        {
+          'copy-btn--ghost': variant === 'ghost' && !copied && !error,
+          'copy-btn--copied': copied,
+          'copy-btn--error': error,
+        },
+        className
+      )}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
@@ -125,20 +72,21 @@ export function CopyButton({
       }}
     >
       {copied ? (
-        <CheckIcon
-          width={sizeConfig.iconSize}
-          height={sizeConfig.iconSize}
+        <Check
+          size={iconSize}
           aria-hidden="true"
           strokeWidth={2.5}
         />
       ) : (
-        <ClipboardDocumentIcon
-          width={sizeConfig.iconSize}
-          height={sizeConfig.iconSize}
+        <Clipboard
+          size={iconSize}
           aria-hidden="true"
+          strokeWidth={2}
         />
       )}
       <span>{copied ? 'Copied!' : error ? 'Failed' : label}</span>
     </button>
   );
 }
+
+export default CopyButton;

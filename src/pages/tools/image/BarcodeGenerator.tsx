@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
+import { Button, Card, Input } from '@/components/ui';
+import { Download } from 'lucide-react';
 
 // CODE128 encoding patterns (Version B)
 const CODE128_PATTERNS: string[] = [
@@ -83,61 +85,59 @@ export default function BarcodeGenerator() {
 
   return (
     <ToolPageWrapper toolId="barcode-generator">
-      <div className="flex flex-col gap-6 max-w-4xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Settings Panel */}
-          <div className="border rounded-2xl p-5 flex flex-col gap-5" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)' }}>
-            <span className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>
-              Barcode Generator
-            </span>
+      <div className="tool-layout lg:grid-cols-2 gap-6">
+        {/* Settings Panel */}
+        <Card className="flex flex-col gap-5">
+          <span className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>
+            Barcode Generator
+          </span>
 
-            <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-semibold text-slate-500">Barcode Content (Letters, Numbers & Standard Symbols)</label>
-              <input
-                type="text"
-                value={text}
-                onChange={(e) => setText(e.target.value.toUpperCase())}
-                placeholder="Enter alphanumeric text..."
-                className="px-3 py-2 border rounded-xl bg-transparent outline-none focus:border-indigo-500 transition-colors text-sm font-mono"
-                style={{ borderColor: 'var(--border-default)', color: 'var(--text-primary)' }}
-              />
-              <span className="text-[10px] text-slate-400">Barcode will automatically convert text to uppercase.</span>
+          <Input
+            label="Barcode Content (Letters, Numbers & Standard Symbols)"
+            type="text"
+            value={text}
+            onChange={(e) => setText(e.target.value.toUpperCase())}
+            placeholder="Enter alphanumeric text..."
+            helperText="Barcode will automatically convert text to uppercase."
+            error={error || undefined}
+          />
+        </Card>
+
+        {/* Preview Panel */}
+        <Card className="flex flex-col items-center justify-between gap-6">
+          <span className="text-sm font-bold w-full text-left" style={{ color: 'var(--text-primary)' }}>
+            Live Barcode Preview
+          </span>
+
+          {downloadUrl ? (
+            <div
+              className="p-4 border rounded-2xl flex items-center justify-center shadow-inner overflow-x-auto max-w-full"
+              style={{ background: '#ffffff', borderColor: 'var(--border-default)' }}
+            >
+              <img src={downloadUrl} alt="Barcode Preview" className="h-28 object-contain" />
             </div>
+          ) : (
+            <div className="h-28 flex items-center justify-center text-[var(--text-tertiary)] text-sm">
+              No barcode generated
+            </div>
+          )}
 
-            {error && (
-              <div className="p-3 rounded-lg border border-red-200 bg-red-50 dark:bg-red-950/20 text-xs text-red-600 dark:text-red-400">
-                ⚠️ {error}
-              </div>
-            )}
-          </div>
-
-          {/* Preview Panel */}
-          <div className="border rounded-2xl p-5 flex flex-col items-center justify-between gap-6" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)' }}>
-            <span className="text-sm font-bold w-full text-left" style={{ color: 'var(--text-primary)' }}>
-              Live Barcode Preview
-            </span>
-
-            {downloadUrl ? (
-              <div className="p-4 border rounded-2xl bg-white flex items-center justify-center shadow-inner overflow-x-auto max-w-full">
-                <img src={downloadUrl} alt="Barcode Preview" className="h-28 object-contain" />
-              </div>
-            ) : (
-              <div className="h-28 flex items-center justify-center text-slate-400 text-sm">
-                No barcode generated
-              </div>
-            )}
-
-            <div className="w-full">
-              <a
-                href={downloadUrl || undefined}
-                download="barcode.svg"
-                className={`w-full btn btn-primary text-center flex items-center justify-center py-2.5 ${!downloadUrl ? 'opacity-50 pointer-events-none' : ''}`}
+          <div className="w-full">
+            <a
+              href={downloadUrl || undefined}
+              download="barcode.svg"
+              style={{ pointerEvents: downloadUrl ? 'auto' : 'none' }}
+            >
+              <Button
+                disabled={!downloadUrl}
+                className="w-full flex items-center justify-center gap-2"
+                leftIcon={<Download size={16} />}
               >
                 Download Barcode (SVG)
-              </a>
-            </div>
+              </Button>
+            </a>
           </div>
-        </div>
+        </Card>
       </div>
     </ToolPageWrapper>
   );

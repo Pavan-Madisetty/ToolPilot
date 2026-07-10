@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
-import { Button, CopyButton } from '@/components/ui';
+import { Button, CopyButton, Textarea } from '@/components/ui';
 
 // Helper to decode Base64Url
 function base64UrlDecode(str: string): string {
@@ -92,17 +92,21 @@ export default function JwtDecoder() {
       <div className="space-y-8">
         {/* Token Input */}
         <div className="space-y-3">
-          <div className="flex items-center justify-between">
-            <label className="label">Paste JWT Token</label>
-            <Button onClick={() => setToken('')} variant="ghost" size="xs">
-              Clear
-            </Button>
-          </div>
-          <textarea
+          <Textarea
+            label={
+              <div className="flex items-center justify-between w-full">
+                <span>Paste JWT Token</span>
+                {token && (
+                  <Button onClick={() => setToken('')} variant="ghost" size="xs">
+                    Clear
+                  </Button>
+                )}
+              </div>
+            }
             value={token}
             onChange={(e) => setToken(e.target.value)}
             placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ..."
-            className="input-base font-mono text-xs leading-relaxed h-[120px] resize-none"
+            className="font-mono text-xs leading-relaxed h-[120px] resize-none"
             aria-label="JWT token input"
           />
           <Button onClick={handleDecode} className="w-full sm:w-auto">
@@ -126,11 +130,11 @@ export default function JwtDecoder() {
                   <span className="text-xs font-bold uppercase tracking-wider text-pink-500">Header</span>
                   <CopyButton text={decoded.header} />
                 </div>
-                <textarea
+                <Textarea
                   readOnly
                   rows={6}
                   value={decoded.header}
-                  className="input-base font-mono text-xs leading-relaxed resize-none bg-slate-50/50 dark:bg-slate-900/30"
+                  className="font-mono text-xs leading-relaxed resize-none"
                   aria-label="JWT header claims"
                 />
               </div>
@@ -140,11 +144,11 @@ export default function JwtDecoder() {
                   <span className="text-xs font-bold uppercase tracking-wider text-blue-500">Payload</span>
                   <CopyButton text={decoded.payload} />
                 </div>
-                <textarea
+                <Textarea
                   readOnly
                   rows={10}
                   value={decoded.payload}
-                  className="input-base font-mono text-xs leading-relaxed resize-none bg-slate-50/50 dark:bg-slate-900/30"
+                  className="font-mono text-xs leading-relaxed resize-none"
                   aria-label="JWT payload claims"
                 />
               </div>

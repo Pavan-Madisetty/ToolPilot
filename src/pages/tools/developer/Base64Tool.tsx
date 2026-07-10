@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
-import { Button, Switch, CopyButton } from '@/components/ui';
+import { Button, Switch, CopyButton, Textarea } from '@/components/ui';
 
 export default function Base64Tool() {
   const [input, setInput] = useState('');
@@ -82,18 +82,21 @@ export default function Base64Tool() {
       <div className="tool-layout lg:grid-cols-2">
         {/* Input */}
         <div className="flex flex-col gap-4">
-          <div className="flex items-center justify-between">
-            <span className="label">Raw Input</span>
-            <Button onClick={clearInput} variant="ghost" size="xs">
-              Clear
-            </Button>
-          </div>
-
-          <textarea
+          <Textarea
+            label={
+              <div className="flex items-center justify-between w-full">
+                <span>Raw Input</span>
+                {input && (
+                  <Button onClick={clearInput} variant="ghost" size="xs">
+                    Clear
+                  </Button>
+                )}
+              </div>
+            }
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={mode === 'encode' ? "Enter plain text here to encode..." : "Enter Base64 text here to decode..."}
-            className="input-base font-mono text-xs leading-relaxed h-[300px] resize-none"
+            className="font-mono text-xs leading-relaxed h-[300px] resize-none"
             aria-label="Base64 input textarea"
           />
 
@@ -129,24 +132,24 @@ export default function Base64Tool() {
           </Button>
 
           {error && (
-            <div role="alert" className="p-3 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-lg text-xs text-red-600 dark:text-red-400">
+            <div role="alert" className="p-3 bg-[rgba(239,68,68,0.08)] border border-[var(--border-default)] rounded-lg text-xs text-[var(--danger)]">
               {error}
             </div>
           )}
         </div>
 
         {/* Output */}
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between">
             <span className="label">Calculated Result</span>
             {output && <CopyButton text={output} variant="ghost" size="xs" />}
           </div>
 
-          <textarea
+          <Textarea
             readOnly
             value={output}
             placeholder="Result will appear here..."
-            className="input-base font-mono text-xs leading-relaxed h-[356px] resize-none bg-slate-50/50 dark:bg-slate-900/30"
+            className="font-mono text-xs leading-relaxed h-[356px] resize-none"
             aria-label="Base64 processed output"
           />
         </div>

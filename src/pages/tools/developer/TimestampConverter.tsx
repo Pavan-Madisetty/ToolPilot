@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
-import { Button, Input, StatCard } from '@/components/ui';
+import { Button, Input, ResultBox, Textarea } from '@/components/ui';
 
 export default function TimestampConverter() {
   const [liveEpoch, setLiveEpoch] = useState<number>(() => Math.floor(Date.now() / 1000));
@@ -56,7 +56,7 @@ export default function TimestampConverter() {
       <div className="space-y-8">
         {/* Live Clock Card */}
         <div className="grid grid-cols-1 gap-4 max-w-md">
-          <StatCard label="Current Unix Epoch Timestamp (p.s. updates live)" value={liveEpoch} highlight />
+          <ResultBox align="left" label="Current Unix Epoch Timestamp (p.s. updates live)" value={liveEpoch} highlight />
         </div>
 
         <div className="tool-layout lg:grid-cols-2">
@@ -73,11 +73,11 @@ export default function TimestampConverter() {
               Convert to Date
             </Button>
             {epochResult && (
-              <textarea
+              <Textarea
                 readOnly
                 rows={4}
                 value={epochResult}
-                className="input-base font-mono text-xs leading-relaxed resize-none mt-4 bg-slate-50/50 dark:bg-slate-900/30"
+                className="font-mono text-xs leading-relaxed resize-none mt-4"
                 aria-label="Timestamp translation output"
               />
             )}
@@ -96,7 +96,10 @@ export default function TimestampConverter() {
               Convert to Epoch
             </Button>
             {dateResult && (
-              <div className="mt-4 p-4 border rounded-xl bg-slate-50/50 dark:bg-slate-900/30" style={{ borderColor: 'var(--border-default)' }}>
+              <div
+                className="mt-4 p-4 border rounded-xl"
+                style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}
+              >
                 <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Epoch Timestamp (seconds)</span>
                 <p className="text-lg font-bold font-mono mt-1" style={{ color: 'var(--text-primary)' }}>{dateResult}</p>
               </div>

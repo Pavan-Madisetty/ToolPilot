@@ -17,13 +17,8 @@ export type ModuleKey =
   | 'education'
   | 'travel'
   | 'health'
-  | 'lifestyle'
   | 'utilities'
-  | 'conversion'
-  | 'calculators'
-  | 'generators'
-  | 'data'
-  | 'browser';
+  | 'conversion';
 
 // ─────────────────────────────────────────────
 // Theme & Design

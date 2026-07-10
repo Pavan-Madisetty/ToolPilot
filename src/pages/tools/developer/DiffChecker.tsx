@@ -1,98 +1,92 @@
 import { useState } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
-import { Button } from '@/components/ui';
+import { Button, Textarea } from '@/components/ui';
 
 interface DiffLine {
   type: 'added' | 'removed' | 'unchanged';
-  value: string;
+  text: string;
   originalLineNum?: number;
   modifiedLineNum?: number;
 }
 
-function computeDiff(original: string, modified: string): DiffLine[] {
-  const origLines = original.split('\n');
-  const modLines = modified.split('\n');
-  const diffs: DiffLine[] = [];
-  
-  let o = 0;
-  let m = 0;
-  
-  while (o < origLines.length || m < modLines.length) {
-    if (o < origLines.length && m < modLines.length) {
-      if (origLines[o] === modLines[m]) {
-        diffs.push({
-          type: 'unchanged',
-          value: origLines[o],
-          originalLineNum: o + 1,
-          modifiedLineNum: m + 1,
-        });
-        o++;
-        m++;
-      } else {
-        const nextModMatch = modLines.slice(m).indexOf(origLines[o]);
-        const nextOrigMatch = origLines.slice(o).indexOf(modLines[m]);
-        
-        if (nextModMatch !== -1 && (nextOrigMatch === -1 || nextModMatch < nextOrigMatch)) {
-          for (let i = 0; i < nextModMatch; i++) {
-            diffs.push({
-              type: 'added',
-              value: modLines[m + i],
-              modifiedLineNum: m + i + 1,
-            });
-          }
-          m += nextModMatch;
-        } else if (nextOrigMatch !== -1 && (nextModMatch === -1 || nextOrigMatch <= nextModMatch)) {
-          for (let i = 0; i < nextOrigMatch; i++) {
-            diffs.push({
-              type: 'removed',
-              value: origLines[o + i],
-              originalLineNum: o + i + 1,
-            });
-          }
-          o += nextOrigMatch;
-        } else {
-          diffs.push({
-            type: 'removed',
-            value: origLines[o],
-            originalLineNum: o + 1,
-          });
-          diffs.push({
-            type: 'added',
-            value: modLines[m],
-            modifiedLineNum: m + 1,
-          });
-          o++;
-          m++;
-        }
-      }
-    } else if (o < origLines.length) {
-      diffs.push({
-        type: 'removed',
-        value: origLines[o],
-        originalLineNum: o + 1,
-      });
-      o++;
-    } else if (m < modLines.length) {
-      diffs.push({
-        type: 'added',
-        value: modLines[m],
-        modifiedLineNum: m + 1,
-      });
-      m++;
-    }
-  }
-  
-  return diffs;
-}
-
 export default function DiffChecker() {
-  const [original, setOriginal] = useState('');
-  const [modified, setModified] = useState('');
+  const [original, setOriginal] = useState('Welcome to ToolPilot.\nThis is a free offline-first platform.');
+  const [modified, setModified] = useState('Welcome to ToolPilot v2!\nThis is a free online platform.');
   const [diffResult, setDiffResult] = useState<DiffLine[] | null>(null);
 
   const handleCompare = () => {
-    const results = computeDiff(original, modified);
-    setDiffResult(results);
+    const origLines = original.split('\n');
+    const modLines = modified.split('\n');
+
+    const diffs: DiffLine[] = [];
+    let origIdx = 0;
+    let modIdx = 0;
+
+    // Simple LCS-based Diff algorithm
+    while (origIdx < origLines.length || modIdx < modLines.length) {
+      if (origIdx < origLines.length && modIdx < modLines.length) {
+        if (origLines[origIdx] === modLines[modIdx]) {
+          diffs.push({
+            type: 'unchanged',
+            text: origLines[origIdx],
+            originalLineNum: origIdx + 1,
+            modifiedLineNum: modIdx + 1,
+          });
+          origIdx++;
+          modIdx++;
+        } else {
+          // Lookahead to find next match
+          let lookaheadOrig = origIdx;
+          let foundMatch = false;
+
+          while (lookaheadOrig < origLines.length) {
+            if (origLines[lookaheadOrig] === modLines[modIdx]) {
+              foundMatch = true;
+              break;
+            }
+            lookaheadOrig++;
+          }
+
+          if (foundMatch) {
+            // Lines deleted in original
+            while (origIdx < lookaheadOrig) {
+              diffs.push({
+                type: 'removed',
+                text: origLines[origIdx],
+                originalLineNum: origIdx + 1,
+              });
+              origIdx++;
+            }
+          } else {
+            // Line added in modified
+            diffs.push({
+              type: 'added',
+              text: modLines[modIdx],
+              modifiedLineNum: modIdx + 1,
+            });
+            modIdx++;
+          }
+        }
+      } else if (origIdx < origLines.length) {
+        // Remaining original lines deleted
+        diffs.push({
+          type: 'removed',
+          text: origLines[origIdx],
+          originalLineNum: origIdx + 1,
+        });
+        origIdx++;
+      } else if (modIdx < modLines.length) {
+        // Remaining modified lines added
+        diffs.push({
+          type: 'added',
+          text: modLines[modIdx],
+          modifiedLineNum: modIdx + 1,
+        });
+        modIdx++;
+      }
+    }
+
+    setDiffResult(diffs);
   };
 
   const clearAll = () => {
@@ -103,30 +97,25 @@ export default function DiffChecker() {
 
   return (
     <ToolPageWrapper toolId="diff-checker">
-      <div className="flex flex-col gap-6">
-        {/* Editor Inputs Panel */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <div className="flex flex-col gap-2">
-            <span className="label">Original Text</span>
-            <textarea
-              value={original}
-              onChange={(e) => setOriginal(e.target.value)}
-              placeholder="Paste original text or code here..."
-              className="input-base font-mono text-xs leading-relaxed h-[200px] resize-none"
-              aria-label="Original text input"
-            />
-          </div>
+      <div className="space-y-6">
+        <div className="tool-layout lg:grid-cols-2">
+          <Textarea
+            label="Original Text"
+            value={original}
+            onChange={(e) => setOriginal(e.target.value)}
+            placeholder="Paste original text or code here..."
+            className="font-mono text-xs leading-relaxed h-[200px] resize-none"
+            aria-label="Original text input"
+          />
 
-          <div className="flex flex-col gap-2">
-            <span className="label">Modified Text</span>
-            <textarea
-              value={modified}
-              onChange={(e) => setModified(e.target.value)}
-              placeholder="Paste modified text or code here..."
-              className="input-base font-mono text-xs leading-relaxed h-[200px] resize-none"
-              aria-label="Modified text input"
-            />
-          </div>
+          <Textarea
+            label="Modified Text"
+            value={modified}
+            onChange={(e) => setModified(e.target.value)}
+            placeholder="Paste modified text or code here..."
+            className="font-mono text-xs leading-relaxed h-[200px] resize-none"
+            aria-label="Modified text input"
+          />
         </div>
 
         <div className="flex justify-end gap-3 border-t pt-4" style={{ borderColor: 'var(--border-default)' }}>
@@ -141,9 +130,12 @@ export default function DiffChecker() {
         {/* Diff Results Output Panel */}
         {diffResult && (
           <div className="flex flex-col gap-3 p-5 card">
-            <h3 className="text-base font-bold">Comparison Results</h3>
+            <h3 className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>Comparison Results</h3>
             
-            <div className="border rounded-xl overflow-hidden font-mono text-xs leading-relaxed bg-slate-50 dark:bg-slate-950" style={{ borderColor: 'var(--border-default)' }}>
+            <div
+              className="border rounded-xl overflow-hidden font-mono text-xs leading-relaxed"
+              style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}
+            >
               <div className="overflow-x-auto max-h-[500px]">
                 <table className="w-full border-collapse">
                   <tbody>
@@ -151,18 +143,18 @@ export default function DiffChecker() {
                       const isRemoved = line.type === 'removed';
                       const isAdded = line.type === 'added';
                       
-                      let bgClass = 'bg-transparent';
+                      let bgClass = 'bg-transparent text-[var(--text-secondary)]';
                       let prefix = ' ';
-                      let numColor = 'text-slate-400 dark:text-slate-600';
+                      let numColor = 'text-[var(--text-tertiary)]';
                       
                       if (isRemoved) {
-                        bgClass = 'bg-red-100/50 dark:bg-red-950/20 text-red-700 dark:text-red-400';
+                        bgClass = 'bg-[rgba(239,68,68,0.06)] text-[var(--danger)]';
                         prefix = '-';
-                        numColor = 'bg-red-200/40 dark:bg-red-950/40 text-red-500';
+                        numColor = 'bg-[rgba(239,68,68,0.12)] text-[var(--danger)]';
                       } else if (isAdded) {
-                        bgClass = 'bg-emerald-100/50 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-400';
+                        bgClass = 'bg-[rgba(16,185,129,0.06)] text-[var(--success)]';
                         prefix = '+';
-                        numColor = 'bg-emerald-200/40 dark:bg-emerald-950/40 text-emerald-500';
+                        numColor = 'bg-[rgba(16,185,129,0.12)] text-[var(--success)]';
                       }
 
                       return (
@@ -178,9 +170,9 @@ export default function DiffChecker() {
                           <td className="w-6 select-none text-center font-bold text-xs">
                             {prefix}
                           </td>
-                          {/* Content */}
-                          <td className="whitespace-pre pr-4 pl-1">
-                            {line.value || ' '}
+                          {/* Code Content */}
+                          <td className="px-4 py-0.5 whitespace-pre font-mono text-xs leading-normal">
+                            {line.text}
                           </td>
                         </tr>
                       );

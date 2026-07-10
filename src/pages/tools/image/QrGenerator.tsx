@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
+import { Textarea } from '@/components/ui';
 
 // Simple lightweight QR code generator matrix helper
 class QRCodeModel {
@@ -262,17 +263,15 @@ export default function QrGenerator() {
             </span>
 
             {/* Input Data */}
-            <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-semibold text-slate-500">QR Code Content (URL or Text)</label>
-              <textarea
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                placeholder="Enter URL or text to encode..."
-                rows={4}
-                className="px-3 py-2 border rounded-xl bg-transparent outline-none focus:border-indigo-500 transition-colors text-sm resize-none"
-                style={{ borderColor: 'var(--border-default)', color: 'var(--text-primary)' }}
-              />
-            </div>
+            <Textarea
+              label="QR Code Content (URL or Text)"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              placeholder="Enter URL or text to encode..."
+              rows={4}
+              className="resize-none text-sm"
+              aria-label="QR Code Content"
+            />
 
             {/* Colors */}
             <div className="grid grid-cols-2 gap-4">

@@ -1,11 +1,12 @@
-import { ReactNode, useEffect, useState, useMemo } from 'react';
+import { ReactNode, useEffect, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Breadcrumb } from '@/components/ui/Breadcrumb';
 import { RelatedTools } from './RelatedTools';
 import { TOOL_BY_ID, isComingSoon } from '@/config/tools';
 import { useHistoryStore, useFavoritesStore } from '@/stores/userStore';
-import { HeartIcon, ShareIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
-import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
+import { Heart, Share2, FileText, Sliders, Eye, Download } from 'lucide-react';
+import { Accordion } from '@/components/ui/Accordion';
+import { clsx } from 'clsx';
 import { useUIStore } from '@/stores/uiStore';
 import { SEO_CONTENTS } from '@/config/seoContents';
 import { getFallbackSEOContent } from '@/utils/seoGenerator';
@@ -29,8 +30,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
   const { isFavorite, toggleFavorite } = useFavoritesStore();
   const { addToast } = useUIStore();
 
-  // FAQ Accordion local expanded state tracking
-  const [expandedFaqIndex, setExpandedFaqIndex] = useState<number | null>(null);
+
 
   useEffect(() => {
     if (tool) {
@@ -216,11 +216,11 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
               }}
               aria-label={favorited ? 'Remove from favorites' : 'Add to favorites'}
             >
-              {favorited ? (
-                <HeartIconSolid className="w-5 h-5" />
-              ) : (
-                <HeartIcon className="w-5 h-5" />
-              )}
+              <Heart
+                size={20}
+                strokeWidth={2}
+                className={clsx({ 'fill-current text-red-500': favorited })}
+              />
               <span>{favorited ? 'Favorited' : 'Favorite'}</span>
             </button>
 
@@ -230,7 +230,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
               style={{ borderColor: 'var(--border-strong)', color: 'var(--text-secondary)' }}
               aria-label="Share tool"
             >
-              <ShareIcon className="w-5 h-5" />
+              <Share2 size={20} strokeWidth={2} />
               <span>Share</span>
             </button>
           </div>
@@ -304,30 +304,13 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                     const getStepIcon = (index: number) => {
                       switch (index) {
                         case 0:
-                          return (
-                            <svg className="w-5 h-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                            </svg>
-                          );
+                          return <FileText size={20} className="text-indigo-500" strokeWidth={2} />;
                         case 1:
-                          return (
-                            <svg className="w-5 h-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-                            </svg>
-                          );
+                          return <Sliders size={20} className="text-indigo-500" strokeWidth={2} />;
                         case 2:
-                          return (
-                            <svg className="w-5 h-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                            </svg>
-                          );
+                          return <Eye size={20} className="text-indigo-500" strokeWidth={2} />;
                         default:
-                          return (
-                            <svg className="w-5 h-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                            </svg>
-                          );
+                          return <Download size={20} className="text-indigo-500" strokeWidth={2} />;
                       }
                     };
 
@@ -455,41 +438,12 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                     Frequently Asked Questions
                   </h2>
                 </div>
-                <div
-                  className="rounded-xl border overflow-hidden divide-y"
-                  style={{ borderColor: 'var(--border-default)', '--tw-divide-opacity': '1' } as React.CSSProperties}
-                >
-                  {tool.faq.map((item, idx) => {
-                    const isExpanded = expandedFaqIndex === idx;
-                    return (
-                      <div
-                        key={idx}
-                        className="transition-colors duration-150"
-                        style={{ borderColor: 'var(--border-default)' }}
-                      >
-                        <button
-                          onClick={() => setExpandedFaqIndex(isExpanded ? null : idx)}
-                          className="w-full px-5 py-4 flex items-center justify-between text-left font-semibold text-sm hover:bg-slate-50 dark:hover:bg-slate-900/30 transition-colors cursor-pointer"
-                          style={{ color: 'var(--text-primary)' }}
-                        >
-                          <span className="pr-4">{item.question}</span>
-                          <ChevronDownIcon
-                            className={`w-5 h-5 shrink-0 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
-                            style={{ color: 'var(--text-tertiary)' }}
-                          />
-                        </button>
-                        {isExpanded && (
-                          <div
-                            className="px-5 pb-5 pt-1 text-sm leading-relaxed"
-                            style={{ color: 'var(--text-secondary)' }}
-                          >
-                            {item.answer}
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
+                <Accordion
+                  items={tool.faq.map((item) => ({
+                    title: item.question,
+                    content: item.answer,
+                  }))}
+                />
               </section>
             )}
 

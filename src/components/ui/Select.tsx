@@ -1,4 +1,4 @@
-import { SelectHTMLAttributes, forwardRef } from 'react';
+import { SelectHTMLAttributes, forwardRef, useId } from 'react';
 import { clsx } from 'clsx';
 
 export interface SelectOption {
@@ -16,7 +16,8 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   ({ className, label, options, error, helperText, requiredMark = false, id, ...props }, ref) => {
-    const selectId = id ?? `select_${Math.random().toString(36).substring(2, 9)}`;
+    const defaultId = useId();
+    const selectId = id ?? defaultId;
     const errorId = `${selectId}_error`;
     const helperId = `${selectId}_helper`;
 

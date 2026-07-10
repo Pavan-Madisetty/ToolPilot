@@ -1,34 +1,39 @@
 import { ReactNode } from 'react';
+import { getModuleColors } from '@/config/modules';
 
 interface ModuleHeaderProps {
+  moduleKey: string;
   title: string;
   description: string;
   icon: ReactNode;
-  iconColorClass: string;
-  accentBgColor: string;
   toolCount?: number;
 }
 
 export function ModuleHeader({
+  moduleKey,
   title,
   description,
   icon,
-  iconColorClass,
-  accentBgColor,
   toolCount,
 }: ModuleHeaderProps) {
+  const { accent, bg, border } = getModuleColors(moduleKey);
+
   return (
     <div
       className="p-6 md:p-8 rounded-2xl border flex flex-col md:flex-row md:items-start justify-between gap-6 mb-10 mt-4"
       style={{
         borderColor: 'var(--border-default)',
-        background: `linear-gradient(135deg, ${accentBgColor} 0%, transparent 100%)`,
+        background: `linear-gradient(135deg, ${bg} 0%, transparent 100%)`,
       }}
     >
       <div className="flex items-start gap-4">
         <div
-          className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border border-[var(--border-default)] ${iconColorClass}`}
-          style={{ background: 'var(--bg-elevated)' }}
+          className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border"
+          style={{
+            background: 'var(--bg-elevated)',
+            color: accent,
+            borderColor: border,
+          }}
           aria-hidden="true"
         >
           {icon}
@@ -47,9 +52,9 @@ export function ModuleHeader({
           <span
             className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border"
             style={{
-              background: 'rgba(79, 70, 229, 0.08)',
-              color: 'var(--text-link)',
-              borderColor: 'rgba(79, 70, 229, 0.15)',
+              background: bg,
+              color: accent,
+              borderColor: border,
             }}
           >
             {toolCount} Utilities Online
