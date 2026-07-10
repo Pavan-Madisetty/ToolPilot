@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Button, Card, Input } from '@/components/ui';
 import { Play, Pause, X, BellOff, Volume2 } from 'lucide-react';
@@ -27,17 +27,10 @@ export default function Countdown() {
   const audioContextRef = useRef<AudioContext | null>(null);
   const chimeIntervalRef = useRef<number | null>(null);
 
-  useEffect(() => {
-    return () => {
-      stopTimer();
-      stopChime();
-    };
-  }, []);
-
-  // Syntherized audio alert
+  // Synthesized audio alert
   const playChime = () => {
     try {
-      const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+      const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
       if (!AudioContextClass) return;
 
       if (!audioContextRef.current) {
@@ -85,8 +78,15 @@ export default function Countdown() {
     }
   };
 
+  const handleComplete = () => {
+    setIsActive(false);
+    setIsCompleted(true);
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    startChimeLoop();
+  };
+
   const startTimer = () => {
-    let initialSeconds = 0;
+    let initialSeconds: number;
 
     if (mode === 'duration') {
       initialSeconds = hours * 3600 + minutes * 60 + seconds;
@@ -121,13 +121,6 @@ export default function Countdown() {
     }, 1000);
   };
 
-  const handleComplete = () => {
-    setIsActive(false);
-    setIsCompleted(true);
-    if (intervalRef.current) clearInterval(intervalRef.current);
-    startChimeLoop();
-  };
-
   const togglePause = () => {
     if (isPaused) {
       // Resume
@@ -148,7 +141,7 @@ export default function Countdown() {
     }
   };
 
-  const stopTimer = () => {
+  const stopTimer = useCallback(() => {
     setIsActive(false);
     setIsPaused(false);
     setIsCompleted(false);
@@ -156,12 +149,18 @@ export default function Countdown() {
     setTotalDuration(0);
     if (intervalRef.current) clearInterval(intervalRef.current);
     stopChime();
-  };
+  }, []);
 
   const dismissAlarm = () => {
     setIsCompleted(false);
     stopChime();
   };
+
+  useEffect(() => {
+    return () => {
+      stopTimer();
+    };
+  }, [stopTimer]);
 
   const formatTime = (totalSecs: number) => {
     const h = Math.floor(totalSecs / 3600);

@@ -17,7 +17,7 @@ export default function CreditCardEMICalculator() {
     const n = months;
 
     // Monthly EMI formula: EMI = P * r * (1+r)^n / ((1+r)^n - 1)
-    let emi = 0;
+    let emi: number;
     if (r > 0) {
       emi = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
     } else {

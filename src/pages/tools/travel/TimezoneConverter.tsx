@@ -49,7 +49,7 @@ export default function TimezoneConverter() {
     const trueUtc = new Date(utcInput.getTime() - fromOffset * 60000);
 
     // 3. Format target timezone conversion
-    let targetTime = '';
+    let targetTime: string;
     try {
       targetTime = trueUtc.toLocaleString('en-US', {
         timeZone: toTz,
@@ -62,7 +62,7 @@ export default function TimezoneConverter() {
 
     // 4. Convert to other timezones for comparative preview
     const otherTimes = TIMEZONES.filter(tz => tz.value !== fromTz && tz.value !== toTz).map(tz => {
-      let formatted = '';
+      let formatted: string;
       try {
         formatted = trueUtc.toLocaleString('en-US', {
           timeZone: tz.value,

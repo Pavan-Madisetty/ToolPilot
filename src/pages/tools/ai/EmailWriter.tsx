@@ -38,8 +38,8 @@ export default function EmailWriter() {
       : '- [Insert point 1 here]\n- [Insert point 2 here]';
 
     const recName = recipient.trim();
-    let subject = '';
-    let body = '';
+    let subject: string;
+    let body: string;
 
     // Purpose-based templates
     switch (purpose) {

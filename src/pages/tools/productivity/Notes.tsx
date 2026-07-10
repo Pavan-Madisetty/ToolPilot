@@ -48,7 +48,18 @@ Date: 2026-07-10
     ];
   });
 
-  const [activeNoteId, setActiveNoteId] = useState<string>('1');
+  const [activeNoteId, setActiveNoteId] = useState<string>(() => {
+    try {
+      const saved = localStorage.getItem('toolpilot_notes');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed && parsed.length > 0) return parsed[0].id;
+      }
+    } catch (e) {
+      console.error(e);
+    }
+    return '1';
+  });
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState<'edit' | 'preview'>('edit');
 
@@ -63,13 +74,6 @@ Date: 2026-07-10
 
   const activeNote = useMemo(() => {
     return notes.find((note) => note.id === activeNoteId) || notes[0] || null;
-  }, [notes, activeNoteId]);
-
-  // Set first note as active if none is active
-  useEffect(() => {
-    if (notes.length > 0 && !activeNoteId) {
-      setActiveNoteId(notes[0].id);
-    }
   }, [notes, activeNoteId]);
 
   const handleCreateNote = () => {

@@ -34,9 +34,9 @@ export default function CoverLetter() {
     const compName = company || '[Company Name]';
 
     let greeting = `Dear Hiring Manager at ${compName},`;
-    let intro = '';
-    let body = '';
-    let closing = '';
+    let intro: string;
+    let body: string;
+    let closing: string;
 
     switch (tone) {
       case 'Casual':

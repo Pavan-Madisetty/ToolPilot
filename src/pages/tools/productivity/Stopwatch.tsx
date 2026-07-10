@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useMemo } from 'react';
+import { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Button, Card } from '@/components/ui';
 import { Play, Pause, RotateCcw, Flag } from 'lucide-react';
@@ -17,6 +17,18 @@ export default function Stopwatch() {
   const timerRef = useRef<number | null>(null);
   const startTimeRef = useRef<number>(0);
   const elapsedTimeRef = useRef<number>(0);
+  const tickRef = useRef<() => void>(() => {});
+
+  const tick = useCallback(() => {
+    const now = performance.now();
+    const elapsed = now - startTimeRef.current + elapsedTimeRef.current;
+    setTime(elapsed);
+    timerRef.current = requestAnimationFrame(tickRef.current);
+  }, []);
+
+  useEffect(() => {
+    tickRef.current = tick;
+  }, [tick]);
 
   useEffect(() => {
     return () => {
@@ -24,14 +36,7 @@ export default function Stopwatch() {
     };
   }, []);
 
-  const tick = () => {
-    const now = performance.now();
-    const elapsed = now - startTimeRef.current + elapsedTimeRef.current;
-    setTime(elapsed);
-    timerRef.current = requestAnimationFrame(tick);
-  };
-
-  const handleStartPause = () => {
+  const handleStartPause = useCallback(() => {
     if (isRunning) {
       // Pause
       if (timerRef.current) cancelAnimationFrame(timerRef.current);
@@ -43,18 +48,18 @@ export default function Stopwatch() {
       setIsRunning(true);
       timerRef.current = requestAnimationFrame(tick);
     }
-  };
+  }, [isRunning, time, tick]);
 
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     if (timerRef.current) cancelAnimationFrame(timerRef.current);
     timerRef.current = null;
     elapsedTimeRef.current = 0;
     setTime(0);
     setIsRunning(false);
     setLaps([]);
-  };
+  }, []);
 
-  const handleLap = () => {
+  const handleLap = useCallback(() => {
     const totalLaps = laps.length;
     const previousCumulative = totalLaps > 0 ? laps[0].cumulativeTime : 0;
     const currentLapTime = time - previousCumulative;
@@ -67,7 +72,7 @@ export default function Stopwatch() {
 
     // Prepend to show newest at the top
     setLaps([newLap, ...laps]);
-  };
+  }, [laps, time]);
 
   // Find min/max lap times to highlight
   const { fastestLapId, slowestLapId } = useMemo(() => {

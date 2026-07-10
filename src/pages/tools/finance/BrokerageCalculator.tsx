@@ -25,7 +25,7 @@ export default function BrokerageCalculator() {
 
     // STT (Securities Transaction Tax)
     // Delivery: 0.1% on buy & sell. Intraday: 0.025% on sell side only.
-    let stt = 0;
+    let stt: number;
     if (tradeType === 'delivery') {
       stt = 0.001 * buyTurnover + 0.001 * sellTurnover;
     } else {

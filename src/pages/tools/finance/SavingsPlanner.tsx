@@ -17,7 +17,7 @@ export default function SavingsPlanner() {
 
     // Monthly deposit required formula (ordinary annuity):
     // FV = PMT * [((1 + r)^n - 1) / r] => PMT = FV * r / [((1 + r)^n - 1)]
-    let monthlyDeposit = 0;
+    let monthlyDeposit: number;
     if (r > 0) {
       monthlyDeposit = (targetAmount * r) / (Math.pow(1 + r, totalMonths) - 1);
     } else {
@@ -34,7 +34,7 @@ export default function SavingsPlanner() {
 
     for (let yr = 1; yr <= years; yr++) {
       const months = yr * 12;
-      let balance = 0;
+      let balance: number;
       if (r > 0) {
         balance = monthlyDeposit * ((Math.pow(1 + r, months) - 1) / r);
       } else {
