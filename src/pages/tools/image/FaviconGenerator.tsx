@@ -18,8 +18,18 @@ export default function FaviconGenerator() {
     { label: 'Small Browser Tab Icon', filename: 'favicon-16x16.png', size: 16, dataUrl: null },
     { label: 'Medium Browser Tab Icon', filename: 'favicon-32x32.png', size: 32, dataUrl: null },
     { label: 'Apple Touch Icon (iOS)', filename: 'apple-touch-icon.png', size: 180, dataUrl: null },
-    { label: 'Android/Chrome Icon', filename: 'android-chrome-192x192.png', size: 192, dataUrl: null },
-    { label: 'High Resolution Icon', filename: 'android-chrome-512x512.png', size: 512, dataUrl: null },
+    {
+      label: 'Android/Chrome Icon',
+      filename: 'android-chrome-192x192.png',
+      size: 192,
+      dataUrl: null,
+    },
+    {
+      label: 'High Resolution Icon',
+      filename: 'android-chrome-512x512.png',
+      size: 512,
+      dataUrl: null,
+    },
   ]);
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
 
@@ -140,12 +150,18 @@ export default function FaviconGenerator() {
                                 src={fav.dataUrl}
                                 alt="fav"
                                 className="object-contain"
-                                style={{ width: Math.min(24, fav.size), height: Math.min(24, fav.size) }}
+                                style={{
+                                  width: Math.min(24, fav.size),
+                                  height: Math.min(24, fav.size),
+                                }}
                               />
                             )}
                           </div>
                           <div>
-                            <div className="text-xs font-bold" style={{ color: 'var(--text-primary)' }}>
+                            <div
+                              className="text-xs font-bold"
+                              style={{ color: 'var(--text-primary)' }}
+                            >
                               {fav.filename}
                             </div>
                             <div className="text-[10px] text-[var(--text-tertiary)]">

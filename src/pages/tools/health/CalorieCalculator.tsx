@@ -50,7 +50,18 @@ export default function CalorieCalculator() {
     } else {
       return 10 * weight + 6.25 * height - 5 * age - 161;
     }
-  }, [inputType, directBmr, unitSystem, gender, age, weightKg, heightCm, weightLbs, heightFeet, heightInches]);
+  }, [
+    inputType,
+    directBmr,
+    unitSystem,
+    gender,
+    age,
+    weightKg,
+    heightCm,
+    weightLbs,
+    heightFeet,
+    heightInches,
+  ]);
 
   const maintenanceCalories = useMemo(() => {
     const mult = Number(activityMultiplier) || 1.2;
@@ -62,12 +73,48 @@ export default function CalorieCalculator() {
     if (!tdee) return [];
 
     return [
-      { name: 'Mild Weight Loss', change: '-250 kcal', target: tdee - 250, desc: 'Lose ~0.25 kg (0.5 lbs) per week', color: 'var(--success)' },
-      { name: 'Weight Loss', change: '-500 kcal', target: tdee - 500, desc: 'Lose ~0.5 kg (1 lb) per week', color: 'var(--success)' },
-      { name: 'Extreme Weight Loss', change: '-1000 kcal', target: tdee - 1000, desc: 'Lose ~1 kg (2 lbs) per week', color: 'var(--danger)' },
-      { name: 'Maintenance', change: '0 kcal', target: tdee, desc: 'Keep current weight', color: 'var(--text-secondary)' },
-      { name: 'Mild Weight Gain', change: '+250 kcal', target: tdee + 250, desc: 'Gain ~0.25 kg (0.5 lbs) per week', color: 'var(--primary)' },
-      { name: 'Weight Gain', change: '+500 kcal', target: tdee + 500, desc: 'Gain ~0.5 kg (1 lb) per week', color: 'var(--primary)' },
+      {
+        name: 'Mild Weight Loss',
+        change: '-250 kcal',
+        target: tdee - 250,
+        desc: 'Lose ~0.25 kg (0.5 lbs) per week',
+        color: 'var(--success)',
+      },
+      {
+        name: 'Weight Loss',
+        change: '-500 kcal',
+        target: tdee - 500,
+        desc: 'Lose ~0.5 kg (1 lb) per week',
+        color: 'var(--success)',
+      },
+      {
+        name: 'Extreme Weight Loss',
+        change: '-1000 kcal',
+        target: tdee - 1000,
+        desc: 'Lose ~1 kg (2 lbs) per week',
+        color: 'var(--danger)',
+      },
+      {
+        name: 'Maintenance',
+        change: '0 kcal',
+        target: tdee,
+        desc: 'Keep current weight',
+        color: 'var(--text-secondary)',
+      },
+      {
+        name: 'Mild Weight Gain',
+        change: '+250 kcal',
+        target: tdee + 250,
+        desc: 'Gain ~0.25 kg (0.5 lbs) per week',
+        color: 'var(--primary)',
+      },
+      {
+        name: 'Weight Gain',
+        change: '+500 kcal',
+        target: tdee + 500,
+        desc: 'Gain ~0.5 kg (1 lb) per week',
+        color: 'var(--primary)',
+      },
     ];
   }, [maintenanceCalories]);
 
@@ -76,7 +123,10 @@ export default function CalorieCalculator() {
       <div className="tool-layout lg:grid-cols-2 gap-6">
         <div className="space-y-6">
           <Card className="space-y-6">
-            <div className="flex justify-between items-center border-b pb-4" style={{ borderColor: 'var(--border-subtle)' }}>
+            <div
+              className="flex justify-between items-center border-b pb-4"
+              style={{ borderColor: 'var(--border-subtle)' }}
+            >
               <h2 className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>
                 BMR / Metric Inputs
               </h2>
@@ -230,7 +280,10 @@ export default function CalorieCalculator() {
                 {caloriePlans.map((plan, index) => (
                   <div key={index} className="flex justify-between items-center py-2.5 text-sm">
                     <div>
-                      <span className="font-semibold block animate-fade-in" style={{ color: 'var(--text-primary)' }}>
+                      <span
+                        className="font-semibold block animate-fade-in"
+                        style={{ color: 'var(--text-primary)' }}
+                      >
                         {plan.name}
                       </span>
                       <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
@@ -238,7 +291,10 @@ export default function CalorieCalculator() {
                       </span>
                     </div>
                     <div className="text-right">
-                      <span className="text-base font-extrabold block" style={{ color: plan.target > 0 ? 'var(--text-primary)' : 'var(--danger)' }}>
+                      <span
+                        className="text-base font-extrabold block"
+                        style={{ color: plan.target > 0 ? 'var(--text-primary)' : 'var(--danger)' }}
+                      >
                         {plan.target > 0 ? `${plan.target} kcal` : 'N/A'}
                       </span>
                       <span className="text-[10px] font-medium" style={{ color: plan.color }}>

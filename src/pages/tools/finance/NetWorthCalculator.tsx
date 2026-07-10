@@ -27,7 +27,16 @@ export default function NetWorthCalculator() {
       netWorth,
       debtToAssetRatio,
     };
-  }, [cash, investments, property, otherAssets, mortgage, otherLoans, creditCards, otherLiabilities]);
+  }, [
+    cash,
+    investments,
+    property,
+    otherAssets,
+    mortgage,
+    otherLoans,
+    creditCards,
+    otherLiabilities,
+  ]);
 
   return (
     <ToolPageWrapper toolId="net-worth-calculator">
@@ -123,27 +132,24 @@ export default function NetWorthCalculator() {
               prefix="₹"
               className="text-danger font-semibold"
             />
-            <ResultBox
-              label="Net Worth"
-              value={calculations.netWorth}
-              prefix="₹"
-              highlight
-            />
+            <ResultBox label="Net Worth" value={calculations.netWorth} prefix="₹" highlight />
           </div>
 
           {/* Visualization Bar */}
           <div className="card p-6 space-y-4">
-            <h3 className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>Debt-to-Asset Analysis</h3>
-            
+            <h3 className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>
+              Debt-to-Asset Analysis
+            </h3>
+
             <div className="w-full h-4 rounded-full bg-[var(--bg-surface)] border border-[var(--border-default)] overflow-hidden flex">
               {calculations.totalAssets > 0 ? (
                 <>
-                  <div 
+                  <div
                     className="h-full bg-success transition-all duration-300"
                     style={{ width: `${Math.max(0, 100 - calculations.debtToAssetRatio)}%` }}
                     title={`Equity/Net Worth: ${(100 - calculations.debtToAssetRatio).toFixed(1)}%`}
                   />
-                  <div 
+                  <div
                     className="h-full bg-danger transition-all duration-300"
                     style={{ width: `${calculations.debtToAssetRatio}%` }}
                     title={`Liabilities: ${calculations.debtToAssetRatio.toFixed(1)}%`}
@@ -156,18 +162,25 @@ export default function NetWorthCalculator() {
 
             <div className="flex items-center justify-between text-xs text-[var(--text-secondary)]">
               <span className="flex items-center gap-1.5">
-                <span className="w-3 h-3 rounded-full bg-success block" /> 
-                Equity / Net Worth: {calculations.totalAssets > 0 ? (100 - calculations.debtToAssetRatio).toFixed(1) : 0}%
+                <span className="w-3 h-3 rounded-full bg-success block" />
+                Equity / Net Worth:{' '}
+                {calculations.totalAssets > 0
+                  ? (100 - calculations.debtToAssetRatio).toFixed(1)
+                  : 0}
+                %
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="w-3 h-3 rounded-full bg-danger block" /> 
+                <span className="w-3 h-3 rounded-full bg-danger block" />
                 Liabilities: {calculations.debtToAssetRatio.toFixed(1)}%
               </span>
             </div>
 
             <Callout tone="tip" title="Understanding Net Worth">
               <p className="text-xs text-[var(--text-secondary)]">
-                Your net worth represents your true financial value. It is calculated by subtracting everything you owe (liabilities) from everything you own (assets). A positive net worth means your assets exceed your liabilities. Ideally, you want to grow your net worth over time by increasing assets and reducing liabilities.
+                Your net worth represents your true financial value. It is calculated by subtracting
+                everything you owe (liabilities) from everything you own (assets). A positive net
+                worth means your assets exceed your liabilities. Ideally, you want to grow your net
+                worth over time by increasing assets and reducing liabilities.
               </p>
             </Callout>
           </div>

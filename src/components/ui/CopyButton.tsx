@@ -72,17 +72,9 @@ export function CopyButton({
       }}
     >
       {copied ? (
-        <Check
-          size={iconSize}
-          aria-hidden="true"
-          strokeWidth={2.5}
-        />
+        <Check size={iconSize} aria-hidden="true" strokeWidth={2.5} />
       ) : (
-        <Clipboard
-          size={iconSize}
-          aria-hidden="true"
-          strokeWidth={2}
-        />
+        <Clipboard size={iconSize} aria-hidden="true" strokeWidth={2} />
       )}
       <span>{copied ? 'Copied!' : error ? 'Failed' : label}</span>
     </button>

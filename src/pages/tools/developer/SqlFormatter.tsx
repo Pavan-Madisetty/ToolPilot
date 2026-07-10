@@ -12,32 +12,73 @@ function formatSql(sql: string, indentSize: string): string {
   if (!sql.trim()) return '';
 
   // Clean up existing whitespace first
-  let cleaned = sql
-    .replace(/\s+/g, ' ')
-    .trim();
+  let cleaned = sql.replace(/\s+/g, ' ').trim();
 
   // List of keywords to uppercase
   const keywords = [
-    'select', 'from', 'where', 'and', 'or', 'join', 'left join', 'right join', 
-    'inner join', 'outer join', 'group by', 'order by', 'having', 'limit', 
-    'insert into', 'values', 'update', 'set', 'delete from', 'on', 'as', 
-    'union', 'create table', 'alter table', 'drop table', 'index', 'in', 'into', 'is', 'null', 'not', 'like'
+    'select',
+    'from',
+    'where',
+    'and',
+    'or',
+    'join',
+    'left join',
+    'right join',
+    'inner join',
+    'outer join',
+    'group by',
+    'order by',
+    'having',
+    'limit',
+    'insert into',
+    'values',
+    'update',
+    'set',
+    'delete from',
+    'on',
+    'as',
+    'union',
+    'create table',
+    'alter table',
+    'drop table',
+    'index',
+    'in',
+    'into',
+    'is',
+    'null',
+    'not',
+    'like',
   ];
 
   // Capitalize SQL keywords
-  keywords.forEach(keyword => {
+  keywords.forEach((keyword) => {
     const regex = new RegExp(`\\b${keyword}\\b`, 'gi');
     cleaned = cleaned.replace(regex, keyword.toUpperCase());
   });
 
   // Keywords that force a line break
   const lineBreaks = [
-    'SELECT', 'FROM', 'WHERE', 'LEFT JOIN', 'RIGHT JOIN', 
-    'INNER JOIN', 'OUTER JOIN', 'JOIN', 'GROUP BY', 'ORDER BY', 'HAVING', 
-    'LIMIT', 'INSERT INTO', 'VALUES', 'UPDATE', 'SET', 'DELETE FROM', 'UNION'
+    'SELECT',
+    'FROM',
+    'WHERE',
+    'LEFT JOIN',
+    'RIGHT JOIN',
+    'INNER JOIN',
+    'OUTER JOIN',
+    'JOIN',
+    'GROUP BY',
+    'ORDER BY',
+    'HAVING',
+    'LIMIT',
+    'INSERT INTO',
+    'VALUES',
+    'UPDATE',
+    'SET',
+    'DELETE FROM',
+    'UNION',
   ];
 
-  lineBreaks.forEach(term => {
+  lineBreaks.forEach((term) => {
     const regex = new RegExp(`\\b${term}\\b`, 'g');
     cleaned = cleaned.replace(regex, `\n${term}`);
   });
@@ -47,9 +88,9 @@ function formatSql(sql: string, indentSize: string): string {
   let currentIndent = 0;
 
   return lines
-    .map(line => line.trim())
-    .filter(line => line.length > 0)
-    .map(line => {
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0)
+    .map((line) => {
       const firstWord = line.split(' ')[0];
       let indent = currentIndent;
 
@@ -104,9 +145,14 @@ export default function SqlFormatter() {
             aria-label="SQL input query"
           />
 
-          <div className="flex flex-wrap items-center justify-between gap-3 border-t pt-4" style={{ borderColor: 'var(--border-default)' }}>
+          <div
+            className="flex flex-wrap items-center justify-between gap-3 border-t pt-4"
+            style={{ borderColor: 'var(--border-default)' }}
+          >
             <div className="flex items-center gap-3">
-              <span className="text-xs" style={{ color: 'var(--text-secondary)' }}>Indent:</span>
+              <span className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+                Indent:
+              </span>
               <Select
                 options={INDENT_OPTIONS}
                 value={indent}
@@ -115,7 +161,7 @@ export default function SqlFormatter() {
                 aria-label="SQL Indentation selector"
               />
             </div>
-            
+
             <Button onClick={handleFormat} className="mt-2 sm:mt-0">
               Format SQL Query
             </Button>

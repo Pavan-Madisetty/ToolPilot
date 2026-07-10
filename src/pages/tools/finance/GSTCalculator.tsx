@@ -109,14 +109,21 @@ export default function GSTCalculator() {
         {/* Results layout */}
         <div className="space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <StatCard label="Base Amount (Net Price)" value={formatCurrency(gstCalculations.baseAmount)} />
-            <StatCard label="Total Tax (GST)" value={formatCurrency(gstCalculations.gstAmount)} highlight />
+            <StatCard
+              label="Base Amount (Net Price)"
+              value={formatCurrency(gstCalculations.baseAmount)}
+            />
+            <StatCard
+              label="Total Tax (GST)"
+              value={formatCurrency(gstCalculations.gstAmount)}
+              highlight
+            />
           </div>
 
           {/* Tax breakup breakdown box */}
           <div className="p-6 card space-y-4">
             <h3 className="text-base font-bold">Tax Breakup Details</h3>
-            
+
             {isInterstate ? (
               <div className="flex items-center justify-between text-sm py-2">
                 <span style={{ color: 'var(--text-secondary)' }}>Integrated GST (IGST)</span>
@@ -124,18 +131,28 @@ export default function GSTCalculator() {
               </div>
             ) : (
               <>
-                <div className="flex items-center justify-between text-sm py-2 border-b" style={{ borderColor: 'var(--border-subtle)' }}>
-                  <span style={{ color: 'var(--text-secondary)' }}>Central GST (CGST - {gstRate / 2}%)</span>
+                <div
+                  className="flex items-center justify-between text-sm py-2 border-b"
+                  style={{ borderColor: 'var(--border-subtle)' }}
+                >
+                  <span style={{ color: 'var(--text-secondary)' }}>
+                    Central GST (CGST - {gstRate / 2}%)
+                  </span>
                   <span className="font-semibold">{formatCurrency(gstCalculations.cgst)}</span>
                 </div>
                 <div className="flex items-center justify-between text-sm py-2">
-                  <span style={{ color: 'var(--text-secondary)' }}>State GST (SGST - {gstRate / 2}%)</span>
+                  <span style={{ color: 'var(--text-secondary)' }}>
+                    State GST (SGST - {gstRate / 2}%)
+                  </span>
                   <span className="font-semibold">{formatCurrency(gstCalculations.sgst)}</span>
                 </div>
               </>
             )}
 
-            <div className="border-t pt-4 flex items-center justify-between" style={{ borderColor: 'var(--border-default)' }}>
+            <div
+              className="border-t pt-4 flex items-center justify-between"
+              style={{ borderColor: 'var(--border-default)' }}
+            >
               <span className="font-bold text-base">Total Price (Inclusive of Tax)</span>
               <span className="text-xl font-extrabold text-primary">
                 {formatCurrency(gstCalculations.totalAmount)}

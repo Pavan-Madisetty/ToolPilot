@@ -15,10 +15,15 @@ function hexToRgb(hex: string) {
 }
 
 function rgbToHex(r: number, g: number, b: number) {
-  return '#' + [r, g, b].map(x => {
-    const hex = x.toString(16);
-    return hex.length === 1 ? '0' + hex : hex;
-  }).join('');
+  return (
+    '#' +
+    [r, g, b]
+      .map((x) => {
+        const hex = x.toString(16);
+        return hex.length === 1 ? '0' + hex : hex;
+      })
+      .join('')
+  );
 }
 
 function rgbToHsl(r: number, g: number, b: number) {
@@ -67,17 +72,17 @@ function hslToRgb(h: number, s: number, l: number) {
     const hue2rgb = (p: number, q: number, t: number) => {
       if (t < 0) t += 1;
       if (t > 1) t -= 1;
-      if (t < 1/6) return p + (q - p) * 6 * t;
-      if (t < 1/2) return q;
-      if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+      if (t < 1 / 6) return p + (q - p) * 6 * t;
+      if (t < 1 / 2) return q;
+      if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
       return p;
     };
 
     const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
     const p = 2 * l - q;
-    r = hue2rgb(p, q, h + 1/3);
+    r = hue2rgb(p, q, h + 1 / 3);
     g = hue2rgb(p, q, h);
-    b = hue2rgb(p, q, h - 1/3);
+    b = hue2rgb(p, q, h - 1 / 3);
   }
 
   return {
@@ -125,8 +130,10 @@ export default function ColorPicker() {
       <div className="tool-layout lg:grid-cols-2 gap-8">
         {/* Left Side: Color Picker / Sliders */}
         <div className="flex flex-col gap-6 p-6 card">
-          <h2 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>Color Controls</h2>
-          
+          <h2 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>
+            Color Controls
+          </h2>
+
           <div className="flex items-center gap-4">
             {/* Color preview swatch and input */}
             <div
@@ -146,7 +153,9 @@ export default function ColorPicker() {
             </div>
 
             <div className="flex-1 flex flex-col gap-1.5">
-              <label htmlFor="hex-input" className="label">HEX Input</label>
+              <label htmlFor="hex-input" className="label">
+                HEX Input
+              </label>
               <input
                 id="hex-input"
                 type="text"
@@ -162,7 +171,7 @@ export default function ColorPicker() {
           {/* RGB Sliders */}
           <div className="flex flex-col gap-4">
             <span className="label">RGB Channels</span>
-            
+
             {/* Red */}
             <div className="flex items-center gap-3">
               <span className="w-4 text-xs font-semibold text-red-500">R</span>
@@ -174,7 +183,7 @@ export default function ColorPicker() {
                 onChange={(e) => updateColorFromRgb(Number(e.target.value), rgb.g, rgb.b)}
                 className="flex-1 h-2 rounded-lg appearance-none cursor-pointer bg-slate-200 dark:bg-slate-800"
                 style={{
-                  background: `linear-gradient(to right, rgb(0, ${rgb.g}, ${rgb.b}), rgb(255, ${rgb.g}, ${rgb.b}))`
+                  background: `linear-gradient(to right, rgb(0, ${rgb.g}, ${rgb.b}), rgb(255, ${rgb.g}, ${rgb.b}))`,
                 }}
                 aria-label="Red channel slider"
               />
@@ -192,7 +201,7 @@ export default function ColorPicker() {
                 onChange={(e) => updateColorFromRgb(rgb.r, Number(e.target.value), rgb.b)}
                 className="flex-1 h-2 rounded-lg appearance-none cursor-pointer bg-slate-200 dark:bg-slate-800"
                 style={{
-                  background: `linear-gradient(to right, rgb(${rgb.r}, 0, ${rgb.b}), rgb(${rgb.r}, 255, ${rgb.b}))`
+                  background: `linear-gradient(to right, rgb(${rgb.r}, 0, ${rgb.b}), rgb(${rgb.r}, 255, ${rgb.b}))`,
                 }}
                 aria-label="Green channel slider"
               />
@@ -210,7 +219,7 @@ export default function ColorPicker() {
                 onChange={(e) => updateColorFromRgb(rgb.r, rgb.g, Number(e.target.value))}
                 className="flex-1 h-2 rounded-lg appearance-none cursor-pointer bg-slate-200 dark:bg-slate-800"
                 style={{
-                  background: `linear-gradient(to right, rgb(${rgb.r}, ${rgb.g}, 0), rgb(${rgb.r}, ${rgb.g}, 255))`
+                  background: `linear-gradient(to right, rgb(${rgb.r}, ${rgb.g}, 0), rgb(${rgb.r}, ${rgb.g}, 255))`,
                 }}
                 aria-label="Blue channel slider"
               />
@@ -219,7 +228,10 @@ export default function ColorPicker() {
           </div>
 
           {/* HSL Sliders */}
-          <div className="flex flex-col gap-4 border-t pt-4" style={{ borderColor: 'var(--border-default)' }}>
+          <div
+            className="flex flex-col gap-4 border-t pt-4"
+            style={{ borderColor: 'var(--border-default)' }}
+          >
             <span className="label">HSL Values</span>
 
             {/* Hue */}
@@ -233,7 +245,8 @@ export default function ColorPicker() {
                 onChange={(e) => updateColorFromHsl(Number(e.target.value), hsl.s, hsl.l)}
                 className="flex-1 h-2 rounded-lg appearance-none cursor-pointer bg-slate-200 dark:bg-slate-800"
                 style={{
-                  background: 'linear-gradient(to right, red, yellow, lime, cyan, blue, magenta, red)'
+                  background:
+                    'linear-gradient(to right, red, yellow, lime, cyan, blue, magenta, red)',
                 }}
                 aria-label="Hue slider"
               />
@@ -251,7 +264,7 @@ export default function ColorPicker() {
                 onChange={(e) => updateColorFromHsl(hsl.h, Number(e.target.value), hsl.l)}
                 className="flex-1 h-2 rounded-lg appearance-none cursor-pointer bg-slate-200 dark:bg-slate-800"
                 style={{
-                  background: `linear-gradient(to right, hsl(${hsl.h}, 0%, ${hsl.l}%), hsl(${hsl.h}, 100%, ${hsl.l}%))`
+                  background: `linear-gradient(to right, hsl(${hsl.h}, 0%, ${hsl.l}%), hsl(${hsl.h}, 100%, ${hsl.l}%))`,
                 }}
                 aria-label="Saturation slider"
               />
@@ -269,7 +282,7 @@ export default function ColorPicker() {
                 onChange={(e) => updateColorFromHsl(hsl.h, hsl.s, Number(e.target.value))}
                 className="flex-1 h-2 rounded-lg appearance-none cursor-pointer bg-slate-200 dark:bg-slate-800"
                 style={{
-                  background: `linear-gradient(to right, black, hsl(${hsl.h}, ${hsl.s}%, 50%), white)`
+                  background: `linear-gradient(to right, black, hsl(${hsl.h}, ${hsl.s}%, 50%), white)`,
                 }}
                 aria-label="Lightness slider"
               />
@@ -280,7 +293,9 @@ export default function ColorPicker() {
 
         {/* Right Side: Output formats / copy values */}
         <div className="flex flex-col gap-6 p-6 card">
-          <h2 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>Color Conversions</h2>
+          <h2 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>
+            Color Conversions
+          </h2>
 
           {/* HEX Result */}
           <div className="flex flex-col gap-2">
@@ -328,11 +343,18 @@ export default function ColorPicker() {
           </div>
 
           {/* CSS Rule representation */}
-          <div className="flex flex-col gap-2 border-t pt-4" style={{ borderColor: 'var(--border-default)' }}>
+          <div
+            className="flex flex-col gap-2 border-t pt-4"
+            style={{ borderColor: 'var(--border-default)' }}
+          >
             <span className="label">CSS styling snippet</span>
             <pre
               className="p-3 border rounded-lg font-mono text-xs leading-relaxed select-all"
-              style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)', color: 'var(--text-primary)' }}
+              style={{
+                background: 'var(--bg-surface)',
+                borderColor: 'var(--border-default)',
+                color: 'var(--text-primary)',
+              }}
             >
               {`background-color: ${hex.toUpperCase()};\ncolor: ${hsl.l > 55 ? '#0F172A' : '#FFFFFF'};`}
             </pre>

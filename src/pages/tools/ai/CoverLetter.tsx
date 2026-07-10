@@ -108,7 +108,10 @@ ${clientName}`;
     <ToolPageWrapper toolId="cover-letter">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Input parameters */}
-        <Card className="flex flex-col gap-6" style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}>
+        <Card
+          className="flex flex-col gap-6"
+          style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}
+        >
           <div>
             <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
               Cover Letter Parameters
@@ -160,7 +163,10 @@ ${clientName}`;
           </div>
 
           {(name || jobTitle || company || achievements || tone !== 'Professional') && (
-            <div className="flex justify-end pt-4 border-t" style={{ borderColor: 'var(--border-default)' }}>
+            <div
+              className="flex justify-end pt-4 border-t"
+              style={{ borderColor: 'var(--border-default)' }}
+            >
               <Button onClick={handleClear} variant="secondary" size="sm">
                 Reset Form
               </Button>
@@ -169,7 +175,10 @@ ${clientName}`;
         </Card>
 
         {/* Output Letter preview */}
-        <Card className="flex flex-col gap-6 justify-between" style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}>
+        <Card
+          className="flex flex-col gap-6 justify-between"
+          style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}
+        >
           <div className="flex flex-col gap-4 flex-1">
             <div>
               <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
@@ -182,7 +191,11 @@ ${clientName}`;
 
             <div
               className="p-4 rounded-lg flex-1 min-h-[350px] whitespace-pre-wrap text-sm leading-relaxed overflow-y-auto"
-              style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', color: 'var(--text-primary)' }}
+              style={{
+                background: 'var(--bg-elevated)',
+                border: '1px solid var(--border-default)',
+                color: 'var(--text-primary)',
+              }}
             >
               {name && jobTitle && company ? (
                 coverLetterText
@@ -195,7 +208,10 @@ ${clientName}`;
           </div>
 
           {name && jobTitle && company && (
-            <div className="flex justify-end pt-4 border-t" style={{ borderColor: 'var(--border-default)' }}>
+            <div
+              className="flex justify-end pt-4 border-t"
+              style={{ borderColor: 'var(--border-default)' }}
+            >
               <CopyButton text={coverLetterText} label="Copy Letter" size="md" />
             </div>
           )}

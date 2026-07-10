@@ -60,7 +60,7 @@ export function ResultBox({
           aria-hidden="true"
         />
       )}
-      
+
       <span
         className={clsx('result-label', {
           'result-label--highlight': highlight,
@@ -68,7 +68,7 @@ export function ResultBox({
       >
         {label}
       </span>
-      
+
       <span
         className={clsx('result-value flex items-baseline gap-0.5', {
           'result-value--highlight': highlight,
@@ -81,7 +81,10 @@ export function ResultBox({
         )}
         <span>{displayValue}</span>
         {suffix && (
-          <span className="text-sm font-medium text-[var(--text-secondary)] ml-0.5" aria-hidden="true">
+          <span
+            className="text-sm font-medium text-[var(--text-secondary)] ml-0.5"
+            aria-hidden="true"
+          >
             {suffix}
           </span>
         )}

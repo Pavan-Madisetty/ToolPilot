@@ -62,14 +62,19 @@ export default function StockAverageCalculator() {
       <div className="tool-layout lg:grid-cols-2 gap-6">
         {/* Left Side: Input Form */}
         <div className="space-y-6 p-6 card">
-          <h2 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>Buy Transactions</h2>
+          <h2 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>
+            Buy Transactions
+          </h2>
           <div className="space-y-4">
             {buys.map((buy, idx) => (
-              <div key={buy.id} className="flex items-end gap-3 p-3 rounded-lg border border-[var(--border-default)] bg-[var(--bg-surface)] relative">
+              <div
+                key={buy.id}
+                className="flex items-end gap-3 p-3 rounded-lg border border-[var(--border-default)] bg-[var(--bg-surface)] relative"
+              >
                 <span className="absolute top-1 left-2 text-[10px] font-semibold text-[var(--text-tertiary)]">
                   Buy #{idx + 1}
                 </span>
-                
+
                 <div className="flex-1 mt-2">
                   <Input
                     label="Quantity"
@@ -80,7 +85,7 @@ export default function StockAverageCalculator() {
                     min={1}
                   />
                 </div>
-                
+
                 <div className="flex-1 mt-2">
                   <Input
                     label="Purchase Price (₹)"
@@ -118,30 +123,27 @@ export default function StockAverageCalculator() {
         {/* Right Side: Results */}
         <div className="flex flex-col gap-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <ResultBox
-              label="Total Quantity"
-              value={results.totalQty}
-              shouldFormat={true}
-            />
+            <ResultBox label="Total Quantity" value={results.totalQty} shouldFormat={true} />
             <ResultBox
               label="Average Stock Price"
               value={results.averagePrice}
               prefix="₹"
               highlight
             />
-            <ResultBox
-              label="Total Invested"
-              value={results.totalInvested}
-              prefix="₹"
-            />
+            <ResultBox label="Total Invested" value={results.totalInvested} prefix="₹" />
           </div>
 
           {/* Allocation & Transaction Breakdown Table */}
           <div className="card p-6 overflow-x-auto">
-            <h3 className="text-sm font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Investment Allocation</h3>
+            <h3 className="text-sm font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
+              Investment Allocation
+            </h3>
             <table className="w-full text-xs text-left border-collapse">
               <thead>
-                <tr className="border-b border-[var(--border-default)]" style={{ color: 'var(--text-secondary)' }}>
+                <tr
+                  className="border-b border-[var(--border-default)]"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
                   <th className="py-2">Transaction</th>
                   <th className="py-2 text-right">Quantity</th>
                   <th className="py-2 text-right">Price</th>
@@ -154,10 +156,15 @@ export default function StockAverageCalculator() {
                   const qty = typeof buy.qty === 'number' ? buy.qty : 0;
                   const price = typeof buy.price === 'number' ? buy.price : 0;
                   const cost = qty * price;
-                  const weight = results.totalInvested > 0 ? (cost / results.totalInvested) * 100 : 0;
+                  const weight =
+                    results.totalInvested > 0 ? (cost / results.totalInvested) * 100 : 0;
 
                   return (
-                    <tr key={buy.id} className="border-b border-[var(--border-default)]" style={{ color: 'var(--text-secondary)' }}>
+                    <tr
+                      key={buy.id}
+                      className="border-b border-[var(--border-default)]"
+                      style={{ color: 'var(--text-secondary)' }}
+                    >
                       <td className="py-2 font-medium">Buy #{idx + 1}</td>
                       <td className="py-2 text-right">{qty.toLocaleString('en-IN')}</td>
                       <td className="py-2 text-right">₹{price.toLocaleString('en-IN')}</td>

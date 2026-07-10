@@ -1,5 +1,13 @@
 import { useState, useMemo } from 'react';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider } from '@/components/ui';
@@ -31,7 +39,9 @@ export default function LoanComparison() {
     const monthsA = tA * 12;
     let emiA: number;
     if (monthlyRateA > 0) {
-      emiA = (pA * monthlyRateA * Math.pow(1 + monthlyRateA, monthsA)) / (Math.pow(1 + monthlyRateA, monthsA) - 1);
+      emiA =
+        (pA * monthlyRateA * Math.pow(1 + monthlyRateA, monthsA)) /
+        (Math.pow(1 + monthlyRateA, monthsA) - 1);
     } else {
       emiA = pA / monthsA;
     }
@@ -43,7 +53,9 @@ export default function LoanComparison() {
     const monthsB = tB * 12;
     let emiB: number;
     if (monthlyRateB > 0) {
-      emiB = (pB * monthlyRateB * Math.pow(1 + monthlyRateB, monthsB)) / (Math.pow(1 + monthlyRateB, monthsB) - 1);
+      emiB =
+        (pB * monthlyRateB * Math.pow(1 + monthlyRateB, monthsB)) /
+        (Math.pow(1 + monthlyRateB, monthsB) - 1);
     } else {
       emiB = pB / monthsB;
     }
@@ -122,14 +134,23 @@ export default function LoanComparison() {
   return (
     <ToolPageWrapper toolId="loan-comparison">
       <div className="tool-layout lg:grid-cols-2 gap-8">
-        
         {/* Left Side: Inputs for both Loan A and Loan B */}
         <div className="space-y-8">
           {/* Loan A card */}
           <div className="p-6 card space-y-6">
-            <div className="flex items-center justify-between border-b pb-3" style={{ borderColor: 'var(--border-default)' }}>
-              <h3 className="font-bold text-sm uppercase tracking-wider text-[var(--primary)]">Loan Option A</h3>
-              <span className="text-xs font-semibold px-2 py-0.5 rounded" style={{ background: 'var(--bg-surface)', color: 'var(--primary)' }}>Option A</span>
+            <div
+              className="flex items-center justify-between border-b pb-3"
+              style={{ borderColor: 'var(--border-default)' }}
+            >
+              <h3 className="font-bold text-sm uppercase tracking-wider text-[var(--primary)]">
+                Loan Option A
+              </h3>
+              <span
+                className="text-xs font-semibold px-2 py-0.5 rounded"
+                style={{ background: 'var(--bg-surface)', color: 'var(--primary)' }}
+              >
+                Option A
+              </span>
             </div>
             <Slider
               label="Loan Amount A (₹)"
@@ -161,9 +182,19 @@ export default function LoanComparison() {
 
           {/* Loan B card */}
           <div className="p-6 card space-y-6">
-            <div className="flex items-center justify-between border-b pb-3" style={{ borderColor: 'var(--border-default)' }}>
-              <h3 className="font-bold text-sm uppercase tracking-wider text-[var(--danger)]">Loan Option B</h3>
-              <span className="text-xs font-semibold px-2 py-0.5 rounded" style={{ background: 'var(--bg-surface)', color: 'var(--danger)' }}>Option B</span>
+            <div
+              className="flex items-center justify-between border-b pb-3"
+              style={{ borderColor: 'var(--border-default)' }}
+            >
+              <h3 className="font-bold text-sm uppercase tracking-wider text-[var(--danger)]">
+                Loan Option B
+              </h3>
+              <span
+                className="text-xs font-semibold px-2 py-0.5 rounded"
+                style={{ background: 'var(--bg-surface)', color: 'var(--danger)' }}
+              >
+                Option B
+              </span>
             </div>
             <Slider
               label="Loan Amount B (₹)"
@@ -198,54 +229,87 @@ export default function LoanComparison() {
         <div className="space-y-6 flex flex-col">
           {/* Side-by-Side Comparison grid */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="p-4 rounded-xl border text-center" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}>
+            <div
+              className="p-4 rounded-xl border text-center"
+              style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}
+            >
               <span className="text-xs text-[var(--text-secondary)]">Monthly EMI (A)</span>
-              <div className="text-xl font-bold text-[var(--primary)] mt-1">{formatCurrency(results.emiA)}</div>
+              <div className="text-xl font-bold text-[var(--primary)] mt-1">
+                {formatCurrency(results.emiA)}
+              </div>
             </div>
-            <div className="p-4 rounded-xl border text-center" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}>
+            <div
+              className="p-4 rounded-xl border text-center"
+              style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}
+            >
               <span className="text-xs text-[var(--text-secondary)]">Monthly EMI (B)</span>
-              <div className="text-xl font-bold text-[var(--danger)] mt-1">{formatCurrency(results.emiB)}</div>
+              <div className="text-xl font-bold text-[var(--danger)] mt-1">
+                {formatCurrency(results.emiB)}
+              </div>
             </div>
-            <div className="p-4 rounded-xl border text-center" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}>
+            <div
+              className="p-4 rounded-xl border text-center"
+              style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}
+            >
               <span className="text-xs text-[var(--text-secondary)]">Total Interest (A)</span>
-              <div className="text-lg font-bold text-[var(--primary)] mt-1">{formatCurrency(results.totalInterestA)}</div>
+              <div className="text-lg font-bold text-[var(--primary)] mt-1">
+                {formatCurrency(results.totalInterestA)}
+              </div>
             </div>
-            <div className="p-4 rounded-xl border text-center" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}>
+            <div
+              className="p-4 rounded-xl border text-center"
+              style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}
+            >
               <span className="text-xs text-[var(--text-secondary)]">Total Interest (B)</span>
-              <div className="text-lg font-bold text-[var(--danger)] mt-1">{formatCurrency(results.totalInterestB)}</div>
+              <div className="text-lg font-bold text-[var(--danger)] mt-1">
+                {formatCurrency(results.totalInterestB)}
+              </div>
             </div>
           </div>
 
           {/* Difference / Savings Box */}
-          <div className="p-5 rounded-2xl border text-center" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}>
-            <span className="text-xs uppercase font-bold tracking-wider text-[var(--text-tertiary)]">Difference (Option B - Option A)</span>
+          <div
+            className="p-5 rounded-2xl border text-center"
+            style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}
+          >
+            <span className="text-xs uppercase font-bold tracking-wider text-[var(--text-tertiary)]">
+              Difference (Option B - Option A)
+            </span>
             <div className="grid grid-cols-3 gap-2 mt-4">
               <div>
                 <div className="text-xs text-[var(--text-secondary)]">EMI Difference</div>
-                <div className={`text-sm font-bold mt-1 ${results.emiDiff >= 0 ? 'text-[var(--success)]' : 'text-[var(--danger)]'}`}>
-                  {results.emiDiff >= 0 ? '+' : ''}{formatCurrency(results.emiDiff)}
+                <div
+                  className={`text-sm font-bold mt-1 ${results.emiDiff >= 0 ? 'text-[var(--success)]' : 'text-[var(--danger)]'}`}
+                >
+                  {results.emiDiff >= 0 ? '+' : ''}
+                  {formatCurrency(results.emiDiff)}
                 </div>
               </div>
               <div>
                 <div className="text-xs text-[var(--text-secondary)]">Interest Diff.</div>
-                <div className={`text-sm font-bold mt-1 ${results.interestDiff >= 0 ? 'text-[var(--success)]' : 'text-[var(--danger)]'}`}>
-                  {results.interestDiff >= 0 ? '+' : ''}{formatCurrency(results.interestDiff)}
+                <div
+                  className={`text-sm font-bold mt-1 ${results.interestDiff >= 0 ? 'text-[var(--success)]' : 'text-[var(--danger)]'}`}
+                >
+                  {results.interestDiff >= 0 ? '+' : ''}
+                  {formatCurrency(results.interestDiff)}
                 </div>
               </div>
               <div>
                 <div className="text-xs text-[var(--text-secondary)]">Total Cost Diff.</div>
-                <div className={`text-sm font-bold mt-1 ${results.totalDiff >= 0 ? 'text-[var(--success)]' : 'text-[var(--danger)]'}`}>
-                  {results.totalDiff >= 0 ? '+' : ''}{formatCurrency(results.totalDiff)}
+                <div
+                  className={`text-sm font-bold mt-1 ${results.totalDiff >= 0 ? 'text-[var(--success)]' : 'text-[var(--danger)]'}`}
+                >
+                  {results.totalDiff >= 0 ? '+' : ''}
+                  {formatCurrency(results.totalDiff)}
                 </div>
               </div>
             </div>
             <p className="text-[11px] text-[var(--text-tertiary)] mt-4">
-              {results.totalDiff > 0 
+              {results.totalDiff > 0
                 ? `Option A saves you a total of ${formatCurrency(results.totalDiff)} compared to Option B.`
                 : results.totalDiff < 0
-                ? `Option B saves you a total of ${formatCurrency(Math.abs(results.totalDiff))} compared to Option A.`
-                : 'Both options have identical total repayment costs.'
-              }
+                  ? `Option B saves you a total of ${formatCurrency(Math.abs(results.totalDiff))} compared to Option A.`
+                  : 'Both options have identical total repayment costs.'}
             </p>
           </div>
 
@@ -254,7 +318,6 @@ export default function LoanComparison() {
             <Bar data={chartData} options={chartOptions} />
           </div>
         </div>
-
       </div>
     </ToolPageWrapper>
   );

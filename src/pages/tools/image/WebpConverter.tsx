@@ -122,18 +122,17 @@ export default function WebpConverter() {
                   suffix="%"
                 />
 
-                <Button
-                  onClick={handleConvert}
-                  disabled={isConverting}
-                  className="w-full mt-2"
-                >
+                <Button onClick={handleConvert} disabled={isConverting} className="w-full mt-2">
                   {isConverting ? 'Converting...' : 'Convert to WebP'}
                 </Button>
               </div>
 
               {/* Output Download Link */}
               {webpUrl && (
-                <div className="pt-4 border-t flex flex-col gap-3" style={{ borderColor: 'var(--border-default)' }}>
+                <div
+                  className="pt-4 border-t flex flex-col gap-3"
+                  style={{ borderColor: 'var(--border-default)' }}
+                >
                   <div className="text-xs font-semibold text-[var(--success)] flex items-center justify-center gap-1.5">
                     <CheckCircle size={14} />
                     <span>Converted to WebP successfully!</span>

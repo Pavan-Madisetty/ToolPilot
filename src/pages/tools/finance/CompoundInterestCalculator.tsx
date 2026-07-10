@@ -88,13 +88,21 @@ export default function CompoundInterestCalculator() {
         <div className="space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <ResultBox align="left" label="Invested Principal" value={formatCurrency(principal)} />
-            <ResultBox align="left" label="Interest Earned" value={formatCurrency(calculations.interestEarned)} highlight />
+            <ResultBox
+              align="left"
+              label="Interest Earned"
+              value={formatCurrency(calculations.interestEarned)}
+              highlight
+            />
           </div>
 
           <div className="p-6 card space-y-4">
             <h3 className="text-base font-bold">Investment Growth Breakdown</h3>
 
-            <div className="flex items-center justify-between text-sm py-2 border-b" style={{ borderColor: 'var(--border-subtle)' }}>
+            <div
+              className="flex items-center justify-between text-sm py-2 border-b"
+              style={{ borderColor: 'var(--border-subtle)' }}
+            >
               <span style={{ color: 'var(--text-secondary)' }}>Effective Annual Rate (EAR)</span>
               <span className="font-semibold">{calculations.ear.toFixed(2)}%</span>
             </div>

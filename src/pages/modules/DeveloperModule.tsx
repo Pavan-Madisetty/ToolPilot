@@ -16,11 +16,25 @@ const ENCODER_TOOLS = devTools.filter((t) =>
 );
 
 const CRYPTO_TOOLS = devTools.filter((t) =>
-  ['hash-generator', 'password-generator', 'uuid-generator', 'jwt-decoder', 'regex-tester'].includes(t.id)
+  [
+    'hash-generator',
+    'password-generator',
+    'uuid-generator',
+    'jwt-decoder',
+    'regex-tester',
+  ].includes(t.id)
 );
 
 const UTILITY_TOOLS = devTools.filter((t) =>
-  ['timestamp-converter', 'color-picker', 'diff-checker', 'lorem-ipsum', 'gradient-generator', 'cron-builder', 'markdown-preview'].includes(t.id)
+  [
+    'timestamp-converter',
+    'color-picker',
+    'diff-checker',
+    'lorem-ipsum',
+    'gradient-generator',
+    'cron-builder',
+    'markdown-preview',
+  ].includes(t.id)
 );
 
 export default function DeveloperModule() {
@@ -44,7 +58,11 @@ export default function DeveloperModule() {
         {/* Formatters */}
         {FORMATTER_TOOLS.length > 0 && (
           <section aria-labelledby="formatters-heading">
-            <h2 id="formatters-heading" className="text-xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
+            <h2
+              id="formatters-heading"
+              className="text-xl font-bold mb-6"
+              style={{ color: 'var(--text-primary)' }}
+            >
               Code Formatters & Beautifiers
             </h2>
             <div className="tools-grid">
@@ -58,7 +76,11 @@ export default function DeveloperModule() {
         {/* Encoders */}
         {ENCODER_TOOLS.length > 0 && (
           <section aria-labelledby="encoders-heading">
-            <h2 id="encoders-heading" className="text-xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
+            <h2
+              id="encoders-heading"
+              className="text-xl font-bold mb-6"
+              style={{ color: 'var(--text-primary)' }}
+            >
               Encoders, Decoders & Parsers
             </h2>
             <div className="tools-grid">
@@ -72,7 +94,11 @@ export default function DeveloperModule() {
         {/* Cryptography */}
         {CRYPTO_TOOLS.length > 0 && (
           <section aria-labelledby="crypto-heading">
-            <h2 id="crypto-heading" className="text-xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
+            <h2
+              id="crypto-heading"
+              className="text-xl font-bold mb-6"
+              style={{ color: 'var(--text-primary)' }}
+            >
               Cryptography & Security Utilities
             </h2>
             <div className="tools-grid">
@@ -86,7 +112,11 @@ export default function DeveloperModule() {
         {/* General Utilities */}
         {UTILITY_TOOLS.length > 0 && (
           <section aria-labelledby="utilities-heading">
-            <h2 id="utilities-heading" className="text-xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
+            <h2
+              id="utilities-heading"
+              className="text-xl font-bold mb-6"
+              style={{ color: 'var(--text-primary)' }}
+            >
               General Developer Utilities
             </h2>
             <div className="tools-grid">

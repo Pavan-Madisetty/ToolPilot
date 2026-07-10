@@ -3,15 +3,97 @@ import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Button, Select, Switch, CopyButton, Textarea } from '@/components/ui';
 
 const LOREM_WORDS = [
-  'lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing', 'elit', 'proin', 'in', 
-  'lorem', 'hendrerit', 'placerat', 'nunc', 'at', 'elementum', 'nisl', 'integer', 'sodales', 'magna', 
-  'egestas', 'laoreet', 'consectetur', 'tellus', 'mi', 'tristique', 'urna', 'id', 'convallis', 'sem', 
-  'metus', 'nec', 'sem', 'etiam', 'ut', 'tincidunt', 'turpis', 'ac', 'lacinia', 'est', 'proin', 
-  'sit', 'amet', 'facilisis', 'massa', 'proin', 'quis', 'varius', 'tellus', 'sed', 'interdum', 
-  'sapien', 'ac', 'libero', 'pellentesque', 'finibus', 'maecenas', 'tristique', 'mi', 'ut', 'porta', 
-  'fermentum', 'ipsum', 'sapien', 'bibendum', 'magna', 'ac', 'convallis', 'velit', 'augue', 'ac', 
-  'nisl', 'vivamus', 'congue', 'eget', 'arcu', 'id', 'varius', 'praesent', 'aliquet', 'risus', 
-  'et', 'ex', 'viverra', 'aliquet', 'mauris', 'efficitur', 'tristique', 'diam', 'vitae', 'convallis'
+  'lorem',
+  'ipsum',
+  'dolor',
+  'sit',
+  'amet',
+  'consectetur',
+  'adipiscing',
+  'elit',
+  'proin',
+  'in',
+  'lorem',
+  'hendrerit',
+  'placerat',
+  'nunc',
+  'at',
+  'elementum',
+  'nisl',
+  'integer',
+  'sodales',
+  'magna',
+  'egestas',
+  'laoreet',
+  'consectetur',
+  'tellus',
+  'mi',
+  'tristique',
+  'urna',
+  'id',
+  'convallis',
+  'sem',
+  'metus',
+  'nec',
+  'sem',
+  'etiam',
+  'ut',
+  'tincidunt',
+  'turpis',
+  'ac',
+  'lacinia',
+  'est',
+  'proin',
+  'sit',
+  'amet',
+  'facilisis',
+  'massa',
+  'proin',
+  'quis',
+  'varius',
+  'tellus',
+  'sed',
+  'interdum',
+  'sapien',
+  'ac',
+  'libero',
+  'pellentesque',
+  'finibus',
+  'maecenas',
+  'tristique',
+  'mi',
+  'ut',
+  'porta',
+  'fermentum',
+  'ipsum',
+  'sapien',
+  'bibendum',
+  'magna',
+  'ac',
+  'convallis',
+  'velit',
+  'augue',
+  'ac',
+  'nisl',
+  'vivamus',
+  'congue',
+  'eget',
+  'arcu',
+  'id',
+  'varius',
+  'praesent',
+  'aliquet',
+  'risus',
+  'et',
+  'ex',
+  'viverra',
+  'aliquet',
+  'mauris',
+  'efficitur',
+  'tristique',
+  'diam',
+  'vitae',
+  'convallis',
 ];
 
 const LOREM_SENTENCES = [
@@ -32,7 +114,7 @@ const LOREM_SENTENCES = [
   'Sed at sapien quis massa sodales elementum.',
   'Nulla sit amet est tempor, elementum velit vitae, consequat sem.',
   'Duis lobortis sodales magna vel luctus.',
-  'Curabitur a odio molestie, efficitur sapien sed, auctor ligula.'
+  'Curabitur a odio molestie, efficitur sapien sed, auctor ligula.',
 ];
 
 const UNIT_OPTIONS = [
@@ -46,12 +128,12 @@ function generateWords(count: number, startWithLorem: boolean): string {
   if (startWithLorem && count > 0) {
     result.push('Lorem', 'ipsum', 'dolor', 'sit', 'amet');
   }
-  
+
   while (result.length < count) {
     const idx = Math.floor(Math.random() * LOREM_WORDS.length);
     result.push(LOREM_WORDS[idx]);
   }
-  
+
   // Make sure output count is exact and format nicely
   const joined = result.slice(0, count).join(' ');
   return joined.charAt(0).toUpperCase() + joined.slice(1) + '.';
@@ -62,14 +144,14 @@ function generateSentences(count: number, startWithLorem: boolean): string {
   if (startWithLorem && count > 0) {
     result.push(LOREM_SENTENCES[0]);
   }
-  
+
   while (result.length < count) {
     const idx = Math.floor(Math.random() * LOREM_SENTENCES.length);
     if (!result.includes(LOREM_SENTENCES[idx]) || result.length > 10) {
       result.push(LOREM_SENTENCES[idx]);
     }
   }
-  
+
   return result.slice(0, count).join(' ');
 }
 
@@ -111,11 +193,15 @@ export default function LoremIpsum() {
       <div className="tool-layout lg:grid-cols-[300px_1fr] gap-8">
         {/* Controls Side Panel */}
         <div className="flex flex-col gap-6 p-6 card h-fit">
-          <h3 className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>Generator Settings</h3>
+          <h3 className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>
+            Generator Settings
+          </h3>
 
           {/* Number Count Input */}
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="count-input" className="label">Amount</label>
+            <label htmlFor="count-input" className="label">
+              Amount
+            </label>
             <input
               id="count-input"
               type="number"

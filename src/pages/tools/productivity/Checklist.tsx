@@ -56,11 +56,7 @@ export default function Checklist() {
   };
 
   const handleToggleCheck = (id: string) => {
-    setItems(
-      items.map((item) =>
-        item.id === id ? { ...item, checked: !item.checked } : item
-      )
-    );
+    setItems(items.map((item) => (item.id === id ? { ...item, checked: !item.checked } : item)));
   };
 
   const handleDeleteItem = (id: string) => {
@@ -102,7 +98,10 @@ export default function Checklist() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
         {/* Bulk Add Tool (Left Column) */}
         <div className="lg:col-span-1 flex flex-col gap-6">
-          <Card className="flex flex-col gap-6" style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}>
+          <Card
+            className="flex flex-col gap-6"
+            style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}
+          >
             <div>
               <h3 className="text-lg font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>
                 Bulk Addition
@@ -136,8 +135,14 @@ export default function Checklist() {
           </Card>
 
           {/* Quick Stats / Summary Card */}
-          <Card className="flex flex-col gap-4" style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}>
-            <h4 className="text-sm font-bold uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>
+          <Card
+            className="flex flex-col gap-4"
+            style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}
+          >
+            <h4
+              className="text-sm font-bold uppercase tracking-wider"
+              style={{ color: 'var(--text-tertiary)' }}
+            >
               Checklist Progress
             </h4>
             <div className="flex justify-between items-baseline">
@@ -148,8 +153,11 @@ export default function Checklist() {
                 {completedCount} of {totalCount} completed
               </span>
             </div>
-            
-            <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2.5 overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
+
+            <div
+              className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2.5 overflow-hidden"
+              style={{ background: 'var(--bg-elevated)' }}
+            >
               <div
                 className="h-full transition-all duration-300 ease-out"
                 style={{
@@ -162,7 +170,10 @@ export default function Checklist() {
         </div>
 
         {/* Main Checklist Card (Right Columns) */}
-        <Card className="lg:col-span-2 flex flex-col gap-6" style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}>
+        <Card
+          className="lg:col-span-2 flex flex-col gap-6"
+          style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}
+        >
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
               <h3 className="text-lg font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>
@@ -174,11 +185,24 @@ export default function Checklist() {
             </div>
 
             <div className="flex gap-2">
-              <Button onClick={handleUncheckAll} variant="secondary" size="xs" disabled={totalCount === 0} className="flex items-center gap-1">
+              <Button
+                onClick={handleUncheckAll}
+                variant="secondary"
+                size="xs"
+                disabled={totalCount === 0}
+                className="flex items-center gap-1"
+              >
                 <RotateCcw size={12} />
                 <span>Reset Checks</span>
               </Button>
-              <Button onClick={handleClearAll} variant="secondary" size="xs" disabled={totalCount === 0} className="flex items-center gap-1" style={{ color: 'var(--danger)', borderColor: 'var(--danger)' }}>
+              <Button
+                onClick={handleClearAll}
+                variant="secondary"
+                size="xs"
+                disabled={totalCount === 0}
+                className="flex items-center gap-1"
+                style={{ color: 'var(--danger)', borderColor: 'var(--danger)' }}
+              >
                 <Trash2 size={12} />
                 <span>Clear All</span>
               </Button>
@@ -229,14 +253,19 @@ export default function Checklist() {
                       onClick={() => handleToggleCheck(item.id)}
                       className="flex items-center gap-3 text-left flex-1"
                     >
-                      <span className="shrink-0" style={{ color: item.checked ? 'var(--success)' : 'var(--text-secondary)' }}>
+                      <span
+                        className="shrink-0"
+                        style={{ color: item.checked ? 'var(--success)' : 'var(--text-secondary)' }}
+                      >
                         {item.checked ? <CheckSquare size={20} /> : <Square size={20} />}
                       </span>
                       <span
                         className={`text-sm break-all font-medium transition-all ${
                           item.checked ? 'line-through' : ''
                         }`}
-                        style={{ color: item.checked ? 'var(--text-tertiary)' : 'var(--text-primary)' }}
+                        style={{
+                          color: item.checked ? 'var(--text-tertiary)' : 'var(--text-primary)',
+                        }}
                       >
                         {item.text}
                       </span>
@@ -258,7 +287,9 @@ export default function Checklist() {
                 className="h-full min-h-[250px] flex flex-col items-center justify-center text-center p-8 border border-dashed rounded-lg"
                 style={{ borderColor: 'var(--border-default)' }}
               >
-                <span className="text-3xl mb-2" aria-hidden="true">🎉</span>
+                <span className="text-3xl mb-2" aria-hidden="true">
+                  🎉
+                </span>
                 <h4 className="font-semibold text-sm mb-1" style={{ color: 'var(--text-primary)' }}>
                   All Caught Up!
                 </h4>

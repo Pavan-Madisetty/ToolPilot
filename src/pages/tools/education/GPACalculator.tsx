@@ -46,8 +46,8 @@ export default function GPACalculator() {
 
   const handleScaleChange = (newScale: '4' | '10') => {
     setScale(newScale);
-    setCourses(prev =>
-      prev.map(c => ({
+    setCourses((prev) =>
+      prev.map((c) => ({
         ...c,
         grade: newScale === '4' ? 'A' : 'O',
       }))
@@ -56,12 +56,12 @@ export default function GPACalculator() {
 
   const currentGradeOptions = useMemo(() => {
     const list = scale === '4' ? SCALE_4_GRADES : SCALE_10_GRADES;
-    return list.map(g => ({ value: g.value, label: g.label }));
+    return list.map((g) => ({ value: g.value, label: g.label }));
   }, [scale]);
 
   const addCourse = () => {
     const defaultGrade = scale === '4' ? 'A' : 'O';
-    setCourses(prev => [
+    setCourses((prev) => [
       ...prev,
       {
         id: Math.random().toString(36).substr(2, 9),
@@ -77,12 +77,12 @@ export default function GPACalculator() {
       setCourses([{ id: '1', name: 'Course 1', credits: 3, grade: scale === '4' ? 'A' : 'O' }]);
       return;
     }
-    setCourses(prev => prev.filter(c => c.id !== id));
+    setCourses((prev) => prev.filter((c) => c.id !== id));
   };
 
   const updateCourse = (id: string, field: keyof Course, value: string | number) => {
-    setCourses(prev =>
-      prev.map(c => {
+    setCourses((prev) =>
+      prev.map((c) => {
         if (c.id === id) {
           return { ...c, [field]: value };
         }
@@ -92,9 +92,7 @@ export default function GPACalculator() {
   };
 
   const resetAll = () => {
-    setCourses([
-      { id: '1', name: 'Course 1', credits: 3, grade: scale === '4' ? 'A' : 'O' },
-    ]);
+    setCourses([{ id: '1', name: 'Course 1', credits: 3, grade: scale === '4' ? 'A' : 'O' }]);
   };
 
   const results = useMemo(() => {
@@ -102,8 +100,8 @@ export default function GPACalculator() {
     let totalCredits = 0;
     let totalPoints = 0;
 
-    courses.forEach(c => {
-      const match = gradeList.find(g => g.value === c.grade);
+    courses.forEach((c) => {
+      const match = gradeList.find((g) => g.value === c.grade);
       const points = match ? match.points : 0;
       const credits = Number(c.credits) || 0;
       totalCredits += credits;
@@ -148,10 +146,14 @@ export default function GPACalculator() {
 
             <div className="space-y-4">
               {courses.map((course, idx) => (
-                <div key={course.id} className="grid grid-cols-12 gap-3 items-end border-b pb-4 last:border-b-0 last:pb-0" style={{ borderColor: 'var(--border-subtle)' }}>
+                <div
+                  key={course.id}
+                  className="grid grid-cols-12 gap-3 items-end border-b pb-4 last:border-b-0 last:pb-0"
+                  style={{ borderColor: 'var(--border-subtle)' }}
+                >
                   <div className="col-span-5">
                     <Input
-                      label={idx === 0 ? "Course Name" : undefined}
+                      label={idx === 0 ? 'Course Name' : undefined}
                       placeholder="e.g. Mathematics"
                       value={course.name}
                       onChange={(e) => updateCourse(course.id, 'name', e.target.value)}
@@ -159,7 +161,7 @@ export default function GPACalculator() {
                   </div>
                   <div className="col-span-3">
                     <Input
-                      label={idx === 0 ? "Credits" : undefined}
+                      label={idx === 0 ? 'Credits' : undefined}
                       type="number"
                       min="0.5"
                       step="0.5"
@@ -170,7 +172,7 @@ export default function GPACalculator() {
                   </div>
                   <div className="col-span-3">
                     <Select
-                      label={idx === 0 ? "Grade" : undefined}
+                      label={idx === 0 ? 'Grade' : undefined}
                       options={currentGradeOptions}
                       value={course.grade}
                       onChange={(e) => updateCourse(course.id, 'grade', e.target.value)}
@@ -215,20 +217,29 @@ export default function GPACalculator() {
                 shouldFormat={false}
                 suffix={`/ \${scale}.0`}
               />
-              <ResultBox
-                label="Total Credits"
-                value={results.totalCredits}
-                shouldFormat={true}
-              />
+              <ResultBox label="Total Credits" value={results.totalCredits} shouldFormat={true} />
             </div>
-            <div className="p-4 rounded-xl space-y-3" style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-default)' }}>
+            <div
+              className="p-4 rounded-xl space-y-3"
+              style={{
+                backgroundColor: 'var(--bg-elevated)',
+                border: '1px solid var(--border-default)',
+              }}
+            >
               <div className="flex justify-between text-sm">
                 <span style={{ color: 'var(--text-secondary)' }}>Total Grade Points</span>
-                <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>{results.totalPoints.toFixed(2)}</span>
+                <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>
+                  {results.totalPoints.toFixed(2)}
+                </span>
               </div>
-              <div className="flex justify-between text-sm border-t pt-2" style={{ borderColor: 'var(--border-subtle)' }}>
+              <div
+                className="flex justify-between text-sm border-t pt-2"
+                style={{ borderColor: 'var(--border-subtle)' }}
+              >
                 <span style={{ color: 'var(--text-secondary)' }}>Grading System</span>
-                <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>{scale === '4' ? '4.0 US/International Scale' : '10.0 Indian/University Scale'}</span>
+                <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>
+                  {scale === '4' ? '4.0 US/International Scale' : '10.0 Indian/University Scale'}
+                </span>
               </div>
             </div>
           </Card>

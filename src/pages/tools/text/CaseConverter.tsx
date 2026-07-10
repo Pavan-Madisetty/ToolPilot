@@ -14,15 +14,11 @@ export default function CaseConverter() {
   };
 
   const toSnakeCase = (str: string) => {
-    return str
-      .replace(/\s+/g, '_')
-      .toLowerCase();
+    return str.replace(/\s+/g, '_').toLowerCase();
   };
 
   const toKebabCase = (str: string) => {
-    return str
-      .replace(/\s+/g, '-')
-      .toLowerCase();
+    return str.replace(/\s+/g, '-').toLowerCase();
   };
 
   const handleConvert = (mode: 'upper' | 'lower' | 'camel' | 'snake' | 'kebab') => {
@@ -49,7 +45,9 @@ export default function CaseConverter() {
             <div className="flex items-center justify-between w-full">
               <span>Input String</span>
               {text && (
-                <Button onClick={() => setText('')} variant="ghost" size="xs">Clear</Button>
+                <Button onClick={() => setText('')} variant="ghost" size="xs">
+                  Clear
+                </Button>
               )}
             </div>
           }
@@ -60,12 +58,25 @@ export default function CaseConverter() {
           aria-label="Input case converter text"
         />
 
-        <div className="flex flex-wrap gap-2 pt-4 border-t" style={{ borderColor: 'var(--border-default)' }}>
-          <Button onClick={() => handleConvert('upper')} size="sm">UPPERCASE</Button>
-          <Button onClick={() => handleConvert('lower')} size="sm" variant="secondary">lowercase</Button>
-          <Button onClick={() => handleConvert('camel')} size="sm" variant="secondary">camelCase</Button>
-          <Button onClick={() => handleConvert('snake')} size="sm" variant="secondary">snake_case</Button>
-          <Button onClick={() => handleConvert('kebab')} size="sm" variant="secondary">kebab-case</Button>
+        <div
+          className="flex flex-wrap gap-2 pt-4 border-t"
+          style={{ borderColor: 'var(--border-default)' }}
+        >
+          <Button onClick={() => handleConvert('upper')} size="sm">
+            UPPERCASE
+          </Button>
+          <Button onClick={() => handleConvert('lower')} size="sm" variant="secondary">
+            lowercase
+          </Button>
+          <Button onClick={() => handleConvert('camel')} size="sm" variant="secondary">
+            camelCase
+          </Button>
+          <Button onClick={() => handleConvert('snake')} size="sm" variant="secondary">
+            snake_case
+          </Button>
+          <Button onClick={() => handleConvert('kebab')} size="sm" variant="secondary">
+            kebab-case
+          </Button>
           {text && <CopyButton text={text} />}
         </div>
       </div>

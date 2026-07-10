@@ -39,7 +39,9 @@ export function Header() {
   /* ── lock body scroll while drawer is open ──────────────── */
   useEffect(() => {
     document.body.style.overflow = isDrawerOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [isDrawerOpen]);
 
   /* ── close drawer on outside click or Escape ────────────── */
@@ -82,7 +84,6 @@ export function Header() {
         }}
       >
         <div className="container-app h-16 flex items-center justify-between">
-          
           {/* LEFT ZONE: Logo */}
           <div className="flex items-center gap-8 h-full shrink-0">
             <Link
@@ -115,10 +116,10 @@ export function Header() {
               onBlur={() => setIsSearchFocused(false)}
               aria-label="Search tools (⌘K)"
               className={clsx(
-                "flex items-center w-[320px] h-10 px-3 rounded-[8px] border cursor-text transition-all duration-150 outline-none select-none",
+                'flex items-center w-[320px] h-10 px-3 rounded-[8px] border cursor-text transition-all duration-150 outline-none select-none',
                 isSearchFocused
-                  ? "border-[#6366F1]"
-                  : "border-[var(--border-default)] hover:border-slate-300 dark:hover:border-slate-700"
+                  ? 'border-[#6366F1]'
+                  : 'border-[var(--border-default)] hover:border-slate-300 dark:hover:border-slate-700'
               )}
               style={{
                 boxShadow: isSearchFocused ? '0 0 0 3px rgba(99, 102, 241, 0.1)' : 'none',
@@ -133,9 +134,7 @@ export function Header() {
               <span className="flex-1 text-left text-sm font-normal text-slate-400 dark:text-slate-500 ml-[12px]">
                 Search tools…
               </span>
-              <kbd
-                className="inline-flex items-center justify-center h-5 px-1.5 rounded-[4px] border text-[11px] font-sans font-medium bg-[var(--bg-surface)] border-[var(--border-default)] text-slate-400 dark:text-slate-500"
-              >
+              <kbd className="inline-flex items-center justify-center h-5 px-1.5 rounded-[4px] border text-[11px] font-sans font-medium bg-[var(--bg-surface)] border-[var(--border-default)] text-slate-400 dark:text-slate-500">
                 ⌘K
               </kbd>
             </button>
@@ -261,7 +260,10 @@ export function Header() {
               <div className="px-4 pt-4">
                 <button
                   type="button"
-                  onClick={() => { setSearchOpen(true); setIsDrawerOpen(false); }}
+                  onClick={() => {
+                    setSearchOpen(true);
+                    setIsDrawerOpen(false);
+                  }}
                   className="flex items-center gap-3 w-full h-11 px-4 rounded-[8px] border border-[var(--border-default)] bg-[var(--bg-base)] text-left hover:border-indigo-400 transition-colors cursor-pointer"
                 >
                   <Search size={16} strokeWidth={2} className="text-slate-400 shrink-0" />

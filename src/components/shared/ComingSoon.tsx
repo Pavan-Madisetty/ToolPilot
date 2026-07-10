@@ -17,8 +17,8 @@ export function ComingSoon({ name }: ComingSoonProps) {
       </span>
       <h2 className="empty-state__title">Coming Soon</h2>
       <p className="empty-state__desc">
-        {name ? `${name} is` : 'This tool is'} under active development.
-        Check back soon — or explore the tools that are ready to use today.
+        {name ? `${name} is` : 'This tool is'} under active development. Check back soon — or
+        explore the tools that are ready to use today.
       </p>
     </div>
   );

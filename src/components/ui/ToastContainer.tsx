@@ -125,12 +125,7 @@ function ToastItem({ toast, onDismiss }: ToastItemProps) {
           marginLeft: 8,
         }}
       >
-        <Icon
-          width={18}
-          height={18}
-          style={{ color: config.iconColor }}
-          strokeWidth={1.75}
-        />
+        <Icon width={18} height={18} style={{ color: config.iconColor }} strokeWidth={1.75} />
       </div>
 
       {/* Content */}

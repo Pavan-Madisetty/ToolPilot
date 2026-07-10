@@ -30,8 +30,6 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
   const { isFavorite, toggleFavorite } = useFavoritesStore();
   const { addToast } = useUIStore();
 
-
-
   useEffect(() => {
     if (tool) {
       recordVisit(tool.id);
@@ -41,8 +39,12 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
   if (!tool) {
     return (
       <div className="container-app py-16 text-center">
-        <h2 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>Tool Not Found</h2>
-        <p className="mt-2" style={{ color: 'var(--text-secondary)' }}>The requested tool could not be loaded.</p>
+        <h2 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
+          Tool Not Found
+        </h2>
+        <p className="mt-2" style={{ color: 'var(--text-secondary)' }}>
+          The requested tool could not be loaded.
+        </p>
       </div>
     );
   }
@@ -87,7 +89,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
   // ─────────────────────────────────────────────
   // Structured Data Schema Generators
   // ─────────────────────────────────────────────
-  
+
   const webAppSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
@@ -163,10 +165,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
         <link rel="canonical" href={`https://toolpilot.app${tool.slug}`} />
 
         {/* Robots — placeholder tools stay out of the index until shipped */}
-        <meta
-          name="robots"
-          content={isComingSoon(tool.id) ? 'noindex, follow' : 'index, follow'}
-        />
+        <meta name="robots" content={isComingSoon(tool.id) ? 'noindex, follow' : 'index, follow'} />
 
         {/* Open Graph */}
         <meta property="og:title" content={tool.metaTitle} />
@@ -196,7 +195,9 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
               <h1 className="text-3xl font-extrabold" style={{ color: 'var(--text-primary)' }}>
                 {tool.name}
               </h1>
-              <span className={`badge module-badge-${tool.module} capitalize text-xs font-semibold px-2.5 py-0.5 rounded-md`}>
+              <span
+                className={`badge module-badge-${tool.module} capitalize text-xs font-semibold px-2.5 py-0.5 rounded-md`}
+              >
                 {tool.module}
               </span>
             </div>
@@ -237,21 +238,24 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
         </div>
 
         {/* Tool Application sandbox */}
-        <div className="min-h-[400px]">
-          {children}
-        </div>
+        <div className="min-h-[400px]">{children}</div>
 
         {/* Rich SEO Content Explanatory Copy Section */}
         {(tool.longDescription || tool.benefits || tool.howToSteps || tool.faq) && (
-          <article className="mt-16 pt-12 border-t flex flex-col gap-16" style={{ borderColor: 'var(--border-default)' }}>
-            
+          <article
+            className="mt-16 pt-12 border-t flex flex-col gap-16"
+            style={{ borderColor: 'var(--border-default)' }}
+          >
             {/* Long intro summary */}
             {tool.longDescription && (
               <section className="flex flex-col gap-4">
                 <h2 className="text-h2" style={{ color: 'var(--text-primary)' }}>
                   About {tool.name}
                 </h2>
-                <p className="text-base leading-relaxed max-w-3xl" style={{ color: 'var(--text-secondary)' }}>
+                <p
+                  className="text-base leading-relaxed max-w-3xl"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
                   {tool.longDescription}
                 </p>
               </section>
@@ -267,7 +271,11 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                     </h3>
                     <ul className="flex flex-col gap-2">
                       {tool.benefits.map((benefit, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                        <li
+                          key={idx}
+                          className="flex items-start gap-2 text-sm leading-relaxed"
+                          style={{ color: 'var(--text-secondary)' }}
+                        >
                           <span className="text-emerald-500 font-bold shrink-0">✓</span>
                           <span>{benefit}</span>
                         </li>
@@ -282,7 +290,11 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                     </h3>
                     <ul className="flex flex-col gap-2">
                       {tool.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                        <li
+                          key={idx}
+                          className="flex items-start gap-2 text-sm leading-relaxed"
+                          style={{ color: 'var(--text-secondary)' }}
+                        >
                           <span className="text-indigo-500 font-bold shrink-0">✓</span>
                           <span>{feature}</span>
                         </li>
@@ -329,13 +341,19 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                               {idx + 1}
                             </span>
                           </div>
-                          
+
                           {/* Texts */}
                           <div className="flex-1 min-w-0">
-                            <h4 className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>
+                            <h4
+                              className="text-sm font-bold"
+                              style={{ color: 'var(--text-primary)' }}
+                            >
                               {step.name}
                             </h4>
-                            <p className="text-xs leading-relaxed mt-0.5" style={{ color: 'var(--text-secondary)' }}>
+                            <p
+                              className="text-xs leading-relaxed mt-0.5"
+                              style={{ color: 'var(--text-secondary)' }}
+                            >
                               {step.text}
                             </p>
                           </div>
@@ -344,7 +362,13 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                         {/* Dashed Line / Arrow separator if not last */}
                         {idx < (tool.howToSteps?.length ?? 0) - 1 && (
                           <div className="hidden lg:flex items-center text-slate-300 dark:text-slate-700 select-none px-0.5 shrink-0">
-                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <svg
+                              className="w-4 h-4"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                            >
                               <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                             </svg>
                           </div>
@@ -368,7 +392,10 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                     }}
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style={{ background: 'rgba(251, 191, 36, 0.15)' }}>
+                      <div
+                        className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
+                        style={{ background: 'rgba(251, 191, 36, 0.15)' }}
+                      >
                         <span className="text-xl">💡</span>
                       </div>
                       <h3 className="text-h3" style={{ color: 'var(--text-primary)' }}>
@@ -377,7 +404,11 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                     </div>
                     <ul className="flex flex-col gap-2.5 pl-1">
                       {tool.tips.map((tip, idx) => (
-                        <li key={idx} className="flex items-start gap-2.5 text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                        <li
+                          key={idx}
+                          className="flex items-start gap-2.5 text-sm leading-relaxed"
+                          style={{ color: 'var(--text-secondary)' }}
+                        >
                           <span className="text-emerald-500 font-bold shrink-0 mt-0.5">✓</span>
                           <span>{tip}</span>
                         </li>
@@ -395,9 +426,22 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                     }}
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style={{ background: 'rgba(99, 102, 241, 0.1)' }}>
-                        <svg className="w-5 h-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                      <div
+                        className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
+                        style={{ background: 'rgba(99, 102, 241, 0.1)' }}
+                      >
+                        <svg
+                          className="w-5 h-5 text-indigo-500"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                          />
                         </svg>
                       </div>
                       <h3 className="text-h3" style={{ color: 'var(--text-primary)' }}>
@@ -408,12 +452,29 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                       {tool.examples.map((example, idx) => (
                         <div key={idx} className="flex flex-col gap-2 text-sm">
                           <div className="flex flex-wrap items-center gap-3">
-                            <span className="font-semibold text-sm" style={{ color: 'var(--text-secondary)' }}>Input:</span>
-                            <code className="font-mono text-xs bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-md" style={{ color: 'var(--text-primary)' }}>{example.input}</code>
+                            <span
+                              className="font-semibold text-sm"
+                              style={{ color: 'var(--text-secondary)' }}
+                            >
+                              Input:
+                            </span>
+                            <code
+                              className="font-mono text-xs bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-md"
+                              style={{ color: 'var(--text-primary)' }}
+                            >
+                              {example.input}
+                            </code>
                           </div>
                           <div className="flex flex-wrap items-center gap-3">
-                            <span className="font-semibold text-sm" style={{ color: 'var(--text-secondary)' }}>Output:</span>
-                            <code className="font-mono text-xs font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/30 px-2.5 py-1 rounded-md">{example.output}</code>
+                            <span
+                              className="font-semibold text-sm"
+                              style={{ color: 'var(--text-secondary)' }}
+                            >
+                              Output:
+                            </span>
+                            <code className="font-mono text-xs font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/30 px-2.5 py-1 rounded-md">
+                              {example.output}
+                            </code>
                           </div>
                         </div>
                       ))}
@@ -446,7 +507,6 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                 />
               </section>
             )}
-
           </article>
         )}
 

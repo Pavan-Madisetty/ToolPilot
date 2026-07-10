@@ -1,10 +1,29 @@
 import { useState, useMemo } from 'react';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+} from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider } from '@/components/ui';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
 
 const formatCurrency = (val: number) => {
   return new Intl.NumberFormat('en-IN', {
@@ -131,9 +150,12 @@ export default function PPFCalculator() {
             suffix=" Yr"
           />
           <div className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40">
-            <h3 className="text-sm font-bold mb-1.5" style={{ color: 'var(--text-primary)' }}>Fixed Return Rate</h3>
+            <h3 className="text-sm font-bold mb-1.5" style={{ color: 'var(--text-primary)' }}>
+              Fixed Return Rate
+            </h3>
             <p className="text-xs text-slate-500 dark:text-slate-400">
-              PPF interest rate is regulated by the Government of India and is currently set at **7.1% p.a.** (compounded annually).
+              PPF interest rate is regulated by the Government of India and is currently set at
+              **7.1% p.a.** (compounded annually).
             </p>
           </div>
         </div>
@@ -143,11 +165,15 @@ export default function PPFCalculator() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="result-box text-center">
               <span className="result-label">Total Invested</span>
-              <div className="result-value text-primary">{formatCurrency(projection.totalInvested)}</div>
+              <div className="result-value text-primary">
+                {formatCurrency(projection.totalInvested)}
+              </div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Interest Earned</span>
-              <div className="result-value text-success">{formatCurrency(projection.interestEarned)}</div>
+              <div className="result-value text-success">
+                {formatCurrency(projection.interestEarned)}
+              </div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Maturity Value</span>

@@ -13,7 +13,7 @@ export default function Stopwatch() {
   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [laps, setLaps] = useState<Lap[]>([]);
-  
+
   const timerRef = useRef<number | null>(null);
   const startTimeRef = useRef<number>(0);
   const elapsedTimeRef = useRef<number>(0);
@@ -99,7 +99,10 @@ export default function Stopwatch() {
     <ToolPageWrapper toolId="stopwatch">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-4xl mx-auto">
         {/* Stopwatch Readout Card */}
-        <Card className="flex flex-col items-center justify-center p-8 md:p-12 text-center" style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}>
+        <Card
+          className="flex flex-col items-center justify-center p-8 md:p-12 text-center"
+          style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}
+        >
           <div className="flex flex-col gap-6 w-full">
             <div>
               <h3 className="text-lg font-semibold" style={{ color: 'var(--text-primary)' }}>
@@ -111,12 +114,12 @@ export default function Stopwatch() {
             </div>
 
             {/* Readout */}
-            <div 
+            <div
               className="py-10 px-4 rounded-2xl font-mono text-5xl md:text-6xl tracking-wider font-bold select-none border"
-              style={{ 
-                background: 'var(--bg-elevated)', 
+              style={{
+                background: 'var(--bg-elevated)',
                 borderColor: 'var(--border-default)',
-                color: isRunning ? 'var(--primary)' : 'var(--text-primary)' 
+                color: isRunning ? 'var(--primary)' : 'var(--text-primary)',
               }}
             >
               {formatTime(time)}
@@ -139,7 +142,7 @@ export default function Stopwatch() {
                 className="flex items-center gap-1.5 px-6 py-2.5 font-semibold"
                 style={{
                   backgroundColor: isRunning ? 'var(--danger)' : 'var(--primary)',
-                  color: '#fff'
+                  color: '#fff',
                 }}
               >
                 {isRunning ? (
@@ -169,7 +172,10 @@ export default function Stopwatch() {
         </Card>
 
         {/* Laps List Card */}
-        <Card className="flex flex-col gap-6 max-h-[500px]" style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}>
+        <Card
+          className="flex flex-col gap-6 max-h-[500px]"
+          style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}
+        >
           <div>
             <h3 className="text-lg font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>
               Laps & Splits
@@ -181,9 +187,15 @@ export default function Stopwatch() {
 
           <div className="flex-1 overflow-y-auto pr-1">
             {laps.length > 0 ? (
-              <div className="flex flex-col border rounded-lg divide-y divide-[var(--border-default)]" style={{ borderColor: 'var(--border-default)' }}>
+              <div
+                className="flex flex-col border rounded-lg divide-y divide-[var(--border-default)]"
+                style={{ borderColor: 'var(--border-default)' }}
+              >
                 {/* Header row */}
-                <div className="grid grid-cols-3 p-3 font-semibold text-xs tracking-wider uppercase bg-slate-50 dark:bg-slate-900/40" style={{ color: 'var(--text-tertiary)' }}>
+                <div
+                  className="grid grid-cols-3 p-3 font-semibold text-xs tracking-wider uppercase bg-slate-50 dark:bg-slate-900/40"
+                  style={{ color: 'var(--text-tertiary)' }}
+                >
                   <span>Lap</span>
                   <span className="text-right">Split Time</span>
                   <span className="text-right">Total Time</span>
@@ -199,17 +211,31 @@ export default function Stopwatch() {
 
                   if (isFastest) {
                     rowColor = 'var(--success)';
-                    splitBadge = <span className="text-[10px] font-bold uppercase ml-2 text-emerald-500">(Fastest)</span>;
+                    splitBadge = (
+                      <span className="text-[10px] font-bold uppercase ml-2 text-emerald-500">
+                        (Fastest)
+                      </span>
+                    );
                   } else if (isSlowest) {
                     rowColor = 'var(--danger)';
-                    splitBadge = <span className="text-[10px] font-bold uppercase ml-2 text-red-500">(Slowest)</span>;
+                    splitBadge = (
+                      <span className="text-[10px] font-bold uppercase ml-2 text-red-500">
+                        (Slowest)
+                      </span>
+                    );
                   }
 
                   return (
-                    <div 
-                      key={lap.id} 
+                    <div
+                      key={lap.id}
                       className="grid grid-cols-3 p-3 text-sm font-mono items-center transition-colors"
-                      style={{ background: isFastest ? 'rgba(16, 185, 129, 0.04)' : isSlowest ? 'rgba(239, 68, 68, 0.04)' : 'transparent' }}
+                      style={{
+                        background: isFastest
+                          ? 'rgba(16, 185, 129, 0.04)'
+                          : isSlowest
+                            ? 'rgba(239, 68, 68, 0.04)'
+                            : 'transparent',
+                      }}
                     >
                       <span className="font-semibold" style={{ color: 'var(--text-secondary)' }}>
                         #{lap.id}
@@ -218,7 +244,10 @@ export default function Stopwatch() {
                         {formatTime(lap.lapTime)}
                         {splitBadge}
                       </span>
-                      <span className="text-right font-medium" style={{ color: 'var(--text-secondary)' }}>
+                      <span
+                        className="text-right font-medium"
+                        style={{ color: 'var(--text-secondary)' }}
+                      >
                         {formatTime(lap.cumulativeTime)}
                       </span>
                     </div>
@@ -226,7 +255,7 @@ export default function Stopwatch() {
                 })}
               </div>
             ) : (
-              <div 
+              <div
                 className="h-full flex items-center justify-center text-center p-8 border border-dashed rounded-lg"
                 style={{ borderColor: 'var(--border-default)' }}
               >

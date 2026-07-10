@@ -167,8 +167,15 @@ export default function ImageResizer() {
                     onChange={(e) => setLockRatio(e.target.checked)}
                     className="accent-[var(--primary)] rounded bg-transparent"
                   />
-                  <span className="text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>
-                    Lock Aspect Ratio ({originalWidth && originalHeight ? (originalWidth / originalHeight).toFixed(2) : '1.00'})
+                  <span
+                    className="text-xs font-semibold"
+                    style={{ color: 'var(--text-secondary)' }}
+                  >
+                    Lock Aspect Ratio (
+                    {originalWidth && originalHeight
+                      ? (originalWidth / originalHeight).toFixed(2)
+                      : '1.00'}
+                    )
                   </span>
                 </label>
 
@@ -180,18 +187,17 @@ export default function ImageResizer() {
                   onChange={(e) => setFormat(e.target.value)}
                 />
 
-                <Button
-                  onClick={handleResize}
-                  disabled={isResizing}
-                  className="w-full mt-2"
-                >
+                <Button onClick={handleResize} disabled={isResizing} className="w-full mt-2">
                   {isResizing ? 'Resizing...' : 'Resize Image'}
                 </Button>
               </div>
 
               {/* Download link */}
               {resizedUrl && (
-                <div className="pt-4 border-t flex flex-col gap-3" style={{ borderColor: 'var(--border-default)' }}>
+                <div
+                  className="pt-4 border-t flex flex-col gap-3"
+                  style={{ borderColor: 'var(--border-default)' }}
+                >
                   <div className="text-xs font-semibold text-[var(--success)] flex items-center gap-1.5 justify-center">
                     <CheckCircle size={14} />
                     <span>Image resized successfully!</span>

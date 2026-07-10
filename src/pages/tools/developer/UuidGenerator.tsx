@@ -44,9 +44,11 @@ export default function UuidGenerator() {
     const timeHiAndVersion = (((time >> 48) & 0x0fff) | 0x1000).toString(16).padStart(4, '0');
     const clockSeqHiAndReserved = ((Math.random() * 64) | 0x80).toString(16).padStart(2, '0');
     const clockSeqLow = ((Math.random() * 256) | 0).toString(16).padStart(2, '0');
-    
+
     const node = Array.from({ length: 6 }, () =>
-      Math.floor(Math.random() * 256).toString(16).padStart(2, '0')
+      Math.floor(Math.random() * 256)
+        .toString(16)
+        .padStart(2, '0')
     ).join('');
 
     return `${timeLow}-${timeMid}-${timeHiAndVersion}-${clockSeqHiAndReserved}${clockSeqLow}-${node}`;

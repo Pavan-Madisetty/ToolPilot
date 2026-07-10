@@ -41,7 +41,6 @@ export default function ImageCompressor() {
     const img = imgRef.current;
     if (!image || !img) return;
 
-
     setTimeout(() => {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
@@ -61,7 +60,6 @@ export default function ImageCompressor() {
         const sizeInBytes = (dataUrl.length - head.length - 1) * 0.75 - padding;
         setCompressedSize(sizeInBytes);
       }
-
     }, 100);
   }, [image, mimeType, quality]);
 
@@ -71,9 +69,10 @@ export default function ImageCompressor() {
     }
   }, [image, compressImage]);
 
-  const savings = originalSize && compressedSize
-    ? Math.max(0, Math.round(((originalSize - compressedSize) / originalSize) * 100))
-    : 0;
+  const savings =
+    originalSize && compressedSize
+      ? Math.max(0, Math.round(((originalSize - compressedSize) / originalSize) * 100))
+      : 0;
 
   return (
     <ToolPageWrapper toolId="image-compress">
@@ -128,7 +127,10 @@ export default function ImageCompressor() {
                   </span>
                   <div
                     className="min-h-[220px] max-h-[300px] flex items-center justify-center rounded-xl overflow-hidden p-2 border"
-                    style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}
+                    style={{
+                      background: 'var(--bg-surface)',
+                      borderColor: 'var(--border-default)',
+                    }}
                   >
                     <img
                       src={compressedUrl}
@@ -163,28 +165,52 @@ export default function ImageCompressor() {
                 </div>
 
                 {/* Size stats & savings readout */}
-                <div className="grid grid-cols-3 gap-3 pt-4 border-t" style={{ borderColor: 'var(--border-default)' }}>
+                <div
+                  className="grid grid-cols-3 gap-3 pt-4 border-t"
+                  style={{ borderColor: 'var(--border-default)' }}
+                >
                   <div className="flex flex-col text-center justify-center">
-                    <span className="text-[10px] text-[var(--text-tertiary)] font-semibold uppercase">Original</span>
-                    <span className="text-sm font-bold mt-1" style={{ color: 'var(--text-primary)' }}>{formatSize(originalSize)}</span>
+                    <span className="text-[10px] text-[var(--text-tertiary)] font-semibold uppercase">
+                      Original
+                    </span>
+                    <span
+                      className="text-sm font-bold mt-1"
+                      style={{ color: 'var(--text-primary)' }}
+                    >
+                      {formatSize(originalSize)}
+                    </span>
                   </div>
                   <div className="flex flex-col text-center justify-center">
-                    <span className="text-[10px] text-[var(--text-tertiary)] font-semibold uppercase">Compressed</span>
-                    <span className="text-sm font-bold mt-1" style={{ color: 'var(--text-primary)' }}>{formatSize(compressedSize)}</span>
+                    <span className="text-[10px] text-[var(--text-tertiary)] font-semibold uppercase">
+                      Compressed
+                    </span>
+                    <span
+                      className="text-sm font-bold mt-1"
+                      style={{ color: 'var(--text-primary)' }}
+                    >
+                      {formatSize(compressedSize)}
+                    </span>
                   </div>
                   <div
                     className="flex flex-col text-center bg-[rgba(16,185,129,0.08)] p-2 rounded-xl border"
                     style={{ borderColor: 'rgba(16,185,129,0.2)' }}
                   >
-                    <span className="text-[10px] text-[var(--success)] font-semibold uppercase">Savings</span>
-                    <span className="text-base font-extrabold mt-0.5 text-[var(--success)]">{savings}%</span>
+                    <span className="text-[10px] text-[var(--success)] font-semibold uppercase">
+                      Savings
+                    </span>
+                    <span className="text-base font-extrabold mt-0.5 text-[var(--success)]">
+                      {savings}%
+                    </span>
                   </div>
                 </div>
               </div>
 
               {/* Download */}
               {compressedUrl && (
-                <div className="pt-4 border-t flex flex-col gap-2" style={{ borderColor: 'var(--border-default)' }}>
+                <div
+                  className="pt-4 border-t flex flex-col gap-2"
+                  style={{ borderColor: 'var(--border-default)' }}
+                >
                   <a
                     href={compressedUrl}
                     download={`compressed_${originalName || 'image'}.${mimeType === 'image/png' ? 'jpg' : mimeType.split('/')[1]}`}

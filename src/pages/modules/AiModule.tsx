@@ -22,11 +22,17 @@ export default function AiModule() {
       />
 
       {/* Coming soon board */}
-      <div className="py-20 text-center border rounded-2xl bg-white dark:bg-slate-800" style={{ borderColor: 'var(--border-default)' }}>
+      <div
+        className="py-20 text-center border rounded-2xl bg-white dark:bg-slate-800"
+        style={{ borderColor: 'var(--border-default)' }}
+      >
         <div className="text-6xl mb-4">🤖</div>
-        <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Local Web-LLM Models Coming Soon</h2>
+        <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+          Local Web-LLM Models Coming Soon
+        </h2>
         <p className="text-sm max-w-md mx-auto" style={{ color: 'var(--text-secondary)' }}>
-          We are integrating WebGPU-accelerated models (such as Llama 3) to execute AI workflows entirely inside your browser cache. Stay tuned!
+          We are integrating WebGPU-accelerated models (such as Llama 3) to execute AI workflows
+          entirely inside your browser cache. Stay tuned!
         </p>
       </div>
     </ModulePageWrapper>

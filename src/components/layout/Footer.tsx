@@ -83,9 +83,12 @@ export function Footer() {
               </span>
             </Link>
 
-            <p className="text-sm leading-relaxed mb-4 max-w-xs" style={{ color: 'var(--text-secondary)' }}>
-              The world's largest browser-based productivity platform with {TOOL_COUNT_LABEL} free tools.
-              No signup. No tracking. Always free.
+            <p
+              className="text-sm leading-relaxed mb-4 max-w-xs"
+              style={{ color: 'var(--text-secondary)' }}
+            >
+              The world's largest browser-based productivity platform with {TOOL_COUNT_LABEL} free
+              tools. No signup. No tracking. Always free.
             </p>
 
             <div className="flex items-center gap-2 mb-4">
@@ -93,14 +96,19 @@ export function Footer() {
                 className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium"
                 style={{ background: 'rgba(34, 197, 94, 0.12)', color: '#16A34A' }}
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" aria-hidden="true" />
+                <span
+                  className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block"
+                  aria-hidden="true"
+                />
                 100% Free Forever
               </span>
             </div>
 
             {/* Newsletter Subscription */}
             <form onSubmit={handleNewsletterSubmit} className="mb-6 flex flex-col gap-2 max-w-xs">
-              <span className="text-xs font-bold uppercase tracking-wider text-[var(--text-tertiary)]">Subscribe to updates</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-[var(--text-tertiary)]">
+                Subscribe to updates
+              </span>
               <div className="flex gap-2">
                 <input
                   type="email"
@@ -125,16 +133,30 @@ export function Footer() {
             {/* Social Icons — plain, no borders */}
             <div className="flex items-center gap-4">
               {/* Twitter / X */}
-              <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter"
+              <a
+                href="https://x.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter"
                 className="transition-colors hover:text-[var(--text-link)]"
-                style={{ color: 'var(--text-tertiary)' }}>
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                style={{ color: 'var(--text-tertiary)' }}
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
               </a>
               {/* GitHub */}
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub"
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
                 className="transition-colors hover:text-[var(--text-link)]"
-                style={{ color: 'var(--text-tertiary)' }}>
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.603-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+                style={{ color: 'var(--text-tertiary)' }}
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.603-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
+                </svg>
               </a>
             </div>
           </div>
@@ -208,21 +230,29 @@ export function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div
-        className="border-t"
-        style={{ borderColor: 'var(--border-default)' }}
-      >
-        <div className="container-app py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs" style={{ color: 'var(--text-tertiary)' }}>
-          <p>
-            © {year} ToolPilot. All rights reserved.
-          </p>
+      <div className="border-t" style={{ borderColor: 'var(--border-default)' }}>
+        <div
+          className="container-app py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs"
+          style={{ color: 'var(--text-tertiary)' }}
+        >
+          <p>© {year} ToolPilot. All rights reserved.</p>
           <p className="flex-1 text-center hidden sm:block">
             Made with <span className="text-rose-500">❤️</span> for productivity
           </p>
           <div className="flex items-center gap-2">
-            <Link to="/privacy" className="underline underline-offset-2 hover:text-[var(--text-link)] transition-colors">Privacy</Link>
+            <Link
+              to="/privacy"
+              className="underline underline-offset-2 hover:text-[var(--text-link)] transition-colors"
+            >
+              Privacy
+            </Link>
             <span>•</span>
-            <Link to="/terms" className="underline underline-offset-2 hover:text-[var(--text-link)] transition-colors">Terms</Link>
+            <Link
+              to="/terms"
+              className="underline underline-offset-2 hover:text-[var(--text-link)] transition-colors"
+            >
+              Terms
+            </Link>
           </div>
         </div>
       </div>

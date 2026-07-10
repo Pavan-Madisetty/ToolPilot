@@ -5,25 +5,28 @@ import { Button, CopyButton, Textarea } from '@/components/ui';
 // ── Pure JS MD5 Implementation (Required for client-side MD5 without imports) ──
 function md5(string: string) {
   function k(n: number) {
-    return Math.abs(Math.sin(n)) * 4294967296 | 0;
+    return (Math.abs(Math.sin(n)) * 4294967296) | 0;
   }
   const s = [7, 12, 17, 22, 5, 9, 14, 20, 4, 11, 16, 23, 6, 10, 15, 21];
-  const a = [1732584193, 4023233417, 2562383102, 271733878], x = [a[0], a[1], a[2], a[3]];
+  const a = [1732584193, 4023233417, 2562383102, 271733878],
+    x = [a[0], a[1], a[2], a[3]];
   const blocks = [];
   let i;
-  const l = string.length, n = (l + 8 >> 6) + 1;
+  const l = string.length,
+    n = ((l + 8) >> 6) + 1;
   for (i = 0; i < n * 16; blocks[i++] = 0);
-  for (i = 0; i < l; blocks[i >> 2] |= string.charCodeAt(i) << (i % 4 << 3), i++);
-  blocks[i >> 2] |= 0x80 << (i % 4 << 3);
+  for (i = 0; i < l; blocks[i >> 2] |= string.charCodeAt(i) << ((i % 4) << 3), i++);
+  blocks[i >> 2] |= 0x80 << ((i % 4) << 3);
   blocks[n * 16 - 2] = l * 8;
   for (i = 0; i < blocks.length; i += 16) {
-    const old = [x[0], x[1], x[2], x[3]]; let r = [0, 0, 0, 0];
+    const old = [x[0], x[1], x[2], x[3]];
+    let r = [0, 0, 0, 0];
     for (let j = 0; j < 64; j++) {
       const div = j >> 4;
       if (div === 0) {
-        r = [x[1] & x[2] | ~x[1] & x[3], 0, 1, 7];
+        r = [(x[1] & x[2]) | (~x[1] & x[3]), 0, 1, 7];
       } else if (div === 1) {
-        r = [x[3] & x[1] | ~x[3] & x[2], 1, 5, 5];
+        r = [(x[3] & x[1]) | (~x[3] & x[2]), 1, 5, 5];
       } else if (div === 2) {
         r = [x[1] ^ x[2] ^ x[3], 2, 3, 9];
       } else if (div === 3) {
@@ -35,18 +38,21 @@ function md5(string: string) {
       x[2] = x[1];
       const add = x[0] + r[0] + k(j + 1) + blocks[i + index];
       const shift = s[r[3] + (j % 4)];
-      x[1] = x[1] + (add << shift | add >>> 32 - shift);
+      x[1] = x[1] + ((add << shift) | (add >>> (32 - shift)));
       x[0] = temp;
     }
-    for (let j = 0; j < 4; x[j] = x[j] + old[j++] | 0);
+    for (let j = 0; j < 4; x[j] = (x[j] + old[j++]) | 0);
   }
   let out = '';
-  for (i = 0; i < 32; out += (x[i >> 3] >> (i % 8 << 3) & 0xf).toString(16), i++);
+  for (i = 0; i < 32; out += ((x[i >> 3] >> ((i % 8) << 3)) & 0xf).toString(16), i++);
   return out;
 }
 
 // ── SubtleCrypto helper for SHA hashes ──
-async function computeSha(text: string, algorithm: 'SHA-1' | 'SHA-256' | 'SHA-512'): Promise<string> {
+async function computeSha(
+  text: string,
+  algorithm: 'SHA-1' | 'SHA-256' | 'SHA-512'
+): Promise<string> {
   const encoder = new TextEncoder();
   const data = encoder.encode(text);
   const hashBuffer = await crypto.subtle.digest(algorithm, data);
@@ -121,7 +127,9 @@ export default function HashGenerator() {
             {/* MD5 */}
             <div className="p-4 card">
               <div className="flex items-center justify-between gap-4 mb-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-blue-500">MD5 Checksum</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-blue-500">
+                  MD5 Checksum
+                </span>
                 {hashes.md5 && <CopyButton text={hashes.md5} />}
               </div>
               <input
@@ -136,7 +144,9 @@ export default function HashGenerator() {
             {/* SHA-1 */}
             <div className="p-4 card">
               <div className="flex items-center justify-between gap-4 mb-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-purple-500">SHA-1 Checksum</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-purple-500">
+                  SHA-1 Checksum
+                </span>
                 {hashes.sha1 && <CopyButton text={hashes.sha1} />}
               </div>
               <input
@@ -151,7 +161,9 @@ export default function HashGenerator() {
             {/* SHA-256 */}
             <div className="p-4 card">
               <div className="flex items-center justify-between gap-4 mb-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-emerald-500">SHA-256 Checksum</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-emerald-500">
+                  SHA-256 Checksum
+                </span>
                 {hashes.sha256 && <CopyButton text={hashes.sha256} />}
               </div>
               <input
@@ -166,7 +178,9 @@ export default function HashGenerator() {
             {/* SHA-512 */}
             <div className="p-4 card">
               <div className="flex items-center justify-between gap-4 mb-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-orange-500">SHA-512 Checksum</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-orange-500">
+                  SHA-512 Checksum
+                </span>
                 {hashes.sha512 && <CopyButton text={hashes.sha512} />}
               </div>
               <Textarea

@@ -45,7 +45,7 @@ export default function BMRCalculator() {
       { name: 'Moderately Active', multiplier: 1.55, desc: 'Moderate exercise 3-5 days/week' },
       { name: 'Very Active', multiplier: 1.725, desc: 'Hard exercise 6-7 days/week' },
       { name: 'Extra Active', multiplier: 1.9, desc: 'Very hard exercise, physical job' },
-    ].map(level => ({
+    ].map((level) => ({
       ...level,
       calories: Math.round(bmr * level.multiplier),
     }));
@@ -182,14 +182,20 @@ export default function BMRCalculator() {
                 {activityLevels.map((lvl, index) => (
                   <div key={index} className="flex justify-between items-center py-2.5 text-sm">
                     <div>
-                      <span className="font-semibold block" style={{ color: 'var(--text-primary)' }}>
+                      <span
+                        className="font-semibold block"
+                        style={{ color: 'var(--text-primary)' }}
+                      >
                         {lvl.name}
                       </span>
                       <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
                         {lvl.desc} (x{lvl.multiplier})
                       </span>
                     </div>
-                    <span className="text-base font-extrabold" style={{ color: index === 0 ? 'var(--text-primary)' : 'var(--primary)' }}>
+                    <span
+                      className="text-base font-extrabold"
+                      style={{ color: index === 0 ? 'var(--text-primary)' : 'var(--primary)' }}
+                    >
                       {lvl.calories} kcal
                     </span>
                   </div>

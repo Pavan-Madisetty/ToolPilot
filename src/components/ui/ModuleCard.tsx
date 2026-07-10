@@ -12,7 +12,12 @@ import { ArrowRight } from 'lucide-react';
 
 const cardVariant = {
   hidden: { opacity: 0, y: 24, scale: 0.97 },
-  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as const } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as const },
+  },
 };
 
 export function ModuleCard({ module }: ModuleCardProps) {
@@ -20,7 +25,11 @@ export function ModuleCard({ module }: ModuleCardProps) {
   const toolCount = (TOOLS_BY_MODULE[module.key] ?? []).length;
 
   return (
-    <motion.div variants={cardVariant} whileHover={{ y: -4, scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+    <motion.div
+      variants={cardVariant}
+      whileHover={{ y: -4, scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+    >
       <Link
         to={module.slug}
         className="module-card"

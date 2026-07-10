@@ -44,7 +44,9 @@ const FDCalculator = lazy(() => import('@/pages/tools/finance/FDCalculator'));
 const GSTCalculator = lazy(() => import('@/pages/tools/finance/GSTCalculator'));
 const IncomeTaxCalculator = lazy(() => import('@/pages/tools/finance/IncomeTaxCalculator'));
 const SalaryCalculator = lazy(() => import('@/pages/tools/finance/SalaryCalculator'));
-const CompoundInterestCalculator = lazy(() => import('@/pages/tools/finance/CompoundInterestCalculator'));
+const CompoundInterestCalculator = lazy(
+  () => import('@/pages/tools/finance/CompoundInterestCalculator')
+);
 const CurrencyConverter = lazy(() => import('@/pages/tools/finance/CurrencyConverter'));
 const BudgetPlanner = lazy(() => import('@/pages/tools/finance/BudgetPlanner'));
 const PPFCalculator = lazy(() => import('@/pages/tools/finance/PPFCalculator'));
@@ -53,7 +55,9 @@ const HomeLoanCalculator = lazy(() => import('@/pages/tools/finance/HomeLoanCalc
 const CarLoanCalculator = lazy(() => import('@/pages/tools/finance/CarLoanCalculator'));
 const PersonalLoanCalculator = lazy(() => import('@/pages/tools/finance/PersonalLoanCalculator'));
 const EducationLoanCalculator = lazy(() => import('@/pages/tools/finance/EducationLoanCalculator'));
-const LoanEligibilityCalculator = lazy(() => import('@/pages/tools/finance/LoanEligibilityCalculator'));
+const LoanEligibilityCalculator = lazy(
+  () => import('@/pages/tools/finance/LoanEligibilityCalculator')
+);
 const RDCalculator = lazy(() => import('@/pages/tools/finance/RDCalculator'));
 const EPFCalculator = lazy(() => import('@/pages/tools/finance/EPFCalculator'));
 const RetirementCalculator = lazy(() => import('@/pages/tools/finance/RetirementCalculator'));
@@ -64,14 +68,18 @@ const LoanComparison = lazy(() => import('@/pages/tools/finance/LoanComparison')
 const MutualFundCalculator = lazy(() => import('@/pages/tools/finance/MutualFundCalculator'));
 
 // New Finance Tools
-const SimpleInterestCalculator = lazy(() => import('@/pages/tools/finance/SimpleInterestCalculator'));
+const SimpleInterestCalculator = lazy(
+  () => import('@/pages/tools/finance/SimpleInterestCalculator')
+);
 const InflationCalculator = lazy(() => import('@/pages/tools/finance/InflationCalculator'));
 const GratuityCalculator = lazy(() => import('@/pages/tools/finance/GratuityCalculator'));
 const StockAverageCalculator = lazy(() => import('@/pages/tools/finance/StockAverageCalculator'));
 const BrokerageCalculator = lazy(() => import('@/pages/tools/finance/BrokerageCalculator'));
 const SavingsPlanner = lazy(() => import('@/pages/tools/finance/SavingsPlanner'));
 const NetWorthCalculator = lazy(() => import('@/pages/tools/finance/NetWorthCalculator'));
-const GoldInvestmentCalculator = lazy(() => import('@/pages/tools/finance/GoldInvestmentCalculator'));
+const GoldInvestmentCalculator = lazy(
+  () => import('@/pages/tools/finance/GoldInvestmentCalculator')
+);
 const CryptoProfitCalculator = lazy(() => import('@/pages/tools/finance/CryptoProfitCalculator'));
 const SubscriptionTracker = lazy(() => import('@/pages/tools/finance/SubscriptionTracker'));
 const CreditCardEMICalculator = lazy(() => import('@/pages/tools/finance/CreditCardEMICalculator'));
@@ -165,9 +173,10 @@ const TimezoneConverter = lazy(() => import('@/pages/tools/travel/TimezoneConver
 const FuelCostCalculator = lazy(() => import('@/pages/tools/travel/FuelCostCalculator'));
 
 export default function App() {
-  const basename = typeof window !== 'undefined' && window.location.hostname.endsWith('.github.io')
-    ? '/ToolPilot'
-    : '';
+  const basename =
+    typeof window !== 'undefined' && window.location.hostname.endsWith('.github.io')
+      ? '/ToolPilot'
+      : '';
 
   return (
     <HelmetProvider>
@@ -177,10 +186,24 @@ export default function App() {
           <Routes>
             <Route path="/" element={<AppLayout />}>
               {/* Home */}
-              <Route index element={<Suspense fallback={<PageLoader />}><HomePage /></Suspense>} />
+              <Route
+                index
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <HomePage />
+                  </Suspense>
+                }
+              />
 
               {/* Search */}
-              <Route path="search" element={<Suspense fallback={<PageLoader />}><SearchPage /></Suspense>} />
+              <Route
+                path="search"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <SearchPage />
+                  </Suspense>
+                }
+              />
 
               {/* Company Pages */}
               <Route path="about" element={<AboutPage />} />
@@ -190,147 +213,952 @@ export default function App() {
               <Route path="contact" element={<ContactPage />} />
 
               {/* Finance Module */}
-              <Route path="finance" element={<Suspense fallback={<PageLoader />}><FinanceModule /></Suspense>} />
-              <Route path="finance/emi-calculator" element={<Suspense fallback={<PageLoader />}><EMICalculator /></Suspense>} />
-              <Route path="finance/sip-calculator" element={<Suspense fallback={<PageLoader />}><SIPCalculator /></Suspense>} />
-              <Route path="finance/fd-calculator" element={<Suspense fallback={<PageLoader />}><FDCalculator /></Suspense>} />
-              <Route path="finance/gst-calculator" element={<Suspense fallback={<PageLoader />}><GSTCalculator /></Suspense>} />
-              <Route path="finance/income-tax-calculator" element={<Suspense fallback={<PageLoader />}><IncomeTaxCalculator /></Suspense>} />
-              <Route path="finance/salary-calculator" element={<Suspense fallback={<PageLoader />}><SalaryCalculator /></Suspense>} />
-              <Route path="finance/compound-interest-calculator" element={<Suspense fallback={<PageLoader />}><CompoundInterestCalculator /></Suspense>} />
-              <Route path="finance/currency-converter" element={<Suspense fallback={<PageLoader />}><CurrencyConverter /></Suspense>} />
-              <Route path="finance/budget-planner" element={<Suspense fallback={<PageLoader />}><BudgetPlanner /></Suspense>} />
-              <Route path="finance/ppf-calculator" element={<Suspense fallback={<PageLoader />}><PPFCalculator /></Suspense>} />
-              <Route path="finance/tip-calculator" element={<Suspense fallback={<PageLoader />}><TipCalculator /></Suspense>} />
-              <Route path="finance/home-loan-calculator" element={<Suspense fallback={<PageLoader />}><HomeLoanCalculator /></Suspense>} />
-              <Route path="finance/car-loan-calculator" element={<Suspense fallback={<PageLoader />}><CarLoanCalculator /></Suspense>} />
-              <Route path="finance/personal-loan-calculator" element={<Suspense fallback={<PageLoader />}><PersonalLoanCalculator /></Suspense>} />
-              <Route path="finance/education-loan-calculator" element={<Suspense fallback={<PageLoader />}><EducationLoanCalculator /></Suspense>} />
-              <Route path="finance/loan-eligibility-calculator" element={<Suspense fallback={<PageLoader />}><LoanEligibilityCalculator /></Suspense>} />
-              <Route path="finance/rd-calculator" element={<Suspense fallback={<PageLoader />}><RDCalculator /></Suspense>} />
-              <Route path="finance/epf-calculator" element={<Suspense fallback={<PageLoader />}><EPFCalculator /></Suspense>} />
-              <Route path="finance/retirement-calculator" element={<Suspense fallback={<PageLoader />}><RetirementCalculator /></Suspense>} />
-              <Route path="finance/hra-calculator" element={<Suspense fallback={<PageLoader />}><HRACalculator /></Suspense>} />
-              <Route path="finance/bill-splitter" element={<Suspense fallback={<PageLoader />}><BillSplitter /></Suspense>} />
-              <Route path="finance/expense-tracker" element={<Suspense fallback={<PageLoader />}><ExpenseTracker /></Suspense>} />
-              <Route path="finance/loan-comparison" element={<Suspense fallback={<PageLoader />}><LoanComparison /></Suspense>} />
-              <Route path="finance/mutual-fund-calculator" element={<Suspense fallback={<PageLoader />}><MutualFundCalculator /></Suspense>} />
-              <Route path="finance/simple-interest-calculator" element={<Suspense fallback={<PageLoader />}><SimpleInterestCalculator /></Suspense>} />
-              <Route path="finance/inflation-calculator" element={<Suspense fallback={<PageLoader />}><InflationCalculator /></Suspense>} />
-              <Route path="finance/gratuity-calculator" element={<Suspense fallback={<PageLoader />}><GratuityCalculator /></Suspense>} />
-              <Route path="finance/stock-average-calculator" element={<Suspense fallback={<PageLoader />}><StockAverageCalculator /></Suspense>} />
-              <Route path="finance/brokerage-calculator" element={<Suspense fallback={<PageLoader />}><BrokerageCalculator /></Suspense>} />
-              <Route path="finance/savings-planner" element={<Suspense fallback={<PageLoader />}><SavingsPlanner /></Suspense>} />
-              <Route path="finance/net-worth-calculator" element={<Suspense fallback={<PageLoader />}><NetWorthCalculator /></Suspense>} />
-              <Route path="finance/gold-investment-calculator" element={<Suspense fallback={<PageLoader />}><GoldInvestmentCalculator /></Suspense>} />
-              <Route path="finance/crypto-profit-calculator" element={<Suspense fallback={<PageLoader />}><CryptoProfitCalculator /></Suspense>} />
-              <Route path="finance/subscription-tracker" element={<Suspense fallback={<PageLoader />}><SubscriptionTracker /></Suspense>} />
-              <Route path="finance/credit-card-emi" element={<Suspense fallback={<PageLoader />}><CreditCardEMICalculator /></Suspense>} />
+              <Route
+                path="finance"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <FinanceModule />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/emi-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <EMICalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/sip-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <SIPCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/fd-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <FDCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/gst-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <GSTCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/income-tax-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <IncomeTaxCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/salary-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <SalaryCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/compound-interest-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <CompoundInterestCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/currency-converter"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <CurrencyConverter />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/budget-planner"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <BudgetPlanner />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/ppf-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <PPFCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/tip-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <TipCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/home-loan-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <HomeLoanCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/car-loan-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <CarLoanCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/personal-loan-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <PersonalLoanCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/education-loan-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <EducationLoanCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/loan-eligibility-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <LoanEligibilityCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/rd-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <RDCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/epf-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <EPFCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/retirement-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <RetirementCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/hra-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <HRACalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/bill-splitter"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <BillSplitter />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/expense-tracker"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <ExpenseTracker />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/loan-comparison"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <LoanComparison />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/mutual-fund-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <MutualFundCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/simple-interest-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <SimpleInterestCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/inflation-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <InflationCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/gratuity-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <GratuityCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/stock-average-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <StockAverageCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/brokerage-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <BrokerageCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/savings-planner"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <SavingsPlanner />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/net-worth-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <NetWorthCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/gold-investment-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <GoldInvestmentCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/crypto-profit-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <CryptoProfitCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/subscription-tracker"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <SubscriptionTracker />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="finance/credit-card-emi"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <CreditCardEMICalculator />
+                  </Suspense>
+                }
+              />
 
               {/* Developer Module */}
-              <Route path="developer" element={<Suspense fallback={<PageLoader />}><DeveloperModule /></Suspense>} />
-              <Route path="developer/json-formatter" element={<Suspense fallback={<PageLoader />}><JsonFormatter /></Suspense>} />
-              <Route path="developer/base64" element={<Suspense fallback={<PageLoader />}><Base64Tool /></Suspense>} />
-              <Route path="developer/url-encoder" element={<Suspense fallback={<PageLoader />}><UrlEncoder /></Suspense>} />
-              <Route path="developer/jwt-decoder" element={<Suspense fallback={<PageLoader />}><JwtDecoder /></Suspense>} />
-              <Route path="developer/uuid-generator" element={<Suspense fallback={<PageLoader />}><UuidGenerator /></Suspense>} />
-              <Route path="developer/hash-generator" element={<Suspense fallback={<PageLoader />}><HashGenerator /></Suspense>} />
-              <Route path="developer/regex-tester" element={<Suspense fallback={<PageLoader />}><RegexTester /></Suspense>} />
-              <Route path="developer/password-generator" element={<Suspense fallback={<PageLoader />}><PasswordGenerator /></Suspense>} />
-              <Route path="developer/color-picker" element={<Suspense fallback={<PageLoader />}><ColorPicker /></Suspense>} />
-              <Route path="developer/sql-formatter" element={<Suspense fallback={<PageLoader />}><SqlFormatter /></Suspense>} />
-              <Route path="developer/diff-checker" element={<Suspense fallback={<PageLoader />}><DiffChecker /></Suspense>} />
-              <Route path="developer/lorem-ipsum" element={<Suspense fallback={<PageLoader />}><LoremIpsum /></Suspense>} />
-              <Route path="developer/timestamp-converter" element={<Suspense fallback={<PageLoader />}><TimestampConverter /></Suspense>} />
-              <Route path="developer/gradient-generator" element={<Suspense fallback={<PageLoader />}><GradientGenerator /></Suspense>} />
-              <Route path="developer/cron-builder" element={<Suspense fallback={<PageLoader />}><CronBuilder /></Suspense>} />
-              <Route path="developer/markdown-preview" element={<Suspense fallback={<PageLoader />}><MarkdownPreview /></Suspense>} />
+              <Route
+                path="developer"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <DeveloperModule />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="developer/json-formatter"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <JsonFormatter />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="developer/base64"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <Base64Tool />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="developer/url-encoder"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <UrlEncoder />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="developer/jwt-decoder"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <JwtDecoder />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="developer/uuid-generator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <UuidGenerator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="developer/hash-generator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <HashGenerator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="developer/regex-tester"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <RegexTester />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="developer/password-generator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <PasswordGenerator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="developer/color-picker"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <ColorPicker />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="developer/sql-formatter"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <SqlFormatter />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="developer/diff-checker"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <DiffChecker />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="developer/lorem-ipsum"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <LoremIpsum />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="developer/timestamp-converter"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <TimestampConverter />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="developer/gradient-generator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <GradientGenerator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="developer/cron-builder"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <CronBuilder />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="developer/markdown-preview"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <MarkdownPreview />
+                  </Suspense>
+                }
+              />
 
               {/* PDF Module */}
-              <Route path="pdf" element={<Suspense fallback={<PageLoader />}><PdfModule /></Suspense>} />
+              <Route
+                path="pdf"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <PdfModule />
+                  </Suspense>
+                }
+              />
 
               {/* Image Module */}
-              <Route path="image" element={<Suspense fallback={<PageLoader />}><ImageModule /></Suspense>} />
-              <Route path="image/resize" element={<Suspense fallback={<PageLoader />}><ImageResizer /></Suspense>} />
-              <Route path="image/compress" element={<Suspense fallback={<PageLoader />}><ImageCompressor /></Suspense>} />
-              <Route path="image/qr-generator" element={<Suspense fallback={<PageLoader />}><QrGenerator /></Suspense>} />
-              <Route path="image/crop" element={<Suspense fallback={<PageLoader />}><ImageCropper /></Suspense>} />
-              <Route path="image/barcode-generator" element={<Suspense fallback={<PageLoader />}><BarcodeGenerator /></Suspense>} />
-              <Route path="image/jpg-converter" element={<Suspense fallback={<PageLoader />}><JpgConverter /></Suspense>} />
-              <Route path="image/webp-converter" element={<Suspense fallback={<PageLoader />}><WebpConverter /></Suspense>} />
-              <Route path="image/color-palette" element={<Suspense fallback={<PageLoader />}><ColorPalette /></Suspense>} />
-              <Route path="image/favicon-generator" element={<Suspense fallback={<PageLoader />}><FaviconGenerator /></Suspense>} />
+              <Route
+                path="image"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <ImageModule />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="image/resize"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <ImageResizer />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="image/compress"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <ImageCompressor />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="image/qr-generator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <QrGenerator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="image/crop"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <ImageCropper />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="image/barcode-generator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <BarcodeGenerator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="image/jpg-converter"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <JpgConverter />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="image/webp-converter"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <WebpConverter />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="image/color-palette"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <ColorPalette />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="image/favicon-generator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <FaviconGenerator />
+                  </Suspense>
+                }
+              />
 
               {/* Text Module */}
-              <Route path="text" element={<Suspense fallback={<PageLoader />}><TextModule /></Suspense>} />
-              <Route path="text/word-counter" element={<Suspense fallback={<PageLoader />}><WordCounter /></Suspense>} />
-              <Route path="text/case-converter" element={<Suspense fallback={<PageLoader />}><CaseConverter /></Suspense>} />
-              <Route path="text/text-diff" element={<Suspense fallback={<PageLoader />}><TextDiff /></Suspense>} />
-              <Route path="text/markdown-editor" element={<Suspense fallback={<PageLoader />}><MarkdownEditor /></Suspense>} />
-              <Route path="text/slug-generator" element={<Suspense fallback={<PageLoader />}><SlugGenerator /></Suspense>} />
+              <Route
+                path="text"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <TextModule />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="text/word-counter"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <WordCounter />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="text/case-converter"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <CaseConverter />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="text/text-diff"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <TextDiff />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="text/markdown-editor"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <MarkdownEditor />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="text/slug-generator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <SlugGenerator />
+                  </Suspense>
+                }
+              />
 
               {/* AI Module */}
-              <Route path="ai" element={<Suspense fallback={<PageLoader />}><AiModule /></Suspense>} />
-              <Route path="ai/prompt-builder" element={<Suspense fallback={<PageLoader />}><PromptBuilder /></Suspense>} />
-              <Route path="ai/email-writer" element={<Suspense fallback={<PageLoader />}><EmailWriter /></Suspense>} />
-              <Route path="ai/resume-builder" element={<Suspense fallback={<PageLoader />}><ResumeBuilder /></Suspense>} />
-              <Route path="ai/cover-letter" element={<Suspense fallback={<PageLoader />}><CoverLetter /></Suspense>} />
+              <Route
+                path="ai"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <AiModule />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="ai/prompt-builder"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <PromptBuilder />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="ai/email-writer"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <EmailWriter />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="ai/resume-builder"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <ResumeBuilder />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="ai/cover-letter"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <CoverLetter />
+                  </Suspense>
+                }
+              />
 
               {/* Business Module */}
-              <Route path="business" element={<Suspense fallback={<PageLoader />}><BusinessModule /></Suspense>} />
-              <Route path="business/invoice-generator" element={<Suspense fallback={<PageLoader />}><InvoiceGenerator /></Suspense>} />
-              <Route path="business/roi-calculator" element={<Suspense fallback={<PageLoader />}><ROICalculator /></Suspense>} />
-              <Route path="business/gst-invoice" element={<Suspense fallback={<PageLoader />}><GstInvoice /></Suspense>} />
-              <Route path="business/profit-margin" element={<Suspense fallback={<PageLoader />}><ProfitMargin /></Suspense>} />
-              <Route path="business/break-even" element={<Suspense fallback={<PageLoader />}><BreakEven /></Suspense>} />
-              <Route path="business/quotation-generator" element={<Suspense fallback={<PageLoader />}><QuotationGenerator /></Suspense>} />
+              <Route
+                path="business"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <BusinessModule />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="business/invoice-generator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <InvoiceGenerator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="business/roi-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <ROICalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="business/gst-invoice"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <GstInvoice />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="business/profit-margin"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <ProfitMargin />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="business/break-even"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <BreakEven />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="business/quotation-generator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <QuotationGenerator />
+                  </Suspense>
+                }
+              />
 
               {/* Productivity Module */}
-              <Route path="productivity" element={<Suspense fallback={<PageLoader />}><ProductivityModule /></Suspense>} />
-              <Route path="productivity/pomodoro" element={<Suspense fallback={<PageLoader />}><PomodoroTimer /></Suspense>} />
-              <Route path="productivity/todo" element={<Suspense fallback={<PageLoader />}><TodoList /></Suspense>} />
-              <Route path="productivity/habit-tracker" element={<Suspense fallback={<PageLoader />}><HabitTracker /></Suspense>} />
-              <Route path="productivity/stopwatch" element={<Suspense fallback={<PageLoader />}><Stopwatch /></Suspense>} />
-              <Route path="productivity/countdown" element={<Suspense fallback={<PageLoader />}><Countdown /></Suspense>} />
-              <Route path="productivity/checklist" element={<Suspense fallback={<PageLoader />}><Checklist /></Suspense>} />
-              <Route path="productivity/notes" element={<Suspense fallback={<PageLoader />}><Notes /></Suspense>} />
+              <Route
+                path="productivity"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <ProductivityModule />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="productivity/pomodoro"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <PomodoroTimer />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="productivity/todo"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <TodoList />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="productivity/habit-tracker"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <HabitTracker />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="productivity/stopwatch"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <Stopwatch />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="productivity/countdown"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <Countdown />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="productivity/checklist"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <Checklist />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="productivity/notes"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <Notes />
+                  </Suspense>
+                }
+              />
 
               {/* Education Module */}
-              <Route path="education" element={<Suspense fallback={<PageLoader />}><EducationModule /></Suspense>} />
-              <Route path="education/scientific-calculator" element={<Suspense fallback={<PageLoader />}><ScientificCalculator /></Suspense>} />
-              <Route path="education/age-calculator" element={<Suspense fallback={<PageLoader />}><AgeCalculator /></Suspense>} />
-              <Route path="education/cgpa-calculator" element={<Suspense fallback={<PageLoader />}><CGPACalculator /></Suspense>} />
-              <Route path="education/percentage-calculator" element={<Suspense fallback={<PageLoader />}><PercentageCalculator /></Suspense>} />
-              <Route path="education/gpa-calculator" element={<Suspense fallback={<PageLoader />}><GPACalculator /></Suspense>} />
-              <Route path="education/unit-converter" element={<Suspense fallback={<PageLoader />}><UnitConverter /></Suspense>} />
+              <Route
+                path="education"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <EducationModule />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="education/scientific-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <ScientificCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="education/age-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <AgeCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="education/cgpa-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <CGPACalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="education/percentage-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <PercentageCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="education/gpa-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <GPACalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="education/unit-converter"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <UnitConverter />
+                  </Suspense>
+                }
+              />
 
               {/* Health Module */}
-              <Route path="health" element={<Suspense fallback={<PageLoader />}><HealthModule /></Suspense>} />
-              <Route path="health/bmi-calculator" element={<Suspense fallback={<PageLoader />}><BMICalculator /></Suspense>} />
-              <Route path="health/bmr-calculator" element={<Suspense fallback={<PageLoader />}><BMRCalculator /></Suspense>} />
-              <Route path="health/calorie-calculator" element={<Suspense fallback={<PageLoader />}><CalorieCalculator /></Suspense>} />
+              <Route
+                path="health"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <HealthModule />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="health/bmi-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <BMICalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="health/bmr-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <BMRCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="health/calorie-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <CalorieCalculator />
+                  </Suspense>
+                }
+              />
 
               {/* Travel Module */}
-              <Route path="travel" element={<Suspense fallback={<PageLoader />}><TravelModule /></Suspense>} />
-              <Route path="travel/timezone-converter" element={<Suspense fallback={<PageLoader />}><TimezoneConverter /></Suspense>} />
-              <Route path="travel/fuel-cost" element={<Suspense fallback={<PageLoader />}><FuelCostCalculator /></Suspense>} />
+              <Route
+                path="travel"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <TravelModule />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="travel/timezone-converter"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <TimezoneConverter />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="travel/fuel-cost"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <FuelCostCalculator />
+                  </Suspense>
+                }
+              />
 
               {/* Utilities Module */}
-              <Route path="utilities" element={<Suspense fallback={<PageLoader />}><UtilitiesModule /></Suspense>} />
-              <Route path="utilities/discount-calculator" element={<Suspense fallback={<PageLoader />}><DiscountCalculator /></Suspense>} />
-              <Route path="utilities/date-difference" element={<Suspense fallback={<PageLoader />}><DateDifference /></Suspense>} />
-              <Route path="utilities/color-converter" element={<Suspense fallback={<PageLoader />}><ColorConverter /></Suspense>} />
-              <Route path="utilities/random-number" element={<Suspense fallback={<PageLoader />}><RandomNumber /></Suspense>} />
+              <Route
+                path="utilities"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <UtilitiesModule />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="utilities/discount-calculator"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <DiscountCalculator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="utilities/date-difference"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <DateDifference />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="utilities/color-converter"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <ColorConverter />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="utilities/random-number"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <RandomNumber />
+                  </Suspense>
+                }
+              />
 
               {/* Conversion Module */}
-              <Route path="convert" element={<Suspense fallback={<PageLoader />}><ConversionModule /></Suspense>} />
-              <Route path="convert/length" element={<Suspense fallback={<PageLoader />}><LengthConverter /></Suspense>} />
-              <Route path="convert/weight" element={<Suspense fallback={<PageLoader />}><WeightConverter /></Suspense>} />
-              <Route path="convert/temperature" element={<Suspense fallback={<PageLoader />}><TemperatureConverter /></Suspense>} />
-              <Route path="convert/data-storage" element={<Suspense fallback={<PageLoader />}><DataStorageConverter /></Suspense>} />
+              <Route
+                path="convert"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <ConversionModule />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="convert/length"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <LengthConverter />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="convert/weight"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <WeightConverter />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="convert/temperature"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <TemperatureConverter />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="convert/data-storage"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <DataStorageConverter />
+                  </Suspense>
+                }
+              />
 
               {/* Wildcard Fallback */}
-              <Route path="*" element={<Suspense fallback={<PageLoader />}><ToolFallback /></Suspense>} />
+              <Route
+                path="*"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <ToolFallback />
+                  </Suspense>
+                }
+              />
             </Route>
           </Routes>
         </AnimatePresence>

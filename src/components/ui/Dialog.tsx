@@ -12,14 +12,7 @@ export interface DialogProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
-export function Dialog({
-  isOpen,
-  onClose,
-  title,
-  children,
-  footer,
-  size = 'md',
-}: DialogProps) {
+export function Dialog({ isOpen, onClose, title, children, footer, size = 'md' }: DialogProps) {
   const panelRef = useRef<HTMLDivElement>(null);
 
   // Close on Escape Key
@@ -83,8 +76,15 @@ export function Dialog({
             aria-labelledby="dialog-title"
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b" style={{ borderColor: 'var(--border-default)' }}>
-              <h2 id="dialog-title" className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>
+            <div
+              className="flex items-center justify-between px-6 py-4 border-b"
+              style={{ borderColor: 'var(--border-default)' }}
+            >
+              <h2
+                id="dialog-title"
+                className="text-lg font-bold"
+                style={{ color: 'var(--text-primary)' }}
+              >
                 {title}
               </h2>
               <button
@@ -97,7 +97,10 @@ export function Dialog({
             </div>
 
             {/* Scrollable Content Body */}
-            <div className="flex-1 overflow-y-auto px-6 py-5 text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+            <div
+              className="flex-1 overflow-y-auto px-6 py-5 text-sm leading-relaxed"
+              style={{ color: 'var(--text-secondary)' }}
+            >
               {children}
             </div>
 

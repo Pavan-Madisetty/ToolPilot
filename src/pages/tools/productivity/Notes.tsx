@@ -137,14 +137,22 @@ Date: 2026-07-10
           // Headers
           if (trimmed.startsWith('# ')) {
             return (
-              <h1 key={idx} className="text-2xl font-bold border-b pb-2 mb-4 mt-2" style={{ borderColor: 'var(--border-default)' }}>
+              <h1
+                key={idx}
+                className="text-2xl font-bold border-b pb-2 mb-4 mt-2"
+                style={{ borderColor: 'var(--border-default)' }}
+              >
                 {trimmed.replace('# ', '')}
               </h1>
             );
           }
           if (trimmed.startsWith('## ')) {
             return (
-              <h2 key={idx} className="text-xl font-bold border-b pb-1 mb-3 mt-4" style={{ borderColor: 'var(--border-default)' }}>
+              <h2
+                key={idx}
+                className="text-xl font-bold border-b pb-1 mb-3 mt-4"
+                style={{ borderColor: 'var(--border-default)' }}
+              >
                 {trimmed.replace('## ', '')}
               </h2>
             );
@@ -218,7 +226,10 @@ Date: 2026-07-10
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
         {/* Left Column: Note Listing */}
         <div className="lg:col-span-1 flex flex-col gap-4">
-          <Card className="flex flex-col gap-4" style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}>
+          <Card
+            className="flex flex-col gap-4"
+            style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}
+          >
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>
                 Notebook
@@ -231,7 +242,10 @@ Date: 2026-07-10
 
             {/* Search Bar */}
             <div className="relative">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none" style={{ color: 'var(--text-tertiary)' }}>
+              <span
+                className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+                style={{ color: 'var(--text-tertiary)' }}
+              >
                 <Search size={16} />
               </span>
               <input
@@ -267,7 +281,10 @@ Date: 2026-07-10
                       }}
                     >
                       <div className="flex items-start justify-between gap-2">
-                        <h4 className="font-bold text-sm truncate" style={{ color: 'var(--text-primary)' }}>
+                        <h4
+                          className="font-bold text-sm truncate"
+                          style={{ color: 'var(--text-primary)' }}
+                        >
                           {note.title || 'Untitled Note'}
                         </h4>
                         <button
@@ -278,10 +295,16 @@ Date: 2026-07-10
                           <Trash2 size={14} />
                         </button>
                       </div>
-                      <p className="text-xs truncate mt-1" style={{ color: 'var(--text-secondary)' }}>
+                      <p
+                        className="text-xs truncate mt-1"
+                        style={{ color: 'var(--text-secondary)' }}
+                      >
                         {snippet || 'Empty note...'}
                       </p>
-                      <span className="text-[10px] block mt-2 text-right" style={{ color: 'var(--text-tertiary)' }}>
+                      <span
+                        className="text-[10px] block mt-2 text-right"
+                        style={{ color: 'var(--text-tertiary)' }}
+                      >
                         {formatDate(note.updatedAt)}
                       </span>
                     </div>
@@ -304,9 +327,15 @@ Date: 2026-07-10
         {/* Right Column: Note Editor / Preview */}
         <div className="lg:col-span-2 flex flex-col gap-4">
           {activeNote ? (
-            <Card className="flex-1 flex flex-col gap-4" style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}>
+            <Card
+              className="flex-1 flex flex-col gap-4"
+              style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}
+            >
               {/* Note Header and Tabs */}
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b pb-4" style={{ borderColor: 'var(--border-default)' }}>
+              <div
+                className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b pb-4"
+                style={{ borderColor: 'var(--border-default)' }}
+              >
                 <div className="flex-1">
                   <input
                     type="text"
@@ -316,20 +345,30 @@ Date: 2026-07-10
                     value={activeNote.title}
                     onChange={(e) => handleUpdateNote('title', e.target.value)}
                   />
-                  <span className="text-[10px] mt-1 block" style={{ color: 'var(--text-tertiary)' }}>
+                  <span
+                    className="text-[10px] mt-1 block"
+                    style={{ color: 'var(--text-tertiary)' }}
+                  >
                     Last saved: {formatDate(activeNote.updatedAt)}
                   </span>
                 </div>
 
                 {/* Tabs & Copy */}
                 <div className="flex items-center gap-2 self-start md:self-center shrink-0">
-                  <div className="flex rounded-md p-0.5 border" style={{ background: 'var(--bg-elevated)', borderColor: 'var(--border-default)' }}>
+                  <div
+                    className="flex rounded-md p-0.5 border"
+                    style={{
+                      background: 'var(--bg-elevated)',
+                      borderColor: 'var(--border-default)',
+                    }}
+                  >
                     <button
                       onClick={() => setActiveTab('edit')}
                       className="px-3 py-1 text-xs font-semibold rounded flex items-center gap-1 transition-colors"
                       style={{
                         background: activeTab === 'edit' ? 'var(--bg-surface)' : 'transparent',
-                        color: activeTab === 'edit' ? 'var(--text-primary)' : 'var(--text-secondary)',
+                        color:
+                          activeTab === 'edit' ? 'var(--text-primary)' : 'var(--text-secondary)',
                       }}
                     >
                       <Edit2 size={12} />
@@ -340,7 +379,8 @@ Date: 2026-07-10
                       className="px-3 py-1 text-xs font-semibold rounded flex items-center gap-1 transition-colors"
                       style={{
                         background: activeTab === 'preview' ? 'var(--bg-surface)' : 'transparent',
-                        color: activeTab === 'preview' ? 'var(--text-primary)' : 'var(--text-secondary)',
+                        color:
+                          activeTab === 'preview' ? 'var(--text-primary)' : 'var(--text-secondary)',
                       }}
                     >
                       <Eye size={12} />

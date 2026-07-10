@@ -19,7 +19,10 @@ export default function NotFoundPage() {
     <>
       <Helmet>
         <title>404 - Page Not Found | ToolPilot</title>
-        <meta name="description" content="The page you are looking for does not exist. Use search to find standard calculators, JSON formatters, image resizers, and other tools." />
+        <meta
+          name="description"
+          content="The page you are looking for does not exist. Use search to find standard calculators, JSON formatters, image resizers, and other tools."
+        />
       </Helmet>
 
       <div className="container-app py-16 flex flex-col items-center justify-center text-center max-w-2xl mx-auto">
@@ -36,11 +39,15 @@ export default function NotFoundPage() {
         </div>
 
         {/* Header */}
-        <h1 className="text-4xl font-extrabold tracking-tight mb-2" style={{ color: 'var(--text-primary)' }}>
+        <h1
+          className="text-4xl font-extrabold tracking-tight mb-2"
+          style={{ color: 'var(--text-primary)' }}
+        >
           404 — Page Not Found
         </h1>
         <p className="text-base mb-8 max-w-md mx-auto" style={{ color: 'var(--text-secondary)' }}>
-          The link might be broken, or the tool is currently undergoing construction. Let's help you find what you need.
+          The link might be broken, or the tool is currently undergoing construction. Let's help you
+          find what you need.
         </p>
 
         {/* Search Bar */}
@@ -69,8 +76,14 @@ export default function NotFoundPage() {
         </form>
 
         {/* Popular Suggestions */}
-        <div className="w-full text-left border rounded-xl p-6 mb-8" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)' }}>
-          <h2 className="text-sm font-semibold mb-4 flex items-center gap-1.5" style={{ color: 'var(--text-primary)' }}>
+        <div
+          className="w-full text-left border rounded-xl p-6 mb-8"
+          style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)' }}
+        >
+          <h2
+            className="text-sm font-semibold mb-4 flex items-center gap-1.5"
+            style={{ color: 'var(--text-primary)' }}
+          >
             <HelpCircle className="w-4 h-4 text-blue-500" />
             Try one of these popular tools:
           </h2>

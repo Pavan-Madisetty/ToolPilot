@@ -144,10 +144,12 @@ export default function CronBuilder() {
         }
 
         // Found next match
-        list.push(current.toLocaleString('en-US', {
-          dateStyle: 'medium',
-          timeStyle: 'short',
-        }));
+        list.push(
+          current.toLocaleString('en-US', {
+            dateStyle: 'medium',
+            timeStyle: 'short',
+          })
+        );
         break;
       }
     }
@@ -159,7 +161,10 @@ export default function CronBuilder() {
       <div className="tool-layout lg:grid-cols-2 gap-6">
         {/* Left Column: Builder Settings */}
         <Card className="flex flex-col gap-5">
-          <span className="text-sm font-bold flex items-center gap-1.5" style={{ color: 'var(--text-primary)' }}>
+          <span
+            className="text-sm font-bold flex items-center gap-1.5"
+            style={{ color: 'var(--text-primary)' }}
+          >
             <Clock size={16} />
             <span>Cron Parameters</span>
           </span>
@@ -222,7 +227,10 @@ export default function CronBuilder() {
           </Card>
 
           <Card className="flex flex-col gap-3">
-            <span className="text-xs font-semibold flex items-center gap-1" style={{ color: 'var(--text-secondary)' }}>
+            <span
+              className="text-xs font-semibold flex items-center gap-1"
+              style={{ color: 'var(--text-secondary)' }}
+            >
               <HelpCircle size={14} />
               <span>Human Readable Translation</span>
             </span>
@@ -232,7 +240,10 @@ export default function CronBuilder() {
           </Card>
 
           <Card className="flex flex-col gap-4">
-            <span className="text-xs font-semibold flex items-center gap-1" style={{ color: 'var(--text-secondary)' }}>
+            <span
+              className="text-xs font-semibold flex items-center gap-1"
+              style={{ color: 'var(--text-secondary)' }}
+            >
               <Calendar size={14} />
               <span>Upcoming Scheduled Runs</span>
             </span>
@@ -247,7 +258,9 @@ export default function CronBuilder() {
                   }}
                 >
                   <span style={{ color: 'var(--text-secondary)' }}>Run #{idx + 1}</span>
-                  <span className="font-mono font-bold" style={{ color: 'var(--text-primary)' }}>{run}</span>
+                  <span className="font-mono font-bold" style={{ color: 'var(--text-primary)' }}>
+                    {run}
+                  </span>
                 </div>
               ))}
             </div>

@@ -23,7 +23,12 @@ export const TOOLS: ToolConfig[] = [
     metaDescription:
       'Free online EMI calculator. Calculate monthly EMI for home loan, car loan, personal loan with complete amortization schedule. Instant results.',
     keywords: ['emi calculator', 'loan emi', 'monthly emi', 'home loan emi', 'car loan emi'],
-    relatedTools: ['home-loan-calculator', 'personal-loan-calculator', 'loan-eligibility-calculator', 'compound-interest-calculator'],
+    relatedTools: [
+      'home-loan-calculator',
+      'personal-loan-calculator',
+      'loan-eligibility-calculator',
+      'compound-interest-calculator',
+    ],
   },
   {
     id: 'home-loan-calculator',
@@ -37,7 +42,12 @@ export const TOOLS: ToolConfig[] = [
     metaTitle: 'Home Loan Calculator - Calculate Housing Loan EMI | ToolPilot',
     metaDescription:
       'Calculate home loan EMI, total interest, and repayment amount instantly. Compare different tenures and interest rates.',
-    keywords: ['home loan calculator', 'housing loan emi', 'mortgage calculator', 'home loan interest'],
+    keywords: [
+      'home loan calculator',
+      'housing loan emi',
+      'mortgage calculator',
+      'home loan interest',
+    ],
     relatedTools: ['emi-calculator', 'loan-eligibility-calculator'],
   },
   {
@@ -49,7 +59,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'TruckIcon',
     tags: ['car loan', 'auto loan', 'vehicle loan', 'emi'],
     metaTitle: 'Car Loan Calculator - Calculate Vehicle Loan EMI | ToolPilot',
-    metaDescription: 'Calculate car loan EMI, down payment impact, and total interest paid. Plan your vehicle purchase.',
+    metaDescription:
+      'Calculate car loan EMI, down payment impact, and total interest paid. Plan your vehicle purchase.',
     keywords: ['car loan calculator', 'auto loan emi', 'vehicle loan calculator'],
     relatedTools: ['emi-calculator', 'personal-loan-calculator'],
   },
@@ -62,7 +73,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'UserIcon',
     tags: ['personal loan', 'unsecured loan', 'emi', 'credit'],
     metaTitle: 'Personal Loan Calculator - Monthly EMI & Interest | ToolPilot',
-    metaDescription: 'Calculate personal loan EMI, total interest and repayment schedule instantly.',
+    metaDescription:
+      'Calculate personal loan EMI, total interest and repayment schedule instantly.',
     keywords: ['personal loan calculator', 'personal loan emi'],
     relatedTools: ['emi-calculator', 'loan-eligibility-calculator'],
   },
@@ -75,7 +87,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'AcademicCapIcon',
     tags: ['education loan', 'student loan', 'emi'],
     metaTitle: 'Education Loan Calculator - Student Loan EMI | ToolPilot',
-    metaDescription: 'Calculate education loan EMI including moratorium period. Plan your student loan repayment.',
+    metaDescription:
+      'Calculate education loan EMI including moratorium period. Plan your student loan repayment.',
     keywords: ['education loan calculator', 'student loan emi'],
     relatedTools: ['emi-calculator'],
   },
@@ -88,7 +101,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'CheckBadgeIcon',
     tags: ['loan eligibility', 'income', 'dsr', 'loan amount'],
     metaTitle: 'Loan Eligibility Calculator - Check Loan Amount | ToolPilot',
-    metaDescription: 'Find out the maximum loan amount you are eligible for based on your income and existing obligations.',
+    metaDescription:
+      'Find out the maximum loan amount you are eligible for based on your income and existing obligations.',
     keywords: ['loan eligibility calculator', 'loan amount eligibility'],
     relatedTools: ['emi-calculator', 'home-loan-calculator'],
   },
@@ -103,7 +117,8 @@ export const TOOLS: ToolConfig[] = [
     isPopular: true,
     isFeatured: true,
     metaTitle: 'SIP Calculator - Calculate Mutual Fund SIP Returns | ToolPilot',
-    metaDescription: 'Free SIP calculator. Calculate returns on systematic investment plan with compound interest. See year-by-year growth.',
+    metaDescription:
+      'Free SIP calculator. Calculate returns on systematic investment plan with compound interest. See year-by-year growth.',
     keywords: ['sip calculator', 'sip returns', 'systematic investment plan', 'mutual fund sip'],
     relatedTools: ['fd-calculator', 'ppf-calculator', 'retirement-calculator'],
   },
@@ -117,7 +132,8 @@ export const TOOLS: ToolConfig[] = [
     tags: ['fd', 'fixed deposit', 'interest', 'maturity'],
     isPopular: true,
     metaTitle: 'FD Calculator - Fixed Deposit Maturity Calculator | ToolPilot',
-    metaDescription: 'Calculate fixed deposit maturity amount, total interest and effective yield. Compare compounding frequencies.',
+    metaDescription:
+      'Calculate fixed deposit maturity amount, total interest and effective yield. Compare compounding frequencies.',
     keywords: ['fd calculator', 'fixed deposit calculator', 'fd maturity', 'fd interest'],
     relatedTools: ['rd-calculator', 'ppf-calculator', 'compound-interest-calculator'],
   },
@@ -130,7 +146,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'ArrowTrendingUpIcon',
     tags: ['rd', 'recurring deposit', 'maturity', 'interest'],
     metaTitle: 'RD Calculator - Recurring Deposit Maturity Calculator | ToolPilot',
-    metaDescription: 'Calculate recurring deposit maturity amount and total interest earned. Plan monthly savings.',
+    metaDescription:
+      'Calculate recurring deposit maturity amount and total interest earned. Plan monthly savings.',
     keywords: ['rd calculator', 'recurring deposit calculator'],
     relatedTools: ['fd-calculator', 'sip-calculator'],
   },
@@ -144,8 +161,14 @@ export const TOOLS: ToolConfig[] = [
     tags: ['ppf', 'public provident fund', 'tax saving', '80c'],
     isPopular: true,
     metaTitle: 'PPF Calculator - Public Provident Fund Returns | ToolPilot',
-    metaDescription: 'Calculate PPF maturity amount with complete year-wise breakdown. Tax-free returns under Section 80C.',
-    keywords: ['ppf calculator', 'public provident fund calculator', 'ppf returns', '80c investment'],
+    metaDescription:
+      'Calculate PPF maturity amount with complete year-wise breakdown. Tax-free returns under Section 80C.',
+    keywords: [
+      'ppf calculator',
+      'public provident fund calculator',
+      'ppf returns',
+      '80c investment',
+    ],
     relatedTools: ['epf-calculator', 'fd-calculator', 'retirement-calculator'],
   },
   {
@@ -157,7 +180,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'BuildingOfficeIcon',
     tags: ['epf', 'employee provident fund', 'pf', 'retirement'],
     metaTitle: 'EPF Calculator - Employee Provident Fund Calculator | ToolPilot',
-    metaDescription: 'Calculate EPF corpus at retirement based on salary and contribution. Plan your retirement corpus.',
+    metaDescription:
+      'Calculate EPF corpus at retirement based on salary and contribution. Plan your retirement corpus.',
     keywords: ['epf calculator', 'pf calculator', 'employee provident fund'],
     relatedTools: ['ppf-calculator', 'retirement-calculator'],
   },
@@ -171,7 +195,8 @@ export const TOOLS: ToolConfig[] = [
     tags: ['retirement', 'planning', 'corpus', 'pension'],
     isFeatured: true,
     metaTitle: 'Retirement Calculator - Plan Your Retirement Corpus | ToolPilot',
-    metaDescription: 'Calculate how much you need to retire comfortably. Account for inflation and expected returns.',
+    metaDescription:
+      'Calculate how much you need to retire comfortably. Account for inflation and expected returns.',
     keywords: ['retirement calculator', 'retirement planning', 'retirement corpus'],
     relatedTools: ['sip-calculator', 'ppf-calculator', 'epf-calculator'],
   },
@@ -185,7 +210,8 @@ export const TOOLS: ToolConfig[] = [
     tags: ['gst', 'goods and services tax', 'tax', 'india'],
     isPopular: true,
     metaTitle: 'GST Calculator - Calculate GST Amount Online | ToolPilot',
-    metaDescription: 'Free GST calculator. Calculate GST at 5%, 12%, 18%, 28% rates. Find GST exclusive or inclusive amounts.',
+    metaDescription:
+      'Free GST calculator. Calculate GST at 5%, 12%, 18%, 28% rates. Find GST exclusive or inclusive amounts.',
     keywords: ['gst calculator', 'gst amount', 'goods and services tax calculator', 'gst india'],
     relatedTools: ['income-tax-calculator', 'salary-calculator'],
   },
@@ -200,8 +226,14 @@ export const TOOLS: ToolConfig[] = [
     isPopular: true,
     isFeatured: true,
     metaTitle: 'Income Tax Calculator FY 2024-25 - Old & New Regime | ToolPilot',
-    metaDescription: 'Calculate income tax for FY 2024-25 under both old and new tax regime. Compare and choose the best regime.',
-    keywords: ['income tax calculator', 'tax calculator india', 'new tax regime calculator', 'income tax 2024-25'],
+    metaDescription:
+      'Calculate income tax for FY 2024-25 under both old and new tax regime. Compare and choose the best regime.',
+    keywords: [
+      'income tax calculator',
+      'tax calculator india',
+      'new tax regime calculator',
+      'income tax 2024-25',
+    ],
     relatedTools: ['salary-calculator', 'hra-calculator', 'gst-calculator'],
   },
   {
@@ -214,8 +246,14 @@ export const TOOLS: ToolConfig[] = [
     tags: ['salary', 'ctc', 'take home', 'in-hand salary', 'pf', 'tds'],
     isPopular: true,
     metaTitle: 'Salary Calculator - Calculate Take Home Salary from CTC | ToolPilot',
-    metaDescription: 'Calculate your monthly in-hand salary from annual CTC. Includes PF, TDS, HRA, and all deductions.',
-    keywords: ['salary calculator', 'ctc to take home', 'in-hand salary calculator', 'salary breakup'],
+    metaDescription:
+      'Calculate your monthly in-hand salary from annual CTC. Includes PF, TDS, HRA, and all deductions.',
+    keywords: [
+      'salary calculator',
+      'ctc to take home',
+      'in-hand salary calculator',
+      'salary breakup',
+    ],
     relatedTools: ['income-tax-calculator', 'hra-calculator', 'epf-calculator'],
   },
   {
@@ -227,7 +265,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'HomeModernIcon',
     tags: ['hra', 'house rent allowance', 'tax exemption', '10(13a)'],
     metaTitle: 'HRA Calculator - House Rent Allowance Exemption | ToolPilot',
-    metaDescription: 'Calculate HRA exemption under Section 10(13A) based on salary, HRA received and rent paid.',
+    metaDescription:
+      'Calculate HRA exemption under Section 10(13A) based on salary, HRA received and rent paid.',
     keywords: ['hra calculator', 'house rent allowance', 'hra exemption'],
     relatedTools: ['salary-calculator', 'income-tax-calculator'],
   },
@@ -240,7 +279,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'ArrowTrendingUpIcon',
     tags: ['compound interest', 'compounding', 'investment growth'],
     metaTitle: 'Compound Interest Calculator - Calculate Investment Growth | ToolPilot',
-    metaDescription: 'Calculate compound interest with annual, quarterly, monthly, or daily compounding. See the power of compounding.',
+    metaDescription:
+      'Calculate compound interest with annual, quarterly, monthly, or daily compounding. See the power of compounding.',
     keywords: ['compound interest calculator', 'compounding calculator', 'interest calculator'],
     relatedTools: ['simple-interest-calculator', 'fd-calculator', 'sip-calculator'],
   },
@@ -253,7 +293,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'CalculatorIcon',
     tags: ['simple interest', 'interest', 'loan', 'finance'],
     metaTitle: 'Simple Interest Calculator - SI Formula Calculator | ToolPilot',
-    metaDescription: 'Calculate simple interest using P×R×T/100 formula. Find principal, rate or time instantly.',
+    metaDescription:
+      'Calculate simple interest using P×R×T/100 formula. Find principal, rate or time instantly.',
     keywords: ['simple interest calculator', 'si calculator', 'interest calculator'],
     relatedTools: ['compound-interest-calculator', 'fd-calculator'],
   },
@@ -268,8 +309,15 @@ export const TOOLS: ToolConfig[] = [
     isPopular: true,
     isFeatured: true,
     metaTitle: 'Currency Converter - Convert 170+ Currencies | ToolPilot',
-    metaDescription: 'Free currency converter with 170+ currencies. Convert USD to INR, EUR to USD and more with up-to-date rates.',
-    keywords: ['currency converter', 'forex converter', 'exchange rate', 'usd to inr', 'eur to usd'],
+    metaDescription:
+      'Free currency converter with 170+ currencies. Convert USD to INR, EUR to USD and more with up-to-date rates.',
+    keywords: [
+      'currency converter',
+      'forex converter',
+      'exchange rate',
+      'usd to inr',
+      'eur to usd',
+    ],
     relatedTools: ['inflation-calculator'],
   },
   {
@@ -281,7 +329,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'ArrowTrendingUpIcon',
     tags: ['inflation', 'purchasing power', 'cost of living', 'cpi'],
     metaTitle: 'Inflation Calculator - Calculate Future Value of Money | ToolPilot',
-    metaDescription: 'Calculate how inflation erodes purchasing power. Find the future value of any amount based on inflation rate.',
+    metaDescription:
+      'Calculate how inflation erodes purchasing power. Find the future value of any amount based on inflation rate.',
     keywords: ['inflation calculator', 'purchasing power calculator', 'inflation rate'],
     relatedTools: ['compound-interest-calculator', 'retirement-calculator'],
   },
@@ -295,7 +344,8 @@ export const TOOLS: ToolConfig[] = [
     tags: ['budget', 'planning', 'expenses', 'income', '50/30/20'],
     isFeatured: true,
     metaTitle: 'Budget Planner - Monthly Budget Calculator | ToolPilot',
-    metaDescription: 'Plan your monthly budget with the 50/30/20 rule. Track income, expenses and savings goal.',
+    metaDescription:
+      'Plan your monthly budget with the 50/30/20 rule. Track income, expenses and savings goal.',
     keywords: ['budget planner', 'monthly budget', 'budget calculator', '50 30 20 rule'],
     relatedTools: ['expense-tracker', 'savings-planner'],
   },
@@ -308,7 +358,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'GiftIcon',
     tags: ['gratuity', 'retirement benefit', 'employee benefit'],
     metaTitle: 'Gratuity Calculator - Calculate Gratuity Amount | ToolPilot',
-    metaDescription: 'Calculate gratuity amount as per Payment of Gratuity Act 1972 based on salary and years of service.',
+    metaDescription:
+      'Calculate gratuity amount as per Payment of Gratuity Act 1972 based on salary and years of service.',
     keywords: ['gratuity calculator', 'gratuity amount', 'gratuity formula'],
     relatedTools: ['epf-calculator', 'salary-calculator'],
   },
@@ -321,7 +372,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'ChartBarSquareIcon',
     tags: ['stock', 'average price', 'shares', 'investment'],
     metaTitle: 'Stock Average Calculator - Average Share Price Calculator | ToolPilot',
-    metaDescription: 'Calculate average purchase price of stocks when bought at different prices. Add unlimited transactions.',
+    metaDescription:
+      'Calculate average purchase price of stocks when bought at different prices. Add unlimited transactions.',
     keywords: ['stock average calculator', 'average share price', 'stock average price'],
     relatedTools: ['brokerage-calculator', 'crypto-profit-calculator'],
   },
@@ -334,8 +386,14 @@ export const TOOLS: ToolConfig[] = [
     icon: 'ArrowsRightLeftIcon',
     tags: ['brokerage', 'trading', 'zerodha', 'charges', 'stt'],
     metaTitle: 'Brokerage Calculator - Calculate Trading Charges | ToolPilot',
-    metaDescription: 'Calculate total brokerage charges including STT, GST, stamp duty for equity, F&O and commodity trading.',
-    keywords: ['brokerage calculator', 'trading charges', 'zerodha brokerage', 'stock trading cost'],
+    metaDescription:
+      'Calculate total brokerage charges including STT, GST, stamp duty for equity, F&O and commodity trading.',
+    keywords: [
+      'brokerage calculator',
+      'trading charges',
+      'zerodha brokerage',
+      'stock trading cost',
+    ],
     relatedTools: ['stock-average-calculator'],
   },
   {
@@ -347,7 +405,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'UsersIcon',
     tags: ['tip', 'bill split', 'restaurant', 'service charge'],
     metaTitle: 'Tip Calculator - Calculate Tip & Split Bill | ToolPilot',
-    metaDescription: 'Calculate tip amount and split restaurant bills equally. Choose tip percentage and number of people.',
+    metaDescription:
+      'Calculate tip amount and split restaurant bills equally. Choose tip percentage and number of people.',
     keywords: ['tip calculator', 'tip amount', 'bill splitter', 'restaurant tip'],
     relatedTools: ['bill-splitter'],
   },
@@ -360,7 +419,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'UsersIcon',
     tags: ['bill split', 'group expense', 'shared cost', 'divide bill'],
     metaTitle: 'Bill Splitter - Split Bills Among Friends | ToolPilot',
-    metaDescription: 'Split restaurant bills, travel expenses or any cost among friends. Supports custom split ratios.',
+    metaDescription:
+      'Split restaurant bills, travel expenses or any cost among friends. Supports custom split ratios.',
     keywords: ['bill splitter', 'split bill', 'expense splitter'],
     relatedTools: ['tip-calculator', 'expense-tracker'],
   },
@@ -373,7 +433,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'ClipboardDocumentListIcon',
     tags: ['expense', 'budget', 'spending', 'tracker', 'finance'],
     metaTitle: 'Expense Tracker - Track Daily Spending | ToolPilot',
-    metaDescription: 'Track daily expenses by category. View spending patterns and stay within your budget.',
+    metaDescription:
+      'Track daily expenses by category. View spending patterns and stay within your budget.',
     keywords: ['expense tracker', 'expense manager', 'spending tracker'],
     relatedTools: ['budget-planner', 'bill-splitter'],
   },
@@ -386,7 +447,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'BanknotesIcon',
     tags: ['savings', 'goal', 'planning', 'emergency fund'],
     metaTitle: 'Savings Planner - Plan Your Savings Goals | ToolPilot',
-    metaDescription: 'Set savings goals and calculate how much to save monthly. Track progress toward your financial goals.',
+    metaDescription:
+      'Set savings goals and calculate how much to save monthly. Track progress toward your financial goals.',
     keywords: ['savings planner', 'savings goal calculator', 'savings calculator'],
     relatedTools: ['budget-planner', 'sip-calculator'],
   },
@@ -399,7 +461,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'ScaleIcon',
     tags: ['net worth', 'assets', 'liabilities', 'wealth'],
     metaTitle: 'Net Worth Calculator - Calculate Your Total Net Worth | ToolPilot',
-    metaDescription: 'Calculate your total net worth by listing all assets and liabilities. Track your financial health.',
+    metaDescription:
+      'Calculate your total net worth by listing all assets and liabilities. Track your financial health.',
     keywords: ['net worth calculator', 'assets liabilities calculator', 'wealth calculator'],
     relatedTools: ['budget-planner', 'retirement-calculator'],
   },
@@ -412,7 +475,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'StarIcon',
     tags: ['gold', 'investment', 'sgb', 'gold etf', 'returns'],
     metaTitle: 'Gold Investment Calculator - Gold Returns Calculator | ToolPilot',
-    metaDescription: 'Calculate returns on gold investment. Compare physical gold, Gold ETF and Sovereign Gold Bond returns.',
+    metaDescription:
+      'Calculate returns on gold investment. Compare physical gold, Gold ETF and Sovereign Gold Bond returns.',
     keywords: ['gold investment calculator', 'gold returns', 'sgb calculator'],
     relatedTools: ['sip-calculator', 'fd-calculator'],
   },
@@ -425,7 +489,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'CurrencyBitcoinIcon',
     tags: ['crypto', 'bitcoin', 'profit', 'loss', '30% tax'],
     metaTitle: 'Crypto Profit Calculator - Calculate Crypto Gains & Tax | ToolPilot',
-    metaDescription: 'Calculate cryptocurrency profit or loss and applicable 30% tax under Indian law. Works for Bitcoin, ETH and all cryptos.',
+    metaDescription:
+      'Calculate cryptocurrency profit or loss and applicable 30% tax under Indian law. Works for Bitcoin, ETH and all cryptos.',
     keywords: ['crypto profit calculator', 'cryptocurrency calculator', 'crypto tax india'],
     relatedTools: ['stock-average-calculator', 'income-tax-calculator'],
   },
@@ -438,7 +503,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'ArrowPathIcon',
     tags: ['subscription', 'recurring', 'netflix', 'saas', 'monthly cost'],
     metaTitle: 'Subscription Tracker - Track All Your Subscriptions | ToolPilot',
-    metaDescription: 'Track all your monthly and annual subscriptions. See total spend and upcoming renewals.',
+    metaDescription:
+      'Track all your monthly and annual subscriptions. See total spend and upcoming renewals.',
     keywords: ['subscription tracker', 'subscription manager', 'monthly subscription cost'],
     relatedTools: ['expense-tracker', 'budget-planner'],
   },
@@ -451,7 +517,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'CreditCardIcon',
     tags: ['credit card', 'emi', 'no cost emi', 'interest'],
     metaTitle: 'Credit Card EMI Calculator - Calculate Card EMI | ToolPilot',
-    metaDescription: 'Calculate credit card EMI options. Compare converting to EMI vs full payment. Find the best option.',
+    metaDescription:
+      'Calculate credit card EMI options. Compare converting to EMI vs full payment. Find the best option.',
     keywords: ['credit card emi calculator', 'card emi', 'no cost emi calculator'],
     relatedTools: ['emi-calculator', 'personal-loan-calculator'],
   },
@@ -464,7 +531,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'ChartPieIcon',
     tags: ['mutual fund', 'lump sum', 'investment', 'nav', 'returns'],
     metaTitle: 'Mutual Fund Calculator - Lump Sum Returns Calculator | ToolPilot',
-    metaDescription: 'Calculate returns on lump sum mutual fund investment. Enter amount, expected return and investment period.',
+    metaDescription:
+      'Calculate returns on lump sum mutual fund investment. Enter amount, expected return and investment period.',
     keywords: ['mutual fund calculator', 'lump sum calculator', 'mutual fund returns'],
     relatedTools: ['sip-calculator', 'fd-calculator'],
   },
@@ -477,7 +545,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'ArrowsRightLeftIcon',
     tags: ['loan comparison', 'compare loans', 'best loan', 'interest rate'],
     metaTitle: 'Loan Comparison Tool - Compare Multiple Loan Offers | ToolPilot',
-    metaDescription: 'Compare multiple loan offers side by side. Find the cheapest loan by total cost comparison.',
+    metaDescription:
+      'Compare multiple loan offers side by side. Find the cheapest loan by total cost comparison.',
     keywords: ['loan comparison', 'compare loans', 'best loan offer'],
     relatedTools: ['emi-calculator', 'home-loan-calculator'],
   },
@@ -496,7 +565,8 @@ export const TOOLS: ToolConfig[] = [
     isPopular: true,
     isFeatured: true,
     metaTitle: 'JSON Formatter & Validator - Beautify JSON Online | ToolPilot',
-    metaDescription: 'Free JSON formatter and validator. Beautify, minify, validate and fix JSON. Syntax highlighting with error detection.',
+    metaDescription:
+      'Free JSON formatter and validator. Beautify, minify, validate and fix JSON. Syntax highlighting with error detection.',
     keywords: ['json formatter', 'json validator', 'json beautifier', 'format json online'],
     relatedTools: ['json-diff', 'json-to-csv', 'csv-to-json', 'yaml-formatter'],
   },
@@ -510,7 +580,8 @@ export const TOOLS: ToolConfig[] = [
     tags: ['base64', 'encode', 'decode', 'encoding'],
     isPopular: true,
     metaTitle: 'Base64 Encoder Decoder - Encode/Decode Online | ToolPilot',
-    metaDescription: 'Free Base64 encoder and decoder. Convert text and files to/from Base64 encoding instantly.',
+    metaDescription:
+      'Free Base64 encoder and decoder. Convert text and files to/from Base64 encoding instantly.',
     keywords: ['base64 encoder', 'base64 decoder', 'base64 online', 'encode decode base64'],
     relatedTools: ['url-encoder', 'hash-generator', 'jwt-decoder'],
   },
@@ -524,7 +595,8 @@ export const TOOLS: ToolConfig[] = [
     tags: ['url', 'encode', 'decode', 'percent encoding', 'uri'],
     isPopular: true,
     metaTitle: 'URL Encoder Decoder - Encode/Decode URLs Online | ToolPilot',
-    metaDescription: 'Free URL encoder and decoder. Percent-encode special characters in URLs and query parameters.',
+    metaDescription:
+      'Free URL encoder and decoder. Percent-encode special characters in URLs and query parameters.',
     keywords: ['url encoder', 'url decoder', 'url encode decode', 'percent encoding'],
     relatedTools: ['base64', 'jwt-decoder'],
   },
@@ -538,7 +610,8 @@ export const TOOLS: ToolConfig[] = [
     tags: ['jwt', 'json web token', 'decode', 'auth', 'bearer'],
     isPopular: true,
     metaTitle: 'JWT Decoder - Decode & Inspect JSON Web Tokens | ToolPilot',
-    metaDescription: 'Free JWT decoder. Inspect header, payload and verify JWT token structure. View claims and expiry.',
+    metaDescription:
+      'Free JWT decoder. Inspect header, payload and verify JWT token structure. View claims and expiry.',
     keywords: ['jwt decoder', 'json web token decoder', 'jwt inspector', 'decode jwt'],
     relatedTools: ['base64', 'hash-generator'],
   },
@@ -552,7 +625,8 @@ export const TOOLS: ToolConfig[] = [
     tags: ['uuid', 'guid', 'unique id', 'v4', 'random'],
     isPopular: true,
     metaTitle: 'UUID Generator - Generate UUIDs Online | ToolPilot',
-    metaDescription: 'Generate UUID v1, v4, v5 instantly. Bulk generate multiple UUIDs. Copy with one click.',
+    metaDescription:
+      'Generate UUID v1, v4, v5 instantly. Bulk generate multiple UUIDs. Copy with one click.',
     keywords: ['uuid generator', 'guid generator', 'random uuid', 'generate uuid online'],
     relatedTools: ['hash-generator', 'password-generator'],
   },
@@ -566,7 +640,8 @@ export const TOOLS: ToolConfig[] = [
     tags: ['hash', 'md5', 'sha', 'sha256', 'checksum', 'crypto'],
     isPopular: true,
     metaTitle: 'Hash Generator - MD5, SHA256, SHA512 Hash Tool | ToolPilot',
-    metaDescription: 'Generate MD5, SHA-1, SHA-256, SHA-512 hashes online. Verify file integrity and checksums.',
+    metaDescription:
+      'Generate MD5, SHA-1, SHA-256, SHA-512 hashes online. Verify file integrity and checksums.',
     keywords: ['hash generator', 'md5 generator', 'sha256 generator', 'checksum calculator'],
     relatedTools: ['uuid-generator', 'base64', 'password-generator'],
   },
@@ -581,7 +656,8 @@ export const TOOLS: ToolConfig[] = [
     isPopular: true,
     isFeatured: true,
     metaTitle: 'Regex Tester - Test Regular Expressions Online | ToolPilot',
-    metaDescription: 'Free regex tester with real-time match highlighting. Test JavaScript, Python, PCRE regex patterns with explanation.',
+    metaDescription:
+      'Free regex tester with real-time match highlighting. Test JavaScript, Python, PCRE regex patterns with explanation.',
     keywords: ['regex tester', 'regular expression tester', 'regex online', 'regex matcher'],
     relatedTools: ['text-diff', 'find-replace'],
   },
@@ -594,7 +670,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'ClockIcon',
     tags: ['timestamp', 'unix time', 'epoch', 'date conversion'],
     metaTitle: 'Timestamp Converter - Unix to Date Time Converter | ToolPilot',
-    metaDescription: 'Convert Unix timestamps to human-readable dates and vice versa. Support for all time zones.',
+    metaDescription:
+      'Convert Unix timestamps to human-readable dates and vice versa. Support for all time zones.',
     keywords: ['timestamp converter', 'unix timestamp', 'epoch converter', 'unix to date'],
     relatedTools: ['unix-converter'],
   },
@@ -608,7 +685,8 @@ export const TOOLS: ToolConfig[] = [
     tags: ['color', 'hex', 'rgb', 'hsl', 'color picker', 'css colors'],
     isPopular: true,
     metaTitle: 'Color Picker & Converter - HEX RGB HSL | ToolPilot',
-    metaDescription: 'Free color picker. Convert colors between HEX, RGB, HSL, HSV formats. Pick any color from palette.',
+    metaDescription:
+      'Free color picker. Convert colors between HEX, RGB, HSL, HSV formats. Pick any color from palette.',
     keywords: ['color picker', 'color converter', 'hex to rgb', 'rgb to hex', 'hsl converter'],
     relatedTools: ['gradient-generator', 'css-formatter'],
   },
@@ -622,7 +700,8 @@ export const TOOLS: ToolConfig[] = [
     tags: ['sql', 'format', 'query', 'database', 'mysql', 'postgresql'],
     isPopular: true,
     metaTitle: 'SQL Formatter - Beautify SQL Queries Online | ToolPilot',
-    metaDescription: 'Free SQL formatter. Beautify MySQL, PostgreSQL, SQLite, SQL Server queries with proper indentation.',
+    metaDescription:
+      'Free SQL formatter. Beautify MySQL, PostgreSQL, SQLite, SQL Server queries with proper indentation.',
     keywords: ['sql formatter', 'sql beautifier', 'format sql', 'sql pretty print'],
     relatedTools: ['json-formatter', 'html-formatter'],
   },
@@ -636,7 +715,8 @@ export const TOOLS: ToolConfig[] = [
     tags: ['diff', 'compare', 'text comparison', 'code diff'],
     isPopular: true,
     metaTitle: 'Diff Checker - Compare Two Texts Online | ToolPilot',
-    metaDescription: 'Free diff checker. Compare two text files or code blocks. See additions, deletions and changes highlighted.',
+    metaDescription:
+      'Free diff checker. Compare two text files or code blocks. See additions, deletions and changes highlighted.',
     keywords: ['diff checker', 'text diff', 'code compare', 'text comparison online'],
     relatedTools: ['json-diff', 'text-diff'],
   },
@@ -650,8 +730,14 @@ export const TOOLS: ToolConfig[] = [
     tags: ['password', 'security', 'strong password', 'random password'],
     isPopular: true,
     metaTitle: 'Password Generator - Generate Strong Passwords | ToolPilot',
-    metaDescription: 'Generate strong, secure random passwords. Set length, include symbols, numbers, uppercase. Bulk generation.',
-    keywords: ['password generator', 'strong password generator', 'random password', 'secure password'],
+    metaDescription:
+      'Generate strong, secure random passwords. Set length, include symbols, numbers, uppercase. Bulk generation.',
+    keywords: [
+      'password generator',
+      'strong password generator',
+      'random password',
+      'secure password',
+    ],
     relatedTools: ['uuid-generator', 'hash-generator'],
   },
   {
@@ -663,7 +749,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'DocumentTextIcon',
     tags: ['lorem ipsum', 'placeholder', 'dummy text', 'lipsum'],
     metaTitle: 'Lorem Ipsum Generator - Generate Placeholder Text | ToolPilot',
-    metaDescription: 'Generate Lorem Ipsum placeholder text. Choose words, sentences or paragraphs. Custom starting text.',
+    metaDescription:
+      'Generate Lorem Ipsum placeholder text. Choose words, sentences or paragraphs. Custom starting text.',
     keywords: ['lorem ipsum generator', 'placeholder text', 'dummy text generator', 'lipsum'],
     relatedTools: ['word-counter', 'random-text'],
   },
@@ -676,8 +763,14 @@ export const TOOLS: ToolConfig[] = [
     icon: 'PaintBrushIcon',
     tags: ['gradient', 'css gradient', 'linear gradient', 'radial gradient'],
     metaTitle: 'CSS Gradient Generator - Create Beautiful Gradients | ToolPilot',
-    metaDescription: 'Create CSS linear and radial gradients visually. Copy CSS code instantly. Live preview.',
-    keywords: ['css gradient generator', 'gradient maker', 'linear gradient', 'background gradient'],
+    metaDescription:
+      'Create CSS linear and radial gradients visually. Copy CSS code instantly. Live preview.',
+    keywords: [
+      'css gradient generator',
+      'gradient maker',
+      'linear gradient',
+      'background gradient',
+    ],
     relatedTools: ['color-picker'],
   },
   {
@@ -689,7 +782,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'ClockIcon',
     tags: ['cron', 'cron expression', 'schedule', 'unix cron'],
     metaTitle: 'Cron Expression Builder - Build Cron Jobs Online | ToolPilot',
-    metaDescription: 'Build cron expressions visually. Get human-readable descriptions. Validate next execution times.',
+    metaDescription:
+      'Build cron expressions visually. Get human-readable descriptions. Validate next execution times.',
     keywords: ['cron builder', 'cron expression', 'cron generator', 'cron validator'],
     relatedTools: ['timestamp-converter'],
   },
@@ -702,7 +796,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'DocumentTextIcon',
     tags: ['markdown', 'preview', 'md', 'github markdown'],
     metaTitle: 'Markdown Preview - Live Markdown Editor | ToolPilot',
-    metaDescription: 'Write Markdown with live preview. GitHub Flavored Markdown support. Export to HTML.',
+    metaDescription:
+      'Write Markdown with live preview. GitHub Flavored Markdown support. Export to HTML.',
     keywords: ['markdown preview', 'markdown editor', 'live markdown', 'md preview'],
     relatedTools: ['html-formatter', 'text-diff'],
   },
@@ -721,7 +816,8 @@ export const TOOLS: ToolConfig[] = [
     isPopular: true,
     isFeatured: true,
     metaTitle: 'Image Resizer - Resize Photos Online for Free | ToolPilot',
-    metaDescription: 'Resize images online. Set custom dimensions, maintain aspect ratio. No upload, 100% private browser-based.',
+    metaDescription:
+      'Resize images online. Set custom dimensions, maintain aspect ratio. No upload, 100% private browser-based.',
     keywords: ['image resizer', 'resize image online', 'photo resizer', 'resize photo'],
     relatedTools: ['image-compress', 'image-crop', 'jpg-converter'],
   },
@@ -736,7 +832,8 @@ export const TOOLS: ToolConfig[] = [
     isPopular: true,
     isFeatured: true,
     metaTitle: 'Image Compressor - Reduce Image Size Online | ToolPilot',
-    metaDescription: 'Compress images online without losing quality. Reduce file size by up to 90%. Supports JPG, PNG, WEBP.',
+    metaDescription:
+      'Compress images online without losing quality. Reduce file size by up to 90%. Supports JPG, PNG, WEBP.',
     keywords: ['image compressor', 'compress image online', 'reduce image size', 'image optimizer'],
     relatedTools: ['image-resize', 'webp-converter'],
   },
@@ -749,7 +846,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'ScissorsIcon',
     tags: ['crop image', 'trim photo', 'aspect ratio', 'square crop'],
     metaTitle: 'Image Cropper - Crop Photos Online for Free | ToolPilot',
-    metaDescription: 'Crop images to any size or preset aspect ratios (1:1, 16:9, 4:3). Free, browser-based, no upload.',
+    metaDescription:
+      'Crop images to any size or preset aspect ratios (1:1, 16:9, 4:3). Free, browser-based, no upload.',
     keywords: ['image cropper', 'crop image online', 'photo cropper', 'crop photo'],
     relatedTools: ['image-resize', 'image-compress'],
   },
@@ -764,7 +862,8 @@ export const TOOLS: ToolConfig[] = [
     isPopular: true,
     isFeatured: true,
     metaTitle: 'QR Code Generator - Create QR Codes Free | ToolPilot',
-    metaDescription: 'Generate QR codes for URLs, text, WiFi, contact info, email and more. Download as PNG or SVG.',
+    metaDescription:
+      'Generate QR codes for URLs, text, WiFi, contact info, email and more. Download as PNG or SVG.',
     keywords: ['qr code generator', 'create qr code', 'free qr code', 'qr code maker'],
     relatedTools: ['barcode-generator'],
   },
@@ -777,7 +876,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'QrCodeIcon',
     tags: ['barcode', 'ean', 'upc', 'code128', 'isbn'],
     metaTitle: 'Barcode Generator - Create Barcodes Online Free | ToolPilot',
-    metaDescription: 'Generate barcodes in EAN-13, EAN-8, UPC-A, CODE-128, CODE-39 formats. Download as SVG or PNG.',
+    metaDescription:
+      'Generate barcodes in EAN-13, EAN-8, UPC-A, CODE-128, CODE-39 formats. Download as SVG or PNG.',
     keywords: ['barcode generator', 'create barcode', 'ean barcode', 'upc barcode'],
     relatedTools: ['qr-generator'],
   },
@@ -791,7 +891,8 @@ export const TOOLS: ToolConfig[] = [
     tags: ['jpg', 'jpeg', 'convert', 'png to jpg', 'webp to jpg'],
     isPopular: true,
     metaTitle: 'Image to JPG Converter - Convert PNG WEBP to JPG | ToolPilot',
-    metaDescription: 'Convert PNG, WEBP, GIF, BMP to JPG online. Set quality. Free, fast and private.',
+    metaDescription:
+      'Convert PNG, WEBP, GIF, BMP to JPG online. Set quality. Free, fast and private.',
     keywords: ['png to jpg', 'webp to jpg', 'convert to jpg', 'image to jpeg'],
     relatedTools: ['webp-converter', 'image-compress', 'image-resize'],
   },
@@ -804,7 +905,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'PhotoIcon',
     tags: ['webp', 'convert', 'jpg to webp', 'png to webp', 'web optimization'],
     metaTitle: 'Image to WEBP Converter - Convert JPG PNG to WEBP | ToolPilot',
-    metaDescription: 'Convert JPG, PNG images to modern WEBP format. Reduce file size by 30%. Free online.',
+    metaDescription:
+      'Convert JPG, PNG images to modern WEBP format. Reduce file size by 30%. Free online.',
     keywords: ['webp converter', 'jpg to webp', 'png to webp', 'convert to webp'],
     relatedTools: ['jpg-converter', 'image-compress'],
   },
@@ -817,7 +919,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'SwatchIcon',
     tags: ['color palette', 'extract colors', 'dominant color', 'image colors'],
     metaTitle: 'Color Palette Extractor - Extract Colors from Image | ToolPilot',
-    metaDescription: 'Extract dominant colors from any image. Get HEX, RGB, HSL values. Generate color schemes.',
+    metaDescription:
+      'Extract dominant colors from any image. Get HEX, RGB, HSL values. Generate color schemes.',
     keywords: ['color palette extractor', 'extract colors from image', 'image color picker'],
     relatedTools: ['color-picker', 'gradient-generator'],
   },
@@ -830,7 +933,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'WindowIcon',
     tags: ['favicon', 'ico', 'browser icon', 'website icon'],
     metaTitle: 'Favicon Generator - Create Favicon from Image | ToolPilot',
-    metaDescription: 'Generate favicon.ico, apple-touch-icon and all required favicon sizes from any image. Download zip.',
+    metaDescription:
+      'Generate favicon.ico, apple-touch-icon and all required favicon sizes from any image. Download zip.',
     keywords: ['favicon generator', 'create favicon', 'favicon maker', 'ico generator'],
     relatedTools: ['image-resize', 'qr-generator'],
   },
@@ -849,7 +953,8 @@ export const TOOLS: ToolConfig[] = [
     isPopular: true,
     isFeatured: true,
     metaTitle: 'Word Counter - Count Words, Characters & Reading Time | ToolPilot',
-    metaDescription: 'Free word counter. Count words, characters, sentences, paragraphs and estimate reading time. Instant results.',
+    metaDescription:
+      'Free word counter. Count words, characters, sentences, paragraphs and estimate reading time. Instant results.',
     keywords: ['word counter', 'character counter', 'word count online', 'count words'],
     relatedTools: ['character-counter', 'reading-time', 'case-converter'],
   },
@@ -863,8 +968,14 @@ export const TOOLS: ToolConfig[] = [
     tags: ['case', 'uppercase', 'lowercase', 'title case', 'camelcase', 'snake_case'],
     isPopular: true,
     metaTitle: 'Case Converter - Convert Text Case Online | ToolPilot',
-    metaDescription: 'Convert text to UPPERCASE, lowercase, Title Case, camelCase, snake_case, PascalCase instantly.',
-    keywords: ['case converter', 'text case converter', 'uppercase lowercase', 'camelcase converter'],
+    metaDescription:
+      'Convert text to UPPERCASE, lowercase, Title Case, camelCase, snake_case, PascalCase instantly.',
+    keywords: [
+      'case converter',
+      'text case converter',
+      'uppercase lowercase',
+      'camelcase converter',
+    ],
     relatedTools: ['word-counter', 'slug-generator'],
   },
   {
@@ -876,7 +987,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'LinkIcon',
     tags: ['slug', 'url slug', 'permalink', 'seo url', 'kebab-case'],
     metaTitle: 'Slug Generator - Generate URL Slugs Online | ToolPilot',
-    metaDescription: 'Generate SEO-friendly URL slugs from any text. Removes special characters, converts spaces to hyphens.',
+    metaDescription:
+      'Generate SEO-friendly URL slugs from any text. Removes special characters, converts spaces to hyphens.',
     keywords: ['slug generator', 'url slug', 'permalink generator', 'seo url generator'],
     relatedTools: ['case-converter', 'word-counter'],
   },
@@ -889,7 +1001,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'DocumentDuplicateIcon',
     tags: ['diff', 'compare text', 'text difference', 'compare files'],
     metaTitle: 'Text Diff - Compare Two Texts and Find Differences | ToolPilot',
-    metaDescription: 'Compare two text blocks online. Highlight additions, deletions and changes with color coding.',
+    metaDescription:
+      'Compare two text blocks online. Highlight additions, deletions and changes with color coding.',
     keywords: ['text diff', 'text comparison', 'compare text online', 'find text differences'],
     relatedTools: ['diff-checker', 'find-replace'],
   },
@@ -902,7 +1015,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'PencilSquareIcon',
     tags: ['markdown', 'editor', 'md', 'github markdown', 'preview'],
     metaTitle: 'Markdown Editor - Free Online Markdown Editor | ToolPilot',
-    metaDescription: 'Free online Markdown editor with live preview. Export to HTML or PDF. GitHub Flavored Markdown.',
+    metaDescription:
+      'Free online Markdown editor with live preview. Export to HTML or PDF. GitHub Flavored Markdown.',
     keywords: ['markdown editor', 'online markdown editor', 'free markdown', 'md editor'],
     relatedTools: ['word-counter', 'markdown-preview'],
   },
@@ -921,7 +1035,8 @@ export const TOOLS: ToolConfig[] = [
     isPopular: true,
     isFeatured: true,
     metaTitle: 'AI Prompt Builder - Build Perfect ChatGPT Prompts | ToolPilot',
-    metaDescription: 'Build structured prompts for ChatGPT, Google Gemini, and Claude. Includes role, context, task and output format.',
+    metaDescription:
+      'Build structured prompts for ChatGPT, Google Gemini, and Claude. Includes role, context, task and output format.',
     keywords: ['ai prompt builder', 'chatgpt prompt', 'prompt engineering', 'prompt generator'],
     relatedTools: ['email-writer', 'blog-outline'],
   },
@@ -935,8 +1050,14 @@ export const TOOLS: ToolConfig[] = [
     tags: ['email', 'professional email', 'business email', 'email template'],
     isPopular: true,
     metaTitle: 'Email Writer - Generate Professional Emails | ToolPilot',
-    metaDescription: 'Generate professional business emails instantly. Choose tone, purpose and get a ready-to-send email.',
-    keywords: ['email writer', 'email generator', 'professional email template', 'business email writer'],
+    metaDescription:
+      'Generate professional business emails instantly. Choose tone, purpose and get a ready-to-send email.',
+    keywords: [
+      'email writer',
+      'email generator',
+      'professional email template',
+      'business email writer',
+    ],
     relatedTools: ['prompt-builder', 'cover-letter'],
   },
   {
@@ -950,7 +1071,8 @@ export const TOOLS: ToolConfig[] = [
     isPopular: true,
     isFeatured: true,
     metaTitle: 'Resume Builder - Create ATS-Friendly Resume Free | ToolPilot',
-    metaDescription: 'Build a professional, ATS-optimized resume instantly. Multiple templates. Download as PDF.',
+    metaDescription:
+      'Build a professional, ATS-optimized resume instantly. Multiple templates. Download as PDF.',
     keywords: ['resume builder', 'cv builder', 'free resume maker', 'ats resume'],
     relatedTools: ['cover-letter', 'email-writer'],
   },
@@ -963,7 +1085,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'PaperAirplaneIcon',
     tags: ['cover letter', 'job application', 'employment', 'hr'],
     metaTitle: 'Cover Letter Generator - Free Cover Letter Maker | ToolPilot',
-    metaDescription: 'Generate a personalized cover letter for any job. Input job description and get a tailored letter.',
+    metaDescription:
+      'Generate a personalized cover letter for any job. Input job description and get a tailored letter.',
     keywords: ['cover letter generator', 'cover letter maker', 'job application letter'],
     relatedTools: ['resume-builder', 'email-writer'],
   },
@@ -982,7 +1105,8 @@ export const TOOLS: ToolConfig[] = [
     isPopular: true,
     isFeatured: true,
     metaTitle: 'Pomodoro Timer - Free Focus Timer Online | ToolPilot',
-    metaDescription: 'Free Pomodoro timer. 25-minute focus sessions with short and long break reminders. Track your daily sessions.',
+    metaDescription:
+      'Free Pomodoro timer. 25-minute focus sessions with short and long break reminders. Track your daily sessions.',
     keywords: ['pomodoro timer', 'focus timer', 'pomodoro technique', 'work timer'],
     relatedTools: ['stopwatch', 'countdown'],
   },
@@ -995,7 +1119,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'ClockIcon',
     tags: ['stopwatch', 'timer', 'lap', 'time tracking'],
     metaTitle: 'Stopwatch - Online Stopwatch with Laps | ToolPilot',
-    metaDescription: 'Free online stopwatch with lap timer. Millisecond precision. Export lap times.',
+    metaDescription:
+      'Free online stopwatch with lap timer. Millisecond precision. Export lap times.',
     keywords: ['stopwatch online', 'online stopwatch', 'lap timer', 'stopwatch with laps'],
     relatedTools: ['pomodoro', 'countdown'],
   },
@@ -1008,7 +1133,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'ClockIcon',
     tags: ['countdown', 'timer', 'deadline', 'event countdown'],
     metaTitle: 'Countdown Timer - Count Down to Any Date | ToolPilot',
-    metaDescription: 'Free countdown timer. Count down to any future date or set a custom duration. Audio alerts.',
+    metaDescription:
+      'Free countdown timer. Count down to any future date or set a custom duration. Audio alerts.',
     keywords: ['countdown timer', 'countdown to date', 'event countdown', 'timer online'],
     relatedTools: ['stopwatch', 'pomodoro'],
   },
@@ -1022,7 +1148,8 @@ export const TOOLS: ToolConfig[] = [
     tags: ['todo', 'task manager', 'checklist', 'tasks'],
     isPopular: true,
     metaTitle: 'To-Do List - Free Task Manager Online | ToolPilot',
-    metaDescription: 'Simple, fast to-do list. Set priorities, due dates and tags. Works offline. Data saved locally.',
+    metaDescription:
+      'Simple, fast to-do list. Set priorities, due dates and tags. Works offline. Data saved locally.',
     keywords: ['todo list', 'task manager online', 'free to do app', 'checklist app'],
     relatedTools: ['kanban', 'habit-tracker'],
   },
@@ -1048,7 +1175,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'DocumentTextIcon',
     tags: ['notes', 'notepad', 'rich text', 'offline notes'],
     metaTitle: 'Notes - Free Online Notepad with Rich Text | ToolPilot',
-    metaDescription: 'Free online rich text notepad. Organize notes in folders. Auto-saved locally. Works offline.',
+    metaDescription:
+      'Free online rich text notepad. Organize notes in folders. Auto-saved locally. Works offline.',
     keywords: ['online notepad', 'free notes app', 'rich text notepad', 'browser notes'],
     relatedTools: ['markdown-editor', 'todo'],
   },
@@ -1062,7 +1190,8 @@ export const TOOLS: ToolConfig[] = [
     tags: ['habit', 'tracker', 'streak', 'daily', 'consistency'],
     isFeatured: true,
     metaTitle: 'Habit Tracker - Track Daily Habits & Build Streaks | ToolPilot',
-    metaDescription: 'Free habit tracker. Track daily habits, build streaks and visualize progress with heatmaps.',
+    metaDescription:
+      'Free habit tracker. Track daily habits, build streaks and visualize progress with heatmaps.',
     keywords: ['habit tracker', 'daily habit tracker', 'streak tracker', 'habit builder'],
     relatedTools: ['todo', 'checklist'],
   },
@@ -1081,8 +1210,14 @@ export const TOOLS: ToolConfig[] = [
     isPopular: true,
     isFeatured: true,
     metaTitle: 'Scientific Calculator - Online Scientific Calculator | ToolPilot',
-    metaDescription: 'Free scientific calculator online. Trigonometry, logarithms, exponents, factorials and more.',
-    keywords: ['scientific calculator', 'online calculator', 'math calculator', 'calculator online'],
+    metaDescription:
+      'Free scientific calculator online. Trigonometry, logarithms, exponents, factorials and more.',
+    keywords: [
+      'scientific calculator',
+      'online calculator',
+      'math calculator',
+      'calculator online',
+    ],
     relatedTools: ['percentage-calculator', 'age-calculator'],
   },
   {
@@ -1095,7 +1230,8 @@ export const TOOLS: ToolConfig[] = [
     tags: ['age', 'birthday', 'date of birth', 'dob', 'years old'],
     isPopular: true,
     metaTitle: 'Age Calculator - Calculate Exact Age from Date of Birth | ToolPilot',
-    metaDescription: 'Calculate your exact age in years, months, and days. Find the day of the week you were born.',
+    metaDescription:
+      'Calculate your exact age in years, months, and days. Find the day of the week you were born.',
     keywords: ['age calculator', 'how old am i', 'age from date of birth', 'age finder'],
     relatedTools: ['date-difference', 'scientific-calculator'],
   },
@@ -1109,8 +1245,14 @@ export const TOOLS: ToolConfig[] = [
     tags: ['percentage', 'percent', 'calculation', 'discount', 'increase', 'decrease'],
     isPopular: true,
     metaTitle: 'Percentage Calculator - Calculate Percentages Online | ToolPilot',
-    metaDescription: 'Calculate percentages easily. Find X% of Y, percentage change, what percent is X of Y, and more.',
-    keywords: ['percentage calculator', 'percent calculator', 'calculate percentage', 'percentage change'],
+    metaDescription:
+      'Calculate percentages easily. Find X% of Y, percentage change, what percent is X of Y, and more.',
+    keywords: [
+      'percentage calculator',
+      'percent calculator',
+      'calculate percentage',
+      'percentage change',
+    ],
     relatedTools: ['scientific-calculator', 'discount-calculator'],
   },
   {
@@ -1123,7 +1265,8 @@ export const TOOLS: ToolConfig[] = [
     tags: ['cgpa', 'cumulative gpa', 'grade point average', 'marks'],
     isPopular: true,
     metaTitle: 'CGPA Calculator - Calculate CGPA and Percentage | ToolPilot',
-    metaDescription: 'Calculate CGPA and convert to percentage. Works for VTU, Anna University, Mumbai University and more.',
+    metaDescription:
+      'Calculate CGPA and convert to percentage. Works for VTU, Anna University, Mumbai University and more.',
     keywords: ['cgpa calculator', 'cgpa to percentage', 'cumulative gpa', 'grade calculator'],
     relatedTools: ['gpa-calculator', 'percentage-calculator'],
   },
@@ -1136,7 +1279,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'AcademicCapIcon',
     tags: ['gpa', 'grade point average', 'semester gpa', 'grades'],
     metaTitle: 'GPA Calculator - Calculate Semester GPA Online | ToolPilot',
-    metaDescription: 'Calculate semester GPA using credit hours and letter grades. Support for 4.0 and 10.0 scales.',
+    metaDescription:
+      'Calculate semester GPA using credit hours and letter grades. Support for 4.0 and 10.0 scales.',
     keywords: ['gpa calculator', 'grade point average calculator', 'semester gpa'],
     relatedTools: ['cgpa-calculator', 'percentage-calculator'],
   },
@@ -1151,7 +1295,8 @@ export const TOOLS: ToolConfig[] = [
     isPopular: true,
     isFeatured: true,
     metaTitle: 'Unit Converter - Convert All Units Online | ToolPilot',
-    metaDescription: 'Free unit converter. Convert length, weight, temperature, speed, volume and 100+ more units.',
+    metaDescription:
+      'Free unit converter. Convert length, weight, temperature, speed, volume and 100+ more units.',
     keywords: ['unit converter', 'unit conversion', 'metric converter', 'measurement converter'],
     relatedTools: ['length-converter', 'weight-converter', 'temperature-converter'],
   },
@@ -1170,7 +1315,8 @@ export const TOOLS: ToolConfig[] = [
     isPopular: true,
     isFeatured: true,
     metaTitle: 'BMI Calculator - Calculate Body Mass Index | ToolPilot',
-    metaDescription: 'Calculate your BMI (Body Mass Index). Find if you are underweight, normal, overweight or obese.',
+    metaDescription:
+      'Calculate your BMI (Body Mass Index). Find if you are underweight, normal, overweight or obese.',
     keywords: ['bmi calculator', 'body mass index', 'bmi calculator online', 'healthy weight'],
     relatedTools: ['bmr-calculator', 'calorie-calculator', 'ideal-weight'],
   },
@@ -1183,7 +1329,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'FireIcon',
     tags: ['bmr', 'basal metabolic rate', 'calories', 'metabolism'],
     metaTitle: 'BMR Calculator - Calculate Basal Metabolic Rate | ToolPilot',
-    metaDescription: 'Calculate your Basal Metabolic Rate (BMR) and daily calorie needs based on activity level.',
+    metaDescription:
+      'Calculate your Basal Metabolic Rate (BMR) and daily calorie needs based on activity level.',
     keywords: ['bmr calculator', 'basal metabolic rate', 'calorie calculator', 'tdee calculator'],
     relatedTools: ['bmi-calculator', 'calorie-calculator'],
   },
@@ -1197,7 +1344,8 @@ export const TOOLS: ToolConfig[] = [
     tags: ['calories', 'calorie deficit', 'weight loss', 'diet', 'tdee'],
     isPopular: true,
     metaTitle: 'Calorie Calculator - Daily Calorie Needs Calculator | ToolPilot',
-    metaDescription: 'Calculate daily calorie needs for your weight goal. Customized for weight loss, maintenance or muscle gain.',
+    metaDescription:
+      'Calculate daily calorie needs for your weight goal. Customized for weight loss, maintenance or muscle gain.',
     keywords: ['calorie calculator', 'daily calorie needs', 'calorie deficit', 'calorie intake'],
     relatedTools: ['bmr-calculator', 'bmi-calculator'],
   },
@@ -1214,7 +1362,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'HashtagIcon',
     tags: ['random number', 'random', 'dice', 'lucky number'],
     metaTitle: 'Random Number Generator - Generate Random Numbers | ToolPilot',
-    metaDescription: 'Generate random numbers within any range. Set min/max values. Generate multiple numbers at once.',
+    metaDescription:
+      'Generate random numbers within any range. Set min/max values. Generate multiple numbers at once.',
     keywords: ['random number generator', 'random number', 'generate random numbers'],
     relatedTools: ['dice-roller', 'coin-flip'],
   },
@@ -1228,7 +1377,8 @@ export const TOOLS: ToolConfig[] = [
     tags: ['color', 'hex', 'rgb', 'hsl', 'cmyk', 'css color'],
     isPopular: true,
     metaTitle: 'Color Converter - Convert HEX RGB HSL CMYK | ToolPilot',
-    metaDescription: 'Convert colors between HEX, RGB, HSL, HSV and CMYK formats. Visual color picker included.',
+    metaDescription:
+      'Convert colors between HEX, RGB, HSL, HSV and CMYK formats. Visual color picker included.',
     keywords: ['color converter', 'hex to rgb', 'rgb to hex', 'hsl to hex', 'color code converter'],
     relatedTools: ['color-picker', 'gradient-generator'],
   },
@@ -1242,8 +1392,14 @@ export const TOOLS: ToolConfig[] = [
     tags: ['date difference', 'days between dates', 'date calculator', 'duration'],
     isPopular: true,
     metaTitle: 'Date Difference Calculator - Days Between Dates | ToolPilot',
-    metaDescription: 'Calculate the difference between two dates in days, weeks, months and years. Find working days.',
-    keywords: ['date difference calculator', 'days between dates', 'date calculator', 'how many days'],
+    metaDescription:
+      'Calculate the difference between two dates in days, weeks, months and years. Find working days.',
+    keywords: [
+      'date difference calculator',
+      'days between dates',
+      'date calculator',
+      'how many days',
+    ],
     relatedTools: ['age-calculator', 'countdown'],
   },
   {
@@ -1256,8 +1412,14 @@ export const TOOLS: ToolConfig[] = [
     tags: ['discount', 'sale price', 'percentage off', 'savings'],
     isPopular: true,
     metaTitle: 'Discount Calculator - Calculate Sale Price & Savings | ToolPilot',
-    metaDescription: 'Calculate discounted price instantly. Find sale price from original price and discount percentage.',
-    keywords: ['discount calculator', 'sale price calculator', 'percentage off calculator', 'savings calculator'],
+    metaDescription:
+      'Calculate discounted price instantly. Find sale price from original price and discount percentage.',
+    keywords: [
+      'discount calculator',
+      'sale price calculator',
+      'percentage off calculator',
+      'savings calculator',
+    ],
     relatedTools: ['percentage-calculator', 'gst-calculator'],
   },
 
@@ -1274,7 +1436,8 @@ export const TOOLS: ToolConfig[] = [
     tags: ['length', 'meter', 'feet', 'inch', 'mile', 'km', 'convert'],
     isPopular: true,
     metaTitle: 'Length Converter - Convert Meters Feet Inches Miles | ToolPilot',
-    metaDescription: 'Convert length units: meters, feet, inches, miles, kilometers, centimeters, yards and more.',
+    metaDescription:
+      'Convert length units: meters, feet, inches, miles, kilometers, centimeters, yards and more.',
     keywords: ['length converter', 'meter to feet', 'feet to meter', 'inches to cm', 'km to miles'],
     relatedTools: ['weight-converter', 'temperature-converter'],
   },
@@ -1303,7 +1466,12 @@ export const TOOLS: ToolConfig[] = [
     isPopular: true,
     metaTitle: 'Temperature Converter - Celsius Fahrenheit Kelvin | ToolPilot',
     metaDescription: 'Convert temperatures between Celsius, Fahrenheit and Kelvin instantly.',
-    keywords: ['temperature converter', 'celsius to fahrenheit', 'fahrenheit to celsius', 'kelvin converter'],
+    keywords: [
+      'temperature converter',
+      'celsius to fahrenheit',
+      'fahrenheit to celsius',
+      'kelvin converter',
+    ],
     relatedTools: ['length-converter', 'weight-converter'],
   },
   {
@@ -1315,7 +1483,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'ServerIcon',
     tags: ['bytes', 'kb', 'mb', 'gb', 'tb', 'data storage', 'convert'],
     metaTitle: 'Data Storage Converter - Bytes KB MB GB TB | ToolPilot',
-    metaDescription: 'Convert data storage units: bytes, kilobytes, megabytes, gigabytes, terabytes.',
+    metaDescription:
+      'Convert data storage units: bytes, kilobytes, megabytes, gigabytes, terabytes.',
     keywords: ['data storage converter', 'bytes to mb', 'gb to tb', 'mb to gb'],
     relatedTools: ['length-converter'],
   },
@@ -1333,7 +1502,8 @@ export const TOOLS: ToolConfig[] = [
     tags: ['timezone', 'time zone', 'world time', 'utc', 'ist', 'est'],
     isPopular: true,
     metaTitle: 'Time Zone Converter - World Time Zone Tool | ToolPilot',
-    metaDescription: 'Convert time between any two time zones. View current time in all major cities worldwide.',
+    metaDescription:
+      'Convert time between any two time zones. View current time in all major cities worldwide.',
     keywords: ['timezone converter', 'time zone converter', 'world clock', 'time zone tool'],
     relatedTools: ['fuel-cost', 'currency-converter'],
   },
@@ -1346,8 +1516,14 @@ export const TOOLS: ToolConfig[] = [
     icon: 'TruckIcon',
     tags: ['fuel cost', 'petrol cost', 'road trip', 'mileage', 'travel cost'],
     metaTitle: 'Fuel Cost Calculator - Calculate Road Trip Fuel Cost | ToolPilot',
-    metaDescription: 'Calculate fuel cost for your road trip. Enter distance, fuel efficiency and petrol/diesel price.',
-    keywords: ['fuel cost calculator', 'petrol cost calculator', 'road trip cost', 'fuel calculator'],
+    metaDescription:
+      'Calculate fuel cost for your road trip. Enter distance, fuel efficiency and petrol/diesel price.',
+    keywords: [
+      'fuel cost calculator',
+      'petrol cost calculator',
+      'road trip cost',
+      'fuel calculator',
+    ],
     relatedTools: ['timezone-converter'],
   },
 
@@ -1365,7 +1541,8 @@ export const TOOLS: ToolConfig[] = [
     isPopular: true,
     isFeatured: true,
     metaTitle: 'Invoice Generator - Create Professional Invoices Free | ToolPilot',
-    metaDescription: 'Create professional invoices and download as PDF. Free, no signup required. Custom branding.',
+    metaDescription:
+      'Create professional invoices and download as PDF. Free, no signup required. Custom branding.',
     keywords: ['invoice generator', 'free invoice maker', 'invoice creator', 'pdf invoice'],
     relatedTools: ['gst-invoice', 'quotation-generator'],
   },
@@ -1379,7 +1556,8 @@ export const TOOLS: ToolConfig[] = [
     tags: ['gst invoice', 'tax invoice', 'cgst', 'sgst', 'igst'],
     isPopular: true,
     metaTitle: 'GST Invoice Generator - Create GST Bill Online | ToolPilot',
-    metaDescription: 'Create GST-compliant invoices with automatic CGST, SGST, IGST calculation. Download as PDF.',
+    metaDescription:
+      'Create GST-compliant invoices with automatic CGST, SGST, IGST calculation. Download as PDF.',
     keywords: ['gst invoice generator', 'gst bill generator', 'tax invoice', 'gst invoice format'],
     relatedTools: ['invoice-generator', 'gst-calculator'],
   },
@@ -1392,8 +1570,14 @@ export const TOOLS: ToolConfig[] = [
     icon: 'ArrowTrendingUpIcon',
     tags: ['roi', 'return on investment', 'profit', 'payback', 'business'],
     metaTitle: 'ROI Calculator - Calculate Return on Investment | ToolPilot',
-    metaDescription: 'Calculate ROI (Return on Investment), net profit and payback period for any investment.',
-    keywords: ['roi calculator', 'return on investment calculator', 'investment roi', 'payback period'],
+    metaDescription:
+      'Calculate ROI (Return on Investment), net profit and payback period for any investment.',
+    keywords: [
+      'roi calculator',
+      'return on investment calculator',
+      'investment roi',
+      'payback period',
+    ],
     relatedTools: ['profit-margin', 'break-even'],
   },
   {
@@ -1405,7 +1589,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'ChartBarIcon',
     tags: ['profit margin', 'gross margin', 'markup', 'cost price', 'selling price'],
     metaTitle: 'Profit Margin Calculator - Calculate Gross & Net Margin | ToolPilot',
-    metaDescription: 'Calculate gross profit margin, net margin and markup percentage. Find selling price from cost and margin.',
+    metaDescription:
+      'Calculate gross profit margin, net margin and markup percentage. Find selling price from cost and margin.',
     keywords: ['profit margin calculator', 'gross margin calculator', 'markup calculator'],
     relatedTools: ['roi-calculator', 'break-even'],
   },
@@ -1418,7 +1603,8 @@ export const TOOLS: ToolConfig[] = [
     icon: 'PresentationChartLineIcon',
     tags: ['break even', 'fixed costs', 'variable costs', 'contribution margin'],
     metaTitle: 'Break-Even Calculator - Find Break-Even Point | ToolPilot',
-    metaDescription: 'Calculate break-even point in units and revenue. Understand fixed and variable cost impact.',
+    metaDescription:
+      'Calculate break-even point in units and revenue. Understand fixed and variable cost impact.',
     keywords: ['break even calculator', 'break-even analysis', 'break even point'],
     relatedTools: ['roi-calculator', 'profit-margin'],
   },
@@ -1431,8 +1617,14 @@ export const TOOLS: ToolConfig[] = [
     icon: 'ClipboardDocumentListIcon',
     tags: ['quotation', 'price quote', 'estimate', 'proposal'],
     metaTitle: 'Quotation Generator - Create Price Quotes Online | ToolPilot',
-    metaDescription: 'Create professional price quotations for clients. Download as PDF. Free, no signup.',
-    keywords: ['quotation generator', 'quote generator', 'price quotation maker', 'estimate generator'],
+    metaDescription:
+      'Create professional price quotations for clients. Download as PDF. Free, no signup.',
+    keywords: [
+      'quotation generator',
+      'quote generator',
+      'price quotation maker',
+      'estimate generator',
+    ],
     relatedTools: ['invoice-generator', 'gst-invoice'],
   },
 ];
@@ -1482,48 +1674,87 @@ export const NEW_TOOLS = TOOLS.filter((t) => t.isNew);
 // ─────────────────────────────────────────────
 export const IMPLEMENTED_TOOL_IDS = new Set<string>([
   // Finance
-  'emi-calculator', 'sip-calculator', 'fd-calculator', 'gst-calculator',
-  'income-tax-calculator', 'salary-calculator', 'compound-interest-calculator',
-  'currency-converter', 'budget-planner', 'ppf-calculator', 'tip-calculator',
-  'home-loan-calculator', 'car-loan-calculator', 'personal-loan-calculator',
-  'education-loan-calculator', 'loan-eligibility-calculator', 'rd-calculator',
-  'epf-calculator', 'retirement-calculator', 'hra-calculator', 'bill-splitter',
-  'expense-tracker', 'loan-comparison', 'mutual-fund-calculator',
+  'emi-calculator',
+  'sip-calculator',
+  'fd-calculator',
+  'gst-calculator',
+  'income-tax-calculator',
+  'salary-calculator',
+  'compound-interest-calculator',
+  'currency-converter',
+  'budget-planner',
+  'ppf-calculator',
+  'tip-calculator',
+  'home-loan-calculator',
+  'car-loan-calculator',
+  'personal-loan-calculator',
+  'education-loan-calculator',
+  'loan-eligibility-calculator',
+  'rd-calculator',
+  'epf-calculator',
+  'retirement-calculator',
+  'hra-calculator',
+  'bill-splitter',
+  'expense-tracker',
+  'loan-comparison',
+  'mutual-fund-calculator',
   // Developer
-  'json-formatter', 'base64', 'url-encoder', 'jwt-decoder', 'uuid-generator',
-  'hash-generator', 'regex-tester', 'password-generator', 'color-picker',
-  'sql-formatter', 'diff-checker', 'lorem-ipsum', 'timestamp-converter',
+  'json-formatter',
+  'base64',
+  'url-encoder',
+  'jwt-decoder',
+  'uuid-generator',
+  'hash-generator',
+  'regex-tester',
+  'password-generator',
+  'color-picker',
+  'sql-formatter',
+  'diff-checker',
+  'lorem-ipsum',
+  'timestamp-converter',
   // Image
-  'image-resize', 'image-compress', 'qr-generator', 'image-crop',
-  'barcode-generator', 'jpg-converter', 'webp-converter', 'color-palette',
+  'image-resize',
+  'image-compress',
+  'qr-generator',
+  'image-crop',
+  'barcode-generator',
+  'jpg-converter',
+  'webp-converter',
+  'color-palette',
   'favicon-generator',
   // Text
-  'word-counter', 'case-converter', 'text-diff', 'markdown-editor',
+  'word-counter',
+  'case-converter',
+  'text-diff',
+  'markdown-editor',
   // Education
-  'gpa-calculator', 'unit-converter',
+  'gpa-calculator',
+  'unit-converter',
   // Health
-  'bmr-calculator', 'calorie-calculator',
+  'bmr-calculator',
+  'calorie-calculator',
   // Utilities
   'random-number',
   // Conversion
   'data-storage-converter',
   // Travel
-  'timezone-converter', 'fuel-cost',
+  'timezone-converter',
+  'fuel-cost',
   // Business
-  'gst-invoice', 'profit-margin', 'break-even', 'quotation-generator',
+  'gst-invoice',
+  'profit-margin',
+  'break-even',
+  'quotation-generator',
 ]);
 
 /** True when a catalog tool has no working implementation yet. */
-export const isComingSoon = (toolId: string): boolean =>
-  !IMPLEMENTED_TOOL_IDS.has(toolId);
+export const isComingSoon = (toolId: string): boolean => !IMPLEMENTED_TOOL_IDS.has(toolId);
 
 // Total number of tools registered in the catalog (incl. placeholders).
 export const TOTAL_TOOL_COUNT = TOOLS.length;
 
 // Number of fully implemented, usable tools — the honest, self-updating count.
-export const LIVE_TOOL_COUNT = TOOLS.filter((t) =>
-  IMPLEMENTED_TOOL_IDS.has(t.id)
-).length;
+export const LIVE_TOOL_COUNT = TOOLS.filter((t) => IMPLEMENTED_TOOL_IDS.has(t.id)).length;
 
 // Human-friendly label for marketing copy — rounds down to the nearest 10
 // so it reads cleanly ("50+") and never over-promises.

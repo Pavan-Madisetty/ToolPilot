@@ -18,7 +18,7 @@ export default function LoanEligibilityCalculator() {
 
   const calculation = useMemo(() => {
     // Standard rule: FOIR (Fixed Obligation Income Ratio) is max 50% of net monthly income
-    const foirRatio = 0.50; 
+    const foirRatio = 0.5;
     const maxDisposableForEMI = Math.max(0, monthlyIncome * foirRatio - existingEMI);
 
     const r = interestRate / 12 / 100;
@@ -29,7 +29,8 @@ export default function LoanEligibilityCalculator() {
       // Eligible Loan principal formula derived from EMI formula:
       // EMI = (P * r * (1+r)^n) / ((1+r)^n - 1)
       // P = EMI * ((1+r)^n - 1) / (r * (1+r)^n)
-      eligibleLoanAmount = maxDisposableForEMI * (Math.pow(1 + r, n) - 1) / (r * Math.pow(1 + r, n));
+      eligibleLoanAmount =
+        (maxDisposableForEMI * (Math.pow(1 + r, n) - 1)) / (r * Math.pow(1 + r, n));
     } else if (maxDisposableForEMI > 0) {
       eligibleLoanAmount = maxDisposableForEMI * n;
     }
@@ -88,11 +89,15 @@ export default function LoanEligibilityCalculator() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="result-box text-center">
               <span className="result-label">Maximum Eligible EMI</span>
-              <div className="result-value text-primary">{formatCurrency(calculation.currentDisposableEMI)}</div>
+              <div className="result-value text-primary">
+                {formatCurrency(calculation.currentDisposableEMI)}
+              </div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Eligible Loan Amount</span>
-              <div className="result-value text-success">{formatCurrency(calculation.eligibleLoanAmount)}</div>
+              <div className="result-value text-success">
+                {formatCurrency(calculation.eligibleLoanAmount)}
+              </div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Disposable Income Limit</span>
@@ -105,20 +110,31 @@ export default function LoanEligibilityCalculator() {
               Eligibility Understanding (FOIR Criteria)
             </h3>
             <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
-              Banks generally limit your total debt repayment obligation (current EMIs + new EMI) to **50%** of your net monthly income. 
+              Banks generally limit your total debt repayment obligation (current EMIs + new EMI) to
+              **50%** of your net monthly income.
             </p>
             <div className="space-y-2.5">
-              <div className="flex items-center justify-between text-xs border-b pb-2" style={{ borderColor: 'var(--border-default)' }}>
+              <div
+                className="flex items-center justify-between text-xs border-b pb-2"
+                style={{ borderColor: 'var(--border-default)' }}
+              >
                 <span className="text-slate-400">Total Obligations Allowed:</span>
                 <span className="font-semibold text-[var(--text-primary)]">50% FOIR Limit</span>
               </div>
-              <div className="flex items-center justify-between text-xs border-b pb-2" style={{ borderColor: 'var(--border-default)' }}>
+              <div
+                className="flex items-center justify-between text-xs border-b pb-2"
+                style={{ borderColor: 'var(--border-default)' }}
+              >
                 <span className="text-slate-400">Net Take-Home Income:</span>
-                <span className="font-semibold text-[var(--text-primary)]">{formatCurrency(monthlyIncome)}</span>
+                <span className="font-semibold text-[var(--text-primary)]">
+                  {formatCurrency(monthlyIncome)}
+                </span>
               </div>
               <div className="flex items-center justify-between text-xs">
                 <span className="text-slate-400">Remaining EMI Margin:</span>
-                <span className="font-bold text-indigo-600 dark:text-indigo-400">{formatCurrency(calculation.currentDisposableEMI)}</span>
+                <span className="font-bold text-indigo-600 dark:text-indigo-400">
+                  {formatCurrency(calculation.currentDisposableEMI)}
+                </span>
               </div>
             </div>
           </div>

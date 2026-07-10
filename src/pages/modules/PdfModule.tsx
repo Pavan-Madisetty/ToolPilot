@@ -22,11 +22,17 @@ export default function PdfModule() {
       />
 
       {/* Coming soon board */}
-      <div className="py-20 text-center border rounded-2xl bg-white dark:bg-slate-800" style={{ borderColor: 'var(--border-default)' }}>
+      <div
+        className="py-20 text-center border rounded-2xl bg-white dark:bg-slate-800"
+        style={{ borderColor: 'var(--border-default)' }}
+      >
         <div className="text-6xl mb-4">🚧</div>
-        <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>PDF Utilities Under Construction</h2>
+        <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+          PDF Utilities Under Construction
+        </h2>
         <p className="text-sm max-w-md mx-auto" style={{ color: 'var(--text-secondary)' }}>
-          We are building client-side WebAssembly rendering engines to support completely private document conversions. Check back soon!
+          We are building client-side WebAssembly rendering engines to support completely private
+          document conversions. Check back soon!
         </p>
       </div>
     </ModulePageWrapper>

@@ -16,13 +16,7 @@ export interface TabsProps {
   className?: string;
 }
 
-export function Tabs({
-  activeTab,
-  onTabChange,
-  tabs,
-  ariaLabel = 'Tabs',
-  className,
-}: TabsProps) {
+export function Tabs({ activeTab, onTabChange, tabs, ariaLabel = 'Tabs', className }: TabsProps) {
   return (
     <div className={clsx('workspace-tabs-container', className)}>
       <div className="workspace-tabs" role="tablist" aria-label={ariaLabel}>

@@ -1,10 +1,29 @@
 import { useState, useMemo } from 'react';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+} from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider } from '@/components/ui';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
 
 const formatCurrency = (val: number) => {
   return new Intl.NumberFormat('en-IN', {
@@ -28,7 +47,8 @@ export default function RetirementCalculator() {
     const postRetirementYears = lifeExpectancy - retirementAge;
 
     // 1. Calculate monthly expense at retirement (adjusted for inflation)
-    const monthlyExpenseAtRetirement = monthlyExpense * Math.pow(1 + inflationRate / 100, yearsToRetire);
+    const monthlyExpenseAtRetirement =
+      monthlyExpense * Math.pow(1 + inflationRate / 100, yearsToRetire);
     const annualExpenseAtRetirement = monthlyExpenseAtRetirement * 12;
 
     // 2. Inflation adjusted post-retirement rate (Real Rate of Return)
@@ -41,7 +61,9 @@ export default function RetirementCalculator() {
     // Using annuity formula with real return rate
     let corpusNeeded: number;
     if (realReturn > 0) {
-      corpusNeeded = annualExpenseAtRetirement * ((1 - Math.pow(1 + realReturn, -postRetirementYears)) / realReturn);
+      corpusNeeded =
+        annualExpenseAtRetirement *
+        ((1 - Math.pow(1 + realReturn, -postRetirementYears)) / realReturn);
     } else {
       corpusNeeded = annualExpenseAtRetirement * postRetirementYears;
     }
@@ -52,7 +74,8 @@ export default function RetirementCalculator() {
     let monthlySavingsNeeded = 0;
     if (rPreMonthly > 0 && totalMonths > 0) {
       // PMT formula: PMT = FV * r / ((1+r)^n - 1)
-      monthlySavingsNeeded = corpusNeeded * rPreMonthly / (Math.pow(1 + rPreMonthly, totalMonths) - 1);
+      monthlySavingsNeeded =
+        (corpusNeeded * rPreMonthly) / (Math.pow(1 + rPreMonthly, totalMonths) - 1);
     } else if (totalMonths > 0) {
       monthlySavingsNeeded = corpusNeeded / totalMonths;
     }
@@ -65,7 +88,8 @@ export default function RetirementCalculator() {
     let currentCorpusAccumulated = 0;
     for (let yr = 1; yr <= yearsToRetire; yr++) {
       const annualContrib = monthlySavingsNeeded * 12;
-      currentCorpusAccumulated = (currentCorpusAccumulated + annualContrib) * (1 + expectedPreReturn / 100);
+      currentCorpusAccumulated =
+        (currentCorpusAccumulated + annualContrib) * (1 + expectedPreReturn / 100);
 
       yearlyLabels.push(`Age ${currentAge + yr}`);
       accumulatedData.push(currentCorpusAccumulated);
@@ -80,7 +104,15 @@ export default function RetirementCalculator() {
       accumulatedData,
       targetData,
     };
-  }, [currentAge, retirementAge, monthlyExpense, inflationRate, expectedPreReturn, expectedPostReturn, lifeExpectancy]);
+  }, [
+    currentAge,
+    retirementAge,
+    monthlyExpense,
+    inflationRate,
+    expectedPreReturn,
+    expectedPostReturn,
+    lifeExpectancy,
+  ]);
 
   const chartData = {
     labels: retirementDetails.yearlyLabels,
@@ -203,15 +235,21 @@ export default function RetirementCalculator() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="result-box text-center">
               <span className="result-label">Inflation-Adjusted Monthly Expense</span>
-              <div className="result-value text-danger">{formatCurrency(retirementDetails.monthlyExpenseAtRetirement)}</div>
+              <div className="result-value text-danger">
+                {formatCurrency(retirementDetails.monthlyExpenseAtRetirement)}
+              </div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Target Corpus Needed</span>
-              <div className="result-value text-success">{formatCurrency(retirementDetails.corpusNeeded)}</div>
+              <div className="result-value text-success">
+                {formatCurrency(retirementDetails.corpusNeeded)}
+              </div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Monthly Savings Required</span>
-              <div className="result-value text-primary">{formatCurrency(retirementDetails.monthlySavingsNeeded)}</div>
+              <div className="result-value text-primary">
+                {formatCurrency(retirementDetails.monthlySavingsNeeded)}
+              </div>
             </div>
           </div>
 

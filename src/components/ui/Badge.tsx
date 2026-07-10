@@ -6,20 +6,10 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   module?: string;
 }
 
-export function Badge({
-  variant = 'primary',
-  module,
-  className,
-  children,
-  ...props
-}: BadgeProps) {
+export function Badge({ variant = 'primary', module, className, children, ...props }: BadgeProps) {
   return (
     <span
-      className={clsx(
-        'badge',
-        module ? `module-badge-${module}` : `badge--${variant}`,
-        className
-      )}
+      className={clsx('badge', module ? `module-badge-${module}` : `badge--${variant}`, className)}
       {...props}
     >
       {children}

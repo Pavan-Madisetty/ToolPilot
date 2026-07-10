@@ -77,7 +77,9 @@ export default function BillSplitter() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="result-box text-center">
               <span className="result-label">Total Bill Amount</span>
-              <div className="result-value text-primary">{formatCurrency(splitDetails.totalBill)}</div>
+              <div className="result-value text-primary">
+                {formatCurrency(splitDetails.totalBill)}
+              </div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Tip / Tax Amounts</span>
@@ -87,7 +89,9 @@ export default function BillSplitter() {
             </div>
             <div className="result-box text-center">
               <span className="result-label">Amount Per Person</span>
-              <div className="result-value text-success">{formatCurrency(splitDetails.perPerson)}</div>
+              <div className="result-value text-success">
+                {formatCurrency(splitDetails.perPerson)}
+              </div>
             </div>
           </div>
 
@@ -96,21 +100,32 @@ export default function BillSplitter() {
               Detailed Bill Summary
             </h3>
             <div className="space-y-3 text-xs text-slate-600 dark:text-slate-300">
-              <div className="flex justify-between border-b pb-2" style={{ borderColor: 'var(--border-default)' }}>
+              <div
+                className="flex justify-between border-b pb-2"
+                style={{ borderColor: 'var(--border-default)' }}
+              >
                 <span>Subtotal Base Bill:</span>
                 <span className="font-semibold">{formatCurrency(billAmount)}</span>
               </div>
-              <div className="flex justify-between border-b pb-2" style={{ borderColor: 'var(--border-default)' }}>
+              <div
+                className="flex justify-between border-b pb-2"
+                style={{ borderColor: 'var(--border-default)' }}
+              >
                 <span>Tip Added ({tipPercent}%):</span>
                 <span className="font-semibold">{formatCurrency(splitDetails.tipAmount)}</span>
               </div>
-              <div className="flex justify-between border-b pb-2" style={{ borderColor: 'var(--border-default)' }}>
+              <div
+                className="flex justify-between border-b pb-2"
+                style={{ borderColor: 'var(--border-default)' }}
+              >
                 <span>Sales Tax Added ({taxPercent}%):</span>
                 <span className="font-semibold">{formatCurrency(splitDetails.taxAmount)}</span>
               </div>
               <div className="flex justify-between font-bold text-lg pt-1">
                 <span>Total Bill Due:</span>
-                <span style={{ color: 'var(--text-primary)' }}>{formatCurrency(splitDetails.totalBill)}</span>
+                <span style={{ color: 'var(--text-primary)' }}>
+                  {formatCurrency(splitDetails.totalBill)}
+                </span>
               </div>
             </div>
           </div>

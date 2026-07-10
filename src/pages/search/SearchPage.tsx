@@ -110,7 +110,10 @@ export default function SearchPage() {
 
         {/* Trending suggestions */}
         <div className="mb-8 flex flex-wrap items-center gap-2">
-          <span className="text-xs font-semibold flex items-center gap-1" style={{ color: 'var(--text-tertiary)' }}>
+          <span
+            className="text-xs font-semibold flex items-center gap-1"
+            style={{ color: 'var(--text-tertiary)' }}
+          >
             <Sparkles size={14} className="text-yellow-500" />
             Trending:
           </span>
@@ -135,7 +138,10 @@ export default function SearchPage() {
           {/* Filters Sidebar */}
           <div className="lg:col-span-1">
             <div className="card lg:sticky lg:top-24 hover:translate-y-0 hover:shadow-md p-5 md:p-6">
-              <div className="text-xs font-bold uppercase tracking-wider mb-4" style={{ color: 'var(--text-tertiary)', letterSpacing: '0.05em' }}>
+              <div
+                className="text-xs font-bold uppercase tracking-wider mb-4"
+                style={{ color: 'var(--text-tertiary)', letterSpacing: '0.05em' }}
+              >
                 Filter by Category
               </div>
               <div className="space-y-1">
@@ -146,19 +152,19 @@ export default function SearchPage() {
                       key={mod.key}
                       onClick={() => handleModuleSelect(mod.key)}
                       className={clsx(
-                        "w-full flex items-center justify-between px-3 py-2.5 text-xs font-semibold rounded-xl text-left transition-all duration-150 cursor-pointer",
+                        'w-full flex items-center justify-between px-3 py-2.5 text-xs font-semibold rounded-xl text-left transition-all duration-150 cursor-pointer',
                         isActive
-                          ? "bg-[rgba(99,102,241,0.08)] text-[var(--primary)]"
-                          : "text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] hover:text-[var(--text-primary)]"
+                          ? 'bg-[rgba(99,102,241,0.08)] text-[var(--primary)]'
+                          : 'text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] hover:text-[var(--text-primary)]'
                       )}
                     >
                       <span>{mod.name}</span>
                       <span
                         className={clsx(
-                          "px-2 py-0.5 rounded-full text-[10px] font-bold",
+                          'px-2 py-0.5 rounded-full text-[10px] font-bold',
                           isActive
-                            ? "bg-[rgba(99,102,241,0.15)] text-[var(--primary)]"
-                            : "bg-[var(--bg-surface)] text-[var(--text-tertiary)]"
+                            ? 'bg-[rgba(99,102,241,0.15)] text-[var(--primary)]'
+                            : 'bg-[var(--bg-surface)] text-[var(--text-tertiary)]'
                         )}
                       >
                         {mod.toolCount}

@@ -38,9 +38,12 @@ export function AccordionItem({
         <span className="pr-4">{title}</span>
         <ChevronDown
           size={18}
-          className={clsx('shrink-0 text-[var(--text-tertiary)] transition-transform duration-200', {
-            'rotate-180': active,
-          })}
+          className={clsx(
+            'shrink-0 text-[var(--text-tertiary)] transition-transform duration-200',
+            {
+              'rotate-180': active,
+            }
+          )}
         />
       </button>
 

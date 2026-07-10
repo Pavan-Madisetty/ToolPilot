@@ -1,5 +1,13 @@
 import { useState, useMemo } from 'react';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider, ResultBox, Callout } from '@/components/ui';
@@ -138,23 +146,14 @@ export default function CreditCardEMICalculator() {
         {/* Right Side: Results & Chart */}
         <div className="flex flex-col gap-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <ResultBox
-              label="Monthly EMI"
-              value={calculations.emi}
-              prefix="₹"
-              highlight
-            />
+            <ResultBox label="Monthly EMI" value={calculations.emi} prefix="₹" highlight />
             <ResultBox
               label="Total Interest"
               value={calculations.totalInterest}
               prefix="₹"
               className="text-danger font-semibold"
             />
-            <ResultBox
-              label="Total Repayment"
-              value={calculations.totalAmount}
-              prefix="₹"
-            />
+            <ResultBox label="Total Repayment" value={calculations.totalAmount} prefix="₹" />
           </div>
 
           <div className="p-6 card h-[320px] relative">
@@ -163,7 +162,10 @@ export default function CreditCardEMICalculator() {
 
           <Callout tone="tip" title="Credit Card EMI Caution">
             <p className="text-xs text-[var(--text-secondary)]">
-              Converting credit card balances to EMI can lower your immediate payment burden, but credit card EMI interest rates are typically much higher (13% - 24%) than personal loans. Also, a processing fee (usually 1% - 2% + GST) is charged upfront, and GST of 18% is applicable on the interest component of each monthly EMI installment.
+              Converting credit card balances to EMI can lower your immediate payment burden, but
+              credit card EMI interest rates are typically much higher (13% - 24%) than personal
+              loans. Also, a processing fee (usually 1% - 2% + GST) is charged upfront, and GST of
+              18% is applicable on the interest component of each monthly EMI installment.
             </p>
           </Callout>
         </div>

@@ -105,7 +105,7 @@ export default function ColorPalette() {
           const centroids = colors.slice(0, paletteSize);
 
           for (let iter = 0; iter < 4; iter++) {
-            const groups: typeof colors[] = Array.from({ length: paletteSize }, () => []);
+            const groups: (typeof colors)[] = Array.from({ length: paletteSize }, () => []);
             for (const color of colors) {
               let minIndex = 0;
               let minDist = Infinity;
@@ -126,7 +126,9 @@ export default function ColorPalette() {
             for (let c = 0; c < centroids.length; c++) {
               const group = groups[c];
               if (group && group.length > 0) {
-                let sumR = 0, sumG = 0, sumB = 0;
+                let sumR = 0,
+                  sumG = 0,
+                  sumB = 0;
                 for (const col of group) {
                   sumR += col.r;
                   sumG += col.g;
@@ -141,13 +143,11 @@ export default function ColorPalette() {
             }
           }
 
-          const formatted = centroids
-            .filter(Boolean)
-            .map((c) => ({
-              hex: rgbToHex(c.r, c.g, c.b),
-              rgb: `rgb(${c.r}, ${c.g}, ${c.b})`,
-              hsl: rgbToHsl(c.r, c.g, c.b),
-            }));
+          const formatted = centroids.filter(Boolean).map((c) => ({
+            hex: rgbToHex(c.r, c.g, c.b),
+            rgb: `rgb(${c.r}, ${c.g}, ${c.b})`,
+            hsl: rgbToHsl(c.r, c.g, c.b),
+          }));
           setPalette(formatted);
         }
       }
@@ -240,7 +240,10 @@ export default function ColorPalette() {
                         style={{ background: color.hex, borderColor: 'var(--border-default)' }}
                       />
                       <div className="flex-1 min-w-0">
-                        <div className="text-xs font-bold truncate" style={{ color: 'var(--text-primary)' }}>
+                        <div
+                          className="text-xs font-bold truncate"
+                          style={{ color: 'var(--text-primary)' }}
+                        >
                           {color.hex}
                         </div>
                         <div className="text-[10px] text-[var(--text-tertiary)] truncate">
@@ -249,7 +252,9 @@ export default function ColorPalette() {
                       </div>
                       <div className="flex items-center">
                         {copiedColor === color.hex ? (
-                          <span className="text-[10px] text-[var(--success)] font-bold">Copied</span>
+                          <span className="text-[10px] text-[var(--success)] font-bold">
+                            Copied
+                          </span>
                         ) : (
                           <Clipboard size={12} className="text-[var(--text-tertiary)]" />
                         )}

@@ -46,7 +46,7 @@ export default function IncomeTaxCalculator() {
     // Slab 3: 7L to 10L
     if (taxableIncome > 700000) {
       const taxable = Math.min(taxableIncome - 700000, 300000);
-      const slabTax = taxable * 0.10;
+      const slabTax = taxable * 0.1;
       tax += slabTax;
       slabBreakdowns.push({ range: '₹7,00,001 - ₹10,00,000', rate: '10%', taxable, tax: slabTax });
     } else {
@@ -66,7 +66,7 @@ export default function IncomeTaxCalculator() {
     // Slab 5: 12L to 15L
     if (taxableIncome > 1200000) {
       const taxable = Math.min(taxableIncome - 1200000, 300000);
-      const slabTax = taxable * 0.20;
+      const slabTax = taxable * 0.2;
       tax += slabTax;
       slabBreakdowns.push({ range: '₹12,00,001 - ₹15,00,000', rate: '20%', taxable, tax: slabTax });
     } else {
@@ -76,7 +76,7 @@ export default function IncomeTaxCalculator() {
     // Slab 6: Above 15L
     if (taxableIncome > 1500000) {
       const taxable = taxableIncome - 1500000;
-      const slabTax = taxable * 0.30;
+      const slabTax = taxable * 0.3;
       tax += slabTax;
       slabBreakdowns.push({ range: 'Above ₹15,00,000', rate: '30%', taxable, tax: slabTax });
     } else {
@@ -121,9 +121,12 @@ export default function IncomeTaxCalculator() {
             onChange={setAnnualSalary}
           />
           <div className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40">
-            <h3 className="text-sm font-bold mb-1.5" style={{ color: 'var(--text-primary)' }}>Regime Type</h3>
+            <h3 className="text-sm font-bold mb-1.5" style={{ color: 'var(--text-primary)' }}>
+              Regime Type
+            </h3>
             <p className="text-xs text-slate-500 dark:text-slate-400">
-              This calculation uses the **New Tax Regime** (FY 2024-25 / FY 2025-26) with standard deduction of ₹75,000 included automatically.
+              This calculation uses the **New Tax Regime** (FY 2024-25 / FY 2025-26) with standard
+              deduction of ₹75,000 included automatically.
             </p>
           </div>
         </div>
@@ -133,15 +136,21 @@ export default function IncomeTaxCalculator() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="result-box text-center">
               <span className="result-label">Taxable Income</span>
-              <div className="result-value text-primary">{formatCurrency(taxCalculation.taxableIncome)}</div>
+              <div className="result-value text-primary">
+                {formatCurrency(taxCalculation.taxableIncome)}
+              </div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Total Tax Due</span>
-              <div className="result-value text-danger">{formatCurrency(taxCalculation.totalTax)}</div>
+              <div className="result-value text-danger">
+                {formatCurrency(taxCalculation.totalTax)}
+              </div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Net In-Hand / Year</span>
-              <div className="result-value text-success">{formatCurrency(taxCalculation.netTakeHome)}</div>
+              <div className="result-value text-success">
+                {formatCurrency(taxCalculation.netTakeHome)}
+              </div>
             </div>
           </div>
 
@@ -171,17 +180,27 @@ export default function IncomeTaxCalculator() {
                   ))}
                   {taxCalculation.rebate > 0 && (
                     <tr className="text-success bg-success/10">
-                      <td className="py-3 font-bold" colSpan={3}>Section 87A Tax Rebate</td>
-                      <td className="py-3 text-right font-bold">-{formatCurrency(taxCalculation.rebate)}</td>
+                      <td className="py-3 font-bold" colSpan={3}>
+                        Section 87A Tax Rebate
+                      </td>
+                      <td className="py-3 text-right font-bold">
+                        -{formatCurrency(taxCalculation.rebate)}
+                      </td>
                     </tr>
                   )}
                   <tr className="font-bold border-t border-[var(--border-default)]">
-                    <td className="py-3" colSpan={3}>Cess (4% Health & Education Cess)</td>
+                    <td className="py-3" colSpan={3}>
+                      Cess (4% Health & Education Cess)
+                    </td>
                     <td className="py-3 text-right">{formatCurrency(taxCalculation.cess)}</td>
                   </tr>
                   <tr className="font-bold text-lg border-t-2 border-[var(--border-default)]">
-                    <td className="py-4" colSpan={3}>Total Annual Tax Due</td>
-                    <td className="py-4 text-right text-rose-500">{formatCurrency(taxCalculation.totalTax)}</td>
+                    <td className="py-4" colSpan={3}>
+                      Total Annual Tax Due
+                    </td>
+                    <td className="py-4 text-right text-rose-500">
+                      {formatCurrency(taxCalculation.totalTax)}
+                    </td>
                   </tr>
                 </tbody>
               </table>

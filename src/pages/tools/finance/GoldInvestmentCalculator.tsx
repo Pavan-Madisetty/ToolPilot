@@ -76,11 +76,7 @@ export default function GoldInvestmentCalculator() {
               value={calculations.initialValue}
               prefix="₹"
             />
-            <ResultBox
-              label="Final Value"
-              value={calculations.finalValue}
-              prefix="₹"
-            />
+            <ResultBox label="Final Value" value={calculations.finalValue} prefix="₹" />
             <ResultBox
               label="Absolute Profit / Loss"
               value={calculations.profit}
@@ -99,13 +95,17 @@ export default function GoldInvestmentCalculator() {
           <Callout tone="info" title="CAGR Explained">
             <div className="text-xs space-y-2 text-[var(--text-secondary)]">
               <p>
-                <strong>CAGR (Compound Annual Growth Rate)</strong> represents the mean annual growth rate of an investment over a specified period of time longer than one year, assuming the investment compounds annually.
+                <strong>CAGR (Compound Annual Growth Rate)</strong> represents the mean annual
+                growth rate of an investment over a specified period of time longer than one year,
+                assuming the investment compounds annually.
               </p>
               <p>
-                <strong>Formula:</strong> CAGR = [ (Final Value &divide; Initial Value)<sup>(1 &divide; Duration)</sup> &minus; 1 ] &times; 100
+                <strong>Formula:</strong> CAGR = [ (Final Value &divide; Initial Value)
+                <sup>(1 &divide; Duration)</sup> &minus; 1 ] &times; 100
               </p>
               <p>
-                Gold is historically considered a safe-haven asset and a hedge against inflation. A positive CAGR indicates steady appreciation of your gold holding.
+                Gold is historically considered a safe-haven asset and a hedge against inflation. A
+                positive CAGR indicates steady appreciation of your gold holding.
               </p>
             </div>
           </Callout>

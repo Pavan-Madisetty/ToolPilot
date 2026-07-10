@@ -71,7 +71,10 @@ export default function CurrencyConverter() {
         return {
           code: cur,
           symbol: CURRENCY_SYMBOLS[cur] ?? '',
-          value: val.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+          value: val.toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }),
         };
       });
   }, [amount, fromCurrency]);
@@ -105,14 +108,20 @@ export default function CurrencyConverter() {
 
         {/* Results layout */}
         <div className="flex flex-col gap-6">
-          <div className="p-8 border rounded-2xl bg-white dark:bg-slate-900/40 shadow-sm flex flex-col justify-center gap-2" style={{ borderColor: 'var(--border-default)' }}>
+          <div
+            className="p-8 border rounded-2xl bg-white dark:bg-slate-900/40 shadow-sm flex flex-col justify-center gap-2"
+            style={{ borderColor: 'var(--border-default)' }}
+          >
             <span className="text-sm font-semibold tracking-wide text-slate-400 dark:text-slate-500 uppercase">
               Converted Amount
             </span>
             <div className="text-4xl font-extrabold" style={{ color: 'var(--text-primary)' }}>
               {CURRENCY_SYMBOLS[fromCurrency] ?? ''}
               {parseFloat(amount || '0').toLocaleString()} = {conversion.symbol}
-              {conversion.convertedAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              {conversion.convertedAmount.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
             </div>
             <div className="text-xs font-semibold text-slate-400 dark:text-slate-500 mt-2">
               Exchange Rate: 1 {fromCurrency} = {conversion.singleRate.toFixed(4)} {toCurrency}
@@ -131,7 +140,9 @@ export default function CurrencyConverter() {
                   className="flex items-center justify-between p-3 rounded-lg border bg-slate-50 dark:bg-slate-800/40"
                   style={{ borderColor: 'var(--border-default)' }}
                 >
-                  <span className="text-xs font-bold text-slate-400 dark:text-slate-500">{conv.code}</span>
+                  <span className="text-xs font-bold text-slate-400 dark:text-slate-500">
+                    {conv.code}
+                  </span>
                   <span className="text-sm font-extrabold" style={{ color: 'var(--text-primary)' }}>
                     {conv.symbol} {conv.value}
                   </span>

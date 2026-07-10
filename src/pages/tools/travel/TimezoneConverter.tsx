@@ -61,22 +61,24 @@ export default function TimezoneConverter() {
     }
 
     // 4. Convert to other timezones for comparative preview
-    const otherTimes = TIMEZONES.filter(tz => tz.value !== fromTz && tz.value !== toTz).map(tz => {
-      let formatted: string;
-      try {
-        formatted = trueUtc.toLocaleString('en-US', {
-          timeZone: tz.value,
-          dateStyle: 'medium',
-          timeStyle: 'short',
-        });
-      } catch {
-        formatted = 'N/A';
+    const otherTimes = TIMEZONES.filter((tz) => tz.value !== fromTz && tz.value !== toTz).map(
+      (tz) => {
+        let formatted: string;
+        try {
+          formatted = trueUtc.toLocaleString('en-US', {
+            timeZone: tz.value,
+            dateStyle: 'medium',
+            timeStyle: 'short',
+          });
+        } catch {
+          formatted = 'N/A';
+        }
+        return {
+          name: tz.label.split(' - ')[0],
+          value: formatted,
+        };
       }
-      return {
-        name: tz.label.split(' - ')[0],
-        value: formatted,
-      };
-    });
+    );
 
     return {
       targetTime,
@@ -142,18 +144,27 @@ export default function TimezoneConverter() {
             </h2>
 
             <ResultBox
-              label={`Time in ${TIMEZONES.find(t => t.value === toTz)?.label.split(' (')[0]}`}
+              label={`Time in ${TIMEZONES.find((t) => t.value === toTz)?.label.split(' (')[0]}`}
               value={times.targetTime}
               highlight
               shouldFormat={false}
             />
 
-            <div className="p-4 rounded-xl space-y-2 text-xs" style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-default)', color: 'var(--text-secondary)' }}>
+            <div
+              className="p-4 rounded-xl space-y-2 text-xs"
+              style={{
+                backgroundColor: 'var(--bg-elevated)',
+                border: '1px solid var(--border-default)',
+                color: 'var(--text-secondary)',
+              }}
+            >
               <p>
-                <strong>Source:</strong> {dateTimeStr.replace('T', ' ')} in {TIMEZONES.find(t => t.value === fromTz)?.label}
+                <strong>Source:</strong> {dateTimeStr.replace('T', ' ')} in{' '}
+                {TIMEZONES.find((t) => t.value === fromTz)?.label}
               </p>
               <p>
-                <strong>Destination:</strong> {times.targetTime} in {TIMEZONES.find(t => t.value === toTz)?.label}
+                <strong>Destination:</strong> {times.targetTime} in{' '}
+                {TIMEZONES.find((t) => t.value === toTz)?.label}
               </p>
             </div>
           </Card>

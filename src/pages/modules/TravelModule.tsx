@@ -22,11 +22,17 @@ export default function TravelModule() {
       />
 
       {/* Coming soon board */}
-      <div className="py-20 text-center border rounded-2xl bg-white dark:bg-slate-800" style={{ borderColor: 'var(--border-default)' }}>
+      <div
+        className="py-20 text-center border rounded-2xl bg-white dark:bg-slate-800"
+        style={{ borderColor: 'var(--border-default)' }}
+      >
         <div className="text-6xl mb-4">✈️</div>
-        <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Travel Utilities Coming Soon</h2>
+        <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+          Travel Utilities Coming Soon
+        </h2>
         <p className="text-sm max-w-md mx-auto" style={{ color: 'var(--text-secondary)' }}>
-          We are building client-side travel utilities (like timezone visualizers and offline itinerary planners). Check back soon!
+          We are building client-side travel utilities (like timezone visualizers and offline
+          itinerary planners). Check back soon!
         </p>
       </div>
     </ModulePageWrapper>

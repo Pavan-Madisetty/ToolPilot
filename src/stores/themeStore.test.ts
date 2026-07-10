@@ -22,5 +22,4 @@ describe('themeStore', () => {
     state = useThemeStore.getState();
     expect(state.theme).toBe('light');
   });
-
 });

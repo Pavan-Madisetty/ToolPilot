@@ -34,7 +34,9 @@ export default function RandomNumber() {
 
     const range = maxVal - minVal + 1;
     if (!allowDuplicates && countVal > range) {
-      setError(`Cannot generate ${countVal} unique numbers in a range of ${range}. Please reduce count or enable duplicates.`);
+      setError(
+        `Cannot generate ${countVal} unique numbers in a range of ${range}. Please reduce count or enable duplicates.`
+      );
       setNumbers([]);
       return;
     }
@@ -122,7 +124,14 @@ export default function RandomNumber() {
             </div>
 
             {error && (
-              <div className="p-3 text-sm rounded-lg" style={{ backgroundColor: 'var(--danger-subtle)', color: 'var(--danger)', border: '1px solid var(--danger)' }}>
+              <div
+                className="p-3 text-sm rounded-lg"
+                style={{
+                  backgroundColor: 'var(--danger-subtle)',
+                  color: 'var(--danger)',
+                  border: '1px solid var(--danger)',
+                }}
+              >
                 {error}
               </div>
             )}
@@ -135,13 +144,14 @@ export default function RandomNumber() {
 
         <div className="space-y-6">
           <Card className="space-y-6">
-            <div className="flex justify-between items-center border-b pb-4" style={{ borderColor: 'var(--border-subtle)' }}>
+            <div
+              className="flex justify-between items-center border-b pb-4"
+              style={{ borderColor: 'var(--border-subtle)' }}
+            >
               <h2 className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>
                 Generated Output
               </h2>
-              {numbers.length > 0 && (
-                <CopyButton text={copyString} />
-              )}
+              {numbers.length > 0 && <CopyButton text={copyString} />}
             </div>
 
             {numbers.length > 0 ? (
@@ -165,11 +175,23 @@ export default function RandomNumber() {
                   ))}
                 </div>
 
-                <div className="p-4 rounded-xl" style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-default)' }}>
-                  <span className="text-xs font-semibold block mb-1" style={{ color: 'var(--text-secondary)' }}>
+                <div
+                  className="p-4 rounded-xl"
+                  style={{
+                    backgroundColor: 'var(--bg-elevated)',
+                    border: '1px solid var(--border-default)',
+                  }}
+                >
+                  <span
+                    className="text-xs font-semibold block mb-1"
+                    style={{ color: 'var(--text-secondary)' }}
+                  >
                     Comma-separated Raw Text
                   </span>
-                  <p className="font-mono text-xs break-all" style={{ color: 'var(--text-primary)' }}>
+                  <p
+                    className="font-mono text-xs break-all"
+                    style={{ color: 'var(--text-primary)' }}
+                  >
                     {copyString}
                   </p>
                 </div>

@@ -1,10 +1,29 @@
 import { useState, useMemo } from 'react';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+} from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider } from '@/components/ui';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
 
 const formatCurrency = (val: number) => {
   return new Intl.NumberFormat('en-IN', {
@@ -41,7 +60,7 @@ export default function EPFCalculator() {
     for (let yr = 1; yr <= yearsToRetire; yr++) {
       // 12% employee contribution
       const monthlyEmployeeContribution = accumulatedBasic * (epfContributionRate / 100);
-      
+
       // 3.67% employer share goes to EPF (remainder 8.33% goes to EPS pension fund)
       const monthlyEmployerEPFContribution = accumulatedBasic * 0.0367;
 
@@ -50,10 +69,10 @@ export default function EPFCalculator() {
       for (let month = 1; month <= 12; month++) {
         const employeeContribution = monthlyEmployeeContribution;
         const employerContribution = monthlyEmployerEPFContribution;
-        
+
         employeeBalance += employeeContribution;
         employerBalance += employerContribution;
-        
+
         // Calculate monthly interest accrued
         const monthlyInterest = (employeeBalance + employerBalance) * monthlyInterestRate;
         employeeBalance += monthlyInterest;
@@ -181,11 +200,15 @@ export default function EPFCalculator() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="result-box text-center">
               <span className="result-label">Total Contributions</span>
-              <div className="result-value text-primary">{formatCurrency(projection.totalInvested)}</div>
+              <div className="result-value text-primary">
+                {formatCurrency(projection.totalInvested)}
+              </div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Total Interest Earned</span>
-              <div className="result-value text-success">{formatCurrency(projection.interestEarned)}</div>
+              <div className="result-value text-success">
+                {formatCurrency(projection.interestEarned)}
+              </div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Corpus at Retirement (Age 58)</span>

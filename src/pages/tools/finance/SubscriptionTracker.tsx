@@ -68,10 +68,15 @@ export default function SubscriptionTracker() {
       <div className="tool-layout lg:grid-cols-2 gap-6">
         {/* Left Side: Subscription Manager */}
         <div className="space-y-6 p-6 card">
-          <h2 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>Manage Subscriptions</h2>
+          <h2 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>
+            Manage Subscriptions
+          </h2>
           <div className="space-y-4">
             {subs.map((sub, idx) => (
-              <div key={sub.id} className="flex items-end gap-3 p-3 rounded-lg border border-[var(--border-default)] bg-[var(--bg-surface)] relative">
+              <div
+                key={sub.id}
+                className="flex items-end gap-3 p-3 rounded-lg border border-[var(--border-default)] bg-[var(--bg-surface)] relative"
+              >
                 <span className="absolute top-1 left-2 text-[10px] font-semibold text-[var(--text-tertiary)]">
                   Subscription #{idx + 1}
                 </span>
@@ -90,7 +95,9 @@ export default function SubscriptionTracker() {
                     label="Cost (₹)"
                     type="number"
                     value={sub.cost}
-                    onChange={(e) => updateSub(sub.id, 'cost', e.target.value === '' ? '' : Number(e.target.value))}
+                    onChange={(e) =>
+                      updateSub(sub.id, 'cost', e.target.value === '' ? '' : Number(e.target.value))
+                    }
                     placeholder="Cost"
                     min={0}
                   />
@@ -101,7 +108,9 @@ export default function SubscriptionTracker() {
                     label="Billing Cycle"
                     options={cycleOptions}
                     value={sub.cycle}
-                    onChange={(e) => updateSub(sub.id, 'cycle', e.target.value as 'monthly' | 'annual')}
+                    onChange={(e) =>
+                      updateSub(sub.id, 'cycle', e.target.value as 'monthly' | 'annual')
+                    }
                   />
                 </div>
 
@@ -145,10 +154,15 @@ export default function SubscriptionTracker() {
 
           {/* Detailed Summary Card */}
           <div className="card p-6 overflow-x-auto">
-            <h3 className="text-sm font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Expenses Breakdown</h3>
+            <h3 className="text-sm font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
+              Expenses Breakdown
+            </h3>
             <table className="w-full text-xs text-left border-collapse">
               <thead>
-                <tr className="border-b border-[var(--border-default)]" style={{ color: 'var(--text-secondary)' }}>
+                <tr
+                  className="border-b border-[var(--border-default)]"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
                   <th className="py-2">Subscription Name</th>
                   <th className="py-2 text-right">Cycle Cost</th>
                   <th className="py-2 text-right">Billing Cycle</th>
@@ -163,12 +177,22 @@ export default function SubscriptionTracker() {
                   const annualEquivalent = sub.cycle === 'annual' ? cost : cost * 12;
 
                   return (
-                    <tr key={sub.id} className="border-b border-[var(--border-default)]" style={{ color: 'var(--text-secondary)' }}>
-                      <td className="py-2 font-medium">{sub.name || `Unlabelled Subscription #${idx + 1}`}</td>
+                    <tr
+                      key={sub.id}
+                      className="border-b border-[var(--border-default)]"
+                      style={{ color: 'var(--text-secondary)' }}
+                    >
+                      <td className="py-2 font-medium">
+                        {sub.name || `Unlabelled Subscription #${idx + 1}`}
+                      </td>
                       <td className="py-2 text-right">₹{cost.toLocaleString('en-IN')}</td>
                       <td className="py-2 text-right capitalize">{sub.cycle}</td>
-                      <td className="py-2 text-right text-warning">₹{monthlyEquivalent.toLocaleString('en-IN', { maximumFractionDigits: 1 })}</td>
-                      <td className="py-2 text-right text-danger">₹{annualEquivalent.toLocaleString('en-IN', { maximumFractionDigits: 1 })}</td>
+                      <td className="py-2 text-right text-warning">
+                        ₹{monthlyEquivalent.toLocaleString('en-IN', { maximumFractionDigits: 1 })}
+                      </td>
+                      <td className="py-2 text-right text-danger">
+                        ₹{annualEquivalent.toLocaleString('en-IN', { maximumFractionDigits: 1 })}
+                      </td>
                     </tr>
                   );
                 })}

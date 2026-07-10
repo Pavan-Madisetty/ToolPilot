@@ -1,4 +1,3 @@
-
 export interface SliderProps {
   label: string;
   value: number;
@@ -80,7 +79,10 @@ export function Slider({
       </div>
 
       {/* Min / Max values display */}
-      <div className="flex items-center justify-between text-[11px] mt-1" style={{ color: 'var(--text-tertiary)' }}>
+      <div
+        className="flex items-center justify-between text-[11px] mt-1"
+        style={{ color: 'var(--text-tertiary)' }}
+      >
         <span>
           {min}
           {suffix}

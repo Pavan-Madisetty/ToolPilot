@@ -47,7 +47,10 @@ export default function SlugGenerator() {
     <ToolPageWrapper toolId="slug-generator">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Input Configuration Column */}
-        <Card className="flex flex-col gap-6" style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}>
+        <Card
+          className="flex flex-col gap-6"
+          style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}
+        >
           <div>
             <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
               Configuration
@@ -73,7 +76,7 @@ export default function SlugGenerator() {
                 checked={isLowercase}
                 onChange={setIsLowercase}
               />
-              
+
               <Switch
                 label="Remove Special Characters"
                 description="Strip punctuation, symbols, and non-alphanumeric characters"
@@ -91,7 +94,10 @@ export default function SlugGenerator() {
           </div>
 
           {inputText && (
-            <div className="flex justify-end pt-4 border-t" style={{ borderColor: 'var(--border-default)' }}>
+            <div
+              className="flex justify-end pt-4 border-t"
+              style={{ borderColor: 'var(--border-default)' }}
+            >
               <Button onClick={handleClear} variant="secondary" size="sm">
                 Clear Input
               </Button>
@@ -100,7 +106,10 @@ export default function SlugGenerator() {
         </Card>
 
         {/* Output Column */}
-        <Card className="flex flex-col gap-6 justify-between" style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}>
+        <Card
+          className="flex flex-col gap-6 justify-between"
+          style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}
+        >
           <div className="flex flex-col gap-4">
             <div>
               <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
@@ -111,9 +120,12 @@ export default function SlugGenerator() {
               </p>
             </div>
 
-            <div 
+            <div
               className="p-4 rounded-lg min-h-[80px] flex items-center justify-between font-mono text-sm break-all"
-              style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)' }}
+              style={{
+                background: 'var(--bg-elevated)',
+                border: '1px solid var(--border-default)',
+              }}
             >
               {slug ? (
                 <span className="flex-1" style={{ color: 'var(--text-primary)' }}>
@@ -128,7 +140,10 @@ export default function SlugGenerator() {
           </div>
 
           {slug && (
-            <div className="flex justify-end pt-4 border-t" style={{ borderColor: 'var(--border-default)' }}>
+            <div
+              className="flex justify-end pt-4 border-t"
+              style={{ borderColor: 'var(--border-default)' }}
+            >
               <CopyButton text={slug} label="Copy Slug" size="md" />
             </div>
           )}

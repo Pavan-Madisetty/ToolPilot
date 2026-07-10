@@ -10,8 +10,12 @@ interface DiffLine {
 }
 
 export default function DiffChecker() {
-  const [original, setOriginal] = useState('Welcome to ToolPilot.\nThis is a free offline-first platform.');
-  const [modified, setModified] = useState('Welcome to ToolPilot v2!\nThis is a free online platform.');
+  const [original, setOriginal] = useState(
+    'Welcome to ToolPilot.\nThis is a free offline-first platform.'
+  );
+  const [modified, setModified] = useState(
+    'Welcome to ToolPilot v2!\nThis is a free online platform.'
+  );
   const [diffResult, setDiffResult] = useState<DiffLine[] | null>(null);
 
   const handleCompare = () => {
@@ -118,20 +122,23 @@ export default function DiffChecker() {
           />
         </div>
 
-        <div className="flex justify-end gap-3 border-t pt-4" style={{ borderColor: 'var(--border-default)' }}>
+        <div
+          className="flex justify-end gap-3 border-t pt-4"
+          style={{ borderColor: 'var(--border-default)' }}
+        >
           <Button onClick={clearAll} variant="secondary">
             Clear
           </Button>
-          <Button onClick={handleCompare}>
-            Find Differences
-          </Button>
+          <Button onClick={handleCompare}>Find Differences</Button>
         </div>
 
         {/* Diff Results Output Panel */}
         {diffResult && (
           <div className="flex flex-col gap-3 p-5 card">
-            <h3 className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>Comparison Results</h3>
-            
+            <h3 className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>
+              Comparison Results
+            </h3>
+
             <div
               className="border rounded-xl overflow-hidden font-mono text-xs leading-relaxed"
               style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}
@@ -142,11 +149,11 @@ export default function DiffChecker() {
                     {diffResult.map((line, idx) => {
                       const isRemoved = line.type === 'removed';
                       const isAdded = line.type === 'added';
-                      
+
                       let bgClass = 'bg-transparent text-[var(--text-secondary)]';
                       let prefix = ' ';
                       let numColor = 'text-[var(--text-tertiary)]';
-                      
+
                       if (isRemoved) {
                         bgClass = 'bg-[rgba(239,68,68,0.06)] text-[var(--danger)]';
                         prefix = '-';
@@ -160,10 +167,16 @@ export default function DiffChecker() {
                       return (
                         <tr key={idx} className={bgClass}>
                           {/* Line Number columns */}
-                          <td className={`w-10 select-none text-right pr-2 border-r border-default font-mono text-[10px] ${numColor}`} style={{ borderColor: 'var(--border-default)' }}>
+                          <td
+                            className={`w-10 select-none text-right pr-2 border-r border-default font-mono text-[10px] ${numColor}`}
+                            style={{ borderColor: 'var(--border-default)' }}
+                          >
                             {line.originalLineNum || ''}
                           </td>
-                          <td className={`w-10 select-none text-right pr-2 border-r border-default font-mono text-[10px] ${numColor}`} style={{ borderColor: 'var(--border-default)' }}>
+                          <td
+                            className={`w-10 select-none text-right pr-2 border-r border-default font-mono text-[10px] ${numColor}`}
+                            style={{ borderColor: 'var(--border-default)' }}
+                          >
                             {line.modifiedLineNum || ''}
                           </td>
                           {/* Prefix */}

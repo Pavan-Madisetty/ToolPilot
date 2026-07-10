@@ -116,7 +116,7 @@ describe('Finance Module Math Engines', () => {
       // 10L-12L: 1.25L * 15% = 18,750
       let tax = 0;
       tax += Math.min(Math.max(0, taxable - 300000), 400000) * 0.05;
-      tax += Math.min(Math.max(0, taxable - 700000), 300000) * 0.10;
+      tax += Math.min(Math.max(0, taxable - 700000), 300000) * 0.1;
       tax += Math.min(Math.max(0, taxable - 1000000), 200000) * 0.15;
 
       const cess = tax * 0.04;
@@ -144,7 +144,7 @@ describe('Finance Module Math Engines', () => {
     it('calculates EPF deduction from basic salary correctly', () => {
       const grossCTC = 1200000;
       const grossMonthly = grossCTC / 12; // 100,000
-      const basic = grossMonthly * 0.50; // 50,000
+      const basic = grossMonthly * 0.5; // 50,000
       const pf = basic * 0.12; // 6,000
       expect(pf).toBe(6000);
     });
@@ -197,7 +197,7 @@ describe('Finance Module Math Engines', () => {
     it('calculates max eligible EMI based on 50% FOIR limit', () => {
       const monthlyIncome = 80000;
       const existingEMI = 15000;
-      const foirLimit = monthlyIncome * 0.50;
+      const foirLimit = monthlyIncome * 0.5;
       const maxEMI = foirLimit - existingEMI;
       expect(maxEMI).toBe(25000);
     });
@@ -260,13 +260,13 @@ describe('Finance Module Math Engines', () => {
       const basic = 50000;
       const hra = 25000;
       const rent = 20000;
-      
+
       const annualBasic = basic * 12;
       const annualHRA = hra * 12;
       const annualRent = rent * 12;
 
-      const baseExempt2 = annualBasic * 0.50; // Metro
-      const baseExempt3 = annualRent - (annualBasic * 0.10); // Rent - 10% Basic
+      const baseExempt2 = annualBasic * 0.5; // Metro
+      const baseExempt3 = annualRent - annualBasic * 0.1; // Rent - 10% Basic
 
       const exemptHRA = Math.min(annualHRA, baseExempt2, baseExempt3);
       const taxableHRA = annualHRA - exemptHRA;
@@ -290,11 +290,7 @@ describe('Finance Module Math Engines', () => {
 
   describe('Expense Tracker Summation', () => {
     it('accumulates expenses correctly', () => {
-      const expenses = [
-        { amount: 3500 },
-        { amount: 18000 },
-        { amount: 2400 }
-      ];
+      const expenses = [{ amount: 3500 }, { amount: 18000 }, { amount: 2400 }];
       const total = expenses.reduce((sum, e) => sum + e.amount, 0);
       expect(total).toBe(23900);
     });
@@ -306,13 +302,13 @@ describe('Finance Module Math Engines', () => {
       const rA = 8.5 / 12 / 100;
       const nA = 15 * 12;
       const emiA = (pA * rA * Math.pow(1 + rA, nA)) / (Math.pow(1 + rA, nA) - 1);
-      const totalInterestA = (emiA * nA) - pA;
+      const totalInterestA = emiA * nA - pA;
 
       const pB = 2000000;
       const rB = 9.2 / 12 / 100;
       const nB = 15 * 12;
       const emiB = (pB * rB * Math.pow(1 + rB, nB)) / (Math.pow(1 + rB, nB) - 1);
-      const totalInterestB = (emiB * nB) - pB;
+      const totalInterestB = emiB * nB - pB;
 
       expect(Math.round(totalInterestB - totalInterestA)).toBe(149252);
     });

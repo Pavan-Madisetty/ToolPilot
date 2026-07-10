@@ -44,7 +44,10 @@ export default function EmailWriter() {
     // Purpose-based templates
     switch (purpose) {
       case 'meeting':
-        subject = tone === 'Casual' ? 'Quick chat / meeting?' : 'Request for Meeting: Discussion on Next Steps';
+        subject =
+          tone === 'Casual'
+            ? 'Quick chat / meeting?'
+            : 'Request for Meeting: Discussion on Next Steps';
         body = `Hi ${recName},
 
 I hope you're doing well.
@@ -60,7 +63,10 @@ Best regards,
         break;
 
       case 'follow-up':
-        subject = tone === 'Casual' ? 'Following up on our last discussion' : 'Follow-up: Discussion regarding updates';
+        subject =
+          tone === 'Casual'
+            ? 'Following up on our last discussion'
+            : 'Follow-up: Discussion regarding updates';
         body = `Hi ${recName},
 
 I hope this email finds you well.
@@ -76,7 +82,8 @@ Best regards,
         break;
 
       case 'update':
-        subject = tone === 'Casual' ? 'Quick update' : 'Status Update: Project Progress & Next Steps';
+        subject =
+          tone === 'Casual' ? 'Quick update' : 'Status Update: Project Progress & Next Steps';
         body = `Hi ${recName},
 
 Here is a quick status update regarding our current progress.
@@ -91,7 +98,8 @@ Best regards,
         break;
 
       case 'apology':
-        subject = tone === 'Casual' ? 'Sorry for the delay' : 'Apology: Update on delay and next steps';
+        subject =
+          tone === 'Casual' ? 'Sorry for the delay' : 'Apology: Update on delay and next steps';
         body = `Hi ${recName},
 
 I want to sincerely apologize for the delay regarding our delivery. 
@@ -125,7 +133,7 @@ Best regards,
     if (tone === 'Casual') {
       body = body
         .replace(/I hope this email finds you well\./gi, "Hope you're having a great week!")
-        .replace(/I hope you're doing well\./gi, "Hope all is well!")
+        .replace(/I hope you're doing well\./gi, 'Hope all is well!')
         .replace(/Best regards,/gi, 'Cheers,')
         .replace(/Sincerely,/gi, 'Thanks,')
         .replace(/I would like to request/gi, 'I wanted to see if we could grab')
@@ -174,7 +182,10 @@ Warmly,
     <ToolPageWrapper toolId="email-writer">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Left Column: Form Inputs */}
-        <Card className="flex flex-col gap-6" style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}>
+        <Card
+          className="flex flex-col gap-6"
+          style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}
+        >
           <div>
             <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
               Email Details
@@ -226,8 +237,15 @@ Warmly,
             />
           </div>
 
-          {(recipient || keyPoints || purpose !== 'follow-up' || customPurpose || tone !== 'Professional') && (
-            <div className="flex justify-end pt-4 border-t" style={{ borderColor: 'var(--border-default)' }}>
+          {(recipient ||
+            keyPoints ||
+            purpose !== 'follow-up' ||
+            customPurpose ||
+            tone !== 'Professional') && (
+            <div
+              className="flex justify-end pt-4 border-t"
+              style={{ borderColor: 'var(--border-default)' }}
+            >
               <Button onClick={handleClear} variant="secondary" size="sm">
                 Reset Form
               </Button>
@@ -236,7 +254,10 @@ Warmly,
         </Card>
 
         {/* Right Column: Output Draft */}
-        <Card className="flex flex-col gap-6 justify-between" style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}>
+        <Card
+          className="flex flex-col gap-6 justify-between"
+          style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}
+        >
           <div className="flex flex-col gap-4 flex-1">
             <div>
               <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
@@ -251,12 +272,19 @@ Warmly,
               <div className="flex flex-col gap-4 flex-1">
                 {/* Subject Block */}
                 <div className="flex flex-col gap-1">
-                  <span className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>
+                  <span
+                    className="text-xs font-bold uppercase tracking-wider"
+                    style={{ color: 'var(--text-tertiary)' }}
+                  >
                     Subject Line
                   </span>
                   <div
                     className="p-3 rounded-lg font-medium text-sm break-words"
-                    style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', color: 'var(--text-primary)' }}
+                    style={{
+                      background: 'var(--bg-elevated)',
+                      border: '1px solid var(--border-default)',
+                      color: 'var(--text-primary)',
+                    }}
                   >
                     {emailDraft.subject}
                   </div>
@@ -264,12 +292,19 @@ Warmly,
 
                 {/* Body Block */}
                 <div className="flex flex-col gap-1 flex-1">
-                  <span className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>
+                  <span
+                    className="text-xs font-bold uppercase tracking-wider"
+                    style={{ color: 'var(--text-tertiary)' }}
+                  >
                     Email Body
                   </span>
                   <div
                     className="p-4 rounded-lg flex-1 min-h-[220px] whitespace-pre-wrap text-sm leading-relaxed overflow-y-auto"
-                    style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', color: 'var(--text-primary)' }}
+                    style={{
+                      background: 'var(--bg-elevated)',
+                      border: '1px solid var(--border-default)',
+                      color: 'var(--text-primary)',
+                    }}
                   >
                     {emailDraft.body}
                   </div>
@@ -288,7 +323,10 @@ Warmly,
           </div>
 
           {emailDraft.subject && (
-            <div className="flex justify-end gap-2 pt-4 border-t" style={{ borderColor: 'var(--border-default)' }}>
+            <div
+              className="flex justify-end gap-2 pt-4 border-t"
+              style={{ borderColor: 'var(--border-default)' }}
+            >
               <CopyButton text={copyFullEmail} label="Copy Full Email" size="md" />
             </div>
           )}

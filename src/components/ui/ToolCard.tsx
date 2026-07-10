@@ -11,20 +11,34 @@ interface ToolCardProps {
 
 const cardVariant = {
   hidden: { opacity: 0, y: 24, scale: 0.97 },
-  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as const } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as const },
+  },
 };
 
 export function ToolCard({ tool, compact = false }: ToolCardProps) {
   const { accent, bg } = getModuleColors(tool.module);
 
   return (
-    <motion.div variants={cardVariant} whileHover={{ y: -3, scale: 1.015 }} whileTap={{ scale: 0.98 }} className="h-full">
+    <motion.div
+      variants={cardVariant}
+      whileHover={{ y: -3, scale: 1.015 }}
+      whileTap={{ scale: 0.98 }}
+      className="h-full"
+    >
       <Link
         to={tool.slug}
         className={`tool-card h-full ${compact ? 'tool-card--compact' : ''}`}
         aria-label={`${tool.name}: ${tool.description}`}
       >
-        <div className="tool-card__icon" style={{ background: bg, color: accent }} aria-hidden="true">
+        <div
+          className="tool-card__icon"
+          style={{ background: bg, color: accent }}
+          aria-hidden="true"
+        >
           {getToolEmoji(tool.icon)}
         </div>
         <div className="tool-card__content w-full">

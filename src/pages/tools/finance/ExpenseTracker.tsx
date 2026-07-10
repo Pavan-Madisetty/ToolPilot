@@ -115,9 +115,15 @@ export default function ExpenseTracker() {
             ) : (
               <div className="divide-y divide-[var(--border-default)]">
                 {expenses.map((exp) => (
-                  <div key={exp.id} className="flex items-center justify-between py-3.5 first:pt-0 last:pb-0">
+                  <div
+                    key={exp.id}
+                    className="flex items-center justify-between py-3.5 first:pt-0 last:pb-0"
+                  >
                     <div>
-                      <div className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
+                      <div
+                        className="text-sm font-semibold"
+                        style={{ color: 'var(--text-primary)' }}
+                      >
                         {exp.name}
                       </div>
                       <span className="text-[11px] text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded font-medium mt-1 inline-block">

@@ -1,10 +1,29 @@
 import { useState, useMemo } from 'react';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+} from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider, ResultBox } from '@/components/ui';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
 
 export default function InflationCalculator() {
   const [currentAmount, setCurrentAmount] = useState<number>(100000); // Default: ₹1,00,000
@@ -41,7 +60,7 @@ export default function InflationCalculator() {
     labels: calculation.yearlyLabels,
     datasets: [
       {
-        label: "Future Value (Required to buy same goods)",
+        label: 'Future Value (Required to buy same goods)',
         data: calculation.futureValueData,
         fill: false,
         borderColor: '#EF4444',
@@ -127,22 +146,9 @@ export default function InflationCalculator() {
         {/* Output & Chart */}
         <div className="flex flex-col gap-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <ResultBox
-              label="Future Value"
-              value={calculation.futureValue}
-              prefix="₹"
-              highlight
-            />
-            <ResultBox
-              label="Purchasing Power"
-              value={calculation.purchasingPower}
-              prefix="₹"
-            />
-            <ResultBox
-              label="Purchasing Power Loss"
-              value={calculation.powerLoss}
-              prefix="₹"
-            />
+            <ResultBox label="Future Value" value={calculation.futureValue} prefix="₹" highlight />
+            <ResultBox label="Purchasing Power" value={calculation.purchasingPower} prefix="₹" />
+            <ResultBox label="Purchasing Power Loss" value={calculation.powerLoss} prefix="₹" />
           </div>
 
           <div className="p-6 card h-[320px] relative">

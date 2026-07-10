@@ -59,13 +59,17 @@ ${constraints ? `- ${constraints}\n` : ''}- Provide a direct and clear response.
     <ToolPageWrapper toolId="prompt-builder">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Configuration Column */}
-        <Card className="flex flex-col gap-6" style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}>
+        <Card
+          className="flex flex-col gap-6"
+          style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}
+        >
           <div>
             <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
               Prompt Parameters
             </h3>
             <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-              Define the role, task, tone, and formatting constraints to build your optimized prompt.
+              Define the role, task, tone, and formatting constraints to build your optimized
+              prompt.
             </p>
           </div>
 
@@ -111,8 +115,15 @@ ${constraints ? `- ${constraints}\n` : ''}- Provide a direct and clear response.
             />
           </div>
 
-          {(role !== 'General Assistant' || customRole || task || tone !== 'Professional' || constraints) && (
-            <div className="flex justify-end pt-4 border-t" style={{ borderColor: 'var(--border-default)' }}>
+          {(role !== 'General Assistant' ||
+            customRole ||
+            task ||
+            tone !== 'Professional' ||
+            constraints) && (
+            <div
+              className="flex justify-end pt-4 border-t"
+              style={{ borderColor: 'var(--border-default)' }}
+            >
               <Button onClick={handleClear} variant="secondary" size="sm">
                 Reset Form
               </Button>
@@ -121,20 +132,27 @@ ${constraints ? `- ${constraints}\n` : ''}- Provide a direct and clear response.
         </Card>
 
         {/* Output Column */}
-        <Card className="flex flex-col gap-6 justify-between animate-fade-in" style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}>
+        <Card
+          className="flex flex-col gap-6 justify-between animate-fade-in"
+          style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}
+        >
           <div className="flex flex-col gap-4 flex-1">
             <div>
               <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
                 Structured Prompt Template
               </h3>
               <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-                Copy the structured prompt and paste it into your favorite AI tool (ChatGPT, Claude, Gemini, etc.).
+                Copy the structured prompt and paste it into your favorite AI tool (ChatGPT, Claude,
+                Gemini, etc.).
               </p>
             </div>
 
-            <div 
+            <div
               className="p-4 rounded-lg flex-1 min-h-[250px] font-mono text-xs whitespace-pre-wrap leading-relaxed overflow-y-auto"
-              style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)' }}
+              style={{
+                background: 'var(--bg-elevated)',
+                border: '1px solid var(--border-default)',
+              }}
             >
               {generatedPrompt ? (
                 <span style={{ color: 'var(--text-primary)' }}>{generatedPrompt}</span>
@@ -147,7 +165,10 @@ ${constraints ? `- ${constraints}\n` : ''}- Provide a direct and clear response.
           </div>
 
           {generatedPrompt && (
-            <div className="flex justify-end pt-4 border-t" style={{ borderColor: 'var(--border-default)' }}>
+            <div
+              className="flex justify-end pt-4 border-t"
+              style={{ borderColor: 'var(--border-default)' }}
+            >
               <CopyButton text={generatedPrompt} label="Copy Prompt" size="md" />
             </div>
           )}

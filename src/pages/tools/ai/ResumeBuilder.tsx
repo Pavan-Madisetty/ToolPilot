@@ -59,7 +59,14 @@ ${education || 'Describe your education...'}
 ---
 
 ## SKILLS
-${skills ? skills.split(',').map((s) => s.trim()).join(', ') : 'List your skills...'}
+${
+  skills
+    ? skills
+        .split(',')
+        .map((s) => s.trim())
+        .join(', ')
+    : 'List your skills...'
+}
 `;
   }, [name, title, email, phone, location, website, summary, experience, education, skills]);
 
@@ -80,18 +87,25 @@ ${skills ? skills.split(',').map((s) => s.trim()).join(', ') : 'List your skills
     <ToolPageWrapper toolId="resume-builder">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Left Column: Form Editor */}
-        <Card className="flex flex-col gap-6" style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}>
+        <Card
+          className="flex flex-col gap-6"
+          style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}
+        >
           <div>
             <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
               Resume Details
             </h3>
             <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-              Fill in your contact and professional details. The ATS preview will update in real-time.
+              Fill in your contact and professional details. The ATS preview will update in
+              real-time.
             </p>
           </div>
 
           <div className="flex flex-col gap-4">
-            <h4 className="text-sm font-bold uppercase tracking-wider mt-2" style={{ color: 'var(--text-tertiary)' }}>
+            <h4
+              className="text-sm font-bold uppercase tracking-wider mt-2"
+              style={{ color: 'var(--text-tertiary)' }}
+            >
               1. Contact Information
             </h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -136,7 +150,10 @@ ${skills ? skills.split(',').map((s) => s.trim()).join(', ') : 'List your skills
               />
             </div>
 
-            <h4 className="text-sm font-bold uppercase tracking-wider mt-4" style={{ color: 'var(--text-tertiary)' }}>
+            <h4
+              className="text-sm font-bold uppercase tracking-wider mt-4"
+              style={{ color: 'var(--text-tertiary)' }}
+            >
               2. Content Sections
             </h4>
             <Textarea
@@ -171,7 +188,10 @@ ${skills ? skills.split(',').map((s) => s.trim()).join(', ') : 'List your skills
             />
           </div>
 
-          <div className="flex justify-end pt-4 border-t" style={{ borderColor: 'var(--border-default)' }}>
+          <div
+            className="flex justify-end pt-4 border-t"
+            style={{ borderColor: 'var(--border-default)' }}
+          >
             <Button onClick={handleClear} variant="secondary" size="sm">
               Reset Resume
             </Button>
@@ -181,7 +201,10 @@ ${skills ? skills.split(',').map((s) => s.trim()).join(', ') : 'List your skills
         {/* Right Column: ATS Preview & Export */}
         <div className="flex flex-col gap-6">
           {/* Action Header */}
-          <Card className="flex items-center justify-between py-4" style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}>
+          <Card
+            className="flex items-center justify-between py-4"
+            style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}
+          >
             <span className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
               Resume Actions
             </span>
@@ -191,18 +214,34 @@ ${skills ? skills.split(',').map((s) => s.trim()).join(', ') : 'List your skills
           </Card>
 
           {/* Real-time Document Preview */}
-          <Card className="flex-1 overflow-auto" style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}>
-            <div 
+          <Card
+            className="flex-1 overflow-auto"
+            style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}
+          >
+            <div
               className="p-6 rounded-lg font-sans text-xs flex flex-col gap-4 text-left shadow-sm min-h-[500px]"
-              style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', color: 'var(--text-primary)' }}
+              style={{
+                background: 'var(--bg-elevated)',
+                border: '1px solid var(--border-default)',
+                color: 'var(--text-primary)',
+              }}
             >
               {/* Header */}
-              <div className="text-center flex flex-col gap-1 border-b pb-4" style={{ borderColor: 'var(--border-default)' }}>
+              <div
+                className="text-center flex flex-col gap-1 border-b pb-4"
+                style={{ borderColor: 'var(--border-default)' }}
+              >
                 <h1 className="text-2xl font-bold tracking-tight">{name || 'Your Name'}</h1>
-                <h2 className="text-sm font-medium tracking-wide" style={{ color: 'var(--text-secondary)' }}>
+                <h2
+                  className="text-sm font-medium tracking-wide"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
                   {title || 'Professional Title'}
                 </h2>
-                <div className="flex flex-wrap justify-center gap-x-2 gap-y-1 text-[10px] mt-1" style={{ color: 'var(--text-tertiary)' }}>
+                <div
+                  className="flex flex-wrap justify-center gap-x-2 gap-y-1 text-[10px] mt-1"
+                  style={{ color: 'var(--text-tertiary)' }}
+                >
                   {email && <span>{email}</span>}
                   {email && (phone || location || website) && <span>•</span>}
                   {phone && <span>{phone}</span>}
@@ -216,7 +255,10 @@ ${skills ? skills.split(',').map((s) => s.trim()).join(', ') : 'List your skills
               {/* Summary */}
               {summary && (
                 <div className="flex flex-col gap-1">
-                  <h3 className="text-xs font-bold uppercase tracking-wider border-b pb-1" style={{ borderColor: 'var(--border-default)', color: 'var(--text-secondary)' }}>
+                  <h3
+                    className="text-xs font-bold uppercase tracking-wider border-b pb-1"
+                    style={{ borderColor: 'var(--border-default)', color: 'var(--text-secondary)' }}
+                  >
                     Professional Summary
                   </h3>
                   <p className="leading-relaxed" style={{ color: 'var(--text-primary)' }}>
@@ -228,10 +270,16 @@ ${skills ? skills.split(',').map((s) => s.trim()).join(', ') : 'List your skills
               {/* Experience */}
               {experience && (
                 <div className="flex flex-col gap-1">
-                  <h3 className="text-xs font-bold uppercase tracking-wider border-b pb-1" style={{ borderColor: 'var(--border-default)', color: 'var(--text-secondary)' }}>
+                  <h3
+                    className="text-xs font-bold uppercase tracking-wider border-b pb-1"
+                    style={{ borderColor: 'var(--border-default)', color: 'var(--text-secondary)' }}
+                  >
                     Professional Experience
                   </h3>
-                  <div className="whitespace-pre-wrap leading-relaxed pr-2" style={{ color: 'var(--text-primary)' }}>
+                  <div
+                    className="whitespace-pre-wrap leading-relaxed pr-2"
+                    style={{ color: 'var(--text-primary)' }}
+                  >
                     {experience}
                   </div>
                 </div>
@@ -240,10 +288,16 @@ ${skills ? skills.split(',').map((s) => s.trim()).join(', ') : 'List your skills
               {/* Education */}
               {education && (
                 <div className="flex flex-col gap-1">
-                  <h3 className="text-xs font-bold uppercase tracking-wider border-b pb-1" style={{ borderColor: 'var(--border-default)', color: 'var(--text-secondary)' }}>
+                  <h3
+                    className="text-xs font-bold uppercase tracking-wider border-b pb-1"
+                    style={{ borderColor: 'var(--border-default)', color: 'var(--text-secondary)' }}
+                  >
                     Education
                   </h3>
-                  <div className="whitespace-pre-wrap leading-relaxed pr-2" style={{ color: 'var(--text-primary)' }}>
+                  <div
+                    className="whitespace-pre-wrap leading-relaxed pr-2"
+                    style={{ color: 'var(--text-primary)' }}
+                  >
                     {education}
                   </div>
                 </div>
@@ -252,11 +306,17 @@ ${skills ? skills.split(',').map((s) => s.trim()).join(', ') : 'List your skills
               {/* Skills */}
               {skills && (
                 <div className="flex flex-col gap-1">
-                  <h3 className="text-xs font-bold uppercase tracking-wider border-b pb-1" style={{ borderColor: 'var(--border-default)', color: 'var(--text-secondary)' }}>
+                  <h3
+                    className="text-xs font-bold uppercase tracking-wider border-b pb-1"
+                    style={{ borderColor: 'var(--border-default)', color: 'var(--text-secondary)' }}
+                  >
                     Skills
                   </h3>
                   <p className="leading-relaxed" style={{ color: 'var(--text-primary)' }}>
-                    {skills.split(',').map((s) => s.trim()).join(' • ')}
+                    {skills
+                      .split(',')
+                      .map((s) => s.trim())
+                      .join(' • ')}
                   </p>
                 </div>
               )}

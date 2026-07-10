@@ -3,7 +3,9 @@ import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { CopyButton, Textarea } from '@/components/ui';
 
 export default function MarkdownEditor() {
-  const [markdown, setMarkdown] = useState('# Hello ToolPilot\n\n- Free tools\n- Works offline\n\n**Have fun compiling markdown!**');
+  const [markdown, setMarkdown] = useState(
+    '# Hello ToolPilot\n\n- Free tools\n- Works offline\n\n**Have fun compiling markdown!**'
+  );
 
   // Simple client-side Markdown to HTML compiler (avoids external library dependencies)
   const htmlPreview = useMemo(() => {

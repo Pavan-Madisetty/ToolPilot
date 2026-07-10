@@ -41,16 +41,19 @@ export function SearchDialog() {
     return saved ? JSON.parse(saved) : [];
   });
 
-  const handleResultSelect = useCallback((slug: string, term: string) => {
-    // Save to recent searches log
-    const updated = [term, ...recentSearches.filter((s) => s !== term)].slice(0, 5);
-    setRecentSearches(updated);
-    localStorage.setItem('recent_searches', JSON.stringify(updated));
+  const handleResultSelect = useCallback(
+    (slug: string, term: string) => {
+      // Save to recent searches log
+      const updated = [term, ...recentSearches.filter((s) => s !== term)].slice(0, 5);
+      setRecentSearches(updated);
+      localStorage.setItem('recent_searches', JSON.stringify(updated));
 
-    navigate(slug);
-    setIsOpen(false);
-    clearSearch();
-  }, [recentSearches, navigate, setIsOpen, clearSearch]);
+      navigate(slug);
+      setIsOpen(false);
+      clearSearch();
+    },
+    [recentSearches, navigate, setIsOpen, clearSearch]
+  );
 
   const handleInputChange = (val: string) => {
     setActiveIndex(-1);
@@ -116,7 +119,16 @@ export function SearchDialog() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, activeIndex, results, recentSearches, navigate, clearSearch, setIsOpen, handleResultSelect]);
+  }, [
+    isOpen,
+    activeIndex,
+    results,
+    recentSearches,
+    navigate,
+    clearSearch,
+    setIsOpen,
+    handleResultSelect,
+  ]);
 
   const clearRecentSearches = () => {
     setRecentSearches([]);
@@ -228,7 +240,10 @@ export function SearchDialog() {
                     </div>
                   ) : (
                     <div className="py-8 px-4 text-center">
-                      <p className="text-sm font-semibold mb-1" style={{ color: 'var(--text-secondary)' }}>
+                      <p
+                        className="text-sm font-semibold mb-1"
+                        style={{ color: 'var(--text-secondary)' }}
+                      >
                         Type at least 2 characters to search
                       </p>
                       <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
@@ -239,7 +254,10 @@ export function SearchDialog() {
                 </div>
               ) : visibleResults.length === 0 ? (
                 <div className="py-10 px-4 text-center">
-                  <p className="text-sm font-semibold mb-1" style={{ color: 'var(--text-secondary)' }}>
+                  <p
+                    className="text-sm font-semibold mb-1"
+                    style={{ color: 'var(--text-secondary)' }}
+                  >
                     No tools found matching "{query}"
                   </p>
                   <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
@@ -256,13 +274,15 @@ export function SearchDialog() {
                         <button
                           onClick={() => handleResultSelect(tool.slug, tool.name)}
                           className={clsx(
-                            "w-full flex items-center justify-between text-left px-4 py-3 rounded-xl transition-all duration-150",
+                            'w-full flex items-center justify-between text-left px-4 py-3 rounded-xl transition-all duration-150',
                             isSelected
-                              ? "bg-[rgba(79,70,229,0.08)] dark:bg-[rgba(139,92,246,0.1)] text-[var(--text-link)]"
-                              : "hover:bg-slate-50 dark:hover:bg-slate-900"
+                              ? 'bg-[rgba(79,70,229,0.08)] dark:bg-[rgba(139,92,246,0.1)] text-[var(--text-link)]'
+                              : 'hover:bg-slate-50 dark:hover:bg-slate-900'
                           )}
                           style={{
-                            borderLeft: isSelected ? '3px solid var(--text-link)' : '3px solid transparent',
+                            borderLeft: isSelected
+                              ? '3px solid var(--text-link)'
+                              : '3px solid transparent',
                             paddingLeft: isSelected ? '13px' : '16px',
                           }}
                         >
@@ -285,9 +305,7 @@ export function SearchDialog() {
                             </div>
                           </div>
                           {moduleConfig && (
-                            <span
-                              className={`badge module-badge-${tool.module}`}
-                            >
+                            <span className={`badge module-badge-${tool.module}`}>
                               {moduleConfig.name}
                             </span>
                           )}

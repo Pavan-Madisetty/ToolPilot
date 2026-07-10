@@ -4,7 +4,9 @@ import { Textarea } from '@/components/ui';
 
 export default function TextDiff() {
   const [original, setOriginal] = useState('Welcome to ToolPilot.\nThis is a free platform.');
-  const [modified, setModified] = useState('Welcome to ToolPilot v2!\nThis is a free online platform.');
+  const [modified, setModified] = useState(
+    'Welcome to ToolPilot v2!\nThis is a free online platform.'
+  );
 
   const diffLines = useMemo(() => {
     const origLines = original.split('\n');
@@ -56,7 +58,9 @@ export default function TextDiff() {
 
         {/* Diff Output Panel */}
         <div className="p-6 card space-y-4">
-          <h3 className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>Line Comparison (Diff Output)</h3>
+          <h3 className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>
+            Line Comparison (Diff Output)
+          </h3>
           <div
             className="p-4 rounded-xl font-mono text-xs leading-relaxed whitespace-pre-wrap border"
             style={{
@@ -71,8 +75,8 @@ export default function TextDiff() {
                   line.type === 'added'
                     ? 'text-[var(--success)] bg-[rgba(16,185,129,0.08)] px-1'
                     : line.type === 'removed'
-                    ? 'text-[var(--danger)] bg-[rgba(239,68,68,0.08)] px-1'
-                    : 'text-[var(--text-tertiary)]'
+                      ? 'text-[var(--danger)] bg-[rgba(239,68,68,0.08)] px-1'
+                      : 'text-[var(--text-tertiary)]'
                 }
               >
                 {line.text}

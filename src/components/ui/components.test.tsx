@@ -33,13 +33,7 @@ describe('UI Component Library', () => {
 
   describe('Input Component', () => {
     it('binds label and description helpers correctly', () => {
-      render(
-        <Input
-          label="Username"
-          helperText="Enter your corporate ID"
-          placeholder="User ID"
-        />
-      );
+      render(<Input label="Username" helperText="Enter your corporate ID" placeholder="User ID" />);
       expect(screen.getByLabelText(/username/i)).toBeInTheDocument();
       expect(screen.getByText(/enter your corporate ID/i)).toBeInTheDocument();
     });

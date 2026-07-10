@@ -166,16 +166,23 @@ export default function ProfitMargin() {
               />
             </div>
 
-            <div className="p-4 rounded-xl space-y-2 text-xs" style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-default)', color: 'var(--text-secondary)' }}>
+            <div
+              className="p-4 rounded-xl space-y-2 text-xs"
+              style={{
+                backgroundColor: 'var(--bg-elevated)',
+                border: '1px solid var(--border-default)',
+                color: 'var(--text-secondary)',
+              }}
+            >
               <p>
-                <strong>Margin vs Markup:</strong> Margin is profit as a percentage of the selling price. Markup is profit as a percentage of the cost price.
+                <strong>Margin vs Markup:</strong> Margin is profit as a percentage of the selling
+                price. Markup is profit as a percentage of the cost price.
               </p>
               <p>
                 <strong>Formulae:</strong>
                 <br />
                 • Margin % = (Profit ÷ Selling Price) × 100
-                <br />
-                • Markup % = (Profit ÷ Cost Price) × 100
+                <br />• Markup % = (Profit ÷ Cost Price) × 100
               </p>
             </div>
           </Card>

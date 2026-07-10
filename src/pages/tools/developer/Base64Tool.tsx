@@ -95,19 +95,26 @@ export default function Base64Tool() {
             }
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={mode === 'encode' ? "Enter plain text here to encode..." : "Enter Base64 text here to decode..."}
+            placeholder={
+              mode === 'encode'
+                ? 'Enter plain text here to encode...'
+                : 'Enter Base64 text here to decode...'
+            }
             className="font-mono text-xs leading-relaxed h-[300px] resize-none"
             aria-label="Base64 input textarea"
           />
 
-          <div className="flex flex-wrap items-center justify-between gap-4 border-t pt-4" style={{ borderColor: 'var(--border-default)' }}>
+          <div
+            className="flex flex-wrap items-center justify-between gap-4 border-t pt-4"
+            style={{ borderColor: 'var(--border-default)' }}
+          >
             <Switch
               label="URL-Safe Base64"
               checked={isUrlSafe}
               onChange={setIsUrlSafe}
               description="Use - and _ symbols, trim padding"
             />
-            
+
             {/* Segmented Mode Control */}
             <div className="segmented-control">
               <button
@@ -132,7 +139,10 @@ export default function Base64Tool() {
           </Button>
 
           {error && (
-            <div role="alert" className="p-3 bg-[rgba(239,68,68,0.08)] border border-[var(--border-default)] rounded-lg text-xs text-[var(--danger)]">
+            <div
+              role="alert"
+              className="p-3 bg-[rgba(239,68,68,0.08)] border border-[var(--border-default)] rounded-lg text-xs text-[var(--danger)]"
+            >
               {error}
             </div>
           )}

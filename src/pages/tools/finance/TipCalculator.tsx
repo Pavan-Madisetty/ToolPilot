@@ -83,15 +83,26 @@ export default function TipCalculator() {
         {/* Output cards layout */}
         <div className="space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <ResultBox align="left" label="Tip Amount (Total)" value={formatCurrency(calculations.tipAmount)} />
-            <ResultBox align="left" label="Total Bill (with Tip)" value={formatCurrency(calculations.totalAmount)} />
+            <ResultBox
+              align="left"
+              label="Tip Amount (Total)"
+              value={formatCurrency(calculations.tipAmount)}
+            />
+            <ResultBox
+              align="left"
+              label="Total Bill (with Tip)"
+              value={formatCurrency(calculations.totalAmount)}
+            />
           </div>
 
           {/* Share details box */}
           <div className="p-6 card space-y-4">
             <h3 className="text-base font-bold">Split Sharing Details</h3>
-            
-            <div className="flex items-center justify-between text-sm py-2 border-b" style={{ borderColor: 'var(--border-subtle)' }}>
+
+            <div
+              className="flex items-center justify-between text-sm py-2 border-b"
+              style={{ borderColor: 'var(--border-subtle)' }}
+            >
               <span style={{ color: 'var(--text-secondary)' }}>Tip Per Person</span>
               <span className="font-semibold">{formatCurrency(calculations.tipPerPerson)}</span>
             </div>

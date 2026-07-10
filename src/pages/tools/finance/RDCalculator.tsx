@@ -1,10 +1,29 @@
 import { useState, useMemo } from 'react';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+} from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider } from '@/components/ui';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
 
 const formatCurrency = (val: number) => {
   return new Intl.NumberFormat('en-IN', {
@@ -27,7 +46,7 @@ export default function RDCalculator() {
 
     let totalInvested = 0;
     let balance = 0;
-    
+
     const yearlyLabels = [];
     const investedData = [];
     const maturityData = [];
@@ -39,7 +58,7 @@ export default function RDCalculator() {
       // M = P * ((1 + r/n)^(nt) - 1) / (1 - (1 + r/n)^(-1/3)) // where n=4 (quarterly compounding)
       const currentMonths = yr * 12;
       totalInvested = P * currentMonths;
-      
+
       // Calculate compound interest compounding quarterly for recurring monthly deposits
       // Let's compute monthly additions:
       let tempBalance = 0;
@@ -152,11 +171,15 @@ export default function RDCalculator() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="result-box text-center">
               <span className="result-label">Invested Amount</span>
-              <div className="result-value text-primary">{formatCurrency(projection.totalInvested)}</div>
+              <div className="result-value text-primary">
+                {formatCurrency(projection.totalInvested)}
+              </div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Est. Interest</span>
-              <div className="result-value text-success">{formatCurrency(projection.interestEarned)}</div>
+              <div className="result-value text-success">
+                {formatCurrency(projection.interestEarned)}
+              </div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Maturity Value</span>

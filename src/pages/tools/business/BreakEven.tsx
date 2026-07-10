@@ -66,8 +66,16 @@ export default function BreakEven() {
             </div>
 
             {!results.isValid && sellingPrice > 0 && (
-              <div className="p-3 text-sm rounded-lg" style={{ backgroundColor: 'var(--danger-subtle)', color: 'var(--danger)', border: '1px solid var(--danger)' }}>
-                Warning: Selling Price must be higher than the Variable Cost to achieve a break-even point.
+              <div
+                className="p-3 text-sm rounded-lg"
+                style={{
+                  backgroundColor: 'var(--danger-subtle)',
+                  color: 'var(--danger)',
+                  border: '1px solid var(--danger)',
+                }}
+              >
+                Warning: Selling Price must be higher than the Variable Cost to achieve a break-even
+                point.
               </div>
             )}
           </Card>
@@ -95,14 +103,23 @@ export default function BreakEven() {
               />
             </div>
 
-            <div className="p-4 rounded-xl space-y-3" style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-default)' }}>
+            <div
+              className="p-4 rounded-xl space-y-3"
+              style={{
+                backgroundColor: 'var(--bg-elevated)',
+                border: '1px solid var(--border-default)',
+              }}
+            >
               <div className="flex justify-between text-sm">
                 <span style={{ color: 'var(--text-secondary)' }}>Contribution Margin per Unit</span>
                 <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>
                   ₹{results.contributionMargin.toFixed(2)}
                 </span>
               </div>
-              <div className="flex justify-between text-sm border-t pt-2" style={{ borderColor: 'var(--border-subtle)' }}>
+              <div
+                className="flex justify-between text-sm border-t pt-2"
+                style={{ borderColor: 'var(--border-subtle)' }}
+              >
                 <span style={{ color: 'var(--text-secondary)' }}>Contribution Margin Ratio</span>
                 <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>
                   {(results.contributionMarginRatio * 100).toFixed(1)}%
@@ -110,16 +127,23 @@ export default function BreakEven() {
               </div>
             </div>
 
-            <div className="p-4 rounded-xl space-y-2 text-xs" style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-default)', color: 'var(--text-secondary)' }}>
+            <div
+              className="p-4 rounded-xl space-y-2 text-xs"
+              style={{
+                backgroundColor: 'var(--bg-elevated)',
+                border: '1px solid var(--border-default)',
+                color: 'var(--text-secondary)',
+              }}
+            >
               <p>
-                <strong>Break-Even Point:</strong> The stage where business revenues equal expenditures, showing zero net profit or loss.
+                <strong>Break-Even Point:</strong> The stage where business revenues equal
+                expenditures, showing zero net profit or loss.
               </p>
               <p>
                 <strong>Formulae:</strong>
                 <br />
                 • Contribution Margin = Price - Variable Cost
-                <br />
-                • Break-Even (Units) = Fixed Costs ÷ Contribution Margin
+                <br />• Break-Even (Units) = Fixed Costs ÷ Contribution Margin
               </p>
             </div>
           </Card>

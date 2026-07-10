@@ -7,12 +7,7 @@ export interface SectionProps extends HTMLAttributes<HTMLDivElement> {
   alt?: boolean;
 }
 
-export function Section({
-  alt = false,
-  className,
-  children,
-  ...props
-}: SectionProps) {
+export function Section({ alt = false, className, children, ...props }: SectionProps) {
   return (
     <section
       className={clsx(

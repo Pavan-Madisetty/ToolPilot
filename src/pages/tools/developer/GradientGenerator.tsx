@@ -16,12 +16,17 @@ export default function GradientGenerator() {
   const [stop1, setStop1] = useState<number>(0);
   const [stop2, setStop2] = useState<number>(100);
 
-  const cssValue = type === 'linear'
-    ? `linear-gradient(${angle}deg, ${color1} ${stop1}%, ${color2} ${stop2}%)`
-    : `radial-gradient(circle, ${color1} ${stop1}%, ${color2} ${stop2}%)`;
+  const cssValue =
+    type === 'linear'
+      ? `linear-gradient(${angle}deg, ${color1} ${stop1}%, ${color2} ${stop2}%)`
+      : `radial-gradient(circle, ${color1} ${stop1}%, ${color2} ${stop2}%)`;
 
   const handleRandomize = () => {
-    const randomHex = () => '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+    const randomHex = () =>
+      '#' +
+      Math.floor(Math.random() * 16777215)
+        .toString(16)
+        .padStart(6, '0');
     setColor1(randomHex());
     setColor2(randomHex());
     setAngle(Math.floor(Math.random() * 360));
@@ -33,11 +38,19 @@ export default function GradientGenerator() {
         {/* Left Column: Settings Panel */}
         <Card className="flex flex-col gap-5">
           <div className="flex items-center justify-between">
-            <span className="text-sm font-bold flex items-center gap-1.5" style={{ color: 'var(--text-primary)' }}>
+            <span
+              className="text-sm font-bold flex items-center gap-1.5"
+              style={{ color: 'var(--text-primary)' }}
+            >
               <Palette size={16} />
               <span>Gradient Settings</span>
             </span>
-            <Button onClick={handleRandomize} variant="secondary" size="xs" leftIcon={<RefreshCw size={14} />}>
+            <Button
+              onClick={handleRandomize}
+              variant="secondary"
+              size="xs"
+              leftIcon={<RefreshCw size={14} />}
+            >
               Randomize
             </Button>
           </div>
@@ -75,7 +88,10 @@ export default function GradientGenerator() {
                 className="font-mono"
               />
             </div>
-            <div className="h-10 border rounded-xl overflow-hidden relative" style={{ borderColor: 'var(--border-default)' }}>
+            <div
+              className="h-10 border rounded-xl overflow-hidden relative"
+              style={{ borderColor: 'var(--border-default)' }}
+            >
               <input
                 type="color"
                 value={color1}
@@ -97,7 +113,10 @@ export default function GradientGenerator() {
           />
 
           {/* Color 2 Selector */}
-          <div className="grid grid-cols-3 gap-3 items-end border-t pt-4" style={{ borderColor: 'var(--border-default)' }}>
+          <div
+            className="grid grid-cols-3 gap-3 items-end border-t pt-4"
+            style={{ borderColor: 'var(--border-default)' }}
+          >
             <div className="col-span-2">
               <Input
                 label="Color 2 (End)"
@@ -108,7 +127,10 @@ export default function GradientGenerator() {
                 className="font-mono"
               />
             </div>
-            <div className="h-10 border rounded-xl overflow-hidden relative" style={{ borderColor: 'var(--border-default)' }}>
+            <div
+              className="h-10 border rounded-xl overflow-hidden relative"
+              style={{ borderColor: 'var(--border-default)' }}
+            >
               <input
                 type="color"
                 value={color2}

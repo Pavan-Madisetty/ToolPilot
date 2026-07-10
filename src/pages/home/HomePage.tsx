@@ -26,10 +26,13 @@ const staggerContainer = {
 
 const cardVariant = {
   hidden: { opacity: 0, y: 24, scale: 0.97 },
-  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as const } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as const },
+  },
 };
-
-
 
 // ─────────────────────────────────────────────
 // Feature Highlights
@@ -38,7 +41,8 @@ const FEATURES = [
   {
     icon: Shield,
     title: 'Privacy First',
-    description: 'All processing happens in your browser. No data ever leaves your device. We have zero tracking, zero ads, zero analytics.',
+    description:
+      'All processing happens in your browser. No data ever leaves your device. We have zero tracking, zero ads, zero analytics.',
     color: '#10b981',
     bg: 'rgba(16, 185, 129, 0.08)',
     border: 'rgba(16, 185, 129, 0.2)',
@@ -46,7 +50,8 @@ const FEATURES = [
   {
     icon: Zap,
     title: 'Lightning Fast',
-    description: 'Optimized for performance with Lighthouse score 95+. Instant results with no server round-trips. Everything runs locally.',
+    description:
+      'Optimized for performance with Lighthouse score 95+. Instant results with no server round-trips. Everything runs locally.',
     color: '#f59e0b',
     bg: 'rgba(245, 158, 11, 0.08)',
     border: 'rgba(245, 158, 11, 0.2)',
@@ -60,8 +65,6 @@ const FEATURES = [
     border: 'rgba(79, 70, 229, 0.2)',
   },
 ];
-
-
 
 // ─────────────────────────────────────────────
 // JSON-LD Schema
@@ -88,14 +91,12 @@ const JSON_LD_ORGANIZATION = {
   name: 'ToolPilot',
   url: 'https://toolpilot.app',
   logo: 'https://toolpilot.app/favicon.svg',
-  sameAs: [
-    'https://github.com/Pavan-Madisetty/ToolPilot'
-  ],
+  sameAs: ['https://github.com/Pavan-Madisetty/ToolPilot'],
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'customer support',
-    email: 'support@toolpilot.app'
-  }
+    email: 'support@toolpilot.app',
+  },
 };
 
 // ─────────────────────────────────────────────
@@ -114,9 +115,7 @@ export default function HomePage() {
     .map((h) => TOOL_BY_ID[h.toolId])
     .filter(Boolean) as ToolConfig[];
 
-  const favoriteTools = favorites
-    .map((f) => TOOL_BY_ID[f.toolId])
-    .filter(Boolean) as ToolConfig[];
+  const favoriteTools = favorites.map((f) => TOOL_BY_ID[f.toolId]).filter(Boolean) as ToolConfig[];
 
   return (
     <>
@@ -126,7 +125,10 @@ export default function HomePage() {
           name="description"
           content={`ToolPilot offers ${TOOL_COUNT_LABEL} free browser tools — EMI calculators, JSON formatters, PDF tools, image compressors, text utilities, and more. No signup. No tracking. Works offline.`}
         />
-        <meta name="keywords" content="free online tools, emi calculator, json formatter, pdf tools, image compressor, text tools, developer tools" />
+        <meta
+          name="keywords"
+          content="free online tools, emi calculator, json formatter, pdf tools, image compressor, text tools, developer tools"
+        />
         <link rel="canonical" href="https://toolpilot.app/" />
 
         {/* Open Graph */}
@@ -143,7 +145,10 @@ export default function HomePage() {
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`ToolPilot — ${TOOL_COUNT_LABEL} Free Online Tools`} />
-        <meta name="twitter:description" content={`${TOOL_COUNT_LABEL} free browser tools. No signup. No tracking. Works offline.`} />
+        <meta
+          name="twitter:description"
+          content={`${TOOL_COUNT_LABEL} free browser tools. No signup. No tracking. Works offline.`}
+        />
         <meta name="twitter:image" content="https://toolpilot.app/og-image.png" />
 
         {/* JSON-LD */}
@@ -163,7 +168,8 @@ export default function HomePage() {
               {TOOL_COUNT_LABEL} Free Online Tools
             </h1>
             <p className="workspace-header__desc text-body-large">
-              Secure, fast, and local browser-based utility tools. No signup, no tracking, works completely offline.
+              Secure, fast, and local browser-based utility tools. No signup, no tracking, works
+              completely offline.
             </p>
             <div className="workspace-header__search-wrap">
               <button
@@ -173,14 +179,14 @@ export default function HomePage() {
                 aria-label="Search all tools"
               >
                 <Search className="workspace-header__search-icon w-5 h-5" aria-hidden="true" />
-                <span className="workspace-header__search-placeholder">Search {TOOL_COUNT_LABEL} tools...</span>
+                <span className="workspace-header__search-placeholder">
+                  Search {TOOL_COUNT_LABEL} tools...
+                </span>
                 <kbd className="workspace-header__search-kbd">⌘K</kbd>
               </button>
             </div>
           </div>
         </section>
-
-
 
         {/* ── Favorites ─────────────────────────── */}
         <AnimatePresence>
@@ -197,7 +203,12 @@ export default function HomePage() {
               <div className="section__header">
                 <div>
                   <h2 id="favorites-heading" className="section__title">
-                    <Star size={20} aria-hidden="true" className="section__title-icon" style={{ color: '#f59e0b' }} />
+                    <Star
+                      size={20}
+                      aria-hidden="true"
+                      className="section__title-icon"
+                      style={{ color: '#f59e0b' }}
+                    />
                     Your Favorites
                   </h2>
                   <p className="section__subtitle">Tools you've starred for quick access</p>
@@ -228,8 +239,12 @@ export default function HomePage() {
             variants={fadeUp}
           >
             <div>
-              <h2 id="workspace-tools-heading" className="section__title">Workspace Categories</h2>
-              <p className="section__subtitle">Select a category to explore secure, browser-based productivity tools</p>
+              <h2 id="workspace-tools-heading" className="section__title">
+                Workspace Categories
+              </h2>
+              <p className="section__subtitle">
+                Select a category to explore secure, browser-based productivity tools
+              </p>
             </div>
             <Link to="/search" className="section__view-all" aria-label="Browse all tools index">
               Search index <ArrowRight size={16} aria-hidden="true" />
@@ -246,7 +261,9 @@ export default function HomePage() {
                 aria-selected={activeModuleKey === 'popular'}
                 role="tab"
               >
-                <span className="workspace-tab__emoji" aria-hidden="true">🔥</span>
+                <span className="workspace-tab__emoji" aria-hidden="true">
+                  🔥
+                </span>
                 <span className="workspace-tab__name">Popular Tools</span>
               </button>
               {MODULES.map((mod) => {
@@ -297,7 +314,9 @@ export default function HomePage() {
             variants={fadeUp}
           >
             <div>
-              <h2 id="features-heading" className="section__title">Why ToolPilot?</h2>
+              <h2 id="features-heading" className="section__title">
+                Why ToolPilot?
+              </h2>
               <p className="section__subtitle">Built with your privacy and performance in mind</p>
             </div>
           </motion.div>
@@ -315,11 +334,13 @@ export default function HomePage() {
                 className="feature-card"
                 variants={cardVariant}
                 whileHover={{ y: -6, scale: 1.02 }}
-                style={{
-                  '--feature-color': feat.color,
-                  '--feature-bg': feat.bg,
-                  '--feature-border': feat.border,
-                } as React.CSSProperties}
+                style={
+                  {
+                    '--feature-color': feat.color,
+                    '--feature-bg': feat.bg,
+                    '--feature-border': feat.border,
+                  } as React.CSSProperties
+                }
               >
                 <div className="feature-card__icon-wrap" aria-hidden="true">
                   <feat.icon size={24} />

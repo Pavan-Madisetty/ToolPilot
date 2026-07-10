@@ -56,7 +56,12 @@ export default function TimestampConverter() {
       <div className="space-y-8">
         {/* Live Clock Card */}
         <div className="grid grid-cols-1 gap-4 max-w-md">
-          <ResultBox align="left" label="Current Unix Epoch Timestamp (p.s. updates live)" value={liveEpoch} highlight />
+          <ResultBox
+            align="left"
+            label="Current Unix Epoch Timestamp (p.s. updates live)"
+            value={liveEpoch}
+            highlight
+          />
         </div>
 
         <div className="tool-layout lg:grid-cols-2">
@@ -100,8 +105,15 @@ export default function TimestampConverter() {
                 className="mt-4 p-4 border rounded-xl"
                 style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}
               >
-                <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Epoch Timestamp (seconds)</span>
-                <p className="text-lg font-bold font-mono mt-1" style={{ color: 'var(--text-primary)' }}>{dateResult}</p>
+                <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
+                  Epoch Timestamp (seconds)
+                </span>
+                <p
+                  className="text-lg font-bold font-mono mt-1"
+                  style={{ color: 'var(--text-primary)' }}
+                >
+                  {dateResult}
+                </p>
               </div>
             )}
           </div>

@@ -4,9 +4,30 @@ import { Button, Slider, Switch, CopyButton } from '@/components/ui';
 
 // Mock small word list for passphrase generator
 const PASSPHRASE_WORDS = [
-  'apple', 'banana', 'orange', 'rocket', 'shield', 'ocean', 'forest', 'mountain',
-  'river', 'cloud', 'galaxy', 'planet', 'vector', 'matrix', 'beacon', 'system',
-  'pilot', 'bridge', 'anchor', 'voyage', 'summit', 'glacier', 'canyon', 'desert'
+  'apple',
+  'banana',
+  'orange',
+  'rocket',
+  'shield',
+  'ocean',
+  'forest',
+  'mountain',
+  'river',
+  'cloud',
+  'galaxy',
+  'planet',
+  'vector',
+  'matrix',
+  'beacon',
+  'system',
+  'pilot',
+  'bridge',
+  'anchor',
+  'voyage',
+  'summit',
+  'glacier',
+  'canyon',
+  'desert',
 ];
 
 export default function PasswordGenerator() {
@@ -56,7 +77,16 @@ export default function PasswordGenerator() {
       result += chars.charAt(array[i] % chars.length);
     }
     return result;
-  }, [length, useUpper, useLower, useNumbers, useSymbols, excludeSimilar, isPassphraseMode, trigger]);
+  }, [
+    length,
+    useUpper,
+    useLower,
+    useNumbers,
+    useSymbols,
+    excludeSimilar,
+    isPassphraseMode,
+    trigger,
+  ]);
 
   // Calculate Entropy for strength meter
   const strengthInfo = useMemo(() => {
@@ -105,7 +135,10 @@ export default function PasswordGenerator() {
                 onChange={setLength}
               />
 
-              <div className="border-t pt-4 space-y-4" style={{ borderColor: 'var(--border-default)' }}>
+              <div
+                className="border-t pt-4 space-y-4"
+                style={{ borderColor: 'var(--border-default)' }}
+              >
                 <Switch label="Uppercase (A-Z)" checked={useUpper} onChange={setUseUpper} />
                 <Switch label="Lowercase (a-z)" checked={useLower} onChange={setUseLower} />
                 <Switch label="Numbers (0-9)" checked={useNumbers} onChange={setUseNumbers} />

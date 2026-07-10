@@ -53,13 +53,7 @@ export function PageLoader() {
           boxShadow: '0 8px 32px rgba(79, 70, 229, 0.25)',
         }}
       >
-        <svg
-          width="28"
-          height="28"
-          viewBox="0 0 24 24"
-          fill="none"
-          aria-hidden="true"
-        >
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path
             d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"
             stroke="white"
@@ -72,10 +66,7 @@ export function PageLoader() {
       </motion.div>
 
       {/* Spinner Ring */}
-      <div
-        style={{ position: 'relative', width: 48, height: 48 }}
-        aria-hidden="true"
-      >
+      <div style={{ position: 'relative', width: 48, height: 48 }} aria-hidden="true">
         <motion.span
           style={{
             position: 'absolute',
@@ -110,10 +101,7 @@ export function PageLoader() {
         }}
       >
         <span>Loading</span>
-        <span
-          style={{ display: 'flex', alignItems: 'center', gap: 3 }}
-          aria-hidden="true"
-        >
+        <span style={{ display: 'flex', alignItems: 'center', gap: 3 }} aria-hidden="true">
           {[0, 1, 2].map((i) => (
             <motion.span
               key={i}

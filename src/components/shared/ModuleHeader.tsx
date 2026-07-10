@@ -39,10 +39,16 @@ export function ModuleHeader({
           {icon}
         </div>
         <div>
-          <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight" style={{ color: 'var(--text-primary)' }}>
+          <h1
+            className="text-2xl md:text-3xl font-extrabold tracking-tight"
+            style={{ color: 'var(--text-primary)' }}
+          >
             {title}
           </h1>
-          <p className="text-sm mt-2 leading-relaxed max-w-xl" style={{ color: 'var(--text-secondary)' }}>
+          <p
+            className="text-sm mt-2 leading-relaxed max-w-xl"
+            style={{ color: 'var(--text-secondary)' }}
+          >
             {description}
           </p>
         </div>

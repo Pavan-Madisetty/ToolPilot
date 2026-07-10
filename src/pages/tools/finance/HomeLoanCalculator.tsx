@@ -82,7 +82,13 @@ export default function HomeLoanCalculator() {
   };
 
   const downloadCSV = () => {
-    const headers = ['Month', 'EMI Paid', 'Principal Component', 'Interest Component', 'Outstanding Balance'];
+    const headers = [
+      'Month',
+      'EMI Paid',
+      'Principal Component',
+      'Interest Component',
+      'Outstanding Balance',
+    ];
     const rows = emiData.schedule.map((row) => [
       row.month,
       row.emi.toFixed(2),
@@ -94,7 +100,7 @@ export default function HomeLoanCalculator() {
     const csvContent =
       'data:text/csv;charset=utf-8,' +
       [headers.join(','), ...rows.map((e) => e.join(','))].join('\n');
-    
+
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement('a');
     link.setAttribute('href', encodedUri);
@@ -142,11 +148,15 @@ export default function HomeLoanCalculator() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="result-box text-center">
               <span className="result-label">Monthly EMI</span>
-              <div className="result-value text-indigo-600 dark:text-indigo-400">{formatCurrency(emiData.monthlyEMI)}</div>
+              <div className="result-value text-indigo-600 dark:text-indigo-400">
+                {formatCurrency(emiData.monthlyEMI)}
+              </div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Total Interest Payable</span>
-              <div className="result-value text-red-500">{formatCurrency(emiData.totalInterest)}</div>
+              <div className="result-value text-red-500">
+                {formatCurrency(emiData.totalInterest)}
+              </div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Total Payment (Principal + Interest)</span>
@@ -166,7 +176,8 @@ export default function HomeLoanCalculator() {
                 Amortization Breakdowns
               </h3>
               <p className="text-xs text-slate-500 dark:text-slate-400">
-                Download the complete monthly payment schedule showing principal and interest components breakdown for the entire tenure of your Home Loan.
+                Download the complete monthly payment schedule showing principal and interest
+                components breakdown for the entire tenure of your Home Loan.
               </p>
               <Button
                 variant="secondary"

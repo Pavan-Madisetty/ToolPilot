@@ -9,7 +9,10 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type = 'text', label, error, helperText, requiredMark = false, id, ...props }, ref) => {
+  (
+    { className, type = 'text', label, error, helperText, requiredMark = false, id, ...props },
+    ref
+  ) => {
     const defaultId = useId();
     const inputId = id ?? defaultId;
     const errorId = `${inputId}_error`;

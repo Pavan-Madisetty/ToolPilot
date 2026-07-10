@@ -19,24 +19,24 @@ export default function SalaryCalculator() {
 
   const salaryDetails = useMemo(() => {
     const grossMonthly = annualCTC / 12;
-    const basic = grossMonthly * 0.50; // 50% of gross
-    const hra = basic * 0.50; // 50% of basic (25% of gross)
+    const basic = grossMonthly * 0.5; // 50% of gross
+    const hra = basic * 0.5; // 50% of basic (25% of gross)
     const pfContribution = basic * 0.12; // 12% of basic (6% of gross)
     const professionalTax = grossMonthly > 15000 ? 200 : 0; // Flat standard Professional Tax
-    
+
     // Hardcoded simplified income tax deduction (approximate monthly regime)
     const annualSalary = annualCTC;
     const standardDeduction = 75000;
     const taxableIncome = Math.max(0, annualSalary - standardDeduction);
     let annualTax = 0;
     if (taxableIncome > 1500000) {
-      annualTax = 140000 + (taxableIncome - 1500000) * 0.30;
+      annualTax = 140000 + (taxableIncome - 1500000) * 0.3;
     } else if (taxableIncome > 1200000) {
-      annualTax = 80000 + (taxableIncome - 1200000) * 0.20;
+      annualTax = 80000 + (taxableIncome - 1200000) * 0.2;
     } else if (taxableIncome > 1000000) {
       annualTax = 50000 + (taxableIncome - 1000000) * 0.15;
     } else if (taxableIncome > 700000) {
-      annualTax = 20000 + (taxableIncome - 700000) * 0.10;
+      annualTax = 20000 + (taxableIncome - 700000) * 0.1;
     } else if (taxableIncome > 300000) {
       annualTax = (taxableIncome - 300000) * 0.05;
     }
@@ -105,19 +105,27 @@ export default function SalaryCalculator() {
             onChange={setAnnualCTC}
           />
           <div className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40">
-            <h3 className="text-sm font-bold mb-1.5" style={{ color: 'var(--text-primary)' }}>Breakdown Metrics</h3>
+            <h3 className="text-sm font-bold mb-1.5" style={{ color: 'var(--text-primary)' }}>
+              Breakdown Metrics
+            </h3>
             <div className="space-y-1.5 text-xs text-slate-500 dark:text-slate-400">
               <div className="flex justify-between">
                 <span>Basic Salary (50%):</span>
-                <span className="font-semibold text-slate-700 dark:text-slate-300">{formatCurrency(salaryDetails.basic)}/mo</span>
+                <span className="font-semibold text-slate-700 dark:text-slate-300">
+                  {formatCurrency(salaryDetails.basic)}/mo
+                </span>
               </div>
               <div className="flex justify-between">
                 <span>HRA (50% of Basic):</span>
-                <span className="font-semibold text-slate-700 dark:text-slate-300">{formatCurrency(salaryDetails.hra)}/mo</span>
+                <span className="font-semibold text-slate-700 dark:text-slate-300">
+                  {formatCurrency(salaryDetails.hra)}/mo
+                </span>
               </div>
               <div className="flex justify-between">
                 <span>EPF Contribution (12%):</span>
-                <span className="font-semibold text-slate-700 dark:text-slate-300">{formatCurrency(salaryDetails.pfContribution)}/mo</span>
+                <span className="font-semibold text-slate-700 dark:text-slate-300">
+                  {formatCurrency(salaryDetails.pfContribution)}/mo
+                </span>
               </div>
             </div>
           </div>
@@ -128,15 +136,21 @@ export default function SalaryCalculator() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="result-box text-center">
               <span className="result-label">Gross Monthly Salary</span>
-              <div className="result-value text-primary">{formatCurrency(salaryDetails.grossMonthly)}</div>
+              <div className="result-value text-primary">
+                {formatCurrency(salaryDetails.grossMonthly)}
+              </div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Total Deductions</span>
-              <div className="result-value text-danger">{formatCurrency(salaryDetails.totalDeductions)}</div>
+              <div className="result-value text-danger">
+                {formatCurrency(salaryDetails.totalDeductions)}
+              </div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Net In-Hand / Month</span>
-              <div className="result-value text-success">{formatCurrency(salaryDetails.netInHand)}</div>
+              <div className="result-value text-success">
+                {formatCurrency(salaryDetails.netInHand)}
+              </div>
             </div>
           </div>
 

@@ -1,11 +1,30 @@
 import { useState, useMemo } from 'react';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+} from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider } from '@/components/ui';
 
 // Register Chart.js line elements
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
 
 const formatCurrency = (val: number) => {
   return new Intl.NumberFormat('en-IN', {
@@ -27,7 +46,7 @@ export default function SIPCalculator() {
     const n = tenureYears * 12;
 
     const totalInvested = P * n;
-    
+
     // Future Value formula: FV = P * [ ( (1 + i)^n - 1 ) / i ] * (1 + i)
     let totalValue: number;
     if (i === 0) {
@@ -148,11 +167,15 @@ export default function SIPCalculator() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="result-box text-center">
               <span className="result-label">Invested Amount</span>
-              <div className="result-value text-primary">{formatCurrency(projection.totalInvested)}</div>
+              <div className="result-value text-primary">
+                {formatCurrency(projection.totalInvested)}
+              </div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Est. Returns</span>
-              <div className="result-value text-success">{formatCurrency(projection.estimatedReturns)}</div>
+              <div className="result-value text-success">
+                {formatCurrency(projection.estimatedReturns)}
+              </div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Total Value</span>

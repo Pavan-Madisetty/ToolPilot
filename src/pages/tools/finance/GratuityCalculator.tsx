@@ -48,7 +48,9 @@ export default function GratuityCalculator() {
 
           {!gratuityData.eligible && (
             <div className="p-4 rounded-xl border border-yellow-200 dark:border-yellow-900 bg-yellow-50 dark:bg-yellow-950/20 text-yellow-800 dark:text-yellow-200 text-xs">
-              <strong>Note:</strong> Under the Payment of Gratuity Act 1972, a minimum of 5 years of continuous service is generally required to be eligible for gratuity (except in cases of death or disablement).
+              <strong>Note:</strong> Under the Payment of Gratuity Act 1972, a minimum of 5 years of
+              continuous service is generally required to be eligible for gratuity (except in cases
+              of death or disablement).
             </div>
           )}
         </div>
@@ -56,38 +58,31 @@ export default function GratuityCalculator() {
         {/* Output & Info */}
         <div className="flex flex-col gap-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <ResultBox
-              label="Gratuity Amount"
-              value={gratuityData.gratuity}
-              prefix="₹"
-              highlight
-            />
-            <ResultBox
-              label="Tax-Exempt Gratuity"
-              value={gratuityData.exempt}
-              prefix="₹"
-            />
-            <ResultBox
-              label="Taxable Gratuity"
-              value={gratuityData.taxable}
-              prefix="₹"
-            />
+            <ResultBox label="Gratuity Amount" value={gratuityData.gratuity} prefix="₹" highlight />
+            <ResultBox label="Tax-Exempt Gratuity" value={gratuityData.exempt} prefix="₹" />
+            <ResultBox label="Taxable Gratuity" value={gratuityData.taxable} prefix="₹" />
           </div>
 
           <Callout tone="info" title="Gratuity Formula & Rules">
             <div className="text-xs space-y-2 text-[var(--text-secondary)]">
               <p>
-                <strong>Formula:</strong> Gratuity = (15 &times; Monthly Salary &times; Service Years) &divide; 26
+                <strong>Formula:</strong> Gratuity = (15 &times; Monthly Salary &times; Service
+                Years) &divide; 26
               </p>
               <p>
                 Where:
                 <br />
-                &bull; <strong>Salary</strong> is the last drawn Basic Salary + Dearness Allowance (DA).
+                &bull; <strong>Salary</strong> is the last drawn Basic Salary + Dearness Allowance
+                (DA).
                 <br />
-                &bull; <strong>Service Years</strong> are rounded to the nearest full year. If the remaining fraction is 6 months or more, it is rounded up to 1 year; otherwise, it is ignored (modeled as <code>Math.round(Years)</code>).
+                &bull; <strong>Service Years</strong> are rounded to the nearest full year. If the
+                remaining fraction is 6 months or more, it is rounded up to 1 year; otherwise, it is
+                ignored (modeled as <code>Math.round(Years)</code>).
               </p>
               <p>
-                The maximum tax-exempt gratuity limit under Section 10(10) of the Income Tax Act is <strong>₹20,00,000</strong>. Any gratuity received exceeding this limit is subject to income tax.
+                The maximum tax-exempt gratuity limit under Section 10(10) of the Income Tax Act is{' '}
+                <strong>₹20,00,000</strong>. Any gratuity received exceeding this limit is subject
+                to income tax.
               </p>
             </div>
           </Callout>

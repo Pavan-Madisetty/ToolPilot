@@ -90,17 +90,7 @@ export default function ImageCropper() {
       canvas.height = hPixel;
 
       if (ctx) {
-        ctx.drawImage(
-          img,
-          xPixel,
-          yPixel,
-          wPixel,
-          hPixel,
-          0,
-          0,
-          wPixel,
-          hPixel
-        );
+        ctx.drawImage(img, xPixel, yPixel, wPixel, hPixel, 0, 0, wPixel, hPixel);
         const dataUrl = canvas.toDataURL('image/png');
         setCroppedUrl(dataUrl);
       }
@@ -184,7 +174,9 @@ export default function ImageCropper() {
 
                 {/* Aspect Ratio selection */}
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-semibold text-[var(--text-secondary)]">Aspect Ratio</label>
+                  <label className="text-xs font-semibold text-[var(--text-secondary)]">
+                    Aspect Ratio
+                  </label>
                   <div className="grid grid-cols-4 gap-2">
                     {['free', '1:1', '16:9', '4:3'].map((ratio) => (
                       <Button
@@ -242,18 +234,17 @@ export default function ImageCropper() {
                   />
                 </div>
 
-                <Button
-                  onClick={handleCrop}
-                  disabled={isCropping}
-                  className="w-full mt-2"
-                >
+                <Button onClick={handleCrop} disabled={isCropping} className="w-full mt-2">
                   {isCropping ? 'Cropping...' : 'Apply Crop'}
                 </Button>
               </div>
 
               {/* Cropped Output Preview */}
               {croppedUrl && (
-                <div className="pt-4 border-t flex flex-col gap-3" style={{ borderColor: 'var(--border-default)' }}>
+                <div
+                  className="pt-4 border-t flex flex-col gap-3"
+                  style={{ borderColor: 'var(--border-default)' }}
+                >
                   <div className="text-xs font-semibold text-[var(--success)] flex items-center justify-center gap-1.5">
                     <CheckCircle size={14} />
                     <span>Cropped image generated!</span>

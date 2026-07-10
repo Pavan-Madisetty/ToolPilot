@@ -21,7 +21,9 @@ class QRCodeModel {
 
   make() {
     this.moduleCount = this.typeNumber * 4 + 17;
-    this.modules = Array.from({ length: this.moduleCount }, () => new Array(this.moduleCount).fill(false));
+    this.modules = Array.from({ length: this.moduleCount }, () =>
+      new Array(this.moduleCount).fill(false)
+    );
 
     this.setupPositionDetectionPattern(0, 0);
     this.setupPositionDetectionPattern(this.moduleCount - 7, 0);
@@ -257,7 +259,10 @@ export default function QrGenerator() {
       <div className="flex flex-col gap-6 max-w-4xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Left Panel: Settings */}
-          <div className="border rounded-2xl p-5 flex flex-col gap-5" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)' }}>
+          <div
+            className="border rounded-2xl p-5 flex flex-col gap-5"
+            style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)' }}
+          >
             <span className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>
               QR Settings
             </span>
@@ -332,8 +337,14 @@ export default function QrGenerator() {
           </div>
 
           {/* Right Panel: Output & Download */}
-          <div className="border rounded-2xl p-5 flex flex-col items-center justify-between gap-6" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)' }}>
-            <span className="text-sm font-bold w-full text-left" style={{ color: 'var(--text-primary)' }}>
+          <div
+            className="border rounded-2xl p-5 flex flex-col items-center justify-between gap-6"
+            style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)' }}
+          >
+            <span
+              className="text-sm font-bold w-full text-left"
+              style={{ color: 'var(--text-primary)' }}
+            >
               Live Preview
             </span>
 

@@ -1,10 +1,29 @@
 import { useState, useMemo } from 'react';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+} from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider, ResultBox } from '@/components/ui';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
 
 export default function SavingsPlanner() {
   const [targetAmount, setTargetAmount] = useState<number>(1000000); // Default: ₹10,00,000 (10 Lakhs)
@@ -151,11 +170,7 @@ export default function SavingsPlanner() {
               prefix="₹"
               highlight
             />
-            <ResultBox
-              label="Total Invested"
-              value={calculations.totalInvested}
-              prefix="₹"
-            />
+            <ResultBox label="Total Invested" value={calculations.totalInvested} prefix="₹" />
             <ResultBox
               label="Total Interest Earned"
               value={calculations.totalInterest}

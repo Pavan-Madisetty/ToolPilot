@@ -1,10 +1,29 @@
 import { useState, useMemo } from 'react';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+} from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider, Select } from '@/components/ui';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
 
 const formatCurrency = (val: number) => {
   return new Intl.NumberFormat('en-IN', {
@@ -149,11 +168,15 @@ export default function FDCalculator() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="result-box text-center">
               <span className="result-label">Invested Amount</span>
-              <div className="result-value text-primary">{formatCurrency(projection.totalInvested)}</div>
+              <div className="result-value text-primary">
+                {formatCurrency(projection.totalInvested)}
+              </div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Est. Interest</span>
-              <div className="result-value text-success">{formatCurrency(projection.interestEarned)}</div>
+              <div className="result-value text-success">
+                {formatCurrency(projection.interestEarned)}
+              </div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Maturity Value</span>

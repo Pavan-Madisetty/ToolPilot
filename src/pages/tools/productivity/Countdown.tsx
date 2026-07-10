@@ -7,7 +7,7 @@ type Mode = 'duration' | 'target';
 
 export default function Countdown() {
   const [mode, setMode] = useState<Mode>('duration');
-  
+
   // Duration Inputs
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(5);
@@ -30,27 +30,29 @@ export default function Countdown() {
   // Synthesized audio alert
   const playChime = () => {
     try {
-      const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      const AudioContextClass =
+        window.AudioContext ||
+        (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
       if (!AudioContextClass) return;
 
       if (!audioContextRef.current) {
         audioContextRef.current = new AudioContextClass();
       }
       const ctx = audioContextRef.current;
-      
+
       const playBeep = (startTime: number, freq: number, duration: number) => {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
-        
+
         osc.type = 'sine';
         osc.frequency.setValueAtTime(freq, startTime);
-        
+
         gain.gain.setValueAtTime(0.15, startTime);
         gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration - 0.05);
-        
+
         osc.connect(gain);
         gain.connect(ctx.destination);
-        
+
         osc.start(startTime);
         osc.stop(startTime + duration);
       };
@@ -177,7 +179,10 @@ export default function Countdown() {
     <ToolPageWrapper toolId="countdown">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-4xl mx-auto">
         {/* Settings Card */}
-        <Card className="flex flex-col gap-6" style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}>
+        <Card
+          className="flex flex-col gap-6"
+          style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}
+        >
           <div>
             <h3 className="text-lg font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>
               Timer Settings
@@ -188,28 +193,35 @@ export default function Countdown() {
           </div>
 
           {/* Mode Switcher */}
-          <div className="flex rounded-lg p-1" style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)' }}>
+          <div
+            className="flex rounded-lg p-1"
+            style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)' }}
+          >
             <button
-              onClick={() => { if (!isActive) setMode('duration'); }}
+              onClick={() => {
+                if (!isActive) setMode('duration');
+              }}
               className="flex-1 py-2 text-xs font-semibold rounded-md transition-colors"
               style={{
                 background: mode === 'duration' ? 'var(--bg-surface)' : 'transparent',
                 color: mode === 'duration' ? 'var(--text-primary)' : 'var(--text-secondary)',
                 cursor: isActive ? 'not-allowed' : 'pointer',
-                opacity: isActive && mode !== 'duration' ? 0.5 : 1
+                opacity: isActive && mode !== 'duration' ? 0.5 : 1,
               }}
               disabled={isActive}
             >
               Custom Duration
             </button>
             <button
-              onClick={() => { if (!isActive) setMode('target'); }}
+              onClick={() => {
+                if (!isActive) setMode('target');
+              }}
               className="flex-1 py-2 text-xs font-semibold rounded-md transition-colors"
               style={{
                 background: mode === 'target' ? 'var(--bg-surface)' : 'transparent',
                 color: mode === 'target' ? 'var(--text-primary)' : 'var(--text-secondary)',
                 cursor: isActive ? 'not-allowed' : 'pointer',
-                opacity: isActive && mode !== 'target' ? 0.5 : 1
+                opacity: isActive && mode !== 'target' ? 0.5 : 1,
               }}
               disabled={isActive}
             >
@@ -236,7 +248,9 @@ export default function Countdown() {
                   min={0}
                   max={59}
                   value={minutes}
-                  onChange={(e) => setMinutes(Math.min(59, Math.max(0, parseInt(e.target.value) || 0)))}
+                  onChange={(e) =>
+                    setMinutes(Math.min(59, Math.max(0, parseInt(e.target.value) || 0)))
+                  }
                   disabled={isActive}
                 />
                 <Input
@@ -245,7 +259,9 @@ export default function Countdown() {
                   min={0}
                   max={59}
                   value={seconds}
-                  onChange={(e) => setSeconds(Math.min(59, Math.max(0, parseInt(e.target.value) || 0)))}
+                  onChange={(e) =>
+                    setSeconds(Math.min(59, Math.max(0, parseInt(e.target.value) || 0)))
+                  }
                   disabled={isActive}
                 />
               </div>
@@ -261,7 +277,7 @@ export default function Countdown() {
                   style={{
                     background: 'var(--bg-elevated)',
                     border: '1px solid var(--border-default)',
-                    color: 'var(--text-primary)'
+                    color: 'var(--text-primary)',
                   }}
                 />
               </div>
@@ -269,16 +285,22 @@ export default function Countdown() {
           </div>
 
           {/* Setup Actions */}
-          <div className="flex justify-end pt-4 border-t" style={{ borderColor: 'var(--border-default)' }}>
+          <div
+            className="flex justify-end pt-4 border-t"
+            style={{ borderColor: 'var(--border-default)' }}
+          >
             {!isActive && !isCompleted && (
               <Button
                 onClick={startTimer}
                 className="flex items-center gap-1.5 px-6 py-2.5 font-semibold"
                 style={{
                   backgroundColor: 'var(--primary)',
-                  color: '#fff'
+                  color: '#fff',
                 }}
-                disabled={(mode === 'duration' && hours === 0 && minutes === 0 && seconds === 0) || (mode === 'target' && !targetDate)}
+                disabled={
+                  (mode === 'duration' && hours === 0 && minutes === 0 && seconds === 0) ||
+                  (mode === 'target' && !targetDate)
+                }
               >
                 <Play size={16} />
                 <span>Start Timer</span>
@@ -287,11 +309,20 @@ export default function Countdown() {
 
             {isActive && (
               <div className="flex gap-2">
-                <Button onClick={togglePause} variant="secondary" className="flex items-center gap-1.5">
+                <Button
+                  onClick={togglePause}
+                  variant="secondary"
+                  className="flex items-center gap-1.5"
+                >
                   {isPaused ? <Play size={16} /> : <Pause size={16} />}
                   <span>{isPaused ? 'Resume' : 'Pause'}</span>
                 </Button>
-                <Button onClick={stopTimer} variant="secondary" className="flex items-center gap-1.5" style={{ color: 'var(--danger)', borderColor: 'var(--danger)' }}>
+                <Button
+                  onClick={stopTimer}
+                  variant="secondary"
+                  className="flex items-center gap-1.5"
+                  style={{ color: 'var(--danger)', borderColor: 'var(--danger)' }}
+                >
                   <X size={16} />
                   <span>Cancel</span>
                 </Button>
@@ -301,7 +332,10 @@ export default function Countdown() {
         </Card>
 
         {/* Display Card */}
-        <Card className="flex flex-col items-center justify-center p-8 md:p-12 text-center" style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}>
+        <Card
+          className="flex flex-col items-center justify-center p-8 md:p-12 text-center"
+          style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}
+        >
           <div className="flex flex-col gap-6 w-full items-center justify-center">
             {/* Alarm Ringing Screen */}
             {isCompleted ? (
@@ -322,7 +356,7 @@ export default function Countdown() {
                   className="flex items-center gap-1.5 px-6 py-2.5 font-semibold"
                   style={{
                     backgroundColor: 'var(--danger)',
-                    color: '#fff'
+                    color: '#fff',
                   }}
                 >
                   <BellOff size={16} />
@@ -336,17 +370,21 @@ export default function Countdown() {
                     Time Remaining
                   </h3>
                   <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-                    {isActive ? (isPaused ? 'Timer paused' : 'Counting down...') : 'Timer not started'}
+                    {isActive
+                      ? isPaused
+                        ? 'Timer paused'
+                        : 'Counting down...'
+                      : 'Timer not started'}
                   </p>
                 </div>
 
                 {/* Main Readout */}
-                <div 
+                <div
                   className="py-10 px-6 rounded-2xl font-mono text-5xl md:text-6xl tracking-wider font-bold select-none border w-full text-center"
-                  style={{ 
-                    background: 'var(--bg-elevated)', 
+                  style={{
+                    background: 'var(--bg-elevated)',
                     borderColor: 'var(--border-default)',
-                    color: isActive && !isPaused ? 'var(--primary)' : 'var(--text-primary)' 
+                    color: isActive && !isPaused ? 'var(--primary)' : 'var(--text-primary)',
                   }}
                 >
                   {formatTime(timeLeft)}
@@ -354,12 +392,15 @@ export default function Countdown() {
 
                 {/* Progress Indicator */}
                 {isActive && (
-                  <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2 overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
-                    <div 
+                  <div
+                    className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2 overflow-hidden"
+                    style={{ background: 'var(--bg-elevated)' }}
+                  >
+                    <div
                       className="h-full transition-all duration-1000 ease-linear"
-                      style={{ 
-                        width: `${progressPercentage}%`, 
-                        backgroundColor: 'var(--primary)'
+                      style={{
+                        width: `${progressPercentage}%`,
+                        backgroundColor: 'var(--primary)',
                       }}
                     />
                   </div>

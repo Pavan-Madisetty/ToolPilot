@@ -26,7 +26,6 @@ export const useThemeStore = create<ThemeStore>()(
         const next: ThemeMode = current === 'light' ? 'dark' : 'light';
         get().setTheme(next);
       },
-
     }),
     {
       name: STORAGE_KEYS.THEME,

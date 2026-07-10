@@ -31,7 +31,10 @@ export default function FuelCostCalculator() {
       <div className="tool-layout lg:grid-cols-2 gap-6">
         <div className="space-y-6">
           <Card className="space-y-6">
-            <div className="flex justify-between items-center border-b pb-4" style={{ borderColor: 'var(--border-subtle)' }}>
+            <div
+              className="flex justify-between items-center border-b pb-4"
+              style={{ borderColor: 'var(--border-subtle)' }}
+            >
               <h2 className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>
                 Trip Parameters
               </h2>
@@ -80,7 +83,11 @@ export default function FuelCostCalculator() {
               />
 
               <Input
-                label={unitSystem === 'metric' ? 'Fuel Price per Liter (₹ or $)' : 'Fuel Price per Gallon ($)'}
+                label={
+                  unitSystem === 'metric'
+                    ? 'Fuel Price per Liter (₹ or $)'
+                    : 'Fuel Price per Gallon ($)'
+                }
                 type="number"
                 min="0"
                 step="0.01"
@@ -128,9 +135,17 @@ export default function FuelCostCalculator() {
               shouldFormat={true}
             />
 
-            <div className="p-4 rounded-xl space-y-2 text-xs" style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-default)', color: 'var(--text-secondary)' }}>
+            <div
+              className="p-4 rounded-xl space-y-2 text-xs"
+              style={{
+                backgroundColor: 'var(--bg-elevated)',
+                border: '1px solid var(--border-default)',
+                color: 'var(--text-secondary)',
+              }}
+            >
               <p>
-                <strong>Calculation Method:</strong> Fuel needed = Distance ÷ Mileage. Cost = Fuel needed × Fuel price. Split cost = Cost ÷ Travelers.
+                <strong>Calculation Method:</strong> Fuel needed = Distance ÷ Mileage. Cost = Fuel
+                needed × Fuel price. Split cost = Cost ÷ Travelers.
               </p>
             </div>
           </Card>

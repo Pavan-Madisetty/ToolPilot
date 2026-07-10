@@ -47,14 +47,7 @@ export default function BudgetPlanner() {
           '#8B5CF6', // Purple for entertainment
           '#10B981', // Emerald for savings (lightened / separate in design)
         ],
-        hoverBackgroundColor: [
-          '#2563EB',
-          '#D97706',
-          '#059669',
-          '#DB2777',
-          '#7C3AED',
-          '#059669',
-        ],
+        hoverBackgroundColor: ['#2563EB', '#D97706', '#059669', '#DB2777', '#7C3AED', '#059669'],
         borderWidth: 1,
       },
     ],
@@ -137,11 +130,17 @@ export default function BudgetPlanner() {
             </div>
             <div className="result-box text-center">
               <span className="result-label">Total Expenses</span>
-              <div className="result-value text-danger">{formatCurrency(calculation.totalExpenses)}</div>
+              <div className="result-value text-danger">
+                {formatCurrency(calculation.totalExpenses)}
+              </div>
             </div>
             <div className="result-box text-center">
-              <span className="result-label">Net Savings ({calculation.savingsRate.toFixed(1)}%)</span>
-              <div className="result-value text-success">{formatCurrency(calculation.netSavings)}</div>
+              <span className="result-label">
+                Net Savings ({calculation.savingsRate.toFixed(1)}%)
+              </span>
+              <div className="result-value text-success">
+                {formatCurrency(calculation.netSavings)}
+              </div>
             </div>
           </div>
 

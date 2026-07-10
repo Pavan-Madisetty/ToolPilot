@@ -96,7 +96,9 @@ export default function CryptoProfitCalculator() {
           </div>
 
           <div className="card p-6">
-            <h3 className="text-sm font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Transaction Details</h3>
+            <h3 className="text-sm font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
+              Transaction Details
+            </h3>
             <div className="space-y-3 text-xs text-[var(--text-secondary)]">
               <div className="flex justify-between border-b border-[var(--border-default)] pb-2">
                 <span>Investment Amount</span>
@@ -104,21 +106,38 @@ export default function CryptoProfitCalculator() {
               </div>
               <div className="flex justify-between border-b border-[var(--border-default)] pb-2">
                 <span>Estimated Sale Value</span>
-                <span>₹{calculations.grossSellValue.toLocaleString('en-IN', { maximumFractionDigits: 2 })}</span>
+                <span>
+                  ₹
+                  {calculations.grossSellValue.toLocaleString('en-IN', {
+                    maximumFractionDigits: 2,
+                  })}
+                </span>
               </div>
               <div className="flex justify-between border-b border-[var(--border-default)] pb-2">
                 <span>Gross Profit / Loss</span>
-                <span className={calculations.grossProfit >= 0 ? 'text-success font-semibold' : 'text-danger font-semibold'}>
+                <span
+                  className={
+                    calculations.grossProfit >= 0
+                      ? 'text-success font-semibold'
+                      : 'text-danger font-semibold'
+                  }
+                >
                   ₹{calculations.grossProfit.toLocaleString('en-IN', { maximumFractionDigits: 2 })}
                 </span>
               </div>
               <div className="flex justify-between border-b border-[var(--border-default)] pb-2">
                 <span>Crypto Tax ({taxRate}%)</span>
-                <span className="text-danger font-semibold">₹{calculations.taxAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 })}</span>
+                <span className="text-danger font-semibold">
+                  ₹{calculations.taxAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 })}
+                </span>
               </div>
               <div className="flex justify-between border-b border-[var(--border-default)] pb-2">
                 <span>Net In-hand Profit / Loss</span>
-                <span className={calculations.netProfit >= 0 ? 'text-success font-bold' : 'text-danger font-bold'}>
+                <span
+                  className={
+                    calculations.netProfit >= 0 ? 'text-success font-bold' : 'text-danger font-bold'
+                  }
+                >
                   ₹{calculations.netProfit.toLocaleString('en-IN', { maximumFractionDigits: 2 })}
                 </span>
               </div>
@@ -127,7 +146,11 @@ export default function CryptoProfitCalculator() {
 
           <Callout tone="info" title="Indian Crypto Tax Policy">
             <p className="text-xs text-[var(--text-secondary)]">
-              Under Indian Income Tax rules, a flat **30% tax** is levied on all profits earned from Virtual Digital Assets (VDAs) / Cryptocurrencies. Additionally, losses from one crypto asset cannot be set off against gains from another, and no deductions are allowed other than the cost of acquisition. A **1% TDS** is also applicable on sell transactions.
+              Under Indian Income Tax rules, a flat **30% tax** is levied on all profits earned from
+              Virtual Digital Assets (VDAs) / Cryptocurrencies. Additionally, losses from one crypto
+              asset cannot be set off against gains from another, and no deductions are allowed
+              other than the cost of acquisition. A **1% TDS** is also applicable on sell
+              transactions.
             </p>
           </Callout>
         </div>

@@ -30,12 +30,26 @@ export default function GstInvoice() {
   const [isInterstate, setIsInterstate] = useState<boolean>(false); // Interstate (IGST) vs Intrastate (CGST+SGST)
 
   const [items, setItems] = useState<InvoiceItem[]>([
-    { id: '1', description: 'Consulting Services', hsn: '998311', qty: 1, price: 15000, gstRate: 18 },
-    { id: '2', description: 'Hardware Server Supply', hsn: '847130', qty: 2, price: 45000, gstRate: 12 },
+    {
+      id: '1',
+      description: 'Consulting Services',
+      hsn: '998311',
+      qty: 1,
+      price: 15000,
+      gstRate: 18,
+    },
+    {
+      id: '2',
+      description: 'Hardware Server Supply',
+      hsn: '847130',
+      qty: 2,
+      price: 45000,
+      gstRate: 12,
+    },
   ]);
 
   const addItem = () => {
-    setItems(prev => [
+    setItems((prev) => [
       ...prev,
       {
         id: Math.random().toString(36).substr(2, 9),
@@ -53,12 +67,12 @@ export default function GstInvoice() {
       setItems([{ id: '1', description: 'New Item', hsn: '', qty: 1, price: 0, gstRate: 18 }]);
       return;
     }
-    setItems(prev => prev.filter(item => item.id !== id));
+    setItems((prev) => prev.filter((item) => item.id !== id));
   };
 
   const updateItem = (id: string, field: keyof InvoiceItem, value: string | number) => {
-    setItems(prev =>
-      prev.map(item => {
+    setItems((prev) =>
+      prev.map((item) => {
         if (item.id === id) {
           return { ...item, [field]: value };
         }
@@ -74,7 +88,7 @@ export default function GstInvoice() {
     let sgst = 0;
     let igst = 0;
 
-    items.forEach(item => {
+    items.forEach((item) => {
       const itemSubtotal = item.qty * item.price;
       const tax = itemSubtotal * (item.gstRate / 100);
       subtotal += itemSubtotal;
@@ -143,7 +157,7 @@ export default function GstInvoice() {
             <h2 className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>
               Invoice Information
             </h2>
-            
+
             <div className="grid grid-cols-2 gap-4">
               <Input
                 label="Invoice Number"
@@ -206,7 +220,10 @@ export default function GstInvoice() {
         <div className="lg:col-span-7 space-y-6">
           {/* Item entry table */}
           <Card className="space-y-4 no-print">
-            <div className="flex justify-between items-center border-b pb-4" style={{ borderColor: 'var(--border-subtle)' }}>
+            <div
+              className="flex justify-between items-center border-b pb-4"
+              style={{ borderColor: 'var(--border-subtle)' }}
+            >
               <h2 className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>
                 Line Items
               </h2>
@@ -218,10 +235,14 @@ export default function GstInvoice() {
 
             <div className="space-y-4">
               {items.map((item, idx) => (
-                <div key={item.id} className="grid grid-cols-12 gap-3 items-end border-b pb-4 last:border-b-0 last:pb-0" style={{ borderColor: 'var(--border-subtle)' }}>
+                <div
+                  key={item.id}
+                  className="grid grid-cols-12 gap-3 items-end border-b pb-4 last:border-b-0 last:pb-0"
+                  style={{ borderColor: 'var(--border-subtle)' }}
+                >
                   <div className="col-span-4">
                     <Input
-                      label={idx === 0 ? "Description" : undefined}
+                      label={idx === 0 ? 'Description' : undefined}
                       value={item.description}
                       onChange={(e) => updateItem(item.id, 'description', e.target.value)}
                       placeholder="Item name"
@@ -229,7 +250,7 @@ export default function GstInvoice() {
                   </div>
                   <div className="col-span-2">
                     <Input
-                      label={idx === 0 ? "HSN" : undefined}
+                      label={idx === 0 ? 'HSN' : undefined}
                       value={item.hsn}
                       onChange={(e) => updateItem(item.id, 'hsn', e.target.value)}
                       placeholder="HSN"
@@ -237,7 +258,7 @@ export default function GstInvoice() {
                   </div>
                   <div className="col-span-2">
                     <Input
-                      label={idx === 0 ? "Qty" : undefined}
+                      label={idx === 0 ? 'Qty' : undefined}
                       type="number"
                       min="1"
                       value={item.qty}
@@ -246,7 +267,7 @@ export default function GstInvoice() {
                   </div>
                   <div className="col-span-2">
                     <Input
-                      label={idx === 0 ? "Price (₹)" : undefined}
+                      label={idx === 0 ? 'Price (₹)' : undefined}
                       type="number"
                       min="0"
                       value={item.price === 0 ? '' : item.price}
@@ -255,7 +276,7 @@ export default function GstInvoice() {
                   </div>
                   <div className="col-span-1.5">
                     <Select
-                      label={idx === 0 ? "GST" : undefined}
+                      label={idx === 0 ? 'GST' : undefined}
                       options={GST_RATES}
                       value={item.gstRate.toString()}
                       onChange={(e) => updateItem(item.id, 'gstRate', Number(e.target.value))}
@@ -276,29 +297,71 @@ export default function GstInvoice() {
           </Card>
 
           {/* Printable Invoice Display */}
-          <div id="printable-invoice" className="p-6 md:p-8 rounded-2xl bg-white dark:bg-slate-900 border text-black dark:text-white" style={{ borderColor: 'var(--border-default)' }}>
-            <div className="flex justify-between items-start border-b pb-6" style={{ borderColor: 'var(--border-default)' }}>
+          <div
+            id="printable-invoice"
+            className="p-6 md:p-8 rounded-2xl bg-white dark:bg-slate-900 border text-black dark:text-white"
+            style={{ borderColor: 'var(--border-default)' }}
+          >
+            <div
+              className="flex justify-between items-start border-b pb-6"
+              style={{ borderColor: 'var(--border-default)' }}
+            >
               <div>
-                <h1 className="text-2xl font-extrabold tracking-tight" style={{ color: 'var(--text-primary)' }}>GST TAX INVOICE</h1>
-                <p className="text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>Invoice No: <span className="font-bold">{invoiceNumber}</span></p>
-                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Date: {invoiceDate}</p>
+                <h1
+                  className="text-2xl font-extrabold tracking-tight"
+                  style={{ color: 'var(--text-primary)' }}
+                >
+                  GST TAX INVOICE
+                </h1>
+                <p className="text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>
+                  Invoice No: <span className="font-bold">{invoiceNumber}</span>
+                </p>
+                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                  Date: {invoiceDate}
+                </p>
               </div>
-              <Button onClick={handlePrint} size="sm" variant="secondary" className="flex items-center gap-1.5 no-print">
+              <Button
+                onClick={handlePrint}
+                size="sm"
+                variant="secondary"
+                className="flex items-center gap-1.5 no-print"
+              >
                 <Printer size={16} />
                 <span>Print Invoice</span>
               </Button>
             </div>
 
-            <div className="grid grid-cols-2 gap-8 py-6 border-b" style={{ borderColor: 'var(--border-default)' }}>
+            <div
+              className="grid grid-cols-2 gap-8 py-6 border-b"
+              style={{ borderColor: 'var(--border-default)' }}
+            >
               <div>
-                <h3 className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>Seller / Bill From</h3>
-                <p className="text-sm font-bold mt-1" style={{ color: 'var(--text-primary)' }}>{sellerName}</p>
-                <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>GSTIN: <span className="font-mono">{sellerGstin || 'N/A'}</span></p>
+                <h3
+                  className="text-xs font-bold uppercase tracking-wider"
+                  style={{ color: 'var(--text-tertiary)' }}
+                >
+                  Seller / Bill From
+                </h3>
+                <p className="text-sm font-bold mt-1" style={{ color: 'var(--text-primary)' }}>
+                  {sellerName}
+                </p>
+                <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+                  GSTIN: <span className="font-mono">{sellerGstin || 'N/A'}</span>
+                </p>
               </div>
               <div>
-                <h3 className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>Buyer / Bill To</h3>
-                <p className="text-sm font-bold mt-1" style={{ color: 'var(--text-primary)' }}>{buyerName}</p>
-                <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>GSTIN: <span className="font-mono">{buyerGstin || 'N/A'}</span></p>
+                <h3
+                  className="text-xs font-bold uppercase tracking-wider"
+                  style={{ color: 'var(--text-tertiary)' }}
+                >
+                  Buyer / Bill To
+                </h3>
+                <p className="text-sm font-bold mt-1" style={{ color: 'var(--text-primary)' }}>
+                  {buyerName}
+                </p>
+                <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+                  GSTIN: <span className="font-mono">{buyerGstin || 'N/A'}</span>
+                </p>
               </div>
             </div>
 
@@ -306,7 +369,10 @@ export default function GstInvoice() {
             <div className="py-6">
               <table className="w-full text-left text-sm">
                 <thead>
-                  <tr className="border-b" style={{ borderColor: 'var(--border-default)', color: 'var(--text-secondary)' }}>
+                  <tr
+                    className="border-b"
+                    style={{ borderColor: 'var(--border-default)', color: 'var(--text-secondary)' }}
+                  >
                     <th className="pb-3 font-semibold">Description</th>
                     <th className="pb-3 font-semibold text-center">HSN</th>
                     <th className="pb-3 font-semibold text-center">Qty</th>
@@ -325,7 +391,9 @@ export default function GstInvoice() {
                         <td className="py-3 text-center">{item.qty}</td>
                         <td className="py-3 text-right">{formatCurrency(item.price)}</td>
                         <td className="py-3 text-center">{item.gstRate}%</td>
-                        <td className="py-3 text-right font-semibold">{formatCurrency(baseTotal + baseTotal * (item.gstRate / 100))}</td>
+                        <td className="py-3 text-right font-semibold">
+                          {formatCurrency(baseTotal + baseTotal * (item.gstRate / 100))}
+                        </td>
                       </tr>
                     );
                   })}
@@ -334,31 +402,48 @@ export default function GstInvoice() {
             </div>
 
             {/* Calculations Totals Block */}
-            <div className="border-t pt-6 flex flex-col items-end" style={{ borderColor: 'var(--border-default)' }}>
+            <div
+              className="border-t pt-6 flex flex-col items-end"
+              style={{ borderColor: 'var(--border-default)' }}
+            >
               <div className="w-full sm:w-80 space-y-2.5 text-sm">
                 <div className="flex justify-between" style={{ color: 'var(--text-secondary)' }}>
                   <span>Subtotal (Base Value)</span>
                   <span className="font-semibold">{formatCurrency(totals.subtotal)}</span>
                 </div>
                 {isInterstate ? (
-                  <div className="flex justify-between animate-fade-in" style={{ color: 'var(--text-secondary)' }}>
+                  <div
+                    className="flex justify-between animate-fade-in"
+                    style={{ color: 'var(--text-secondary)' }}
+                  >
                     <span>Integrated Tax (IGST)</span>
                     <span className="font-semibold">{formatCurrency(totals.igst)}</span>
                   </div>
                 ) : (
                   <>
-                    <div className="flex justify-between" style={{ color: 'var(--text-secondary)' }}>
+                    <div
+                      className="flex justify-between"
+                      style={{ color: 'var(--text-secondary)' }}
+                    >
                       <span>Central Tax (CGST)</span>
                       <span className="font-semibold">{formatCurrency(totals.cgst)}</span>
                     </div>
-                    <div className="flex justify-between" style={{ color: 'var(--text-secondary)' }}>
+                    <div
+                      className="flex justify-between"
+                      style={{ color: 'var(--text-secondary)' }}
+                    >
                       <span>State Tax (SGST)</span>
                       <span className="font-semibold">{formatCurrency(totals.sgst)}</span>
                     </div>
                   </>
                 )}
-                <div className="flex justify-between border-t pt-3" style={{ borderColor: 'var(--border-default)' }}>
-                  <span className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>Grand Total</span>
+                <div
+                  className="flex justify-between border-t pt-3"
+                  style={{ borderColor: 'var(--border-default)' }}
+                >
+                  <span className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>
+                    Grand Total
+                  </span>
                   <span className="text-lg font-extrabold text-indigo-600 dark:text-indigo-400">
                     {formatCurrency(totals.grandTotal)}
                   </span>

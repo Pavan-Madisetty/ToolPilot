@@ -33,23 +33,14 @@ export function Callout({
   const displayIcon = icon ?? defaultIcon;
 
   return (
-    <div
-      className={clsx(
-        'callout',
-        `callout--${tone}`,
-        className
-      )}
-      {...props}
-    >
+    <div className={clsx('callout', `callout--${tone}`, className)} {...props}>
       <div className="callout__header">
         <div className="callout__icon-wrap" aria-hidden="true">
           {displayIcon}
         </div>
         <h3 className="callout__title">{displayTitle}</h3>
       </div>
-      <div className="callout__content w-full">
-        {children}
-      </div>
+      <div className="callout__content w-full">{children}</div>
     </div>
   );
 }

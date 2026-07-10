@@ -64,7 +64,7 @@ export default function JwtDecoder() {
       if (payloadObj.iss) claims.push({ label: 'Issuer (iss)', value: payloadObj.iss });
       if (payloadObj.sub) claims.push({ label: 'Subject (sub)', value: payloadObj.sub });
       if (payloadObj.aud) claims.push({ label: 'Audience (aud)', value: String(payloadObj.aud) });
-      
+
       if (payloadObj.exp) {
         const expDate = new Date(payloadObj.exp * 1000);
         const isExpired = expDate.getTime() < currentTimestamp;
@@ -114,7 +114,10 @@ export default function JwtDecoder() {
           </Button>
 
           {error && (
-            <div role="alert" className="p-3 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-lg text-xs text-red-600 dark:text-red-400">
+            <div
+              role="alert"
+              className="p-3 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-lg text-xs text-red-600 dark:text-red-400"
+            >
               {error}
             </div>
           )}
@@ -127,7 +130,9 @@ export default function JwtDecoder() {
             <div className="space-y-4">
               <div className="p-4 card">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-bold uppercase tracking-wider text-pink-500">Header</span>
+                  <span className="text-xs font-bold uppercase tracking-wider text-pink-500">
+                    Header
+                  </span>
                   <CopyButton text={decoded.header} />
                 </div>
                 <Textarea
@@ -141,7 +146,9 @@ export default function JwtDecoder() {
 
               <div className="p-4 card">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-bold uppercase tracking-wider text-blue-500">Payload</span>
+                  <span className="text-xs font-bold uppercase tracking-wider text-blue-500">
+                    Payload
+                  </span>
                   <CopyButton text={decoded.payload} />
                 </div>
                 <Textarea
@@ -160,9 +167,17 @@ export default function JwtDecoder() {
                 <h3 className="text-sm font-bold mb-4">Claims Metadata</h3>
                 <div className="space-y-3">
                   {claimsInfo.map((claim) => (
-                    <div key={claim.label} className="border-b pb-2 last:border-0 last:pb-0" style={{ borderColor: 'var(--border-subtle)' }}>
-                      <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{claim.label}</span>
-                      <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>{claim.value}</p>
+                    <div
+                      key={claim.label}
+                      className="border-b pb-2 last:border-0 last:pb-0"
+                      style={{ borderColor: 'var(--border-subtle)' }}
+                    >
+                      <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
+                        {claim.label}
+                      </span>
+                      <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
+                        {claim.value}
+                      </p>
                     </div>
                   ))}
                 </div>

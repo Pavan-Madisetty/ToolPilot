@@ -12,17 +12,20 @@ export default function MarkdownPreview() {
     let html = markdown;
 
     // Escaping simple HTML tags to avoid tag injection
-    html = html
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
+    html = html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
     // Restoring blockquote &gt; for parsing
     html = html.replace(/^&gt;\s+(.*)$/gim, '<blockquote>$1</blockquote>');
 
     // Headers
-    html = html.replace(/^# (.*$)/gim, '<h1 class="text-3xl font-extrabold mb-4 border-b pb-2">$1</h1>');
-    html = html.replace(/^## (.*$)/gim, '<h2 class="text-2xl font-bold mb-3 border-b pb-1">$1</h2>');
+    html = html.replace(
+      /^# (.*$)/gim,
+      '<h1 class="text-3xl font-extrabold mb-4 border-b pb-2">$1</h1>'
+    );
+    html = html.replace(
+      /^## (.*$)/gim,
+      '<h2 class="text-2xl font-bold mb-3 border-b pb-1">$1</h2>'
+    );
     html = html.replace(/^### (.*$)/gim, '<h3 class="text-xl font-bold mb-2">$1</h3>');
 
     // Code blocks (fenced)
@@ -31,18 +34,30 @@ export default function MarkdownPreview() {
     });
 
     // Inline code
-    html = html.replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-default)] rounded font-mono text-xs">$1</code>');
+    html = html.replace(
+      /`([^`]+)`/g,
+      '<code class="px-1.5 py-0.5 bg-[var(--bg-elevated)] border border-[var(--border-default)] rounded font-mono text-xs">$1</code>'
+    );
 
     // Bold & Italics
     html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
 
     // Task list check boxes
-    html = html.replace(/^- \[(x|X)\] (.*$)/gim, '<div class="flex items-center gap-2 my-1"><input type="checkbox" checked disabled class="accent-[var(--primary)]" /><span>$2</span></div>');
-    html = html.replace(/^- \[\s*\] (.*$)/gim, '<div class="flex items-center gap-2 my-1"><input type="checkbox" disabled class="accent-[var(--primary)]" /><span>$1</span></div>');
+    html = html.replace(
+      /^- \[(x|X)\] (.*$)/gim,
+      '<div class="flex items-center gap-2 my-1"><input type="checkbox" checked disabled class="accent-[var(--primary)]" /><span>$2</span></div>'
+    );
+    html = html.replace(
+      /^- \[\s*\] (.*$)/gim,
+      '<div class="flex items-center gap-2 my-1"><input type="checkbox" disabled class="accent-[var(--primary)]" /><span>$1</span></div>'
+    );
 
     // Unordered lists
-    html = html.replace(/^- (.*$)/gim, '<ul><li class="list-disc list-inside ml-2 my-0.5">$1</li></ul>');
+    html = html.replace(
+      /^- (.*$)/gim,
+      '<ul><li class="list-disc list-inside ml-2 my-0.5">$1</li></ul>'
+    );
     html = html.replace(/<\/ul>\s*<ul>/g, ''); // merge lists
 
     // Blockquotes recovery wrapper
@@ -52,7 +67,13 @@ export default function MarkdownPreview() {
     const paragraphs = html.split('\n\n');
     html = paragraphs
       .map((p) => {
-        if (p.trim().startsWith('<h') || p.trim().startsWith('<ul') || p.trim().startsWith('<pre') || p.trim().startsWith('<block') || p.trim().startsWith('<div')) {
+        if (
+          p.trim().startsWith('<h') ||
+          p.trim().startsWith('<ul') ||
+          p.trim().startsWith('<pre') ||
+          p.trim().startsWith('<block') ||
+          p.trim().startsWith('<div')
+        ) {
           return p;
         }
         return `<p class="my-2 leading-relaxed text-sm">${p.replace(/\n/g, '<br />')}</p>`;
@@ -78,7 +99,10 @@ export default function MarkdownPreview() {
         {/* Input Panel */}
         <Card className="flex flex-col gap-4">
           <div className="flex items-center justify-between">
-            <span className="text-sm font-bold flex items-center gap-1.5" style={{ color: 'var(--text-primary)' }}>
+            <span
+              className="text-sm font-bold flex items-center gap-1.5"
+              style={{ color: 'var(--text-primary)' }}
+            >
               <FileText size={16} />
               <span>Markdown Source</span>
             </span>
@@ -86,7 +110,12 @@ export default function MarkdownPreview() {
               <Button onClick={() => setMarkdown('')} variant="secondary" size="xs">
                 Clear
               </Button>
-              <Button onClick={handleDownload} variant="secondary" size="xs" leftIcon={<Download size={14} />}>
+              <Button
+                onClick={handleDownload}
+                variant="secondary"
+                size="xs"
+                leftIcon={<Download size={14} />}
+              >
                 Export .md
               </Button>
             </div>
@@ -103,17 +132,15 @@ export default function MarkdownPreview() {
         {/* Preview Panel */}
         <Card className="flex flex-col gap-4">
           <div className="flex items-center justify-between">
-            <span className="text-sm font-bold flex items-center gap-1.5" style={{ color: 'var(--text-primary)' }}>
+            <span
+              className="text-sm font-bold flex items-center gap-1.5"
+              style={{ color: 'var(--text-primary)' }}
+            >
               <Eye size={16} />
               <span>Live Render</span>
             </span>
             {htmlPreview && (
-              <CopyButton
-                text={htmlPreview}
-                label="Copy HTML"
-                variant="outline"
-                size="xs"
-              />
+              <CopyButton text={htmlPreview} label="Copy HTML" variant="outline" size="xs" />
             )}
           </div>
           <div

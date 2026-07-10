@@ -31,9 +31,9 @@ export default function HRACalculator() {
     // 2. 50% of salary for metro, 40% for non-metro
     // 3. Rent paid minus 10% of salary
 
-    const limitPercentage = isMetro === 'metro' ? 0.50 : 0.40;
+    const limitPercentage = isMetro === 'metro' ? 0.5 : 0.4;
     const baseExempt2 = annualBasic * limitPercentage;
-    const baseExempt3 = Math.max(0, annualRent - (annualBasic * 0.10));
+    const baseExempt3 = Math.max(0, annualRent - annualBasic * 0.1);
 
     const annualExemptHRA = Math.min(annualHRA, baseExempt2, baseExempt3);
     const annualTaxableHRA = Math.max(0, annualHRA - annualExemptHRA);
@@ -88,14 +88,18 @@ export default function HRACalculator() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="result-box text-center">
               <span className="result-label">Exempt HRA (Monthly / Annual)</span>
-              <div className="result-value text-success">{formatCurrency(calculation.monthlyExemptHRA)}</div>
+              <div className="result-value text-success">
+                {formatCurrency(calculation.monthlyExemptHRA)}
+              </div>
               <span className="text-xs text-slate-500 dark:text-slate-400 mt-1 block">
                 {formatCurrency(calculation.annualExemptHRA)} / Year
               </span>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Taxable HRA (Monthly / Annual)</span>
-              <div className="result-value text-danger">{formatCurrency(calculation.monthlyTaxableHRA)}</div>
+              <div className="result-value text-danger">
+                {formatCurrency(calculation.monthlyTaxableHRA)}
+              </div>
               <span className="text-xs text-slate-500 dark:text-slate-400 mt-1 block">
                 {formatCurrency(calculation.annualTaxableHRA)} / Year
               </span>
@@ -108,20 +112,31 @@ export default function HRACalculator() {
               Section 10(13A) Exemption Criteria
             </h3>
             <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
-              The HRA tax exemption is calculated as the minimum of the three following statutory rules:
+              The HRA tax exemption is calculated as the minimum of the three following statutory
+              rules:
             </p>
             <div className="space-y-3 text-xs text-slate-600 dark:text-slate-300">
-              <div className="flex justify-between border-b pb-2" style={{ borderColor: 'var(--border-default)' }}>
+              <div
+                className="flex justify-between border-b pb-2"
+                style={{ borderColor: 'var(--border-default)' }}
+              >
                 <span>1. Actual HRA Received (Annual):</span>
                 <span className="font-semibold">{formatCurrency(hraReceived * 12)}</span>
               </div>
-              <div className="flex justify-between border-b pb-2" style={{ borderColor: 'var(--border-default)' }}>
+              <div
+                className="flex justify-between border-b pb-2"
+                style={{ borderColor: 'var(--border-default)' }}
+              >
                 <span>2. Salary percentage limit ({isMetro === 'metro' ? '50%' : '40%'}):</span>
-                <span className="font-semibold">{formatCurrency(basicSalary * 12 * (isMetro === 'metro' ? 0.50 : 0.40))}</span>
+                <span className="font-semibold">
+                  {formatCurrency(basicSalary * 12 * (isMetro === 'metro' ? 0.5 : 0.4))}
+                </span>
               </div>
               <div className="flex justify-between">
                 <span>3. Rent Paid minus 10% of Basic Salary:</span>
-                <span className="font-semibold">{formatCurrency(Math.max(0, (rentPaid * 12) - (basicSalary * 12 * 0.10)))}</span>
+                <span className="font-semibold">
+                  {formatCurrency(Math.max(0, rentPaid * 12 - basicSalary * 12 * 0.1))}
+                </span>
               </div>
             </div>
           </div>

@@ -1,10 +1,29 @@
 import { useState, useMemo } from 'react';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+} from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider, Select } from '@/components/ui';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
 
 const formatCurrency = (val: number) => {
   return new Intl.NumberFormat('en-IN', {
@@ -40,7 +59,7 @@ export default function MutualFundCalculator() {
     if (investmentType === 'sip') {
       const i = r / 12; // Monthly rate
       const months = t * 12;
-      
+
       // Future Value of SIP formula:
       // FV = P * [((1 + i)^n - 1) / i] * (1 + i)
       totalInvested = P * months;
@@ -54,14 +73,12 @@ export default function MutualFundCalculator() {
       for (let yr = 1; yr <= t; yr++) {
         const m = yr * 12;
         const currentInvested = P * m;
-        const currentMaturity = i > 0 
-          ? P * ((Math.pow(1 + i, m) - 1) / i) * (1 + i)
-          : currentInvested;
+        const currentMaturity =
+          i > 0 ? P * ((Math.pow(1 + i, m) - 1) / i) * (1 + i) : currentInvested;
         yearlyLabels.push(`Year ${yr}`);
         investedData.push(currentInvested);
         maturityData.push(currentMaturity);
       }
-
     } else {
       // Lump sum compound interest formula:
       // FV = P * (1 + r)^t
@@ -179,11 +196,15 @@ export default function MutualFundCalculator() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="result-box text-center">
               <span className="result-label">Total Invested</span>
-              <div className="result-value text-blue-500">{formatCurrency(results.totalInvested)}</div>
+              <div className="result-value text-blue-500">
+                {formatCurrency(results.totalInvested)}
+              </div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Est. Returns</span>
-              <div className="result-value text-emerald-500">{formatCurrency(results.interestEarned)}</div>
+              <div className="result-value text-emerald-500">
+                {formatCurrency(results.interestEarned)}
+              </div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Total Future Value</span>

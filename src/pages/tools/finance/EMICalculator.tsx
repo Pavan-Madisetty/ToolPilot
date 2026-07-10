@@ -88,7 +88,13 @@ export default function EMICalculator() {
 
   // Download Amortization Schedule as CSV
   const downloadCSV = () => {
-    const headers = ['Month', 'EMI Paid', 'Principal Component', 'Interest Component', 'Outstanding Balance'];
+    const headers = [
+      'Month',
+      'EMI Paid',
+      'Principal Component',
+      'Interest Component',
+      'Outstanding Balance',
+    ];
     const rows = emiData.schedule.map((row) => [
       row.month,
       row.emi.toFixed(2),

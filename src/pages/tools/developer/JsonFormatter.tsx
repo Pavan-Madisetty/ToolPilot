@@ -112,7 +112,12 @@ export default function JsonFormatter() {
               <Button onClick={() => setInput('')} variant="ghost" size="xs">
                 Clear
               </Button>
-              <Button onClick={repairJson} variant="secondary" size="xs" leftIcon={<RefreshCw size={14} />}>
+              <Button
+                onClick={repairJson}
+                variant="secondary"
+                size="xs"
+                leftIcon={<RefreshCw size={14} />}
+              >
                 Auto-Fix
               </Button>
             </div>
@@ -127,7 +132,10 @@ export default function JsonFormatter() {
           />
 
           {jsonResults.error && (
-            <div role="alert" className="p-3 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-lg text-xs text-red-600 dark:text-red-400">
+            <div
+              role="alert"
+              className="p-3 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-lg text-xs text-red-600 dark:text-red-400"
+            >
               <span className="font-bold">Syntax Error:</span> {jsonResults.error}
             </div>
           )}
@@ -138,9 +146,16 @@ export default function JsonFormatter() {
           <div className="flex items-center justify-between">
             <span className="label">Formatted Output</span>
             <div className="flex gap-2">
-              {jsonResults.output && <CopyButton text={jsonResults.output} variant="ghost" size="xs" />}
               {jsonResults.output && (
-                <Button onClick={downloadJson} variant="ghost" size="xs" className="flex items-center gap-1">
+                <CopyButton text={jsonResults.output} variant="ghost" size="xs" />
+              )}
+              {jsonResults.output && (
+                <Button
+                  onClick={downloadJson}
+                  variant="ghost"
+                  size="xs"
+                  className="flex items-center gap-1"
+                >
                   <Download size={14} />
                   <span>Download</span>
                 </Button>
@@ -148,7 +163,10 @@ export default function JsonFormatter() {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-4" style={{ borderColor: 'var(--border-default)' }}>
+          <div
+            className="flex flex-wrap items-center justify-between gap-3 border-b pb-4"
+            style={{ borderColor: 'var(--border-default)' }}
+          >
             <div className="flex items-center gap-3">
               <Select
                 options={INDENT_OPTIONS}
@@ -169,10 +187,18 @@ export default function JsonFormatter() {
             </div>
 
             <div className="flex gap-2">
-              <Button onClick={() => setMode('format')} size="xs" variant={mode === 'format' ? 'primary' : 'secondary'}>
+              <Button
+                onClick={() => setMode('format')}
+                size="xs"
+                variant={mode === 'format' ? 'primary' : 'secondary'}
+              >
                 Format
               </Button>
-              <Button onClick={() => setMode('minify')} size="xs" variant={mode === 'minify' ? 'primary' : 'secondary'}>
+              <Button
+                onClick={() => setMode('minify')}
+                size="xs"
+                variant={mode === 'minify' ? 'primary' : 'secondary'}
+              >
                 Minify
               </Button>
             </div>

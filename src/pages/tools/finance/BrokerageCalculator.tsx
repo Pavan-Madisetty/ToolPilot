@@ -107,11 +107,7 @@ export default function BrokerageCalculator() {
         {/* Right Side: Results */}
         <div className="flex flex-col gap-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <ResultBox
-              label="Total Charges"
-              value={calculations.totalCharges}
-              prefix="₹"
-            />
+            <ResultBox label="Total Charges" value={calculations.totalCharges} prefix="₹" />
             <ResultBox
               label="Net Profit / Loss"
               value={calculations.netProfit}
@@ -119,44 +115,60 @@ export default function BrokerageCalculator() {
               highlight
               className={calculations.netProfit >= 0 ? 'text-success' : 'text-danger'}
             />
-            <ResultBox
-              label="Gross Profit / Loss"
-              value={calculations.grossProfit}
-              prefix="₹"
-            />
+            <ResultBox label="Gross Profit / Loss" value={calculations.grossProfit} prefix="₹" />
           </div>
 
           {/* Breakdown Table */}
           <div className="card p-6">
-            <h3 className="text-sm font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Charges Breakdown</h3>
+            <h3 className="text-sm font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
+              Charges Breakdown
+            </h3>
             <div className="space-y-3 text-xs text-[var(--text-secondary)]">
               <div className="flex justify-between border-b border-[var(--border-default)] pb-2">
                 <span>Turnover</span>
-                <span className="font-semibold">₹{calculations.totalTurnover.toLocaleString('en-IN', { maximumFractionDigits: 2 })}</span>
+                <span className="font-semibold">
+                  ₹
+                  {calculations.totalTurnover.toLocaleString('en-IN', { maximumFractionDigits: 2 })}
+                </span>
               </div>
               <div className="flex justify-between border-b border-[var(--border-default)] pb-2">
                 <span>Brokerage (0.05% or flat ₹20/leg)</span>
-                <span className="font-semibold">₹{calculations.brokerage.toLocaleString('en-IN', { maximumFractionDigits: 2 })}</span>
+                <span className="font-semibold">
+                  ₹{calculations.brokerage.toLocaleString('en-IN', { maximumFractionDigits: 2 })}
+                </span>
               </div>
               <div className="flex justify-between border-b border-[var(--border-default)] pb-2">
                 <span>STT (Securities Transaction Tax)</span>
-                <span className="font-semibold">₹{calculations.stt.toLocaleString('en-IN', { maximumFractionDigits: 2 })}</span>
+                <span className="font-semibold">
+                  ₹{calculations.stt.toLocaleString('en-IN', { maximumFractionDigits: 2 })}
+                </span>
               </div>
               <div className="flex justify-between border-b border-[var(--border-default)] pb-2">
                 <span>Exchange Transaction Charges</span>
-                <span className="font-semibold">₹{calculations.exchangeCharges.toLocaleString('en-IN', { maximumFractionDigits: 2 })}</span>
+                <span className="font-semibold">
+                  ₹
+                  {calculations.exchangeCharges.toLocaleString('en-IN', {
+                    maximumFractionDigits: 2,
+                  })}
+                </span>
               </div>
               <div className="flex justify-between border-b border-[var(--border-default)] pb-2">
                 <span>GST (18% on Brokerage + Exchange)</span>
-                <span className="font-semibold">₹{calculations.gst.toLocaleString('en-IN', { maximumFractionDigits: 2 })}</span>
+                <span className="font-semibold">
+                  ₹{calculations.gst.toLocaleString('en-IN', { maximumFractionDigits: 2 })}
+                </span>
               </div>
               <div className="flex justify-between border-b border-[var(--border-default)] pb-2">
                 <span>SEBI Turnover Charges</span>
-                <span className="font-semibold">₹{calculations.sebiCharges.toLocaleString('en-IN', { maximumFractionDigits: 2 })}</span>
+                <span className="font-semibold">
+                  ₹{calculations.sebiCharges.toLocaleString('en-IN', { maximumFractionDigits: 2 })}
+                </span>
               </div>
               <div className="flex justify-between border-b border-[var(--border-default)] pb-2">
                 <span>Stamp Duty</span>
-                <span className="font-semibold">₹{calculations.stampDuty.toLocaleString('en-IN', { maximumFractionDigits: 2 })}</span>
+                <span className="font-semibold">
+                  ₹{calculations.stampDuty.toLocaleString('en-IN', { maximumFractionDigits: 2 })}
+                </span>
               </div>
             </div>
           </div>

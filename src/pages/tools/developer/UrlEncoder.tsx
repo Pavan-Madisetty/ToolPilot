@@ -55,17 +55,28 @@ export default function UrlEncoder() {
           <Textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={mode === 'encode' ? "Enter URL or text to encode..." : "Enter encoded URL text to decode..."}
+            placeholder={
+              mode === 'encode'
+                ? 'Enter URL or text to encode...'
+                : 'Enter encoded URL text to decode...'
+            }
             className="font-mono text-xs leading-relaxed h-[300px] resize-none"
             aria-label="URL input query"
           />
 
-          <div className="flex flex-wrap items-center justify-between gap-4 border-t pt-4" style={{ borderColor: 'var(--border-default)' }}>
+          <div
+            className="flex flex-wrap items-center justify-between gap-4 border-t pt-4"
+            style={{ borderColor: 'var(--border-default)' }}
+          >
             <Switch
               label="Encode All Characters"
               checked={encodeAll}
               onChange={setEncodeAll}
-              description={encodeAll ? 'Encode spaces, slashes, query parameters' : 'Encode only spaces and special characters'}
+              description={
+                encodeAll
+                  ? 'Encode spaces, slashes, query parameters'
+                  : 'Encode only spaces and special characters'
+              }
             />
 
             {/* Segmented Mode Control */}
@@ -92,7 +103,10 @@ export default function UrlEncoder() {
           </Button>
 
           {error && (
-            <div role="alert" className="p-3 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-lg text-xs text-red-600 dark:text-red-400">
+            <div
+              role="alert"
+              className="p-3 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-lg text-xs text-red-600 dark:text-red-400"
+            >
               {error}
             </div>
           )}

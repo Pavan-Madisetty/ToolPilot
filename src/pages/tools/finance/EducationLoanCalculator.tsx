@@ -25,7 +25,7 @@ export default function EducationLoanCalculator() {
     // Moratorium calculations: interest is accrued during study/moratorium period and added to principal
     const mMonths = moratoriumYears * 12;
     const rMonthly = rate / 12 / 100;
-    
+
     // Accrued principal at the end of moratorium period
     let revisedPrincipal = principal;
     if (rMonthly > 0) {
@@ -33,7 +33,7 @@ export default function EducationLoanCalculator() {
     }
 
     const nRepayment = tenureYears * 12;
-    
+
     if (rMonthly === 0) {
       const emi = revisedPrincipal / nRepayment;
       return {
@@ -44,9 +44,11 @@ export default function EducationLoanCalculator() {
       };
     }
 
-    const emi = (revisedPrincipal * rMonthly * Math.pow(1 + rMonthly, nRepayment)) / (Math.pow(1 + rMonthly, nRepayment) - 1);
+    const emi =
+      (revisedPrincipal * rMonthly * Math.pow(1 + rMonthly, nRepayment)) /
+      (Math.pow(1 + rMonthly, nRepayment) - 1);
     const totalAmount = emi * nRepayment;
-    const totalInterest = (totalAmount + (revisedPrincipal - principal)) - principal;
+    const totalInterest = totalAmount + (revisedPrincipal - principal) - principal;
 
     const schedule = [];
     let balance = revisedPrincipal;
@@ -85,7 +87,13 @@ export default function EducationLoanCalculator() {
   };
 
   const downloadCSV = () => {
-    const headers = ['Month', 'EMI Paid', 'Principal Component', 'Interest Component', 'Outstanding Balance'];
+    const headers = [
+      'Month',
+      'EMI Paid',
+      'Principal Component',
+      'Interest Component',
+      'Outstanding Balance',
+    ];
     const rows = emiData.schedule.map((row) => [
       row.month,
       row.emi.toFixed(2),
@@ -97,7 +105,7 @@ export default function EducationLoanCalculator() {
     const csvContent =
       'data:text/csv;charset=utf-8,' +
       [headers.join(','), ...rows.map((e) => e.join(','))].join('\n');
-    
+
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement('a');
     link.setAttribute('href', encodedUri);
@@ -154,11 +162,15 @@ export default function EducationLoanCalculator() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="result-box text-center">
               <span className="result-label">Monthly EMI (Post-Moratorium)</span>
-              <div className="result-value text-indigo-600 dark:text-indigo-400">{formatCurrency(emiData.monthlyEMI)}</div>
+              <div className="result-value text-indigo-600 dark:text-indigo-400">
+                {formatCurrency(emiData.monthlyEMI)}
+              </div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Total Interest Payable</span>
-              <div className="result-value text-red-500">{formatCurrency(emiData.totalInterest)}</div>
+              <div className="result-value text-red-500">
+                {formatCurrency(emiData.totalInterest)}
+              </div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Total Payment (incl. Moratorium Interest)</span>
@@ -178,7 +190,8 @@ export default function EducationLoanCalculator() {
                 Moratorium Details
               </h3>
               <p className="text-xs text-slate-500 dark:text-slate-400">
-                During the study/moratorium period, interest accumulates and is capitalized into the principal. The repayment EMI starts after this course moratorium ends.
+                During the study/moratorium period, interest accumulates and is capitalized into the
+                principal. The repayment EMI starts after this course moratorium ends.
               </p>
               {emiData.schedule.length > 0 && (
                 <Button

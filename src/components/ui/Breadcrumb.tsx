@@ -43,9 +43,7 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
                   {item.label}
                 </Link>
               ) : (
-                <span className="breadcrumb-static">
-                  {item.label}
-                </span>
+                <span className="breadcrumb-static">{item.label}</span>
               )}
             </li>
           );
