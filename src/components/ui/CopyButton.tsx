@@ -91,7 +91,7 @@ export function CopyButton({
         fontWeight: 500,
         fontFamily: 'var(--font-sans)',
         border: isGhost ? '1px solid transparent' : '1px solid var(--border-default)',
-        borderRadius: 6,
+        borderRadius: 'var(--radius-sm)',
         cursor: copied ? 'default' : 'pointer',
         background: copied
           ? 'rgba(34, 197, 94, 0.08)'
@@ -101,18 +101,18 @@ export function CopyButton({
               ? 'transparent'
               : 'var(--bg-elevated)',
         color: copied
-          ? 'rgb(22, 163, 74)'
+          ? 'var(--success)'
           : error
-            ? 'rgb(220, 38, 38)'
+            ? 'var(--danger)'
             : 'var(--text-secondary)',
         borderColor: copied
-          ? 'rgba(34, 197, 94, 0.3)'
+          ? 'var(--success)'
           : error
-            ? 'rgba(239, 68, 68, 0.3)'
+            ? 'var(--danger)'
             : isGhost
               ? 'transparent'
               : 'var(--border-default)',
-        transition: 'all 0.18s ease',
+        transition: 'all 0.15s ease-in-out',
         userSelect: 'none',
         whiteSpace: 'nowrap',
         outline: 'none',

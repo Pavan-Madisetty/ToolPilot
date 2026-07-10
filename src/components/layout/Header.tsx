@@ -139,17 +139,7 @@ export function Header() {
               type="button"
               onClick={() => setSearchOpen(true)}
               aria-label="Search tools (⌘K)"
-              className={clsx(
-                'hidden md:flex items-center gap-3',
-                'h-10 px-4 rounded-lg',
-                'border-2 cursor-text',
-                'transition-all duration-150',
-                'focus-visible:outline-none',
-                // light defaults — clear visible stroke
-                'border-slate-200 bg-white hover:border-indigo-400',
-                // dark defaults
-                'dark:border-slate-700 dark:bg-slate-900 dark:hover:border-indigo-500',
-              )}
+              className="hidden md:flex items-center gap-3 h-10 px-4 rounded-[var(--radius-md)] border border-[var(--border-default)] bg-[var(--bg-elevated)] cursor-text transition-all duration-150 focus-visible:outline-none hover:border-[var(--border-focus)]"
               style={{ minWidth: 280, maxWidth: 400 }}
             >
               <MagnifyingGlassIcon

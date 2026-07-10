@@ -239,7 +239,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
             
             {/* Long intro summary */}
             {tool.longDescription && (
-              <section className="flex flex-col gap-3">
+              <section className="flex flex-col gap-4">
                 <h2 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
                   About {tool.name}
                 </h2>
@@ -253,7 +253,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
             {(tool.benefits || tool.features) && (
               <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {tool.benefits && (
-                  <div className="flex flex-col gap-3">
+                  <div className="flex flex-col gap-4">
                     <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>
                       Key Benefits
                     </h3>
@@ -268,7 +268,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                   </div>
                 )}
                 {tool.features && (
-                  <div className="flex flex-col gap-3">
+                  <div className="flex flex-col gap-4">
                     <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>
                       Key Features
                     </h3>
@@ -287,7 +287,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
 
             {/* How to use / Step by Step instructions */}
             {tool.howToSteps && (
-              <section className="flex flex-col gap-5">
+              <section className="flex flex-col gap-4">
                 <h2 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
                   How to Use {tool.name}
                 </h2>
@@ -318,10 +318,10 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
               <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {tool.tips && (
                   <div
-                    className="border rounded-xl p-5 bg-amber-50/10 dark:bg-amber-950/5 flex flex-col gap-3 border-l-4"
-                    style={{ borderColor: 'var(--border-default)', borderLeftColor: '#F59E0B' }}
+                    className="border rounded-xl p-6 bg-amber-50/10 dark:bg-amber-950/5 flex flex-col gap-4 border-l-4"
+                    style={{ borderColor: 'var(--border-default)', borderLeftColor: 'var(--warning)' }}
                   >
-                    <h3 className="text-sm font-bold text-amber-800 dark:text-amber-400 flex items-center gap-1.5">
+                    <h3 className="text-sm font-bold text-amber-800 dark:text-amber-400 flex items-center gap-2">
                       <span>💡</span>
                       <span>Pro Tips</span>
                     </h3>
@@ -337,15 +337,15 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
 
                 {tool.examples && (
                   <div
-                    className="border rounded-xl p-5 bg-blue-50/10 dark:bg-blue-950/5 flex flex-col gap-3 border-l-4"
-                    style={{ borderColor: 'var(--border-default)', borderLeftColor: '#3B82F6' }}
+                    className="border rounded-xl p-6 bg-blue-50/10 dark:bg-blue-950/5 flex flex-col gap-4 border-l-4"
+                    style={{ borderColor: 'var(--border-default)', borderLeftColor: 'var(--info)' }}
                   >
-                    <h3 className="text-sm font-bold text-blue-800 dark:text-blue-400 flex items-center gap-1.5">
+                    <h3 className="text-sm font-bold text-blue-800 dark:text-blue-400 flex items-center gap-2">
                       <span>📊</span>
                       <span>Calculation Examples</span>
                     </h3>
                     {tool.examples.map((example, idx) => (
-                      <div key={idx} className="flex flex-col gap-1.5 text-xs">
+                      <div key={idx} className="flex flex-col gap-2 text-xs">
                         <div className="font-semibold" style={{ color: 'var(--text-primary)' }}>
                           Input: <span className="font-mono bg-slate-100 dark:bg-slate-900 px-1 py-0.5 rounded">{example.input}</span>
                         </div>
@@ -365,7 +365,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                 <h2 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
                   Frequently Asked Questions
                 </h2>
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-4">
                   {tool.faq.map((item, idx) => {
                     const isExpanded = expandedFaqIndex === idx;
                     return (
@@ -376,7 +376,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                       >
                         <button
                           onClick={() => setExpandedFaqIndex(isExpanded ? null : idx)}
-                          className="w-full px-5 py-4 flex items-center justify-between text-left font-bold text-sm hover:bg-slate-100 dark:hover:bg-slate-900/30 transition-colors"
+                          className="w-full px-6 py-4 flex items-center justify-between text-left font-bold text-sm hover:bg-slate-100 dark:hover:bg-slate-900/30 transition-colors"
                           style={{ color: 'var(--text-primary)' }}
                         >
                           <span className="pr-4">{item.question}</span>
@@ -385,7 +385,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                           />
                         </button>
                         {isExpanded && (
-                          <div className="px-5 pb-5 pt-3 text-sm leading-relaxed border-t" style={{ borderColor: 'var(--border-default)', color: 'var(--text-secondary)' }}>
+                          <div className="px-6 pb-6 pt-4 text-sm leading-relaxed border-t" style={{ borderColor: 'var(--border-default)', color: 'var(--text-secondary)' }}>
                             {item.answer}
                           </div>
                         )}

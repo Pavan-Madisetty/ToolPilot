@@ -57,17 +57,17 @@ export function StatCard({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-start',
-        gap: 6,
-        padding: '20px 24px',
-        borderRadius: 16,
+        gap: 'var(--space-8)',
+        padding: 'var(--space-16) var(--space-24)',
+        borderRadius: 'var(--radius-md)',
         background: highlight
           ? 'linear-gradient(135deg, rgba(79, 70, 229, 0.08) 0%, rgba(79, 70, 229, 0.03) 100%)'
-          : 'var(--bg-surface)',
-        border: `1.5px solid ${highlight ? 'rgba(79, 70, 229, 0.25)' : 'var(--border-default)'}`,
+          : 'var(--bg-elevated)',
+        border: `1px solid ${highlight ? 'var(--primary)' : 'var(--border-default)'}`,
         boxShadow: highlight
-          ? '0 4px 20px rgba(79, 70, 229, 0.08)'
-          : 'var(--shadow-xs)',
-        transition: 'box-shadow 0.2s ease, border-color 0.2s ease',
+          ? 'var(--shadow-md)'
+          : 'var(--shadow-sm)',
+        transition: 'all 0.2s ease-in-out',
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -82,8 +82,8 @@ export function StatCard({
             left: 0,
             right: 0,
             height: 3,
-            background: 'linear-gradient(90deg, var(--text-link), rgba(79, 70, 229, 0.6))',
-            borderRadius: '16px 16px 0 0',
+            background: 'var(--primary)',
+            borderRadius: 'var(--radius-md) var(--radius-md) 0 0',
           }}
         />
       )}
@@ -95,7 +95,7 @@ export function StatCard({
           fontWeight: 600,
           letterSpacing: '0.06em',
           textTransform: 'uppercase',
-          color: highlight ? 'var(--text-link)' : 'var(--text-tertiary)',
+          color: highlight ? 'var(--primary)' : 'var(--text-tertiary)',
           fontFamily: 'var(--font-sans)',
         }}
       >
@@ -108,7 +108,7 @@ export function StatCard({
           display: 'flex',
           alignItems: 'baseline',
           gap: 2,
-          color: highlight ? 'var(--text-link)' : 'var(--text-primary)',
+          color: highlight ? 'var(--primary)' : 'var(--text-primary)',
           fontFamily: 'var(--font-sans)',
         }}
       >
@@ -118,7 +118,7 @@ export function StatCard({
             style={{
               fontSize: '1.125rem',
               fontWeight: 600,
-              color: highlight ? 'var(--text-link)' : 'var(--text-secondary)',
+              color: highlight ? 'var(--primary)' : 'var(--text-secondary)',
             }}
           >
             {prefix}

@@ -38,10 +38,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             'btn-ghost': variant === 'ghost',
             'btn-danger': variant === 'danger',
             'btn-success': variant === 'success',
+            'btn-xs': size === 'xs',
             'btn-sm': size === 'sm',
             'btn-lg': size === 'lg',
             'btn-xl': size === 'xl',
-            'px-2.5 py-1 text-xs rounded-[8px]': size === 'xs',
           },
           className
         )}
