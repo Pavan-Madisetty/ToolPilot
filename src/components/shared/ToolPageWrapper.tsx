@@ -189,9 +189,14 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
         {/* Tool Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 mt-4">
           <div>
-            <h1 className="text-3xl font-extrabold" style={{ color: 'var(--text-primary)' }}>
-              {tool.name}
-            </h1>
+            <div className="flex flex-wrap items-center gap-3">
+              <h1 className="text-3xl font-extrabold" style={{ color: 'var(--text-primary)' }}>
+                {tool.name}
+              </h1>
+              <span className={`badge module-badge-${tool.module} capitalize text-xs font-semibold px-2.5 py-0.5 rounded-md`}>
+                {tool.module}
+              </span>
+            </div>
             <p className="text-base mt-2" style={{ color: 'var(--text-secondary)' }}>
               {tool.description}
             </p>
@@ -203,8 +208,8 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
               onClick={() => toggleFavorite(tool.id)}
               className="btn btn-secondary flex items-center gap-1.5"
               style={{
-                borderColor: favorited ? '#EF4444' : 'var(--border-strong)',
-                color: favorited ? '#EF4444' : 'var(--text-secondary)',
+                borderColor: favorited ? 'var(--danger)' : 'var(--border-default)',
+                color: favorited ? 'var(--danger)' : 'var(--text-secondary)',
               }}
               aria-label={favorited ? 'Remove from favorites' : 'Add to favorites'}
             >
@@ -235,12 +240,12 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
 
         {/* Rich SEO Content Explanatory Copy Section */}
         {(tool.longDescription || tool.benefits || tool.howToSteps || tool.faq) && (
-          <article className="mt-16 pt-12 border-t flex flex-col gap-12" style={{ borderColor: 'var(--border-default)' }}>
+          <article className="mt-16 pt-12 border-t flex flex-col gap-16" style={{ borderColor: 'var(--border-default)' }}>
             
             {/* Long intro summary */}
             {tool.longDescription && (
               <section className="flex flex-col gap-4">
-                <h2 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
+                <h2 className="text-h2" style={{ color: 'var(--text-primary)' }}>
                   About {tool.name}
                 </h2>
                 <p className="text-base leading-relaxed max-w-3xl" style={{ color: 'var(--text-secondary)' }}>
@@ -254,7 +259,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
               <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {tool.benefits && (
                   <div className="flex flex-col gap-4">
-                    <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>
+                    <h3 className="text-h3" style={{ color: 'var(--text-primary)' }}>
                       Key Benefits
                     </h3>
                     <ul className="flex flex-col gap-2">
@@ -269,7 +274,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                 )}
                 {tool.features && (
                   <div className="flex flex-col gap-4">
-                    <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>
+                    <h3 className="text-h3" style={{ color: 'var(--text-primary)' }}>
                       Key Features
                     </h3>
                     <ul className="flex flex-col gap-2">
@@ -288,27 +293,79 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
             {/* How to use / Step by Step instructions */}
             {tool.howToSteps && (
               <section className="flex flex-col gap-4">
-                <h2 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
+                <h2 className="text-h2" style={{ color: 'var(--text-primary)' }}>
                   How to Use {tool.name}
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                  {tool.howToSteps.map((step, idx) => (
-                    <div
-                      key={idx}
-                      className="border rounded-xl p-4 flex flex-col gap-2 bg-slate-50/50 dark:bg-slate-900/10"
-                      style={{ borderColor: 'var(--border-default)' }}
-                    >
-                      <span className="text-xs font-bold text-indigo-500 uppercase font-mono">
-                        Step {idx + 1}
-                      </span>
-                      <h4 className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>
-                        {step.name}
-                      </h4>
-                      <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                        {step.text}
-                      </p>
-                    </div>
-                  ))}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {tool.howToSteps.map((step, idx) => {
+                    const getStepIcon = (index: number) => {
+                      switch (index) {
+                        case 0:
+                          return (
+                            <svg className="w-5 h-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                          );
+                        case 1:
+                          return (
+                            <svg className="w-5 h-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                            </svg>
+                          );
+                        case 2:
+                          return (
+                            <svg className="w-5 h-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                          );
+                        default:
+                          return (
+                            <svg className="w-5 h-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                          );
+                      }
+                    };
+
+                    return (
+                      <div key={idx} className="flex items-center gap-2">
+                        <div
+                          className="relative border rounded-xl p-4 flex items-center gap-4 bg-white dark:bg-slate-900/40 shadow-sm flex-1"
+                          style={{ borderColor: 'var(--border-default)' }}
+                        >
+                          {/* Icon with overlapping step number */}
+                          <div className="relative shrink-0">
+                            <div className="w-12 h-12 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 flex items-center justify-center">
+                              {getStepIcon(idx)}
+                            </div>
+                            <span className="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-indigo-600 text-white font-mono text-[10px] font-bold flex items-center justify-center border border-white dark:border-slate-900">
+                              {idx + 1}
+                            </span>
+                          </div>
+                          
+                          {/* Texts */}
+                          <div className="flex-1 min-w-0">
+                            <h4 className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>
+                              {step.name}
+                            </h4>
+                            <p className="text-xs leading-relaxed mt-0.5" style={{ color: 'var(--text-secondary)' }}>
+                              {step.text}
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Dashed Line / Arrow separator if not last */}
+                        {idx < (tool.howToSteps?.length ?? 0) - 1 && (
+                          <div className="hidden lg:flex items-center text-slate-300 dark:text-slate-700 select-none px-0.5 shrink-0">
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               </section>
             )}
@@ -318,17 +375,25 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
               <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {tool.tips && (
                   <div
-                    className="border rounded-xl p-6 bg-amber-50/10 dark:bg-amber-950/5 flex flex-col gap-4 border-l-4"
-                    style={{ borderColor: 'var(--border-default)', borderLeftColor: 'var(--warning)' }}
+                    className="rounded-2xl p-6 flex flex-col gap-4"
+                    style={{
+                      background: 'rgba(251, 191, 36, 0.06)',
+                      border: '1px solid rgba(251, 191, 36, 0.2)',
+                    }}
                   >
-                    <h3 className="text-sm font-bold text-amber-800 dark:text-amber-400 flex items-center gap-2">
-                      <span>💡</span>
-                      <span>Pro Tips</span>
-                    </h3>
-                    <ul className="flex flex-col gap-2">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style={{ background: 'rgba(251, 191, 36, 0.15)' }}>
+                        <span className="text-xl">💡</span>
+                      </div>
+                      <h3 className="text-h3" style={{ color: 'var(--text-primary)' }}>
+                        Pro Tips
+                      </h3>
+                    </div>
+                    <ul className="flex flex-col gap-2.5 pl-1">
                       {tool.tips.map((tip, idx) => (
-                        <li key={idx} className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                          • {tip}
+                        <li key={idx} className="flex items-start gap-2.5 text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                          <span className="text-emerald-500 font-bold shrink-0 mt-0.5">✓</span>
+                          <span>{tip}</span>
                         </li>
                       ))}
                     </ul>
@@ -337,23 +402,36 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
 
                 {tool.examples && (
                   <div
-                    className="border rounded-xl p-6 bg-blue-50/10 dark:bg-blue-950/5 flex flex-col gap-4 border-l-4"
-                    style={{ borderColor: 'var(--border-default)', borderLeftColor: 'var(--info)' }}
+                    className="rounded-2xl p-6 flex flex-col gap-4"
+                    style={{
+                      background: 'rgba(99, 102, 241, 0.04)',
+                      border: '1px solid rgba(99, 102, 241, 0.15)',
+                    }}
                   >
-                    <h3 className="text-sm font-bold text-blue-800 dark:text-blue-400 flex items-center gap-2">
-                      <span>📊</span>
-                      <span>Calculation Examples</span>
-                    </h3>
-                    {tool.examples.map((example, idx) => (
-                      <div key={idx} className="flex flex-col gap-2 text-xs">
-                        <div className="font-semibold" style={{ color: 'var(--text-primary)' }}>
-                          Input: <span className="font-mono bg-slate-100 dark:bg-slate-900 px-1 py-0.5 rounded">{example.input}</span>
-                        </div>
-                        <div className="text-slate-500 dark:text-slate-400">
-                          Output: <span className="font-mono font-semibold text-indigo-600 dark:text-indigo-400">{example.output}</span>
-                        </div>
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style={{ background: 'rgba(99, 102, 241, 0.1)' }}>
+                        <svg className="w-5 h-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
                       </div>
-                    ))}
+                      <h3 className="text-h3" style={{ color: 'var(--text-primary)' }}>
+                        Calculation Examples
+                      </h3>
+                    </div>
+                    <div className="flex flex-col gap-4 pl-1">
+                      {tool.examples.map((example, idx) => (
+                        <div key={idx} className="flex flex-col gap-2 text-sm">
+                          <div className="flex flex-wrap items-center gap-3">
+                            <span className="font-semibold text-sm" style={{ color: 'var(--text-secondary)' }}>Input:</span>
+                            <code className="font-mono text-xs bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-md" style={{ color: 'var(--text-primary)' }}>{example.input}</code>
+                          </div>
+                          <div className="flex flex-wrap items-center gap-3">
+                            <span className="font-semibold text-sm" style={{ color: 'var(--text-secondary)' }}>Output:</span>
+                            <code className="font-mono text-xs font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/30 px-2.5 py-1 rounded-md">{example.output}</code>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
               </section>
@@ -361,31 +439,47 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
 
             {/* Frequently Asked Questions */}
             {tool.faq && (
-              <section className="flex flex-col gap-4">
-                <h2 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
-                  Frequently Asked Questions
-                </h2>
-                <div className="flex flex-col gap-4">
+              <section className="flex flex-col gap-6">
+                <div className="flex items-center gap-3">
+                  <span
+                    className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-base shrink-0"
+                    style={{ background: '#6366F1', color: '#fff' }}
+                    aria-hidden="true"
+                  >
+                    ?
+                  </span>
+                  <h2 className="text-h2" style={{ color: 'var(--text-primary)' }}>
+                    Frequently Asked Questions
+                  </h2>
+                </div>
+                <div
+                  className="rounded-xl border overflow-hidden divide-y"
+                  style={{ borderColor: 'var(--border-default)', '--tw-divide-opacity': '1' } as React.CSSProperties}
+                >
                   {tool.faq.map((item, idx) => {
                     const isExpanded = expandedFaqIndex === idx;
                     return (
                       <div
                         key={idx}
-                        className="border rounded-xl overflow-hidden bg-slate-50/30 dark:bg-slate-900/5 transition-all duration-200"
+                        className="transition-colors duration-150"
                         style={{ borderColor: 'var(--border-default)' }}
                       >
                         <button
                           onClick={() => setExpandedFaqIndex(isExpanded ? null : idx)}
-                          className="w-full px-6 py-4 flex items-center justify-between text-left font-bold text-sm hover:bg-slate-100 dark:hover:bg-slate-900/30 transition-colors"
+                          className="w-full px-5 py-4 flex items-center justify-between text-left font-semibold text-sm hover:bg-slate-50 dark:hover:bg-slate-900/30 transition-colors cursor-pointer"
                           style={{ color: 'var(--text-primary)' }}
                         >
                           <span className="pr-4">{item.question}</span>
                           <ChevronDownIcon
-                            className={`w-4 h-4 text-slate-400 shrink-0 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+                            className={`w-5 h-5 shrink-0 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
+                            style={{ color: 'var(--text-tertiary)' }}
                           />
                         </button>
                         {isExpanded && (
-                          <div className="px-6 pb-6 pt-4 text-sm leading-relaxed border-t" style={{ borderColor: 'var(--border-default)', color: 'var(--text-secondary)' }}>
+                          <div
+                            className="px-5 pb-5 pt-1 text-sm leading-relaxed"
+                            style={{ color: 'var(--text-secondary)' }}
+                          >
                             {item.answer}
                           </div>
                         )}
@@ -401,7 +495,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
 
         {/* Related Tools */}
         {tool.relatedTools && tool.relatedTools.length > 0 && (
-          <div className="mt-16 pb-16">
+          <div className="mt-12 pb-16">
             <RelatedTools toolIds={tool.relatedTools} />
           </div>
         )}

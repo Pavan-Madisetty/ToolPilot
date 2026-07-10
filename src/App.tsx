@@ -40,6 +40,17 @@ const CurrencyConverter = lazy(() => import('@/pages/tools/finance/CurrencyConve
 const BudgetPlanner = lazy(() => import('@/pages/tools/finance/BudgetPlanner'));
 const PPFCalculator = lazy(() => import('@/pages/tools/finance/PPFCalculator'));
 const TipCalculator = lazy(() => import('@/pages/tools/finance/TipCalculator'));
+const HomeLoanCalculator = lazy(() => import('@/pages/tools/finance/HomeLoanCalculator'));
+const CarLoanCalculator = lazy(() => import('@/pages/tools/finance/CarLoanCalculator'));
+const PersonalLoanCalculator = lazy(() => import('@/pages/tools/finance/PersonalLoanCalculator'));
+const EducationLoanCalculator = lazy(() => import('@/pages/tools/finance/EducationLoanCalculator'));
+const LoanEligibilityCalculator = lazy(() => import('@/pages/tools/finance/LoanEligibilityCalculator'));
+const RDCalculator = lazy(() => import('@/pages/tools/finance/RDCalculator'));
+const EPFCalculator = lazy(() => import('@/pages/tools/finance/EPFCalculator'));
+const RetirementCalculator = lazy(() => import('@/pages/tools/finance/RetirementCalculator'));
+const HRACalculator = lazy(() => import('@/pages/tools/finance/HRACalculator'));
+const BillSplitter = lazy(() => import('@/pages/tools/finance/BillSplitter'));
+const ExpenseTracker = lazy(() => import('@/pages/tools/finance/ExpenseTracker'));
 
 // Developer Tools
 const JsonFormatter = lazy(() => import('@/pages/tools/developer/JsonFormatter'));
@@ -132,6 +143,17 @@ export default function App() {
               <Route path="finance/budget-planner" element={<Suspense fallback={<PageLoader />}><BudgetPlanner /></Suspense>} />
               <Route path="finance/ppf-calculator" element={<Suspense fallback={<PageLoader />}><PPFCalculator /></Suspense>} />
               <Route path="finance/tip-calculator" element={<Suspense fallback={<PageLoader />}><TipCalculator /></Suspense>} />
+              <Route path="finance/home-loan-calculator" element={<Suspense fallback={<PageLoader />}><HomeLoanCalculator /></Suspense>} />
+              <Route path="finance/car-loan-calculator" element={<Suspense fallback={<PageLoader />}><CarLoanCalculator /></Suspense>} />
+              <Route path="finance/personal-loan-calculator" element={<Suspense fallback={<PageLoader />}><PersonalLoanCalculator /></Suspense>} />
+              <Route path="finance/education-loan-calculator" element={<Suspense fallback={<PageLoader />}><EducationLoanCalculator /></Suspense>} />
+              <Route path="finance/loan-eligibility-calculator" element={<Suspense fallback={<PageLoader />}><LoanEligibilityCalculator /></Suspense>} />
+              <Route path="finance/rd-calculator" element={<Suspense fallback={<PageLoader />}><RDCalculator /></Suspense>} />
+              <Route path="finance/epf-calculator" element={<Suspense fallback={<PageLoader />}><EPFCalculator /></Suspense>} />
+              <Route path="finance/retirement-calculator" element={<Suspense fallback={<PageLoader />}><RetirementCalculator /></Suspense>} />
+              <Route path="finance/hra-calculator" element={<Suspense fallback={<PageLoader />}><HRACalculator /></Suspense>} />
+              <Route path="finance/bill-splitter" element={<Suspense fallback={<PageLoader />}><BillSplitter /></Suspense>} />
+              <Route path="finance/expense-tracker" element={<Suspense fallback={<PageLoader />}><ExpenseTracker /></Suspense>} />
 
               {/* Developer Module */}
               <Route path="developer" element={<Suspense fallback={<PageLoader />}><DeveloperModule /></Suspense>} />

@@ -98,7 +98,7 @@ export default function TipCalculator() {
 
             <div className="flex items-center justify-between pt-4">
               <span className="font-bold text-base">Each Person Pays</span>
-              <span className="text-2xl font-extrabold text-blue-500">
+              <span className="text-2xl font-extrabold text-primary">
                 {formatCurrency(calculations.sharePerPerson)}
               </span>
             </div>

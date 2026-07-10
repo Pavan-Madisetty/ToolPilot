@@ -148,11 +148,11 @@ export default function SIPCalculator() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="result-box text-center">
               <span className="result-label">Invested Amount</span>
-              <div className="result-value text-blue-500">{formatCurrency(projection.totalInvested)}</div>
+              <div className="result-value text-primary">{formatCurrency(projection.totalInvested)}</div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Est. Returns</span>
-              <div className="result-value text-emerald-500">{formatCurrency(projection.estimatedReturns)}</div>
+              <div className="result-value text-success">{formatCurrency(projection.estimatedReturns)}</div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Total Value</span>

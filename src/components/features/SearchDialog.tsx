@@ -145,10 +145,9 @@ export function SearchDialog() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.97, y: -8 }}
             transition={{ duration: 0.15, ease: 'easeOut' }}
-            className="w-full max-w-xl overflow-hidden rounded-xl border shadow-2xl relative z-10 flex flex-col max-h-[70vh]"
+            className="w-full max-w-xl overflow-hidden rounded-2xl shadow-2xl relative z-10 flex flex-col max-h-[70vh]"
             style={{
               background: 'var(--bg-elevated)',
-              borderColor: 'var(--border-default)',
             }}
             role="dialog"
             aria-modal="true"
@@ -159,7 +158,6 @@ export function SearchDialog() {
               className="flex items-center gap-3 px-4 py-3.5 border-b transition-colors duration-200"
               style={{
                 borderColor: isFocused ? 'var(--border-focus)' : 'var(--border-default)',
-                boxShadow: isFocused ? '0 1px 0 0 var(--border-focus)' : 'none',
               }}
             >
               {isPending ? (
@@ -258,7 +256,7 @@ export function SearchDialog() {
                         <button
                           onClick={() => handleResultSelect(tool.slug, tool.name)}
                           className={clsx(
-                            "w-full flex items-center justify-between text-left px-4 py-3 rounded-lg transition-all duration-150",
+                            "w-full flex items-center justify-between text-left px-4 py-3 rounded-xl transition-all duration-150",
                             isSelected
                               ? "bg-[rgba(79,70,229,0.08)] dark:bg-[rgba(139,92,246,0.1)] text-[var(--text-link)]"
                               : "hover:bg-slate-50 dark:hover:bg-slate-900"

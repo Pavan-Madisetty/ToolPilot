@@ -137,7 +137,7 @@ export default function GSTCalculator() {
 
             <div className="border-t pt-4 flex items-center justify-between" style={{ borderColor: 'var(--border-default)' }}>
               <span className="font-bold text-base">Total Price (Inclusive of Tax)</span>
-              <span className="text-xl font-extrabold text-blue-500">
+              <span className="text-xl font-extrabold text-primary">
                 {formatCurrency(gstCalculations.totalAmount)}
               </span>
             </div>

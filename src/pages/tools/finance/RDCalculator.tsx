@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
-import { Slider, Select } from '@/components/ui';
+import { Slider } from '@/components/ui';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 
@@ -14,49 +14,58 @@ const formatCurrency = (val: number) => {
   }).format(val);
 };
 
-export default function FDCalculator() {
-  const [principal, setPrincipal] = useState(100000); // ₹1,00,000 default
-  const [interestRate, setInterestRate] = useState(7.1); // 7.1% default
+export default function RDCalculator() {
+  const [monthlyAmount, setMonthlyAmount] = useState(5000); // ₹5,000 monthly investment
+  const [interestRate, setInterestRate] = useState(6.8); // 6.8% interest rate default
   const [tenureYears, setTenureYears] = useState(5); // 5 years default
-  const [compoundingFreq, setCompoundingFreq] = useState<string>('4'); // Quarterly compounding default
-
-  const compoundingOptions = [
-    { value: '12', label: 'Monthly' },
-    { value: '4', label: 'Quarterly' },
-    { value: '2', label: 'Half-Yearly' },
-    { value: '1', label: 'Yearly' },
-  ];
 
   const projection = useMemo(() => {
-    const P = principal;
+    const P = monthlyAmount;
     const r = interestRate / 100;
-    const n = parseInt(compoundingFreq);
     const t = tenureYears;
+    const n = 4; // Compounded quarterly (standard bank RD rule in India)
 
-    // Formula: A = P * (1 + r/n)^(n*t)
-    const maturityAmount = P * Math.pow(1 + r / n, n * t);
-    const interestEarned = maturityAmount - P;
-
+    let totalInvested = 0;
+    let balance = 0;
+    
     const yearlyLabels = [];
     const investedData = [];
     const maturityData = [];
 
+    // Loop through each year
     for (let yr = 1; yr <= t; yr++) {
-      const balance = P * Math.pow(1 + r / n, n * yr);
+      // In RD, each month's investment compounds for the remaining months of that year/tenure
+      // Formula for RD maturity value:
+      // M = P * ((1 + r/n)^(nt) - 1) / (1 - (1 + r/n)^(-1/3)) // where n=4 (quarterly compounding)
+      const currentMonths = yr * 12;
+      totalInvested = P * currentMonths;
+      
+      // Calculate compound interest compounding quarterly for recurring monthly deposits
+      // Let's compute monthly additions:
+      let tempBalance = 0;
+      for (let m = 1; m <= currentMonths; m++) {
+        // Compound each month's payment for the remaining periods
+        const compoundingPeriods = (currentMonths - m + 1) / 3; // divided by quarterly period
+        tempBalance += P * Math.pow(1 + r / n, compoundingPeriods);
+      }
+      balance = tempBalance;
+
       yearlyLabels.push(`Year ${yr}`);
-      investedData.push(P);
+      investedData.push(totalInvested);
       maturityData.push(balance);
     }
 
+    const interestEarned = Math.max(0, balance - totalInvested);
+
     return {
-      totalInvested: P,
+      totalInvested: P * t * 12,
       interestEarned,
-      maturityAmount,
+      maturityAmount: balance,
       yearlyLabels,
       investedData,
       maturityData,
     };
-  }, [principal, interestRate, tenureYears, compoundingFreq]);
+  }, [monthlyAmount, interestRate, tenureYears]);
 
   const chartData = {
     labels: projection.yearlyLabels,
@@ -106,17 +115,17 @@ export default function FDCalculator() {
   };
 
   return (
-    <ToolPageWrapper toolId="fd-calculator">
+    <ToolPageWrapper toolId="rd-calculator">
       <div className="tool-layout">
-        {/* Input Sidebar */}
+        {/* Sliders sidebar */}
         <div className="space-y-6 p-6 card">
           <Slider
-            label="Principal Amount (₹)"
-            min={1000}
-            max={10000000}
-            step={1000}
-            value={principal}
-            onChange={setPrincipal}
+            label="Monthly Deposit Amount (₹)"
+            min={500}
+            max={1000000}
+            step={500}
+            value={monthlyAmount}
+            onChange={setMonthlyAmount}
           />
           <Slider
             label="Rate of Interest (p.a.)"
@@ -136,15 +145,9 @@ export default function FDCalculator() {
             onChange={setTenureYears}
             suffix=" Yr"
           />
-          <Select
-            label="Compounding Frequency"
-            options={compoundingOptions}
-            value={compoundingFreq}
-            onChange={(e) => setCompoundingFreq(e.target.value)}
-          />
         </div>
 
-        {/* Results view */}
+        {/* Results layout */}
         <div className="flex flex-col gap-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="result-box text-center">
@@ -161,7 +164,7 @@ export default function FDCalculator() {
             </div>
           </div>
 
-          {/* Compound Growth Chart */}
+          {/* Growth chart */}
           <div className="p-6 card h-[320px] relative">
             <Line data={chartData} options={chartOptions} />
           </div>

@@ -5,10 +5,8 @@ import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider, Button } from '@/components/ui';
 import { ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 
-// Register Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-// Helper for formatting Indian currency
 const formatCurrency = (val: number) => {
   return new Intl.NumberFormat('en-IN', {
     style: 'currency',
@@ -17,12 +15,11 @@ const formatCurrency = (val: number) => {
   }).format(val);
 };
 
-export default function EMICalculator() {
-  const [principal, setPrincipal] = useState(1000000); // ₹10 Lakhs default
+export default function HomeLoanCalculator() {
+  const [principal, setPrincipal] = useState(5000000); // ₹50 Lakhs default for Home Loan
   const [rate, setRate] = useState(8.5); // 8.5% interest
-  const [tenureYears, setTenureYears] = useState(10); // 10 years default
+  const [tenureYears, setTenureYears] = useState(20); // 20 years default for Home Loan
 
-  // Calculate EMI
   const emiData = useMemo(() => {
     const P = principal;
     const r = rate / 12 / 100;
@@ -48,7 +45,6 @@ export default function EMICalculator() {
     const totalAmount = emi * n;
     const totalInterest = totalAmount - P;
 
-    // Build Amortization Schedule
     const schedule = [];
     let balance = P;
     for (let month = 1; month <= n; month++) {
@@ -72,7 +68,6 @@ export default function EMICalculator() {
     };
   }, [principal, rate, tenureYears]);
 
-  // Chart Data
   const chartData = {
     labels: ['Principal Amount', 'Total Interest'],
     datasets: [
@@ -86,7 +81,6 @@ export default function EMICalculator() {
     ],
   };
 
-  // Download Amortization Schedule as CSV
   const downloadCSV = () => {
     const headers = ['Month', 'EMI Paid', 'Principal Component', 'Interest Component', 'Outstanding Balance'];
     const rows = emiData.schedule.map((row) => [
@@ -100,35 +94,34 @@ export default function EMICalculator() {
     const csvContent =
       'data:text/csv;charset=utf-8,' +
       [headers.join(','), ...rows.map((e) => e.join(','))].join('\n');
-
+    
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement('a');
     link.setAttribute('href', encodedUri);
-    link.setAttribute('download', `EMI_Schedule_${principal}_${rate}_${tenureYears}yrs.csv`);
+    link.setAttribute('download', 'Home_Loan_Amortization_Schedule.csv');
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
 
   return (
-    <ToolPageWrapper toolId="emi-calculator">
+    <ToolPageWrapper toolId="home-loan-calculator">
       <div className="tool-layout">
-        {/* Inputs panel */}
+        {/* Sidebar Controls */}
         <div className="space-y-6 p-6 card">
           <Slider
-            label="Loan Amount (₹)"
-            min={10000}
+            label="Home Loan Amount (₹)"
+            min={100000}
             max={100000000}
-            step={10000}
+            step={50000}
             value={principal}
             onChange={setPrincipal}
-            suffix=""
           />
           <Slider
             label="Interest Rate (p.a.)"
             min={1}
-            max={36}
-            step={0.1}
+            max={20}
+            step={0.05}
             value={rate}
             onChange={setRate}
             suffix="%"
@@ -144,57 +137,45 @@ export default function EMICalculator() {
           />
         </div>
 
-        {/* Results panel */}
+        {/* Results Content */}
         <div className="flex flex-col gap-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="result-box text-center">
               <span className="result-label">Monthly EMI</span>
-              <div className="result-value text-primary">{formatCurrency(emiData.monthlyEMI)}</div>
+              <div className="result-value text-indigo-600 dark:text-indigo-400">{formatCurrency(emiData.monthlyEMI)}</div>
             </div>
             <div className="result-box text-center">
               <span className="result-label">Total Interest Payable</span>
-              <div className="result-value">{formatCurrency(emiData.totalInterest)}</div>
+              <div className="result-value text-red-500">{formatCurrency(emiData.totalInterest)}</div>
             </div>
             <div className="result-box text-center">
-              <span className="result-label">Total Payment (P + I)</span>
+              <span className="result-label">Total Payment (Principal + Interest)</span>
               <div className="result-value">{formatCurrency(emiData.totalAmount)}</div>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center p-6 card">
-            {/* Chart */}
-            <div className="max-w-[240px] mx-auto">
-              <Pie data={chartData} options={{ plugins: { legend: { position: 'bottom' } } }} />
+          {/* Chart & Action */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="p-6 card flex items-center justify-center h-[280px]">
+              <div className="w-full h-full max-w-[240px]">
+                <Pie data={chartData} options={{ responsive: true, maintainAspectRatio: false }} />
+              </div>
             </div>
-
-            {/* Amortization schedule details */}
-            <div className="flex flex-col justify-center text-sm space-y-4">
-              <h3 className="font-bold mb-2">Loan Breakup Proportions</h3>
-              <div className="flex items-center justify-between">
-                <span className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-[var(--text-link)]" />
-                  Principal Loan Amount
-                </span>
-                <span className="font-semibold">{formatCurrency(principal)}</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-red-500" />
-                  Total Interest Charges
-                </span>
-                <span className="font-semibold">{formatCurrency(emiData.totalInterest)}</span>
-              </div>
-              <div className="pt-4 border-t" style={{ borderColor: 'var(--border-default)' }}>
-                <Button
-                  onClick={downloadCSV}
-                  variant="secondary"
-                  size="sm"
-                  className="w-full"
-                  leftIcon={<ArrowDownTrayIcon className="w-4 h-4" />}
-                >
-                  Download Schedule as CSV
-                </Button>
-              </div>
+            <div className="p-6 card flex flex-col justify-center gap-4">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                Amortization Breakdowns
+              </h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                Download the complete monthly payment schedule showing principal and interest components breakdown for the entire tenure of your Home Loan.
+              </p>
+              <Button
+                variant="secondary"
+                onClick={downloadCSV}
+                className="flex items-center justify-center gap-2"
+              >
+                <ArrowDownTrayIcon className="w-4 h-4" />
+                Download Amortization Schedule
+              </Button>
             </div>
           </div>
         </div>

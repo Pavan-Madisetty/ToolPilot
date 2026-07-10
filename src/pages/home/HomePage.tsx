@@ -152,7 +152,33 @@ export default function HomePage() {
       </Helmet>
 
       <main id="main-content" className="homepage">
-        {/* Workspace section */}
+        {/* Workspace section / Hero */}
+        <section className="workspace-header" aria-label="Hero">
+          <div className="workspace-header__pattern" aria-hidden="true" />
+          <div className="workspace-header__content">
+            <div className="workspace-header__badge">
+              <span>🚀 browser-based</span>
+            </div>
+            <h1 className="workspace-header__title text-h1">
+              500+ Free Online Tools
+            </h1>
+            <p className="workspace-header__desc text-body-large">
+              Secure, fast, and local browser-based utility tools. No signup, no tracking, works completely offline.
+            </p>
+            <div className="workspace-header__search-wrap">
+              <button
+                type="button"
+                onClick={openSearch}
+                className="workspace-header__search-bar"
+                aria-label="Search all tools"
+              >
+                <Search className="workspace-header__search-icon w-5 h-5" aria-hidden="true" />
+                <span className="workspace-header__search-placeholder">Search 500+ tools...</span>
+                <kbd className="workspace-header__search-kbd">⌘K</kbd>
+              </button>
+            </div>
+          </div>
+        </section>
 
 
 
@@ -160,7 +186,8 @@ export default function HomePage() {
         <AnimatePresence>
           {favoriteTools.length > 0 && (
             <motion.section
-              className="section container"
+              id="favorites"
+              className="section container-app"
               aria-labelledby="favorites-heading"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -192,7 +219,7 @@ export default function HomePage() {
         </AnimatePresence>
 
         {/* ── Workspace Categories & Tools Grid ── */}
-        <section className="section container" aria-labelledby="workspace-tools-heading">
+        <section className="section container-app" aria-labelledby="workspace-tools-heading">
           <motion.div
             className="section__header"
             initial="hidden"
@@ -261,7 +288,7 @@ export default function HomePage() {
         </section>
 
         {/* ── Feature Highlights ────────────────── */}
-        <section className="section container" aria-labelledby="features-heading">
+        <section className="section container-app" aria-labelledby="features-heading">
           <motion.div
             className="section__header section__header--center"
             initial="hidden"
@@ -308,7 +335,7 @@ export default function HomePage() {
         <AnimatePresence>
           {recentTools.length > 0 && (
             <motion.section
-              className="section container"
+              className="section container-app"
               aria-labelledby="recent-heading"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -342,7 +369,7 @@ export default function HomePage() {
         {/* ── CTA Banner ────────────────────────── */}
         <section className="cta-banner" aria-labelledby="cta-heading">
           <motion.div
-            className="cta-banner__inner container"
+            className="cta-banner__inner container-app"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-80px' }}

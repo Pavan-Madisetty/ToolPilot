@@ -101,7 +101,7 @@ export default function CompoundInterestCalculator() {
 
             <div className="flex items-center justify-between pt-4">
               <span className="font-bold text-base">Maturity Value (A)</span>
-              <span className="text-2xl font-extrabold text-blue-500">
+              <span className="text-2xl font-extrabold text-primary">
                 {formatCurrency(calculations.totalAmount)}
               </span>
             </div>

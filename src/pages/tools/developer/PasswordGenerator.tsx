@@ -61,9 +61,9 @@ export default function PasswordGenerator() {
   // Calculate Entropy for strength meter
   const strengthInfo = useMemo(() => {
     if (isPassphraseMode) {
-      return { score: 'Strong', color: 'bg-emerald-500', width: 'w-3/4' };
+      return { score: 'Strong', color: 'var(--success)', width: '75%' };
     }
-    if (!passwordVal) return { score: 'None', color: 'bg-gray-200', width: 'w-0' };
+    if (!passwordVal) return { score: 'None', color: 'var(--border-strong)', width: '0%' };
 
     let pool = 0;
     if (useUpper) pool += 26;
@@ -73,13 +73,13 @@ export default function PasswordGenerator() {
 
     const entropy = passwordVal.length * Math.log2(pool || 1);
     if (entropy < 40) {
-      return { score: 'Weak', color: 'bg-red-500', width: 'w-1/4' };
+      return { score: 'Weak', color: 'var(--danger)', width: '25%' };
     } else if (entropy < 65) {
-      return { score: 'Fair', color: 'bg-yellow-500', width: 'w-2/4' };
+      return { score: 'Fair', color: 'var(--warning)', width: '50%' };
     } else if (entropy < 85) {
-      return { score: 'Strong', color: 'bg-emerald-500', width: 'w-3/4' };
+      return { score: 'Strong', color: 'var(--success)', width: '75%' };
     } else {
-      return { score: 'Very Strong', color: 'bg-[var(--text-link)]', width: 'w-full' };
+      return { score: 'Very Strong', color: 'var(--primary)', width: '100%' };
     }
   }, [passwordVal, useUpper, useLower, useNumbers, useSymbols, isPassphraseMode]);
 
@@ -148,10 +148,13 @@ export default function PasswordGenerator() {
             <div className="space-y-1.5">
               <div className="flex items-center justify-between text-xs font-semibold">
                 <span style={{ color: 'var(--text-secondary)' }}>Password Strength</span>
-                <span className={isPassphraseMode ? 'text-emerald-500' : ''}>{strengthInfo.score}</span>
+                <span style={{ color: strengthInfo.color }}>{strengthInfo.score}</span>
               </div>
-              <div className="h-2 w-full bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
-                <div className={`h-full transition-all duration-300 ${strengthInfo.color} ${strengthInfo.width}`} />
+              <div className="h-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                <div
+                  className="h-full transition-all duration-300"
+                  style={{ backgroundColor: strengthInfo.color, width: strengthInfo.width }}
+                />
               </div>
             </div>
           </div>
