@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Card, Button } from '@/components/ui';
 import { RefreshCw, Delete, Copy, Check } from 'lucide-react';
@@ -11,128 +11,128 @@ interface HistoryItem {
   timestamp: string;
 }
 
+const evaluateExpression = (expr: string, degMode: boolean): string => {
+  if (!expr.trim()) return '';
+
+  // Replace visual representations with javascript-executable representations
+  let parsed = expr
+    .replace(/sin/g, degMode ? 'degSin' : 'Math.sin')
+    .replace(/cos/g, degMode ? 'degCos' : 'Math.cos')
+    .replace(/tan/g, degMode ? 'degTan' : 'Math.tan')
+    .replace(/log/g, 'Math.log10')
+    .replace(/ln/g, 'Math.log')
+    .replace(/sqrt/g, 'Math.sqrt')
+    .replace(/π/g, 'Math.PI')
+    .replace(/e/g, 'Math.E')
+    .replace(/\^/g, '**')
+    .replace(/fact/g, 'factorial')
+    .replace(/×/g, '*')
+    .replace(/÷/g, '/');
+
+  // Balance parentheses
+  const openBrackets = (parsed.match(/\(/g) || []).length;
+  let closeBrackets = (parsed.match(/\)/g) || []).length;
+  while (openBrackets > closeBrackets) {
+    parsed += ')';
+    closeBrackets++;
+  }
+
+  try {
+    // Validate safe characters only to prevent security issues
+    // Allowed: numbers, operators, Math.xxx, degSin, degCos, degTan, factorial
+    const safeCheck = parsed
+      .replace(/Math\.(sin|cos|tan|log10|log|sqrt|PI|E)/g, '')
+      .replace(/degSin|degCos|degTan|factorial/g, '')
+      .replace(/[0-9+\-*/().\s]/g, '')
+      .replace(/\*\*/g, '');
+
+    if (safeCheck.length > 0) {
+      return 'Error';
+    }
+
+    const degSin = (x: number) => {
+      // Handle values like sin(180) which should be exactly 0, sin(90) = 1
+      const rad = (x * Math.PI) / 180;
+      const val = Math.sin(rad);
+      return Math.abs(val) < 1e-15 ? 0 : val;
+    };
+    const degCos = (x: number) => {
+      const rad = (x * Math.PI) / 180;
+      const val = Math.cos(rad);
+      return Math.abs(val) < 1e-15 ? 0 : val;
+    };
+    const degTan = (x: number) => {
+      const rad = (x * Math.PI) / 180;
+      // Tan 90 is undefined/infinity
+      if (Math.abs((x % 180) - 90) < 1e-9) return NaN;
+      const val = Math.tan(rad);
+      return Math.abs(val) < 1e-15 ? 0 : val;
+    };
+    const factorial = (n: number): number => {
+      if (n < 0) return NaN;
+      if (n === 0 || n === 1) return 1;
+      if (!Number.isInteger(n)) return NaN;
+      if (n > 170) return Infinity; // JS Max Float limit
+      let res = 1;
+      for (let i = 2; i <= n; i++) res *= i;
+      return res;
+    };
+
+    const fn = new Function(
+      'degSin', 'degCos', 'degTan', 'factorial',
+      `return (${parsed});`
+    );
+    const val = fn(degSin, degCos, degTan, factorial);
+
+    if (typeof val !== 'number' || Number.isNaN(val)) {
+      return 'Error';
+    }
+    
+    // Limit decimals for clean output
+    if (!Number.isInteger(val)) {
+      return Number(val.toFixed(10)).toString();
+    }
+    return val.toString();
+  } catch {
+    return '';
+  }
+};
+
 export default function ScientificCalculator() {
   const [expression, setExpression] = useState('');
   const [result, setResult] = useState('');
   const [isDegree, setIsDegree] = useState(true);
-  const [history, setHistory] = useState<HistoryItem[]>([]);
-  const [copied, setCopied] = useState(false);
-
-  // Load history from local storage
-  useEffect(() => {
+  const [history, setHistory] = useState<HistoryItem[]>(() => {
     try {
       const savedHistory = localStorage.getItem('scientific_calc_history');
-      if (savedHistory) {
-        setHistory(JSON.parse(savedHistory));
-      }
+      if (savedHistory) return JSON.parse(savedHistory);
     } catch (e) {
       console.error('Failed to load calculator history', e);
     }
-  }, []);
+    return [];
+  });
+  const [copied, setCopied] = useState(false);
 
-  const saveHistory = (newHistory: HistoryItem[]) => {
-    setHistory(newHistory);
-    localStorage.setItem('scientific_calc_history', JSON.stringify(newHistory));
-  };
-
-  const evaluateExpression = (expr: string, degMode: boolean): string => {
-    if (!expr.trim()) return '';
-
-    // Replace visual representations with javascript-executable representations
-    let parsed = expr
-      .replace(/sin/g, degMode ? 'degSin' : 'Math.sin')
-      .replace(/cos/g, degMode ? 'degCos' : 'Math.cos')
-      .replace(/tan/g, degMode ? 'degTan' : 'Math.tan')
-      .replace(/log/g, 'Math.log10')
-      .replace(/ln/g, 'Math.log')
-      .replace(/sqrt/g, 'Math.sqrt')
-      .replace(/π/g, 'Math.PI')
-      .replace(/e/g, 'Math.E')
-      .replace(/\^/g, '**')
-      .replace(/fact/g, 'factorial')
-      .replace(/×/g, '*')
-      .replace(/÷/g, '/');
-
-    // Balance parentheses
-    let openBrackets = (parsed.match(/\(/g) || []).length;
-    let closeBrackets = (parsed.match(/\)/g) || []).length;
-    while (openBrackets > closeBrackets) {
-      parsed += ')';
-      closeBrackets++;
-    }
-
-    try {
-      // Validate safe characters only to prevent security issues
-      // Allowed: numbers, operators, Math.xxx, degSin, degCos, degTan, factorial
-      const safeCheck = parsed
-        .replace(/Math\.(sin|cos|tan|log10|log|sqrt|PI|E)/g, '')
-        .replace(/degSin|degCos|degTan|factorial/g, '')
-        .replace(/[0-9+\-*/().\s]/g, '')
-        .replace(/\*\*/g, '');
-
-      if (safeCheck.length > 0) {
-        return 'Error';
-      }
-
-      const degSin = (x: number) => {
-        // Handle values like sin(180) which should be exactly 0, sin(90) = 1
-        const rad = (x * Math.PI) / 180;
-        const val = Math.sin(rad);
-        return Math.abs(val) < 1e-15 ? 0 : val;
-      };
-      const degCos = (x: number) => {
-        const rad = (x * Math.PI) / 180;
-        const val = Math.cos(rad);
-        return Math.abs(val) < 1e-15 ? 0 : val;
-      };
-      const degTan = (x: number) => {
-        const rad = (x * Math.PI) / 180;
-        // Tan 90 is undefined/infinity
-        if (Math.abs((x % 180) - 90) < 1e-9) return NaN;
-        const val = Math.tan(rad);
-        return Math.abs(val) < 1e-15 ? 0 : val;
-      };
-      const factorial = (n: number): number => {
-        if (n < 0) return NaN;
-        if (n === 0 || n === 1) return 1;
-        if (!Number.isInteger(n)) return NaN;
-        if (n > 170) return Infinity; // JS Max Float limit
-        let res = 1;
-        for (let i = 2; i <= n; i++) res *= i;
-        return res;
-      };
-
-      const fn = new Function(
-        'degSin', 'degCos', 'degTan', 'factorial',
-        `return (${parsed});`
-      );
-      const val = fn(degSin, degCos, degTan, factorial);
-
-      if (typeof val !== 'number' || Number.isNaN(val)) {
-        return 'Error';
-      }
-      
-      // Limit decimals for clean output
-      if (!Number.isInteger(val)) {
-        return Number(val.toFixed(10)).toString();
-      }
-      return val.toString();
-    } catch (e) {
-      return '';
-    }
-  };
-
-  // Real-time calculation helper
+  // Save history to local storage
   useEffect(() => {
+    try {
+      localStorage.setItem('scientific_calc_history', JSON.stringify(history));
+    } catch (e) {
+      console.error('Failed to save calculator history', e);
+    }
+  }, [history]);
+
+  // Real-time calculation helper via useMemo
+  const liveResult = useMemo(() => {
     const activeEval = evaluateExpression(expression, isDegree);
     if (activeEval && activeEval !== 'Error') {
-      setResult(activeEval);
-    } else {
-      setResult('');
+      return activeEval;
     }
+    return '';
   }, [expression, isDegree]);
 
-  const handleKeyPress = (value: string) => {
+  const handleKeyPress = useCallback((value: string) => {
+    setResult('');
     setExpression((prev) => {
       // Logic for different keys
       if (['sin', 'cos', 'tan', 'log', 'ln', 'sqrt', 'fact'].includes(value)) {
@@ -143,14 +143,15 @@ export default function ScientificCalculator() {
       if (value === 'x^y') return prev + '^';
       return prev + value;
     });
-  };
+  }, []);
 
-  const handleClear = () => {
+  const handleClear = useCallback(() => {
     setExpression('');
     setResult('');
-  };
+  }, []);
 
-  const handleBackspace = () => {
+  const handleBackspace = useCallback(() => {
+    setResult('');
     setExpression((prev) => {
       if (prev.length === 0) return prev;
 
@@ -164,9 +165,9 @@ export default function ScientificCalculator() {
 
       return prev.slice(0, -1);
     });
-  };
+  }, []);
 
-  const handleCalculate = () => {
+  const handleCalculate = useCallback(() => {
     const finalVal = evaluateExpression(expression, isDegree);
     if (finalVal && finalVal !== 'Error') {
       setResult(finalVal);
@@ -178,23 +179,23 @@ export default function ScientificCalculator() {
         isDegree,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
-      saveHistory([newItem, ...history.slice(0, 19)]); // limit to last 20
+      setHistory((prev) => [newItem, ...prev.slice(0, 19)]);
     } else {
       setResult('Error');
     }
-  };
+  }, [expression, isDegree]);
 
   const copyToClipboard = () => {
-    const valToCopy = result || expression;
+    const valToCopy = result || liveResult || expression;
     if (!valToCopy) return;
     navigator.clipboard.writeText(valToCopy);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const clearHistory = () => {
-    saveHistory([]);
-  };
+  const clearHistory = useCallback(() => {
+    setHistory([]);
+  }, []);
 
   // Keyboard support listener
   useEffect(() => {
@@ -225,7 +226,7 @@ export default function ScientificCalculator() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [expression, isDegree, history]);
+  }, [handleKeyPress, handleBackspace, handleCalculate, handleClear]);
 
   // Keys list grouped for the grid layout
   const scientificKeys = [

@@ -52,8 +52,28 @@ const formatDateString = (date: Date): string => {
 };
 
 export default function HabitTracker() {
-  const [habits, setHabits] = useState<Habit[]>([]);
-  const [logs, setLogs] = useState<HabitLogs>({});
+  const [habits, setHabits] = useState<Habit[]>(() => {
+    try {
+      const saved = localStorage.getItem('habit_tracker_habits');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error(e);
+    }
+    return [
+      { id: '1', name: 'Drink Water (8 glasses)', frequency: 'daily', category: 'Health', color: 'blue', createdAt: new Date().toISOString() },
+      { id: '2', name: 'Exercise (30 mins)', frequency: 'daily', category: 'Fitness', color: 'green', createdAt: new Date().toISOString() },
+    ];
+  });
+  
+  const [logs, setLogs] = useState<HabitLogs>(() => {
+    try {
+      const saved = localStorage.getItem('habit_tracker_logs');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error(e);
+    }
+    return {};
+  });
   
   // New habit form states
   const [name, setName] = useState('');
@@ -62,23 +82,15 @@ export default function HabitTracker() {
   const [color, setColor] = useState('blue');
   const [error, setError] = useState('');
 
-  // Load from local storage
+  // Sync to local storage
   useEffect(() => {
     try {
-      const savedHabits = localStorage.getItem('habit_tracker_habits');
-      const savedLogs = localStorage.getItem('habit_tracker_logs');
-      if (savedHabits) setHabits(JSON.parse(savedHabits));
-      if (savedLogs) setLogs(JSON.parse(savedLogs));
+      localStorage.setItem('habit_tracker_habits', JSON.stringify(habits));
+      localStorage.setItem('habit_tracker_logs', JSON.stringify(logs));
     } catch (e) {
-      console.error('Failed to parse habits or logs from localStorage', e);
+      console.error('Error saving to storage:', e);
     }
-  }, []);
-
-  // Save to local storage
-  const saveToStorage = (updatedHabits: Habit[], updatedLogs: HabitLogs) => {
-    localStorage.setItem('habit_tracker_habits', JSON.stringify(updatedHabits));
-    localStorage.setItem('habit_tracker_logs', JSON.stringify(updatedLogs));
-  };
+  }, [habits, logs]);
 
   // Get current week's Mon-Sun dates
   const weekDays = useMemo(() => {
@@ -118,7 +130,6 @@ export default function HabitTracker() {
 
     setHabits(updatedHabits);
     setLogs(updatedLogs);
-    saveToStorage(updatedHabits, updatedLogs);
 
     // Reset form
     setName('');
@@ -131,7 +142,6 @@ export default function HabitTracker() {
 
     setHabits(updatedHabits);
     setLogs(updatedLogs);
-    saveToStorage(updatedHabits, updatedLogs);
   };
 
   const toggleDay = (habitId: string, dateStr: string) => {
@@ -147,7 +157,6 @@ export default function HabitTracker() {
 
     const updatedLogs = { ...logs, [habitId]: updatedHabitLogs };
     setLogs(updatedLogs);
-    saveToStorage(habits, updatedLogs);
   };
 
   // Streak calculator

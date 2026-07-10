@@ -173,9 +173,6 @@ export default function CGPACalculator() {
 
   // Calculations per semester and overall
   const calculationResults = useMemo(() => {
-    let totalCgpaCredits = 0;
-    let totalCgpaPoints = 0;
-
     const semestersResults = semesters.map((sem) => {
       let semCredits = 0;
       let semPoints = 0;
@@ -189,9 +186,6 @@ export default function CGPACalculator() {
 
       const sgpa = semCredits > 0 ? semPoints / semCredits : 0;
 
-      totalCgpaCredits += semCredits;
-      totalCgpaPoints += semPoints;
-
       return {
         semId: sem.id,
         name: sem.name,
@@ -200,6 +194,9 @@ export default function CGPACalculator() {
         points: semPoints,
       };
     });
+
+    const totalCgpaCredits = semestersResults.reduce((sum, s) => sum + s.credits, 0);
+    const totalCgpaPoints = semestersResults.reduce((sum, s) => sum + s.points, 0);
 
     const cgpa = totalCgpaCredits > 0 ? totalCgpaPoints / totalCgpaCredits : 0;
     const percentage = cgpa * multiplier;
