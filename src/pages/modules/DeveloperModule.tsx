@@ -20,7 +20,7 @@ const CRYPTO_TOOLS = devTools.filter((t) =>
 );
 
 const UTILITY_TOOLS = devTools.filter((t) =>
-  ['timestamp-converter', 'color-picker', 'diff-checker', 'lorem-ipsum'].includes(t.id)
+  ['timestamp-converter', 'color-picker', 'diff-checker', 'lorem-ipsum', 'gradient-generator', 'cron-builder', 'markdown-preview'].includes(t.id)
 );
 
 export default function DeveloperModule() {

@@ -77,6 +77,9 @@ const SqlFormatter = lazy(() => import('@/pages/tools/developer/SqlFormatter'));
 const DiffChecker = lazy(() => import('@/pages/tools/developer/DiffChecker'));
 const LoremIpsum = lazy(() => import('@/pages/tools/developer/LoremIpsum'));
 const TimestampConverter = lazy(() => import('@/pages/tools/developer/TimestampConverter'));
+const GradientGenerator = lazy(() => import('@/pages/tools/developer/GradientGenerator'));
+const CronBuilder = lazy(() => import('@/pages/tools/developer/CronBuilder'));
+const MarkdownPreview = lazy(() => import('@/pages/tools/developer/MarkdownPreview'));
 
 // Image Tools
 const ImageResizer = lazy(() => import('@/pages/tools/image/ImageResizer'));
@@ -190,6 +193,9 @@ export default function App() {
               <Route path="developer/diff-checker" element={<Suspense fallback={<PageLoader />}><DiffChecker /></Suspense>} />
               <Route path="developer/lorem-ipsum" element={<Suspense fallback={<PageLoader />}><LoremIpsum /></Suspense>} />
               <Route path="developer/timestamp-converter" element={<Suspense fallback={<PageLoader />}><TimestampConverter /></Suspense>} />
+              <Route path="developer/gradient-generator" element={<Suspense fallback={<PageLoader />}><GradientGenerator /></Suspense>} />
+              <Route path="developer/cron-builder" element={<Suspense fallback={<PageLoader />}><CronBuilder /></Suspense>} />
+              <Route path="developer/markdown-preview" element={<Suspense fallback={<PageLoader />}><MarkdownPreview /></Suspense>} />
 
               {/* PDF Module */}
               <Route path="pdf" element={<Suspense fallback={<PageLoader />}><PdfModule /></Suspense>} />
