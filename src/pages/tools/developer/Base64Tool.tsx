@@ -66,7 +66,7 @@ export default function Base64Tool() {
   };
 
   return (
-    <ToolPageWrapper toolId="base-64">
+    <ToolPageWrapper toolId="base64">
       <div className="tool-layout lg:grid-cols-2">
         {/* Input */}
         <div className="flex flex-col gap-4">

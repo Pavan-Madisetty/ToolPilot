@@ -11,7 +11,7 @@ import { ToastContainer } from '@/components/ui/ToastContainer';
 // ─────────────────────────────────────────────
 const HomePage = lazy(() => import('@/pages/home/HomePage'));
 const SearchPage = lazy(() => import('@/pages/search/SearchPage'));
-const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'));
+const ToolFallback = lazy(() => import('@/pages/tools/ToolFallback'));
 
 // Module Pages
 const FinanceModule = lazy(() => import('@/pages/modules/FinanceModule'));
@@ -199,8 +199,8 @@ export default function App() {
               <Route path="convert/weight" element={<Suspense fallback={<PageLoader />}><WeightConverter /></Suspense>} />
               <Route path="convert/temperature" element={<Suspense fallback={<PageLoader />}><TemperatureConverter /></Suspense>} />
 
-              {/* 404 */}
-              <Route path="*" element={<Suspense fallback={<PageLoader />}><NotFoundPage /></Suspense>} />
+              {/* Wildcard Fallback */}
+              <Route path="*" element={<Suspense fallback={<PageLoader />}><ToolFallback /></Suspense>} />
             </Route>
           </Routes>
         </AnimatePresence>
