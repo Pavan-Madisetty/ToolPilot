@@ -177,6 +177,13 @@ const HtmlToPdf = lazy(() => import('@/pages/tools/pdf/HtmlToPdf'));
 const ImageToPdf = lazy(() => import('@/pages/tools/pdf/ImageToPdf'));
 const MarkdownToPdf = lazy(() => import('@/pages/tools/pdf/MarkdownToPdf'));
 
+import { useGoogleAnalytics } from '@/hooks/useGoogleAnalytics';
+
+function AnalyticsTracker() {
+  useGoogleAnalytics();
+  return null;
+}
+
 export default function App() {
   const basename =
     typeof window !== 'undefined' && window.location.hostname.endsWith('.github.io')
@@ -186,6 +193,7 @@ export default function App() {
   return (
     <HelmetProvider>
       <BrowserRouter basename={basename}>
+        <AnalyticsTracker />
         <ToastContainer />
         <AnimatePresence mode="wait">
           <Routes>
