@@ -7,6 +7,7 @@ import { MODULES } from '@/config/modules';
 import { ToolCard } from '@/components/ui/ToolCard';
 import type { ToolConfig } from '@/types';
 import { Breadcrumb } from '@/components/ui/Breadcrumb';
+import { clsx } from 'clsx';
 
 // Client-side fuzzy search function
 function performSearch(query: string, selectedModule: string): ToolConfig[] {
@@ -37,6 +38,7 @@ export default function SearchPage() {
 
   const [prevQuery, setPrevQuery] = useState(queryParam);
   const [inputVal, setInputVal] = useState(queryParam);
+  const [isFocused, setIsFocused] = useState(false);
 
   if (queryParam !== prevQuery) {
     setPrevQuery(queryParam);
@@ -102,10 +104,11 @@ export default function SearchPage() {
         <div className="mb-8 max-w-2xl">
           <form onSubmit={handleSearchSubmit} className="flex gap-2">
             <div
-              className="flex-1 flex items-center gap-3 px-4 py-3 border rounded-xl shadow-sm"
+              className="flex-1 flex items-center gap-3 px-4 h-12 rounded-[var(--radius-md)] border transition-all duration-150 shadow-sm"
               style={{
                 background: 'var(--bg-elevated)',
-                borderColor: 'var(--border-default)',
+                borderColor: isFocused ? 'var(--border-focus)' : 'var(--border-default)',
+                boxShadow: isFocused ? '0 0 0 2px var(--bg-base), 0 0 0 4px var(--primary)' : 'none',
               }}
             >
               <MagnifyingGlassIcon className="w-5 h-5 shrink-0" style={{ color: 'var(--text-tertiary)' }} />
@@ -113,8 +116,10 @@ export default function SearchPage() {
                 type="text"
                 value={inputVal}
                 onChange={(e) => handleQueryChange(e.target.value)}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
                 placeholder="Search tools by name, description, tags..."
-                className="flex-1 bg-transparent border-none outline-none text-sm"
+                className="flex-1 bg-transparent border-none outline-none text-sm h-full"
                 style={{ color: 'var(--text-primary)' }}
                 aria-label="Search tools"
               />
@@ -158,13 +163,7 @@ export default function SearchPage() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Filters Sidebar */}
           <div className="lg:col-span-1">
-            <div
-              className="p-5 border rounded-xl shadow-xs lg:sticky lg:top-24"
-              style={{
-                background: 'var(--bg-elevated)',
-                borderColor: 'var(--border-default)',
-              }}
-            >
+            <div className="card lg:sticky lg:top-24 hover:translate-y-0 hover:shadow-md p-5 md:p-6">
               <div className="text-xs font-bold uppercase tracking-wider mb-4" style={{ color: 'var(--text-tertiary)', letterSpacing: '0.05em' }}>
                 Filter by Category
               </div>
@@ -175,31 +174,21 @@ export default function SearchPage() {
                     <button
                       key={mod.key}
                       onClick={() => handleModuleSelect(mod.key)}
-                      className="w-full flex items-center justify-between px-3 py-2.5 text-xs font-medium rounded-lg text-left transition-all duration-150"
-                      style={{
-                        background: isActive ? 'rgba(79, 70, 229, 0.08)' : 'transparent',
-                        color: isActive ? 'var(--text-link)' : 'var(--text-secondary)',
-                      }}
-                      onMouseEnter={(e) => {
-                        if (!isActive) {
-                          e.currentTarget.style.background = 'var(--bg-surface)';
-                          e.currentTarget.style.color = 'var(--text-primary)';
-                        }
-                      }}
-                      onMouseLeave={(e) => {
-                        if (!isActive) {
-                          e.currentTarget.style.background = 'transparent';
-                          e.currentTarget.style.color = 'var(--text-secondary)';
-                        }
-                      }}
+                      className={clsx(
+                        "w-full flex items-center justify-between px-3 py-2.5 text-xs font-semibold rounded-xl text-left transition-all duration-150 cursor-pointer",
+                        isActive
+                          ? "bg-[rgba(99,102,241,0.08)] text-[var(--primary)]"
+                          : "text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] hover:text-[var(--text-primary)]"
+                      )}
                     >
                       <span>{mod.name}</span>
                       <span
-                        className="px-2 py-0.5 rounded-full text-[10px] font-bold"
-                        style={{
-                          background: isActive ? 'rgba(79, 70, 229, 0.15)' : 'var(--bg-surface)',
-                          color: isActive ? 'var(--text-link)' : 'var(--text-tertiary)',
-                        }}
+                        className={clsx(
+                          "px-2 py-0.5 rounded-full text-[10px] font-bold",
+                          isActive
+                            ? "bg-[rgba(99,102,241,0.15)] text-[var(--primary)]"
+                            : "bg-[var(--bg-surface)] text-[var(--text-tertiary)]"
+                        )}
                       >
                         {mod.toolCount}
                       </span>
@@ -213,18 +202,12 @@ export default function SearchPage() {
           {/* Tool Grid Results */}
           <div className="lg:col-span-3">
             {filteredTools.length === 0 ? (
-              <div
-                className="py-16 text-center border rounded-xl"
-                style={{
-                  background: 'var(--bg-elevated)',
-                  borderColor: 'var(--border-default)',
-                }}
-              >
+              <div className="card text-center py-16 hover:translate-y-0 hover:shadow-md">
                 <div className="text-6xl mb-4">🔍</div>
                 <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
                   No tools found
                 </h3>
-                <p style={{ color: 'var(--text-secondary)' }}>
+                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
                   No matching tools found for your query. Try clearing filters or try other keywords.
                 </p>
               </div>

@@ -299,4 +299,41 @@ describe('Finance Module Math Engines', () => {
       expect(total).toBe(23900);
     });
   });
+
+  describe('Loan Comparison Math', () => {
+    it('calculates difference between two loan interest totals correctly', () => {
+      const pA = 2000000;
+      const rA = 8.5 / 12 / 100;
+      const nA = 15 * 12;
+      const emiA = (pA * rA * Math.pow(1 + rA, nA)) / (Math.pow(1 + rA, nA) - 1);
+      const totalInterestA = (emiA * nA) - pA;
+
+      const pB = 2000000;
+      const rB = 9.2 / 12 / 100;
+      const nB = 15 * 12;
+      const emiB = (pB * rB * Math.pow(1 + rB, nB)) / (Math.pow(1 + rB, nB) - 1);
+      const totalInterestB = (emiB * nB) - pB;
+
+      expect(Math.round(totalInterestB - totalInterestA)).toBe(149252);
+    });
+  });
+
+  describe('Mutual Fund SIP/Lumpsum Math', () => {
+    it('calculates systematic investment plan returns correctly', () => {
+      const P = 5000;
+      const r = 12 / 100;
+      const i = r / 12;
+      const months = 10 * 12;
+      const maturity = P * ((Math.pow(1 + i, months) - 1) / i) * (1 + i);
+      expect(Math.round(maturity)).toBe(1161695);
+    });
+
+    it('calculates lump sum returns correctly', () => {
+      const P = 5000;
+      const r = 12 / 100;
+      const years = 10;
+      const maturity = P * Math.pow(1 + r, years);
+      expect(Math.round(maturity)).toBe(15529);
+    });
+  });
 });

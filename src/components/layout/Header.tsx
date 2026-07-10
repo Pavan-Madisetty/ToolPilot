@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   MagnifyingGlassIcon,
@@ -8,46 +8,17 @@ import {
   Bars3Icon,
   XMarkIcon,
   HeartIcon,
-  ChevronDownIcon,
 } from '@heroicons/react/24/outline';
 import { useThemeStore } from '@/stores/themeStore';
 import { useSearchStore } from '@/stores/uiStore';
-import { MODULES } from '@/config/modules';
 import { clsx } from 'clsx';
-
-/** Maps module key → emoji for the mobile drawer */
-const MODULE_EMOJIS: Record<string, string> = {
-  finance: '💵',
-  developer: '💻',
-  pdf: '📄',
-  image: '🖼️',
-  text: '✍️',
-  ai: '🤖',
-  business: '💼',
-  productivity: '⏱️',
-  education: '🎓',
-  travel: '✈️',
-  health: '❤️',
-  utilities: '⚙️',
-  conversion: '⚖️',
-};
-
-const POPULAR_MENU_TOOLS = [
-  { name: 'JSON Formatter', slug: '/developer/json-formatter' },
-  { name: 'EMI Calculator', slug: '/finance/emi-calculator' },
-  { name: 'Word Counter', slug: '/text/word-counter' },
-  { name: 'Image Compressor', slug: '/image/image-compressor' },
-  { name: 'Base64 Encoder', slug: '/developer/base64' },
-];
 
 export function Header() {
   const { theme, toggleTheme } = useThemeStore();
   const { setIsOpen: setSearchOpen } = useSearchStore();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const location = useLocation();
 
-  const [hoveredNav, setHoveredNav] = useState<'tools' | 'categories' | null>(null);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
   const drawerRef = useRef<HTMLDivElement>(null);
@@ -103,25 +74,6 @@ export function Header() {
     };
   }, [isDrawerOpen]);
 
-  // Determine active states for desktop navigation links
-  const isToolsActive = location.pathname !== '/' && (
-    location.pathname.includes('/developer/') ||
-    location.pathname.includes('/finance/') ||
-    location.pathname.includes('/text/') ||
-    location.pathname.includes('/image/') ||
-    location.pathname.includes('/productivity/') ||
-    location.pathname.includes('/education/') ||
-    location.pathname.includes('/business/') ||
-    location.pathname.includes('/utilities/') ||
-    location.pathname.includes('/conversion/') ||
-    location.pathname.includes('/health/')
-  );
-
-  const isCategoriesActive = MODULES.some((mod) => location.pathname === mod.slug);
-  const isBlogActive = location.pathname.startsWith('/blog') || location.hash === '#blog';
-  const isAboutActive = location.pathname.startsWith('/about') || location.hash === '#about';
-  const isPricingActive = location.pathname.startsWith('/pricing') || location.hash === '#pricing';
-
   return (
     <>
       {/* ════════════════════════  HEADER BAR  ════════════════════════ */}
@@ -160,161 +112,6 @@ export function Header() {
                 <span className="text-[var(--primary)]">Pilot</span>
               </span>
             </Link>
-
-            {/* Desktop Navigation Links */}
-            <nav className="hidden md:flex items-center h-full gap-5 lg:gap-6" aria-label="Main Navigation">
-              {/* Tools Dropdown Link */}
-              <div
-                className="relative h-full flex items-center"
-                onMouseEnter={() => setHoveredNav('tools')}
-                onMouseLeave={() => setHoveredNav(null)}
-              >
-                <button
-                  type="button"
-                  className={clsx(
-                    "flex items-center gap-1.5 h-10 px-3 rounded-lg text-sm font-medium transition-all duration-150 cursor-pointer",
-                    "hover:bg-[#F8FAFC] dark:hover:bg-[#1e293b]",
-                    isToolsActive ? "text-[#6366F1]" : "text-[#64748B] dark:text-slate-300"
-                  )}
-                >
-                  <span>Tools</span>
-                  <ChevronDownIcon className={clsx("w-4 h-4 text-slate-400 dark:text-slate-500 transition-transform duration-150", hoveredNav === 'tools' && "rotate-180")} />
-                </button>
-                {isToolsActive && (
-                  <span className="absolute bottom-0 left-3 right-3 h-[2px] bg-[#6366F1] rounded-full" />
-                )}
-
-                <AnimatePresence>
-                  {hoveredNav === 'tools' && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 8 }}
-                      transition={{ duration: 0.15 }}
-                      className="absolute top-[85%] left-0 z-50 w-64 rounded-xl border p-3 shadow-xl flex flex-col gap-0.5"
-                      style={{
-                        background: 'var(--bg-elevated)',
-                        borderColor: 'var(--border-default)',
-                        borderRadius: '12px',
-                      }}
-                    >
-                      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 px-3 py-1.5">Popular Tools</p>
-                      {POPULAR_MENU_TOOLS.map((tool) => (
-                        <Link
-                          key={tool.slug}
-                          to={tool.slug}
-                          className="flex items-center px-3 py-2 text-sm font-medium text-slate-600 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400 hover:bg-[#F8FAFC] dark:hover:bg-[#1e293b] rounded-lg transition-colors"
-                        >
-                          {tool.name}
-                        </Link>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {/* Categories Dropdown Link */}
-              <div
-                className="relative h-full flex items-center"
-                onMouseEnter={() => setHoveredNav('categories')}
-                onMouseLeave={() => setHoveredNav(null)}
-              >
-                <button
-                  type="button"
-                  className={clsx(
-                    "flex items-center gap-1.5 h-10 px-3 rounded-lg text-sm font-medium transition-all duration-150 cursor-pointer",
-                    "hover:bg-[#F8FAFC] dark:hover:bg-[#1e293b]",
-                    isCategoriesActive ? "text-[#6366F1]" : "text-[#64748B] dark:text-slate-300"
-                  )}
-                >
-                  <span>Categories</span>
-                  <ChevronDownIcon className={clsx("w-4 h-4 text-slate-400 dark:text-slate-500 transition-transform duration-150", hoveredNav === 'categories' && "rotate-180")} />
-                </button>
-                {isCategoriesActive && (
-                  <span className="absolute bottom-0 left-3 right-3 h-[2px] bg-[#6366F1] rounded-full" />
-                )}
-
-                <AnimatePresence>
-                  {hoveredNav === 'categories' && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 8 }}
-                      transition={{ duration: 0.15 }}
-                      className="absolute top-[85%] left-0 z-50 w-64 rounded-xl border p-3 shadow-xl flex flex-col gap-0.5"
-                      style={{
-                        background: 'var(--bg-elevated)',
-                        borderColor: 'var(--border-default)',
-                        borderRadius: '12px',
-                      }}
-                    >
-                      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 px-3 py-1.5">Modules</p>
-                      {MODULES.map((mod) => (
-                        <Link
-                          key={mod.key}
-                          to={mod.slug}
-                          className="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-slate-600 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400 hover:bg-[#F8FAFC] dark:hover:bg-[#1e293b] rounded-lg transition-colors"
-                        >
-                          <span className="text-base">{MODULE_EMOJIS[mod.key] ?? '🔧'}</span>
-                          <span>{mod.name}</span>
-                        </Link>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {/* Blog Link (Hidden on Tablet) */}
-              <div className="hidden lg:flex relative h-full flex items-center">
-                <Link
-                  to="/#blog"
-                  className={clsx(
-                    "flex items-center h-10 px-3 rounded-lg text-sm font-medium transition-all duration-150",
-                    "hover:bg-[#F8FAFC] dark:hover:bg-[#1e293b]",
-                    isBlogActive ? "text-[#6366F1]" : "text-[#64748B] dark:text-slate-300"
-                  )}
-                >
-                  <span>Blog</span>
-                </Link>
-                {isBlogActive && (
-                  <span className="absolute bottom-0 left-3 right-3 h-[2px] bg-[#6366F1] rounded-full" />
-                )}
-              </div>
-
-              {/* About Link (Hidden on Tablet) */}
-              <div className="hidden lg:flex relative h-full flex items-center">
-                <Link
-                  to="/#about"
-                  className={clsx(
-                    "flex items-center h-10 px-3 rounded-lg text-sm font-medium transition-all duration-150",
-                    "hover:bg-[#F8FAFC] dark:hover:bg-[#1e293b]",
-                    isAboutActive ? "text-[#6366F1]" : "text-[#64748B] dark:text-slate-300"
-                  )}
-                >
-                  <span>About</span>
-                </Link>
-                {isAboutActive && (
-                  <span className="absolute bottom-0 left-3 right-3 h-[2px] bg-[#6366F1] rounded-full" />
-                )}
-              </div>
-
-              {/* Pricing Link (Hidden on Tablet) */}
-              <div className="hidden lg:flex relative h-full flex items-center">
-                <Link
-                  to="/#pricing"
-                  className={clsx(
-                    "flex items-center h-10 px-3 rounded-lg text-sm font-medium transition-all duration-150",
-                    "hover:bg-[#F8FAFC] dark:hover:bg-[#1e293b]",
-                    isPricingActive ? "text-[#6366F1]" : "text-[#64748B] dark:text-slate-300"
-                  )}
-                >
-                  <span>Pricing</span>
-                </Link>
-                {isPricingActive && (
-                  <span className="absolute bottom-0 left-3 right-3 h-[2px] bg-[#6366F1] rounded-full" />
-                )}
-              </div>
-            </nav>
           </div>
 
           {/* CENTER-RIGHT ZONE: Search Field */}
@@ -383,13 +180,7 @@ export function Header() {
               </motion.div>
             </button>
 
-            {/* Sign in Button */}
-            <button
-              type="button"
-              className="text-sm font-semibold text-[var(--primary)] hover:text-[var(--primary-hover)] transition-colors px-3 h-10 flex items-center shrink-0 cursor-pointer"
-            >
-              Sign in
-            </button>
+
 
             {/* Tablet-only Hamburger Menu */}
             <button
@@ -514,66 +305,17 @@ export function Header() {
 
               {/* drawer modules & links */}
               <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-6">
-                {/* Tools */}
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2 px-1">Tools</p>
-                  <div className="flex flex-col gap-0.5">
-                    {POPULAR_MENU_TOOLS.map((tool) => (
-                      <Link
-                        key={tool.slug}
-                        to={tool.slug}
-                        onClick={() => setIsDrawerOpen(false)}
-                        className="px-3 py-2 text-sm font-medium text-slate-600 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400 hover:bg-[var(--bg-surface)] rounded-lg transition-colors"
-                      >
-                        {tool.name}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Categories */}
-                <div>
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2 px-1">Categories</p>
-                  <div className="grid grid-cols-2 gap-1.5">
-                    {MODULES.map((mod) => (
-                      <Link
-                        key={mod.key}
-                        to={mod.slug}
-                        onClick={() => setIsDrawerOpen(false)}
-                        className="flex items-center gap-2 px-3 py-2 text-xs font-semibold text-slate-600 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400 bg-[var(--bg-surface)] hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
-                      >
-                        <span className="text-sm">{MODULE_EMOJIS[mod.key] ?? '🔧'}</span>
-                        <span>{mod.name}</span>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Navigation Links */}
-                <div>
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2 px-1">Navigation</p>
                   <div className="flex flex-col gap-0.5">
                     <Link
-                      to="/#blog"
+                      to="/#favorites"
                       onClick={() => setIsDrawerOpen(false)}
-                      className="px-3 py-2.5 text-sm font-semibold text-slate-600 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400 hover:bg-[var(--bg-surface)] rounded-lg transition-colors"
+                      className="flex items-center gap-2.5 px-3 py-2.5 text-sm font-semibold text-slate-600 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400 hover:bg-[var(--bg-surface)] rounded-lg transition-colors"
                     >
-                      Blog
+                      <HeartIcon className="w-5 h-5 text-slate-400 shrink-0" />
+                      <span>Favorites</span>
                     </Link>
-                    <Link
-                      to="/#about"
-                      onClick={() => setIsDrawerOpen(false)}
-                      className="px-3 py-2.5 text-sm font-semibold text-slate-600 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400 hover:bg-[var(--bg-surface)] rounded-lg transition-colors"
-                    >
-                      About
-                    </Link>
-                    <Link
-                      to="/#pricing"
-                      onClick={() => setIsDrawerOpen(false)}
-                      className="px-3 py-2.5 text-sm font-semibold text-slate-600 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400 hover:bg-[var(--bg-surface)] rounded-lg transition-colors"
-                    >
-                      Pricing
-                    </Link>
+
                   </div>
                 </div>
               </div>

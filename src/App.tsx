@@ -51,6 +51,8 @@ const RetirementCalculator = lazy(() => import('@/pages/tools/finance/Retirement
 const HRACalculator = lazy(() => import('@/pages/tools/finance/HRACalculator'));
 const BillSplitter = lazy(() => import('@/pages/tools/finance/BillSplitter'));
 const ExpenseTracker = lazy(() => import('@/pages/tools/finance/ExpenseTracker'));
+const LoanComparison = lazy(() => import('@/pages/tools/finance/LoanComparison'));
+const MutualFundCalculator = lazy(() => import('@/pages/tools/finance/MutualFundCalculator'));
 
 // Developer Tools
 const JsonFormatter = lazy(() => import('@/pages/tools/developer/JsonFormatter'));
@@ -154,6 +156,8 @@ export default function App() {
               <Route path="finance/hra-calculator" element={<Suspense fallback={<PageLoader />}><HRACalculator /></Suspense>} />
               <Route path="finance/bill-splitter" element={<Suspense fallback={<PageLoader />}><BillSplitter /></Suspense>} />
               <Route path="finance/expense-tracker" element={<Suspense fallback={<PageLoader />}><ExpenseTracker /></Suspense>} />
+              <Route path="finance/loan-comparison" element={<Suspense fallback={<PageLoader />}><LoanComparison /></Suspense>} />
+              <Route path="finance/mutual-fund-calculator" element={<Suspense fallback={<PageLoader />}><MutualFundCalculator /></Suspense>} />
 
               {/* Developer Module */}
               <Route path="developer" element={<Suspense fallback={<PageLoader />}><DeveloperModule /></Suspense>} />
