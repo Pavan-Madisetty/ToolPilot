@@ -7,7 +7,7 @@ const NORMAL_LOWER = 'abcdefghijklmnopqrstuvwxyz';
 const NORMAL_UPPER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const NORMAL_NUM = '0123456789';
 
-const STYLES = [
+const FONT_PRESETS = [
   {
     name: 'Bold Serif',
     lower: Array.from('𝐚𝐛𝐜𝐝𝐞𝐟𝐠𝐡𝐢𝐣𝐤𝐥𝐦𝐧𝐨𝐩𝐪𝐫𝐬𝐭𝐮𝐯𝐰𝐱𝐲𝐳'),
@@ -58,7 +58,7 @@ const STYLES = [
   },
   {
     name: 'Monospace',
-    lower: Array.from('𝚊𝚋𝚌𝚍𝚎𝚏𝚐𝚑𝚒𝚓𝚔𝚕𝚖𝚗𝚘𝚙𝚚𝚛𝚜𝚝𝚞𝚟𝚠𝚡𝚢𝚣'),
+    lower: Array.from('𝚊𝚋𝚌𝚍𝚎𝚏𝚐𝚑𝚒𝚓𝚔𝚕𝚖𝚗𝚘𝚙𝚚𝚛𝚜𝚝𝚞𝚠𝚡𝚢𝚣'),
     upper: Array.from('𝙰𝙱𝙲𝙳𝙴𝖥𝖦𝖧𝖨𝖩𝖪𝖫𝖬𝖭𝖮𝖯𝖰𝖱𝖲𝖳𝖴𝖵𝖶𝖷𝖸𝖹'),
     num: Array.from('𝟶𝟷𝟸𝟹𝟺𝟻𝟼𝟽𝟾𝟿'),
   },
@@ -68,6 +68,33 @@ const STYLES = [
     upper: Array.from('ⒶⒷⒸⒹⒺⒻⒼⒽⒾⒿⓀⓁⓂⓃⓄⓅⓆⓇⓈⓉⓊⓋⓌⓍⓎⓏ'),
     num: Array.from('⓪①②③④⑤⑥⑦⑧⑨'),
   },
+  {
+    name: 'Fullwidth',
+    lower: Array.from('ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ'),
+    upper: Array.from('ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ'),
+    num: Array.from('０１２３４５６７８９'),
+  },
+];
+
+const DECORATOR_PRESETS = [
+  { name: 'Wings', prefix: '꧁ ', suffix: ' ꧂' },
+  { prefix: '★彡 ', suffix: ' 彡★', name: 'Stars Wave' },
+  { prefix: '｡☆✼★ ', suffix: ' ★✼☆｡', name: 'Sparkles Ribbon' },
+  { prefix: '【 ', suffix: ' 】', name: 'Bold Brackets' },
+  { prefix: '『 ', suffix: ' 』', name: 'Gothic Brackets' },
+  { prefix: '✨ ', suffix: ' ✨', name: 'Magic Sparkles' },
+  { prefix: '👑 ', suffix: ' 👑', name: 'Crown King' },
+  { prefix: '⚡ ', suffix: ' ⚡', name: 'Lightning High' },
+  { prefix: '✿ ♡‿♡ ', suffix: ' ♡‿♡ ✿', name: 'Hearts Bloom' },
+  { prefix: '•´¯`•. ', suffix: ' .•´¯`•', name: 'Swirls Wave' },
+  { prefix: '°°°·.°·..·°¯°·._.· ', suffix: ' ·._.·°¯°·.·° .·°°°', name: 'Complex Outline' },
+  { prefix: 'ミ★ ', suffix: ' ★彡', name: 'Shooting Stars' },
+  { prefix: '卍 ', suffix: ' 卍', name: 'Swastika Seal' },
+  { prefix: '◤ ', suffix: ' ◢', name: 'Gamer Wedges' },
+  { prefix: '♥ ', suffix: ' ♥', name: 'Hearts Accent' },
+  { prefix: '★ ', suffix: ' ★', name: 'Star Accent' },
+  { prefix: '  ▂ ▃ ▅ ▆ ▇ █ ', suffix: ' █ ▇ ▆ ▅ ▃ ▂  ', name: 'Bars Wave' },
+  { prefix: '☠️ ', suffix: ' ☠️', name: 'Skull Danger' },
 ];
 
 const FLIPPED_MAP: Record<string, string> = {
@@ -77,19 +104,29 @@ const FLIPPED_MAP: Record<string, string> = {
   '.': '˙', ',': '`', '\'': ',', '"': '„', '?': '¿', '!': '¡', '(': ')', ')': '(', '[': ']', ']': '[', '{': '}', '}': '{', '<': '>', '>': '<', '_': '‾',
 };
 
+interface OutputItem {
+  name: string;
+  text: string;
+  category: 'font' | 'decoration' | 'special';
+}
+
 export default function StylishText() {
   const [inputText, setInputText] = useState('');
-  const [outputs, setOutputs] = useState<{ name: string; text: string }[]>([]);
+  const [outputs, setOutputs] = useState<OutputItem[]>([]);
+  const [activeTab, setActiveTab] = useState<'all' | 'fonts' | 'decorations' | 'special'>('all');
 
   useEffect(() => {
-    if (!inputText) {
+    if (!inputText.trim()) {
       setOutputs([]);
       return;
     }
 
-    const styledList = STYLES.map((style) => {
+    const list: OutputItem[] = [];
+
+    // Helper function to map text to font
+    const applyFont = (text: string, style: typeof FONT_PRESETS[0]) => {
       let result = '';
-      for (const char of inputText) {
+      for (const char of text) {
         let idx = NORMAL_LOWER.indexOf(char);
         if (idx !== -1) {
           result += style.lower[idx] || char;
@@ -110,33 +147,79 @@ export default function StylishText() {
 
         result += char;
       }
-      return { name: style.name, text: result };
+      return result;
+    };
+
+    // 1. Cool Fonts
+    FONT_PRESETS.forEach((preset) => {
+      list.push({
+        name: preset.name,
+        text: applyFont(inputText, preset),
+        category: 'font',
+      });
     });
 
-    // Add Strikethrough
+    // 2. Decorated styles (Mix some presets with fancy fonts like Script/Bold script/Gothic)
+    const scriptStyle = FONT_PRESETS.find((f) => f.name === 'Bold Script') || FONT_PRESETS[4];
+    const doubleStruckStyle = FONT_PRESETS.find((f) => f.name === 'Double-Struck (Outline)') || FONT_PRESETS[7];
+    const normalFormatted = inputText;
+
+    DECORATOR_PRESETS.forEach((decor, idx) => {
+      // Pick dynamic font mixes for variety
+      let baseText = normalFormatted;
+      if (idx % 3 === 0) {
+        baseText = applyFont(inputText, scriptStyle);
+      } else if (idx % 3 === 1) {
+        baseText = applyFont(inputText, doubleStruckStyle);
+      }
+
+      list.push({
+        name: decor.name,
+        text: decor.prefix + baseText + decor.suffix,
+        category: 'decoration',
+      });
+    });
+
+    // 3. Special effects
+    // Strikethrough
     const strikethroughText = inputText
       .split('')
       .map((char) => char + '\u0336')
       .join('');
-    styledList.push({ name: 'Strikethrough', text: strikethroughText });
+    list.push({ name: 'Strikethrough', text: strikethroughText, category: 'special' });
 
-    // Add Underline
+    // Underline
     const underlineText = inputText
       .split('')
       .map((char) => char + '\u0332')
       .join('');
-    styledList.push({ name: 'Underline', text: underlineText });
+    list.push({ name: 'Underline', text: underlineText, category: 'special' });
 
-    // Add Upside Down
-    const upsideDownText = inputText
+    // Upside Down Flipped
+    const flippedText = inputText
       .split('')
       .map((char) => FLIPPED_MAP[char] || char)
       .reverse()
       .join('');
-    styledList.push({ name: 'Upside Down', text: upsideDownText });
+    list.push({ name: 'Upside Down', text: flippedText, category: 'special' });
 
-    setOutputs(styledList);
+    // Zalgo / Glitch
+    const glitchText = inputText
+      .split('')
+      .map((char) => char + (Math.random() > 0.6 ? '\u030d\u031a\u033d' : ''))
+      .join('');
+    list.push({ name: 'Glitch Text', text: glitchText, category: 'special' });
+
+    setOutputs(list);
   }, [inputText]);
+
+  const filteredOutputs = outputs.filter((item) => {
+    if (activeTab === 'all') return true;
+    if (activeTab === 'fonts') return item.category === 'font';
+    if (activeTab === 'decorations') return item.category === 'decoration';
+    if (activeTab === 'special') return item.category === 'special';
+    return true;
+  });
 
   return (
     <ToolPageWrapper toolId="stylish-text">
@@ -144,7 +227,7 @@ export default function StylishText() {
         <Textarea
           label={
             <div className="flex items-center justify-between w-full">
-              <span>Enter Text</span>
+              <span>Input Plain Text</span>
               {inputText && (
                 <Button onClick={() => setInputText('')} variant="ghost" size="xs">
                   Clear
@@ -154,31 +237,56 @@ export default function StylishText() {
           }
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
-          placeholder="Type something here to see stylish versions..."
-          className="h-[100px] resize-none"
+          placeholder="Type or paste the text you want to decorate here..."
+          className="h-[120px] resize-none text-base"
         />
 
-        {outputs.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-            {outputs.map((out) => (
+        {/* Tab Filters */}
+        <div className="flex flex-wrap gap-2 border-b border-[var(--border-default)] pb-3">
+          {(['all', 'fonts', 'decorations', 'special'] as const).map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
+                activeTab === tab
+                  ? 'bg-[var(--primary)] text-white shadow-sm'
+                  : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] border border-[var(--border-default)] hover:bg-[var(--bg-elevated)]'
+              }`}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+
+        {/* Output list */}
+        {filteredOutputs.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {filteredOutputs.map((item, idx) => (
               <div
-                key={out.name}
-                className="p-4 rounded-xl border border-[var(--border-default)] bg-[var(--bg-elevated)] flex flex-col justify-between gap-3 shadow-sm hover:shadow-md transition-shadow"
+                key={`${item.name}-${idx}`}
+                className="p-5 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-elevated)] hover:border-[var(--primary)] hover:shadow-md transition-all flex flex-col justify-between gap-4 group relative"
               >
                 <div>
-                  <span className="text-xs font-semibold text-[var(--text-tertiary)] uppercase tracking-wider block mb-1">
-                    {out.name}
+                  <span className="text-[10px] font-bold text-[var(--text-tertiary)] uppercase tracking-widest block mb-1">
+                    {item.name}
                   </span>
-                  <p className="text-lg font-medium text-[var(--text-primary)] select-all break-words leading-normal">
-                    {out.text}
+                  <p className="text-xl font-medium text-[var(--text-primary)] select-all break-words leading-relaxed">
+                    {item.text}
                   </p>
                 </div>
-                <div className="flex justify-end">
-                  <CopyButton text={out.text} />
+                <div className="flex justify-end pt-2 border-t border-[var(--border-subtle)]">
+                  <CopyButton text={item.text} />
                 </div>
               </div>
             ))}
           </div>
+        ) : (
+          inputText && (
+            <div className="text-center py-12">
+              <span className="text-4xl block mb-2">💡</span>
+              <p className="text-sm font-semibold text-[var(--text-secondary)]">No fonts match the selected filter</p>
+            </div>
+          )
         )}
       </div>
     </ToolPageWrapper>
