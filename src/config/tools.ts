@@ -1243,9 +1243,243 @@ export const TOOLS: ToolConfig[] = [
       { name: 'Choose Skin Tone', text: 'If desired, select your preferred skin tone from the option bar.' },
       { name: 'Click to Copy', text: 'Click on any emoji card to copy it directly to your clipboard.' }
     ],
+  },
+  {
+    id: 'pdf-to-markdown',
+    name: 'PDF to Markdown',
+    description: 'Convert PDF document text to clean Markdown formatting',
+    longDescription: 'Extract text blocks, headings, lists, and links from PDF files client-side and convert them into clean Markdown formatting (.md) without uploading your files to any server.',
+    module: 'text',
+    slug: '/text/pdf-to-markdown',
+    icon: 'DocumentTextIcon',
+    tags: ['pdf to markdown', 'pdf converter', 'markdown parser', 'pdf extractor'],
+    metaTitle: 'PDF to Markdown Converter - Extract PDF to MD Online | Toolskyt',
+    metaDescription:
+      'Free client-side PDF to Markdown converter. Upload any PDF file and convert headings, paragraph text, lists, and quotes into Markdown.',
+    keywords: ['pdf to markdown', 'convert pdf to md', 'pdf markdown extractor', 'pdf to md free'],
+    relatedTools: ['markdown-editor', 'word-counter'],
+    benefits: [
+      '100% private: processing is done entirely inside your browser.',
+      'Instantly formats headings, paragraphs, and list elements.',
+      'Supports dragging and dropping documents directly.'
+    ],
+    features: [
+      'Automatic paragraph and header layout detection.',
+      'Plain text and styled markdown output modes.',
+      'Drag and drop file picker interface.'
+    ],
+    howToSteps: [
+      { name: 'Upload PDF Document', text: 'Select or drag your PDF file into the upload zone.' },
+      { name: 'Extract Text', text: 'Wait a few milliseconds for local browser extraction to compile.' },
+      { name: 'Copy Markdown', text: 'Review the formatted Markdown and click Copy to Clipboard.' }
+    ],
     faq: [
-      { question: 'How do I copy an emoji?', answer: 'Simply click or tap on any emoji in the grid. A copy-success toast notification will confirm it is in your clipboard.' },
-      { question: 'Are skin tone selections saved?', answer: 'Yes, your active skin-tone modifier is cached so you do not have to select it repeatedly.' }
+      { question: 'Is my PDF uploaded to any server?', answer: 'No! The conversion runs completely client-side. Your document text never leaves your device.' },
+      { question: 'Does it support scanned images?', answer: 'This tool extracts text characters. It does not perform OCR on scanned text inside images.' }
+    ]
+  },
+  {
+    id: 'numbers-to-words',
+    name: 'Numbers to Words Converter',
+    description: 'Convert numbers to English words and Chinese characters',
+    longDescription: 'Convert any numeric value into standard written English text words and Chinese characters (simplified/traditional) with Pinyin transliteration.',
+    module: 'text',
+    slug: '/text/numbers-to-words',
+    icon: 'LanguageIcon',
+    tags: ['numbers to words', 'number spelling', 'chinese numbers', 'pinyin converter'],
+    metaTitle: 'Numbers to Words - English & Chinese Number Translator | Toolskyt',
+    metaDescription:
+      'Translate digits, decimals, and negative numbers into written words. Supports standard English spelling and Chinese Hanzi/Pinyin.',
+    keywords: ['numbers to words', 'spell out numbers', 'number to words generator', 'numbers to chinese'],
+    relatedTools: ['random-number', 'case-converter'],
+    benefits: [
+      'Write checks or fill bank forms without spelling errors.',
+      'Learn standard numbering terminology in English and Chinese.',
+      'Convert very large integer values instantly.'
+    ],
+    features: [
+      'Supports English cardinality (spelled words) spelling formats.',
+      'Converts to Simplified Chinese (Hanzi) and Traditional Chinese character sets.',
+      'Includes Pinyin pronunciation guide for Chinese equivalents.'
+    ],
+    howToSteps: [
+      { name: 'Enter Numeric Input', text: 'Type any numeric value (integer or decimal).' },
+      { name: 'Select Target Language', text: 'Toggle between English Words mode or Chinese Characters mode.' },
+      { name: 'Copy Output Words', text: 'Tap Copy to collect the written description.' }
+    ],
+    faq: [
+      { question: 'What is the limit of the numbers converted?', answer: 'The tool supports integers up to 15 digits (trillions) with full decimal accuracy.' },
+      { question: 'What is Pinyin?', answer: 'Pinyin is the official romanization system for Chinese characters, helping you read the characters correctly.' }
+    ]
+  },
+  {
+    id: 'detect-language',
+    name: 'Detect Language',
+    description: 'Identify the language of any text block instantly',
+    longDescription: 'Analyze any input string and automatically detect which language it belongs to. Supports detection of English, Chinese, Spanish, French, German, Arabic, Japanese, Hindi, and more.',
+    module: 'text',
+    slug: '/text/detect-language',
+    icon: 'QuestionMarkCircleIcon',
+    tags: ['language detector', 'detect language', 'identify text', 'language finder'],
+    metaTitle: 'Detect Language - Identify Text Language Online | Toolskyt',
+    metaDescription:
+      'Identify language of text blocks instantly. Clean client-side analysis supporting Spanish, English, French, and 15+ popular dialects.',
+    keywords: ['language detector', 'identify language of text', 'what language is this', 'detect language online'],
+    relatedTools: ['case-converter', 'word-counter'],
+    benefits: [
+      'Quickly classify unknown text or code snippets.',
+      'Perform language detection completely offline in the browser.',
+      'Displays matching confidence level metrics.'
+    ],
+    features: [
+      'Stop-words statistical matching dictionary.',
+      'Unicode script block mapping to separate Asian character languages.',
+      'High-speed detection running in milliseconds.'
+    ],
+    howToSteps: [
+      { name: 'Enter Text Block', text: 'Type or paste the words you want to check.' },
+      { name: 'View Match Result', text: 'The detector displays the identified language and confidence level.' },
+      { name: 'Copy Code', text: 'Copy the standard ISO code (e.g. "en", "zh", "es") if needed.' }
+    ],
+    faq: [
+      { question: 'How accurate is the detection?', answer: 'Accuracy is very high for blocks of 3 or more words, as the stop-words algorithm works best with sentence segments.' },
+      { question: 'Does it support code scripts?', answer: 'It is optimized for human spoken languages and will try to map text segments accordingly.' }
+    ]
+  },
+  {
+    id: 'remove-spaces',
+    name: 'Remove Spaces & Clean Text',
+    description: 'Remove double spaces, tabs, and excess line breaks',
+    longDescription: 'Clean up text strings by formatting spaces, removing redundant blank lines, deleting trailing whitespace, or collapsing all whitespace into a single space.',
+    module: 'text',
+    slug: '/text/remove-spaces',
+    icon: 'ScissorsIcon',
+    tags: ['remove spaces', 'clean whitespace', 'collapse spacing', 'format text spacing'],
+    metaTitle: 'Remove Spaces & Clean Text - Trim Whitespace Online | Toolskyt',
+    metaDescription:
+      'Remove excess spacing, tabs, line breaks and trailing spaces from text blocks online in one click.',
+    keywords: ['remove spaces', 'trim whitespace', 'collapse multiple spaces', 'strip spacing from text'],
+    relatedTools: ['case-converter', 'word-counter'],
+    benefits: [
+      'Clean raw text blocks copied from PDFs or formatting sources.',
+      'Compress and sanitize strings before pasting into code structures.',
+      'Quickly strip tabs or newlines for single-line usage.'
+    ],
+    features: [
+      'Collapse multiple consecutive spaces into a single space.',
+      'Strip all newlines, tab chars, or trailing spaces.',
+      'Pre-built utility macros for single-click cleanups.'
+    ],
+    howToSteps: [
+      { name: 'Paste Text Input', text: 'Enter the messy text segment with excess spacing.' },
+      { name: 'Select Spacing Rule', text: 'Choose either Collapse spaces, Remove newlines, or Strip all spaces.' },
+      { name: 'Copy Cleaned Output', text: 'Tap Copy to clipboard.' }
+    ],
+    faq: [
+      { question: 'Can this remove blank lines?', answer: 'Yes! The Collapse Lines mode removes empty paragraphs and consecutive carriage returns.' },
+      { question: 'Is there a limit on input length?', answer: 'No. The utility is extremely fast and can handle large text documents easily.' }
+    ]
+  },
+  {
+    id: 'read-math-expressions',
+    name: 'Read Math Expressions',
+    description: 'Convert mathematical equations into English words',
+    longDescription: 'Translate equations, arithmetic expressions, and algebra formulas (like 3 + 4 * 2 = 11) into written English words ("three plus four multiplied by two equals eleven").',
+    module: 'text',
+    slug: '/text/read-math-expressions',
+    icon: 'CommandLineIcon',
+    tags: ['math to words', 'read equations', 'pronounce math', 'equation generator'],
+    metaTitle: 'Read Math Expressions - Math to Words Converter | Toolskyt',
+    metaDescription:
+      'Convert math formulas and expressions into plain english words online. Read mathematical expressions.',
+    keywords: ['read math expressions', 'math equation to words', 'spelled equations', 'math text converter'],
+    relatedTools: ['numbers-to-words', 'scientific-calculator'],
+    benefits: [
+      'Help screen readers and accessibility tools pronounce equations.',
+      'Verify written descriptions of algebraic formulas.',
+      'Learn standard vocalizations of advanced operators.'
+    ],
+    features: [
+      'Supports basic arithmetic operators (+, -, *, /, =).',
+      'Supports brackets, exponent power bases, and negative values.',
+      'One-click translation and copy output.'
+    ],
+    howToSteps: [
+      { name: 'Enter Equation', text: 'Type a formula such as "5 * (2 + 3) = 25".' },
+      { name: 'Convert to Text', text: 'The expression translates into words automatically.' },
+      { name: 'Copy or Speak', text: 'Copy the words text or listen to it.' }
+    ],
+    faq: [
+      { question: 'What operators are supported?', answer: 'Basic operators like addition (+), subtraction (-), multiplication (*), division (/), exponents (^), brackets, and equal signs (=).' },
+      { question: 'Does it translate to Chinese?', answer: 'Currently, the mathematical operator descriptions are generated in English.' }
+    ]
+  },
+  {
+    id: 'date-converter',
+    name: 'Multilingual Date Converter',
+    description: 'Convert and format dates across calendars and languages',
+    longDescription: 'Convert dates between Gregorian, Hijri (Islamic), and Solar calendars. Formats dates in multiple languages: English, Chinese, Spanish, French, and Arabic.',
+    module: 'text',
+    slug: '/text/date-converter',
+    icon: 'CalendarIcon',
+    tags: ['date converter', 'calendar formatting', 'hijri gregorian', 'multilingual dates'],
+    metaTitle: 'Multilingual Date Converter - Calendar Formatting | Toolskyt',
+    metaDescription:
+      'Convert dates between Gregorian, Hijri, and Solar calendars. Spell out date names in multiple languages.',
+    keywords: ['date converter', 'hijri to gregorian', 'multilingual dates', 'calendar converter'],
+    relatedTools: ['date-difference', 'timezone-converter'],
+    benefits: [
+      'Quickly calculate corresponding Hijri dates for Gregorian formats.',
+      'Generate localized date strings for documents and translation.',
+      'Accurate timezone and calendar offsets.'
+    ],
+    features: [
+      'Bi-directional Hijri to Gregorian calculator converter.',
+      'Localization options for date spelling in 5+ global languages.',
+      'Single-click copy formatted outputs.'
+    ],
+    howToSteps: [
+      { name: 'Select Input Date', text: 'Pick a calendar type and choose a date.' },
+      { name: 'Configure Translation', text: 'Choose the destination language and format style.' },
+      { name: 'Copy Localized Date', text: 'Collect the translated date string.' }
+    ],
+    faq: [
+      { question: 'How is the Hijri calendar computed?', answer: 'It uses the standard arithmetic Tabular Islamic Calendar algorithm to calculate offsets.' },
+      { question: 'Is current time synced?', answer: 'Yes! The default inputs are initialized to your local device date.' }
+    ]
+  },
+  {
+    id: 'dictionary',
+    name: 'Dictionary & Word Search',
+    description: 'Lookup definitions, synonyms, and phonetics online',
+    longDescription: 'A complete English dictionary lookup tool. Search definitions, part-of-speech listings, pronunciation phonetics, audio, and example sentences.',
+    module: 'text',
+    slug: '/text/dictionary',
+    icon: 'BookOpenIcon',
+    tags: ['dictionary', 'word lookup', 'synonyms', 'phonetic search'],
+    metaTitle: 'Dictionary & Word Search - Free Word Lookup Online | Toolskyt',
+    metaDescription:
+      'Search english word definitions, synonyms, audio pronunciations and examples with the free online dictionary.',
+    keywords: ['online dictionary', 'word lookup tool', 'synonyms list', 'define words'],
+    relatedTools: ['word-counter', 'case-converter'],
+    benefits: [
+      'Lookup definitions instantly as you type.',
+      'Listen to standard audio phonetic pronunciations.',
+      'Expand vocabulary with synonyms and parts of speech.'
+    ],
+    features: [
+      'Real-time definition lookups using public API endpoints.',
+      'Audio pronunciation tags for words.',
+      'Alternative synonym mappings.'
+    ],
+    howToSteps: [
+      { name: 'Search Word', text: 'Type the english word you wish to define.' },
+      { name: 'Browse Listings', text: 'Review the definitions, parts of speech, and usage examples.' },
+      { name: 'Listen to Phonetics', text: 'Click the audio icon to hear pronunciation.' }
+    ],
+    faq: [
+      { question: 'Is an active internet connection required?', answer: 'Yes, because definitions are requested in real-time from the public dictionary database.' },
+      { question: 'Does it support languages other than English?', answer: 'Currently, the search mappings are optimized for English definitions.' }
     ]
   },
 

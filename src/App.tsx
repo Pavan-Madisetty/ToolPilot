@@ -123,6 +123,13 @@ const SlugGenerator = lazy(() => import('@/pages/tools/text/SlugGenerator'));
 const TextToEmoji = lazy(() => import('@/pages/tools/text/TextToEmoji'));
 const StylishText = lazy(() => import('@/pages/tools/text/StylishText'));
 const EmojiSearch = lazy(() => import('@/pages/tools/text/EmojiSearch'));
+const PdfToMarkdown = lazy(() => import('@/pages/tools/text/PdfToMarkdown'));
+const NumbersToWords = lazy(() => import('@/pages/tools/text/NumbersToWords'));
+const DetectLanguage = lazy(() => import('@/pages/tools/text/DetectLanguage'));
+const RemoveSpaces = lazy(() => import('@/pages/tools/text/RemoveSpaces'));
+const ReadMathExpressions = lazy(() => import('@/pages/tools/text/ReadMathExpressions'));
+const DateConverter = lazy(() => import('@/pages/tools/text/DateConverter'));
+const Dictionary = lazy(() => import('@/pages/tools/text/Dictionary'));
 
 // AI Tools
 const PromptBuilder = lazy(() => import('@/pages/tools/ai/PromptBuilder'));
@@ -854,6 +861,62 @@ export default function App() {
                 element={
                   <Suspense fallback={<PageLoader />}>
                     <EmojiSearch />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="text/pdf-to-markdown"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <PdfToMarkdown />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="text/numbers-to-words"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <NumbersToWords />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="text/detect-language"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <DetectLanguage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="text/remove-spaces"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <RemoveSpaces />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="text/read-math-expressions"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <ReadMathExpressions />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="text/date-converter"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <DateConverter />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="text/dictionary"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <Dictionary />
                   </Suspense>
                 }
               />
