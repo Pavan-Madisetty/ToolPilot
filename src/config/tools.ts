@@ -13,6 +13,7 @@ export const TOOLS: ToolConfig[] = [
     id: 'emi-calculator',
     name: 'EMI Calculator',
     description: 'Calculate your monthly loan EMI with amortization schedule',
+    longDescription: 'Calculate your Equated Monthly Installment (EMI) for various types of loans including home loans, car loans, and personal loans. Toolskyt provides detailed amortization schedules, breakdown charts, and repayment statistics completely offline, ensuring your calculations remain private.',
     module: 'finance',
     slug: '/finance/emi-calculator',
     icon: 'CurrencyRupeeIcon',
@@ -29,6 +30,26 @@ export const TOOLS: ToolConfig[] = [
       'loan-eligibility-calculator',
       'compound-interest-calculator',
     ],
+    benefits: [
+      'Calculate payments instantly to budget your finance schedules.',
+      'Examine amortization breakdowns to understand compound interest.',
+      'Adjust loan duration and interest variables on the fly.'
+    ],
+    features: [
+      'Supports home loan, personal loan, and car loan calculations.',
+      'Generates interactive principal vs. interest repayment ratios.',
+      'Calculates total payable interest and absolute repayments.'
+    ],
+    howToSteps: [
+      { name: 'Enter Loan Principal', text: 'Specify the total loan amount you intend to borrow.' },
+      { name: 'Set Interest Rate', text: 'Enter the annual interest rate offered by your bank.' },
+      { name: 'Specify Tenure', text: 'Specify the loan repayment period in years or months.' },
+      { name: 'Analyze Breakdown', text: 'Review the monthly EMI payment break-up and tables.' }
+    ],
+    faq: [
+      { question: 'What is an EMI?', answer: 'EMI stands for Equated Monthly Installment. It represents the fixed payment made by a borrower to a lender every month.' },
+      { question: 'Is my financial data secure?', answer: 'Yes! Toolskyt performs all calculations locally in your browser. We never track, upload, or collect your financial parameters.' }
+    ]
   },
   {
     id: 'home-loan-calculator',
@@ -558,6 +579,7 @@ export const TOOLS: ToolConfig[] = [
     id: 'json-formatter',
     name: 'JSON Formatter & Validator',
     description: 'Format, validate, and beautify JSON with syntax highlighting',
+    longDescription: 'Toolskyt JSON Formatter & Validator helps you clean, pretty-print, parse, and analyze raw JSON strings. It detects syntax errors in real-time, displays precise line numbers for issues, and outputs structured, readable JSON complete with code highlighting.',
     module: 'developer',
     slug: '/developer/json-formatter',
     icon: 'CodeBracketIcon',
@@ -569,11 +591,32 @@ export const TOOLS: ToolConfig[] = [
       'Free JSON formatter and validator. Beautify, minify, validate and fix JSON. Syntax highlighting with error detection.',
     keywords: ['json formatter', 'json validator', 'json beautifier', 'format json online'],
     relatedTools: ['json-diff', 'json-to-csv', 'csv-to-json', 'yaml-formatter'],
+    benefits: [
+      'Instantly beautify raw compressed API responses into readable structures.',
+      'Detect syntax errors and identify line numbers for key fixes.',
+      'Save time when debugging nested JSON configurations.'
+    ],
+    features: [
+      'Interactive syntax highlighting with support for dark/light themes.',
+      'One-click minification and copying controls.',
+      'Validates conformance to RFC 8259 JSON standards.'
+    ],
+    howToSteps: [
+      { name: 'Paste JSON Code', text: 'Paste your raw or minified JSON string into the editor.' },
+      { name: 'Click Format', text: 'The tool will automatically parse and pretty-print the data.' },
+      { name: 'Check Validation Errors', text: 'If there are formatting errors, the validator will mark them.' },
+      { name: 'Copy or Minify', text: 'Copy the beautified result or minify it back into a single string.' }
+    ],
+    faq: [
+      { question: 'Does this formatter upload my JSON data?', answer: 'Never. Your data is formatted entirely inside your browser tab using client-side JavaScript.' },
+      { question: 'What standard does the validator use?', answer: 'It conforms to strict RFC 8259 specifications, identifying invalid commas, trailing commas, or missing quotes.' }
+    ]
   },
   {
     id: 'base64',
     name: 'Base64 Encoder / Decoder',
     description: 'Encode and decode Base64 strings and files',
+    longDescription: 'Quickly convert text strings or binary files to and from Base64 representation. This utility is ideal for developers encoding credentials, embedding image assets in stylesheets, or translating web tokens safely.',
     module: 'developer',
     slug: '/developer/base64',
     icon: 'ArrowsRightLeftIcon',
@@ -584,6 +627,25 @@ export const TOOLS: ToolConfig[] = [
       'Free Base64 encoder and decoder. Convert text and files to/from Base64 encoding instantly.',
     keywords: ['base64 encoder', 'base64 decoder', 'base64 online', 'encode decode base64'],
     relatedTools: ['url-encoder', 'hash-generator', 'jwt-decoder'],
+    benefits: [
+      'Secure offline encoding prevents credentials exposure.',
+      'Supports file conversion to Base64 data URIs.',
+      'Accurate conversion conforming to RFC 4648 standards.'
+    ],
+    features: [
+      'Dual-input interface supporting instant text conversions.',
+      'Drag and drop files to generate inline Base64 data hashes.',
+      'One-click copying and query clearing triggers.'
+    ],
+    howToSteps: [
+      { name: 'Paste Target Text', text: 'Paste the string or upload the file you wish to convert.' },
+      { name: 'Select Action', text: 'Choose to either Encode or Decode the input data.' },
+      { name: 'Copy Result', text: 'Collect the output stream immediately from the output display panel.' }
+    ],
+    faq: [
+      { question: 'What is Base64?', answer: 'Base64 is a binary-to-text encoding scheme that translates binary data into a set of 64 ASCII characters.' },
+      { question: 'Are files sent to external servers?', answer: 'No. File processing and encoding occur strictly within your local browser cache.' }
+    ]
   },
   {
     id: 'url-encoder',
@@ -604,6 +666,7 @@ export const TOOLS: ToolConfig[] = [
     id: 'jwt-decoder',
     name: 'JWT Decoder & Inspector',
     description: 'Decode and inspect JWT tokens with claims validation',
+    longDescription: 'Toolskyt JWT Decoder & Inspector lets you safely decode JSON Web Tokens (JWT) locally to view the header metadata, payload JSON, and signatures. It parses claims, checks validation variables, and reports token expiration states.',
     module: 'developer',
     slug: '/developer/jwt-decoder',
     icon: 'ShieldCheckIcon',
@@ -614,11 +677,31 @@ export const TOOLS: ToolConfig[] = [
       'Free JWT decoder. Inspect header, payload and verify JWT token structure. View claims and expiry.',
     keywords: ['jwt decoder', 'json web token decoder', 'jwt inspector', 'decode jwt'],
     relatedTools: ['base64', 'hash-generator'],
+    benefits: [
+      'Inspect authorization payloads without exposing credentials.',
+      'Verify expiration timestamps and signature methods.',
+      'Format nested headers and parameters cleanly.'
+    ],
+    features: [
+      'Interactive syntax highlighting for decoded token payloads.',
+      'Real-time expiration countdown and claims indicators.',
+      'Full validation reports on standard claims (iss, sub, exp).'
+    ],
+    howToSteps: [
+      { name: 'Paste JWT Token', text: 'Paste your encoded JSON Web Token (typically beginning with eyJ).' },
+      { name: 'Inspect Payload', text: 'Review the formatted JSON output showing header metadata and payload data.' },
+      { name: 'Check Expiration', text: 'View active claims validation and token expiry state.' }
+    ],
+    faq: [
+      { question: 'Is it safe to decode secret keys online?', answer: 'With Toolskyt, it is 100% safe. All token decoding occurs client-side in your tab; we never log or inspect tokens.' },
+      { question: 'Can I verify the signature?', answer: 'Yes, our inspector validates structure signatures and validates signatures algorithm parameters.' }
+    ]
   },
   {
     id: 'uuid-generator',
     name: 'UUID Generator',
     description: 'Generate UUIDs (v1, v4, v5) individually or in bulk',
+    longDescription: 'Generate universally unique identifiers (UUIDs) locally. Toolskyt supports v1 (timestamp-based), v4 (fully random), and v5 (namespace SHA-1) configurations. Ideal for generating test keys, database IDs, and software identifiers.',
     module: 'developer',
     slug: '/developer/uuid-generator',
     icon: 'FingerPrintIcon',
@@ -629,6 +712,26 @@ export const TOOLS: ToolConfig[] = [
       'Generate UUID v1, v4, v5 instantly. Bulk generate multiple UUIDs. Copy with one click.',
     keywords: ['uuid generator', 'guid generator', 'random uuid', 'generate uuid online'],
     relatedTools: ['hash-generator', 'password-generator'],
+    benefits: [
+      'Generate up to 10,000 UUIDs instantly in bulk.',
+      'Supports RFC 4122 compliance for v1, v4, and v5 standards.',
+      'Fully offline generation guarantees no ID logging.'
+    ],
+    features: [
+      'Adjust counts to generate multiple GUIDs in a single click.',
+      'Customize layouts (hyphens, uppercase, or raw text blocks).',
+      'Download UUID lists as plain text files.'
+    ],
+    howToSteps: [
+      { name: 'Choose UUID Version', text: 'Select v1, v4, or v5 based on your identifier requirements.' },
+      { name: 'Select Quantity', text: 'Specify how many UUIDs you need to generate (e.g. 1 to 1000).' },
+      { name: 'Click Generate', text: 'The UUIDs will be generated instantly in the text panel.' },
+      { name: 'Copy or Save', text: 'Copy the list or download it directly to your system.' }
+    ],
+    faq: [
+      { question: 'What is a UUID?', answer: 'A Universally Unique Identifier (UUID) is a 128-bit label used for information identification in computer systems.' },
+      { question: 'Is a v4 UUID truly random?', answer: 'Yes, v4 UUIDs rely on cryptographically secure pseudorandom numbers to ensure collision-free keys.' }
+    ]
   },
   {
     id: 'hash-generator',
