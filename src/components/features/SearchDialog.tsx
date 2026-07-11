@@ -151,7 +151,7 @@ export function SearchDialog() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-slate-900/40 dark:bg-slate-950/60 backdrop-blur-sm"
+            className="fixed inset-0 bg-bg-overlay backdrop-blur-sm"
             onClick={() => setIsOpen(false)}
           />
 
@@ -162,29 +162,28 @@ export function SearchDialog() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.97, y: -8 }}
             transition={{ duration: 0.15, ease: 'easeOut' }}
-            className="w-full max-w-xl overflow-hidden rounded-2xl shadow-2xl relative z-10 flex flex-col max-h-[70vh]"
-            style={{
-              background: 'var(--bg-elevated)',
-            }}
+            className="w-full max-w-xl overflow-hidden rounded-2xl shadow-2xl relative z-10 flex flex-col max-h-[70vh] bg-bg-elevated border border-border-default"
             role="dialog"
             aria-modal="true"
             aria-label="Search tools"
           >
             {/* Search Input Box */}
             <div
-              className="flex items-center gap-3 px-4 py-3.5 border-b transition-colors duration-200"
-              style={{
-                borderColor: isFocused ? 'var(--border-focus)' : 'var(--border-default)',
-              }}
+              className={clsx(
+                'flex items-center gap-3 px-4 py-3.5 border-b transition-colors duration-200',
+                isFocused ? 'border-border-focus' : 'border-border-default'
+              )}
             >
               {isPending ? (
                 <div className="w-5 h-5 shrink-0 flex items-center justify-center">
-                  <div className="w-4 h-4 border-2 border-t-transparent border-[var(--text-link)] rounded-full animate-spin" />
+                  <div className="w-4 h-4 border-2 border-t-transparent border-primary rounded-full animate-spin" />
                 </div>
               ) : (
                 <Search
-                  className="w-5 h-5 shrink-0 transition-colors"
-                  style={{ color: isFocused ? 'var(--text-link)' : 'var(--text-tertiary)' }}
+                  className={clsx(
+                    'w-5 h-5 shrink-0 transition-colors',
+                    isFocused ? 'text-primary' : 'text-text-tertiary'
+                  )}
                 />
               )}
               <input
@@ -195,8 +194,7 @@ export function SearchDialog() {
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
                 placeholder="Search tools by name, tag, category..."
-                className="flex-1 bg-transparent border-none outline-none text-sm font-medium"
-                style={{ color: 'var(--text-primary)' }}
+                className="flex-1 bg-transparent border-none outline-none text-sm font-medium text-text-primary"
                 aria-label="Search inputs"
               />
               {query && (
@@ -217,14 +215,13 @@ export function SearchDialog() {
                   {recentSearches.length > 0 ? (
                     <div>
                       <div className="flex items-center justify-between px-3 py-1.5 mb-1.5">
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--text-tertiary)] flex items-center gap-1.5">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-text-tertiary flex items-center gap-1.5">
                           <Clock className="w-3.5 h-3.5" />
                           Recent Searches
                         </span>
                         <button
                           onClick={clearRecentSearches}
-                          className="text-[10px] font-semibold hover:text-[var(--text-link)] transition-colors"
-                          style={{ color: 'var(--text-tertiary)' }}
+                          className="text-[10px] font-semibold text-text-tertiary hover:text-primary transition-colors"
                         >
                           Clear
                         </button>
@@ -234,10 +231,9 @@ export function SearchDialog() {
                           <button
                             key={term}
                             onClick={() => handleInputChange(term)}
-                            className="w-full flex items-center gap-2.5 px-3 py-2 text-xs text-left rounded-lg hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors"
-                            style={{ color: 'var(--text-secondary)' }}
+                            className="w-full flex items-center gap-2.5 px-3 py-2 text-xs text-left rounded-lg hover:bg-bg-surface text-text-secondary transition-colors"
                           >
-                            <Clock className="w-3.5 h-3.5 text-slate-400" />
+                            <Clock className="w-3.5 h-3.5 text-text-tertiary" />
                             <span>{term}</span>
                           </button>
                         ))}
@@ -245,13 +241,10 @@ export function SearchDialog() {
                     </div>
                   ) : (
                     <div className="py-8 px-4 text-center">
-                      <p
-                        className="text-sm font-semibold mb-1"
-                        style={{ color: 'var(--text-secondary)' }}
-                      >
+                      <p className="text-sm font-semibold mb-1 text-text-secondary">
                         Type at least 2 characters to search
                       </p>
-                      <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
+                      <p className="text-xs text-text-tertiary">
                         Try searching "EMI", "JSON", "Base64", "Word Counter"
                       </p>
                     </div>
@@ -259,13 +252,10 @@ export function SearchDialog() {
                 </div>
               ) : visibleResults.length === 0 ? (
                 <div className="py-10 px-4 text-center">
-                  <p
-                    className="text-sm font-semibold mb-1"
-                    style={{ color: 'var(--text-secondary)' }}
-                  >
+                  <p className="text-sm font-semibold mb-1 text-text-secondary">
                     No tools found matching "{query}"
                   </p>
-                  <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
+                  <p className="text-xs text-text-tertiary">
                     Check your spelling or try search terms.
                   </p>
                 </div>
@@ -279,17 +269,11 @@ export function SearchDialog() {
                         <button
                           onClick={() => handleResultSelect(tool.slug, tool.name)}
                           className={clsx(
-                            'w-full flex items-center justify-between text-left px-4 py-3 rounded-xl transition-all duration-150',
+                            'w-full flex items-center justify-between text-left py-3 rounded-xl transition-all duration-150 border-l-[3px]',
                             isSelected
-                              ? 'bg-[rgba(79,70,229,0.08)] dark:bg-[rgba(139,92,246,0.1)] text-[var(--text-link)]'
-                              : 'hover:bg-slate-50 dark:hover:bg-slate-900'
+                              ? 'bg-primary-subtle text-primary border-primary pl-[13px] pr-4'
+                              : 'hover:bg-bg-surface text-text-primary border-transparent pl-4 pr-4'
                           )}
-                          style={{
-                            borderLeft: isSelected
-                              ? '3px solid var(--text-link)'
-                              : '3px solid transparent',
-                            paddingLeft: isSelected ? '13px' : '16px',
-                          }}
                         >
                           <div className="flex items-center gap-3">
                             <span className="text-lg shrink-0" aria-hidden="true">
@@ -297,20 +281,20 @@ export function SearchDialog() {
                             </span>
                             <div>
                               <p
-                                className="text-sm font-semibold"
-                                style={{
-                                  color: isSelected ? 'var(--text-link)' : 'var(--text-primary)',
-                                }}
+                                className={clsx(
+                                  'text-sm font-semibold',
+                                  isSelected ? 'text-primary' : 'text-text-primary'
+                                )}
                               >
                                 {tool.name}
                               </p>
-                              <p className="text-xs truncate max-w-[280px] sm:max-w-[340px] mt-0.5 text-slate-400 dark:text-slate-500">
+                              <p className="text-xs truncate max-w-[280px] sm:max-w-[340px] mt-0.5 text-text-tertiary">
                                 {tool.description}
                               </p>
                             </div>
                           </div>
                           {moduleConfig && (
-                            <span className={`badge module-badge-${tool.module}`}>
+                            <span className={clsx('badge', `module-badge-${tool.module}`)}>
                               {moduleConfig.name}
                             </span>
                           )}
@@ -323,12 +307,9 @@ export function SearchDialog() {
             </div>
 
             {/* Footer / Shortcuts */}
-            <div
-              className="px-4 py-2.5 border-t text-[11px] flex items-center justify-between"
-              style={{ borderColor: 'var(--border-default)', color: 'var(--text-tertiary)' }}
-            >
+            <div className="px-4 py-2.5 border-t text-[11px] flex items-center justify-between border-border-default text-text-tertiary">
               <span className="flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-blue-500" />
+                <Sparkles className="w-3.5 h-3.5 text-info" />
                 Find tools instantly
               </span>
               <span className="flex items-center gap-2.5">

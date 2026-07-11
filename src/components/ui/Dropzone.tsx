@@ -1,5 +1,6 @@
 import { useRef, useState, ChangeEvent, ReactNode } from 'react';
 import { Upload, AlertCircle } from 'lucide-react';
+import { clsx } from 'clsx';
 
 interface DropzoneProps {
   onFileSelect: (file: File) => void;
@@ -93,15 +94,14 @@ export function Dropzone({
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
-        className="border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-colors"
-        style={{
-          background: isDragging ? 'var(--primary-subtle)' : 'var(--bg-surface)',
-          borderColor: isDragging
-            ? 'var(--primary)'
-            : error
-              ? 'var(--danger)'
-              : 'var(--border-default)',
-        }}
+        className={clsx(
+          'border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-colors',
+          {
+            'bg-primary-subtle border-primary': isDragging,
+            'bg-bg-surface border-danger': !isDragging && error,
+            'bg-bg-surface border-border-default': !isDragging && !error,
+          }
+        )}
         role="button"
         tabIndex={0}
         aria-label={title}
@@ -122,10 +122,10 @@ export function Dropzone({
         <div className="flex justify-center mb-4" aria-hidden="true">
           {icon}
         </div>
-        <p className="text-base font-semibold" style={{ color: 'var(--text-primary)' }}>
+        <p className="text-body font-semibold text-text-primary">
           {isDragging ? 'Drop your file here' : title}
         </p>
-        <p className="text-xs mt-1" style={{ color: 'var(--text-tertiary)' }}>
+        <p className="text-small text-text-tertiary mt-2">
           {subtitle}
         </p>
       </div>
@@ -133,8 +133,7 @@ export function Dropzone({
       {error && (
         <p
           role="alert"
-          className="flex items-center gap-1.5 text-xs mt-2"
-          style={{ color: 'var(--danger)' }}
+          className="flex items-center gap-2 text-small text-danger mt-2"
         >
           <AlertCircle size={14} aria-hidden="true" />
           {error}

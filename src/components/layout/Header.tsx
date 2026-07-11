@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Sun, Moon, Menu, X, Heart, Folder } from 'lucide-react';
 import { useThemeStore } from '@/stores/themeStore';
@@ -13,6 +13,20 @@ export function Header() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const location = useLocation();
+
+  const getSearchPlaceholder = () => {
+    const path = location.pathname;
+    if (path.startsWith('/developer')) return 'Search developer tools...';
+    if (path.startsWith('/finance')) return 'Search finance tools...';
+    if (path.startsWith('/pdf')) return 'Search pdf tools...';
+    if (path.startsWith('/image')) return 'Search image tools...';
+    if (path.startsWith('/text')) return 'Search text tools...';
+    if (path.startsWith('/ai')) return 'Search ai tools...';
+    if (path.startsWith('/business')) return 'Search business tools...';
+    if (path.startsWith('/productivity')) return 'Search productivity tools...';
+    return 'Search tools...';
+  };
 
   const drawerRef = useRef<HTMLDivElement>(null);
   const toggleBtnRef = useRef<HTMLButtonElement>(null);
@@ -69,19 +83,20 @@ export function Header() {
     };
   }, [isDrawerOpen]);
 
+  /* ── Shared icon-button class ──────────────────────────── */
+  const iconBtnClass =
+    'w-10 h-10 rounded-[var(--radius-md)] flex items-center justify-center hover:bg-bg-surface text-text-secondary hover:text-text-primary transition-colors cursor-pointer';
+
   return (
     <>
       {/* ════════════════════════  HEADER BAR  ════════════════════════ */}
       <header
         role="banner"
-        className="sticky top-0 z-50 transition-shadow duration-200"
-        style={{
-          background: 'var(--bg-surface)',
-          borderBottom: '1px solid var(--border-default)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
-          boxShadow: isScrolled ? '0 1px 3px rgba(0,0,0,0.06)' : 'none',
-        }}
+        className={clsx(
+          'sticky top-0 z-50 h-16 border-b border-border-default backdrop-blur-xl transition-shadow',
+          isScrolled ? 'shadow-sm' : 'shadow-none'
+        )}
+        style={{ background: 'var(--header-bg)' }}
       >
         <div className="container-app h-16 flex items-center justify-between">
           {/* LEFT ZONE: Logo */}
@@ -89,20 +104,17 @@ export function Header() {
             <Link
               to="/"
               className="flex items-center gap-3 font-bold text-xl select-none cursor-pointer"
-              aria-label="ToolPilot — Home"
+              aria-label="Toolskyt — Home"
             >
               <div
-                className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-black shadow-sm shrink-0"
-                style={{
-                  background: 'var(--primary)',
-                }}
+                className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white text-sm font-black shadow-sm shrink-0"
                 aria-hidden="true"
               >
                 T
               </div>
               <span className="font-bold text-xl tracking-tight leading-none flex items-center">
-                <span className="text-[var(--text-primary)]">Tool</span>
-                <span className="text-[var(--primary)]">Pilot</span>
+                <span className="text-text-primary">Tool</span>
+                <span className="text-primary">skyt</span>
               </span>
             </Link>
           </div>
@@ -116,25 +128,21 @@ export function Header() {
               onBlur={() => setIsSearchFocused(false)}
               aria-label="Search tools (⌘K)"
               className={clsx(
-                'flex items-center w-[320px] h-10 px-3 rounded-[8px] border cursor-text transition-all duration-150 outline-none select-none',
+                'flex items-center w-[320px] h-10 px-3 rounded-[var(--radius-md)] border cursor-text transition-all outline-none select-none bg-bg-base',
                 isSearchFocused
-                  ? 'border-[#6366F1]'
-                  : 'border-[var(--border-default)] hover:border-slate-300 dark:hover:border-slate-700'
+                  ? 'border-primary ring-2 ring-primary/10'
+                  : 'border-border-default hover:border-border-strong'
               )}
-              style={{
-                boxShadow: isSearchFocused ? '0 0 0 3px rgba(99, 102, 241, 0.1)' : 'none',
-                background: 'var(--bg-base)',
-              }}
             >
               <Search
                 size={16}
-                className="shrink-0 text-slate-400 dark:text-slate-500"
+                className="shrink-0 text-text-disabled"
                 aria-hidden="true"
               />
-              <span className="flex-1 text-left text-sm font-normal text-slate-400 dark:text-slate-500 ml-[12px]">
-                Search tools…
+              <span className="flex-1 text-left text-sm font-normal text-text-disabled ml-3">
+                {getSearchPlaceholder()}
               </span>
-              <kbd className="inline-flex items-center justify-center h-5 px-1.5 rounded-[4px] border text-[11px] font-sans font-medium bg-[var(--bg-surface)] border-[var(--border-default)] text-slate-400 dark:text-slate-500">
+              <kbd className="inline-flex items-center justify-center h-5 px-1.5 rounded-[var(--radius-sm)] border text-[11px] font-sans font-medium bg-bg-surface border-border-default text-text-disabled">
                 ⌘K
               </kbd>
             </button>
@@ -146,7 +154,7 @@ export function Header() {
             <Link
               to="/#favorites"
               aria-label="View favorite tools"
-              className="w-10 h-10 rounded-[8px] flex items-center justify-center hover:bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+              className={iconBtnClass}
             >
               <Heart size={20} strokeWidth={2} aria-hidden="true" />
             </Link>
@@ -156,13 +164,14 @@ export function Header() {
               type="button"
               onClick={toggleTheme}
               aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
-              className="w-10 h-10 rounded-[8px] flex items-center justify-center hover:bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+              className={iconBtnClass}
             >
               <motion.div
                 key={theme}
                 initial={{ rotate: -90, opacity: 0 }}
                 animate={{ rotate: 0, opacity: 1 }}
                 transition={{ duration: 0.18 }}
+                className="flex items-center justify-center w-full h-full"
               >
                 {theme === 'light' ? (
                   <Moon size={20} strokeWidth={2} aria-hidden="true" />
@@ -178,7 +187,7 @@ export function Header() {
               type="button"
               onClick={() => setIsDrawerOpen(true)}
               aria-label="Open navigation menu"
-              className="w-10 h-10 rounded-[8px] flex items-center justify-center hover:bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors lg:hidden shrink-0"
+              className={clsx(iconBtnClass, 'lg:hidden')}
             >
               <Menu size={20} strokeWidth={2} aria-hidden="true" />
             </button>
@@ -190,7 +199,7 @@ export function Header() {
               type="button"
               onClick={() => setSearchOpen(true)}
               aria-label="Search tools"
-              className="w-10 h-10 rounded-[8px] flex items-center justify-center hover:bg-[var(--bg-surface)] text-[var(--text-secondary)]"
+              className={iconBtnClass}
             >
               <Search size={20} strokeWidth={2} aria-hidden="true" />
             </button>
@@ -200,7 +209,7 @@ export function Header() {
               type="button"
               onClick={() => setIsDrawerOpen(true)}
               aria-label="Open menu"
-              className="w-10 h-10 rounded-[8px] flex items-center justify-center hover:bg-[var(--bg-surface)] text-[var(--text-secondary)]"
+              className={iconBtnClass}
             >
               <Menu size={20} strokeWidth={2} aria-hidden="true" />
             </button>
@@ -219,7 +228,7 @@ export function Header() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.18 }}
-              className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm"
+              className="fixed inset-0 z-40 bg-bg-overlay backdrop-blur-sm"
               aria-hidden="true"
               onClick={() => setIsDrawerOpen(false)}
             />
@@ -236,21 +245,16 @@ export function Header() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', stiffness: 320, damping: 32 }}
-              className="fixed top-0 right-0 bottom-0 z-50 w-[320px] flex flex-col overflow-hidden"
-              style={{
-                background: 'var(--bg-elevated)',
-                borderLeft: '1px solid var(--border-default)',
-                boxShadow: '-8px 0 32px rgba(0,0,0,0.12)',
-              }}
+              className="fixed top-0 right-0 bottom-0 z-50 w-[320px] flex flex-col overflow-hidden bg-bg-elevated border-l border-border-default shadow-xl"
             >
               {/* Drawer Header */}
-              <div className="flex items-center justify-between px-5 h-16 shrink-0 border-b border-[var(--border-default)]">
-                <span className="font-bold text-base text-[var(--text-primary)]">Navigation</span>
+              <div className="flex items-center justify-between px-5 h-16 shrink-0 border-b border-border-default">
+                <span className="font-bold text-body text-text-primary">Navigation</span>
                 <button
                   type="button"
                   onClick={() => setIsDrawerOpen(false)}
                   aria-label="Close menu"
-                  className="w-10 h-10 rounded-[8px] flex items-center justify-center hover:bg-[var(--bg-surface)] text-[var(--text-secondary)] cursor-pointer"
+                  className={iconBtnClass}
                 >
                   <X size={20} strokeWidth={2} />
                 </button>
@@ -264,10 +268,10 @@ export function Header() {
                     setSearchOpen(true);
                     setIsDrawerOpen(false);
                   }}
-                  className="flex items-center gap-3 w-full h-11 px-4 rounded-[8px] border border-[var(--border-default)] bg-[var(--bg-base)] text-left hover:border-indigo-400 transition-colors cursor-pointer"
+                  className="flex items-center gap-3 w-full h-11 px-4 rounded-[var(--radius-md)] border border-border-default bg-bg-base text-left hover:border-primary transition-colors cursor-pointer"
                 >
-                  <Search size={16} strokeWidth={2} className="text-slate-400 shrink-0" />
-                  <span className="text-sm text-slate-400 dark:text-slate-500">Search tools…</span>
+                  <Search size={16} strokeWidth={2} className="text-text-disabled shrink-0" />
+                  <span className="text-caption text-text-disabled">Search tools…</span>
                 </button>
               </div>
 
@@ -279,9 +283,9 @@ export function Header() {
                     <Link
                       to="/#favorites"
                       onClick={() => setIsDrawerOpen(false)}
-                      className="flex items-center gap-3 px-3 py-2.5 text-sm font-semibold text-slate-600 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400 hover:bg-[var(--bg-surface)] rounded-lg transition-colors cursor-pointer"
+                      className="flex items-center gap-3 px-3 py-2.5 text-caption font-semibold text-text-secondary hover:text-primary hover:bg-bg-surface rounded-lg transition-colors cursor-pointer"
                     >
-                      <Heart size={18} strokeWidth={2} className="text-slate-400 shrink-0" />
+                      <Heart size={18} strokeWidth={2} className="text-text-tertiary shrink-0" />
                       <span>Favorites</span>
                     </Link>
                   </div>
@@ -289,7 +293,7 @@ export function Header() {
 
                 {/* Explore Categories */}
                 <div>
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--text-tertiary)] px-3 mb-2">
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-text-tertiary px-3 mb-2">
                     Explore Categories
                   </div>
                   <div className="flex flex-col gap-0.5">
@@ -298,9 +302,9 @@ export function Header() {
                         key={mod.key}
                         to={mod.slug}
                         onClick={() => setIsDrawerOpen(false)}
-                        className="flex items-center gap-3 px-3 py-2.5 text-sm font-semibold text-slate-600 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400 hover:bg-[var(--bg-surface)] rounded-lg transition-colors cursor-pointer"
+                        className="flex items-center gap-3 px-3 py-2.5 text-caption font-semibold text-text-secondary hover:text-primary hover:bg-bg-surface rounded-lg transition-colors cursor-pointer"
                       >
-                        <Folder size={18} strokeWidth={2} className="text-slate-400 shrink-0" />
+                        <Folder size={18} strokeWidth={2} className="text-text-tertiary shrink-0" />
                         <span>{mod.name}</span>
                       </Link>
                     ))}
@@ -309,20 +313,20 @@ export function Header() {
               </div>
 
               {/* Drawer Footer */}
-              <div className="px-5 py-4 border-t border-[var(--border-default)] shrink-0 flex flex-col gap-2 bg-[var(--bg-surface)]">
+              <div className="px-5 py-4 border-t border-border-default shrink-0 flex flex-col gap-2 bg-bg-surface">
                 <button
                   type="button"
                   onClick={toggleTheme}
-                  className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-600 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                  className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-caption font-semibold text-text-secondary hover:text-primary hover:bg-bg-elevated transition-colors cursor-pointer"
                 >
                   {theme === 'light' ? (
                     <>
-                      <Moon size={18} strokeWidth={2} className="text-slate-500" />
+                      <Moon size={18} strokeWidth={2} className="text-text-tertiary" />
                       <span>Switch to Dark Mode</span>
                     </>
                   ) : (
                     <>
-                      <Sun size={18} strokeWidth={2} className="text-slate-400" />
+                      <Sun size={18} strokeWidth={2} className="text-text-tertiary" />
                       <span>Switch to Light Mode</span>
                     </>
                   )}

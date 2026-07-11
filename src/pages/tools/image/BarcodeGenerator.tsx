@@ -34,7 +34,7 @@ const START_CODE_B = CODE128_PATTERNS[104]; // Start Code B
 const STOP_CODE = CODE128_PATTERNS[106]; // Stop pattern
 
 export default function BarcodeGenerator() {
-  const [text, setText] = useState<string>('TOOLPILOT123');
+  const [text, setText] = useState<string>('TOOLSKYT123');
 
   let downloadUrl = '';
   let error: string | null = null;

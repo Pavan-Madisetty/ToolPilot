@@ -14,10 +14,10 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'robots.txt'],
       manifest: {
-        name: 'ToolPilot — 500+ Free Online Tools',
-        short_name: 'ToolPilot',
+        name: 'Toolskyt — 100+ Free Online Tools',
+        short_name: 'Toolskyt',
         description:
-          "The world's largest browser-based productivity platform with 500+ free tools for Finance, Developer, PDF, Image, Text, AI, and more.",
+          "The world's largest browser-based productivity platform with 100+ free tools for Finance, Developer, PDF, Image, Text, AI, and more.",
         theme_color: '#3B82F6',
         background_color: '#ffffff',
         display: 'standalone',

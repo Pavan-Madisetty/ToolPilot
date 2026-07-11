@@ -25,33 +25,14 @@ export function PageLoader() {
       initial="initial"
       animate="animate"
       exit="exit"
-      style={{
-        position: 'fixed',
-        inset: 0,
-        zIndex: 9999,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '24px',
-        background: 'var(--bg-base)',
-      }}
+      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center gap-6 bg-bg-base"
     >
       {/* Logo Mark */}
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 0.1, duration: 0.4, ease: 'easeOut' }}
-        style={{
-          width: 56,
-          height: 56,
-          borderRadius: 16,
-          background: 'linear-gradient(135deg, var(--text-link) 0%, rgba(79, 70, 229, 0.6) 100%)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          boxShadow: '0 8px 32px rgba(79, 70, 229, 0.25)',
-        }}
+        className="w-14 h-14 rounded-2xl bg-gradient-to-br from-text-link to-indigo-500/60 flex items-center justify-center shadow-lg shadow-indigo-500/25"
       >
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path
@@ -66,15 +47,9 @@ export function PageLoader() {
       </motion.div>
 
       {/* Spinner Ring */}
-      <div style={{ position: 'relative', width: 48, height: 48 }} aria-hidden="true">
+      <div className="relative w-12 h-12" aria-hidden="true">
         <motion.span
-          style={{
-            position: 'absolute',
-            inset: 0,
-            borderRadius: '50%',
-            border: '3px solid var(--border-default)',
-            borderTopColor: 'var(--text-link)',
-          }}
+          className="absolute inset-0 rounded-full border-3 border-border-default border-t-text-link"
           animate={{ rotate: 360 }}
           transition={{
             duration: 0.9,
@@ -89,19 +64,10 @@ export function PageLoader() {
         initial={{ opacity: 0, y: 6 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.3 }}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 6,
-          color: 'var(--text-secondary)',
-          fontSize: '0.9375rem',
-          fontWeight: 500,
-          fontFamily: 'var(--font-sans)',
-          letterSpacing: '0.01em',
-        }}
+        className="flex items-center gap-1.5 text-text-secondary text-sm font-medium tracking-wide"
       >
         <span>Loading</span>
-        <span style={{ display: 'flex', alignItems: 'center', gap: 3 }} aria-hidden="true">
+        <span className="flex items-center gap-0.5" aria-hidden="true">
           {[0, 1, 2].map((i) => (
             <motion.span
               key={i}
@@ -115,13 +81,7 @@ export function PageLoader() {
                 delay: i * 0.15,
                 ease: 'easeInOut',
               }}
-              style={{
-                display: 'inline-block',
-                width: 5,
-                height: 5,
-                borderRadius: '50%',
-                background: 'var(--text-link)',
-              }}
+              className="inline-block w-1 h-1 rounded-full bg-text-link"
             />
           ))}
         </span>
@@ -129,3 +89,5 @@ export function PageLoader() {
     </motion.div>
   );
 }
+
+export default PageLoader;

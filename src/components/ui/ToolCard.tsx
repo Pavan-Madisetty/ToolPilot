@@ -32,16 +32,13 @@ export function ToolCard({ tool, compact = false }: ToolCardProps) {
       <Link
         to={tool.slug}
         className={`tool-card h-full ${compact ? 'tool-card--compact' : ''}`}
-        style={{ borderRadius: '16px' }}
         aria-label={`${tool.name}: ${tool.description}`}
       >
         <div
-          className="tool-card__icon"
+          className="tool-card__icon rounded-md border-transparent"
           style={{ 
             background: bg, 
             color: accent, 
-            borderColor: 'transparent',
-            borderRadius: '10px'
           }}
           aria-hidden="true"
         >

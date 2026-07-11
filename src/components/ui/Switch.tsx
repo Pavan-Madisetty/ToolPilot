@@ -17,15 +17,14 @@ export function Switch({ label, checked, onChange, description, disabled = false
       <div className="flex flex-col">
         <label
           htmlFor={switchId}
-          className={clsx('text-sm font-medium cursor-pointer', {
+          className={clsx('text-caption font-medium cursor-pointer text-text-primary', {
             'opacity-50 cursor-not-allowed': disabled,
           })}
-          style={{ color: 'var(--text-primary)' }}
         >
           {label}
         </label>
         {description && (
-          <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
+          <span className="text-small text-text-tertiary">
             {description}
           </span>
         )}
@@ -40,14 +39,13 @@ export function Switch({ label, checked, onChange, description, disabled = false
         disabled={disabled}
         onClick={() => onChange(!checked)}
         className={clsx(
-          'relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2',
+          'relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out outline-none focus-visible:ring-2 focus-visible:ring-border-focus focus-visible:ring-offset-2',
           {
             'opacity-50 cursor-not-allowed': disabled,
+            'bg-primary': checked,
+            'bg-border-strong': !checked,
           }
         )}
-        style={{
-          backgroundColor: checked ? 'var(--primary)' : 'var(--border-strong)',
-        }}
       >
         <span
           className={clsx(

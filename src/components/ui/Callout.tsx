@@ -24,9 +24,9 @@ export function Callout({
   }[tone];
 
   const defaultIcon = {
-    tip: <Lightbulb size={20} className="text-amber-500" strokeWidth={2} />,
-    example: <BarChart2 size={20} className="text-indigo-500" strokeWidth={2} />,
-    info: <Info size={20} className="text-blue-500" strokeWidth={2} />,
+    tip: <Lightbulb size={20} className="text-warning" strokeWidth={2} />,
+    example: <BarChart2 size={20} className="text-primary" strokeWidth={2} />,
+    info: <Info size={20} className="text-info" strokeWidth={2} />,
   }[tone];
 
   const displayTitle = title ?? defaultTitle;

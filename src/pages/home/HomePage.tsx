@@ -45,26 +45,26 @@ const FEATURES = [
     title: 'Privacy First',
     description:
       'All processing happens in your browser. No data ever leaves your device. We have zero tracking, zero ads, zero analytics.',
-    color: '#10b981',
-    bg: 'rgba(16, 185, 129, 0.08)',
-    border: 'rgba(16, 185, 129, 0.2)',
+    color: 'var(--success)',
+    bg: 'var(--success-subtle)',
+    border: 'color-mix(in srgb, var(--success) 20%, transparent)',
   },
   {
     icon: Zap,
     title: 'Lightning Fast',
     description:
       'Optimized for performance with Lighthouse score 95+. Instant results with no server round-trips. Everything runs locally.',
-    color: '#f59e0b',
-    bg: 'rgba(245, 158, 11, 0.08)',
-    border: 'rgba(245, 158, 11, 0.2)',
+    color: 'var(--warning)',
+    bg: 'var(--warning-subtle)',
+    border: 'color-mix(in srgb, var(--warning) 20%, transparent)',
   },
   {
     icon: Wifi,
     title: 'Works Offline',
-    description: `Full PWA support — install ToolPilot on your device and use every tool without an internet connection.`,
-    color: 'var(--text-link)',
-    bg: 'rgba(79, 70, 229, 0.08)',
-    border: 'rgba(79, 70, 229, 0.2)',
+    description: `Full PWA support — install Toolskyt on your device and use every tool without an internet connection.`,
+    color: 'var(--primary)',
+    bg: 'var(--primary-subtle)',
+    border: 'color-mix(in srgb, var(--primary) 20%, transparent)',
   },
 ];
 
@@ -74,14 +74,14 @@ const FEATURES = [
 const JSON_LD_WEBSITE = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'ToolPilot',
-  url: 'https://toolpilot.app',
+  name: 'Toolskyt',
+  url: 'https://toolskyt.com',
   description: 'Free browser tools for finance, developer, PDF, image, text and more.',
   potentialAction: {
     '@type': 'SearchAction',
     target: {
       '@type': 'EntryPoint',
-      urlTemplate: 'https://toolpilot.app/search?q={search_term_string}',
+      urlTemplate: 'https://toolskyt.com/search?q={search_term_string}',
     },
     'query-input': 'required name=search_term_string',
   },
@@ -90,14 +90,14 @@ const JSON_LD_WEBSITE = {
 const JSON_LD_ORGANIZATION = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'ToolPilot',
-  url: 'https://toolpilot.app',
-  logo: 'https://toolpilot.app/favicon.svg',
+  name: 'Toolskyt',
+  url: 'https://toolskyt.com',
+  logo: 'https://toolskyt.com/favicon.svg',
   sameAs: ['https://github.com/Pavan-Madisetty/ToolPilot'],
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'customer support',
-    email: 'support@toolpilot.app',
+    email: 'support@toolskyt.com',
   },
 };
 
@@ -142,36 +142,36 @@ export default function HomePage() {
   return (
     <>
       <Helmet>
-        <title>{config.seo?.homepage?.metaTitle || `ToolPilot — ${TOOL_COUNT_LABEL} Free Online Tools for Finance, Developer, PDF & More`}</title>
+        <title>{config.seo?.homepage?.metaTitle || `Toolskyt — ${TOOL_COUNT_LABEL} Free Online Tools for Finance, Developer, PDF & More`}</title>
         <meta
           name="description"
-          content={config.seo?.homepage?.metaDescription || `ToolPilot offers ${TOOL_COUNT_LABEL} free browser tools — EMI calculators, JSON formatters, PDF tools, image compressors, text utilities, and more. No signup. No tracking. Works offline.`}
+          content={config.seo?.homepage?.metaDescription || `Toolskyt offers ${TOOL_COUNT_LABEL} free browser tools — EMI calculators, JSON formatters, PDF tools, image compressors, text utilities, and more. No signup. No tracking. Works offline.`}
         />
         <meta
           name="keywords"
           content={config.seo?.homepage?.keywords?.join(', ') || "free online tools, emi calculator, json formatter, pdf tools, image compressor, text tools, developer tools"}
         />
-        <link rel="canonical" href="https://toolpilot.app/" />
+        <link rel="canonical" href="https://toolskyt.com/" />
 
         {/* Open Graph */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://toolpilot.app/" />
-        <meta property="og:title" content={config.seo?.homepage?.metaTitle || `ToolPilot — ${TOOL_COUNT_LABEL} Free Online Tools`} />
+        <meta property="og:url" content="https://toolskyt.com/" />
+        <meta property="og:title" content={config.seo?.homepage?.metaTitle || `Toolskyt — ${TOOL_COUNT_LABEL} Free Online Tools`} />
         <meta
           property="og:description"
           content={config.seo?.homepage?.metaDescription || `${TOOL_COUNT_LABEL} free browser tools. No signup. No tracking. Works offline.`}
         />
-        <meta property="og:image" content={config.seo?.homepage?.ogImage || "https://toolpilot.app/og-image.png"} />
-        <meta property="og:site_name" content="ToolPilot" />
+        <meta property="og:image" content={config.seo?.homepage?.ogImage || "https://toolskyt.com/og-image.png"} />
+        <meta property="og:site_name" content="Toolskyt" />
 
         {/* Twitter */}
         <meta name="twitter:card" content={config.seo?.homepage?.twitterCard || "summary_large_image"} />
-        <meta name="twitter:title" content={config.seo?.homepage?.metaTitle || `ToolPilot — ${TOOL_COUNT_LABEL} Free Online Tools`} />
+        <meta name="twitter:title" content={config.seo?.homepage?.metaTitle || `Toolskyt — ${TOOL_COUNT_LABEL} Free Online Tools`} />
         <meta
           name="twitter:description"
           content={config.seo?.homepage?.metaDescription || `${TOOL_COUNT_LABEL} free browser tools. No signup. No tracking. Works offline.`}
         />
-        <meta property="twitter:image" content={config.seo?.homepage?.ogImage || "https://toolpilot.app/og-image.png"} />
+        <meta property="twitter:image" content={config.seo?.homepage?.ogImage || "https://toolskyt.com/og-image.png"} />
 
         {/* JSON-LD */}
         <script type="application/ld+json">{JSON.stringify(JSON_LD_WEBSITE)}</script>
@@ -232,8 +232,7 @@ export default function HomePage() {
                     <Star
                       size={20}
                       aria-hidden="true"
-                      className="section__title-icon"
-                      style={{ color: '#f59e0b' }}
+                      className="section__title-icon text-warning"
                     />
                     Your Favorites
                   </h2>
@@ -344,7 +343,7 @@ export default function HomePage() {
             >
               <div>
                 <h2 id="features-heading" className="section__title">
-                  Why ToolPilot?
+                  Why Toolskyt?
                 </h2>
                 <p className="section__subtitle">Built with your privacy and performance in mind</p>
               </div>

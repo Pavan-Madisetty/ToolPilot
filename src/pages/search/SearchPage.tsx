@@ -58,8 +58,8 @@ export default function SearchPage() {
   };
 
   const pageTitle = queryParam
-    ? `Search Results for "${queryParam}" | ToolPilot`
-    : `Search ${TOOL_COUNT_LABEL} Free Online Tools | ToolPilot`;
+    ? `Search Results for "${queryParam}" | Toolskyt`
+    : `Search ${TOOL_COUNT_LABEL} Free Online Tools | Toolskyt`;
 
   return (
     <>
@@ -67,30 +67,30 @@ export default function SearchPage() {
         <title>{pageTitle}</title>
         <meta
           name="description"
-          content="Search and filter hundreds of free online productivity tools on ToolPilot. Find EMI calculators, JSON tools, image encoders, and more."
+          content="Search and filter hundreds of free online productivity tools on Toolskyt. Find EMI calculators, JSON tools, image encoders, and more."
         />
         <meta name="robots" content="noindex, follow" />
-        <link rel="canonical" href="https://toolpilot.app/search" />
+        <link rel="canonical" href="https://toolskyt.com/search" />
 
         {/* Open Graph */}
         <meta property="og:title" content={pageTitle} />
         <meta
           property="og:description"
-          content="Search and filter hundreds of free online productivity tools on ToolPilot. Find EMI calculators, JSON tools, image encoders, and more."
+          content="Search and filter hundreds of free online productivity tools on Toolskyt. Find EMI calculators, JSON tools, image encoders, and more."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://toolpilot.app/search" />
-        <meta property="og:image" content="https://toolpilot.app/og-image.png" />
-        <meta property="og:site_name" content="ToolPilot" />
+        <meta property="og:url" content="https://toolskyt.com/search" />
+        <meta property="og:image" content="https://toolskyt.com/og-image.png" />
+        <meta property="og:site_name" content="Toolskyt" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={pageTitle} />
         <meta
           name="twitter:description"
-          content="Search and filter hundreds of free online productivity tools on ToolPilot. Find EMI calculators, JSON tools, image encoders, and more."
+          content="Search and filter hundreds of free online productivity tools on Toolskyt. Find EMI calculators, JSON tools, image encoders, and more."
         />
-        <meta name="twitter:image" content="https://toolpilot.app/og-image.png" />
+        <meta name="twitter:image" content="https://toolskyt.com/og-image.png" />
       </Helmet>
 
       <div className="container-app py-8">

@@ -46,7 +46,7 @@ export function Dialog({ isOpen, onClose, title, children, footer, size = 'md' }
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-slate-900/40 dark:bg-slate-950/60 backdrop-blur-sm"
+            className="fixed inset-0 bg-bg-overlay backdrop-blur-sm"
             onClick={onClose}
           />
 
@@ -59,7 +59,7 @@ export function Dialog({ isOpen, onClose, title, children, footer, size = 'md' }
             transition={{ duration: 0.2, ease: 'easeOut' }}
             onClick={handleBackdropClick}
             className={clsx(
-              'w-full flex flex-col overflow-hidden rounded-2xl border shadow-2xl relative z-10 max-h-[85vh]',
+              'w-full flex flex-col overflow-hidden rounded-2xl border border-border-default bg-bg-elevated shadow-xl relative z-10 max-h-[85vh]',
               {
                 'max-w-sm': size === 'sm',
                 'max-w-md': size === 'md',
@@ -67,24 +67,13 @@ export function Dialog({ isOpen, onClose, title, children, footer, size = 'md' }
                 'max-w-2xl': size === 'xl',
               }
             )}
-            style={{
-              background: 'var(--bg-elevated)',
-              borderColor: 'var(--border-default)',
-            }}
             role="dialog"
             aria-modal="true"
             aria-labelledby="dialog-title"
           >
             {/* Header */}
-            <div
-              className="flex items-center justify-between px-6 py-4 border-b"
-              style={{ borderColor: 'var(--border-default)' }}
-            >
-              <h2
-                id="dialog-title"
-                className="text-lg font-bold"
-                style={{ color: 'var(--text-primary)' }}
-              >
+            <div className="flex items-center justify-between px-6 py-4 border-b border-border-default">
+              <h2 id="dialog-title" className="text-body-large font-bold text-text-primary">
                 {title}
               </h2>
               <button
@@ -97,19 +86,13 @@ export function Dialog({ isOpen, onClose, title, children, footer, size = 'md' }
             </div>
 
             {/* Scrollable Content Body */}
-            <div
-              className="flex-1 overflow-y-auto px-6 py-5 text-sm leading-relaxed"
-              style={{ color: 'var(--text-secondary)' }}
-            >
+            <div className="flex-1 overflow-y-auto px-6 py-5 text-sm leading-relaxed text-text-secondary">
               {children}
             </div>
 
             {/* Footer Actions (Optional) */}
             {footer && (
-              <div
-                className="px-6 py-4 border-t flex items-center justify-end gap-3"
-                style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}
-              >
+              <div className="px-6 py-4 border-t border-border-default bg-bg-surface flex items-center justify-end gap-3">
                 {footer}
               </div>
             )}

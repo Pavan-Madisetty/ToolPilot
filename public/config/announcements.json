@@ -3,7 +3,7 @@
     {
       "id": "welcome_notice",
       "enabled": true,
-      "text": "🎉 Welcome to ToolPilot! 100+ fully-functional offline-first browser tools are now active. No signup, no tracking.",
+      "text": "🎉 Welcome to Toolskyt! 100+ fully-functional offline-first browser tools are now active. No signup, no tracking.",
       "type": "info",
       "dismissible": true,
       "priority": 10,

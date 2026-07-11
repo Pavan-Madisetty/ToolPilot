@@ -46,18 +46,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               [helperId]: !!helperText && !error,
             })}
             className={clsx(
-              'input-base pr-10 cursor-pointer appearance-none',
+              'input-base pr-10 cursor-pointer appearance-none select-custom-arrow',
               {
                 'input-error': !!error,
               },
               className
             )}
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
-              backgroundSize: '1.25rem',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'right 10px center',
-            }}
             {...props}
           >
             {options.map((opt) => (

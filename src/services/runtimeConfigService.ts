@@ -24,7 +24,7 @@ export const DEFAULT_CONFIG: FullRuntimeConfig = {
   homepage: {
     hero: {
       title: 'Your Complete Digital Toolkit',
-      subtitle: '500+ free browser tools. No signup. No tracking. Works offline.',
+      subtitle: '100+ free browser tools. No signup. No tracking. Works offline.',
     },
     visibleSections: {
       hero: true,
@@ -39,7 +39,7 @@ export const DEFAULT_CONFIG: FullRuntimeConfig = {
   },
   seo: {
     homepage: {
-      metaTitle: 'ToolPilot — 500+ Free Online Tools for Finance, Developer, PDF & More',
+      metaTitle: 'Toolskyt — 100+ Free Online Tools for Finance, Developer, PDF & More',
       metaDescription: 'Free online browser tools. No signup. No tracking. Works offline. Complete tools for finance, developer utilities, PDF editing, text conversion, and travel estimation.',
       keywords: ['online tools', 'emi calculator', 'sip calculator', 'json formatter', 'resume builder'],
     },
@@ -53,7 +53,7 @@ export const DEFAULT_CONFIG: FullRuntimeConfig = {
   },
 };
 
-const CACHE_KEY = 'toolpilot_runtime_config_cache';
+const CACHE_KEY = 'toolskyt_runtime_config_cache';
 
 class RuntimeConfigService {
   private config: FullRuntimeConfig = { ...DEFAULT_CONFIG };

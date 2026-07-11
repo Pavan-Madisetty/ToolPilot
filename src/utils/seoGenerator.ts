@@ -51,7 +51,7 @@ export function getFallbackSEOContent(tool: ToolConfig): Partial<ToolConfig> {
     {
       question: `Is my data shared when using the ${name}?`,
       answer:
-        'No. ToolPilot operates under a zero-server policy. All calculations, data formatting, and file exports are executed locally on your machine.',
+        'No. Toolskyt operates under a zero-server policy. All calculations, data formatting, and file exports are executed locally on your machine.',
     },
     {
       question: `Do I need to sign up or pay to use the ${name}?`,

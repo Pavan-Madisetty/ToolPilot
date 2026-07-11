@@ -41,10 +41,10 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
   if (!tool) {
     return (
       <div className="container-app py-16 text-center">
-        <h2 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
+        <h2 className="text-2xl font-bold text-text-primary">
           Tool Not Found
         </h2>
-        <p className="mt-2" style={{ color: 'var(--text-secondary)' }}>
+        <p className="mt-2 text-text-secondary">
           The requested tool could not be loaded.
         </p>
       </div>
@@ -101,7 +101,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
     '@type': 'WebApplication',
     name: tool.name,
     description: tool.description,
-    url: `https://toolpilot.app${tool.slug}`,
+    url: `https://toolskyt.com${tool.slug}`,
     applicationCategory: 'UtilityApplication',
     operatingSystem: 'All',
     browserRequirements: 'Requires JavaScript. Requires HTML5.',
@@ -120,19 +120,19 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://toolpilot.app/',
+        item: 'https://toolskyt.com/',
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: moduleName,
-        item: `https://toolpilot.app${moduleSlug}`,
+        item: `https://toolskyt.com${moduleSlug}`,
       },
       {
         '@type': 'ListItem',
         position: 3,
         name: tool.name,
-        item: `https://toolpilot.app${tool.slug}`,
+        item: `https://toolskyt.com${tool.slug}`,
       },
     ],
   };
@@ -173,7 +173,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
         <title>{tool.metaTitle}</title>
         <meta name="description" content={tool.metaDescription} />
         <meta name="keywords" content={tool.keywords.join(', ')} />
-        <link rel="canonical" href={`https://toolpilot.app${tool.slug}`} />
+        <link rel="canonical" href={`https://toolskyt.com${tool.slug}`} />
 
         {/* Robots — placeholder tools stay out of the index until shipped */}
         <meta name="robots" content={isComingSoon(tool.id) ? 'noindex, follow' : 'index, follow'} />
@@ -182,15 +182,15 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
         <meta property="og:title" content={tool.metaTitle} />
         <meta property="og:description" content={tool.metaDescription} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`https://toolpilot.app${tool.slug}`} />
-        <meta property="og:image" content="https://toolpilot.app/og-image.png" />
-        <meta property="og:site_name" content="ToolPilot" />
+        <meta property="og:url" content={`https://toolskyt.com${tool.slug}`} />
+        <meta property="og:image" content="https://toolskyt.com/og-image.png" />
+        <meta property="og:site_name" content="Toolskyt" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={tool.metaTitle} />
         <meta name="twitter:description" content={tool.metaDescription} />
-        <meta name="twitter:image" content="https://toolpilot.app/og-image.png" />
+        <meta name="twitter:image" content="https://toolskyt.com/og-image.png" />
 
         {/* Structured Data Scripts */}
         <script type="application/ld+json">{JSON.stringify(webAppSchema)}</script>
@@ -206,7 +206,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 mt-4">
           <div>
             <div className="flex flex-wrap items-center gap-3">
-              <h1 className="text-3xl font-extrabold" style={{ color: 'var(--text-primary)' }}>
+              <h1 className="text-3xl font-extrabold text-text-primary">
                 {tool.name}
               </h1>
               <span
@@ -215,7 +215,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                 {tool.module}
               </span>
             </div>
-            <p className="text-base mt-2" style={{ color: 'var(--text-secondary)' }}>
+            <p className="text-base mt-2 text-text-secondary">
               {tool.description}
             </p>
           </div>
@@ -224,25 +224,23 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
           <div className="flex items-center gap-2">
             <button
               onClick={() => toggleFavorite(tool.id)}
-              className="btn btn-secondary flex items-center gap-1.5"
-              style={{
-                borderColor: favorited ? 'var(--danger)' : 'var(--border-default)',
-                color: favorited ? 'var(--danger)' : 'var(--text-secondary)',
-              }}
+              className={clsx(
+                'btn btn-secondary flex items-center gap-1.5 border transition-colors',
+                favorited ? 'border-danger text-danger' : 'border-border-default text-text-secondary'
+              )}
               aria-label={favorited ? 'Remove from favorites' : 'Add to favorites'}
             >
               <Heart
                 size={20}
                 strokeWidth={2}
-                className={clsx({ 'fill-current text-red-500': favorited })}
+                className={clsx({ 'fill-current text-danger': favorited })}
               />
               <span>{favorited ? 'Favorited' : 'Favorite'}</span>
             </button>
 
             <button
               onClick={handleShare}
-              className="btn btn-secondary flex items-center gap-1.5"
-              style={{ borderColor: 'var(--border-strong)', color: 'var(--text-secondary)' }}
+              className="btn btn-secondary flex items-center gap-1.5 border border-border-strong text-text-secondary"
               aria-label="Share tool"
             >
               <Share2 size={20} strokeWidth={2} />
@@ -256,20 +254,14 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
 
         {/* Rich SEO Content Explanatory Copy Section */}
         {(tool.longDescription || tool.benefits || tool.howToSteps || tool.faq) && (
-          <article
-            className="mt-16 pt-12 border-t flex flex-col gap-16"
-            style={{ borderColor: 'var(--border-default)' }}
-          >
+          <article className="mt-16 pt-12 border-t flex flex-col gap-16 border-border-default">
             {/* Long intro summary */}
             {tool.longDescription && (
               <section className="flex flex-col gap-4">
-                <h2 className="text-h2" style={{ color: 'var(--text-primary)' }}>
+                <h2 className="text-h2 text-text-primary">
                   About {tool.name}
                 </h2>
-                <p
-                  className="text-base leading-relaxed max-w-3xl"
-                  style={{ color: 'var(--text-secondary)' }}
-                >
+                <p className="text-base leading-relaxed max-w-3xl text-text-secondary">
                   {tool.longDescription}
                 </p>
               </section>
@@ -280,17 +272,16 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
               <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {tool.benefits && (
                   <div className="flex flex-col gap-4">
-                    <h3 className="text-h3" style={{ color: 'var(--text-primary)' }}>
+                    <h3 className="text-h3 text-text-primary">
                       Key Benefits
                     </h3>
                     <ul className="flex flex-col gap-2">
                       {tool.benefits.map((benefit, idx) => (
                         <li
                           key={idx}
-                          className="flex items-start gap-2 text-sm leading-relaxed"
-                          style={{ color: 'var(--text-secondary)' }}
+                          className="flex items-start gap-2 text-sm leading-relaxed text-text-secondary"
                         >
-                          <span className="text-emerald-500 font-bold shrink-0">✓</span>
+                          <span className="text-success font-bold shrink-0">✓</span>
                           <span>{benefit}</span>
                         </li>
                       ))}
@@ -299,17 +290,16 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                 )}
                 {tool.features && (
                   <div className="flex flex-col gap-4">
-                    <h3 className="text-h3" style={{ color: 'var(--text-primary)' }}>
+                    <h3 className="text-h3 text-text-primary">
                       Key Features
                     </h3>
                     <ul className="flex flex-col gap-2">
                       {tool.features.map((feature, idx) => (
                         <li
                           key={idx}
-                          className="flex items-start gap-2 text-sm leading-relaxed"
-                          style={{ color: 'var(--text-secondary)' }}
+                          className="flex items-start gap-2 text-sm leading-relaxed text-text-secondary"
                         >
-                          <span className="text-indigo-500 font-bold shrink-0">✓</span>
+                          <span className="text-primary font-bold shrink-0">✓</span>
                           <span>{feature}</span>
                         </li>
                       ))}
@@ -322,7 +312,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
             {/* How to use / Step by Step instructions */}
             {tool.howToSteps && (
               <section className="flex flex-col gap-4">
-                <h2 className="text-h2" style={{ color: 'var(--text-primary)' }}>
+                <h2 className="text-h2 text-text-primary">
                   How to Use {tool.name}
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -330,44 +320,35 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                     const getStepIcon = (index: number) => {
                       switch (index) {
                         case 0:
-                          return <FileText size={20} className="text-indigo-500" strokeWidth={2} />;
+                          return <FileText size={20} className="text-primary" strokeWidth={2} />;
                         case 1:
-                          return <Sliders size={20} className="text-indigo-500" strokeWidth={2} />;
+                          return <Sliders size={20} className="text-primary" strokeWidth={2} />;
                         case 2:
-                          return <Eye size={20} className="text-indigo-500" strokeWidth={2} />;
+                          return <Eye size={20} className="text-primary" strokeWidth={2} />;
                         default:
-                          return <Download size={20} className="text-indigo-500" strokeWidth={2} />;
+                          return <Download size={20} className="text-primary" strokeWidth={2} />;
                       }
                     };
 
                     return (
                       <div key={idx} className="flex items-center gap-2">
-                        <div
-                          className="relative border rounded-xl p-4 flex items-center gap-4 bg-white dark:bg-slate-900/40 shadow-sm flex-1"
-                          style={{ borderColor: 'var(--border-default)' }}
-                        >
+                        <div className="relative border border-border-default rounded-xl p-4 flex items-center gap-4 bg-bg-elevated shadow-sm flex-1">
                           {/* Icon with overlapping step number */}
                           <div className="relative shrink-0">
-                            <div className="w-12 h-12 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 flex items-center justify-center">
+                            <div className="w-12 h-12 rounded-xl bg-primary-subtle flex items-center justify-center">
                               {getStepIcon(idx)}
                             </div>
-                            <span className="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-indigo-600 text-white font-mono text-[10px] font-bold flex items-center justify-center border border-white dark:border-slate-900">
+                            <span className="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-primary text-text-inverse font-mono text-[10px] font-bold flex items-center justify-center border border-bg-elevated">
                               {idx + 1}
                             </span>
                           </div>
 
                           {/* Texts */}
                           <div className="flex-1 min-w-0">
-                            <h4
-                              className="text-sm font-bold"
-                              style={{ color: 'var(--text-primary)' }}
-                            >
+                            <h4 className="text-sm font-bold text-text-primary">
                               {step.name}
                             </h4>
-                            <p
-                              className="text-xs leading-relaxed mt-0.5"
-                              style={{ color: 'var(--text-secondary)' }}
-                            >
+                            <p className="text-xs leading-relaxed mt-0.5 text-text-secondary">
                               {step.text}
                             </p>
                           </div>
@@ -375,7 +356,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
 
                         {/* Dashed Line / Arrow separator if not last */}
                         {idx < (tool.howToSteps?.length ?? 0) - 1 && (
-                          <div className="hidden lg:flex items-center text-slate-300 dark:text-slate-700 select-none px-0.5 shrink-0">
+                          <div className="hidden lg:flex items-center text-text-tertiary select-none px-0.5 shrink-0">
                             <svg
                               className="w-4 h-4"
                               fill="none"
@@ -398,21 +379,12 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
             {(tool.tips || tool.examples) && (
               <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {tool.tips && (
-                  <div
-                    className="rounded-2xl p-6 flex flex-col gap-4"
-                    style={{
-                      background: 'rgba(251, 191, 36, 0.06)',
-                      border: '1px solid rgba(251, 191, 36, 0.2)',
-                    }}
-                  >
+                  <div className="rounded-2xl p-6 flex flex-col gap-4 bg-warning-subtle border border-warning-subtle">
                     <div className="flex items-center gap-3">
-                      <div
-                        className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
-                        style={{ background: 'rgba(251, 191, 36, 0.15)' }}
-                      >
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 bg-warning-subtle">
                         <span className="text-xl">💡</span>
                       </div>
-                      <h3 className="text-h3" style={{ color: 'var(--text-primary)' }}>
+                      <h3 className="text-h3 text-text-primary">
                         Pro Tips
                       </h3>
                     </div>
@@ -420,10 +392,9 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                       {tool.tips.map((tip, idx) => (
                         <li
                           key={idx}
-                          className="flex items-start gap-2.5 text-sm leading-relaxed"
-                          style={{ color: 'var(--text-secondary)' }}
+                          className="flex items-start gap-2.5 text-sm leading-relaxed text-text-secondary"
                         >
-                          <span className="text-emerald-500 font-bold shrink-0 mt-0.5">✓</span>
+                          <span className="text-success font-bold shrink-0 mt-0.5">✓</span>
                           <span>{tip}</span>
                         </li>
                       ))}
@@ -432,20 +403,11 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                 )}
 
                 {tool.examples && (
-                  <div
-                    className="rounded-2xl p-6 flex flex-col gap-4"
-                    style={{
-                      background: 'rgba(99, 102, 241, 0.04)',
-                      border: '1px solid rgba(99, 102, 241, 0.15)',
-                    }}
-                  >
+                  <div className="rounded-2xl p-6 flex flex-col gap-4 bg-primary-subtle border border-primary-subtle">
                     <div className="flex items-center gap-3">
-                      <div
-                        className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
-                        style={{ background: 'rgba(99, 102, 241, 0.1)' }}
-                      >
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 bg-primary-subtle">
                         <svg
-                          className="w-5 h-5 text-indigo-500"
+                          className="w-5 h-5 text-primary"
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
@@ -458,7 +420,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                           />
                         </svg>
                       </div>
-                      <h3 className="text-h3" style={{ color: 'var(--text-primary)' }}>
+                      <h3 className="text-h3 text-text-primary">
                         Calculation Examples
                       </h3>
                     </div>
@@ -466,27 +428,18 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                       {tool.examples.map((example, idx) => (
                         <div key={idx} className="flex flex-col gap-2 text-sm">
                           <div className="flex flex-wrap items-center gap-3">
-                            <span
-                              className="font-semibold text-sm"
-                              style={{ color: 'var(--text-secondary)' }}
-                            >
+                            <span className="font-semibold text-sm text-text-secondary">
                               Input:
                             </span>
-                            <code
-                              className="font-mono text-xs bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-md"
-                              style={{ color: 'var(--text-primary)' }}
-                            >
+                            <code className="font-mono text-xs bg-bg-inset px-2.5 py-1 rounded-md text-text-primary">
                               {example.input}
                             </code>
                           </div>
                           <div className="flex flex-wrap items-center gap-3">
-                            <span
-                              className="font-semibold text-sm"
-                              style={{ color: 'var(--text-secondary)' }}
-                            >
+                            <span className="font-semibold text-sm text-text-secondary">
                               Output:
                             </span>
-                            <code className="font-mono text-xs font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/30 px-2.5 py-1 rounded-md">
+                            <code className="font-mono text-xs font-semibold text-primary bg-primary-subtle px-2.5 py-1 rounded-md">
                               {example.output}
                             </code>
                           </div>
@@ -502,14 +455,10 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
             {tool.faq && (
               <section className="flex flex-col gap-6">
                 <div className="flex items-center gap-3">
-                  <span
-                    className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-base shrink-0"
-                    style={{ background: '#6366F1', color: '#fff' }}
-                    aria-hidden="true"
-                  >
+                  <span className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-base shrink-0 bg-primary text-text-inverse" aria-hidden="true">
                     ?
                   </span>
-                  <h2 className="text-h2" style={{ color: 'var(--text-primary)' }}>
+                  <h2 className="text-h2 text-text-primary">
                     Frequently Asked Questions
                   </h2>
                 </div>

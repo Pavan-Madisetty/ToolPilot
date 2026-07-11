@@ -18,7 +18,7 @@ export default function NotFoundPage() {
   return (
     <>
       <Helmet>
-        <title>404 - Page Not Found | ToolPilot</title>
+        <title>404 - Page Not Found | Toolskyt</title>
         <meta
           name="description"
           content="The page you are looking for does not exist. Use search to find standard calculators, JSON formatters, image resizers, and other tools."

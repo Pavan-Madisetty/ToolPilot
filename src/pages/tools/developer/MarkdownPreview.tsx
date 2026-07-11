@@ -5,7 +5,7 @@ import { Eye, FileText, Download } from 'lucide-react';
 
 export default function MarkdownPreview() {
   const [markdown, setMarkdown] = useState<string>(
-    `# Markdown Previewer\n\nWelcome to **ToolPilot**! This is a live browser-based Markdown renderer.\n\n## Features\n- Real-time preview\n- 100% offline and secure\n- Copy compiled HTML instantly\n\n### Formatting Examples\nHere is a code block:\n\`\`\`javascript\nconst greet = () => "Hello, ToolPilot!";\n\`\`\`\n\n> This is a blockquote containing some interesting quote.\n\n- [x] Standard UI Components\n- [x] Full Design Tokens\n- [ ] More tools coming soon!`
+    `# Markdown Previewer\n\nWelcome to **Toolskyt**! This is a live browser-based Markdown renderer.\n\n## Features\n- Real-time preview\n- 100% offline and secure\n- Copy compiled HTML instantly\n\n### Formatting Examples\nHere is a code block:\n\`\`\`javascript\nconst greet = () => "Hello, Toolskyt!";\n\`\`\`\n\n> This is a blockquote containing some interesting quote.\n\n- [x] Standard UI Components\n- [x] Full Design Tokens\n- [ ] More tools coming soon!`
   );
 
   const htmlPreview = useMemo(() => {

@@ -13,7 +13,7 @@ export function Skeleton({ className, variant = 'rect' }: SkeletonProps) {
         {
           'h-4 w-full': variant === 'text',
           'rounded-full': variant === 'circle',
-          'rounded-lg': variant === 'rect',
+          'rounded-md': variant === 'rect',
         },
         className
       )}

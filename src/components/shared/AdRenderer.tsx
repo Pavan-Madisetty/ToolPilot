@@ -49,7 +49,7 @@ export function AdRenderer({ slotId, className = '' }: AdRendererProps) {
       )}
 
       {slot.type === 'image' && slot.imageUrl && (
-        <div className="relative inline-block rounded-xl overflow-hidden shadow-sm border border-[var(--border-default)] transition-transform hover:scale-[1.01]">
+        <div className="relative inline-block rounded-xl overflow-hidden shadow-sm border border-border-default transition-transform hover:scale-[1.01]">
           <span className="absolute top-2 left-2 bg-black/60 backdrop-blur-xs text-[8px] font-bold text-white tracking-widest uppercase px-1.5 py-0.5 rounded">
             Sponsored
           </span>

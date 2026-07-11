@@ -1,9 +1,9 @@
 # ToolPilot — Browser-Based Productivity Platform
 
-> **The world's largest browser-based productivity platform with 500+ free tools.**
+> **The world's largest browser-based productivity platform with 100+ free tools.**
 
-[![GitHub Pages](https://img.shields.io/badge/deployed-GitHub%20Pages-blue?logo=github)](https://toolpilot.app)
-[![Lighthouse](https://img.shields.io/badge/lighthouse-95%2B-green?logo=lighthouse)](https://toolpilot.app)
+[![GitHub Pages](https://img.shields.io/badge/deployed-GitHub%20Pages-blue?logo=github)](https://toolskyt.com)
+[![Lighthouse](https://img.shields.io/badge/lighthouse-95%2B-green?logo=lighthouse)](https://toolskyt.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Strict-blue?logo=typescript)](https://www.typescriptlang.org/)
 [![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
@@ -12,7 +12,7 @@
 
 ## 🚀 About
 
-ToolPilot is an enterprise-grade, browser-based productivity platform offering 500+ free tools across 14+ modules including Finance, Developer, PDF, Image, Text, AI Writing, Business, Productivity, Education, Travel, Health, and more.
+ToolPilot is an enterprise-grade, browser-based productivity platform offering 100+ free tools across 14+ modules including Finance, Developer, PDF, Image, Text, AI Writing, Business, Productivity, Education, Travel, Health, and more.
 
 **Key highlights:**
 - 🌐 **100% Browser-based** — No backend, no database, no hosting costs

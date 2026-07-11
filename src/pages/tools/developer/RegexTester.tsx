@@ -4,7 +4,7 @@ import { Input, Switch, Textarea } from '@/components/ui';
 
 export default function RegexTester() {
   const [pattern, setPattern] = useState('[a-zA-Z]+');
-  const [text, setText] = useState('Welcome to ToolPilot 2026!');
+  const [text, setText] = useState('Welcome to Toolskyt 2026!');
   const [isCaseInsensitive, setIsCaseInsensitive] = useState(false);
   const [isGlobal, setIsGlobal] = useState(true);
 

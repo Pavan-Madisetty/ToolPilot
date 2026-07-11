@@ -11,10 +11,10 @@ interface DiffLine {
 
 export default function DiffChecker() {
   const [original, setOriginal] = useState(
-    'Welcome to ToolPilot.\nThis is a free offline-first platform.'
+    'Welcome to Toolskyt.\nThis is a free offline-first platform.'
   );
   const [modified, setModified] = useState(
-    'Welcome to ToolPilot v2!\nThis is a free online platform.'
+    'Welcome to Toolskyt v2!\nThis is a free online platform.'
   );
   const [diffResult, setDiffResult] = useState<DiffLine[] | null>(null);
 

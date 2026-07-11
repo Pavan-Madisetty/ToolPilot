@@ -3,9 +3,9 @@ import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Textarea } from '@/components/ui';
 
 export default function TextDiff() {
-  const [original, setOriginal] = useState('Welcome to ToolPilot.\nThis is a free platform.');
+  const [original, setOriginal] = useState('Welcome to Toolskyt.\nThis is a free platform.');
   const [modified, setModified] = useState(
-    'Welcome to ToolPilot v2!\nThis is a free online platform.'
+    'Welcome to Toolskyt v2!\nThis is a free online platform.'
   );
 
   const diffLines = useMemo(() => {

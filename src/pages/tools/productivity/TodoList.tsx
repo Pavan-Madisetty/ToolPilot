@@ -21,7 +21,7 @@ export default function TodoList() {
   const [tasks, setTasks] = useState<Task[]>(() => {
     const cached = localStorage.getItem('todolist_tasks');
     return cached ? JSON.parse(cached) : [
-      { id: '1', title: 'Start using ToolPilot Productivity tools', priority: 'high', completed: true },
+      { id: '1', title: 'Start using Toolskyt Productivity tools', priority: 'high', completed: true },
       { id: '2', title: 'Schedule calendar focus blocks', priority: 'medium', completed: false },
       { id: '3', title: 'Optimize workspace template options', priority: 'low', completed: false },
     ];

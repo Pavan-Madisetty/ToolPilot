@@ -4,7 +4,7 @@ import { resolve } from 'path';
 import { TOOLS, isComingSoon } from '../src/config/tools';
 import { MODULES } from '../src/config/modules';
 
-const DOMAIN = 'https://toolpilot.app';
+const DOMAIN = 'https://toolskyt.com';
 
 function generateSitemap() {
   console.log('Generating sitemap.xml...');

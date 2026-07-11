@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /search
 
-Sitemap: https://toolpilot.app/sitemap.xml
+Sitemap: https://toolskyt.com/sitemap.xml

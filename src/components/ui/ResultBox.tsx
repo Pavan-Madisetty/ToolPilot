@@ -55,8 +55,7 @@ export function ResultBox({
     >
       {highlight && (
         <div
-          className="absolute top-0 left-0 right-0 h-[3px] rounded-t-lg"
-          style={{ background: 'var(--primary)' }}
+          className="absolute top-0 left-0 right-0 h-[3px] rounded-t-lg bg-primary"
           aria-hidden="true"
         />
       )}
@@ -75,14 +74,14 @@ export function ResultBox({
         })}
       >
         {prefix && (
-          <span className="text-lg font-semibold opacity-85 mr-0.5" aria-hidden="true">
+          <span className="text-body-large font-semibold opacity-85 mr-0.5" aria-hidden="true">
             {prefix}
           </span>
         )}
         <span>{displayValue}</span>
         {suffix && (
           <span
-            className="text-sm font-medium text-[var(--text-secondary)] ml-0.5"
+            className="text-caption font-medium text-text-secondary ml-0.5"
             aria-hidden="true"
           >
             {suffix}

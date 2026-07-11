@@ -178,12 +178,12 @@ export interface JsonFormatterState {
 // LocalStorage Keys
 // ─────────────────────────────────────────────
 export const STORAGE_KEYS = {
-  THEME: 'toolpilot_theme',
-  DESIGN: 'toolpilot_design',
-  FAVORITES: 'toolpilot_favorites',
-  HISTORY: 'toolpilot_history',
-  RECENTLY_USED: 'toolpilot_recently_used',
-  TOOL_HISTORY_PREFIX: 'toolpilot_tool_history_',
+  THEME: 'toolskyt_theme',
+  DESIGN: 'toolskyt_design',
+  FAVORITES: 'toolskyt_favorites',
+  HISTORY: 'toolskyt_history',
+  RECENTLY_USED: 'toolskyt_recently_used',
+  TOOL_HISTORY_PREFIX: 'toolskyt_tool_history_',
 } as const;
 
 export type StorageKey = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];

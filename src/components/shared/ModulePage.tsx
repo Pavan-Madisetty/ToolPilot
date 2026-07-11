@@ -35,12 +35,25 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Shortcut key listener for '/' search input focus
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === '/' && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        heroSearchRef.current?.focus();
+        heroSearchRef.current?.select();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   if (!moduleConfig || !metadata) {
     return (
       <div className="py-20 text-center">
-        <AlertCircle className="mx-auto text-red-500 mb-4" size={48} />
+        <AlertCircle className="mx-auto text-danger mb-4" size={48} />
         <h2 className="text-xl font-bold">Module Configuration Missing</h2>
-        <p className="text-sm text-gray-500 mt-2">Could not load details for module key: "{moduleKey}"</p>
+        <p className="text-sm text-text-secondary mt-2">Could not load details for module key: "{moduleKey}"</p>
       </div>
     );
   }
@@ -168,7 +181,7 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
       )}
 
       {/* ── HERO SECTION ── */}
-      <section className="pt-6 pb-12 md:pt-10 md:pb-16 text-center max-w-3xl mx-auto flex flex-col items-center">
+      <section className="pt-8 pb-16 text-center max-w-3xl mx-auto flex flex-col items-center">
         {/* Module Icon Container with Glow */}
         <div
           className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 border relative shadow-sm"
@@ -182,17 +195,17 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
         </div>
 
         {/* Title & Description */}
-        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-[var(--text-primary)]">
+        <h1 className="text-h2 font-extrabold tracking-tight text-[var(--text-primary)]">
           {moduleDisplayName}
         </h1>
-        <p className="text-sm md:text-base text-[var(--text-secondary)] mt-3 max-w-2xl leading-relaxed">
+        <p className="text-body-large mt-3 max-w-2xl leading-relaxed">
           {moduleConfig.description}
         </p>
 
         {/* Search input container */}
         <div className="w-full max-w-xl mt-8 relative group">
-          <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-[var(--text-tertiary)] group-focus-within:text-[var(--primary)] transition-colors">
-            <Search size={18} />
+          <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none text-[var(--text-secondary)] group-focus-within:text-[var(--primary)] transition-colors">
+            <Search size={20} />
           </div>
           <input
             ref={heroSearchRef}
@@ -200,17 +213,22 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
             placeholder={`Search ${tools.length} ${searchPlaceholderName}...`}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-12 pr-10 rounded-xl border border-[var(--border-default)] bg-[var(--bg-elevated)] text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/20 focus:border-[var(--primary)] transition-all text-[var(--text-primary)]"
-            style={{ borderRadius: '14px', height: '48px' }}
+            className="w-full pl-14 pr-16 rounded-xl border border-[var(--border-default)] bg-[var(--bg-elevated)] text-[var(--text-primary)] shadow-sm focus:outline-none focus:ring-4 focus:ring-[var(--primary)]/10 focus:border-[var(--primary)] transition-all font-medium"
+            style={{ borderRadius: '16px', height: '60px', fontSize: '1.125rem' }}
           />
-          {searchQuery && (
-            <button
-              onClick={() => setSearchQuery('')}
-              className="absolute inset-y-0 right-3 flex items-center text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
-            >
-              <X size={16} />
-            </button>
-          )}
+          <div className="absolute inset-y-0 right-4 flex items-center gap-2">
+            {searchQuery ? (
+              <button
+                onClick={() => setSearchQuery('')}
+                className="text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
+                aria-label="Clear search query"
+              >
+                <X size={18} />
+              </button>
+            ) : (
+              <kbd className="workspace-header__search-kbd">/</kbd>
+            )}
+          </div>
         </div>
 
         {/* Popular Searches */}
@@ -232,14 +250,14 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
 
       {/* ── FEATURED TOOLS SECTION ── */}
       {featuredTools.length > 0 && !searchQuery && (
-        <section id="featured" className="py-8 border-t border-[var(--border-default)]">
-          <div className="flex items-center gap-2 mb-6">
-            <div className="w-1.5 h-6 rounded-full" style={{ background: colors.accent }} />
-            <h2 className="text-xl font-bold tracking-tight text-[var(--text-primary)]">
+        <section id="featured" className="py-12 md:py-16">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-2 h-6 rounded-full" style={{ background: colors.accent }} />
+            <h2 className="text-h3 font-bold tracking-tight text-[var(--text-primary)]">
               Featured {moduleDisplayName}
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="tools-grid">
             {featuredTools.map((tool) => (
               <ToolCard key={tool.id} tool={tool} />
             ))}
@@ -248,15 +266,15 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
       )}
 
       {/* ── ALL TOOLS GRID SECTION ── */}
-      <section id="all-tools" className="py-8 border-t border-[var(--border-default)]">
-        <div className="flex items-center justify-between gap-4 mb-6">
-          <div className="flex items-center gap-2">
-            <div className="w-1.5 h-6 rounded-full" style={{ background: searchQuery ? 'var(--primary)' : colors.accent }} />
-            <h2 className="text-xl font-bold tracking-tight text-[var(--text-primary)]">
+      <section id="all-tools" className="py-12 md:py-16">
+        <div className="flex items-center justify-between gap-4 mb-8">
+          <div className="flex items-center gap-3">
+            <div className="w-2 h-6 rounded-full" style={{ background: searchQuery ? 'var(--primary)' : colors.accent }} />
+            <h2 className="text-h3 font-bold tracking-tight text-[var(--text-primary)]">
               {searchQuery ? 'Search Results' : `All ${moduleDisplayName}`}
             </h2>
           </div>
-          <span className="text-xs font-semibold text-[var(--text-secondary)] px-2.5 py-1 rounded-full bg-[var(--bg-surface)] border border-[var(--border-default)]">
+          <span className="text-sm font-semibold text-[var(--text-secondary)] shrink-0">
             {filteredTools.length} {filteredTools.length === 1 ? 'Tool' : 'Tools'}
           </span>
         </div>
@@ -283,17 +301,17 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
           <>
             {/* Split by categories if registered and search is empty */}
             {!searchQuery && metadata.categories && metadata.categories.length > 0 ? (
-              <div className="space-y-10">
+              <div className="space-y-16">
                 {metadata.categories.map((cat, idx) => {
                   const catTools = filteredTools.filter((t) => cat.toolIds.includes(t.id));
                   if (catTools.length === 0) return null;
 
                   return (
-                    <div key={idx} className="space-y-4">
-                      <h3 className="text-base font-bold text-[var(--text-primary)] border-b border-[var(--border-default)] pb-2">
+                    <div key={idx} className="mb-16 last:mb-0">
+                      <h3 className="text-h4 font-bold text-[var(--text-primary)] mb-6">
                         {cat.title}
                       </h3>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <div className="tools-grid">
                         {catTools.map((tool) => (
                           <ToolCard key={tool.id} tool={tool} />
                         ))}
@@ -304,11 +322,11 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
 
                 {/* Render any uncategorized tools in a separate section */}
                 {uncategorizedTools.length > 0 && (
-                  <div className="space-y-4">
-                    <h3 className="text-base font-bold text-[var(--text-primary)] border-b border-[var(--border-default)] pb-2">
+                  <div className="mt-16">
+                    <h3 className="text-h4 font-bold text-[var(--text-primary)] mb-6">
                       More {moduleConfig.name} Utilities
                     </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="tools-grid">
                       {uncategorizedTools.map((tool) => (
                         <ToolCard key={tool.id} tool={tool} />
                       ))}
@@ -318,7 +336,7 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
               </div>
             ) : (
               /* Flat grid rendering */
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="tools-grid">
                 {filteredTools.map((tool) => (
                   <ToolCard key={tool.id} tool={tool} />
                 ))}
@@ -329,10 +347,10 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
       </section>
 
       {/* ── WHY USE THESE TOOLS ── */}
-      <section id="why-use" className="py-12 border-t border-[var(--border-default)]">
+      <section id="why-use" className="py-12 md:py-16">
         <div className="text-center max-w-2xl mx-auto mb-10">
           <h2 className="text-2xl font-bold tracking-tight text-[var(--text-primary)]">
-            Why Use ToolPilot {whyUseName}?
+            Why Use Toolskyt {whyUseName}?
           </h2>
           <p className="text-sm text-[var(--text-secondary)] mt-2 leading-relaxed">
             All utilities in our library are fine-tuned for high-performance developer workflows, privacy-first actions, and modern standards.
@@ -344,7 +362,6 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
             <div
               key={idx}
               className="p-6 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-elevated)] shadow-sm hover:shadow-md transition-shadow duration-200"
-              style={{ borderRadius: '16px' }}
             >
               <div
                 className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 border"
@@ -363,97 +380,94 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
         </div>
       </section>
 
-      {/* ── FREQUENTLY ASKED QUESTIONS ── */}
-      {metadata.faqs && metadata.faqs.length > 0 && (
-        <section id="faq" className="py-12 border-t border-[var(--border-default)]">
-          <div className="flex items-center gap-3 mb-8">
-            <div
-              className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-white text-sm shrink-0 shadow-sm"
-              style={{ background: colors.accent }}
-            >
-              ?
-            </div>
-            <h2 className="text-2xl font-bold tracking-tight text-[var(--text-primary)]">
-              Frequently Asked Questions
-            </h2>
-          </div>
-          <div className="max-w-4xl">
-            <Accordion
-              items={metadata.faqs.map((faq) => ({
-                title: faq.question,
-                content: faq.answer,
-              }))}
-            />
-          </div>
-        </section>
-      )}
-
-      {/* ── RELATED MODULES SECTION ── */}
-      {metadata.relatedModules.length > 0 && (
-        <section className="py-12 border-t border-[var(--border-default)]">
-          <h2 className="text-lg font-bold tracking-tight text-[var(--text-primary)] mb-6">
-            Explore Related Categories
-          </h2>
-          <div className="flex flex-wrap gap-3">
-            {metadata.relatedModules.map((key) => {
-              const relConf = MODULES.find((m) => m.key === key);
-              if (!relConf) return null;
-
-              const relColors = getModuleColors(key);
-
-              return (
-                <Link
-                  key={key}
-                  to={relConf.slug}
-                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[var(--border-default)] hover:shadow-sm hover:border-[var(--primary)] transition-all bg-[var(--bg-elevated)]"
-                  style={{ borderRadius: '12px' }}
+      {/* ── FAQ & RELATED CATEGORIES SECTION ── */}
+      {((metadata.faqs && metadata.faqs.length > 0) || metadata.relatedModules.length > 0) && (
+        <section className="py-12 md:py-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          {/* FAQ Column (Left - 7 cols) */}
+          {metadata.faqs && metadata.faqs.length > 0 && (
+            <div id="faq" className="lg:col-span-7">
+              <div className="flex items-center gap-3 mb-6">
+                <div
+                  className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-white text-sm shrink-0 shadow-sm"
+                  style={{ background: colors.accent }}
                 >
-                  <div
-                    className="w-6 h-6 rounded-md flex items-center justify-center text-xs shrink-0"
-                    style={{
-                      background: relColors.bg,
-                      color: relColors.accent,
-                    }}
-                  >
-                    <LucideIcon name={relConf.icon} size={12} strokeWidth={2.5} />
-                  </div>
-                  <span className="text-xs font-semibold text-[var(--text-primary)]">{relConf.name}</span>
-                  <ChevronRight size={12} className="text-[var(--text-tertiary)]" />
-                </Link>
-              );
-            })}
-          </div>
+                  ?
+                </div>
+                <h2 className="text-h3 font-bold tracking-tight text-[var(--text-primary)]">
+                  Frequently Asked Questions
+                </h2>
+              </div>
+              <Accordion
+                items={metadata.faqs.map((faq) => ({
+                  title: faq.question,
+                  content: faq.answer,
+                }))}
+              />
+            </div>
+          )}
+
+          {/* Related Categories Column (Right - 5 cols) */}
+          {metadata.relatedModules.length > 0 && (
+            <div className="lg:col-span-5">
+              <h2 className="text-h3 font-bold tracking-tight text-[var(--text-primary)] mb-6">
+                Explore Related Categories
+              </h2>
+              <div className="flex flex-wrap gap-3">
+                {metadata.relatedModules.map((key) => {
+                  const relConf = MODULES.find((m) => m.key === key);
+                  if (!relConf) return null;
+
+                  const relColors = getModuleColors(key);
+
+                  return (
+                    <Link
+                      key={key}
+                      to={relConf.slug}
+                      className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[var(--border-default)] hover:shadow-sm hover:border-[var(--primary)] transition-all bg-[var(--bg-elevated)]"
+                    >
+                      <div
+                        className="w-6 h-6 rounded-md flex items-center justify-center text-xs shrink-0"
+                        style={{
+                          background: relColors.bg,
+                          color: relColors.accent,
+                        }}
+                      >
+                        <LucideIcon name={relConf.icon} size={12} strokeWidth={2.5} />
+                      </div>
+                      <span className="text-xs font-semibold text-[var(--text-primary)]">{relConf.name}</span>
+                      <ChevronRight size={12} className="text-[var(--text-tertiary)]" />
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </section>
       )}
 
       {/* ── CTA SECTION ── */}
-      <section className="py-8 md:py-10 border-t border-[var(--border-default)]">
-        <div
-          className="p-8 md:p-12 rounded-2xl border text-center relative overflow-hidden"
-          style={{
-            borderRadius: '16px',
-            background: 'linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-elevated) 100%)',
-            borderColor: 'var(--border-default)',
-          }}
-        >
+      <section className="py-12 md:py-16">
+        <div className="cta-banner">
           {/* Accent light glow */}
           <div
-            className="absolute top-0 right-0 w-64 h-64 rounded-full filter blur-[80px] pointer-events-none opacity-20"
+            className="absolute top-0 right-0 w-96 h-96 rounded-full filter blur-[120px] pointer-events-none opacity-20"
             style={{ background: colors.accent }}
           />
 
-          <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-[var(--text-primary)] max-w-xl mx-auto">
-            Ready to experience lightning-fast productivity?
-          </h2>
-          <p className="text-sm text-[var(--text-secondary)] mt-3 max-w-xl mx-auto leading-relaxed">
-            ToolPilot provides {tools.length} private utilities for {ctaTasksLabel} right in your browser tab. No registrations, no fee requirements, and no data tracking.
-          </p>
+          <div className="max-w-xl text-center lg:text-left">
+            <h2 className="cta-banner__title text-h3 font-extrabold tracking-tight mb-2">
+              Ready to experience lightning-fast productivity?
+            </h2>
+            <p className="cta-banner__desc">
+              Toolskyt provides {tools.length} private utilities for {ctaTasksLabel} right in your browser tab. No registrations, no fee requirements, and no data tracking.
+            </p>
+          </div>
 
-          <div className="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
+          <div className="flex flex-col sm:flex-row gap-4 shrink-0 justify-center">
             <Link
               to="/"
-              className="btn btn-primary inline-flex items-center gap-2"
-              style={{ borderRadius: '8px', height: '40px' }}
+              className="cta-banner__btn"
+              style={{ background: 'var(--primary)', color: '#ffffff' }}
             >
               <span>Explore All Categories</span>
               <ArrowRight size={16} />
@@ -461,8 +475,8 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
             <a
               href="#all-tools"
               onClick={(e) => handleSmoothScroll(e, 'all-tools')}
-              className="btn btn-secondary inline-flex items-center gap-1.5"
-              style={{ borderRadius: '8px', height: '40px' }}
+              className="cta-banner__btn"
+              style={{ background: 'var(--bg-surface)', color: 'var(--text-primary)', border: '1px solid var(--border-default)' }}
             >
               Browse All Tools
             </a>

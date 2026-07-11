@@ -5,48 +5,48 @@ export function AboutPage() {
   return (
     <>
       <Helmet>
-        <title>About | ToolPilot</title>
+        <title>About | Toolskyt</title>
         <meta
           name="description"
-          content="Learn about ToolPilot, the private, offline-first client-side web toolbox."
+          content="Learn about Toolskyt, the private, offline-first client-side web toolbox."
         />
-        <link rel="canonical" href="https://toolpilot.app/about" />
+        <link rel="canonical" href="https://toolskyt.com/about" />
         <meta name="robots" content="index, follow" />
 
         {/* Open Graph */}
-        <meta property="og:title" content="About | ToolPilot" />
+        <meta property="og:title" content="About | Toolskyt" />
         <meta
           property="og:description"
-          content="Learn about ToolPilot, the private, offline-first client-side web toolbox."
+          content="Learn about Toolskyt, the private, offline-first client-side web toolbox."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://toolpilot.app/about" />
-        <meta property="og:image" content="https://toolpilot.app/og-image.png" />
-        <meta property="og:site_name" content="ToolPilot" />
+        <meta property="og:url" content="https://toolskyt.com/about" />
+        <meta property="og:image" content="https://toolskyt.com/og-image.png" />
+        <meta property="og:site_name" content="Toolskyt" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="About | ToolPilot" />
+        <meta name="twitter:title" content="About | Toolskyt" />
         <meta
           name="twitter:description"
-          content="Learn about ToolPilot, the private, offline-first client-side web toolbox."
+          content="Learn about Toolskyt, the private, offline-first client-side web toolbox."
         />
-        <meta name="twitter:image" content="https://toolpilot.app/og-image.png" />
+        <meta name="twitter:image" content="https://toolskyt.com/og-image.png" />
       </Helmet>
       <div className="container-app py-12 max-w-3xl mx-auto">
         <Breadcrumb items={[{ label: 'About' }]} />
         <h1 className="text-3xl font-extrabold mt-6 mb-4 text-[var(--text-primary)]">
-          About ToolPilot
+          About Toolskyt
         </h1>
         <div className="text-sm leading-relaxed text-[var(--text-secondary)] space-y-4">
           <p>
-            ToolPilot is a comprehensive, client-side utility platform that provides over 50
+            Toolskyt is a comprehensive, client-side utility platform that provides over 50
             professional web tools completely free of charge. Our mission is to make developer,
             financial, text, and educational tools accessible instantly without any signups, ads, or
             tracking.
           </p>
           <p>
-            Unlike traditional utility sites, ToolPilot operates under an{' '}
+            Unlike traditional utility sites, Toolskyt operates under an{' '}
             <strong style={{ color: 'var(--text-primary)' }}>offline-first, client-side</strong>{' '}
             principle. All tools execute directly in your browser using JavaScript and WebAssembly.
             Your data never leaves your computer, ensuring total privacy.
@@ -61,45 +61,45 @@ export function BlogPage() {
   return (
     <>
       <Helmet>
-        <title>Blog | ToolPilot</title>
+        <title>Blog | Toolskyt</title>
         <meta
           name="description"
-          content="Read the latest updates and developer tutorials on the ToolPilot blog."
+          content="Read the latest updates and developer tutorials on the Toolskyt blog."
         />
-        <link rel="canonical" href="https://toolpilot.app/blog" />
+        <link rel="canonical" href="https://toolskyt.com/blog" />
         <meta name="robots" content="index, follow" />
 
         {/* Open Graph */}
-        <meta property="og:title" content="Blog | ToolPilot" />
+        <meta property="og:title" content="Blog | Toolskyt" />
         <meta
           property="og:description"
-          content="Read the latest updates and developer tutorials on the ToolPilot blog."
+          content="Read the latest updates and developer tutorials on the Toolskyt blog."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://toolpilot.app/blog" />
-        <meta property="og:image" content="https://toolpilot.app/og-image.png" />
-        <meta property="og:site_name" content="ToolPilot" />
+        <meta property="og:url" content="https://toolskyt.com/blog" />
+        <meta property="og:image" content="https://toolskyt.com/og-image.png" />
+        <meta property="og:site_name" content="Toolskyt" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="Blog | ToolPilot" />
+        <meta name="twitter:title" content="Blog | Toolskyt" />
         <meta
           name="twitter:description"
-          content="Read the latest updates and developer tutorials on the ToolPilot blog."
+          content="Read the latest updates and developer tutorials on the Toolskyt blog."
         />
-        <meta name="twitter:image" content="https://toolpilot.app/og-image.png" />
+        <meta name="twitter:image" content="https://toolskyt.com/og-image.png" />
       </Helmet>
       <div className="container-app py-12 max-w-3xl mx-auto">
         <Breadcrumb items={[{ label: 'Blog' }]} />
         <h1 className="text-3xl font-extrabold mt-6 mb-4 text-[var(--text-primary)]">Blog</h1>
         <div className="text-sm leading-relaxed text-[var(--text-secondary)] space-y-4">
           <p>
-            Welcome to the ToolPilot blog! We share guides, release notes, and tutorials on
+            Welcome to the Toolskyt blog! We share guides, release notes, and tutorials on
             client-side web development.
           </p>
           <div className="border border-[var(--border-default)] rounded-xl p-6 bg-[var(--bg-elevated)]">
             <h2 className="text-lg font-bold text-[var(--text-primary)] mb-1">
-              Introducing ToolPilot Redesign
+              Introducing Toolskyt Redesign
             </h2>
             <span className="text-xs text-[var(--text-tertiary)]">Published July 10, 2026</span>
             <p className="mt-3 text-sm text-[var(--text-secondary)]">
@@ -117,33 +117,33 @@ export function PrivacyPage() {
   return (
     <>
       <Helmet>
-        <title>Privacy Policy | ToolPilot</title>
+        <title>Privacy Policy | Toolskyt</title>
         <meta
           name="description"
-          content="Read our privacy policy. ToolPilot is a client-side platform that never sends your data to servers."
+          content="Read our privacy policy. Toolskyt is a client-side platform that never sends your data to servers."
         />
-        <link rel="canonical" href="https://toolpilot.app/privacy" />
+        <link rel="canonical" href="https://toolskyt.com/privacy" />
         <meta name="robots" content="index, follow" />
 
         {/* Open Graph */}
-        <meta property="og:title" content="Privacy Policy | ToolPilot" />
+        <meta property="og:title" content="Privacy Policy | Toolskyt" />
         <meta
           property="og:description"
-          content="Read our privacy policy. ToolPilot is a client-side platform that never sends your data to servers."
+          content="Read our privacy policy. Toolskyt is a client-side platform that never sends your data to servers."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://toolpilot.app/privacy" />
-        <meta property="og:image" content="https://toolpilot.app/og-image.png" />
-        <meta property="og:site_name" content="ToolPilot" />
+        <meta property="og:url" content="https://toolskyt.com/privacy" />
+        <meta property="og:image" content="https://toolskyt.com/og-image.png" />
+        <meta property="og:site_name" content="Toolskyt" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="Privacy Policy | ToolPilot" />
+        <meta name="twitter:title" content="Privacy Policy | Toolskyt" />
         <meta
           name="twitter:description"
-          content="Read our privacy policy. ToolPilot is a client-side platform that never sends your data to servers."
+          content="Read our privacy policy. Toolskyt is a client-side platform that never sends your data to servers."
         />
-        <meta name="twitter:image" content="https://toolpilot.app/og-image.png" />
+        <meta name="twitter:image" content="https://toolskyt.com/og-image.png" />
       </Helmet>
       <div className="container-app py-12 max-w-3xl mx-auto">
         <Breadcrumb items={[{ label: 'Privacy' }]} />
@@ -152,7 +152,7 @@ export function PrivacyPage() {
         </h1>
         <div className="text-sm leading-relaxed text-[var(--text-secondary)] space-y-4">
           <p>
-            At ToolPilot, we take your privacy extremely seriously.{' '}
+            At Toolskyt, we take your privacy extremely seriously.{' '}
             <strong style={{ color: 'var(--text-primary)' }}>
               All calculations, formatting, compression, and operations run entirely inside your
               browser.
@@ -173,24 +173,24 @@ export function TermsPage() {
   return (
     <>
       <Helmet>
-        <title>Terms of Service | ToolPilot</title>
-        <meta name="description" content="Review the Terms of Service for ToolPilot." />
-        <link rel="canonical" href="https://toolpilot.app/terms" />
+        <title>Terms of Service | Toolskyt</title>
+        <meta name="description" content="Review the Terms of Service for Toolskyt." />
+        <link rel="canonical" href="https://toolskyt.com/terms" />
         <meta name="robots" content="index, follow" />
 
         {/* Open Graph */}
-        <meta property="og:title" content="Terms of Service | ToolPilot" />
-        <meta property="og:description" content="Review the Terms of Service for ToolPilot." />
+        <meta property="og:title" content="Terms of Service | Toolskyt" />
+        <meta property="og:description" content="Review the Terms of Service for Toolskyt." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://toolpilot.app/terms" />
-        <meta property="og:image" content="https://toolpilot.app/og-image.png" />
-        <meta property="og:site_name" content="ToolPilot" />
+        <meta property="og:url" content="https://toolskyt.com/terms" />
+        <meta property="og:image" content="https://toolskyt.com/og-image.png" />
+        <meta property="og:site_name" content="Toolskyt" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="Terms of Service | ToolPilot" />
-        <meta name="twitter:description" content="Review the Terms of Service for ToolPilot." />
-        <meta name="twitter:image" content="https://toolpilot.app/og-image.png" />
+        <meta name="twitter:title" content="Terms of Service | Toolskyt" />
+        <meta name="twitter:description" content="Review the Terms of Service for Toolskyt." />
+        <meta name="twitter:image" content="https://toolskyt.com/og-image.png" />
       </Helmet>
       <div className="container-app py-12 max-w-3xl mx-auto">
         <Breadcrumb items={[{ label: 'Terms' }]} />
@@ -199,7 +199,7 @@ export function TermsPage() {
         </h1>
         <div className="text-sm leading-relaxed text-[var(--text-secondary)] space-y-4">
           <p>
-            By using ToolPilot, you agree to use our tools for lawful purposes. Since our tools
+            By using Toolskyt, you agree to use our tools for lawful purposes. Since our tools
             execute exclusively client-side, we bear no liability for errors or discrepancies in
             outputs (such as EMI or interest calculators). All tools are provided "as-is".
           </p>
@@ -213,24 +213,24 @@ export function ContactPage() {
   return (
     <>
       <Helmet>
-        <title>Contact Us | ToolPilot</title>
-        <meta name="description" content="Contact the ToolPilot project maintainers." />
-        <link rel="canonical" href="https://toolpilot.app/contact" />
+        <title>Contact Us | Toolskyt</title>
+        <meta name="description" content="Contact the Toolskyt project maintainers." />
+        <link rel="canonical" href="https://toolskyt.com/contact" />
         <meta name="robots" content="index, follow" />
 
         {/* Open Graph */}
-        <meta property="og:title" content="Contact Us | ToolPilot" />
-        <meta property="og:description" content="Contact the ToolPilot project maintainers." />
+        <meta property="og:title" content="Contact Us | Toolskyt" />
+        <meta property="og:description" content="Contact the Toolskyt project maintainers." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://toolpilot.app/contact" />
-        <meta property="og:image" content="https://toolpilot.app/og-image.png" />
-        <meta property="og:site_name" content="ToolPilot" />
+        <meta property="og:url" content="https://toolskyt.com/contact" />
+        <meta property="og:image" content="https://toolskyt.com/og-image.png" />
+        <meta property="og:site_name" content="Toolskyt" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="Contact Us | ToolPilot" />
-        <meta name="twitter:description" content="Contact the ToolPilot project maintainers." />
-        <meta name="twitter:image" content="https://toolpilot.app/og-image.png" />
+        <meta name="twitter:title" content="Contact Us | Toolskyt" />
+        <meta name="twitter:description" content="Contact the Toolskyt project maintainers." />
+        <meta name="twitter:image" content="https://toolskyt.com/og-image.png" />
       </Helmet>
       <div className="container-app py-12 max-w-3xl mx-auto">
         <Breadcrumb items={[{ label: 'Contact' }]} />
@@ -241,10 +241,10 @@ export function ContactPage() {
             maintainers at:
           </p>
           <a
-            href="mailto:support@toolpilot.app"
+            href="mailto:support@toolskyt.com"
             className="font-semibold text-[var(--primary)] hover:text-[var(--text-link-hover)]"
           >
-            support@toolpilot.app
+            support@toolskyt.com
           </a>
         </div>
       </div>

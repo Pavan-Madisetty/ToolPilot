@@ -7,6 +7,7 @@ interface LucideIconProps {
   className?: string;
   strokeWidth?: number;
   style?: CSSProperties;
+  'aria-hidden'?: boolean | 'true' | 'false';
 }
 
 const ICON_MAPPING: Record<string, string> = {
@@ -73,20 +74,45 @@ export function LucideIcon({
   className,
   strokeWidth = 2,
   style,
+  'aria-hidden': ariaHidden = true,
 }: LucideIconProps) {
   // Resolve mapping
   const resolvedName = ICON_MAPPING[name] || name;
   
   // Find component in Icons bundle
-  const IconComponent = (Icons as any)[resolvedName];
+  const IconComponent = (Icons as unknown as Record<
+    string,
+    React.ComponentType<{
+      size?: number;
+      className?: string;
+      strokeWidth?: number;
+      style?: CSSProperties;
+      'aria-hidden'?: boolean | 'true' | 'false';
+    }>
+  >)[resolvedName];
 
   if (!IconComponent) {
     // Fallback icon
-    return <Icons.HelpCircle size={size} className={className} strokeWidth={strokeWidth} style={style} />;
+    return (
+      <Icons.HelpCircle
+        size={size}
+        className={className}
+        strokeWidth={strokeWidth}
+        style={style}
+        aria-hidden={ariaHidden}
+      />
+    );
   }
 
-  return <IconComponent size={size} className={className} strokeWidth={strokeWidth} style={style} />;
+  return (
+    <IconComponent
+      size={size}
+      className={className}
+      strokeWidth={strokeWidth}
+      style={style}
+      aria-hidden={ariaHidden}
+    />
+  );
 }
-
 
 export default LucideIcon;

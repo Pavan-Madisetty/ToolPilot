@@ -13,7 +13,7 @@ interface Note {
 export default function Notes() {
   const [notes, setNotes] = useState<Note[]>(() => {
     try {
-      const saved = localStorage.getItem('toolpilot_notes');
+      const saved = localStorage.getItem('toolskyt_notes');
       if (saved) return JSON.parse(saved);
     } catch (e) {
       console.error('Error loading notes:', e);
@@ -27,7 +27,7 @@ export default function Notes() {
 
 Here are some cool concepts for the upcoming hackathon:
 
-1. **ToolPilot Extensions**: Custom modules for developer workflows.
+1. **Toolskyt Extensions**: Custom modules for developer workflows.
 2. **AI Resume Parser**: Extract and clean CV text into ATS formats.
 3. **Task Board**: Local storage offline Kanban board.
 
@@ -50,7 +50,7 @@ Date: 2026-07-10
 
   const [activeNoteId, setActiveNoteId] = useState<string>(() => {
     try {
-      const saved = localStorage.getItem('toolpilot_notes');
+      const saved = localStorage.getItem('toolskyt_notes');
       if (saved) {
         const parsed = JSON.parse(saved);
         if (parsed && parsed.length > 0) return parsed[0].id;
@@ -66,7 +66,7 @@ Date: 2026-07-10
   // Sync to local storage
   useEffect(() => {
     try {
-      localStorage.setItem('toolpilot_notes', JSON.stringify(notes));
+      localStorage.setItem('toolskyt_notes', JSON.stringify(notes));
     } catch (e) {
       console.error('Error saving notes:', e);
     }

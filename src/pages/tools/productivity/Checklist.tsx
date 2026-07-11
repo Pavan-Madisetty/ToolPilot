@@ -12,7 +12,7 @@ interface ChecklistItem {
 export default function Checklist() {
   const [items, setItems] = useState<ChecklistItem[]>(() => {
     try {
-      const saved = localStorage.getItem('toolpilot_checklist');
+      const saved = localStorage.getItem('toolskyt_checklist');
       if (saved) return JSON.parse(saved);
     } catch (e) {
       console.error('Error loading checklist:', e);
@@ -32,7 +32,7 @@ export default function Checklist() {
   // Persist items to local storage
   useEffect(() => {
     try {
-      localStorage.setItem('toolpilot_checklist', JSON.stringify(items));
+      localStorage.setItem('toolskyt_checklist', JSON.stringify(items));
     } catch (e) {
       console.error('Error saving checklist:', e);
     }

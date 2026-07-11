@@ -136,7 +136,7 @@ export const MODULE_METADATA: Record<string, ModuleMetadata> = {
     faqs: [
       {
         question: 'Is it safe to paste JWT tokens or API configs here?',
-        answer: 'Yes. Unlike online tools that send payload data to backend servers, ToolPilot parses and formats all tokens and files inside your browser. No data ever leaves your device.',
+        answer: 'Yes. Unlike online tools that send payload data to backend servers, Toolskyt parses and formats all tokens and files inside your browser. No data ever leaves your device.',
       },
       {
         question: 'Does the JSON Formatter validate syntax errors?',
@@ -385,7 +385,7 @@ export const MODULE_METADATA: Record<string, ModuleMetadata> = {
     faqs: [
       {
         question: 'Do my checklists and note data persist?',
-        answer: 'Yes, we use the browser local storage API to auto-save checklists, Pomodoro sessions, and notes so they persist when you reopen ToolPilot.',
+        answer: 'Yes, we use the browser local storage API to auto-save checklists, Pomodoro sessions, and notes so they persist when you reopen Toolskyt.',
       },
       {
         question: 'Can I customize the timer intervals?',

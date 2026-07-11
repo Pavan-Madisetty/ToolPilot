@@ -2,7 +2,8 @@ import { useEffect, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useUIStore } from '@/stores/uiStore';
 import type { ToastMessage } from '@/types';
-import { CheckCircle, AlertCircle, AlertTriangle, Info, X, LucideIcon } from 'lucide-react';
+import { CheckCircle, AlertCircle, AlertTriangle, Info, X } from 'lucide-react';
+import { clsx } from 'clsx';
 
 // ─────────────────────────────────────────────
 // Toast Configuration
@@ -13,40 +14,35 @@ type ToastVariant = ToastMessage['type'];
 const VARIANT_CONFIG: Record<
   ToastVariant,
   {
-    icon: LucideIcon;
-    bg: string;
-    border: string;
-    iconColor: string;
-    labelColor: string;
+    icon: typeof CheckCircle;
+    bgClass: string;
+    borderClass: string;
+    textClass: string;
   }
 > = {
   success: {
     icon: CheckCircle,
-    bg: 'rgba(22, 163, 74, 0.08)',
-    border: 'rgba(22, 163, 74, 0.25)',
-    iconColor: 'rgb(22, 163, 74)',
-    labelColor: 'rgb(22, 163, 74)',
+    bgClass: 'bg-success-subtle',
+    borderClass: 'border-success/25',
+    textClass: 'text-success',
   },
   error: {
     icon: AlertCircle,
-    bg: 'rgba(220, 38, 38, 0.08)',
-    border: 'rgba(220, 38, 38, 0.25)',
-    iconColor: 'rgb(220, 38, 38)',
-    labelColor: 'rgb(220, 38, 38)',
+    bgClass: 'bg-danger-subtle',
+    borderClass: 'border-danger/25',
+    textClass: 'text-danger',
   },
   warning: {
     icon: AlertTriangle,
-    bg: 'rgba(234, 179, 8, 0.08)',
-    border: 'rgba(234, 179, 8, 0.3)',
-    iconColor: 'rgb(202, 138, 4)',
-    labelColor: 'rgb(161, 98, 7)',
+    bgClass: 'bg-warning-subtle',
+    borderClass: 'border-warning/30',
+    textClass: 'text-warning',
   },
   info: {
     icon: Info,
-    bg: 'rgba(59, 130, 246, 0.08)',
-    border: 'rgba(59, 130, 246, 0.25)',
-    iconColor: 'rgb(59, 130, 246)',
-    labelColor: 'rgb(37, 99, 235)',
+    bgClass: 'bg-info-subtle',
+    borderClass: 'border-info/25',
+    textClass: 'text-info',
   },
 };
 
@@ -64,7 +60,7 @@ function ToastItem({ toast, onDismiss }: ToastItemProps) {
   const Icon = config.icon;
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Auto-dismiss with visual progress
+  // Auto-dismiss logic
   useEffect(() => {
     const duration = toast.duration ?? 4000;
     timerRef.current = setTimeout(() => onDismiss(toast.id), duration);
@@ -83,75 +79,32 @@ function ToastItem({ toast, onDismiss }: ToastItemProps) {
       role="alert"
       aria-live="polite"
       aria-atomic="true"
-      style={{
-        display: 'flex',
-        alignItems: 'flex-start',
-        gap: 12,
-        padding: '14px 16px',
-        borderRadius: 14,
-        background: 'var(--bg-elevated)',
-        border: `1.5px solid ${config.border}`,
-        boxShadow: 'var(--shadow-lg)',
-        minWidth: 280,
-        maxWidth: 380,
-        backdropFilter: 'blur(12px)',
-        position: 'relative',
-        overflow: 'hidden',
-      }}
+      className={clsx(
+        'flex items-start gap-3 p-3.5 pr-4 rounded-xl bg-bg-elevated shadow-lg min-w-[280px] max-w-[380px] backdrop-blur-md relative overflow-hidden border',
+        config.borderClass
+      )}
     >
       {/* Colored left stripe */}
       <div
         aria-hidden="true"
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          bottom: 0,
-          width: 4,
-          background: config.iconColor,
-          borderRadius: '14px 0 0 14px',
-        }}
+        className={clsx('absolute top-0 left-0 bottom-0 w-1 rounded-l-lg bg-current', config.textClass)}
       />
 
       {/* Icon */}
       <div
         aria-hidden="true"
-        style={{
-          flexShrink: 0,
-          marginTop: 1,
-          padding: 6,
-          borderRadius: 8,
-          background: config.bg,
-          marginLeft: 8,
-        }}
+        className={clsx('shrink-0 mt-0.5 p-1.5 rounded-md ml-2', config.bgClass)}
       >
-        <Icon width={18} height={18} style={{ color: config.iconColor }} strokeWidth={1.75} />
+        <Icon width={18} height={18} className={config.textClass} strokeWidth={1.75} />
       </div>
 
       {/* Content */}
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <p
-          style={{
-            margin: 0,
-            fontSize: '0.875rem',
-            fontWeight: 600,
-            color: 'var(--text-primary)',
-            fontFamily: 'var(--font-sans)',
-            lineHeight: 1.4,
-          }}
-        >
+      <div className="flex-1 min-w-0">
+        <p className="m-0 text-caption font-semibold text-text-primary leading-normal">
           {toast.title}
         </p>
         {toast.message && (
-          <p
-            style={{
-              margin: '3px 0 0',
-              fontSize: '0.8125rem',
-              color: 'var(--text-secondary)',
-              fontFamily: 'var(--font-sans)',
-              lineHeight: 1.5,
-            }}
-          >
+          <p className="mt-1 mb-0 text-small text-text-secondary leading-relaxed">
             {toast.message}
           </p>
         )}
@@ -162,30 +115,7 @@ function ToastItem({ toast, onDismiss }: ToastItemProps) {
         type="button"
         onClick={() => onDismiss(toast.id)}
         aria-label="Dismiss notification"
-        style={{
-          flexShrink: 0,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: 24,
-          height: 24,
-          borderRadius: 6,
-          border: 'none',
-          background: 'transparent',
-          color: 'var(--text-tertiary)',
-          cursor: 'pointer',
-          padding: 0,
-          transition: 'background 0.15s, color 0.15s',
-          marginTop: 1,
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.background = 'var(--bg-surface)';
-          e.currentTarget.style.color = 'var(--text-primary)';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.background = 'transparent';
-          e.currentTarget.style.color = 'var(--text-tertiary)';
-        }}
+        className="shrink-0 flex items-center justify-center w-6 h-6 rounded-md border-0 bg-transparent text-text-tertiary hover:bg-bg-surface hover:text-text-primary cursor-pointer p-0 transition-colors mt-0.5"
       >
         <X size={14} strokeWidth={2.5} aria-hidden="true" />
       </button>
@@ -205,20 +135,11 @@ export function ToastContainer() {
       aria-label="Notifications"
       aria-live="polite"
       aria-relevant="additions removals"
-      style={{
-        position: 'fixed',
-        bottom: 24,
-        right: 24,
-        zIndex: 10000,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 10,
-        pointerEvents: 'none',
-      }}
+      className="fixed bottom-6 right-6 z-[10000] flex flex-col gap-2.5 pointer-events-none"
     >
       <AnimatePresence mode="sync" initial={false}>
         {toasts.map((toast) => (
-          <div key={toast.id} style={{ pointerEvents: 'auto' }}>
+          <div key={toast.id} className="pointer-events-auto">
             <ToastItem toast={toast} onDismiss={removeToast} />
           </div>
         ))}
@@ -226,3 +147,5 @@ export function ToastContainer() {
     </div>
   );
 }
+
+export default ToastContainer;

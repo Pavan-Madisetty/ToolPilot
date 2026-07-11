@@ -94,7 +94,7 @@ export default function JsonFormatter() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'toolpilot_formatted.json';
+    link.download = 'toolskyt_formatted.json';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -126,7 +126,7 @@ export default function JsonFormatter() {
           <Textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder='Paste JSON here... e.g. {"name": "ToolPilot", "tags": ["utility", "free"]}'
+            placeholder='Paste JSON here... e.g. {"name": "Toolskyt", "tags": ["utility", "free"]}'
             className="font-mono text-xs leading-relaxed h-[420px] resize-none"
             aria-label="JSON input raw data"
           />

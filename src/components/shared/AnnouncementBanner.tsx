@@ -7,7 +7,7 @@ export function AnnouncementBanner() {
   const { config } = useRuntimeConfig();
   const [dismissedBanners, setDismissedBanners] = useState<string[]>(() => {
     try {
-      const stored = localStorage.getItem('toolpilot_dismissed_announcements');
+      const stored = localStorage.getItem('toolskyt_dismissed_announcements');
       return stored ? JSON.parse(stored) : [];
     } catch {
       return [];
@@ -39,7 +39,7 @@ export function AnnouncementBanner() {
     const nextDismissed = [...dismissedBanners, activeBanner.id];
     setDismissedBanners(nextDismissed);
     try {
-      localStorage.setItem('toolpilot_dismissed_announcements', JSON.stringify(nextDismissed));
+      localStorage.setItem('toolskyt_dismissed_announcements', JSON.stringify(nextDismissed));
     } catch (err) {
       console.warn('Failed saving dismissed banners:', err);
     }
@@ -49,28 +49,28 @@ export function AnnouncementBanner() {
 
   const typeStyles = {
     info: {
-      bg: 'bg-blue-50 dark:bg-blue-950/20',
-      text: 'text-blue-800 dark:text-blue-200',
-      border: 'border-blue-200 dark:border-blue-900',
-      icon: <Info size={16} className="text-blue-600 dark:text-blue-400 mt-0.5" />,
+      bg: 'bg-info-subtle',
+      text: 'text-info',
+      border: 'border-info-subtle',
+      icon: <Info size={16} className="text-info mt-0.5" />,
     },
     warning: {
-      bg: 'bg-amber-50 dark:bg-amber-950/20',
-      text: 'text-amber-800 dark:text-amber-200',
-      border: 'border-amber-200 dark:border-amber-900',
-      icon: <AlertTriangle size={16} className="text-amber-600 dark:text-amber-400 mt-0.5" />,
+      bg: 'bg-warning-subtle',
+      text: 'text-warning',
+      border: 'border-warning-subtle',
+      icon: <AlertTriangle size={16} className="text-warning mt-0.5" />,
     },
     error: {
-      bg: 'bg-red-50 dark:bg-red-950/20',
-      text: 'text-red-800 dark:text-red-200',
-      border: 'border-red-200 dark:border-red-900',
-      icon: <AlertOctagon size={16} className="text-red-600 dark:text-red-400 mt-0.5" />,
+      bg: 'bg-danger-subtle',
+      text: 'text-danger',
+      border: 'border-danger-subtle',
+      icon: <AlertOctagon size={16} className="text-danger mt-0.5" />,
     },
     success: {
-      bg: 'bg-emerald-50 dark:bg-emerald-950/20',
-      text: 'text-emerald-800 dark:text-emerald-200',
-      border: 'border-emerald-200 dark:border-emerald-900',
-      icon: <CheckCircle2 size={16} className="text-emerald-600 dark:text-emerald-400 mt-0.5" />,
+      bg: 'bg-success-subtle',
+      text: 'text-success',
+      border: 'border-success-subtle',
+      icon: <CheckCircle2 size={16} className="text-success mt-0.5" />,
     },
   };
 

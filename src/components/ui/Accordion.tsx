@@ -25,7 +25,7 @@ export function AccordionItem({
   return (
     <div
       className={clsx(
-        'border-b border-[var(--border-default)] last:border-b-0 transition-colors duration-150',
+        'transition-colors duration-150',
         className
       )}
     >
@@ -80,7 +80,7 @@ export function Accordion({ items, className }: AccordionProps) {
   return (
     <div
       className={clsx(
-        'rounded-xl border overflow-hidden divide-y divide-[var(--border-default)] border-[var(--border-default)]',
+        'rounded-[var(--radius-lg)] border border-border-default overflow-hidden divide-y divide-border-default',
         className
       )}
     >

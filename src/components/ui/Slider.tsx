@@ -51,7 +51,7 @@ export function Slider({
             aria-label={`${label} numeric input`}
           />
           {suffix && (
-            <span className="text-xs font-semibold" style={{ color: 'var(--text-tertiary)' }}>
+            <span className="text-xs font-semibold text-text-tertiary">
               {suffix}
             </span>
           )}
@@ -69,7 +69,7 @@ export function Slider({
           step={step}
           value={value}
           onChange={(e) => onChange(Number(e.target.value))}
-          className="flex-1 h-1.5 rounded-lg bg-[var(--bg-surface)] appearance-none cursor-pointer accent-[var(--primary)] focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 h-1.5 rounded-lg bg-bg-surface appearance-none cursor-pointer accent-primary focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
           style={{
             background: `linear-gradient(to right, var(--primary) 0%, var(--primary) ${
               ((value - min) / (max - min)) * 100
@@ -80,8 +80,7 @@ export function Slider({
 
       {/* Min / Max values display */}
       <div
-        className="flex items-center justify-between text-[11px] mt-1"
-        style={{ color: 'var(--text-tertiary)' }}
+        className="flex items-center justify-between text-[11px] mt-1 text-text-tertiary"
       >
         <span>
           {min}
