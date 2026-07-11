@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import type { ToolConfig } from '@/types';
 import { getModuleColors } from '@/config/modules';
-import { getToolEmoji } from '@/utils/toolIcons';
+import { LucideIcon } from '@/components/shared/LucideIcon';
 
 interface ToolCardProps {
   tool: ToolConfig;
@@ -32,14 +32,20 @@ export function ToolCard({ tool, compact = false }: ToolCardProps) {
       <Link
         to={tool.slug}
         className={`tool-card h-full ${compact ? 'tool-card--compact' : ''}`}
+        style={{ borderRadius: '16px' }}
         aria-label={`${tool.name}: ${tool.description}`}
       >
         <div
           className="tool-card__icon"
-          style={{ background: bg, color: accent }}
+          style={{ 
+            background: bg, 
+            color: accent, 
+            borderColor: 'transparent',
+            borderRadius: '10px'
+          }}
           aria-hidden="true"
         >
-          {getToolEmoji(tool.icon)}
+          <LucideIcon name={tool.icon} size={20} strokeWidth={2} />
         </div>
         <div className="tool-card__content w-full">
           <div className="tool-card__header flex items-start justify-between gap-2 w-full">
@@ -60,3 +66,4 @@ export function ToolCard({ tool, compact = false }: ToolCardProps) {
 }
 
 export default ToolCard;
+

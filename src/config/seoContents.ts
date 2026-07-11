@@ -379,6 +379,20 @@ export const SEO_CONTENTS: Record<string, Partial<ToolConfig>> = {
       { name: 'Select Timezone', text: 'Compare UTC and local timezone representations.' },
     ],
   },
+  'alternative-timestamps': {
+    longDescription:
+      'A multi-epoch timestamp converter that decodes alternative time formats such as Windows LDAP/Active Directory, Chrome/WebKit, .NET Ticks, NTP, Cocoa, GPS, and Unix epoch timestamps into readable dates and vice-versa.',
+    benefits: [
+      'Multi-Format: View what a timestamp translates to across 8 different system epochs simultaneously.',
+      'Auto-Parsing: Detects and processes microsecond and nanosecond precisions automatically.',
+      'Developer friendly: Easily copy code snippets and values in one click.',
+    ],
+    howToSteps: [
+      { name: 'Enter Timestamp', text: 'Paste any numerical timestamp value.' },
+      { name: 'Select System', text: 'Choose the source format (e.g. LDAP ticks, Unix seconds, NTP).' },
+      { name: 'View Results', text: 'Instantly view comparison across all formats, UTC, local, and ISO times.' },
+    ],
+  },
 
   // ─────────────────────────────────────────────
   // TEXT MODULE

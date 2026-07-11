@@ -98,6 +98,7 @@ const SqlFormatter = lazy(() => import('@/pages/tools/developer/SqlFormatter'));
 const DiffChecker = lazy(() => import('@/pages/tools/developer/DiffChecker'));
 const LoremIpsum = lazy(() => import('@/pages/tools/developer/LoremIpsum'));
 const TimestampConverter = lazy(() => import('@/pages/tools/developer/TimestampConverter'));
+const AlternativeTimestamps = lazy(() => import('@/pages/tools/developer/AlternativeTimestamps'));
 const GradientGenerator = lazy(() => import('@/pages/tools/developer/GradientGenerator'));
 const CronBuilder = lazy(() => import('@/pages/tools/developer/CronBuilder'));
 const MarkdownPreview = lazy(() => import('@/pages/tools/developer/MarkdownPreview'));
@@ -627,7 +628,15 @@ export default function App() {
                 path="developer/timestamp-converter"
                 element={
                   <Suspense fallback={<PageLoader />}>
-                    <TimestampConverter />
+                     <TimestampConverter />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="developer/alternative-timestamps"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <AlternativeTimestamps />
                   </Suspense>
                 }
               />
