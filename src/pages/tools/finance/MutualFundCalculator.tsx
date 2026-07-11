@@ -13,6 +13,7 @@ import {
 import { Line } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider, Select } from '@/components/ui';
+import { useChartTheme } from '@/hooks/useChartTheme';
 
 ChartJS.register(
   CategoryScale,
@@ -34,6 +35,7 @@ const formatCurrency = (val: number) => {
 };
 
 export default function MutualFundCalculator() {
+  const chartTheme = useChartTheme();
   const [investmentType, setInvestmentType] = useState<string>('sip'); // 'sip' or 'lump-sum'
   const [amount, setAmount] = useState<number>(5000); // 5000 SIP / Lumpsum default
   const [expectedReturn, setExpectedReturn] = useState<number>(12); // 12% default returns
@@ -112,7 +114,7 @@ export default function MutualFundCalculator() {
         label: 'Maturity Value',
         data: results.maturityData,
         fill: true,
-        borderColor: '#10B981',
+        borderColor: chartTheme.success,
         backgroundColor: 'rgba(16, 185, 129, 0.1)',
         tension: 0.2,
       },
@@ -120,7 +122,7 @@ export default function MutualFundCalculator() {
         label: 'Invested Amount',
         data: results.investedData,
         fill: true,
-        borderColor: '#4F46E5',
+        borderColor: chartTheme.primary,
         backgroundColor: 'rgba(79, 70, 229, 0.1)',
         tension: 0.2,
       },
@@ -133,20 +135,25 @@ export default function MutualFundCalculator() {
     plugins: {
       legend: {
         position: 'top' as const,
+        labels: { color: chartTheme.textSecondary },
       },
     },
     scales: {
       y: {
         grid: {
-          color: 'var(--border-subtle)',
+          color: chartTheme.borderSubtle,
         },
         ticks: {
+          color: chartTheme.textTertiary,
           callback: (value: string | number) => formatCurrency(Number(value)),
         },
       },
       x: {
         grid: {
           display: false,
+        },
+        ticks: {
+          color: chartTheme.textTertiary,
         },
       },
     },

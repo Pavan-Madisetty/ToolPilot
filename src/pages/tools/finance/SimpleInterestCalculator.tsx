@@ -13,6 +13,7 @@ import {
 import { Line } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider, ResultBox } from '@/components/ui';
+import { useChartTheme } from '@/hooks/useChartTheme';
 
 ChartJS.register(
   CategoryScale,
@@ -26,6 +27,7 @@ ChartJS.register(
 );
 
 export default function SimpleInterestCalculator() {
+  const chartTheme = useChartTheme();
   const [principal, setPrincipal] = useState<number>(100000); // Default: ₹1,00,000
   const [rate, setRate] = useState<number>(10); // Default: 10%
   const [years, setYears] = useState<number>(5); // Default: 5 years
@@ -64,7 +66,7 @@ export default function SimpleInterestCalculator() {
         label: 'Total Amount',
         data: calculation.totalData,
         fill: true,
-        borderColor: '#10B981',
+        borderColor: chartTheme.success,
         backgroundColor: 'rgba(16, 185, 129, 0.1)',
         tension: 0.2,
       },
@@ -72,7 +74,7 @@ export default function SimpleInterestCalculator() {
         label: 'Simple Interest',
         data: calculation.interestData,
         fill: true,
-        borderColor: '#3B82F6',
+        borderColor: chartTheme.info,
         backgroundColor: 'rgba(59, 130, 246, 0.1)',
         tension: 0.2,
       },
@@ -86,17 +88,17 @@ export default function SimpleInterestCalculator() {
       legend: {
         position: 'top' as const,
         labels: {
-          color: 'var(--text-secondary)',
+          color: chartTheme.textSecondary,
         },
       },
     },
     scales: {
       y: {
         grid: {
-          color: 'var(--border-subtle)',
+          color: chartTheme.borderSubtle,
         },
         ticks: {
-          color: 'var(--text-secondary)',
+          color: chartTheme.textTertiary,
           callback: (value: string | number) => '₹' + Number(value).toLocaleString('en-IN'),
         },
       },
@@ -105,7 +107,7 @@ export default function SimpleInterestCalculator() {
           display: false,
         },
         ticks: {
-          color: 'var(--text-secondary)',
+          color: chartTheme.textTertiary,
         },
       },
     },

@@ -245,12 +245,13 @@ export default function QuotationGenerator() {
                   className="grid grid-cols-12 gap-3 items-end border-b pb-4 last:border-b-0 last:pb-0"
                   style={{ borderColor: 'var(--border-subtle)' }}
                 >
-                  <div className="col-span-4">
+                  <div className="col-span-3">
                     <Input
                       label={idx === 0 ? 'Item/Service' : undefined}
                       value={item.description}
                       onChange={(e) => updateItem(item.id, 'description', e.target.value)}
                       placeholder="Description"
+                      aria-label="Item or service description"
                     />
                   </div>
                   <div className="col-span-2">
@@ -260,6 +261,7 @@ export default function QuotationGenerator() {
                       min="1"
                       value={item.qty}
                       onChange={(e) => updateItem(item.id, 'qty', Number(e.target.value))}
+                      aria-label="Quantity"
                     />
                   </div>
                   <div className="col-span-2">
@@ -269,9 +271,10 @@ export default function QuotationGenerator() {
                       min="0"
                       value={item.price === 0 ? '' : item.price}
                       onChange={(e) => updateItem(item.id, 'price', Number(e.target.value))}
+                      aria-label="Price"
                     />
                   </div>
-                  <div className="col-span-1.5">
+                  <div className="col-span-2">
                     <Input
                       label={idx === 0 ? 'Disc %' : undefined}
                       type="number"
@@ -279,9 +282,10 @@ export default function QuotationGenerator() {
                       max="100"
                       value={item.discount}
                       onChange={(e) => updateItem(item.id, 'discount', Number(e.target.value))}
+                      aria-label="Discount percent"
                     />
                   </div>
-                  <div className="col-span-1.5">
+                  <div className="col-span-2">
                     <Input
                       label={idx === 0 ? 'Tax %' : undefined}
                       type="number"
@@ -289,6 +293,7 @@ export default function QuotationGenerator() {
                       max="100"
                       value={item.tax}
                       onChange={(e) => updateItem(item.id, 'tax', Number(e.target.value))}
+                      aria-label="Tax percent"
                     />
                   </div>
                   <div className="col-span-1 pb-1 flex justify-center">
@@ -296,6 +301,7 @@ export default function QuotationGenerator() {
                       onClick={() => removeItem(item.id)}
                       className="p-2 text-[var(--danger)] hover:bg-[rgba(239,68,68,0.1)] rounded-lg transition-colors"
                       title="Remove item"
+                      aria-label="Remove item"
                     >
                       <Trash2 size={16} />
                     </button>

@@ -11,10 +11,12 @@ import {
 import { Bar } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider, ResultBox, Callout } from '@/components/ui';
+import { useChartTheme } from '@/hooks/useChartTheme';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 export default function CreditCardEMICalculator() {
+  const chartTheme = useChartTheme();
   const [balance, setBalance] = useState<number>(50000); // Card Balance
   const [rate, setRate] = useState<number>(18); // Interest Rate (% p.a.)
   const [months, setMonths] = useState<number>(12); // EMI Tenure (months)
@@ -66,12 +68,12 @@ export default function CreditCardEMICalculator() {
       {
         label: 'Principal Paid',
         data: calculations.principalPaidData,
-        backgroundColor: '#3B82F6',
+        backgroundColor: chartTheme.info,
       },
       {
         label: 'Interest Paid',
         data: calculations.interestPaidData,
-        backgroundColor: '#EF4444',
+        backgroundColor: chartTheme.danger,
       },
     ],
   };
@@ -83,7 +85,7 @@ export default function CreditCardEMICalculator() {
       legend: {
         position: 'top' as const,
         labels: {
-          color: 'var(--text-secondary)',
+          color: chartTheme.textSecondary,
         },
       },
     },
@@ -91,10 +93,10 @@ export default function CreditCardEMICalculator() {
       y: {
         stacked: true,
         grid: {
-          color: 'var(--border-subtle)',
+          color: chartTheme.borderSubtle,
         },
         ticks: {
-          color: 'var(--text-secondary)',
+          color: chartTheme.textTertiary,
           callback: (value: string | number) => '₹' + Number(value).toLocaleString('en-IN'),
         },
       },
@@ -104,7 +106,7 @@ export default function CreditCardEMICalculator() {
           display: false,
         },
         ticks: {
-          color: 'var(--text-secondary)',
+          color: chartTheme.textTertiary,
         },
       },
     },

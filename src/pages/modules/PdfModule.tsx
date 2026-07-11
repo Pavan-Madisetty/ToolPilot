@@ -24,17 +24,19 @@ export default function PdfModule() {
 
       {/* Tools Grid */}
       {pdfTools.length > 0 ? (
-        <div className="tools-grid mt-8">
-          {pdfTools.map((tool) => (
-            <ToolCard key={tool.id} tool={tool} />
-          ))}
-        </div>
+        <section aria-label="PDF tools">
+          <div className="tools-grid mt-8">
+            {pdfTools.map((tool) => (
+              <ToolCard key={tool.id} tool={tool} />
+            ))}
+          </div>
+        </section>
       ) : (
         <div
-          className="py-20 text-center border rounded-2xl bg-white dark:bg-slate-800"
-          style={{ borderColor: 'var(--border-default)' }}
+          className="py-20 text-center border rounded-2xl"
+          style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)' }}
         >
-          <div className="text-6xl mb-4">🚧</div>
+          <div className="text-6xl mb-4" aria-hidden="true">🚧</div>
           <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
             PDF Utilities Under Construction
           </h2>

@@ -35,10 +35,15 @@ export function SearchDialog() {
   const [activeIndex, setActiveIndex] = useState(-1);
   const [isPending, startTransition] = useTransition();
 
-  // Load recent searches from localStorage
+  // Load recent searches from localStorage (guard against corrupt/malformed data)
   const [recentSearches, setRecentSearches] = useState<string[]>(() => {
-    const saved = localStorage.getItem('recent_searches');
-    return saved ? JSON.parse(saved) : [];
+    try {
+      const saved = localStorage.getItem('recent_searches');
+      const parsed = saved ? JSON.parse(saved) : [];
+      return Array.isArray(parsed) ? parsed.filter((s) => typeof s === 'string') : [];
+    } catch {
+      return [];
+    }
   });
 
   const handleResultSelect = useCallback(

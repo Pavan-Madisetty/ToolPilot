@@ -69,6 +69,13 @@
   --info: #3b82f6;
   --danger: #ef4444;
 
+  /* Subtle role tints (for soft backgrounds behind status text) */
+  --primary-subtle: rgba(99, 102, 241, 0.1);
+  --success-subtle: rgba(16, 185, 129, 0.1);
+  --warning-subtle: rgba(245, 158, 11, 0.1);
+  --info-subtle: rgba(59, 130, 246, 0.1);
+  --danger-subtle: rgba(239, 68, 68, 0.1);
+
   /* Radius Scale */
   --radius-sm: 6px;
   --radius-md: 10px;
@@ -113,6 +120,13 @@
   --warning: #f59e0b;
   --info: #3b82f6;
   --danger: #ef4444;
+
+  /* Subtle role tints (slightly stronger in dark for legibility) */
+  --primary-subtle: rgba(99, 102, 241, 0.16);
+  --success-subtle: rgba(16, 185, 129, 0.16);
+  --warning-subtle: rgba(245, 158, 11, 0.16);
+  --info-subtle: rgba(59, 130, 246, 0.16);
+  --danger-subtle: rgba(239, 68, 68, 0.16);
 
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.3);

@@ -13,6 +13,7 @@ import {
 import { Line } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider, ResultBox } from '@/components/ui';
+import { useChartTheme } from '@/hooks/useChartTheme';
 
 ChartJS.register(
   CategoryScale,
@@ -26,6 +27,7 @@ ChartJS.register(
 );
 
 export default function SavingsPlanner() {
+  const chartTheme = useChartTheme();
   const [targetAmount, setTargetAmount] = useState<number>(1000000); // Default: ₹10,00,000 (10 Lakhs)
   const [years, setYears] = useState<number>(10); // Default: 10 years
   const [interestRate, setInterestRate] = useState<number>(8); // Default: 8%
@@ -81,7 +83,7 @@ export default function SavingsPlanner() {
         label: 'Target / Accumulated Balance',
         data: calculations.balanceData,
         fill: true,
-        borderColor: '#10B981',
+        borderColor: chartTheme.success,
         backgroundColor: 'rgba(16, 185, 129, 0.1)',
         tension: 0.2,
       },
@@ -89,7 +91,7 @@ export default function SavingsPlanner() {
         label: 'Total Principal Invested',
         data: calculations.investedData,
         fill: true,
-        borderColor: '#4F46E5',
+        borderColor: chartTheme.primary,
         backgroundColor: 'rgba(79, 70, 229, 0.1)',
         tension: 0.2,
       },
@@ -103,17 +105,17 @@ export default function SavingsPlanner() {
       legend: {
         position: 'top' as const,
         labels: {
-          color: 'var(--text-secondary)',
+          color: chartTheme.textSecondary,
         },
       },
     },
     scales: {
       y: {
         grid: {
-          color: 'var(--border-subtle)',
+          color: chartTheme.borderSubtle,
         },
         ticks: {
-          color: 'var(--text-secondary)',
+          color: chartTheme.textTertiary,
           callback: (value: string | number) => '₹' + Number(value).toLocaleString('en-IN'),
         },
       },
@@ -122,7 +124,7 @@ export default function SavingsPlanner() {
           display: false,
         },
         ticks: {
-          color: 'var(--text-secondary)',
+          color: chartTheme.textTertiary,
         },
       },
     },

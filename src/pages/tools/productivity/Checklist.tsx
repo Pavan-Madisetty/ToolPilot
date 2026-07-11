@@ -85,7 +85,9 @@ export default function Checklist() {
   };
 
   const handleClearAll = () => {
-    setItems([]);
+    if (window.confirm('Clear all items?')) {
+      setItems([]);
+    }
   };
 
   // Memoized calculations
@@ -155,7 +157,7 @@ export default function Checklist() {
             </div>
 
             <div
-              className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2.5 overflow-hidden"
+              className="w-full rounded-full h-2.5 overflow-hidden"
               style={{ background: 'var(--bg-elevated)' }}
             >
               <div
@@ -273,11 +275,11 @@ export default function Checklist() {
 
                     <button
                       onClick={() => handleDeleteItem(item.id)}
-                      className="p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                      className="p-1 rounded hover:bg-[var(--bg-surface)] transition-colors"
                       style={{ color: 'var(--text-tertiary)' }}
                       aria-label="Delete item"
                     >
-                      <Trash2 size={16} className="hover:text-red-500 transition-colors" />
+                      <Trash2 size={16} className="transition-colors" />
                     </button>
                   </div>
                 ))}

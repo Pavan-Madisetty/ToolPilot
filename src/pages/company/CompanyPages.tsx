@@ -46,9 +46,10 @@ export function AboutPage() {
             tracking.
           </p>
           <p>
-            Unlike traditional utility sites, ToolPilot operates under an **offline-first,
-            client-side** principle. All tools execute directly in your browser using JavaScript and
-            WebAssembly. Your data never leaves your computer, ensuring total privacy.
+            Unlike traditional utility sites, ToolPilot operates under an{' '}
+            <strong style={{ color: 'var(--text-primary)' }}>offline-first, client-side</strong>{' '}
+            principle. All tools execute directly in your browser using JavaScript and WebAssembly.
+            Your data never leaves your computer, ensuring total privacy.
           </p>
         </div>
       </div>
@@ -151,9 +152,12 @@ export function PrivacyPage() {
         </h1>
         <div className="text-sm leading-relaxed text-[var(--text-secondary)] space-y-4">
           <p>
-            At ToolPilot, we take your privacy extremely seriously. **All calculations, formatting,
-            compression, and operations run entirely inside your browser.** No files or text inputs
-            are ever sent to our servers.
+            At ToolPilot, we take your privacy extremely seriously.{' '}
+            <strong style={{ color: 'var(--text-primary)' }}>
+              All calculations, formatting, compression, and operations run entirely inside your
+              browser.
+            </strong>{' '}
+            No files or text inputs are ever sent to our servers.
           </p>
           <p>
             We do not use tracking cookies, analytics profiling, or sell user demographic data. This
@@ -236,7 +240,12 @@ export function ContactPage() {
             Have suggestions for new tools, or found a bug? You can contact our open-source
             maintainers at:
           </p>
-          <p className="font-semibold text-[var(--primary)]">support@toolpilot.com</p>
+          <a
+            href="mailto:support@toolpilot.app"
+            className="font-semibold text-[var(--primary)] hover:text-[var(--text-link-hover)]"
+          >
+            support@toolpilot.app
+          </a>
         </div>
       </div>
     </>

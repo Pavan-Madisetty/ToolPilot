@@ -36,7 +36,7 @@ export function Footer() {
     { label: 'Privacy Policy', href: '/privacy' },
     { label: 'Terms of Service', href: '/terms' },
     { label: 'Contact', href: '/contact' },
-    { label: 'Sitemap', href: '/sitemap.xml' },
+    { label: 'Sitemap', href: '/sitemap.xml', external: true },
   ];
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
@@ -175,7 +175,7 @@ export function Footer() {
                   key={link.href}
                   to={link.href}
                   className="text-sm transition-colors duration-150 hover:text-[var(--text-link)]"
-                  style={{ color: 'var(--text-tertiary)' }}
+                  style={{ color: 'var(--text-secondary)' }}
                 >
                   {link.label}
                 </Link>
@@ -197,7 +197,7 @@ export function Footer() {
                   key={link.href}
                   to={link.href}
                   className="text-sm transition-colors duration-150 hover:text-[var(--text-link)]"
-                  style={{ color: 'var(--text-tertiary)' }}
+                  style={{ color: 'var(--text-secondary)' }}
                 >
                   {link.label}
                 </Link>
@@ -214,16 +214,27 @@ export function Footer() {
               Company
             </h3>
             <div className="grid grid-cols-2 gap-x-6 gap-y-2.5">
-              {company.map((link) => (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  className="text-sm transition-colors duration-150 hover:text-[var(--text-link)]"
-                  style={{ color: 'var(--text-tertiary)' }}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {company.map((link) =>
+                'external' in link && link.external ? (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="text-sm transition-colors duration-150 hover:text-[var(--text-link)]"
+                    style={{ color: 'var(--text-secondary)' }}
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    className="text-sm transition-colors duration-150 hover:text-[var(--text-link)]"
+                    style={{ color: 'var(--text-secondary)' }}
+                  >
+                    {link.label}
+                  </Link>
+                )
+              )}
             </div>
           </div>
         </div>

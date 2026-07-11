@@ -4,6 +4,7 @@ import { Pie } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider, Button } from '@/components/ui';
 import { Download } from 'lucide-react';
+import { useChartTheme } from '@/hooks/useChartTheme';
 
 // Register Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -18,6 +19,7 @@ const formatCurrency = (val: number) => {
 };
 
 export default function EMICalculator() {
+  const chartTheme = useChartTheme();
   const [principal, setPrincipal] = useState(1000000); // ₹10 Lakhs default
   const [rate, setRate] = useState(8.5); // 8.5% interest
   const [tenureYears, setTenureYears] = useState(10); // 10 years default
@@ -78,10 +80,10 @@ export default function EMICalculator() {
     datasets: [
       {
         data: [principal, emiData.totalInterest],
-        backgroundColor: ['#4F46E5', '#EF4444'],
+        backgroundColor: [chartTheme.primary, chartTheme.danger],
         hoverBackgroundColor: ['#4338CA', '#DC2626'],
         borderWidth: 1,
-        borderColor: 'var(--border-default)',
+        borderColor: chartTheme.elevated,
       },
     ],
   };
@@ -170,7 +172,19 @@ export default function EMICalculator() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center p-6 card">
             {/* Chart */}
             <div className="max-w-[240px] mx-auto">
-              <Pie data={chartData} options={{ plugins: { legend: { position: 'bottom' } } }} />
+              <Pie
+                data={chartData}
+                options={{
+                  responsive: true,
+                  maintainAspectRatio: true,
+                  plugins: {
+                    legend: {
+                      position: 'bottom',
+                      labels: { color: chartTheme.textSecondary },
+                    },
+                  },
+                }}
+              />
             </div>
 
             {/* Amortization schedule details */}

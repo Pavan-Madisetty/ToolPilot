@@ -193,8 +193,8 @@ export default function Stopwatch() {
               >
                 {/* Header row */}
                 <div
-                  className="grid grid-cols-3 p-3 font-semibold text-xs tracking-wider uppercase bg-slate-50 dark:bg-slate-900/40"
-                  style={{ color: 'var(--text-tertiary)' }}
+                  className="grid grid-cols-3 p-3 font-semibold text-xs tracking-wider uppercase"
+                  style={{ color: 'var(--text-tertiary)', background: 'var(--bg-elevated)' }}
                 >
                   <span>Lap</span>
                   <span className="text-right">Split Time</span>
@@ -212,14 +212,14 @@ export default function Stopwatch() {
                   if (isFastest) {
                     rowColor = 'var(--success)';
                     splitBadge = (
-                      <span className="text-[10px] font-bold uppercase ml-2 text-emerald-500">
+                      <span className="text-[10px] font-bold uppercase ml-2" style={{ color: 'var(--success)' }}>
                         (Fastest)
                       </span>
                     );
                   } else if (isSlowest) {
                     rowColor = 'var(--danger)';
                     splitBadge = (
-                      <span className="text-[10px] font-bold uppercase ml-2 text-red-500">
+                      <span className="text-[10px] font-bold uppercase ml-2" style={{ color: 'var(--danger)' }}>
                         (Slowest)
                       </span>
                     );

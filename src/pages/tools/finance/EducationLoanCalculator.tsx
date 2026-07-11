@@ -4,6 +4,7 @@ import { Pie } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider, Button } from '@/components/ui';
 import { Download } from 'lucide-react';
+import { useChartTheme } from '@/hooks/useChartTheme';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -16,6 +17,7 @@ const formatCurrency = (val: number) => {
 };
 
 export default function EducationLoanCalculator() {
+  const chartTheme = useChartTheme();
   const [principal, setPrincipal] = useState(2000000); // ₹20 Lakhs default for Education Loan
   const [rate, setRate] = useState(10.5); // 10.5% interest
   const [tenureYears, setTenureYears] = useState(10); // 10 years default for Education Loan
@@ -78,10 +80,10 @@ export default function EducationLoanCalculator() {
     datasets: [
       {
         data: [principal, emiData.totalInterest],
-        backgroundColor: ['#4F46E5', '#EF4444'],
+        backgroundColor: [chartTheme.primary, chartTheme.danger],
         hoverBackgroundColor: ['#4338CA', '#DC2626'],
         borderWidth: 1,
-        borderColor: 'var(--border-default)',
+        borderColor: chartTheme.border,
       },
     ],
   };
@@ -182,7 +184,18 @@ export default function EducationLoanCalculator() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="p-6 card flex items-center justify-center h-[280px]">
               <div className="w-full h-full max-w-[240px]">
-                <Pie data={chartData} options={{ responsive: true, maintainAspectRatio: false }} />
+                <Pie
+                  data={chartData}
+                  options={{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                      legend: {
+                        labels: { color: chartTheme.textSecondary },
+                      },
+                    },
+                  }}
+                />
               </div>
             </div>
             <div className="p-6 card flex flex-col justify-center gap-4">

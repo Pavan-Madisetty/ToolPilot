@@ -13,6 +13,7 @@ import {
 import { Line } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider } from '@/components/ui';
+import { useChartTheme } from '@/hooks/useChartTheme';
 
 ChartJS.register(
   CategoryScale,
@@ -34,6 +35,7 @@ const formatCurrency = (val: number) => {
 };
 
 export default function RetirementCalculator() {
+  const chartTheme = useChartTheme();
   const [currentAge, setCurrentAge] = useState(30); // 30 years old default
   const [retirementAge, setRetirementAge] = useState(60); // 60 years retirement default
   const [monthlyExpense, setMonthlyExpense] = useState(40000); // ₹40,000 monthly expense default
@@ -121,14 +123,14 @@ export default function RetirementCalculator() {
         label: 'Accumulated Savings Target',
         data: retirementDetails.accumulatedData,
         fill: true,
-        borderColor: '#10B981',
+        borderColor: chartTheme.success,
         backgroundColor: 'rgba(16, 185, 129, 0.1)',
         tension: 0.2,
       },
       {
         label: 'Target Corpus Required',
         data: retirementDetails.targetData,
-        borderColor: '#EC4899',
+        borderColor: chartTheme.palette[5],
         borderDash: [5, 5],
         fill: false,
         tension: 0,
@@ -142,20 +144,25 @@ export default function RetirementCalculator() {
     plugins: {
       legend: {
         position: 'top' as const,
+        labels: { color: chartTheme.textSecondary },
       },
     },
     scales: {
       y: {
         grid: {
-          color: 'var(--border-subtle)',
+          color: chartTheme.borderSubtle,
         },
         ticks: {
+          color: chartTheme.textTertiary,
           callback: (value: string | number) => formatCurrency(Number(value)),
         },
       },
       x: {
         grid: {
           display: false,
+        },
+        ticks: {
+          color: chartTheme.textTertiary,
         },
       },
     },

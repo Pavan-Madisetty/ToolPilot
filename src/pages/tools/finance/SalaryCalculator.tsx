@@ -3,6 +3,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider } from '@/components/ui';
+import { useChartTheme } from '@/hooks/useChartTheme';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -15,6 +16,7 @@ const formatCurrency = (val: number) => {
 };
 
 export default function SalaryCalculator() {
+  const chartTheme = useChartTheme();
   const [annualCTC, setAnnualCTC] = useState(1200000); // ₹12,00,000 CTC default
 
   const salaryDetails = useMemo(() => {
@@ -71,7 +73,7 @@ export default function SalaryCalculator() {
           salaryDetails.professionalTax,
           salaryDetails.monthlyIncomeTax,
         ],
-        backgroundColor: ['#10B981', '#3B82F6', '#F59E0B', '#EF4444'],
+        backgroundColor: [chartTheme.success, chartTheme.info, chartTheme.warning, chartTheme.danger],
         hoverBackgroundColor: ['#059669', '#2563EB', '#D97706', '#DC2626'],
         borderWidth: 1,
       },
@@ -85,7 +87,7 @@ export default function SalaryCalculator() {
       legend: {
         position: 'right' as const,
         labels: {
-          color: 'var(--text-primary)',
+          color: chartTheme.textPrimary,
         },
       },
     },

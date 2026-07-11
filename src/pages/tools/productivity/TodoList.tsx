@@ -141,10 +141,10 @@ export default function TodoList() {
     return list;
   }, [tasks, filter, sortBy]);
 
-  const getPriorityColor = (p: 'low' | 'medium' | 'high') => {
-    if (p === 'high') return 'text-red-600 bg-red-50 border-red-200 dark:bg-red-950/20 dark:text-red-400 dark:border-red-900';
-    if (p === 'medium') return 'text-amber-600 bg-amber-50 border-amber-200 dark:bg-amber-950/20 dark:text-amber-400 dark:border-amber-900';
-    return 'text-blue-600 bg-blue-50 border-blue-200 dark:bg-blue-950/20 dark:text-blue-400 dark:border-blue-900';
+  const getPriorityStyle = (p: 'low' | 'medium' | 'high'): React.CSSProperties => {
+    if (p === 'high') return { color: 'var(--danger)', background: 'var(--danger-subtle)', borderColor: 'var(--danger)' };
+    if (p === 'medium') return { color: 'var(--warning)', background: 'var(--warning-subtle)', borderColor: 'var(--warning)' };
+    return { color: 'var(--info)', background: 'var(--info-subtle)', borderColor: 'var(--info)' };
   };
 
   return (
@@ -157,7 +157,7 @@ export default function TodoList() {
           style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}
         >
           <div className="flex items-center gap-3 w-full md:w-auto">
-            <div className="p-3 bg-blue-50 dark:bg-blue-950/20 rounded-xl text-blue-600 dark:text-blue-400">
+            <div className="p-3 rounded-xl" style={{ background: 'var(--info-subtle)', color: 'var(--info)' }}>
               <CheckSquare size={24} />
             </div>
             <div>
@@ -177,8 +177,8 @@ export default function TodoList() {
             </div>
             <div className="w-full h-2 rounded-full bg-[var(--bg-elevated)] overflow-hidden">
               <div
-                className="h-full bg-blue-600 transition-all duration-300"
-                style={{ width: `${stats.percentage}%` }}
+                className="h-full transition-all duration-300"
+                style={{ width: `${stats.percentage}%`, background: 'var(--primary)' }}
               />
             </div>
           </div>
@@ -226,9 +226,14 @@ export default function TodoList() {
                       onClick={() => setNewPriority(p)}
                       className={`text-xs px-2.5 py-1 rounded-md border font-semibold capitalize transition-all ${
                         newPriority === p
-                          ? 'border-blue-600 bg-blue-50 text-blue-600 dark:bg-blue-950/25 dark:text-blue-400'
+                          ? ''
                           : 'border-[var(--border-default)] text-[var(--text-secondary)] hover:bg-[var(--bg-base)]'
                       }`}
+                      style={
+                        newPriority === p
+                          ? { borderColor: 'var(--primary)', background: 'var(--primary-subtle)', color: 'var(--primary)' }
+                          : undefined
+                      }
                     >
                       {p}
                     </button>
@@ -253,9 +258,10 @@ export default function TodoList() {
                 onClick={() => setFilter(f)}
                 className={`text-xs px-3 py-1.5 font-bold rounded-lg capitalize transition-all ${
                   filter === f
-                    ? 'bg-blue-600 text-white shadow-sm'
+                    ? 'text-white shadow-sm'
                     : 'text-[var(--text-secondary)] hover:bg-[var(--bg-elevated)]'
                 }`}
+                style={filter === f ? { background: 'var(--primary)' } : undefined}
               >
                 {f}
               </button>
@@ -280,7 +286,8 @@ export default function TodoList() {
             {stats.completed > 0 && (
               <button
                 onClick={handleClearCompleted}
-                className="text-xs font-bold text-red-500 hover:underline flex items-center gap-1"
+                className="text-xs font-bold hover:underline flex items-center gap-1"
+                style={{ color: 'var(--danger)' }}
               >
                 <Trash2 size={12} />
                 Clear Done
@@ -309,27 +316,28 @@ export default function TodoList() {
                   <button
                     type="button"
                     onClick={() => handleToggleTask(t.id)}
-                    className="mt-0.5 text-blue-600 dark:text-blue-400 flex-shrink-0"
+                    className="mt-0.5 flex-shrink-0"
+                    style={{ color: 'var(--primary)' }}
                     aria-label={t.completed ? 'Mark task as incomplete' : 'Mark task as complete'}
                   >
                     {t.completed ? (
                       <CheckCircle2 size={18} className="fill-current" />
                     ) : (
-                      <Circle size={18} className="text-slate-400 dark:text-slate-600 hover:text-blue-500" />
+                      <Circle size={18} style={{ color: 'var(--text-tertiary)' }} />
                     )}
                   </button>
                   <div className="min-w-0 flex-1">
                     <p
                       className={`text-sm font-medium break-words leading-relaxed ${
-                        t.completed ? 'line-through text-slate-400 dark:text-slate-600' : ''
+                        t.completed ? 'line-through' : ''
                       }`}
-                      style={{ color: 'var(--text-primary)' }}
+                      style={{ color: t.completed ? 'var(--text-tertiary)' : 'var(--text-primary)' }}
                     >
                       {t.title}
                     </p>
                     {/* Meta info */}
-                    <div className="flex items-center flex-wrap gap-x-3 gap-y-1 mt-1 text-[10px] text-slate-500">
-                      <span className={`px-2 py-0.2 rounded border text-[9px] font-bold uppercase ${getPriorityColor(t.priority)}`}>
+                    <div className="flex items-center flex-wrap gap-x-3 gap-y-1 mt-1 text-[10px]" style={{ color: 'var(--text-tertiary)' }}>
+                      <span className="px-2 py-0.5 rounded border text-[9px] font-bold uppercase" style={getPriorityStyle(t.priority)}>
                         {t.priority}
                       </span>
                       {t.dueDate && (
@@ -345,7 +353,8 @@ export default function TodoList() {
                 {/* Delete button */}
                 <button
                   onClick={() => handleDeleteTask(t.id, t.title)}
-                  className="p-1.5 hover:bg-[var(--bg-elevated)] rounded-lg text-red-500 hover:text-red-600 transition-colors flex-shrink-0"
+                  className="p-1.5 hover:bg-[var(--bg-elevated)] rounded-lg transition-colors flex-shrink-0"
+                  style={{ color: 'var(--danger)' }}
                   aria-label={`Delete task: ${t.title}`}
                 >
                   <Trash2 size={14} />

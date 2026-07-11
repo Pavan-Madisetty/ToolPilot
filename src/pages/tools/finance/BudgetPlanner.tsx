@@ -3,6 +3,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider } from '@/components/ui';
+import { useChartTheme } from '@/hooks/useChartTheme';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -15,6 +16,7 @@ const formatCurrency = (val: number) => {
 };
 
 export default function BudgetPlanner() {
+  const chartTheme = useChartTheme();
   const [monthlyIncome, setMonthlyIncome] = useState(80000); // ₹80,000 monthly income
   const [housing, setHousing] = useState(25000); // ₹25,000 housing
   const [food, setFood] = useState(12000); // ₹12,000 food
@@ -40,12 +42,12 @@ export default function BudgetPlanner() {
       {
         data: [housing, food, utilities, transport, entertainment, calculation.netSavings],
         backgroundColor: [
-          '#3B82F6', // Blue for housing
-          '#F59E0B', // Amber for food
-          '#10B981', // Emerald for utilities
-          '#EC4899', // Pink for transport
-          '#8B5CF6', // Purple for entertainment
-          '#10B981', // Emerald for savings (lightened / separate in design)
+          chartTheme.info, // Blue for housing
+          chartTheme.warning, // Amber for food
+          chartTheme.success, // Emerald for utilities
+          chartTheme.palette[5], // Pink for transport
+          chartTheme.palette[6], // Purple for entertainment
+          chartTheme.palette[7], // Teal for savings (distinct from utilities)
         ],
         hoverBackgroundColor: ['#2563EB', '#D97706', '#059669', '#DB2777', '#7C3AED', '#059669'],
         borderWidth: 1,
@@ -60,7 +62,7 @@ export default function BudgetPlanner() {
       legend: {
         position: 'right' as const,
         labels: {
-          color: 'var(--text-primary)',
+          color: chartTheme.textSecondary,
         },
       },
     },

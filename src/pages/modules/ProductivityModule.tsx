@@ -23,12 +23,27 @@ export default function ProductivityModule() {
       />
 
       {/* Tools Grid */}
-      <section aria-label="Productivity tools list">
-        <div className="tools-grid">
-          {productivityTools.map((tool) => (
-            <ToolCard key={tool.id} tool={tool} />
-          ))}
-        </div>
+      <section aria-label="Productivity tools">
+        {productivityTools.length > 0 ? (
+          <div className="tools-grid mt-8">
+            {productivityTools.map((tool) => (
+              <ToolCard key={tool.id} tool={tool} />
+            ))}
+          </div>
+        ) : (
+          <div
+            className="py-20 text-center border rounded-2xl"
+            style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)' }}
+          >
+            <div className="text-6xl mb-4" aria-hidden="true">⏱️</div>
+            <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+              Tools Coming Soon
+            </h2>
+            <p className="text-sm max-w-md mx-auto" style={{ color: 'var(--text-secondary)' }}>
+              We're building productivity tools like Pomodoro timers and to-do lists. Check back soon!
+            </p>
+          </div>
+        )}
       </section>
     </ModulePageWrapper>
   );

@@ -240,12 +240,13 @@ export default function GstInvoice() {
                   className="grid grid-cols-12 gap-3 items-end border-b pb-4 last:border-b-0 last:pb-0"
                   style={{ borderColor: 'var(--border-subtle)' }}
                 >
-                  <div className="col-span-4">
+                  <div className="col-span-3">
                     <Input
                       label={idx === 0 ? 'Description' : undefined}
                       value={item.description}
                       onChange={(e) => updateItem(item.id, 'description', e.target.value)}
                       placeholder="Item name"
+                      aria-label="Item description"
                     />
                   </div>
                   <div className="col-span-2">
@@ -254,6 +255,7 @@ export default function GstInvoice() {
                       value={item.hsn}
                       onChange={(e) => updateItem(item.id, 'hsn', e.target.value)}
                       placeholder="HSN"
+                      aria-label="HSN code"
                     />
                   </div>
                   <div className="col-span-2">
@@ -263,6 +265,7 @@ export default function GstInvoice() {
                       min="1"
                       value={item.qty}
                       onChange={(e) => updateItem(item.id, 'qty', Number(e.target.value))}
+                      aria-label="Quantity"
                     />
                   </div>
                   <div className="col-span-2">
@@ -272,21 +275,24 @@ export default function GstInvoice() {
                       min="0"
                       value={item.price === 0 ? '' : item.price}
                       onChange={(e) => updateItem(item.id, 'price', Number(e.target.value))}
+                      aria-label="Price"
                     />
                   </div>
-                  <div className="col-span-1.5">
+                  <div className="col-span-2">
                     <Select
                       label={idx === 0 ? 'GST' : undefined}
                       options={GST_RATES}
                       value={item.gstRate.toString()}
                       onChange={(e) => updateItem(item.id, 'gstRate', Number(e.target.value))}
+                      aria-label="GST rate"
                     />
                   </div>
-                  <div className="col-span-0.5 pb-1 flex justify-center">
+                  <div className="col-span-1 pb-1 flex justify-center">
                     <button
                       onClick={() => removeItem(item.id)}
                       className="p-2 text-[var(--danger)] hover:bg-[rgba(239,68,68,0.1)] rounded-lg transition-colors"
                       title="Remove item"
+                      aria-label="Remove item"
                     >
                       <Trash2 size={16} />
                     </button>

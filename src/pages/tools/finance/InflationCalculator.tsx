@@ -13,6 +13,7 @@ import {
 import { Line } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider, ResultBox } from '@/components/ui';
+import { useChartTheme } from '@/hooks/useChartTheme';
 
 ChartJS.register(
   CategoryScale,
@@ -26,6 +27,7 @@ ChartJS.register(
 );
 
 export default function InflationCalculator() {
+  const chartTheme = useChartTheme();
   const [currentAmount, setCurrentAmount] = useState<number>(100000); // Default: ₹1,00,000
   const [inflationRate, setInflationRate] = useState<number>(6); // Default: 6%
   const [years, setYears] = useState<number>(10); // Default: 10 years
@@ -63,7 +65,7 @@ export default function InflationCalculator() {
         label: 'Future Value (Required to buy same goods)',
         data: calculation.futureValueData,
         fill: false,
-        borderColor: '#EF4444',
+        borderColor: chartTheme.danger,
         backgroundColor: 'rgba(239, 68, 68, 0.1)',
         tension: 0.2,
       },
@@ -71,7 +73,7 @@ export default function InflationCalculator() {
         label: "Purchasing Power (Real value of today's amount)",
         data: calculation.purchasingPowerData,
         fill: true,
-        borderColor: '#3B82F6',
+        borderColor: chartTheme.info,
         backgroundColor: 'rgba(59, 130, 246, 0.05)',
         tension: 0.2,
       },
@@ -85,17 +87,17 @@ export default function InflationCalculator() {
       legend: {
         position: 'top' as const,
         labels: {
-          color: 'var(--text-secondary)',
+          color: chartTheme.textSecondary,
         },
       },
     },
     scales: {
       y: {
         grid: {
-          color: 'var(--border-subtle)',
+          color: chartTheme.borderSubtle,
         },
         ticks: {
-          color: 'var(--text-secondary)',
+          color: chartTheme.textTertiary,
           callback: (value: string | number) => '₹' + Number(value).toLocaleString('en-IN'),
         },
       },
@@ -104,7 +106,7 @@ export default function InflationCalculator() {
           display: false,
         },
         ticks: {
-          color: 'var(--text-secondary)',
+          color: chartTheme.textTertiary,
         },
       },
     },

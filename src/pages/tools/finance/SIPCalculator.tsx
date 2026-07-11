@@ -13,6 +13,7 @@ import {
 import { Line } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider } from '@/components/ui';
+import { useChartTheme } from '@/hooks/useChartTheme';
 
 // Register Chart.js line elements
 ChartJS.register(
@@ -35,6 +36,7 @@ const formatCurrency = (val: number) => {
 };
 
 export default function SIPCalculator() {
+  const chartTheme = useChartTheme();
   const [monthlyAmount, setMonthlyAmount] = useState(5000); // ₹5000/month default
   const [returnRate, setReturnRate] = useState(12); // 12% expected annual return
   const [tenureYears, setTenureYears] = useState(10); // 10 years default
@@ -89,7 +91,7 @@ export default function SIPCalculator() {
         label: 'Total Value',
         data: projection.returnsData,
         fill: true,
-        borderColor: '#10B981',
+        borderColor: chartTheme.success,
         backgroundColor: 'rgba(16, 185, 129, 0.1)',
         tension: 0.2,
       },
@@ -97,8 +99,8 @@ export default function SIPCalculator() {
         label: 'Total Invested',
         data: projection.investedData,
         fill: true,
-        borderColor: '#4F46E5',
-        backgroundColor: 'rgba(79, 70, 229, 0.1)',
+        borderColor: chartTheme.primary,
+        backgroundColor: 'rgba(99, 102, 241, 0.1)',
         tension: 0.2,
       },
     ],
@@ -110,20 +112,25 @@ export default function SIPCalculator() {
     plugins: {
       legend: {
         position: 'top' as const,
+        labels: { color: chartTheme.textSecondary },
       },
     },
     scales: {
       y: {
         grid: {
-          color: 'var(--border-subtle)',
+          color: chartTheme.borderSubtle,
         },
         ticks: {
+          color: chartTheme.textTertiary,
           callback: (value: string | number) => formatCurrency(Number(value)),
         },
       },
       x: {
         grid: {
           display: false,
+        },
+        ticks: {
+          color: chartTheme.textTertiary,
         },
       },
     },

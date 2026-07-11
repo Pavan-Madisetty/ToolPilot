@@ -391,7 +391,7 @@ export default function HabitTracker() {
                       </div>
                       <div className="flex items-center gap-3">
                         <div className="flex items-center gap-1 text-xs font-semibold" style={{ color: 'var(--text-secondary)' }} title="Current streak">
-                          <Flame size={14} className="text-orange-500" />
+                          <Flame size={14} style={{ color: 'var(--warning)' }} />
                           <span>{streak}d</span>
                         </div>
                         <button
@@ -463,13 +463,15 @@ export default function HabitTracker() {
                   {weekDays.map((day) => (
                     <div
                       key={day.dateString}
-                      className={clsx(
-                        'col-span-1 flex flex-col items-center justify-center p-1 rounded',
-                        day.isToday && 'bg-indigo-50/50 dark:bg-indigo-950/20 ring-1 ring-indigo-500/20'
-                      )}
+                      className="col-span-1 flex flex-col items-center justify-center p-1 rounded"
+                      style={
+                        day.isToday
+                          ? { background: 'var(--primary-subtle)', boxShadow: '0 0 0 1px var(--primary)' }
+                          : undefined
+                      }
                     >
                       <span className="text-[10px] font-semibold text-[var(--text-tertiary)] uppercase">{day.dayName}</span>
-                      <span className={clsx('text-xs font-bold mt-0.5', day.isToday ? 'text-indigo-600 dark:text-indigo-400' : 'text-[var(--text-secondary)]')}>
+                      <span className="text-xs font-bold mt-0.5" style={{ color: day.isToday ? 'var(--primary)' : 'var(--text-secondary)' }}>
                         {day.dayNum}
                       </span>
                     </div>

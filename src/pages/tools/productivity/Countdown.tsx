@@ -15,6 +15,7 @@ export default function Countdown() {
 
   // Target Date Input
   const [targetDate, setTargetDate] = useState('');
+  const [targetError, setTargetError] = useState('');
 
   // Timer states
   const [totalDuration, setTotalDuration] = useState(0); // in seconds
@@ -99,9 +100,10 @@ export default function Countdown() {
       const now = Date.now();
       initialSeconds = Math.floor((targetTime - now) / 1000);
       if (initialSeconds <= 0) {
-        alert('Please select a future date and time.');
+        setTargetError('Please select a future date and time.');
         return;
       }
+      setTargetError('');
     }
 
     setTotalDuration(initialSeconds);
@@ -272,7 +274,10 @@ export default function Countdown() {
                   type="datetime-local"
                   className="input-base w-full"
                   value={targetDate}
-                  onChange={(e) => setTargetDate(e.target.value)}
+                  onChange={(e) => {
+                    setTargetDate(e.target.value);
+                    if (targetError) setTargetError('');
+                  }}
                   disabled={isActive}
                   style={{
                     background: 'var(--bg-elevated)',
@@ -280,6 +285,11 @@ export default function Countdown() {
                     color: 'var(--text-primary)',
                   }}
                 />
+                {targetError && (
+                  <p className="text-xs mt-1" style={{ color: 'var(--danger)' }}>
+                    {targetError}
+                  </p>
+                )}
               </div>
             )}
           </div>
@@ -340,8 +350,8 @@ export default function Countdown() {
             {/* Alarm Ringing Screen */}
             {isCompleted ? (
               <div className="flex flex-col items-center gap-6 animate-bounce">
-                <div className="w-20 h-20 rounded-full flex items-center justify-center bg-red-100 dark:bg-red-950/40 border border-red-500">
-                  <Volume2 size={36} className="text-red-500" />
+                <div className="w-20 h-20 rounded-full flex items-center justify-center border" style={{ background: 'var(--danger-subtle)', borderColor: 'var(--danger)' }}>
+                  <Volume2 size={36} style={{ color: 'var(--danger)' }} />
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold" style={{ color: 'var(--danger)' }}>
@@ -393,7 +403,7 @@ export default function Countdown() {
                 {/* Progress Indicator */}
                 {isActive && (
                   <div
-                    className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2 overflow-hidden"
+                    className="w-full rounded-full h-2 overflow-hidden"
                     style={{ background: 'var(--bg-elevated)' }}
                   >
                     <div

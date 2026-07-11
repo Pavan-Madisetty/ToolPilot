@@ -13,6 +13,7 @@ import {
 import { Line } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider } from '@/components/ui';
+import { useChartTheme } from '@/hooks/useChartTheme';
 
 ChartJS.register(
   CategoryScale,
@@ -34,6 +35,7 @@ const formatCurrency = (val: number) => {
 };
 
 export default function PPFCalculator() {
+  const chartTheme = useChartTheme();
   const [yearlyAmount, setYearlyAmount] = useState(50000); // ₹50,000/year default
   const [tenureYears, setTenureYears] = useState(15); // 15 years default
 
@@ -82,7 +84,7 @@ export default function PPFCalculator() {
         label: 'Maturity Value',
         data: projection.maturityData,
         fill: true,
-        borderColor: '#10B981',
+        borderColor: chartTheme.success,
         backgroundColor: 'rgba(16, 185, 129, 0.1)',
         tension: 0.2,
       },
@@ -90,7 +92,7 @@ export default function PPFCalculator() {
         label: 'Invested Amount',
         data: projection.investedData,
         fill: true,
-        borderColor: '#4F46E5',
+        borderColor: chartTheme.primary,
         backgroundColor: 'rgba(79, 70, 229, 0.1)',
         tension: 0.2,
       },
@@ -103,20 +105,25 @@ export default function PPFCalculator() {
     plugins: {
       legend: {
         position: 'top' as const,
+        labels: { color: chartTheme.textSecondary },
       },
     },
     scales: {
       y: {
         grid: {
-          color: 'var(--border-subtle)',
+          color: chartTheme.borderSubtle,
         },
         ticks: {
+          color: chartTheme.textTertiary,
           callback: (value: string | number) => formatCurrency(Number(value)),
         },
       },
       x: {
         grid: {
           display: false,
+        },
+        ticks: {
+          color: chartTheme.textTertiary,
         },
       },
     },

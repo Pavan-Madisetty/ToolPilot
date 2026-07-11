@@ -59,6 +59,16 @@ const UTILITY_TOOLS = financeTools.filter((t) =>
   ].includes(t.id)
 );
 
+// Catch-all: any finance tool not assigned to a bucket above
+const CATEGORIZED_IDS = new Set([
+  ...LOAN_TOOLS,
+  ...INVESTMENT_TOOLS,
+  ...TAX_TOOLS,
+  ...UTILITY_TOOLS,
+].map((t) => t.id));
+
+const UNCATEGORIZED_TOOLS = financeTools.filter((t) => !CATEGORIZED_IDS.has(t.id));
+
 export default function FinanceModule() {
   return (
     <ModulePageWrapper
@@ -76,7 +86,7 @@ export default function FinanceModule() {
       />
 
       {/* Categories of Tools */}
-      <div className="space-y-12">
+      <div className="space-y-12 mt-8">
         {/* Loans & EMI */}
         {LOAN_TOOLS.length > 0 && (
           <section aria-labelledby="loans-heading">
@@ -143,6 +153,24 @@ export default function FinanceModule() {
             </h2>
             <div className="tools-grid">
               {UTILITY_TOOLS.map((tool) => (
+                <ToolCard key={tool.id} tool={tool} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* More Finance Tools (catch-all) */}
+        {UNCATEGORIZED_TOOLS.length > 0 && (
+          <section aria-labelledby="more-heading">
+            <h2
+              id="more-heading"
+              className="text-xl font-bold mb-6"
+              style={{ color: 'var(--text-primary)' }}
+            >
+              More Finance Tools
+            </h2>
+            <div className="tools-grid">
+              {UNCATEGORIZED_TOOLS.map((tool) => (
                 <ToolCard key={tool.id} tool={tool} />
               ))}
             </div>

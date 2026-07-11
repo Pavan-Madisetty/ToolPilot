@@ -164,7 +164,7 @@ body {
               className="flex items-center gap-2"
             >
               <Printer size={16} />
-              Export to PDF
+              Print / Save as PDF
             </Button>
           </div>
         </div>

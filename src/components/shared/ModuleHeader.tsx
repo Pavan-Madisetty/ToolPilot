@@ -53,17 +53,22 @@ export function ModuleHeader({
           </p>
         </div>
       </div>
-      {toolCount !== undefined && (
+      {toolCount !== undefined && toolCount > 0 && (
         <div className="shrink-0">
           <span
             className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border"
             style={{
-              background: bg,
-              color: accent,
-              borderColor: border,
+              background: 'var(--bg-elevated)',
+              color: 'var(--text-secondary)',
+              borderColor: 'var(--border-default)',
             }}
           >
-            {toolCount} Utilities Online
+            <span
+              className="w-1.5 h-1.5 rounded-full"
+              style={{ background: accent }}
+              aria-hidden="true"
+            />
+            {toolCount} {toolCount === 1 ? 'Tool' : 'Tools'} Available
           </span>
         </div>
       )}

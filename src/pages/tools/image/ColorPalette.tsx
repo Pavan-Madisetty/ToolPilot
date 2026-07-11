@@ -156,10 +156,15 @@ export default function ColorPalette() {
   };
 
   const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text).then(() => {
-      setCopiedColor(text);
-      setTimeout(() => setCopiedColor(null), 1500);
-    });
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        setCopiedColor(text);
+        setTimeout(() => setCopiedColor(null), 1500);
+      })
+      .catch(() => {
+        // Clipboard access can fail (e.g. permissions/insecure context); fail silently.
+      });
   };
 
   return (
@@ -229,10 +234,12 @@ export default function ColorPalette() {
               {palette.length > 0 ? (
                 <div className="grid grid-cols-2 gap-3">
                   {palette.map((color, idx) => (
-                    <div
+                    <button
                       key={idx}
+                      type="button"
                       onClick={() => copyToClipboard(color.hex)}
-                      className="border rounded-xl p-2 flex items-center gap-3 cursor-pointer hover:bg-[var(--bg-surface)] transition-colors"
+                      aria-label={`Copy ${color.hex}`}
+                      className="text-left border rounded-xl p-2 flex items-center gap-3 cursor-pointer hover:bg-[var(--bg-surface)] transition-colors"
                       style={{ borderColor: 'var(--border-default)' }}
                     >
                       <div
@@ -259,7 +266,7 @@ export default function ColorPalette() {
                           <Clipboard size={12} className="text-[var(--text-tertiary)]" />
                         )}
                       </div>
-                    </div>
+                    </button>
                   ))}
                 </div>
               ) : (

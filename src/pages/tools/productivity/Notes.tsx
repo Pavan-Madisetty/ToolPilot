@@ -126,7 +126,7 @@ Date: 2026-07-10
 
   // Basic custom markdown parser for preview
   const renderMarkdown = (mdText: string) => {
-    if (!mdText) return <p className="italic text-slate-400">Empty note</p>;
+    if (!mdText) return <p className="italic" style={{ color: 'var(--text-tertiary)' }}>Empty note</p>;
     const lines = mdText.split('\n');
 
     return (
@@ -274,7 +274,7 @@ Date: 2026-07-10
                         setActiveNoteId(note.id);
                         setActiveTab('edit');
                       }}
-                      className="p-3 rounded-lg border cursor-pointer transition-all hover:bg-slate-50 dark:hover:bg-slate-900/30"
+                      className="p-3 rounded-lg border cursor-pointer transition-all hover:bg-[var(--bg-elevated)]"
                       style={{
                         background: isActive ? 'var(--bg-elevated)' : 'transparent',
                         borderColor: isActive ? 'var(--primary)' : 'var(--border-default)',
@@ -289,7 +289,8 @@ Date: 2026-07-10
                         </h4>
                         <button
                           onClick={(e) => handleDeleteNote(note.id, e)}
-                          className="text-slate-400 hover:text-red-500 transition-colors p-0.5 rounded"
+                          className="transition-colors p-0.5 rounded"
+                          style={{ color: 'var(--text-tertiary)' }}
                           aria-label="Delete note"
                         >
                           <Trash2 size={14} />
@@ -424,7 +425,7 @@ Date: 2026-07-10
               className="flex-1 min-h-[400px] flex flex-col items-center justify-center text-center p-8 border border-dashed"
               style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}
             >
-              <FileText size={48} className="text-slate-300 mb-2" />
+              <FileText size={48} className="mb-2" style={{ color: 'var(--text-tertiary)' }} />
               <h4 className="font-bold text-sm mb-1" style={{ color: 'var(--text-primary)' }}>
                 No Active Note
               </h4>

@@ -9,7 +9,12 @@ export default function MarkdownEditor() {
 
   // Simple client-side Markdown to HTML compiler (avoids external library dependencies)
   const htmlPreview = useMemo(() => {
-    let html = markdown;
+    // Escape HTML first so raw tags in user input can never execute
+    // (e.g. `<img src=x onerror=...>`). Markdown syntax is applied afterwards.
+    let html = markdown
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
 
     // Headers
     html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');

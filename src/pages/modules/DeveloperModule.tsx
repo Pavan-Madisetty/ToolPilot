@@ -37,6 +37,16 @@ const UTILITY_TOOLS = devTools.filter((t) =>
   ].includes(t.id)
 );
 
+// Catch-all: any developer tool not assigned to a bucket above
+const CATEGORIZED_IDS = new Set([
+  ...FORMATTER_TOOLS,
+  ...ENCODER_TOOLS,
+  ...CRYPTO_TOOLS,
+  ...UTILITY_TOOLS,
+].map((t) => t.id));
+
+const UNCATEGORIZED_TOOLS = devTools.filter((t) => !CATEGORIZED_IDS.has(t.id));
+
 export default function DeveloperModule() {
   return (
     <ModulePageWrapper
@@ -54,7 +64,7 @@ export default function DeveloperModule() {
       />
 
       {/* Categories of Tools */}
-      <div className="space-y-12">
+      <div className="space-y-12 mt-8">
         {/* Formatters */}
         {FORMATTER_TOOLS.length > 0 && (
           <section aria-labelledby="formatters-heading">
@@ -121,6 +131,24 @@ export default function DeveloperModule() {
             </h2>
             <div className="tools-grid">
               {UTILITY_TOOLS.map((tool) => (
+                <ToolCard key={tool.id} tool={tool} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* More Developer Tools (catch-all) */}
+        {UNCATEGORIZED_TOOLS.length > 0 && (
+          <section aria-labelledby="more-heading">
+            <h2
+              id="more-heading"
+              className="text-xl font-bold mb-6"
+              style={{ color: 'var(--text-primary)' }}
+            >
+              More Developer Tools
+            </h2>
+            <div className="tools-grid">
+              {UNCATEGORIZED_TOOLS.map((tool) => (
                 <ToolCard key={tool.id} tool={tool} />
               ))}
             </div>

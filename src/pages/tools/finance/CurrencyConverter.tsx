@@ -109,10 +109,13 @@ export default function CurrencyConverter() {
         {/* Results layout */}
         <div className="flex flex-col gap-6">
           <div
-            className="p-8 border rounded-2xl bg-white dark:bg-slate-900/40 shadow-sm flex flex-col justify-center gap-2"
-            style={{ borderColor: 'var(--border-default)' }}
+            className="p-8 border rounded-2xl shadow-sm flex flex-col justify-center gap-2"
+            style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)' }}
           >
-            <span className="text-sm font-semibold tracking-wide text-slate-400 dark:text-slate-500 uppercase">
+            <span
+              className="text-sm font-semibold tracking-wide uppercase"
+              style={{ color: 'var(--text-tertiary)' }}
+            >
               Converted Amount
             </span>
             <div className="text-4xl font-extrabold" style={{ color: 'var(--text-primary)' }}>
@@ -123,24 +126,30 @@ export default function CurrencyConverter() {
                 maximumFractionDigits: 2,
               })}
             </div>
-            <div className="text-xs font-semibold text-slate-400 dark:text-slate-500 mt-2">
+            <div className="text-xs font-semibold mt-2" style={{ color: 'var(--text-tertiary)' }}>
               Exchange Rate: 1 {fromCurrency} = {conversion.singleRate.toFixed(4)} {toCurrency}
             </div>
           </div>
 
           {/* Popular conversions list */}
           <div className="p-6 card">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-4">
+            <h3
+              className="text-sm font-bold uppercase tracking-wider mb-4"
+              style={{ color: 'var(--text-tertiary)' }}
+            >
               Alternative Currency Rates
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
               {popularConversions.map((conv) => (
                 <div
                   key={conv.code}
-                  className="flex items-center justify-between p-3 rounded-lg border bg-slate-50 dark:bg-slate-800/40"
-                  style={{ borderColor: 'var(--border-default)' }}
+                  className="flex items-center justify-between p-3 rounded-lg border"
+                  style={{
+                    borderColor: 'var(--border-default)',
+                    background: 'var(--bg-surface)',
+                  }}
                 >
-                  <span className="text-xs font-bold text-slate-400 dark:text-slate-500">
+                  <span className="text-xs font-bold" style={{ color: 'var(--text-tertiary)' }}>
                     {conv.code}
                   </span>
                   <span className="text-sm font-extrabold" style={{ color: 'var(--text-primary)' }}>
@@ -150,6 +159,11 @@ export default function CurrencyConverter() {
               ))}
             </div>
           </div>
+
+          <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
+            Rates are indicative and for reference only. They are not live market rates — verify with
+            your bank before making transactions.
+          </p>
         </div>
       </div>
     </ToolPageWrapper>

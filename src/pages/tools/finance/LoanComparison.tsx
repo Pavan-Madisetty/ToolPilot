@@ -11,6 +11,7 @@ import {
 import { Bar } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Slider } from '@/components/ui';
+import { useChartTheme } from '@/hooks/useChartTheme';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -23,6 +24,7 @@ const formatCurrency = (val: number) => {
 };
 
 export default function LoanComparison() {
+  const chartTheme = useChartTheme();
   // Loan A State
   const [pA, setPA] = useState(2000000); // ₹20 Lakhs
   const [rA, setRA] = useState(8.5); // 8.5%
@@ -85,13 +87,13 @@ export default function LoanComparison() {
       {
         label: 'Principal Amount',
         data: [pA, pB],
-        backgroundColor: '#6366F1', // Primary brand color in hex for Chart.js canvas
+        backgroundColor: chartTheme.primary,
         borderRadius: 6,
       },
       {
         label: 'Total Interest',
         data: [results.totalInterestA, results.totalInterestB],
-        backgroundColor: '#EF4444', // Danger color in hex for Chart.js canvas
+        backgroundColor: chartTheme.danger,
         borderRadius: 6,
       },
     ],
@@ -104,7 +106,7 @@ export default function LoanComparison() {
       legend: {
         position: 'top' as const,
         labels: {
-          color: 'var(--text-primary)',
+          color: chartTheme.textSecondary,
         },
       },
     },
@@ -112,10 +114,10 @@ export default function LoanComparison() {
       y: {
         stacked: true,
         grid: {
-          color: 'var(--border-subtle)',
+          color: chartTheme.borderSubtle,
         },
         ticks: {
-          color: 'var(--text-secondary)',
+          color: chartTheme.textTertiary,
           callback: (value: string | number) => formatCurrency(Number(value)),
         },
       },
@@ -125,7 +127,7 @@ export default function LoanComparison() {
           display: false,
         },
         ticks: {
-          color: 'var(--text-secondary)',
+          color: chartTheme.textTertiary,
         },
       },
     },

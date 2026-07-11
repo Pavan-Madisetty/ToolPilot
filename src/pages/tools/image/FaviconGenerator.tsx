@@ -10,6 +10,45 @@ interface FaviconSize {
   dataUrl: string | null;
 }
 
+/**
+ * Browsers don't support `canvas.toDataURL('image/x-icon')` — it silently
+ * falls back to PNG, producing a file that is a PNG mislabeled as .ico.
+ * This wraps a real PNG blob in a valid ICO container (PNG-in-ICO, supported
+ * by all modern browsers) and returns a data URL for download.
+ */
+function pngToIcoDataUrl(canvas: HTMLCanvasElement): string {
+  const pngDataUrl = canvas.toDataURL('image/png');
+  const pngBase64 = pngDataUrl.split(',')[1];
+  const pngBinary = atob(pngBase64);
+  const pngBytes = new Uint8Array(pngBinary.length);
+  for (let i = 0; i < pngBinary.length; i++) pngBytes[i] = pngBinary.charCodeAt(i);
+
+  const header = new Uint8Array(6 + 16);
+  const view = new DataView(header.buffer);
+  // ICONDIR
+  view.setUint16(0, 0, true); // reserved
+  view.setUint16(2, 1, true); // type: icon
+  view.setUint16(4, 1, true); // image count
+  // ICONDIRENTRY
+  const dim = canvas.width >= 256 ? 0 : canvas.width; // 0 means 256px
+  header[6] = dim; // width
+  header[7] = dim; // height
+  header[8] = 0; // palette
+  header[9] = 0; // reserved
+  view.setUint16(10, 1, true); // color planes
+  view.setUint16(12, 32, true); // bits per pixel
+  view.setUint32(14, pngBytes.length, true); // image data size
+  view.setUint32(18, 22, true); // offset to image data (6 + 16)
+
+  const ico = new Uint8Array(header.length + pngBytes.length);
+  ico.set(header, 0);
+  ico.set(pngBytes, header.length);
+
+  let binary = '';
+  for (let i = 0; i < ico.length; i++) binary += String.fromCharCode(ico[i]);
+  return `data:image/x-icon;base64,${btoa(binary)}`;
+}
+
 export default function FaviconGenerator() {
   const [image, setImage] = useState<string | null>(null);
   const [originalName, setOriginalName] = useState<string>('');
@@ -63,8 +102,9 @@ export default function FaviconGenerator() {
 
         if (ctx) {
           ctx.drawImage(img, 0, 0, fav.size, fav.size);
-          const format = fav.filename.endsWith('.ico') ? 'image/x-icon' : 'image/png';
-          const dataUrl = canvas.toDataURL(format);
+          const dataUrl = fav.filename.endsWith('.ico')
+            ? pngToIcoDataUrl(canvas)
+            : canvas.toDataURL('image/png');
           return { ...fav, dataUrl };
         }
         return fav;

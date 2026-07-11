@@ -229,7 +229,7 @@ export default function ImageToPdf() {
               className="w-full flex items-center justify-center gap-2 mt-4"
             >
               <Printer size={16} />
-              Export {images.length > 0 ? `(${images.length} Pages)` : ''} to PDF
+              Print / Save {images.length > 0 ? `(${images.length} Pages)` : ''} as PDF
             </Button>
           </div>
         </Card>
@@ -278,7 +278,7 @@ export default function ImageToPdf() {
               {images.map((img, index) => (
                 <div
                   key={img.id}
-                  className="flex items-center gap-4 p-3 border rounded-xl bg-[var(--bg-base)] border-[var(--border-default)] hover:border-slate-300 dark:hover:border-slate-700 transition-colors"
+                  className="flex items-center gap-4 p-3 border rounded-xl bg-[var(--bg-base)] border-[var(--border-default)] hover:border-[var(--border-strong)] transition-colors"
                 >
                   <img
                     src={img.src}
@@ -309,7 +309,8 @@ export default function ImageToPdf() {
                     </button>
                     <button
                       onClick={() => removeImage(img.id)}
-                      className="p-1.5 rounded-md hover:bg-red-50 dark:hover:bg-red-950/20 text-red-500"
+                      className="p-1.5 rounded-md hover:bg-[var(--danger-subtle)]"
+                      style={{ color: 'var(--danger)' }}
                       aria-label="Remove image"
                     >
                       <X size={16} />
@@ -320,7 +321,7 @@ export default function ImageToPdf() {
             </div>
           ) : (
             <div className="flex-1 flex flex-col items-center justify-center text-center p-8">
-              <ImageIcon size={48} className="text-slate-300 dark:text-slate-700 mb-3" />
+              <ImageIcon size={48} className="mb-3" style={{ color: 'var(--text-tertiary)' }} />
               <p className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>
                 No images added yet. Click upload to start converting.
               </p>

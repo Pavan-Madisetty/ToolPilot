@@ -344,13 +344,14 @@ export default function PomodoroTimer() {
         >
           <div className="flex items-center justify-between border-b pb-2" style={{ borderColor: 'var(--border-default)' }}>
             <h3 className="text-sm font-bold uppercase tracking-wider flex items-center gap-1.5" style={{ color: 'var(--text-primary)' }}>
-              <Award size={16} className="text-amber-500" />
+              <Award size={16} style={{ color: 'var(--warning)' }} />
               Focus Stats
             </h3>
             {(completedSessions > 0 || focusMinutes > 0) && (
               <button
                 onClick={handleClearStats}
-                className="text-xs font-semibold text-red-500 hover:underline"
+                className="text-xs font-semibold hover:underline"
+                style={{ color: 'var(--danger)' }}
               >
                 Reset Stats
               </button>
@@ -358,7 +359,7 @@ export default function PomodoroTimer() {
           </div>
           <div className="grid grid-cols-2 gap-4 text-center">
             <div className="p-3 rounded-lg bg-[var(--bg-elevated)] border border-[var(--border-default)]">
-              <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+              <span className="text-2xl font-bold" style={{ color: 'var(--primary)' }}>
                 {completedSessions}
               </span>
               <p className="text-xs font-medium mt-1" style={{ color: 'var(--text-secondary)' }}>
@@ -366,7 +367,7 @@ export default function PomodoroTimer() {
               </p>
             </div>
             <div className="p-3 rounded-lg bg-[var(--bg-elevated)] border border-[var(--border-default)]">
-              <span className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">
+              <span className="text-2xl font-bold" style={{ color: 'var(--success)' }}>
                 {focusMinutes}
               </span>
               <p className="text-xs font-medium mt-1" style={{ color: 'var(--text-secondary)' }}>

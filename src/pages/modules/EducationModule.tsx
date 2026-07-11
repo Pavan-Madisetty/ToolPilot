@@ -23,12 +23,27 @@ export default function EducationModule() {
       />
 
       {/* Tools Grid */}
-      <section aria-label="Education tools list">
-        <div className="tools-grid">
-          {educationTools.map((tool) => (
-            <ToolCard key={tool.id} tool={tool} />
-          ))}
-        </div>
+      <section aria-label="Education tools">
+        {educationTools.length > 0 ? (
+          <div className="tools-grid mt-8">
+            {educationTools.map((tool) => (
+              <ToolCard key={tool.id} tool={tool} />
+            ))}
+          </div>
+        ) : (
+          <div
+            className="py-20 text-center border rounded-2xl"
+            style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)' }}
+          >
+            <div className="text-6xl mb-4" aria-hidden="true">🎓</div>
+            <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+              Tools Coming Soon
+            </h2>
+            <p className="text-sm max-w-md mx-auto" style={{ color: 'var(--text-secondary)' }}>
+              We're building educational tools like scientific calculators and GPA grids. Check back soon!
+            </p>
+          </div>
+        )}
       </section>
     </ModulePageWrapper>
   );

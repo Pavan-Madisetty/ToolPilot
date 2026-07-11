@@ -40,10 +40,12 @@ export function ModulePageWrapper({
       <div className="container-app py-16 text-center">
         <Breadcrumb items={[{ label: moduleName }]} />
         <div
-          className="py-20 text-center border rounded-2xl bg-white dark:bg-slate-800 mt-8"
-          style={{ borderColor: 'var(--border-default)' }}
+          className="py-20 text-center border rounded-2xl mt-8"
+          style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)' }}
         >
-          <div className="text-6xl mb-4">🚧</div>
+          <div className="text-6xl mb-4" aria-hidden="true">
+            🚧
+          </div>
           <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
             Category Under Construction
           </h2>

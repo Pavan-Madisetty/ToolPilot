@@ -201,6 +201,7 @@ export default function QrGenerator() {
   const [bgColor, setBgColor] = useState<string>('#ffffff');
   const [size, setSize] = useState<number>(256);
   const [downloadUrl, setDownloadUrl] = useState<string>('');
+  const [error, setError] = useState<string | null>(null);
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -218,6 +219,10 @@ export default function QrGenerator() {
     if (len > 120) version = 10;
 
     try {
+      if (len > 255) {
+        throw new Error('Input is too long to encode. Please shorten your text.');
+      }
+
       const qr = new QRCodeModel(version, 1); // 1 = Medium Error correction
       qr.addData(text || ' ');
       qr.make();
@@ -245,8 +250,14 @@ export default function QrGenerator() {
         }
       }
       setDownloadUrl(canvas.toDataURL('image/png'));
+      setError(null);
     } catch (e) {
       console.error(e);
+      setError(
+        e instanceof Error && e.message
+          ? e.message
+          : 'Failed to generate QR code. Your input may be too long.'
+      );
     }
   }, [text, fgColor, bgColor, size]);
 
@@ -281,38 +292,44 @@ export default function QrGenerator() {
             {/* Colors */}
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-semibold text-slate-500">Foreground Color</label>
+                <label className="text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>
+                  Foreground Color
+                </label>
                 <div className="flex items-center gap-2">
                   <input
                     type="color"
                     value={fgColor}
                     onChange={(e) => setFgColor(e.target.value)}
                     className="w-8 h-8 rounded border cursor-pointer bg-transparent"
+                    style={{ borderColor: 'var(--border-default)' }}
                   />
                   <input
                     type="text"
                     value={fgColor}
                     onChange={(e) => setFgColor(e.target.value)}
-                    className="flex-1 px-2.5 py-1 border rounded-lg bg-transparent text-xs"
+                    className="flex-1 px-2.5 py-1 border rounded-lg bg-transparent text-xs outline-none focus:border-[var(--border-focus)] transition-colors"
                     style={{ borderColor: 'var(--border-default)', color: 'var(--text-primary)' }}
                   />
                 </div>
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-semibold text-slate-500">Background Color</label>
+                <label className="text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>
+                  Background Color
+                </label>
                 <div className="flex items-center gap-2">
                   <input
                     type="color"
                     value={bgColor}
                     onChange={(e) => setBgColor(e.target.value)}
                     className="w-8 h-8 rounded border cursor-pointer bg-transparent"
+                    style={{ borderColor: 'var(--border-default)' }}
                   />
                   <input
                     type="text"
                     value={bgColor}
                     onChange={(e) => setBgColor(e.target.value)}
-                    className="flex-1 px-2.5 py-1 border rounded-lg bg-transparent text-xs"
+                    className="flex-1 px-2.5 py-1 border rounded-lg bg-transparent text-xs outline-none focus:border-[var(--border-focus)] transition-colors"
                     style={{ borderColor: 'var(--border-default)', color: 'var(--text-primary)' }}
                   />
                 </div>
@@ -321,11 +338,13 @@ export default function QrGenerator() {
 
             {/* Size */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-semibold text-slate-500">QR Code Size (px)</label>
+              <label className="text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>
+                QR Code Size (px)
+              </label>
               <select
                 value={size}
                 onChange={(e) => setSize(parseInt(e.target.value))}
-                className="px-3 py-2 border rounded-xl bg-transparent outline-none focus:border-indigo-500 transition-colors text-sm"
+                className="px-3 py-2 border rounded-xl bg-transparent outline-none focus:border-[var(--border-focus)] transition-colors text-sm"
                 style={{ borderColor: 'var(--border-default)', color: 'var(--text-primary)' }}
               >
                 <option value={128}>128 × 128 px</option>
@@ -334,6 +353,12 @@ export default function QrGenerator() {
                 <option value={1024}>1024 × 1024 px</option>
               </select>
             </div>
+
+            {error && (
+              <p role="alert" className="text-xs font-semibold" style={{ color: 'var(--danger)' }}>
+                {error}
+              </p>
+            )}
           </div>
 
           {/* Right Panel: Output & Download */}
