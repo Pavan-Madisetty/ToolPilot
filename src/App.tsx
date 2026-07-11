@@ -120,6 +120,9 @@ const CaseConverter = lazy(() => import('@/pages/tools/text/CaseConverter'));
 const TextDiff = lazy(() => import('@/pages/tools/text/TextDiff'));
 const MarkdownEditor = lazy(() => import('@/pages/tools/text/MarkdownEditor'));
 const SlugGenerator = lazy(() => import('@/pages/tools/text/SlugGenerator'));
+const TextToEmoji = lazy(() => import('@/pages/tools/text/TextToEmoji'));
+const StylishText = lazy(() => import('@/pages/tools/text/StylishText'));
+const EmojiSearch = lazy(() => import('@/pages/tools/text/EmojiSearch'));
 
 // AI Tools
 const PromptBuilder = lazy(() => import('@/pages/tools/ai/PromptBuilder'));
@@ -827,6 +830,30 @@ export default function App() {
                 element={
                   <Suspense fallback={<PageLoader />}>
                     <SlugGenerator />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="text/text-to-emoji"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <TextToEmoji />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="text/stylish-text"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <StylishText />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="text/emoji-search"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <EmojiSearch />
                   </Suspense>
                 }
               />

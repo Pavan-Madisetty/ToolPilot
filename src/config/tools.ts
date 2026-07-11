@@ -1146,6 +1146,108 @@ export const TOOLS: ToolConfig[] = [
     keywords: ['markdown editor', 'online markdown editor', 'free markdown', 'md editor'],
     relatedTools: ['word-counter', 'markdown-preview'],
   },
+  {
+    id: 'text-to-emoji',
+    name: 'Text to Emoji Translator',
+    description: 'Translate words to emojis or spell text using emoji blocks',
+    longDescription: 'Toolskyt Text to Emoji Translator lets you translate standard text phrases into emoji expressions, swap keywords with their emoji equivalents, or render text characters as decorative emoji blocks.',
+    module: 'text',
+    slug: '/text/text-to-emoji',
+    icon: 'FaceSmileIcon',
+    tags: ['emoji', 'translator', 'text to emoji', 'emoji art'],
+    metaTitle: 'Text to Emoji Translator - Convert Text to Emojis Online | Toolskyt',
+    metaDescription:
+      'Translate your words, sentences, or phrases into emojis instantly. Copy translated outputs or generate block emoji letters.',
+    keywords: ['text to emoji', 'emoji translator', 'translate to emoji', 'emoji text converter'],
+    relatedTools: ['case-converter', 'word-counter'],
+    benefits: [
+      'Create visual posts for social media feeds.',
+      'Instantly swap keywords with matching emoticons.',
+      'Generate block characters for messaging apps.'
+    ],
+    features: [
+      'Interactive translation dictionary matching hundreds of keywords.',
+      'Letter spelling generator using custom colored emoji squares.',
+      'Quick copy and single-tap sharing controls.'
+    ],
+    howToSteps: [
+      { name: 'Input Plain Text', text: 'Type or paste the sentence or text you want to convert.' },
+      { name: 'Choose Converter Mode', text: 'Select either Word Translation mode or Block Speller mode.' },
+      { name: 'Copy Emoji Output', text: 'Click Copy to collect the generated emoji blocks or translation.' }
+    ],
+    faq: [
+      { question: 'How does the translation work?', answer: 'The translator checks your input text against a dictionary mapping key terms (like cat, heart, fire, pizza) to matching emojis.' },
+      { question: 'Is it free to use?', answer: 'Yes! All Toolskyt converter utilities are 100% free with no registration.' }
+    ]
+  },
+  {
+    id: 'stylish-text',
+    name: 'Stylish Text Generator',
+    description: 'Convert regular text into stylish fonts and Unicode symbols',
+    longDescription: 'Turn normal alphanumeric text into fancy, aesthetic, and stylish fonts using special Unicode characters. Perfect for social media bios (Instagram, Twitter), gaming nicknames, and chat decorations.',
+    module: 'text',
+    slug: '/text/stylish-text',
+    icon: 'SparklesIcon',
+    tags: ['stylish text', 'fancy text', 'font generator', 'unicode text', 'bio styles'],
+    metaTitle: 'Stylish Text Generator - Fancy Text & Font Generator | Toolskyt',
+    metaDescription:
+      'Generate cool, stylish, and fancy text fonts online. Copy and paste scripts, gothic text, outline symbols, and cursive text.',
+    keywords: ['stylish text', 'fancy text generator', 'font changer', 'unicode styles'],
+    relatedTools: ['case-converter', 'slug-generator'],
+    benefits: [
+      'Decorate social profile descriptions and bio layouts.',
+      'Generate unique gaming tags and server nicknames.',
+      'Copy-paste compatible scripts that work across browsers.'
+    ],
+    features: [
+      'Instantly produces 15+ text font variations on type.',
+      'Includes Gothic, Script Cursive, Double-Struck Outline, Monospace, and Strikethrough.',
+      'Single-tap Copy button for each generated style card.'
+    ],
+    howToSteps: [
+      { name: 'Enter Text Input', text: 'Type the word or phrase you want to transform.' },
+      { name: 'Browse Font Options', text: 'Scroll through the live list of generated typography variations.' },
+      { name: 'Copy Preferred Style', text: 'Click the Copy button next to your favorite style card.' }
+    ],
+    faq: [
+      { question: 'Do these styles work on Instagram or Twitter?', answer: 'Yes! Because they are generated using native Unicode characters, they can be copied and pasted directly into bio fields and posts.' },
+      { question: 'Why do some characters look like blocks?', answer: 'Some older operating systems or browsers may not support specific Unicode symbols. Modern devices render all styles correctly.' }
+    ]
+  },
+  {
+    id: 'emoji-search',
+    name: 'Emoji Search & Copy',
+    description: 'Search, browse, and copy emojis with skin tone support',
+    longDescription: 'A full-featured search engine for emojis. Browse categorized emojis, filter dynamically by keywords, customize skin-tone modifiers, and copy with a single tap.',
+    module: 'text',
+    slug: '/text/emoji-search',
+    icon: 'FaceSmileIcon',
+    tags: ['emoji search', 'find emoji', 'copy paste emoji', 'emoticons list'],
+    metaTitle: 'Emoji Search & Copy - Find and Copy Emojis Online | Toolskyt',
+    metaDescription:
+      'Search emojis by keyword, category, or alias. Customize skin tones and copy emojis instantly to clipboard.',
+    keywords: ['emoji search', 'emoji finder', 'copy emoji', 'find emoji online'],
+    relatedTools: ['text-to-emoji', 'case-converter'],
+    benefits: [
+      'Quickly find the perfect emoji from categories.',
+      'Apply standard skin-tone modifications.',
+      'One-click copies directly to your clipboard.'
+    ],
+    features: [
+      'Dynamically filters as you type keywords.',
+      'Supports categories like Smileys, Animals, Food, Objects, and Flags.',
+      'Skin tone picker modifier panel.'
+    ],
+    howToSteps: [
+      { name: 'Browse or Search', text: 'Type a keyword (e.g. happy, fire) or browse categories.' },
+      { name: 'Choose Skin Tone', text: 'If desired, select your preferred skin tone from the option bar.' },
+      { name: 'Click to Copy', text: 'Click on any emoji card to copy it directly to your clipboard.' }
+    ],
+    faq: [
+      { question: 'How do I copy an emoji?', answer: 'Simply click or tap on any emoji in the grid. A copy-success toast notification will confirm it is in your clipboard.' },
+      { question: 'Are skin tone selections saved?', answer: 'Yes, your active skin-tone modifier is cached so you do not have to select it repeatedly.' }
+    ]
+  },
 
   // ─────────────────────────────────────────────
   // AI WRITING MODULE
