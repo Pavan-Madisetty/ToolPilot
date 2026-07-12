@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Search } from 'lucide-react';
 import { useUIStore } from '@/stores/uiStore';
@@ -129,31 +129,23 @@ export default function EmojiSearch() {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [selectedSkinTone, setSelectedSkinTone] = useState<string>('');
-  const [filteredEmojis, setFilteredEmojis] = useState<EmojiItem[]>(EMOJIS);
-
   const categories = ['All', 'Smileys', 'Gestures', 'Animals', 'Nature', 'Food', 'Activities', 'Travel', 'Objects', 'Symbols'];
 
-  useEffect(() => {
-    let result = EMOJIS;
+  let filteredEmojis = EMOJIS;
 
-    // Filter by Category
-    if (activeCategory !== 'All') {
-      result = result.filter((item) => item.category === activeCategory);
-    }
+  if (activeCategory !== 'All') {
+    filteredEmojis = filteredEmojis.filter((item) => item.category === activeCategory);
+  }
 
-    // Filter by Search Query
-    if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase().trim();
-      result = result.filter(
-        (item) =>
-          item.name.toLowerCase().includes(query) ||
-          item.category.toLowerCase().includes(query) ||
-          item.keywords.some((kw) => kw.includes(query))
-      );
-    }
-
-    setFilteredEmojis(result);
-  }, [searchQuery, activeCategory]);
+  if (searchQuery.trim()) {
+    const query = searchQuery.toLowerCase().trim();
+    filteredEmojis = filteredEmojis.filter(
+      (item) =>
+        item.name.toLowerCase().includes(query) ||
+        item.category.toLowerCase().includes(query) ||
+        item.keywords.some((kw) => kw.includes(query))
+    );
+  }
 
   const handleCopyEmoji = (baseEmoji: string, supportsSkinTone?: boolean) => {
     const finalEmoji = supportsSkinTone ? baseEmoji + selectedSkinTone : baseEmoji;

@@ -1,39 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Button, CopyButton, Textarea } from '@/components/ui';
 
 export default function RemoveSpaces() {
   const [inputText, setInputText] = useState('');
-  const [outputText, setOutputText] = useState('');
   const [rule, setRule] = useState<'collapse' | 'strip-all' | 'trim-lines' | 'remove-newlines'>('collapse');
 
-  useEffect(() => {
-    if (!inputText) {
-      setOutputText('');
-      return;
-    }
-
-    let result = inputText;
-
+  let outputText = '';
+  if (inputText) {
     if (rule === 'collapse') {
-      // Replaces multiple consecutive spaces with a single space
-      result = inputText.replace(/[ \t]+/g, ' ');
+      outputText = inputText.replace(/[ \t]+/g, ' ');
     } else if (rule === 'strip-all') {
-      // Removes all spaces and tab spaces completely
-      result = inputText.replace(/\s+/g, '');
+      outputText = inputText.replace(/\s+/g, '');
     } else if (rule === 'trim-lines') {
-      // Trims leading/trailing whitespace on each line
-      result = inputText
+      outputText = inputText
         .split('\n')
         .map((line) => line.trim())
         .join('\n');
     } else if (rule === 'remove-newlines') {
-      // Replaces line breaks with a single space
-      result = inputText.replace(/[\r\n]+/g, ' ').replace(/\s+/g, ' ');
+      outputText = inputText.replace(/[\r\n]+/g, ' ').replace(/\s+/g, ' ');
     }
-
-    setOutputText(result);
-  }, [inputText, rule]);
+  }
 
   return (
     <ToolPageWrapper toolId="remove-spaces">

@@ -51,11 +51,12 @@ export default function Dictionary() {
       if (Array.isArray(data) && data[0]) {
         setResult(data[0]);
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
+      const errMsg = err instanceof Error ? err.message : 'Could not lookup the specified word.';
       addToast({
         type: 'error',
         title: 'Search Failed',
-        message: err.message || 'Could not lookup the specified word.',
+        message: errMsg,
       });
     } finally {
       setLoading(false);

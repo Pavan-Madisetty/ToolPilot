@@ -4,6 +4,29 @@ import { Button, CopyButton } from '@/components/ui';
 import { Upload, FileText, CheckCircle, RefreshCw } from 'lucide-react';
 import { useUIStore } from '@/stores/uiStore';
 
+interface PdfTextItem {
+  str: string;
+  transform: number[];
+}
+
+interface PdfJsDocument {
+  numPages: number;
+  getPage: (index: number) => Promise<{
+    getTextContent: () => Promise<{
+      items: PdfTextItem[];
+    }>;
+  }>;
+}
+
+interface PdfJsLib {
+  GlobalWorkerOptions: {
+    workerSrc: string;
+  };
+  getDocument: (options: { data: ArrayBuffer }) => {
+    promise: Promise<PdfJsDocument>;
+  };
+}
+
 export default function PdfToMarkdown() {
   const { addToast } = useUIStore();
   const [loading, setLoading] = useState(false);
@@ -13,17 +36,22 @@ export default function PdfToMarkdown() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const loadPdfJS = () => {
-    return new Promise<any>((resolve, reject) => {
-      if ((window as any).pdfjsLib) {
-        resolve((window as any).pdfjsLib);
+    return new Promise<PdfJsLib>((resolve, reject) => {
+      const globalWindow = window as unknown as { pdfjsLib?: PdfJsLib };
+      if (globalWindow.pdfjsLib) {
+        resolve(globalWindow.pdfjsLib);
         return;
       }
       const script = document.createElement('script');
       script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js';
       script.onload = () => {
-        const pdfjs = (window as any).pdfjsLib;
-        pdfjs.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
-        resolve(pdfjs);
+        const pdfjs = globalWindow.pdfjsLib;
+        if (pdfjs) {
+          pdfjs.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+          resolve(pdfjs);
+        } else {
+          reject(new Error('Failed to load PDF.js engine'));
+        }
       };
       script.onerror = () => reject(new Error('Failed to load PDF.js engine'));
       document.body.appendChild(script);
@@ -58,7 +86,7 @@ export default function PdfToMarkdown() {
         let lastY = -1;
         let pageText = '';
 
-        for (const item of textContent.items as any[]) {
+        for (const item of textContent.items) {
           // Approximate basic formatting (add newlines for new visual lines)
           if (lastY !== -1 && Math.abs(item.transform[5] - lastY) > 10) {
             pageText += '\n';
@@ -82,12 +110,13 @@ export default function PdfToMarkdown() {
         title: 'PDF Extracted',
         message: 'Successfully extracted text to Markdown formatting!',
       });
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
+      const errMsg = err instanceof Error ? err.message : 'Could not parse the PDF document.';
       addToast({
         type: 'error',
         title: 'Extraction Failed',
-        message: err.message || 'Could not parse the PDF document.',
+        message: errMsg,
       });
     } finally {
       setLoading(false);

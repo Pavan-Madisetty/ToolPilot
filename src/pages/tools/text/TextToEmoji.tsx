@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Button, CopyButton, Textarea } from '@/components/ui';
 
@@ -82,15 +82,10 @@ const BLOCK_LETTER_MAP: Record<string, string> = {
 
 export default function TextToEmoji() {
   const [inputText, setInputText] = useState('');
-  const [outputText, setOutputText] = useState('');
   const [mode, setMode] = useState<'translate' | 'speller'>('translate');
 
-  useEffect(() => {
-    if (!inputText.trim()) {
-      setOutputText('');
-      return;
-    }
-
+  let outputText = '';
+  if (inputText.trim()) {
     if (mode === 'translate') {
       // Word translation
       const words = inputText.split(/(\s+)/);
@@ -104,14 +99,14 @@ export default function TextToEmoji() {
         }
         return part;
       });
-      setOutputText(translated.join(''));
+      outputText = translated.join('');
     } else {
       // Block speller
       const chars = inputText.toLowerCase().split('');
       const blockChars = chars.map((char) => BLOCK_LETTER_MAP[char] || char);
-      setOutputText(blockChars.join(' '));
+      outputText = blockChars.join(' ');
     }
-  }, [inputText, mode]);
+  }
 
   return (
     <ToolPageWrapper toolId="text-to-emoji">

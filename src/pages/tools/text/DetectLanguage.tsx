@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Button, Textarea } from '@/components/ui';
 
@@ -85,18 +85,12 @@ const LANGUAGES: LanguageDetectorRule[] = [
 
 export default function DetectLanguage() {
   const [text, setText] = useState('');
-  const [detectedLang, setDetectedLang] = useState('');
-  const [detectedCode, setDetectedCode] = useState('');
-  const [confidence, setConfidence] = useState(0);
 
-  useEffect(() => {
-    if (!text.trim()) {
-      setDetectedLang('');
-      setDetectedCode('');
-      setConfidence(0);
-      return;
-    }
+  let detectedLang = '';
+  let detectedCode = '';
+  let confidence = 0;
 
+  if (text.trim()) {
     const cleanText = text.toLowerCase().trim();
     const words = cleanText.split(/\s+/);
     const scores: Record<string, number> = {};
@@ -136,18 +130,17 @@ export default function DetectLanguage() {
 
     const match = LANGUAGES.find((l) => l.code === bestCode);
     if (match && bestScore > 0) {
-      setDetectedLang(match.lang);
-      setDetectedCode(match.code);
+      detectedLang = match.lang;
+      detectedCode = match.code;
       // Map score to a confidence percentage from 40% to 100%
-      const confPct = Math.min(100, Math.max(40, 40 + bestScore * 4));
-      setConfidence(confPct);
+      confidence = Math.min(100, Math.max(40, 40 + bestScore * 4));
     } else {
       // Default fallback
-      setDetectedLang('Unknown (likely English)');
-      setDetectedCode('en');
-      setConfidence(30);
+      detectedLang = 'Unknown (likely English)';
+      detectedCode = 'en';
+      confidence = 30;
     }
-  }, [text]);
+  }
 
   return (
     <ToolPageWrapper toolId="detect-language">

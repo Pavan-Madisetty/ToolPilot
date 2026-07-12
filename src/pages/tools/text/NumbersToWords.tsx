@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Button, CopyButton } from '@/components/ui';
 
@@ -44,7 +44,7 @@ const convertEnglish = (numStr: string): string => {
 const convertEnglishInt = (num: number): string => {
   if (num === 0) return '';
 
-  let parts: string[] = [];
+  const parts: string[] = [];
   let scaleIdx = 0;
   let val = num;
 
@@ -93,8 +93,8 @@ const convertChinese = (numStr: string): { hanzi: string; pinyin: string } => {
   if (isNaN(num)) return { hanzi: '', pinyin: '' };
   if (num === 0) return { hanzi: '零', pinyin: 'líng' };
 
-  let hanziParts: string[] = [];
-  let pinyinParts: string[] = [];
+  const hanziParts: string[] = [];
+  const pinyinParts: string[] = [];
 
   if (num < 0) {
     hanziParts.push('负');
@@ -144,7 +144,7 @@ const convertChineseInt = (num: number): { hanzi: string; pinyin: string } => {
     const section = val % 10000;
     if (section > 0) {
       let secHz = '';
-      let secPy: string[] = [];
+      const secPy: string[] = [];
       let temp = section;
       let zeroFlag = false;
 
@@ -192,26 +192,20 @@ const convertChineseInt = (num: number): { hanzi: string; pinyin: string } => {
 export default function NumbersToWords() {
   const [inputVal, setInputVal] = useState('');
   const [lang, setLang] = useState<'en' | 'zh'>('en');
-  const [englishText, setEnglishText] = useState('');
-  const [chineseHanzi, setChineseHanzi] = useState('');
-  const [chinesePinyin, setChinesePinyin] = useState('');
 
-  useEffect(() => {
-    if (!inputVal) {
-      setEnglishText('');
-      setChineseHanzi('');
-      setChinesePinyin('');
-      return;
-    }
+  let englishText = '';
+  let chineseHanzi = '';
+  let chinesePinyin = '';
 
+  if (inputVal) {
     if (lang === 'en') {
-      setEnglishText(convertEnglish(inputVal));
+      englishText = convertEnglish(inputVal);
     } else {
       const { hanzi, pinyin } = convertChinese(inputVal);
-      setChineseHanzi(hanzi);
-      setChinesePinyin(pinyin);
+      chineseHanzi = hanzi;
+      chinesePinyin = pinyin;
     }
-  }, [inputVal, lang]);
+  }
 
   return (
     <ToolPageWrapper toolId="numbers-to-words">

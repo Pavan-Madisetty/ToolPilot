@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Button, CopyButton } from '@/components/ui';
 import { Volume2 } from 'lucide-react';
@@ -10,7 +10,7 @@ const EN_SCALES = ['', 'thousand', 'million', 'billion'];
 
 const convertEnglishInt = (num: number): string => {
   if (num === 0) return '';
-  let parts: string[] = [];
+  const parts: string[] = [];
   let scaleIdx = 0;
   let val = num;
 
@@ -91,7 +91,7 @@ const MATH_OPERATORS: Record<string, string> = {
 
 const parseExpression = (expr: string): string => {
   // Matches floats, single operators, letters/symbols
-  const tokens = expr.match(/\d+(\.\d+)?|[\+\-\*\/\=\(\)\^x]|[A-Za-z]+/g);
+  const tokens = expr.match(/\d+(\.\d+)?|[-+*/()^x=]|[A-Za-z]+/g);
   if (!tokens) return '';
 
   const parsedTokens = tokens.map((token) => {
@@ -112,15 +112,7 @@ const parseExpression = (expr: string): string => {
 
 export default function ReadMathExpressions() {
   const [expression, setExpression] = useState('');
-  const [spokenText, setSpokenText] = useState('');
-
-  useEffect(() => {
-    if (!expression.trim()) {
-      setSpokenText('');
-      return;
-    }
-    setSpokenText(parseExpression(expression));
-  }, [expression]);
+  const spokenText = expression.trim() ? parseExpression(expression) : '';
 
   const handleSpeak = () => {
     if (!spokenText) return;

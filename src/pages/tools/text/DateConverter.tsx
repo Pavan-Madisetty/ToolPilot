@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { CopyButton } from '@/components/ui';
 
@@ -60,8 +60,8 @@ const jdToSolar = (jd: number) => {
   const year = cycle * 33 + cycleYears + 475;
   const dayOfYear = section - Math.floor((cycleYears * 12053 - 8) / 33);
 
-  let month = 0;
-  let day = 0;
+  let month: number;
+  let day: number;
   if (dayOfYear < 186) {
     month = Math.floor(dayOfYear / 31) + 1;
     day = Math.floor(dayOfYear % 31) + 1;
@@ -78,13 +78,12 @@ export default function DateConverter() {
     return today.toISOString().split('T')[0];
   });
   const [lang, setLang] = useState('en');
-  const [gregorianStr, setGregorianStr] = useState('');
-  const [hijriStr, setHijriStr] = useState('');
-  const [solarStr, setSolarStr] = useState('');
 
-  useEffect(() => {
-    if (!inputDate) return;
+  let gregorianStr = '';
+  let hijriStr = '';
+  let solarStr = '';
 
+  if (inputDate) {
     const [y, m, d] = inputDate.split('-').map(Number);
     const dateObj = new Date(y, m - 1, d);
     const jd = getJulianDay(y, m, d);
@@ -92,33 +91,24 @@ export default function DateConverter() {
     const hijri = jdToHijri(jd);
     const solar = jdToSolar(jd);
 
-    // Format Gregorian Localization
-    let options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const localeMap: Record<string, string> = { en: 'en-US', zh: 'zh-CN', es: 'es-ES', fr: 'fr-FR', ar: 'ar-EG' };
-    const gregLoc = dateObj.toLocaleDateString(localeMap[lang] || 'en-US', options);
+    gregorianStr = dateObj.toLocaleDateString(localeMap[lang] || 'en-US', options);
 
-    // Format Hijri & Solar descriptions
     const hijriMonthName = HIJRI_MONTHS[hijri.month - 1];
     const solarMonthName = SOLAR_MONTHS[solar.month - 1];
 
-    let hStr = '';
-    let sStr = '';
-
     if (lang === 'ar') {
-      hStr = `${hijri.day} ${hijriMonthName} ${hijri.year} هـ`;
-      sStr = `${solar.day} ${solarMonthName} ${solar.year} ش`;
+      hijriStr = `${hijri.day} ${hijriMonthName} ${hijri.year} هـ`;
+      solarStr = `${solar.day} ${solarMonthName} ${solar.year} ش`;
     } else if (lang === 'zh') {
-      hStr = `伊历 ${hijri.year}年 ${hijri.month}月 ${hijri.day}日`;
-      sStr = `波斯历 ${solar.year}年 ${solar.month}月 ${solar.day}日`;
+      hijriStr = `伊历 ${hijri.year}年 ${hijri.month}月 ${hijri.day}日`;
+      solarStr = `波斯历 ${solar.year}年 ${solar.month}月 ${solar.day}日`;
     } else {
-      hStr = `${hijri.day} ${hijriMonthName} ${hijri.year} AH`;
-      sStr = `${solar.day} ${solarMonthName} ${solar.year} SH`;
+      hijriStr = `${hijri.day} ${hijriMonthName} ${hijri.year} AH`;
+      solarStr = `${solar.day} ${solarMonthName} ${solar.year} SH`;
     }
-
-    setGregorianStr(gregLoc);
-    setHijriStr(hStr);
-    setSolarStr(sStr);
-  }, [inputDate, lang]);
+  }
 
   return (
     <ToolPageWrapper toolId="date-converter">

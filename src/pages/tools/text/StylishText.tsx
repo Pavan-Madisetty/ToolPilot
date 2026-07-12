@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Button, CopyButton, Textarea } from '@/components/ui';
 
@@ -110,49 +110,43 @@ interface OutputItem {
   category: 'font' | 'decoration' | 'special';
 }
 
-export default function StylishText() {
-  const [inputText, setInputText] = useState('');
-  const [outputs, setOutputs] = useState<OutputItem[]>([]);
-  const [activeTab, setActiveTab] = useState<'all' | 'fonts' | 'decorations' | 'special'>('all');
-
-  useEffect(() => {
-    if (!inputText.trim()) {
-      setOutputs([]);
-      return;
+// Helper function to map text to font
+const applyFont = (text: string, style: typeof FONT_PRESETS[0]) => {
+  let result = '';
+  for (const char of text) {
+    let idx = NORMAL_LOWER.indexOf(char);
+    if (idx !== -1) {
+      result += style.lower[idx] || char;
+      continue;
     }
 
-    const list: OutputItem[] = [];
+    idx = NORMAL_UPPER.indexOf(char);
+    if (idx !== -1) {
+      result += style.upper[idx] || char;
+      continue;
+    }
 
-    // Helper function to map text to font
-    const applyFont = (text: string, style: typeof FONT_PRESETS[0]) => {
-      let result = '';
-      for (const char of text) {
-        let idx = NORMAL_LOWER.indexOf(char);
-        if (idx !== -1) {
-          result += style.lower[idx] || char;
-          continue;
-        }
+    idx = NORMAL_NUM.indexOf(char);
+    if (idx !== -1) {
+      result += style.num[idx] || char;
+      continue;
+    }
 
-        idx = NORMAL_UPPER.indexOf(char);
-        if (idx !== -1) {
-          result += style.upper[idx] || char;
-          continue;
-        }
+    result += char;
+  }
+  return result;
+};
 
-        idx = NORMAL_NUM.indexOf(char);
-        if (idx !== -1) {
-          result += style.num[idx] || char;
-          continue;
-        }
+export default function StylishText() {
+  const [inputText, setInputText] = useState('');
+  const [activeTab, setActiveTab] = useState<'all' | 'fonts' | 'decorations' | 'special'>('all');
 
-        result += char;
-      }
-      return result;
-    };
+  const outputs: OutputItem[] = [];
 
+  if (inputText.trim()) {
     // 1. Cool Fonts
     FONT_PRESETS.forEach((preset) => {
-      list.push({
+      outputs.push({
         name: preset.name,
         text: applyFont(inputText, preset),
         category: 'font',
@@ -173,7 +167,7 @@ export default function StylishText() {
         baseText = applyFont(inputText, doubleStruckStyle);
       }
 
-      list.push({
+      outputs.push({
         name: decor.name,
         text: decor.prefix + baseText + decor.suffix,
         category: 'decoration',
@@ -186,14 +180,14 @@ export default function StylishText() {
       .split('')
       .map((char) => char + '\u0336')
       .join('');
-    list.push({ name: 'Strikethrough', text: strikethroughText, category: 'special' });
+    outputs.push({ name: 'Strikethrough', text: strikethroughText, category: 'special' });
 
     // Underline
     const underlineText = inputText
       .split('')
       .map((char) => char + '\u0332')
       .join('');
-    list.push({ name: 'Underline', text: underlineText, category: 'special' });
+    outputs.push({ name: 'Underline', text: underlineText, category: 'special' });
 
     // Upside Down Flipped
     const flippedText = inputText
@@ -201,17 +195,15 @@ export default function StylishText() {
       .map((char) => FLIPPED_MAP[char] || char)
       .reverse()
       .join('');
-    list.push({ name: 'Upside Down', text: flippedText, category: 'special' });
+    outputs.push({ name: 'Upside Down', text: flippedText, category: 'special' });
 
     // Zalgo / Glitch
     const glitchText = inputText
       .split('')
-      .map((char) => char + (Math.random() > 0.6 ? '\u030d\u031a\u033d' : ''))
+      .map((char, idx) => char + ((char.charCodeAt(0) + idx) % 3 === 0 ? '\u030d\u031a\u033d' : ''))
       .join('');
-    list.push({ name: 'Glitch Text', text: glitchText, category: 'special' });
-
-    setOutputs(list);
-  }, [inputText]);
+    outputs.push({ name: 'Glitch Text', text: glitchText, category: 'special' });
+  }
 
   const filteredOutputs = outputs.filter((item) => {
     if (activeTab === 'all') return true;
