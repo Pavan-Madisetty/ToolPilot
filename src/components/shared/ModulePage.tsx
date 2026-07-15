@@ -250,10 +250,10 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
 
       {/* ── FEATURED TOOLS SECTION ── */}
       {featuredTools.length > 0 && !searchQuery && (
-        <section id="featured" className="py-12 md:py-16">
+        <section id="featured" className="py-12 md:py-16 bg-[var(--bg-surface-container-low)] border-y border-[var(--border-default)] rounded-2xl mb-12 -mx-4 px-4 md:-mx-6 md:px-6 lg:-mx-8 lg:px-8">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-2 h-6 rounded-full" style={{ background: colors.accent }} />
-            <h2 className="text-h3 font-bold tracking-tight text-[var(--text-primary)]">
+            <div className="w-1.5 h-6 rounded-full" style={{ background: 'var(--primary)' }} />
+            <h2 className="text-h3 font-display font-bold tracking-tight text-[var(--text-primary)]">
               Featured {moduleDisplayName}
             </h2>
           </div>
@@ -269,8 +269,8 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
       <section id="all-tools" className="py-12 md:py-16">
         <div className="flex items-center justify-between gap-4 mb-8">
           <div className="flex items-center gap-3">
-            <div className="w-2 h-6 rounded-full" style={{ background: searchQuery ? 'var(--primary)' : colors.accent }} />
-            <h2 className="text-h3 font-bold tracking-tight text-[var(--text-primary)]">
+            <div className="w-1.5 h-6 rounded-full" style={{ background: 'var(--primary)' }} />
+            <h2 className="text-h3 font-display font-bold tracking-tight text-[var(--text-primary)]">
               {searchQuery ? 'Search Results' : `All ${moduleDisplayName}`}
             </h2>
           </div>
@@ -308,9 +308,12 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
 
                   return (
                     <div key={idx} className="mb-16 last:mb-0">
-                      <h3 className="text-h4 font-bold text-[var(--text-primary)] mb-6">
-                        {cat.title}
-                      </h3>
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="w-1 h-5 rounded-full" style={{ background: 'var(--primary)' }} />
+                        <h3 className="text-h4 font-display font-bold text-[var(--text-primary)]">
+                          {cat.title}
+                        </h3>
+                      </div>
                       <div className="tools-grid">
                         {catTools.map((tool) => (
                           <ToolCard key={tool.id} tool={tool} />
@@ -323,9 +326,12 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
                 {/* Render any uncategorized tools in a separate section */}
                 {uncategorizedTools.length > 0 && (
                   <div className="mt-16">
-                    <h3 className="text-h4 font-bold text-[var(--text-primary)] mb-6">
-                      More {moduleConfig.name} Utilities
-                    </h3>
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-1 h-5 rounded-full" style={{ background: 'var(--primary)' }} />
+                      <h3 className="text-h4 font-display font-bold text-[var(--text-primary)]">
+                        More {moduleConfig.name} Utilities
+                      </h3>
+                    </div>
                     <div className="tools-grid">
                       {uncategorizedTools.map((tool) => (
                         <ToolCard key={tool.id} tool={tool} />
@@ -347,9 +353,9 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
       </section>
 
       {/* ── WHY USE THESE TOOLS ── */}
-      <section id="why-use" className="py-12 md:py-16">
+      <section id="why-use" className="py-12 md:py-16 bg-[var(--bg-surface-container-low)] border-y border-[var(--border-default)] rounded-2xl mb-12 -mx-4 px-4 md:-mx-6 md:px-6 lg:-mx-8 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <h2 className="text-2xl font-bold tracking-tight text-[var(--text-primary)]">
+          <h2 className="text-2xl font-display font-bold tracking-tight text-[var(--text-primary)]">
             Why Use Toolskyt {whyUseName}?
           </h2>
           <p className="text-sm text-[var(--text-secondary)] mt-2 leading-relaxed">
@@ -361,7 +367,7 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
           {metadata.whyUse.map((benefit, idx) => (
             <div
               key={idx}
-              className="p-6 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-elevated)] shadow-sm hover:shadow-md transition-shadow duration-200"
+              className="p-6 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface-container-lowest)] shadow-sm hover:shadow-md transition-shadow duration-200"
             >
               <div
                 className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 border"
@@ -389,11 +395,11 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
               <div className="flex items-center gap-3 mb-6">
                 <div
                   className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-white text-sm shrink-0 shadow-sm"
-                  style={{ background: colors.accent }}
+                  style={{ background: 'var(--primary)' }}
                 >
                   ?
                 </div>
-                <h2 className="text-h3 font-bold tracking-tight text-[var(--text-primary)]">
+                <h2 className="text-h3 font-display font-bold tracking-tight text-[var(--text-primary)]">
                   Frequently Asked Questions
                 </h2>
               </div>

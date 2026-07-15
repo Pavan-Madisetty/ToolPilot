@@ -181,6 +181,14 @@ export function Header() {
               </motion.div>
             </button>
 
+            {/* Sign in action */}
+            <Link
+              to="/signin"
+              className="text-sm font-semibold text-[var(--text-secondary)] hover:text-primary transition-colors px-3 py-2 cursor-pointer"
+            >
+              Sign in
+            </Link>
+
             {/* Tablet Hamburger Menu */}
             <button
               ref={toggleBtnRef}

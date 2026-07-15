@@ -199,55 +199,57 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
         {howToSchema && <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>}
       </Helmet>
 
-      <div className="container-app py-8">
+      <div className="container-module py-8">
         <Breadcrumb items={breadcrumbItems} />
 
         {/* Tool Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 mt-4">
-          <div>
-            <div className="flex flex-wrap items-center gap-3">
-              <h1 className="text-3xl font-extrabold text-text-primary">
-                {tool.name}
-              </h1>
-              <span
-                className={`badge module-badge-${tool.module} capitalize text-xs font-semibold px-2.5 py-0.5 rounded-md`}
-              >
-                {tool.module}
-              </span>
+        <header className="mb-12 mt-4 text-center md:text-left">
+          <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
+            <div className="flex-1">
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-2">
+                <h1 className="text-display-lg-mobile md:text-display-lg font-display font-bold tracking-tight text-[var(--text-primary)] leading-tight">
+                  {tool.name}
+                </h1>
+                <span
+                  className={`badge module-badge-${tool.module} capitalize text-xs font-semibold px-2.5 py-0.5 rounded-md`}
+                >
+                  {tool.module}
+                </span>
+              </div>
+              <p className="text-base font-body-md text-[var(--text-secondary)] max-w-2xl leading-relaxed">
+                {tool.description}
+              </p>
             </div>
-            <p className="text-base mt-2 text-text-secondary">
-              {tool.description}
-            </p>
-          </div>
 
-          {/* Quick Actions */}
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => toggleFavorite(tool.id)}
-              className={clsx(
-                'btn btn-secondary flex items-center gap-1.5 border transition-colors',
-                favorited ? 'border-danger text-danger' : 'border-border-default text-text-secondary'
-              )}
-              aria-label={favorited ? 'Remove from favorites' : 'Add to favorites'}
-            >
-              <Heart
-                size={20}
-                strokeWidth={2}
-                className={clsx({ 'fill-current text-danger': favorited })}
-              />
-              <span>{favorited ? 'Favorited' : 'Favorite'}</span>
-            </button>
+            {/* Quick Actions */}
+            <div className="flex items-center justify-center gap-2 shrink-0 self-center md:self-start">
+              <button
+                onClick={() => toggleFavorite(tool.id)}
+                className={clsx(
+                  'btn btn-secondary flex items-center gap-1.5 border transition-colors',
+                  favorited ? 'border-danger text-danger bg-danger/5' : 'border-border-default text-text-secondary hover:bg-[var(--bg-surface)]'
+                )}
+                aria-label={favorited ? 'Remove from favorites' : 'Add to favorites'}
+              >
+                <Heart
+                  size={18}
+                  strokeWidth={2}
+                  className={clsx({ 'fill-current text-danger': favorited })}
+                />
+                <span>{favorited ? 'Favorited' : 'Favorite'}</span>
+              </button>
 
-            <button
-              onClick={handleShare}
-              className="btn btn-secondary flex items-center gap-1.5 border border-border-strong text-text-secondary"
-              aria-label="Share tool"
-            >
-              <Share2 size={20} strokeWidth={2} />
-              <span>Share</span>
-            </button>
+              <button
+                onClick={handleShare}
+                className="btn btn-secondary flex items-center gap-1.5 border border-border-strong text-text-secondary hover:bg-[var(--bg-surface)]"
+                aria-label="Share tool"
+              >
+                <Share2 size={18} strokeWidth={2} />
+                <span>Share</span>
+              </button>
+            </div>
           </div>
-        </div>
+        </header>
 
         {/* Tool Application sandbox */}
         <div className="min-h-[400px]">{children}</div>
@@ -258,7 +260,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
             {/* Long intro summary */}
             {tool.longDescription && (
               <section className="flex flex-col gap-4">
-                <h2 className="text-h2 text-text-primary">
+                <h2 className="text-h2 font-display text-text-primary">
                   About {tool.name}
                 </h2>
                 <p className="text-base leading-relaxed max-w-3xl text-text-secondary">
@@ -272,7 +274,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
               <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {tool.benefits && (
                   <div className="flex flex-col gap-4">
-                    <h3 className="text-h3 text-text-primary">
+                    <h3 className="text-h3 font-display text-text-primary">
                       Key Benefits
                     </h3>
                     <ul className="flex flex-col gap-2">
@@ -290,7 +292,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                 )}
                 {tool.features && (
                   <div className="flex flex-col gap-4">
-                    <h3 className="text-h3 text-text-primary">
+                    <h3 className="text-h3 font-display text-text-primary">
                       Key Features
                     </h3>
                     <ul className="flex flex-col gap-2">
@@ -312,7 +314,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
             {/* How to use / Step by Step instructions */}
             {tool.howToSteps && (
               <section className="flex flex-col gap-4">
-                <h2 className="text-h2 text-text-primary">
+                <h2 className="text-h2 font-display text-text-primary">
                   How to Use {tool.name}
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -332,7 +334,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
 
                     return (
                       <div key={idx} className="flex items-center gap-2">
-                        <div className="relative border border-border-default rounded-xl p-4 flex items-center gap-4 bg-bg-elevated shadow-sm flex-1">
+                        <div className="relative border border-[var(--border-default)] rounded-xl p-4 flex items-center gap-4 bg-[var(--bg-surface-container-lowest)] shadow-sm hover:shadow-md transition-shadow duration-200 flex-1">
                           {/* Icon with overlapping step number */}
                           <div className="relative shrink-0">
                             <div className="w-12 h-12 rounded-xl bg-primary-subtle flex items-center justify-center">
@@ -458,7 +460,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                   <span className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-base shrink-0 bg-primary text-text-inverse" aria-hidden="true">
                     ?
                   </span>
-                  <h2 className="text-h2 text-text-primary">
+                  <h2 className="text-h2 font-display text-text-primary">
                     Frequently Asked Questions
                   </h2>
                 </div>

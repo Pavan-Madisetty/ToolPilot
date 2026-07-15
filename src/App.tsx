@@ -195,6 +195,7 @@ function AnalyticsTracker() {
   return null;
 }
 
+import { ScrollToTop } from '@/components/layout/ScrollToTop';
 import { RuntimeConfigProvider } from '@/context/RuntimeConfigContext';
 
 export default function App() {
@@ -207,6 +208,7 @@ export default function App() {
     <RuntimeConfigProvider>
       <HelmetProvider>
       <BrowserRouter basename={basename}>
+        <ScrollToTop />
         <AnalyticsTracker />
         <ToastContainer />
         <AnimatePresence mode="wait">
