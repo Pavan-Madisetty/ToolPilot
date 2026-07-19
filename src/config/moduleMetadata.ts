@@ -184,7 +184,7 @@ export const MODULE_METADATA: Record<string, ModuleMetadata> = {
     ],
   },
   pdf: {
-    popularSearches: ['HTML to PDF', 'Image to PDF', 'Markdown to PDF'],
+    popularSearches: ['HTML to PDF', 'Image to PDF', 'Markdown to PDF', 'PDF Metadata'],
     whyUse: [
       {
         title: 'Client-Side Rendering',
@@ -217,7 +217,7 @@ export const MODULE_METADATA: Record<string, ModuleMetadata> = {
       },
     ],
     relatedModules: ['image', 'text', 'business', 'productivity'],
-    featuredTools: ['html-to-pdf', 'image-to-pdf', 'markdown-to-pdf'],
+    featuredTools: ['html-to-pdf', 'image-to-pdf', 'markdown-to-pdf', 'pdf-metadata'],
   },
   image: {
     popularSearches: ['Image Resizer', 'Image Compressor', 'QR Generator', 'Image Cropper'],

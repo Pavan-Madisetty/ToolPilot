@@ -184,27 +184,27 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
       <section className="pt-8 pb-16 text-center max-w-3xl mx-auto flex flex-col items-center">
         {/* Module Icon Container with Glow */}
         <div
-          className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 border relative shadow-sm"
+          className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 border border-gray-200/60 relative shadow-md transition-transform duration-300 hover:scale-105"
           style={{
             background: 'var(--bg-elevated)',
             borderColor: colors.accent,
             boxShadow: `0 4px 20px ${colors.bg}`,
           }}
         >
-          <LucideIcon name={moduleConfig.icon} size={28} strokeWidth={2} style={{ color: colors.accent }} />
+          <LucideIcon name={moduleConfig.icon} size={28} strokeWidth={2.5} style={{ color: colors.accent }} />
         </div>
 
         {/* Title & Description */}
-        <h1 className="text-h2 font-extrabold tracking-tight text-[var(--text-primary)]">
+        <h1 className="font-display text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900">
           {moduleDisplayName}
         </h1>
-        <p className="text-body-large mt-3 max-w-2xl leading-relaxed">
+        <p className="font-sans text-sm md:text-base text-gray-500 mt-3 max-w-2xl leading-relaxed font-medium">
           {moduleConfig.description}
         </p>
 
         {/* Search input container */}
         <div className="w-full max-w-xl mt-8 relative group">
-          <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none text-[var(--text-secondary)] group-focus-within:text-[var(--primary)] transition-colors">
+          <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-primary transition-colors">
             <Search size={20} />
           </div>
           <input
@@ -213,14 +213,14 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
             placeholder={`Search ${tools.length} ${searchPlaceholderName}...`}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-14 pr-16 rounded-xl border border-[var(--border-default)] bg-[var(--bg-elevated)] text-[var(--text-primary)] shadow-sm focus:outline-none focus:ring-4 focus:ring-[var(--primary)]/10 focus:border-[var(--primary)] transition-all font-medium"
+            className="w-full pl-14 pr-16 rounded-2xl border border-gray-200 bg-white text-gray-900 shadow-md focus:outline-none focus:ring-4 focus:ring-primary/5 focus:border-primary transition-all font-semibold"
             style={{ borderRadius: '16px', height: '60px', fontSize: '1.125rem' }}
           />
           <div className="absolute inset-y-0 right-4 flex items-center gap-2">
             {searchQuery ? (
               <button
                 onClick={() => setSearchQuery('')}
-                className="text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
+                className="text-gray-400 hover:text-gray-900 transition-colors cursor-pointer"
                 aria-label="Clear search query"
               >
                 <X size={18} />
@@ -234,12 +234,12 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
         {/* Popular Searches */}
         {metadata.popularSearches.length > 0 && (
           <div className="mt-4 flex flex-wrap justify-center items-center gap-2">
-            <span className="text-xs font-semibold text-[var(--text-tertiary)]">Popular:</span>
+            <span className="text-xs font-semibold text-gray-400">Popular:</span>
             {metadata.popularSearches.map((term) => (
               <button
                 key={term}
                 onClick={() => setSearchQuery(term)}
-                className="text-xs px-2.5 py-1 rounded-full border border-[var(--border-default)] bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-strong)] transition-all cursor-pointer"
+                className="text-xs px-2.5 py-1 rounded-full border border-gray-200 bg-white text-gray-500 hover:text-gray-900 hover:border-gray-400 transition-all cursor-pointer font-medium"
               >
                 {term}
               </button>
@@ -353,34 +353,36 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
       </section>
 
       {/* ── WHY USE THESE TOOLS ── */}
-      <section id="why-use" className="py-12 md:py-16 bg-[var(--bg-surface-container-low)] border-y border-[var(--border-default)] rounded-2xl mb-12 -mx-4 px-4 md:-mx-6 md:px-6 lg:-mx-8 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-10">
-          <h2 className="text-2xl font-display font-bold tracking-tight text-[var(--text-primary)]">
+      <section id="why-use" className="py-12 md:py-16 bg-slate-900 border-y border-slate-850 rounded-2xl mb-12 -mx-4 px-8 md:-mx-6 lg:-mx-8 text-left relative overflow-hidden group">
+        <div className="absolute top-0 right-0 transform translate-x-12 -translate-y-12 w-48 h-48 rounded-full bg-primary/10 blur-2xl group-hover:bg-primary/20 transition-all duration-500" />
+        
+        <div className="max-w-2xl mb-10 relative z-10">
+          <h2 className="font-display text-2xl font-extrabold tracking-tight text-white">
             Why Use Toolskyt {whyUseName}?
           </h2>
-          <p className="text-sm text-[var(--text-secondary)] mt-2 leading-relaxed">
+          <p className="text-xs text-slate-400 mt-2 leading-relaxed font-semibold">
             All utilities in our library are fine-tuned for high-performance developer workflows, privacy-first actions, and modern standards.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
           {metadata.whyUse.map((benefit, idx) => (
             <div
               key={idx}
-              className="p-6 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface-container-lowest)] shadow-sm hover:shadow-md transition-shadow duration-200"
+              className="p-6 rounded-2xl border border-slate-800 bg-slate-800/80 shadow-sm hover:shadow-lg hover:border-primary/45 transition-all duration-300"
             >
               <div
                 className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 border"
                 style={{
-                  background: colors.bg,
+                  background: 'rgba(255, 255, 255, 0.05)',
                   color: colors.accent,
-                  borderColor: colors.border,
+                  borderColor: 'rgba(255, 255, 255, 0.1)',
                 }}
               >
-                <LucideIcon name={benefit.icon} size={20} strokeWidth={2} />
+                <LucideIcon name={benefit.icon} size={20} strokeWidth={2.5} />
               </div>
-              <h3 className="font-bold text-base text-[var(--text-primary)] mb-2">{benefit.title}</h3>
-              <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{benefit.description}</p>
+              <h3 className="font-display font-bold text-sm text-white mb-2">{benefit.title}</h3>
+              <p className="text-xs text-slate-400 leading-relaxed font-semibold">{benefit.description}</p>
             </div>
           ))}
         </div>

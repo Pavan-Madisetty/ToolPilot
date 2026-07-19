@@ -4,43 +4,9 @@ import { TOOL_COUNT_LABEL } from '@/config/tools';
 import { useUIStore } from '@/stores/uiStore';
 
 export function Footer() {
-  const year = new Date().getFullYear();
+  const currentYear = new Date().getFullYear();
   const { addToast } = useUIStore();
   const [email, setEmail] = useState('');
-
-  const popularTools = [
-    { label: 'EMI Calculator', href: '/finance/emi-calculator' },
-    { label: 'SIP Calculator', href: '/finance/sip-calculator' },
-    { label: 'GST Calculator', href: '/finance/gst-calculator' },
-    { label: 'JSON Formatter', href: '/developer/json-formatter' },
-    { label: 'Word Counter', href: '/text/word-counter' },
-    { label: 'QR Generator', href: '/image/qr-generator' },
-    { label: 'BMI Calculator', href: '/health/bmi-calculator' },
-    { label: 'Age Calculator', href: '/education/age-calculator' },
-  ];
-
-  const modules = [
-    { label: 'Finance', href: '/finance' },
-    { label: 'Developer', href: '/developer' },
-    { label: 'PDF Tools', href: '/pdf' },
-    { label: 'Image Tools', href: '/image' },
-    { label: 'Text Tools', href: '/text' },
-    { label: 'AI Writing', href: '/ai' },
-    { label: 'Business', href: '/business' },
-    { label: 'Productivity', href: '/productivity' },
-  ];
-
-  const company = [
-    { label: 'About', href: '/about' },
-    { label: 'Blog', href: '/blog' },
-    { label: 'Privacy Policy', href: '/privacy' },
-    { label: 'Terms of Service', href: '/terms' },
-    { label: 'Contact', href: '/contact' },
-    { label: 'Sitemap', href: '/sitemap.xml', external: true },
-  ];
-
-  const footerLinkClass =
-    'text-caption text-text-secondary transition-colors hover:text-text-link';
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,173 +20,170 @@ export function Footer() {
     setEmail('');
   };
 
+  const footerLinkClass =
+    'text-slate-400 hover:text-white transition-colors text-left block cursor-pointer text-sm font-medium';
+
   return (
-    <footer
-      className="mt-auto border-t border-border-default bg-bg-surface"
-      role="contentinfo"
-      aria-label="Site footer"
-    >
-      {/* Main Footer */}
-      <div className="container-app py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6">
-          {/* Brand Column */}
-          <div className="lg:col-span-3">
-            <Link
-              to="/"
-              className="inline-flex items-center gap-2 font-bold text-xl mb-4"
-              aria-label="Toolskyt home"
+    <footer className="w-full bg-[#0b0f19] text-slate-300 border-t border-slate-800/60 font-sans mt-auto py-16 px-6 md:px-12">
+      <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-12 border-b border-slate-800/60">
+        
+        {/* Brand & Newsletter Column */}
+        <div className="space-y-6">
+          <Link
+            to="/"
+            className="font-display text-2xl font-extrabold text-white cursor-pointer select-none tracking-tight block"
+            id="footer-brand"
+          >
+            Tool<span className="text-[#6366F1]">skyt</span>
+          </Link>
+          <p className="text-sm text-slate-400 font-medium leading-relaxed">
+            The world's premium browser-based productivity platform. Over {TOOL_COUNT_LABEL} free, secure, and lightning-fast developer tools, finance converters, and image processors. 100% offline-ready and private.
+          </p>
+          
+          {/* Newsletter Subscription */}
+          <form onSubmit={handleNewsletterSubmit} className="flex flex-col gap-3 max-w-xs">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-200">
+              Subscribe to updates
+            </span>
+            <div className="relative flex items-center w-full">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                className="w-full bg-[#111827] border border-slate-800 rounded-xl pl-3 pr-20 py-2.5 text-xs font-medium text-slate-200 outline-none placeholder:text-slate-500 focus:border-[#6366F1] focus:ring-1 focus:ring-[#6366F1] transition-all"
+                required
+                aria-label="Newsletter email address"
+              />
+              <button
+                type="submit"
+                className="absolute right-1 top-1 bottom-1 bg-[#6366F1] hover:bg-[#4f46e5] text-white px-3.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-colors cursor-pointer"
+              >
+                Join
+              </button>
+            </div>
+          </form>
+
+          {/* Social Icons */}
+          <div className="flex items-center gap-4 pt-2">
+            <a
+              href="https://x.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Twitter"
+              className="text-slate-400 hover:text-white transition-colors"
             >
-              <div
-                className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white text-sm font-black"
-                aria-hidden="true"
-              >
-                T
-              </div>
-              <span className="text-text-primary">
-                Tool<span className="text-primary">skyt</span>
-              </span>
-            </Link>
-
-            <p className="text-caption leading-relaxed mb-4 max-w-xs text-text-secondary">
-              The world's largest browser-based productivity platform with {TOOL_COUNT_LABEL} free
-              tools. No signup. No tracking. Always free.
-            </p>
-
-            <div className="flex items-center gap-2 mb-4">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-success-subtle text-success">
-                <span
-                  className="w-1.5 h-1.5 rounded-full bg-success inline-block"
-                  aria-hidden="true"
-                />
-                100% Free Forever
-              </span>
-            </div>
-
-            {/* Newsletter Subscription */}
-            <form onSubmit={handleNewsletterSubmit} className="mb-6 flex flex-col gap-2 max-w-xs">
-              <span className="text-xs font-bold uppercase tracking-wider text-text-tertiary">
-                Subscribe to updates
-              </span>
-              <div className="flex gap-2">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  className="input-base btn-sm"
-                  required
-                  aria-label="Newsletter email address"
-                />
-                <button
-                  type="submit"
-                  className="btn btn-primary btn-sm cursor-pointer"
-                >
-                  Join
-                </button>
-              </div>
-            </form>
-
-            {/* Social Icons */}
-            <div className="flex items-center gap-4">
-              {/* Twitter / X */}
-              <a
-                href="https://x.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter"
-                className="text-text-tertiary transition-colors hover:text-text-link"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                </svg>
-              </a>
-              {/* GitHub */}
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                className="text-text-tertiary transition-colors hover:text-text-link"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.603-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
-                </svg>
-              </a>
-            </div>
-          </div>
-
-          {/* Popular Tools */}
-          <div className="lg:col-span-3">
-            <h3 className="text-caption font-semibold mb-4 tracking-wide text-text-primary">
-              Popular Tools
-            </h3>
-            <div className="grid grid-cols-2 gap-x-6 gap-y-2.5">
-              {popularTools.map((link) => (
-                <Link key={link.href} to={link.href} className={footerLinkClass}>
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Modules */}
-          <div className="lg:col-span-3">
-            <h3 className="text-caption font-semibold mb-4 tracking-wide text-text-primary">
-              Modules
-            </h3>
-            <div className="grid grid-cols-2 gap-x-6 gap-y-2.5">
-              {modules.map((link) => (
-                <Link key={link.href} to={link.href} className={footerLinkClass}>
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Company */}
-          <div className="lg:col-span-3">
-            <h3 className="text-caption font-semibold mb-4 tracking-wide text-text-primary">
-              Company
-            </h3>
-            <div className="grid grid-cols-2 gap-x-6 gap-y-2.5">
-              {company.map((link) =>
-                'external' in link && link.external ? (
-                  <a key={link.href} href={link.href} className={footerLinkClass}>
-                    {link.label}
-                  </a>
-                ) : (
-                  <Link key={link.href} to={link.href} className={footerLinkClass}>
-                    {link.label}
-                  </Link>
-                )
-              )}
-            </div>
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg>
+            </a>
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="text-slate-400 hover:text-white transition-colors"
+            >
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.603-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
+              </svg>
+            </a>
           </div>
         </div>
+
+        {/* Modules Column */}
+        <div className="space-y-4">
+          <h4 className="text-xs font-bold uppercase tracking-wider text-slate-200">Product Modules</h4>
+          <ul className="space-y-2.5">
+            <li>
+              <Link to="/developer" className={footerLinkClass}>
+                Developer Utilities
+              </Link>
+            </li>
+            <li>
+              <Link to="/finance" className={footerLinkClass}>
+                Finance & Tax Converters
+              </Link>
+            </li>
+            <li>
+              <Link to="/pdf" className={footerLinkClass}>
+                PDF & Document Tools
+              </Link>
+            </li>
+            <li>
+              <Link to="/image" className={footerLinkClass}>
+                Image & Design Tools
+              </Link>
+            </li>
+            <li>
+              <Link to="/productivity" className={footerLinkClass}>
+                Productivity Tools
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Developer Utilities Column */}
+        <div className="space-y-4">
+          <h4 className="text-xs font-bold uppercase tracking-wider text-slate-200">Popular Developer Tools</h4>
+          <ul className="space-y-2.5">
+            <li>
+              <Link to="/developer/alternative-timestamps" className={footerLinkClass}>
+                Unix Timestamp Converter
+              </Link>
+            </li>
+            <li>
+              <Link to="/developer/json-formatter" className={footerLinkClass}>
+                JSON Formatter & Validator
+              </Link>
+            </li>
+            <li>
+              <Link to="/developer/jwt-decoder" className={footerLinkClass}>
+                Client-Side JWT Debugger
+              </Link>
+            </li>
+            <li>
+              <Link to="/developer/base64" className={footerLinkClass}>
+                Base64 Encoder & Decoder
+              </Link>
+            </li>
+            <li>
+              <Link to="/image/qr-generator" className={footerLinkClass}>
+                High-Resolution QR Generator
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Legal & Platform Column */}
+        <div className="space-y-4">
+          <h4 className="text-xs font-bold uppercase tracking-wider text-slate-200">Platform Information</h4>
+          <ul className="space-y-2.5">
+            <li><Link to="/about" className={footerLinkClass}>About Us</Link></li>
+            <li><Link to="/privacy" className={footerLinkClass}>Privacy & Cookies Policy</Link></li>
+            <li><Link to="/terms" className={footerLinkClass}>Terms of Service</Link></li>
+            <li><Link to="/contact" className={footerLinkClass}>Contact & Support</Link></li>
+            <li>
+              <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className={footerLinkClass}>
+                XML Sitemap
+              </a>
+            </li>
+          </ul>
+        </div>
+
       </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-border-default">
-        <div className="container-app py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-small text-text-tertiary">
-          <p>© {year} Toolskyt. All rights reserved.</p>
-          <p className="flex-1 text-center hidden sm:block">
-            Made with <span className="text-danger">❤️</span> for productivity
-          </p>
-          <div className="flex items-center gap-2">
-            <Link
-              to="/privacy"
-              className="underline underline-offset-2 hover:text-text-link transition-colors"
-            >
-              Privacy
-            </Link>
-            <span>•</span>
-            <Link
-              to="/terms"
-              className="underline underline-offset-2 hover:text-text-link transition-colors"
-            >
-              Terms
-            </Link>
-          </div>
+      {/* SEO Text Footer block */}
+      <div className="max-w-[1280px] mx-auto pt-10 text-xs text-slate-400 font-medium space-y-4">
+        <p className="leading-relaxed">
+          <span className="font-semibold text-slate-200">Search Engine Optimization (SEO) Context:</span> Toolskyt is an all-in-one suite built for developers, designers, and financial planners. Featuring local browser compilation with zero server latency, users can instantly convert epoch times, inspect decrypted JWT signature blocks, compress high-definition PNGs, and generate vector QR matrices.
+        </p>
+        <p className="leading-relaxed">
+          Every calculation, encryption, conversion, and validation operates with zero server transit. No data ever leaves your device, conforming to rigorous modern web security guidelines. Perfect for offline usage as a Progressive Web Application (PWA).
+        </p>
+        <div className="pt-4 border-t border-slate-800/60 text-slate-500 flex justify-between items-center flex-wrap gap-2">
+          <span>© {currentYear} Toolskyt. All rights reserved.</span>
+          <span>Made with ❤️ for productivity</span>
         </div>
       </div>
     </footer>

@@ -187,6 +187,7 @@ const FuelCostCalculator = lazy(() => import('@/pages/tools/travel/FuelCostCalcu
 const HtmlToPdf = lazy(() => import('@/pages/tools/pdf/HtmlToPdf'));
 const ImageToPdf = lazy(() => import('@/pages/tools/pdf/ImageToPdf'));
 const MarkdownToPdf = lazy(() => import('@/pages/tools/pdf/MarkdownToPdf'));
+const PdfMetadataTool = lazy(() => import('@/pages/tools/pdf/PdfMetadataTool'));
 
 import { useGoogleAnalytics } from '@/hooks/useGoogleAnalytics';
 
@@ -707,6 +708,14 @@ export default function App() {
                 element={
                   <Suspense fallback={<PageLoader />}>
                     <MarkdownToPdf />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="pdf/pdf-metadata"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <PdfMetadataTool />
                   </Suspense>
                 }
               />

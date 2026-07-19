@@ -45,26 +45,26 @@ const FEATURES = [
     title: 'Privacy First',
     description:
       'All processing happens in your browser. No data ever leaves your device. We have zero tracking, zero ads, zero analytics.',
-    color: 'var(--success)',
-    bg: 'var(--success-subtle)',
-    border: 'color-mix(in srgb, var(--success) 20%, transparent)',
+    color: '#10b981',
+    bg: 'rgba(16, 185, 129, 0.08)',
+    border: 'rgba(16, 185, 129, 0.2)',
   },
   {
     icon: Zap,
     title: 'Lightning Fast',
     description:
       'Optimized for performance with Lighthouse score 95+. Instant results with no server round-trips. Everything runs locally.',
-    color: 'var(--warning)',
-    bg: 'var(--warning-subtle)',
-    border: 'color-mix(in srgb, var(--warning) 20%, transparent)',
+    color: '#f59e0b',
+    bg: 'rgba(245, 158, 11, 0.08)',
+    border: 'rgba(245, 158, 11, 0.2)',
   },
   {
     icon: Wifi,
     title: 'Works Offline',
     description: `Full PWA support — install Toolskyt on your device and use every tool without an internet connection.`,
-    color: 'var(--primary)',
-    bg: 'var(--primary-subtle)',
-    border: 'color-mix(in srgb, var(--primary) 20%, transparent)',
+    color: 'var(--text-link)',
+    bg: 'rgba(79, 70, 229, 0.08)',
+    border: 'rgba(79, 70, 229, 0.2)',
   },
 ];
 
@@ -109,7 +109,7 @@ export default function HomePage() {
   const setIsOpen = useSearchStore((s) => s.setIsOpen);
   const { favorites } = useFavoritesStore();
   const { history } = useHistoryStore();
-  const [activeModuleKey, setActiveModuleKey] = useState<string>(MODULES[0]?.key || 'finance');
+  const [activeModuleKey, setActiveModuleKey] = useState<string>('popular');
 
   const openSearch = useCallback(() => setIsOpen(true), [setIsOpen]);
 
@@ -152,28 +152,6 @@ export default function HomePage() {
           content={config.seo?.homepage?.keywords?.join(', ') || "free online tools, emi calculator, json formatter, pdf tools, image compressor, text tools, developer tools"}
         />
         <link rel="canonical" href="https://toolskyt.com/" />
-
-        {/* Open Graph */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://toolskyt.com/" />
-        <meta property="og:title" content={config.seo?.homepage?.metaTitle || `Toolskyt — ${TOOL_COUNT_LABEL} Free Online Tools`} />
-        <meta
-          property="og:description"
-          content={config.seo?.homepage?.metaDescription || `${TOOL_COUNT_LABEL} free browser tools. No signup. No tracking. Works offline.`}
-        />
-        <meta property="og:image" content={config.seo?.homepage?.ogImage || "https://toolskyt.com/og-image.png"} />
-        <meta property="og:site_name" content="Toolskyt" />
-
-        {/* Twitter */}
-        <meta name="twitter:card" content={config.seo?.homepage?.twitterCard || "summary_large_image"} />
-        <meta name="twitter:title" content={config.seo?.homepage?.metaTitle || `Toolskyt — ${TOOL_COUNT_LABEL} Free Online Tools`} />
-        <meta
-          name="twitter:description"
-          content={config.seo?.homepage?.metaDescription || `${TOOL_COUNT_LABEL} free browser tools. No signup. No tracking. Works offline.`}
-        />
-        <meta property="twitter:image" content={config.seo?.homepage?.ogImage || "https://toolskyt.com/og-image.png"} />
-
-        {/* JSON-LD */}
         <script type="application/ld+json">{JSON.stringify(JSON_LD_WEBSITE)}</script>
         <script type="application/ld+json">{JSON.stringify(JSON_LD_ORGANIZATION)}</script>
       </Helmet>
@@ -232,7 +210,8 @@ export default function HomePage() {
                     <Star
                       size={20}
                       aria-hidden="true"
-                      className="section__title-icon text-warning"
+                      className="section__title-icon"
+                      style={{ color: '#f59e0b' }}
                     />
                     Your Favorites
                   </h2>

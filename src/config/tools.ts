@@ -1600,6 +1600,22 @@ export const TOOLS: ToolConfig[] = [
     keywords: ['markdown to pdf', 'export md to pdf', 'md converter', 'pdf report'],
     relatedTools: ['html-to-pdf', 'image-to-pdf'],
   },
+  {
+    id: 'pdf-metadata',
+    name: 'PDF Metadata & Compression',
+    description: 'View and edit PDF document metadata properties client-side',
+    module: 'pdf',
+    slug: '/pdf/pdf-metadata',
+    icon: 'DocumentTextIcon',
+    tags: ['pdf', 'metadata', 'pdf reader', 'pdf editor', 'compression'],
+    isPopular: true,
+    isFeatured: true,
+    metaTitle: 'PDF Metadata Reader & Editor - Edit PDF Properties Online | Toolskyt',
+    metaDescription:
+      'View and edit PDF properties and metadata like Title, Author, Subject, Keywords completely client-side.',
+    keywords: ['pdf metadata', 'edit pdf properties', 'pdf author editor', 'pdf metadata reader'],
+    relatedTools: ['html-to-pdf', 'image-to-pdf', 'markdown-to-pdf'],
+  },
 
   // ─────────────────────────────────────────────
   // PRODUCTIVITY MODULE

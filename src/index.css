@@ -46,19 +46,57 @@
   --color-border-strong: var(--border-strong);
   --color-border-focus: var(--border-focus);
 
-  /* Spacing Scale — Strict 8pt grid (complete) */
-  --spacing-4: 0.25rem;   /* 4px */
-  --spacing-8: 0.5rem;    /* 8px */
-  --spacing-12: 0.75rem;  /* 12px */
-  --spacing-16: 1rem;     /* 16px */
-  --spacing-24: 1.5rem;   /* 24px */
-  --spacing-20: 1.25rem;  /* 20px */
-  --spacing-32: 2rem;     /* 32px */
-  --spacing-40: 2.5rem;   /* 40px */
-  --spacing-48: 3rem;     /* 48px */
-  --spacing-64: 4rem;     /* 64px */
-  --spacing-80: 5rem;     /* 80px */
-  --spacing-96: 6rem;     /* 96px */
+  /* Redesign Material 3 Theme Additions */
+  --color-surface: #f9f9ff;
+  --color-surface-dim: #cfdaf2;
+  --color-surface-bright: #f9f9ff;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f0f3ff;
+  --color-surface-container: #e7eeff;
+  --color-surface-container-high: #dee8ff;
+  --color-surface-container-highest: #d8e3fb;
+  --color-on-surface: #111c2d;
+  --color-on-surface-variant: #464554;
+  --color-inverse-surface: #263143;
+  --color-inverse-on-surface: #ecf1ff;
+  --color-outline: #767586;
+  --color-outline-variant: #c7c4d7;
+  --color-surface-tint: #494bd6;
+  --color-primary-container: #6063ee;
+  --color-on-primary-container: #fffbff;
+  --color-inverse-primary: #c0c1ff;
+  --color-secondary: #006c49;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #6cf8bb;
+  --color-on-secondary-container: #00714d;
+  --color-tertiary: #904900;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #b55d00;
+  --color-on-tertiary-container: #fffbff;
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+  --color-primary-fixed: #e1e0ff;
+  --color-primary-fixed-dim: #c0c1ff;
+  --color-on-primary-fixed: #07006c;
+  --color-on-primary-fixed-variant: #2f2ebe;
+  --color-secondary-fixed: #6ffbbe;
+  --color-secondary-fixed-dim: #4edea3;
+  --color-on-secondary-fixed: #002113;
+  --color-on-secondary-fixed-variant: #005236;
+  --color-tertiary-fixed: #ffdcc5;
+  --color-tertiary-fixed-dim: #ffb783;
+  --color-on-tertiary-fixed: #301400;
+  --color-on-tertiary-fixed-variant: #703700;
+  --color-background: #f9f9ff;
+  --color-on-background: #111c2d;
+  --color-surface-variant: #d8e3fb;
+  --color-surface-subtle: #F8FAFC;
+  --color-border-light: #E2E8F0;
+  --color-accent-indigo: #6366F1;
+  --color-success-emerald: #10B981;
+
 }
 
 :root,
@@ -77,37 +115,37 @@
   --space-96: 96px;
 
   /* Color System */
-  --bg-base: #ffffff;    /* Page background */
-  --bg-surface: #f8fafc;  /* Grouped sections, alternating rows */
+  --bg-base: #F8FAFC;    /* Page background updated to modern surface subtle */
+  --bg-surface: #ffffff;  /* Grouped sections */
   --bg-elevated: #ffffff; /* Cards, inputs, modals — floats above surface */
   --bg-inset: #f1f5f9;   /* Inset wells, code blocks, recessed areas */
   --bg-overlay: rgba(15, 23, 42, 0.4);
   --bg-surface-container-lowest: #ffffff;
   --bg-surface-container-low: #f0f3ff;
 
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-tertiary: #64748b;
-  --text-disabled: #94a3b8;
+  --text-primary: #111c2d; /* Updated to on-surface variant */
+  --text-secondary: #464554;
+  --text-tertiary: #767586;
+  --text-disabled: #cbd5e1;
   --text-inverse: #ffffff;
-  --text-link: #6366f1;
-  --text-link-hover: #4f46e5;
+  --text-link: #4648d4;
+  --text-link-hover: #3537b0;
 
   --border-subtle: #f8fafc;
-  --border-default: #e5e7eb;
+  --border-default: #e2e8f0;
   --border-strong: #cbd5e1;
-  --border-focus: #6366f1;
+  --border-focus: #4648d4;
 
   /* Core Roles */
-  --primary: #6366f1;
-  --primary-hover: #4f46e5;
+  --primary: #4648d4;
+  --primary-hover: #3537b0;
   --success: #10b981;
   --warning: #f59e0b;
   --info: #3b82f6;
   --danger: #ef4444;
 
   /* Subtle role tints (for soft backgrounds behind status text) */
-  --primary-subtle: rgba(99, 102, 241, 0.1);
+  --primary-subtle: rgba(70, 72, 212, 0.1);
   --success-subtle: rgba(16, 185, 129, 0.1);
   --warning-subtle: rgba(245, 158, 11, 0.1);
   --info-subtle: rgba(59, 130, 246, 0.1);
@@ -138,7 +176,7 @@
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
   --header-bg: rgba(255, 255, 255, 0.85);
-  --header-border: #e5e7eb;
+  --header-border: #e2e8f0;
 }
 
 [data-theme='dark'],

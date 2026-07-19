@@ -85,7 +85,7 @@ export function Header() {
 
   /* ── Shared icon-button class ──────────────────────────── */
   const iconBtnClass =
-    'w-10 h-10 rounded-[var(--radius-md)] flex items-center justify-center hover:bg-bg-surface text-text-secondary hover:text-text-primary transition-colors cursor-pointer';
+    'w-10 h-10 rounded-full flex items-center justify-center hover:bg-primary/5 text-text-secondary hover:text-primary transition-all duration-200 cursor-pointer active:scale-95';
 
   return (
     <>
@@ -103,7 +103,7 @@ export function Header() {
           <div className="flex items-center gap-8 h-full shrink-0">
             <Link
               to="/"
-              className="flex items-center gap-3 font-bold text-xl select-none cursor-pointer"
+              className="flex items-center gap-2 select-none cursor-pointer font-display text-xl font-extrabold tracking-tight"
               aria-label="Toolskyt — Home"
             >
               <div
@@ -112,7 +112,7 @@ export function Header() {
               >
                 T
               </div>
-              <span className="font-bold text-xl tracking-tight leading-none flex items-center">
+              <span className="leading-none flex items-center">
                 <span className="text-text-primary">Tool</span>
                 <span className="text-primary">skyt</span>
               </span>
@@ -128,10 +128,10 @@ export function Header() {
               onBlur={() => setIsSearchFocused(false)}
               aria-label="Search tools (⌘K)"
               className={clsx(
-                'flex items-center w-[320px] h-10 px-3 rounded-[var(--radius-md)] border cursor-text transition-all outline-none select-none bg-bg-base',
+                'flex items-center w-[320px] h-10 px-3.5 rounded-full border cursor-text transition-all outline-none select-none bg-bg-base',
                 isSearchFocused
-                  ? 'border-primary ring-2 ring-primary/10'
-                  : 'border-border-default hover:border-border-strong'
+                  ? 'border-primary ring-4 ring-primary/5'
+                  : 'border-border-default hover:border-border-strong hover:shadow-xs'
               )}
             >
               <Search
@@ -139,17 +139,17 @@ export function Header() {
                 className="shrink-0 text-text-disabled"
                 aria-hidden="true"
               />
-              <span className="flex-1 text-left text-sm font-normal text-text-disabled ml-3">
+              <span className="flex-1 text-left text-xs font-semibold text-text-disabled ml-3">
                 {getSearchPlaceholder()}
               </span>
-              <kbd className="inline-flex items-center justify-center h-5 px-1.5 rounded-[var(--radius-sm)] border text-[11px] font-sans font-medium bg-bg-surface border-border-default text-text-disabled">
+              <kbd className="inline-flex items-center justify-center h-5 px-1.5 rounded-[var(--radius-sm)] border text-[10px] font-sans font-bold bg-bg-surface border-border-default text-text-disabled uppercase">
                 ⌘K
               </kbd>
             </button>
           </div>
 
           {/* RIGHT ZONE: Icons Cluster & Theme toggle */}
-          <nav aria-label="Site actions" className="hidden md:flex items-center gap-4 shrink-0">
+          <nav aria-label="Site actions" className="hidden md:flex items-center gap-4 shrink-0 font-sans">
             {/* Favorites heart */}
             <Link
               to="/#favorites"
@@ -184,7 +184,7 @@ export function Header() {
             {/* Sign in action */}
             <Link
               to="/signin"
-              className="text-sm font-semibold text-[var(--text-secondary)] hover:text-primary transition-colors px-3 py-2 cursor-pointer"
+              className="text-xs font-bold uppercase tracking-wider text-text-secondary hover:text-primary transition-colors px-3 py-2 cursor-pointer"
             >
               Sign in
             </Link>
