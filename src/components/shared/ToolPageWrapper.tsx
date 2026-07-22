@@ -210,9 +210,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                 <h1 className="font-display text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 leading-tight">
                   {tool.name}
                 </h1>
-                <span
-                  className="capitalize text-[10px] font-bold tracking-widest px-2.5 py-0.5 rounded-full bg-primary/5 text-primary border border-primary/10"
-                >
+                <span className="tool-header-badge">
                   {tool.module}
                 </span>
               </div>
@@ -226,10 +224,9 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
               <button
                 onClick={() => toggleFavorite(tool.id)}
                 className={clsx(
-                  'px-4 py-2 rounded-full border text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer active:scale-95 flex items-center gap-1.5',
-                  favorited 
-                    ? 'border-danger text-danger bg-danger/5' 
-                    : 'border-gray-200 text-gray-500 hover:bg-gray-50 hover:text-gray-900 shadow-sm'
+                  'btn-favorite',
+                  favorited && 'is-active',
+                  'px-4 py-2 rounded-full border text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer active:scale-95 flex items-center gap-1.5'
                 )}
                 aria-label={favorited ? 'Remove from favorites' : 'Add to favorites'}
               >
@@ -243,7 +240,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
 
               <button
                 onClick={handleShare}
-                className="px-4 py-2 rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50 hover:text-gray-900 shadow-sm text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer active:scale-95 flex items-center gap-1.5"
+                className="btn-share px-4 py-2 rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50 hover:text-gray-900 shadow-sm text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer active:scale-95 flex items-center gap-1.5"
                 aria-label="Share tool"
               >
                 <Share2 size={16} strokeWidth={2.5} />
@@ -258,7 +255,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
 
         {/* Rich SEO Content Explanatory Copy Section */}
         {(tool.longDescription || tool.benefits || tool.howToSteps || tool.faq) && (
-          <article className="mt-16 pt-12 border-t flex flex-col gap-16 border-border-default">
+          <article className="tool-about-article">
             {/* Long intro summary */}
             {tool.longDescription && (
               <section className="flex flex-col gap-4">
@@ -316,62 +313,43 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
             {/* How to use / Step by Step instructions */}
             {tool.howToSteps && (
               <section className="flex flex-col gap-4">
-                <h2 className="font-display text-xl font-bold text-gray-900">
+                <h2 className="font-display text-xl font-bold text-gray-900 dark:text-slate-100">
                   How to Use {tool.name}
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="step-cards-grid">
                   {tool.howToSteps.map((step, idx) => {
                     const getStepIcon = (index: number) => {
                       switch (index) {
                         case 0:
-                          return <FileText size={20} className="text-primary" strokeWidth={2.5} />;
+                          return <FileText size={20} strokeWidth={2.5} />;
                         case 1:
-                          return <Sliders size={20} className="text-primary" strokeWidth={2.5} />;
+                          return <Sliders size={20} strokeWidth={2.5} />;
                         case 2:
-                          return <Eye size={20} className="text-primary" strokeWidth={2.5} />;
+                          return <Eye size={20} strokeWidth={2.5} />;
                         default:
-                          return <Download size={20} className="text-primary" strokeWidth={2.5} />;
+                          return <Download size={20} strokeWidth={2.5} />;
                       }
                     };
 
                     return (
-                      <div key={idx} className="flex items-center gap-2">
-                        <div className="relative border border-gray-100 rounded-2xl p-5 flex items-center gap-4 bg-white hover:shadow-md transition-shadow duration-300 flex-1">
-                          {/* Icon with overlapping step number */}
-                          <div className="relative shrink-0">
-                            <div className="w-11 h-11 rounded-xl bg-primary/5 flex items-center justify-center">
-                              {getStepIcon(idx)}
-                            </div>
-                            <span className="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-primary text-white font-mono text-[9px] font-extrabold flex items-center justify-center border-2 border-white shadow-xs">
-                              {idx + 1}
-                            </span>
-                          </div>
-
-                          {/* Texts */}
-                          <div className="flex-1 min-w-0">
-                            <h4 className="text-xs font-bold text-gray-900">
-                              {step.name}
-                            </h4>
-                            <p className="text-[10px] leading-relaxed mt-0.5 text-gray-500 font-medium">
-                              {step.text}
-                            </p>
-                          </div>
+                      <div key={idx} className="step-card-item">
+                        {/* Icon with overlapping step number */}
+                        <div className="step-icon-container">
+                          {getStepIcon(idx)}
+                          <span className="step-number-badge">
+                            {idx + 1}
+                          </span>
                         </div>
 
-                        {/* Dashed Line / Arrow separator if not last */}
-                        {idx < (tool.howToSteps?.length ?? 0) - 1 && (
-                          <div className="hidden lg:flex items-center text-gray-300 select-none px-0.5 shrink-0">
-                            <svg
-                              className="w-4 h-4"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                              strokeWidth={2}
-                            >
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                            </svg>
-                          </div>
-                        )}
+                        {/* Texts */}
+                        <div className="step-text-content">
+                          <h4 className="step-title">
+                            {step.name}
+                          </h4>
+                          <p className="step-description">
+                            {step.text}
+                          </p>
+                        </div>
                       </div>
                     );
                   })}
@@ -383,22 +361,22 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
             {(tool.tips || tool.examples) && (
               <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {tool.tips && (
-                  <div className="rounded-2xl p-6 flex flex-col gap-4 bg-amber-500/5 border border-amber-500/10">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 bg-amber-500/10 text-amber-600">
-                        <span className="text-base">💡</span>
+                  <div className="callout-card callout-card-tips">
+                    <div className="callout-header">
+                      <div className="callout-icon-wrapper callout-card-tips-icon">
+                        <span className="text-sm">💡</span>
                       </div>
-                      <h3 className="font-display text-sm font-bold text-gray-900">
+                      <h3 className="callout-title">
                         Pro Tips
                       </h3>
                     </div>
-                    <ul className="flex flex-col gap-2 pl-1">
+                    <ul className="callout-list">
                       {tool.tips.map((tip, idx) => (
                         <li
                           key={idx}
-                          className="flex items-start gap-2 text-xs leading-relaxed text-gray-500 font-medium"
+                          className="callout-list-item"
                         >
-                          <span className="text-amber-600 font-bold shrink-0 mr-1.5">✓</span>
+                          <span className="callout-check-icon">✓</span>
                           <span>{tip}</span>
                         </li>
                       ))}
@@ -407,11 +385,11 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                 )}
 
                 {tool.examples && (
-                  <div className="rounded-2xl p-6 flex flex-col gap-4 bg-primary/5 border border-primary/10">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 bg-primary/10 text-primary">
+                  <div className="callout-card callout-card-examples">
+                    <div className="callout-header">
+                      <div className="callout-icon-wrapper callout-card-examples-icon">
                         <svg
-                          className="w-4 h-4 text-primary"
+                          className="w-4 h-4 text-current"
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
@@ -424,26 +402,26 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
                           />
                         </svg>
                       </div>
-                      <h3 className="font-display text-sm font-bold text-gray-900">
+                      <h3 className="callout-title">
                         Calculation Examples
                       </h3>
                     </div>
-                    <div className="flex flex-col gap-4 pl-1">
+                    <div className="example-item">
                       {tool.examples.map((example, idx) => (
-                        <div key={idx} className="flex flex-col gap-2 text-xs">
-                          <div className="flex flex-wrap items-center gap-3">
-                            <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">
+                        <div key={idx} className="example-item">
+                          <div className="example-row">
+                            <span className="example-label">
                               Input:
                             </span>
-                            <code className="font-mono text-xs bg-white border border-gray-100 px-2 py-1 rounded-md text-gray-800">
+                            <code className="example-code">
                               {example.input}
                             </code>
                           </div>
-                          <div className="flex flex-wrap items-center gap-3">
-                            <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">
+                          <div className="example-row">
+                            <span className="example-label">
                               Output:
                             </span>
-                            <code className="font-mono text-xs font-bold text-primary bg-primary/5 px-2.5 py-1 rounded-md border border-primary/10">
+                            <code className="example-code example-code-output">
                               {example.output}
                             </code>
                           </div>
@@ -482,9 +460,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
 
         {/* Related Tools */}
         {tool.relatedTools && tool.relatedTools.length > 0 && (
-          <div className="mt-12 pb-16">
-            <RelatedTools toolIds={tool.relatedTools} />
-          </div>
+          <RelatedTools toolIds={tool.relatedTools} />
         )}
       </div>
     </>

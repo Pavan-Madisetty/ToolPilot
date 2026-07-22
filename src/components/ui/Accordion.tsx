@@ -23,17 +23,12 @@ export function AccordionItem({
   const toggle = onToggle ?? (() => setLocalOpen(!localOpen));
 
   return (
-    <div
-      className={clsx(
-        'transition-colors duration-150',
-        className
-      )}
-    >
+    <div className={clsx('accordion-card', className)}>
       <button
         type="button"
         onClick={toggle}
         aria-expanded={active}
-        className="w-full px-5 py-4 flex items-center justify-between text-left font-semibold text-sm hover:bg-[var(--bg-surface)] transition-colors cursor-pointer text-[var(--text-primary)]"
+        className="accordion-trigger"
       >
         <span className="pr-4">{title}</span>
         <ChevronDown
@@ -54,9 +49,9 @@ export function AccordionItem({
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.2, ease: 'easeInOut' }}
-            className="overflow-hidden"
+            className="accordion-content-wrapper"
           >
-            <div className="px-5 pb-5 pt-1 text-sm leading-relaxed text-[var(--text-secondary)]">
+            <div className="accordion-content">
               {children}
             </div>
           </motion.div>
@@ -78,12 +73,7 @@ export function Accordion({ items, className }: AccordionProps) {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   return (
-    <div
-      className={clsx(
-        'rounded-[var(--radius-lg)] border border-border-default overflow-hidden divide-y divide-border-default',
-        className
-      )}
-    >
+    <div className={clsx('accordion-container', className)}>
       {items.map((item, idx) => (
         <AccordionItem
           key={idx}

@@ -35,7 +35,7 @@ export function RelatedTools({ toolIds }: RelatedToolsProps) {
   };
 
   return (
-    <section className="pt-8 border-t border-border-default">
+    <section className="related-tools-section">
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-xl font-bold flex items-center gap-2 text-text-primary">
           {/* Filled star icon */}

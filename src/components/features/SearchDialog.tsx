@@ -168,21 +168,16 @@ export function SearchDialog() {
             aria-label="Search tools"
           >
             {/* Search Input Box */}
-            <div
-              className={clsx(
-                'flex items-center gap-3 px-4 py-3.5 border-b transition-colors duration-200',
-                isFocused ? 'border-border-focus' : 'border-border-default'
-              )}
-            >
+            <div className="search-modal-header">
               {isPending ? (
                 <div className="w-5 h-5 shrink-0 flex items-center justify-center">
-                  <div className="w-4 h-4 border-2 border-t-transparent border-primary rounded-full animate-spin" />
+                  <div className="w-4 h-4 border-2 border-t-transparent border-indigo-500 rounded-full animate-spin" />
                 </div>
               ) : (
                 <Search
                   className={clsx(
                     'w-5 h-5 shrink-0 transition-colors',
-                    isFocused ? 'text-primary' : 'text-text-tertiary'
+                    isFocused ? 'text-indigo-500' : 'text-slate-400'
                   )}
                 />
               )}
@@ -194,7 +189,7 @@ export function SearchDialog() {
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
                 placeholder="Search tools by name, tag, category..."
-                className="flex-1 bg-transparent border-none outline-none text-sm font-medium text-text-primary"
+                className="search-modal-input"
                 aria-label="Search inputs"
               />
               {query && (
@@ -209,7 +204,7 @@ export function SearchDialog() {
             </div>
 
             {/* Results / Empty / Suggestions */}
-            <div className="flex-1 overflow-y-auto p-2">
+            <div className="search-modal-results">
               {query.trim().length < 2 ? (
                 <div className="py-4">
                   {recentSearches.length > 0 ? (
@@ -260,7 +255,7 @@ export function SearchDialog() {
                   </p>
                 </div>
               ) : (
-                <ul className="space-y-0.5" role="listbox">
+                <ul className="space-y-1" role="listbox">
                   {visibleResults.map(({ tool }, idx) => {
                     const moduleConfig = MODULE_MAP[tool.module];
                     const isSelected = activeIndex === idx;
@@ -269,32 +264,25 @@ export function SearchDialog() {
                         <button
                           onClick={() => handleResultSelect(tool.slug, tool.name)}
                           className={clsx(
-                            'w-full flex items-center justify-between text-left py-3 rounded-xl transition-all duration-150 border-l-[3px]',
-                            isSelected
-                              ? 'bg-primary-subtle text-primary border-primary pl-[13px] pr-4'
-                              : 'hover:bg-bg-surface text-text-primary border-transparent pl-4 pr-4'
+                            'search-modal-item',
+                            isSelected && 'search-modal-item-selected'
                           )}
                         >
-                          <div className="flex items-center gap-3">
+                          <div className="flex items-center gap-3 min-w-0 flex-1">
                             <span className="text-lg shrink-0" aria-hidden="true">
                               {getCategoryEmoji(tool.module)}
                             </span>
-                            <div>
-                              <p
-                                className={clsx(
-                                  'text-sm font-semibold',
-                                  isSelected ? 'text-primary' : 'text-text-primary'
-                                )}
-                              >
+                            <div className="min-w-0 flex-1 pr-2">
+                              <p className="search-modal-title">
                                 {tool.name}
                               </p>
-                              <p className="text-xs truncate max-w-[280px] sm:max-w-[340px] mt-0.5 text-text-tertiary">
+                              <p className="search-modal-desc truncate">
                                 {tool.description}
                               </p>
                             </div>
                           </div>
                           {moduleConfig && (
-                            <span className={clsx('badge', `module-badge-${tool.module}`)}>
+                            <span className={clsx('badge shrink-0', `module-badge-${tool.module}`)}>
                               {moduleConfig.name}
                             </span>
                           )}
@@ -307,9 +295,9 @@ export function SearchDialog() {
             </div>
 
             {/* Footer / Shortcuts */}
-            <div className="px-4 py-2.5 border-t text-[11px] flex items-center justify-between border-border-default text-text-tertiary">
+            <div className="search-modal-footer">
               <span className="flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-info" />
+                <Sparkles className="w-3.5 h-3.5 text-indigo-500" />
                 Find tools instantly
               </span>
               <span className="flex items-center gap-2.5">

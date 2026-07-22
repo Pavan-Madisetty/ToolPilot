@@ -181,7 +181,7 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
       )}
 
       {/* ── HERO SECTION ── */}
-      <section className="pt-8 pb-16 text-center max-w-3xl mx-auto flex flex-col items-center">
+      <section className="module-hero-section">
         {/* Module Icon Container with Glow */}
         <div
           className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 border border-gray-200/60 relative shadow-md transition-transform duration-300 hover:scale-105"
@@ -195,16 +195,16 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
         </div>
 
         {/* Title & Description */}
-        <h1 className="font-display text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900">
+        <h1 className="font-display text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-slate-100">
           {moduleDisplayName}
         </h1>
-        <p className="font-sans text-sm md:text-base text-gray-500 mt-3 max-w-2xl leading-relaxed font-medium">
+        <p className="font-sans text-sm md:text-base text-gray-500 dark:text-slate-400 mt-3 max-w-2xl leading-relaxed font-medium">
           {moduleConfig.description}
         </p>
 
         {/* Search input container */}
-        <div className="w-full max-w-xl mt-8 relative group">
-          <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-primary transition-colors">
+        <div className="module-hero-search-wrapper group">
+          <div className="module-hero-search-icon">
             <Search size={20} />
           </div>
           <input
@@ -213,14 +213,13 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
             placeholder={`Search ${tools.length} ${searchPlaceholderName}...`}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-14 pr-16 rounded-2xl border border-gray-200 bg-white text-gray-900 shadow-md focus:outline-none focus:ring-4 focus:ring-primary/5 focus:border-primary transition-all font-semibold"
-            style={{ borderRadius: '16px', height: '60px', fontSize: '1.125rem' }}
+            className="module-hero-search-input"
           />
           <div className="absolute inset-y-0 right-4 flex items-center gap-2">
             {searchQuery ? (
               <button
                 onClick={() => setSearchQuery('')}
-                className="text-gray-400 hover:text-gray-900 transition-colors cursor-pointer"
+                className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer"
                 aria-label="Clear search query"
               >
                 <X size={18} />
@@ -233,13 +232,13 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
 
         {/* Popular Searches */}
         {metadata.popularSearches.length > 0 && (
-          <div className="mt-4 flex flex-wrap justify-center items-center gap-2">
-            <span className="text-xs font-semibold text-gray-400">Popular:</span>
+          <div className="module-hero-popular-row">
+            <span className="text-xs font-semibold text-gray-400 dark:text-slate-400">Popular:</span>
             {metadata.popularSearches.map((term) => (
               <button
                 key={term}
                 onClick={() => setSearchQuery(term)}
-                className="text-xs px-2.5 py-1 rounded-full border border-gray-200 bg-white text-gray-500 hover:text-gray-900 hover:border-gray-400 transition-all cursor-pointer font-medium"
+                className="module-hero-popular-tag"
               >
                 {term}
               </button>
@@ -250,12 +249,14 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
 
       {/* ── FEATURED TOOLS SECTION ── */}
       {featuredTools.length > 0 && !searchQuery && (
-        <section id="featured" className="py-12 md:py-16 bg-[var(--bg-surface-container-low)] border-y border-[var(--border-default)] rounded-2xl mb-12 -mx-4 px-4 md:-mx-6 md:px-6 lg:-mx-8 lg:px-8">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-1.5 h-6 rounded-full" style={{ background: 'var(--primary)' }} />
-            <h2 className="text-h3 font-display font-bold tracking-tight text-[var(--text-primary)]">
-              Featured {moduleDisplayName}
-            </h2>
+        <section id="featured" className="module-featured-section">
+          <div className="module-section-header">
+            <div className="module-section-title-wrap">
+              <div className="module-section-accent-bar" style={{ background: colors.accent }} />
+              <h2 className="module-section-title">
+                Featured {moduleDisplayName}
+              </h2>
+            </div>
           </div>
           <div className="tools-grid">
             {featuredTools.map((tool) => (
@@ -266,15 +267,15 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
       )}
 
       {/* ── ALL TOOLS GRID SECTION ── */}
-      <section id="all-tools" className="py-12 md:py-16">
-        <div className="flex items-center justify-between gap-4 mb-8">
-          <div className="flex items-center gap-3">
-            <div className="w-1.5 h-6 rounded-full" style={{ background: 'var(--primary)' }} />
-            <h2 className="text-h3 font-display font-bold tracking-tight text-[var(--text-primary)]">
+      <section id="all-tools" className="module-all-tools-section">
+        <div className="module-section-header">
+          <div className="module-section-title-wrap">
+            <div className="module-section-accent-bar" style={{ background: colors.accent }} />
+            <h2 className="module-section-title">
               {searchQuery ? 'Search Results' : `All ${moduleDisplayName}`}
             </h2>
           </div>
-          <span className="text-sm font-semibold text-[var(--text-secondary)] shrink-0">
+          <span className="text-sm font-semibold text-gray-500 dark:text-slate-400 shrink-0">
             {filteredTools.length} {filteredTools.length === 1 ? 'Tool' : 'Tools'}
           </span>
         </div>
@@ -301,16 +302,16 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
           <>
             {/* Split by categories if registered and search is empty */}
             {!searchQuery && metadata.categories && metadata.categories.length > 0 ? (
-              <div className="space-y-16">
+              <div>
                 {metadata.categories.map((cat, idx) => {
                   const catTools = filteredTools.filter((t) => cat.toolIds.includes(t.id));
                   if (catTools.length === 0) return null;
 
                   return (
-                    <div key={idx} className="mb-16 last:mb-0">
-                      <div className="flex items-center gap-3 mb-6">
-                        <div className="w-1 h-5 rounded-full" style={{ background: 'var(--primary)' }} />
-                        <h3 className="text-h4 font-display font-bold text-[var(--text-primary)]">
+                    <div key={idx} className="module-category-block">
+                      <div className="module-category-header">
+                        <div className="module-category-accent-bar" style={{ background: colors.accent }} />
+                        <h3 className="module-category-title">
                           {cat.title}
                         </h3>
                       </div>
@@ -325,10 +326,10 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
 
                 {/* Render any uncategorized tools in a separate section */}
                 {uncategorizedTools.length > 0 && (
-                  <div className="mt-16">
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="w-1 h-5 rounded-full" style={{ background: 'var(--primary)' }} />
-                      <h3 className="text-h4 font-display font-bold text-[var(--text-primary)]">
+                  <div className="module-category-block">
+                    <div className="module-category-header">
+                      <div className="module-category-accent-bar" style={{ background: colors.accent }} />
+                      <h3 className="module-category-title">
                         More {moduleConfig.name} Utilities
                       </h3>
                     </div>
@@ -353,36 +354,34 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
       </section>
 
       {/* ── WHY USE THESE TOOLS ── */}
-      <section id="why-use" className="py-12 md:py-16 bg-slate-900 border-y border-slate-850 rounded-2xl mb-12 -mx-4 px-8 md:-mx-6 lg:-mx-8 text-left relative overflow-hidden group">
-        <div className="absolute top-0 right-0 transform translate-x-12 -translate-y-12 w-48 h-48 rounded-full bg-primary/10 blur-2xl group-hover:bg-primary/20 transition-all duration-500" />
+      <section id="why-use" className="module-feature-section group">
+        <div className="absolute top-0 right-0 transform translate-x-12 -translate-y-12 w-48 h-48 rounded-full bg-indigo-500/10 blur-2xl group-hover:bg-indigo-500/20 transition-all duration-500" />
         
-        <div className="max-w-2xl mb-10 relative z-10">
-          <h2 className="font-display text-2xl font-extrabold tracking-tight text-white">
+        <div className="relative z-10">
+          <h2 className="module-feature-heading">
             Why Use Toolskyt {whyUseName}?
           </h2>
-          <p className="text-xs text-slate-400 mt-2 leading-relaxed font-semibold">
+          <p className="module-feature-subheading">
             All utilities in our library are fine-tuned for high-performance developer workflows, privacy-first actions, and modern standards.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
+        <div className="module-feature-grid">
           {metadata.whyUse.map((benefit, idx) => (
             <div
               key={idx}
-              className="p-6 rounded-2xl border border-slate-800 bg-slate-800/80 shadow-sm hover:shadow-lg hover:border-primary/45 transition-all duration-300"
+              className="module-feature-card"
             >
               <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 border"
+                className="module-feature-icon-box"
                 style={{
-                  background: 'rgba(255, 255, 255, 0.05)',
                   color: colors.accent,
-                  borderColor: 'rgba(255, 255, 255, 0.1)',
                 }}
               >
                 <LucideIcon name={benefit.icon} size={20} strokeWidth={2.5} />
               </div>
-              <h3 className="font-display font-bold text-sm text-white mb-2">{benefit.title}</h3>
-              <p className="text-xs text-slate-400 leading-relaxed font-semibold">{benefit.description}</p>
+              <h3 className="module-feature-title">{benefit.title}</h3>
+              <p className="module-feature-desc">{benefit.description}</p>
             </div>
           ))}
         </div>
@@ -390,20 +389,17 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
 
       {/* ── FAQ & RELATED CATEGORIES SECTION ── */}
       {((metadata.faqs && metadata.faqs.length > 0) || metadata.relatedModules.length > 0) && (
-        <section className="py-12 md:py-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <section className="module-footer-section">
           {/* FAQ Column (Left - 7 cols) */}
           {metadata.faqs && metadata.faqs.length > 0 && (
-            <div id="faq" className="lg:col-span-7">
-              <div className="flex items-center gap-3 mb-6">
-                <div
-                  className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-white text-sm shrink-0 shadow-sm"
-                  style={{ background: 'var(--primary)' }}
-                >
-                  ?
+            <div id="faq" className="module-faq-column">
+              <div className="module-section-header">
+                <div className="module-section-title-wrap">
+                  <div className="module-section-accent-bar" style={{ background: colors.accent }} />
+                  <h2 className="module-section-title">
+                    Frequently Asked Questions
+                  </h2>
                 </div>
-                <h2 className="text-h3 font-display font-bold tracking-tight text-[var(--text-primary)]">
-                  Frequently Asked Questions
-                </h2>
               </div>
               <Accordion
                 items={metadata.faqs.map((faq) => ({
@@ -416,37 +412,44 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
 
           {/* Related Categories Column (Right - 5 cols) */}
           {metadata.relatedModules.length > 0 && (
-            <div className="lg:col-span-5">
-              <h2 className="text-h3 font-bold tracking-tight text-[var(--text-primary)] mb-6">
-                Explore Related Categories
-              </h2>
-              <div className="flex flex-wrap gap-3">
-                {metadata.relatedModules.map((key) => {
-                  const relConf = MODULES.find((m) => m.key === key);
-                  if (!relConf) return null;
+            <div className="module-categories-column">
+              <div className="module-section-header">
+                <div className="module-section-title-wrap">
+                  <div className="module-section-accent-bar" style={{ background: colors.accent }} />
+                  <h2 className="module-section-title">
+                    Explore Related Categories
+                  </h2>
+                </div>
+              </div>
+              <div className="module-related-categories-card">
+                <div className="module-category-pill-grid">
+                  {metadata.relatedModules.map((key) => {
+                    const relConf = MODULES.find((m) => m.key === key);
+                    if (!relConf) return null;
 
-                  const relColors = getModuleColors(key);
+                    const relColors = getModuleColors(key);
 
-                  return (
-                    <Link
-                      key={key}
-                      to={relConf.slug}
-                      className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[var(--border-default)] hover:shadow-sm hover:border-[var(--primary)] transition-all bg-[var(--bg-elevated)]"
-                    >
-                      <div
-                        className="w-6 h-6 rounded-md flex items-center justify-center text-xs shrink-0"
-                        style={{
-                          background: relColors.bg,
-                          color: relColors.accent,
-                        }}
+                    return (
+                      <Link
+                        key={key}
+                        to={relConf.slug}
+                        className="module-category-pill"
                       >
-                        <LucideIcon name={relConf.icon} size={12} strokeWidth={2.5} />
-                      </div>
-                      <span className="text-xs font-semibold text-[var(--text-primary)]">{relConf.name}</span>
-                      <ChevronRight size={12} className="text-[var(--text-tertiary)]" />
-                    </Link>
-                  );
-                })}
+                        <div
+                          className="w-6 h-6 rounded-md flex items-center justify-center text-xs shrink-0"
+                          style={{
+                            background: relColors.bg,
+                            color: relColors.accent,
+                          }}
+                        >
+                          <LucideIcon name={relConf.icon} size={12} strokeWidth={2.5} />
+                        </div>
+                        <span>{relConf.name}</span>
+                        <ChevronRight size={12} className="text-gray-400 dark:text-slate-500" />
+                      </Link>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           )}
@@ -454,7 +457,7 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
       )}
 
       {/* ── CTA SECTION ── */}
-      <section className="py-12 md:py-16">
+      <section className="cta-banner-wrapper">
         <div className="cta-banner">
           {/* Accent light glow */}
           <div

@@ -131,7 +131,7 @@ export default function Base64Tool() {
           
           {/* Header */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-            <div className="text-left">
+            <div className="text-left pr-2">
               <h2 className="font-display text-xl font-bold text-gray-900 mb-2">Base64 Encoder & Decoder</h2>
               <p className="text-sm text-gray-500">Encode files or standard strings to base64, or decode base64 hashes back into files or readable text format.</p>
             </div>
@@ -139,7 +139,7 @@ export default function Base64Tool() {
             <button
               id="base64-toggle-mode-btn"
               onClick={toggleMode}
-              className="self-start sm:self-center px-4 py-2.5 bg-primary text-white text-xs font-bold uppercase rounded-lg shadow-sm shadow-primary/15 hover:bg-primary-container transition-all flex items-center gap-1.5 cursor-pointer"
+              className="shrink-0 whitespace-nowrap self-start sm:self-center px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold uppercase rounded-lg shadow-sm transition-all flex items-center gap-1.5 cursor-pointer"
             >
               <ArrowLeftRight className="w-3.5 h-3.5" />
               Switch to {mode === 'encode' ? 'Decode' : 'Encode'}
@@ -161,7 +161,7 @@ export default function Base64Tool() {
                 onDragLeave={handleDrag}
                 onDrop={handleDrop}
                 className={`relative flex flex-col rounded-xl border-2 border-dashed ${
-                  dragActive ? 'border-primary bg-primary/5' : 'border-gray-200 bg-gray-50/20'
+                  dragActive ? 'border-indigo-500 bg-indigo-50/20' : 'border-gray-200 bg-gray-50/20'
                 } p-2 transition-all`}
               >
                 <textarea
@@ -213,7 +213,7 @@ export default function Base64Tool() {
 
             {/* Output Panel */}
             <div className="space-y-3 text-left">
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center mb-2.5">
                 <label className="font-sans text-[11px] font-bold text-gray-400 uppercase tracking-wider block">
                   {mode === 'encode' ? 'Encoded Base64 Output' : 'Decoded Output'}
                 </label>
