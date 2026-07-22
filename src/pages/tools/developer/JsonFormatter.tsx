@@ -15,11 +15,40 @@ import {
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { JsonTreeViewer } from '@/components/features/JsonTreeViewer';
 
+// Helper for sorting object keys recursively
+function sortObjectKeys(obj: unknown): unknown {
+  if (obj === null || typeof obj !== 'object') {
+    return obj;
+  }
+  if (Array.isArray(obj)) {
+    return obj.map(sortObjectKeys);
+  }
+  const record = obj as Record<string, unknown>;
+  const sortedKeys = Object.keys(record).sort();
+  const sortedObj: Record<string, unknown> = {};
+  sortedKeys.forEach((key) => {
+    sortedObj[key] = sortObjectKeys(record[key]);
+  });
+  return sortedObj;
+}
+
+// Parse error helper
+function parseErrorPosition(msg: string, text: string) {
+  const posMatch = msg.match(/at position (\d+)/i);
+  if (posMatch) {
+    const pos = parseInt(posMatch[1], 10);
+    const lines = text.slice(0, pos).split('\n');
+    return { line: lines.length, column: lines[lines.length - 1].length + 1 };
+  }
+  const lineColMatch = msg.match(/line (\d+).*column (\d+)/i);
+  if (lineColMatch) {
+    return { line: parseInt(lineColMatch[1], 10), column: parseInt(lineColMatch[2], 10) };
+  }
+  return null;
+}
+
 export default function JsonFormatter() {
   const [inputVal, setInputVal] = useState('{\n  "name": "Toolskyt",\n  "version": "1.0.0",\n  "description": "The world\'s most precise developer suite",\n  "features": [\n    "High Performance",\n    "Privacy First",\n    "Offline Capable"\n  ],\n  "active": true,\n  "rating": 5.0\n}');
-  const [parsedData, setParsedData] = useState<any>(null);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const [errorPos, setErrorPos] = useState<{ line: number; column: number } | null>(null);
   
   // Right panel settings
   const [activeTab, setActiveTab] = useState<'viewer' | 'formatted' | 'minified'>('viewer');
@@ -31,7 +60,7 @@ export default function JsonFormatter() {
 
   // Path Selection state
   const [selectedPath, setSelectedPath] = useState<(string | number)[] | null>(null);
-  const [selectedNodeValue, setSelectedNodeValue] = useState<any>(null);
+  const [selectedNodeValue, setSelectedNodeValue] = useState<unknown>(null);
   
   // Copy indicators
   const [copiedInput, setCopiedInput] = useState(false);
@@ -48,13 +77,28 @@ export default function JsonFormatter() {
   const lineNumbersRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // Derive parsed data and error info dynamically from inputVal via useMemo
+  const { parsedData, errorMsg, errorPos } = useMemo(() => {
+    if (!inputVal.trim()) {
+      return { parsedData: null, errorMsg: null, errorPos: null };
+    }
+    try {
+      const parsed = JSON.parse(inputVal);
+      return { parsedData: parsed, errorMsg: null, errorPos: null };
+    } catch (err) {
+      const error = err as Error;
+      const msg = error.message || 'Invalid JSON format';
+      return { parsedData: null, errorMsg: msg, errorPos: parseErrorPosition(msg, inputVal) };
+    }
+  }, [inputVal]);
+
   // Formatted Output value computation
   const formattedOutput = useMemo(() => {
     if (!parsedData) return '';
     try {
       const dataToFormat = sortKeys ? sortObjectKeys(parsedData) : parsedData;
       return JSON.stringify(dataToFormat, null, indentSize);
-    } catch (e) {
+    } catch {
       return '';
     }
   }, [parsedData, indentSize, sortKeys]);
@@ -65,47 +109,10 @@ export default function JsonFormatter() {
     try {
       const dataToMinify = sortKeys ? sortObjectKeys(parsedData) : parsedData;
       return JSON.stringify(dataToMinify);
-    } catch (e) {
+    } catch {
       return '';
     }
   }, [parsedData, sortKeys]);
-
-  // Parse error helper
-  const parseErrorPosition = (msg: string, text: string) => {
-    const posMatch = msg.match(/at position (\d+)/i);
-    if (posMatch) {
-      const pos = parseInt(posMatch[1], 10);
-      const lines = text.slice(0, pos).split('\n');
-      return { line: lines.length, column: lines[lines.length - 1].length + 1 };
-    }
-    const lineColMatch = msg.match(/line (\d+).*column (\d+)/i);
-    if (lineColMatch) {
-      return { line: parseInt(lineColMatch[1], 10), column: parseInt(lineColMatch[2], 10) };
-    }
-    return null;
-  };
-
-  // Perform parsing whenever input changes
-  useEffect(() => {
-    if (!inputVal.trim()) {
-      setParsedData(null);
-      setErrorMsg(null);
-      setErrorPos(null);
-      return;
-    }
-    try {
-      const parsed = JSON.parse(inputVal);
-      setParsedData(parsed);
-      setErrorMsg(null);
-      setErrorPos(null);
-    } catch (err) {
-      const error = err as Error;
-      const msg = error.message || 'Invalid JSON format';
-      setErrorMsg(msg);
-      setParsedData(null);
-      setErrorPos(parseErrorPosition(msg, inputVal));
-    }
-  }, [inputVal]);
 
   // Scroll sync handler
   const handleScroll = () => {
@@ -118,22 +125,6 @@ export default function JsonFormatter() {
   useEffect(() => {
     handleScroll();
   }, [inputVal]);
-
-  // Helper for sorting keys
-  function sortObjectKeys(obj: any): any {
-    if (obj === null || typeof obj !== 'object') {
-      return obj;
-    }
-    if (Array.isArray(obj)) {
-      return obj.map(sortObjectKeys);
-    }
-    const sortedKeys = Object.keys(obj).sort();
-    const sortedObj: any = {};
-    sortedKeys.forEach((key) => {
-      sortedObj[key] = sortObjectKeys(obj[key]);
-    });
-    return sortedObj;
-  }
 
   // Format Path string
   const formatPathString = (path: (string | number)[] | null, includeRoot = true): string => {

@@ -1,16 +1,16 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { ChevronRight, ChevronDown, AlertCircle } from 'lucide-react';
 
 interface JsonTreeViewerProps {
-  data: any;
+  data: unknown;
   searchQuery?: string;
   defaultExpanded?: boolean;
-  onSelectPath?: (path: (string | number)[], value: any) => void;
+  onSelectPath?: (path: (string | number)[], value: unknown) => void;
   onHoverPath?: (path: (string | number)[] | null) => void;
 }
 
 // Helper to determine if a subtree contains a search query match
-function matchesSearch(value: any, key: string | number, query: string): boolean {
+function matchesSearch(value: unknown, key: string | number, query: string): boolean {
   if (!query) return false;
   const q = query.toLowerCase();
 
@@ -26,9 +26,10 @@ function matchesSearch(value: any, key: string | number, query: string): boolean
   // Check nested
   if (Array.isArray(value)) {
     return value.some((item, index) => matchesSearch(item, index, query));
-  } else {
-    return Object.entries(value).some(([k, v]) => matchesSearch(v, k, query));
+  } else if (value && typeof value === 'object') {
+    return Object.entries(value as Record<string, unknown>).some(([k, v]) => matchesSearch(v, k, query));
   }
+  return false;
 }
 
 // Helper to highlight matched query text
@@ -66,11 +67,11 @@ const HighlightText: React.FC<{ text: string; query: string }> = ({ text, query 
 
 interface JsonTreeNodeProps {
   name: string | number;
-  value: any;
+  value: unknown;
   path: (string | number)[];
   searchQuery: string;
   defaultExpanded: boolean;
-  onSelectPath?: (path: (string | number)[], value: any) => void;
+  onSelectPath?: (path: (string | number)[], value: unknown) => void;
   onHoverPath?: (path: (string | number)[] | null) => void;
   isLast?: boolean;
 }
@@ -87,15 +88,19 @@ const JsonTreeNode: React.FC<JsonTreeNodeProps> = ({
 }) => {
   const isObject = typeof value === 'object' && value !== null;
   const isArray = Array.isArray(value);
-  const size = isObject ? (isArray ? value.length : Object.keys(value).length) : 0;
+  const size = isObject
+    ? isArray
+      ? (value as unknown[]).length
+      : Object.keys(value as Record<string, unknown>).length
+    : 0;
 
   // Determine if children contain a search query match
   const hasChildMatch = useMemo(() => {
     if (!searchQuery || !isObject) return false;
     if (isArray) {
-      return value.some((item: any, idx: number) => matchesSearch(item, idx, searchQuery));
+      return (value as unknown[]).some((item: unknown, idx: number) => matchesSearch(item, idx, searchQuery));
     } else {
-      return Object.entries(value).some(([k, v]) => matchesSearch(v, k, searchQuery));
+      return Object.entries(value as Record<string, unknown>).some(([k, v]) => matchesSearch(v, k, searchQuery));
     }
   }, [value, isObject, isArray, searchQuery]);
 
@@ -103,24 +108,21 @@ const JsonTreeNode: React.FC<JsonTreeNodeProps> = ({
     return matchesSearch(value, name, searchQuery);
   }, [value, name, searchQuery]);
 
-  // Expanded state
-  const [isExpanded, setIsExpanded] = useState(defaultExpanded);
+  // Expanded state derived cleanly
+  const [userExpanded, setUserExpanded] = useState<boolean | null>(null);
+  
+  // Track reset of defaultExpanded
+  const [prevDefaultExpanded, setPrevDefaultExpanded] = useState(defaultExpanded);
+  if (defaultExpanded !== prevDefaultExpanded) {
+    setPrevDefaultExpanded(defaultExpanded);
+    setUserExpanded(null);
+  }
 
-  // Auto-expand nodes that contain matches in their children
-  useEffect(() => {
-    if (hasChildMatch) {
-      setIsExpanded(true);
-    }
-  }, [hasChildMatch]);
-
-  // Reset expansion when defaultExpanded changes globally (Expand/Collapse All)
-  useEffect(() => {
-    setIsExpanded(defaultExpanded);
-  }, [defaultExpanded]);
+  const isExpanded = userExpanded ?? (hasChildMatch || defaultExpanded);
 
   const toggleExpand = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setIsExpanded(!isExpanded);
+    setUserExpanded(!isExpanded);
   };
 
   const handleSelect = (e: React.MouseEvent) => {
@@ -142,50 +144,52 @@ const JsonTreeNode: React.FC<JsonTreeNodeProps> = ({
     }
   };
 
-  const nameElement = (
-    <span
-      onClick={handleSelect}
-      className={`cursor-pointer font-mono font-medium rounded hover:bg-gray-100 dark:hover:bg-gray-800 px-1 transition-colors ${
-        typeof name === 'number'
-          ? 'text-rose-500 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/20 text-[10px] px-1 rounded mr-1'
-          : 'text-indigo-600 dark:text-indigo-400 font-semibold'
-      }`}
-    >
-      <HighlightText text={String(name)} query={searchQuery} />
-    </span>
-  );
-
+  // Format primitive value node
   if (!isObject) {
-    // Primitive node
-    let valueElement;
-    if (value === null) {
-      valueElement = <span className="text-gray-400 italic font-mono">null</span>;
-    } else if (typeof value === 'string') {
+    let valueElement: React.ReactNode;
+    if (typeof value === 'string') {
       valueElement = (
-        <span className="text-emerald-600 dark:text-emerald-400 font-mono break-all">
-          "<HighlightText text={value} query={searchQuery} />"
+        <span className="text-emerald-600 dark:text-emerald-400 font-semibold break-all">
+          "{<HighlightText text={value} query={searchQuery} />}"
         </span>
       );
     } else if (typeof value === 'number') {
       valueElement = (
-        <span className="text-blue-600 dark:text-blue-400 font-mono">
+        <span className="text-indigo-600 dark:text-indigo-400 font-semibold">
           <HighlightText text={String(value)} query={searchQuery} />
         </span>
       );
     } else if (typeof value === 'boolean') {
       valueElement = (
-        <span className="text-purple-600 dark:text-purple-400 font-mono font-semibold">
-          {String(value)}
+        <span className="text-amber-600 dark:text-amber-400 font-bold uppercase text-[11px]">
+          <HighlightText text={String(value)} query={searchQuery} />
+        </span>
+      );
+    } else if (value === null) {
+      valueElement = (
+        <span className="text-rose-500 dark:text-rose-400 font-bold uppercase text-[11px]">
+          null
         </span>
       );
     } else {
-      valueElement = <span className="font-mono text-gray-800 dark:text-gray-200">{String(value)}</span>;
+      valueElement = (
+        <span className="text-gray-500 font-semibold">
+          <HighlightText text={String(value)} query={searchQuery} />
+        </span>
+      );
     }
+
+    const nameElement = (
+      <span className="text-slate-800 dark:text-slate-200 font-semibold">
+        <HighlightText text={String(name)} query={searchQuery} />
+      </span>
+    );
 
     return (
       <div
-        className={`group py-tree-row-y pr-tree-row-x pl-tree-indent select-text hover:bg-blue-50/40 dark:hover:bg-blue-950/10 rounded-lg flex items-start gap-item-gap transition-all ${
-          isMatched && searchQuery ? 'bg-amber-50/50 dark:bg-amber-950/10' : ''
+        onClick={handleSelect}
+        className={`group/leaf flex items-center gap-item-gap hover:bg-indigo-50/60 dark:hover:bg-indigo-950/20 py-tree-row-y px-tree-row-x rounded-lg transition-colors cursor-pointer select-text ${
+          isMatched && searchQuery ? 'bg-amber-50/60 dark:bg-amber-950/20 ring-1 ring-amber-200 dark:ring-amber-800' : ''
         }`}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -200,10 +204,16 @@ const JsonTreeNode: React.FC<JsonTreeNodeProps> = ({
     );
   }
 
+  const nameElement = (
+    <span className="text-slate-800 dark:text-slate-200 font-semibold">
+      <HighlightText text={String(name)} query={searchQuery} />
+    </span>
+  );
+
   // Object or Array node
   const renderChildren = () => {
     if (isArray) {
-      return (value as any[]).map((item, idx) => (
+      return (value as unknown[]).map((item, idx) => (
         <JsonTreeNode
           key={idx}
           name={idx}
@@ -213,16 +223,17 @@ const JsonTreeNode: React.FC<JsonTreeNodeProps> = ({
           defaultExpanded={defaultExpanded}
           onSelectPath={onSelectPath}
           onHoverPath={onHoverPath}
-          isLast={idx === (value as any[]).length - 1}
+          isLast={idx === (value as unknown[]).length - 1}
         />
       ));
     } else {
-      const keys = Object.keys(value);
+      const record = value as Record<string, unknown>;
+      const keys = Object.keys(record);
       return keys.map((key, idx) => (
         <JsonTreeNode
           key={key}
           name={key}
-          value={(value as any)[key]}
+          value={record[key]}
           path={[...path, key]}
           searchQuery={searchQuery}
           defaultExpanded={defaultExpanded}
@@ -315,7 +326,7 @@ export const JsonTreeViewer: React.FC<JsonTreeViewerProps> = ({
       </div>
       <div className="pl-2 flex flex-col gap-item-gap">
         {isArray
-          ? (data as any[]).map((item, idx) => (
+          ? (data as unknown[]).map((item, idx) => (
               <JsonTreeNode
                 key={idx}
                 name={idx}
@@ -325,20 +336,20 @@ export const JsonTreeViewer: React.FC<JsonTreeViewerProps> = ({
                 defaultExpanded={defaultExpanded}
                 onSelectPath={onSelectPath}
                 onHoverPath={onHoverPath}
-                isLast={idx === (data as any[]).length - 1}
+                isLast={idx === (data as unknown[]).length - 1}
               />
             ))
-          : Object.keys(data).map((key, idx) => (
+          : Object.keys(data as Record<string, unknown>).map((key, idx) => (
               <JsonTreeNode
                 key={key}
                 name={key}
-                value={data[key]}
+                value={(data as Record<string, unknown>)[key]}
                 path={[key]}
                 searchQuery={searchQuery}
                 defaultExpanded={defaultExpanded}
                 onSelectPath={onSelectPath}
                 onHoverPath={onHoverPath}
-                isLast={idx === Object.keys(data).length - 1}
+                isLast={idx === Object.keys(data as Record<string, unknown>).length - 1}
               />
             ))}
       </div>
