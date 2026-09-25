@@ -307,7 +307,7 @@ export default function QrGenerator() {
                     type="text"
                     value={fgColor}
                     onChange={(e) => setFgColor(e.target.value)}
-                    className="flex-1 px-2.5 py-1 border rounded-lg bg-transparent text-xs outline-none focus:border-[var(--border-focus)] transition-colors"
+                    className="min-w-0 flex-1 px-2.5 py-1 border rounded-lg bg-transparent text-xs outline-none focus:border-[var(--border-focus)] transition-colors"
                     style={{ borderColor: 'var(--border-default)', color: 'var(--text-primary)' }}
                   />
                 </div>
@@ -329,7 +329,7 @@ export default function QrGenerator() {
                     type="text"
                     value={bgColor}
                     onChange={(e) => setBgColor(e.target.value)}
-                    className="flex-1 px-2.5 py-1 border rounded-lg bg-transparent text-xs outline-none focus:border-[var(--border-focus)] transition-colors"
+                    className="min-w-0 flex-1 px-2.5 py-1 border rounded-lg bg-transparent text-xs outline-none focus:border-[var(--border-focus)] transition-colors"
                     style={{ borderColor: 'var(--border-default)', color: 'var(--text-primary)' }}
                   />
                 </div>

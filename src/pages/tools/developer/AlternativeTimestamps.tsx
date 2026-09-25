@@ -523,13 +523,17 @@ export default function AlternativeTimestamps() {
             </div>
           </div>
           
-          <div className="rounded-xl overflow-hidden border border-gray-100 shadow-lg">
-            <img 
-              referrerPolicy="no-referrer"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmpx--Qq_GntMX8luZ1UdPeXXPvf3Jr_TZRMiu8HSjGXp5pQR5jnp8sGus_nfYnBQrcWyHfgDrDpaprSHCqoVmOaT5YiC8-JZ_tizO00HSBKH4JfT1T_rwW0wuCJO9rt-EA-qxpdu-G4qsArMZzKg5TPBldA9qcnTEkktWo2_K4UsTG2sTG9hU1T6mUTdR0bXZVakdp5r8bSH6DmG4K5z7D-ewMw2pgr6klRdbWAzG7-QJxg_mfVkYetkA-rSxmDG8cPZe_KoSxg4"
-              alt="Toolskyt developer dashboard displaying elegant timestamps conversion algorithms"
-              className="w-full h-80 object-cover hover:scale-105 transition-transform duration-700"
-            />
+          <div
+            className="rounded-xl overflow-hidden border border-gray-100 shadow-lg h-80 flex items-center justify-center text-center p-8"
+            style={{ background: 'linear-gradient(135deg, #4648d4 0%, #7c3aed 100%)' }}
+            role="img"
+            aria-label="Timestamp conversion illustration"
+          >
+            <div className="text-white">
+              <div className="font-mono text-4xl md:text-5xl font-bold tracking-tight">1735689600</div>
+              <div className="my-3 text-2xl opacity-80" aria-hidden="true">&darr;</div>
+              <div className="font-mono text-lg md:text-xl opacity-95">2025-01-01T00:00:00Z</div>
+            </div>
           </div>
         </section>
       </div>

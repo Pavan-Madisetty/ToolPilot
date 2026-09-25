@@ -298,7 +298,7 @@ export default function TimezoneConverter() {
         {/* Top Control Panel */}
         <div className="card p-6 space-y-6">
           <div className="flex flex-col md:flex-row gap-4 items-end justify-between">
-            <div className="flex flex-wrap md:flex-nowrap gap-4 items-end flex-1">
+            <div className="flex flex-wrap gap-4 items-end flex-1 min-w-0">
               <div className="w-full md:w-48">
                 <Input
                   label="Compare Date"
@@ -309,7 +309,7 @@ export default function TimezoneConverter() {
               </div>
               
               {availableToAdd.length > 0 && (
-                <div className="flex gap-2 items-end w-full md:w-80">
+                <div className="flex gap-2 items-end w-full lg:w-80">
                   <div className="flex-1">
                     <Select
                       label="Add Timezone"

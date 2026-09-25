@@ -1,11 +1,12 @@
 import type { ToolConfig } from '@/types';
+import { EXTRA_TOOLS, EXTRA_TOOL_IDS } from './extraTools';
 
 // ============================================================
 // Tool Registry — see LIVE_TOOL_COUNT / TOTAL_TOOL_COUNT at the bottom of this file
 // for the authoritative, self-updating counts (do not hardcode tool totals in copy).
 // ============================================================
 
-export const TOOLS: ToolConfig[] = [
+const BASE_TOOLS: ToolConfig[] = [
   // ─────────────────────────────────────────────
   // FINANCE MODULE
   // ─────────────────────────────────────────────
@@ -24,12 +25,7 @@ export const TOOLS: ToolConfig[] = [
     metaDescription:
       'Free online EMI calculator. Calculate monthly EMI for home loan, car loan, personal loan with complete amortization schedule. Instant results.',
     keywords: ['emi calculator', 'loan emi', 'monthly emi', 'home loan emi', 'car loan emi'],
-    relatedTools: [
-      'home-loan-calculator',
-      'personal-loan-calculator',
-      'loan-eligibility-calculator',
-      'compound-interest-calculator',
-    ],
+    relatedTools: ['home-loan-calculator', 'personal-loan-calculator', 'loan-eligibility-calculator', 'compound-interest-calculator'],
     benefits: [
       'Calculate payments instantly to budget your finance schedules.',
       'Examine amortization breakdowns to understand compound interest.',
@@ -590,7 +586,7 @@ export const TOOLS: ToolConfig[] = [
     metaDescription:
       'Free JSON formatter and validator. Beautify, minify, validate and fix JSON. Syntax highlighting with error detection.',
     keywords: ['json formatter', 'json validator', 'json beautifier', 'format json online'],
-    relatedTools: ['json-diff', 'json-to-csv', 'csv-to-json', 'yaml-formatter'],
+    relatedTools: ['diff-checker', 'json-csv-converter'],
     benefits: [
       'Instantly beautify raw compressed API responses into readable structures.',
       'Detect syntax errors and identify line numbers for key fixes.',
@@ -814,7 +810,7 @@ export const TOOLS: ToolConfig[] = [
     metaDescription:
       'Free color picker. Convert colors between HEX, RGB, HSL, HSV formats. Pick any color from palette.',
     keywords: ['color picker', 'color converter', 'hex to rgb', 'rgb to hex', 'hsl converter'],
-    relatedTools: ['gradient-generator', 'css-formatter'],
+    relatedTools: ['gradient-generator'],
   },
   {
     id: 'sql-formatter',
@@ -829,7 +825,7 @@ export const TOOLS: ToolConfig[] = [
     metaDescription:
       'Free SQL formatter. Beautify MySQL, PostgreSQL, SQLite, SQL Server queries with proper indentation.',
     keywords: ['sql formatter', 'sql beautifier', 'format sql', 'sql pretty print'],
-    relatedTools: ['json-formatter', 'html-formatter'],
+    relatedTools: ['json-formatter', 'html-entity-encoder'],
   },
   {
     id: 'diff-checker',
@@ -844,7 +840,7 @@ export const TOOLS: ToolConfig[] = [
     metaDescription:
       'Free diff checker. Compare two text files or code blocks. See additions, deletions and changes highlighted.',
     keywords: ['diff checker', 'text diff', 'code compare', 'text comparison online'],
-    relatedTools: ['json-diff', 'text-diff'],
+    relatedTools: ['text-diff'],
   },
   {
     id: 'password-generator',
@@ -878,7 +874,7 @@ export const TOOLS: ToolConfig[] = [
     metaDescription:
       'Generate Lorem Ipsum placeholder text. Choose words, sentences or paragraphs. Custom starting text.',
     keywords: ['lorem ipsum generator', 'placeholder text', 'dummy text generator', 'lipsum'],
-    relatedTools: ['word-counter', 'random-text'],
+    relatedTools: ['word-counter', 'text-sorter'],
   },
   {
     id: 'gradient-generator',
@@ -925,7 +921,7 @@ export const TOOLS: ToolConfig[] = [
     metaDescription:
       'Write Markdown with live preview. GitHub Flavored Markdown support. Export to HTML.',
     keywords: ['markdown preview', 'markdown editor', 'live markdown', 'md preview'],
-    relatedTools: ['html-formatter', 'text-diff'],
+    relatedTools: ['html-entity-encoder', 'text-diff'],
   },
 
   // ─────────────────────────────────────────────
@@ -1082,7 +1078,7 @@ export const TOOLS: ToolConfig[] = [
     metaDescription:
       'Free word counter. Count words, characters, sentences, paragraphs and estimate reading time. Instant results.',
     keywords: ['word counter', 'character counter', 'word count online', 'count words'],
-    relatedTools: ['character-counter', 'reading-time', 'case-converter'],
+    relatedTools: ['readability-checker', 'case-converter'],
   },
   {
     id: 'case-converter',
@@ -1448,40 +1444,6 @@ export const TOOLS: ToolConfig[] = [
       { question: 'Is current time synced?', answer: 'Yes! The default inputs are initialized to your local device date.' }
     ]
   },
-  {
-    id: 'dictionary',
-    name: 'Dictionary & Word Search',
-    description: 'Lookup definitions, synonyms, and phonetics online',
-    longDescription: 'A complete English dictionary lookup tool. Search definitions, part-of-speech listings, pronunciation phonetics, audio, and example sentences.',
-    module: 'text',
-    slug: '/text/dictionary',
-    icon: 'BookOpenIcon',
-    tags: ['dictionary', 'word lookup', 'synonyms', 'phonetic search'],
-    metaTitle: 'Dictionary & Word Search - Free Word Lookup Online | Toolskyt',
-    metaDescription:
-      'Search english word definitions, synonyms, audio pronunciations and examples with the free online dictionary.',
-    keywords: ['online dictionary', 'word lookup tool', 'synonyms list', 'define words'],
-    relatedTools: ['word-counter', 'case-converter'],
-    benefits: [
-      'Lookup definitions instantly as you type.',
-      'Listen to standard audio phonetic pronunciations.',
-      'Expand vocabulary with synonyms and parts of speech.'
-    ],
-    features: [
-      'Real-time definition lookups using public API endpoints.',
-      'Audio pronunciation tags for words.',
-      'Alternative synonym mappings.'
-    ],
-    howToSteps: [
-      { name: 'Search Word', text: 'Type the english word you wish to define.' },
-      { name: 'Browse Listings', text: 'Review the definitions, parts of speech, and usage examples.' },
-      { name: 'Listen to Phonetics', text: 'Click the audio icon to hear pronunciation.' }
-    ],
-    faq: [
-      { question: 'Is an active internet connection required?', answer: 'Yes, because definitions are requested in real-time from the public dictionary database.' },
-      { question: 'Does it support languages other than English?', answer: 'Currently, the search mappings are optimized for English definitions.' }
-    ]
-  },
 
   // ─────────────────────────────────────────────
   // AI WRITING MODULE
@@ -1500,7 +1462,7 @@ export const TOOLS: ToolConfig[] = [
     metaDescription:
       'Build structured prompts for ChatGPT, Google Gemini, and Claude. Includes role, context, task and output format.',
     keywords: ['ai prompt builder', 'chatgpt prompt', 'prompt engineering', 'prompt generator'],
-    relatedTools: ['email-writer', 'blog-outline'],
+    relatedTools: ['email-writer', 'text-summarizer'],
   },
   {
     id: 'email-writer',
@@ -1677,7 +1639,7 @@ export const TOOLS: ToolConfig[] = [
     metaDescription:
       'Simple, fast to-do list. Set priorities, due dates and tags. Works offline. Data saved locally.',
     keywords: ['todo list', 'task manager online', 'free to do app', 'checklist app'],
-    relatedTools: ['kanban', 'habit-tracker'],
+    relatedTools: ['eisenhower-matrix', 'habit-tracker'],
   },
   {
     id: 'checklist',
@@ -1690,7 +1652,7 @@ export const TOOLS: ToolConfig[] = [
     metaTitle: 'Checklist - Create Reusable Checklists Online | Toolskyt',
     metaDescription: 'Create reusable checklists for any process. Share via URL. Print-friendly.',
     keywords: ['checklist maker', 'checklist creator', 'online checklist', 'free checklist'],
-    relatedTools: ['todo', 'kanban'],
+    relatedTools: ['todo', 'eisenhower-matrix'],
   },
   {
     id: 'notes',
@@ -1891,7 +1853,7 @@ export const TOOLS: ToolConfig[] = [
     metaDescription:
       'Generate random numbers within any range. Set min/max values. Generate multiple numbers at once.',
     keywords: ['random number generator', 'random number', 'generate random numbers'],
-    relatedTools: ['dice-roller', 'coin-flip'],
+    relatedTools: ['dice-coin'],
   },
   {
     id: 'color-converter',
@@ -2155,6 +2117,9 @@ export const TOOLS: ToolConfig[] = [
   },
 ];
 
+// Base catalog + additional client-side tools (see ./extraTools.ts)
+export const TOOLS: ToolConfig[] = [...BASE_TOOLS, ...EXTRA_TOOLS];
+
 // ─────────────────────────────────────────────
 // Tool Lookup Maps
 // ─────────────────────────────────────────────
@@ -2199,6 +2164,21 @@ export const NEW_TOOLS = TOOLS.filter((t) => t.isNew);
 // When you ship a tool, add its id here (and its route in App.tsx).
 // ─────────────────────────────────────────────
 export const IMPLEMENTED_TOOL_IDS = new Set<string>([
+  ...EXTRA_TOOL_IDS,
+  // Previously hidden — pages verified working
+  'text-to-emoji',
+  'stylish-text',
+  'emoji-search',
+  'pdf-to-markdown',
+  'numbers-to-words',
+  'detect-language',
+  'remove-spaces',
+  'read-math-expressions',
+  'date-converter',
+  'pdf-metadata',
+  'pomodoro',
+  'todo',
+
   // FINANCE
   'emi-calculator',
   'home-loan-calculator',

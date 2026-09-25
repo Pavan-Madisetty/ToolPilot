@@ -12,6 +12,7 @@ import { ToastContainer } from '@/components/ui/ToastContainer';
 const HomePage = lazy(() => import('@/pages/home/HomePage'));
 const SearchPage = lazy(() => import('@/pages/search/SearchPage'));
 const ToolFallback = lazy(() => import('@/pages/tools/ToolFallback'));
+import { EXTRA_ROUTES } from '@/pages/tools/extraRoutes';
 
 // Company Pages
 import {
@@ -129,7 +130,6 @@ const DetectLanguage = lazy(() => import('@/pages/tools/text/DetectLanguage'));
 const RemoveSpaces = lazy(() => import('@/pages/tools/text/RemoveSpaces'));
 const ReadMathExpressions = lazy(() => import('@/pages/tools/text/ReadMathExpressions'));
 const DateConverter = lazy(() => import('@/pages/tools/text/DateConverter'));
-const Dictionary = lazy(() => import('@/pages/tools/text/Dictionary'));
 
 // AI Tools
 const PromptBuilder = lazy(() => import('@/pages/tools/ai/PromptBuilder'));
@@ -923,14 +923,6 @@ export default function App() {
                   </Suspense>
                 }
               />
-              <Route
-                path="text/dictionary"
-                element={
-                  <Suspense fallback={<PageLoader />}>
-                    <Dictionary />
-                  </Suspense>
-                }
-              />
 
               {/* AI Module */}
               <Route
@@ -1300,6 +1292,19 @@ export default function App() {
                   </Suspense>
                 }
               />
+
+              {/* Additional client-side tools */}
+              {EXTRA_ROUTES.map(({ path, Component }) => (
+                <Route
+                  key={path}
+                  path={path}
+                  element={
+                    <Suspense fallback={<PageLoader />}>
+                      <Component />
+                    </Suspense>
+                  }
+                />
+              ))}
 
               {/* Wildcard Fallback */}
               <Route

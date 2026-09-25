@@ -62,7 +62,7 @@ class RuntimeConfigService {
   /**
    * Helper to perform fetch requests with simple retry and timeout.
    */
-  private async fetchWithRetry(url: string, retries = 3, delay = 500): Promise<unknown> {
+  private async fetchWithRetry(url: string, retries = 2, delay = 300): Promise<unknown> {
     for (let i = 0; i < retries; i++) {
       try {
         const controller = new AbortController();
@@ -91,13 +91,10 @@ class RuntimeConfigService {
   public async loadAllConfigs(): Promise<FullRuntimeConfig> {
     if (this.isLoaded) return this.config;
 
-    const base = `${window.location.origin}${
-      window.location.pathname.endsWith('/')
-        ? window.location.pathname.slice(0, -1)
-        : window.location.pathname
-    }`.replace(/\/search$|\/finance.*|\/developer.*|\/image.*|\/text.*|\/ai.*|\/pdf.*|\/productivity.*|\/education.*|\/health.*|\/utilities.*|\/conversion.*|\/travel.*|\/business.*/, '');
-
-    const normalizedBase = base.endsWith('/') ? base : `${base}/`;
+    // Config files are static assets served from the site root (or Vite BASE_URL),
+    // independent of the current route — deep links must not affect the URL.
+    const baseUrl = import.meta.env.BASE_URL || '/';
+    const normalizedBase = `${window.location.origin}${baseUrl.startsWith('/') ? '' : '/'}${baseUrl}${baseUrl.endsWith('/') ? '' : '/'}`;
     const configPath = (file: string) => `${normalizedBase}config/${file}`;
 
     try {

@@ -86,14 +86,13 @@ export default function CompoundInterestCalculator() {
 
   return (
     <ToolPageWrapper toolId="compound-interest-calculator">
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden grid grid-cols-1 lg:grid-cols-12 font-sans text-left">
+      <div className="bg-bg-surface rounded-2xl border border-border-default shadow-sm overflow-hidden grid grid-cols-1 lg:grid-cols-12 font-sans text-left">
         
         {/* LEFT: Inputs Block (5 cols) */}
-        <div className="lg:col-span-5 p-8 bg-gray-50/50 border-r border-gray-100 space-y-6">
+        <div className="lg:col-span-5 p-6 md:p-8 bg-bg-surface-container-low border-r border-border-default space-y-6">
           <div className="space-y-1">
             <span className="text-[10px] font-bold text-primary tracking-wider uppercase bg-primary/10 px-2 py-0.5 rounded-full">FINANCE MATRIX</span>
-            <h2 className="font-display text-xl font-bold text-gray-900">Compound Estimator</h2>
-            <p className="text-xs text-gray-500 font-medium">Model custom scenarios with real-time tax impact & contribution patterns.</p>
+            <p className="text-xs text-text-secondary font-medium pt-1">Model custom scenarios with real-time tax impact & contribution patterns.</p>
           </div>
 
           {/* Input sliders & groups */}

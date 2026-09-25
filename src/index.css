@@ -249,12 +249,16 @@
 /* ─────────────────────────────────────────────
    Base Styles
    ───────────────────────────────────────────── */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* Kept inside @layer base so Tailwind utilities (space-y-*, mt-*, p-*, …) can override it.
+   An unlayered reset would beat every layered utility and silently disable them. */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 }
 
 html {
@@ -877,15 +881,16 @@ textarea.input-base {
 
 .tool-layout {
   display: grid;
-  grid-template-columns: 1fr;
   gap: var(--space-24);
   align-items: start;
+  width: 100%;
 }
-@media (min-width: 1024px) {
-  .tool-layout {
-    grid-template-columns: 400px 1fr;
-  }
+/* Grid items must be allowed to shrink, otherwise wide content (pre, tables,
+   button rows) forces horizontal page scroll on small screens. */
+.tool-layout > * {
+  min-width: 0;
 }
+
 
 /* ─────────────────────────────────────────────
    Badge Component

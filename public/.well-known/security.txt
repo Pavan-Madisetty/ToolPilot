@@ -1,0 +1,4 @@
+Contact: mailto:support@toolskyt.com
+Preferred-Languages: en
+Canonical: https://toolskyt.com/.well-known/security.txt
+Policy: https://toolskyt.com/privacy

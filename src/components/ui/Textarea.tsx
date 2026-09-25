@@ -7,10 +7,11 @@ export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   error?: string;
   helperText?: string;
   requiredMark?: boolean;
+  variant?: 'default' | 'code';
 }
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ className, label, error, helperText, requiredMark = false, id, rows = 4, ...props }, ref) => {
+  ({ className, label, error, helperText, requiredMark = false, variant = 'default', id, rows = 4, ...props }, ref) => {
     const defaultId = useId();
     const textareaId = id ?? defaultId;
     const errorId = `${textareaId}_error`;
@@ -41,7 +42,9 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             [helperId]: !!helperText && !error,
           })}
           className={clsx(
-            'input-base min-h-[100px] resize-y py-2.5',
+            variant === 'code'
+              ? 'w-full bg-slate-900 dark:bg-slate-950 text-slate-100 border border-slate-800 rounded-xl p-4 font-mono text-xs leading-relaxed outline-none resize-none overflow-auto'
+              : 'input-base min-h-[100px] resize-y py-2.5',
             {
               'input-error': !!error,
             },

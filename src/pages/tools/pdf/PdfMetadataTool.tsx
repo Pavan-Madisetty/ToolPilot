@@ -97,14 +97,13 @@ export default function PdfMetadataTool() {
 
   return (
     <ToolPageWrapper toolId="pdf-metadata">
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden grid grid-cols-1 lg:grid-cols-12 font-sans text-left">
+      <div className="bg-bg-surface rounded-2xl border border-border-default shadow-sm overflow-hidden grid grid-cols-1 lg:grid-cols-12 font-sans text-left">
         
         {/* Left Column: File drag/drop and metadata input forms (7 cols) */}
-        <div className="lg:col-span-7 p-8 space-y-6 border-r border-gray-100">
+        <div className="lg:col-span-7 p-6 md:p-8 space-y-6 border-r border-border-default">
           <div className="space-y-1">
             <span className="text-[10px] font-bold text-primary tracking-wider uppercase bg-primary/10 px-2 py-0.5 rounded-full">PDF PROTOCOL</span>
-            <h2 className="font-display text-xl font-bold text-gray-900">PDF Metadata & Compression Engine</h2>
-            <p className="text-xs text-gray-500 font-medium">Inject security flags, clean PDF metadata, and compress document catalogs.</p>
+            <p className="text-xs text-text-secondary font-medium pt-1">Inject security flags, clean PDF metadata, and compress document catalogs.</p>
           </div>
 
           {/* Drag & Drop Area */}

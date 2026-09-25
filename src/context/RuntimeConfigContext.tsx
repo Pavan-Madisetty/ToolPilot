@@ -2,7 +2,6 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { FullRuntimeConfig, FeatureFlags, AdSlotConfig } from '@/types/runtimeConfig';
 import { runtimeConfigService, DEFAULT_CONFIG } from '@/services/runtimeConfigService';
-import { PageLoader } from '@/components/ui/PageLoader';
 
 interface RuntimeConfigContextType {
   config: FullRuntimeConfig;
@@ -14,8 +13,9 @@ interface RuntimeConfigContextType {
 const RuntimeConfigContext = createContext<RuntimeConfigContextType | undefined>(undefined);
 
 export function RuntimeConfigProvider({ children }: { children: ReactNode }) {
+  // Render immediately with defaults; live config is applied when it arrives (never block the UI).
   const [config, setConfig] = useState<FullRuntimeConfig>(DEFAULT_CONFIG);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -38,10 +38,6 @@ export function RuntimeConfigProvider({ children }: { children: ReactNode }) {
       mounted = false;
     };
   }, []);
-
-  if (isLoading) {
-    return <PageLoader />;
-  }
 
   const getFeatureFlag = (key: keyof FeatureFlags): boolean => {
     return config.featureFlags[key] ?? DEFAULT_CONFIG.featureFlags[key];

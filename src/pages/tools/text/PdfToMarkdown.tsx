@@ -4,29 +4,6 @@ import { Button, CopyButton } from '@/components/ui';
 import { Upload, FileText, CheckCircle, RefreshCw } from 'lucide-react';
 import { useUIStore } from '@/stores/uiStore';
 
-interface PdfTextItem {
-  str: string;
-  transform: number[];
-}
-
-interface PdfJsDocument {
-  numPages: number;
-  getPage: (index: number) => Promise<{
-    getTextContent: () => Promise<{
-      items: PdfTextItem[];
-    }>;
-  }>;
-}
-
-interface PdfJsLib {
-  GlobalWorkerOptions: {
-    workerSrc: string;
-  };
-  getDocument: (options: { data: ArrayBuffer }) => {
-    promise: Promise<PdfJsDocument>;
-  };
-}
-
 export default function PdfToMarkdown() {
   const { addToast } = useUIStore();
   const [loading, setLoading] = useState(false);
@@ -35,27 +12,14 @@ export default function PdfToMarkdown() {
   const [fileName, setFileName] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const loadPdfJS = () => {
-    return new Promise<PdfJsLib>((resolve, reject) => {
-      const globalWindow = window as unknown as { pdfjsLib?: PdfJsLib };
-      if (globalWindow.pdfjsLib) {
-        resolve(globalWindow.pdfjsLib);
-        return;
-      }
-      const script = document.createElement('script');
-      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js';
-      script.onload = () => {
-        const pdfjs = globalWindow.pdfjsLib;
-        if (pdfjs) {
-          pdfjs.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
-          resolve(pdfjs);
-        } else {
-          reject(new Error('Failed to load PDF.js engine'));
-        }
-      };
-      script.onerror = () => reject(new Error('Failed to load PDF.js engine'));
-      document.body.appendChild(script);
-    });
+  /** pdf.js is bundled with the app (lazy chunk + local worker) — no CDN or network needed. */
+  const loadPdfJS = async () => {
+    const [pdfjs, worker] = await Promise.all([
+      import('pdfjs-dist/legacy/build/pdf.mjs'),
+      import('pdfjs-dist/legacy/build/pdf.worker.min.mjs?url'),
+    ]);
+    pdfjs.GlobalWorkerOptions.workerSrc = worker.default;
+    return pdfjs;
   };
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,7 +39,7 @@ export default function PdfToMarkdown() {
       setProgress('Reading file...');
 
       const arrayBuffer = await file.arrayBuffer();
-      const pdf = await pdfjs.getDocument({ data: arrayBuffer }).promise;
+      const pdf = await pdfjs.getDocument({ data: new Uint8Array(arrayBuffer) }).promise;
       const numPages = pdf.numPages;
       let fullText = '';
 
@@ -87,6 +51,7 @@ export default function PdfToMarkdown() {
         let pageText = '';
 
         for (const item of textContent.items) {
+          if (!('str' in item)) continue; // skip marked-content markers
           // Approximate basic formatting (add newlines for new visual lines)
           if (lastY !== -1 && Math.abs(item.transform[5] - lastY) > 10) {
             pageText += '\n';
@@ -99,10 +64,7 @@ export default function PdfToMarkdown() {
       }
 
       // Convert double newlines/headers into cleaner markdown
-      const cleanedMarkdown = fullText
-        .replace(/\n{3,}/g, '\n\n')
-        .replace(/Page\s+(\d+)/gi, '\n### Page $1\n')
-        .trim();
+      const cleanedMarkdown = fullText.replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
 
       setMarkdown(cleanedMarkdown);
       addToast({

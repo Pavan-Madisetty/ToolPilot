@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
-import { Clipboard, Check, Upload, ArrowLeftRight, FileText, Download, Image as ImageIcon } from 'lucide-react';
+import { Upload, ArrowLeftRight, FileText, Download, Image as ImageIcon } from 'lucide-react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
+import { Button, CopyButton, Textarea } from '@/components/ui';
 
 export default function Base64Tool() {
   const [mode, setMode] = useState<'encode' | 'decode'>('encode');
@@ -10,7 +11,6 @@ export default function Base64Tool() {
   const [fileSize, setFileSize] = useState<string | null>(null);
   const [fileType, setFileType] = useState<string | null>(null);
   const [dragActive, setDragActive] = useState(false);
-  const [copied, setCopied] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Encode Text logic
@@ -114,159 +114,140 @@ export default function Base64Tool() {
     setFileType(null);
   };
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(outputText).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
-  };
-
   const isImageOutput = outputText.startsWith('data:image/');
-  const isDecodedImage = mode === 'decode' && (inputText.startsWith('data:image/') || /^[a-zA-Z0-9+/=]+$/.test(inputText) && (inputText.length > 500));
+  const isDecodedImage = mode === 'decode' && (inputText.startsWith('data:image/') || (/^[a-zA-Z0-9+/=]+$/.test(inputText) && inputText.length > 500));
 
   return (
     <ToolPageWrapper toolId="base64">
-      <div className="space-y-6 font-sans">
-        <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-          
-          {/* Header */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-            <div className="text-left pr-2">
-              <h2 className="font-display text-xl font-bold text-gray-900 mb-2">Base64 Encoder & Decoder</h2>
-              <p className="text-sm text-gray-500">Encode files or standard strings to base64, or decode base64 hashes back into files or readable text format.</p>
-            </div>
-            
-            <button
+      <div className="tool-layout lg:grid-cols-2">
+        
+        {/* Input Panel */}
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center justify-between min-h-[36px]">
+            <span className="label">
+              {mode === 'encode' ? 'Raw Input (Text or Drag File)' : 'Base64 Hash Input'}
+            </span>
+            <Button
               id="base64-toggle-mode-btn"
+              variant="secondary"
+              size="xs"
               onClick={toggleMode}
-              className="shrink-0 whitespace-nowrap self-start sm:self-center px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold uppercase rounded-lg shadow-sm transition-all flex items-center gap-1.5 cursor-pointer"
+              leftIcon={<ArrowLeftRight size={14} />}
             >
-              <ArrowLeftRight className="w-3.5 h-3.5" />
               Switch to {mode === 'encode' ? 'Decode' : 'Encode'}
-            </button>
+            </Button>
           </div>
 
-          {/* Workspace Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            
-            {/* Input Panel */}
-            <div className="space-y-3 text-left">
-              <label className="font-sans text-[11px] font-bold text-gray-400 uppercase tracking-wider block">
-                {mode === 'encode' ? 'Raw Input (Text or Drag File)' : 'Base64 Hash Input'}
-              </label>
-              
-              <div 
-                onDragEnter={handleDrag}
-                onDragOver={handleDrag}
-                onDragLeave={handleDrag}
-                onDrop={handleDrop}
-                className={`relative flex flex-col rounded-xl border-2 border-dashed ${
-                  dragActive ? 'border-indigo-500 bg-indigo-50/20' : 'border-gray-200 bg-gray-50/20'
-                } p-2 transition-all`}
-              >
-                <textarea
-                  id="base64-input-textarea"
-                  rows={10}
-                  value={inputText}
-                  onChange={(e) => mode === 'encode' ? handleEncodeText(e.target.value) : handleDecodeText(e.target.value)}
-                  placeholder={mode === 'encode' ? 'Type or paste text to encode, or drag a file here...' : 'Paste Base64 string to decode...'}
-                  className="w-full bg-transparent p-4 border-0 outline-none text-xs font-mono leading-relaxed resize-none text-gray-800"
-                />
+          <div 
+            onDragEnter={handleDrag}
+            onDragOver={handleDrag}
+            onDragLeave={handleDrag}
+            onDrop={handleDrop}
+            className={`relative flex flex-col rounded-xl border-2 border-dashed transition-all overflow-hidden ${
+              dragActive ? 'border-primary bg-primary/5' : 'border-border-default bg-bg-surface-container-low'
+            }`}
+          >
+            <textarea
+              id="base64-input-textarea"
+              rows={10}
+              value={inputText}
+              onChange={(e) => mode === 'encode' ? handleEncodeText(e.target.value) : handleDecodeText(e.target.value)}
+              placeholder={mode === 'encode' ? 'Type or paste text to encode, or drag a file here...' : 'Paste Base64 string to decode...'}
+              className="w-full bg-transparent p-4 outline-none font-mono text-xs leading-relaxed resize-none text-text-primary placeholder:text-text-tertiary"
+            />
 
-                {/* Upload Overlay/Zone */}
-                {mode === 'encode' && (
-                  <div className="border-t border-gray-100 p-4 bg-gray-50/50 rounded-b-xl flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-medium text-gray-500">
-                    <div className="flex items-center gap-2">
-                      <Upload className="w-4 h-4 text-gray-400" />
-                      <span>Drag and drop any file here to encode to Base64 data URL</span>
-                    </div>
-                    <button
-                      id="base64-select-file-btn"
-                      onClick={() => fileInputRef.current?.click()}
-                      className="px-3 py-1.5 bg-white border border-gray-200 hover:bg-gray-100 hover:text-primary rounded-lg text-[10px] font-bold uppercase transition-all cursor-pointer"
-                    >
-                      Select File
-                    </button>
-                    <input
-                      ref={fileInputRef}
-                      type="file"
-                      onChange={handleFileChange}
-                      className="hidden"
-                    />
-                  </div>
-                )}
-              </div>
-
-              {fileName && (
-                <div className="p-3 bg-gray-50 rounded-lg flex items-center justify-between text-xs text-gray-600 font-medium">
-                  <div className="flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-primary" />
-                    <span className="font-semibold">{fileName}</span>
-                    <span className="text-gray-400">({fileSize})</span>
-                  </div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary px-2 py-0.5 rounded">
-                    {fileType?.split('/')[1] || 'binary'}
-                  </span>
+            {/* Upload Overlay/Zone */}
+            {mode === 'encode' && (
+              <div className="border-t border-border-default p-3 bg-bg-surface-container-lowest flex flex-wrap items-center justify-between gap-3 text-xs text-text-secondary">
+                <div className="flex items-center gap-2">
+                  <Upload size={14} className="text-text-tertiary shrink-0" />
+                  <span>Drag and drop any file here to encode to Base64</span>
                 </div>
-              )}
-            </div>
-
-            {/* Output Panel */}
-            <div className="space-y-3 text-left">
-              <div className="flex justify-between items-center mb-2.5">
-                <label className="font-sans text-[11px] font-bold text-gray-400 uppercase tracking-wider block">
-                  {mode === 'encode' ? 'Encoded Base64 Output' : 'Decoded Output'}
-                </label>
-                
-                {outputText && (
-                  <button
-                    id="base64-copy-output-btn"
-                    onClick={handleCopy}
-                    className="px-2.5 py-1.5 bg-gray-50 hover:bg-gray-100 border border-gray-100 text-gray-500 hover:text-primary rounded-lg text-[10px] font-bold uppercase transition-all flex items-center gap-1 cursor-pointer font-sans"
-                  >
-                    {copied ? <Check className="w-3.5 h-3.5 text-success-emerald" /> : <Clipboard className="w-3.5 h-3.5" />}
-                    {copied ? 'Copied' : 'Copy Output'}
-                  </button>
-                )}
-              </div>
-
-              {/* Special Image Decoding Output */}
-              {mode === 'decode' && (isImageOutput || isDecodedImage) ? (
-                <div className="rounded-xl border border-gray-200 p-5 bg-gray-50 flex flex-col items-center justify-center gap-4 min-h-[220px]">
-                  <ImageIcon className="w-8 h-8 text-primary opacity-80" />
-                  <div className="text-xs text-gray-500 font-semibold uppercase tracking-wider">Image detected in Base64 stream</div>
-                  
-                  <img 
-                    src={inputText.startsWith('data:') ? inputText : `data:image/png;base64,${inputText}`} 
-                    alt="Decoded preview" 
-                    className="max-h-48 max-w-xs object-contain rounded border border-gray-200 shadow-sm bg-white"
-                  />
-
-                  <a
-                    id="base64-download-img"
-                    href={inputText.startsWith('data:') ? inputText : `data:image/png;base64,${inputText}`}
-                    download="decoded_image.png"
-                    className="px-4 py-2 bg-primary text-white text-xs font-bold uppercase rounded-lg shadow-sm hover:bg-primary-container transition-all flex items-center gap-1.5 cursor-pointer font-sans"
-                  >
-                    <Download className="w-3.5 h-3.5" />
-                    Download Decoded Image
-                  </a>
-                </div>
-              ) : (
-                <textarea
-                  id="base64-output-textarea"
-                  readOnly
-                  rows={11}
-                  value={outputText}
-                  placeholder="Converted results will appear here..."
-                  className="w-full bg-slate-900 border border-slate-800 text-slate-100 rounded-xl p-4 font-mono text-xs leading-relaxed outline-none resize-none select-all break-all"
+                <Button
+                  id="base64-select-file-btn"
+                  variant="ghost"
+                  size="xs"
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  Select File
+                </Button>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  onChange={handleFileChange}
+                  className="hidden"
                 />
-              )}
-            </div>
-
+              </div>
+            )}
           </div>
 
+          {fileName && (
+            <div className="p-3 card flex items-center justify-between text-xs text-text-secondary font-medium">
+              <div className="flex items-center gap-2 overflow-hidden">
+                <FileText size={16} className="text-primary shrink-0" />
+                <span className="font-semibold text-text-primary truncate">{fileName}</span>
+                <span className="text-text-tertiary shrink-0">({fileSize})</span>
+              </div>
+              <span className="text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary px-2 py-0.5 rounded shrink-0">
+                {fileType?.split('/')[1] || 'binary'}
+              </span>
+            </div>
+          )}
         </div>
+
+        {/* Output Panel */}
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center justify-between min-h-[36px]">
+            <span className="label">
+              {mode === 'encode' ? 'Encoded Base64 Output' : 'Decoded Output'}
+            </span>
+            
+            {outputText && (
+              <CopyButton
+                text={outputText}
+                label="Copy Output"
+                size="xs"
+              />
+            )}
+          </div>
+
+          {/* Special Image Decoding Output */}
+          {mode === 'decode' && (isImageOutput || isDecodedImage) ? (
+            <div className="rounded-xl border border-border-default p-6 bg-bg-surface-container-low flex flex-col items-center justify-center gap-4 min-h-[280px]">
+              <ImageIcon size={32} className="text-primary opacity-80" />
+              <div className="text-xs text-text-secondary font-semibold uppercase tracking-wider">
+                Image detected in Base64 stream
+              </div>
+              
+              <img 
+                src={inputText.startsWith('data:') ? inputText : `data:image/png;base64,${inputText}`} 
+                alt="Decoded preview" 
+                className="max-h-48 max-w-xs object-contain rounded border border-border-default shadow-sm bg-bg-surface"
+              />
+
+              <a
+                id="base64-download-img"
+                href={inputText.startsWith('data:') ? inputText : `data:image/png;base64,${inputText}`}
+                download="decoded_image.png"
+                className="btn btn-primary btn-xs flex items-center gap-1.5 cursor-pointer"
+              >
+                <Download size={14} />
+                <span>Download Decoded Image</span>
+              </a>
+            </div>
+          ) : (
+            <Textarea
+              id="base64-output-textarea"
+              readOnly
+              rows={11}
+              variant="code"
+              value={outputText}
+              placeholder="Converted results will appear here..."
+              className="h-full select-all break-all"
+            />
+          )}
+        </div>
+
       </div>
     </ToolPageWrapper>
   );

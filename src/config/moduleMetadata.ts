@@ -83,6 +83,9 @@ export const MODULE_METADATA: Record<string, ModuleMetadata> = {
           'mutual-fund-calculator',
           'compound-interest-calculator',
           'simple-interest-calculator',
+          'lumpsum-calculator',
+          'swp-calculator',
+          'cagr-calculator',
           'stock-average-calculator',
           'savings-planner',
           'gold-investment-calculator',
@@ -152,11 +155,11 @@ export const MODULE_METADATA: Record<string, ModuleMetadata> = {
     categories: [
       {
         title: 'Code Formatters & Beautifiers',
-        toolIds: ['json-formatter', 'sql-formatter', 'xml-formatter', 'yaml-formatter'],
+        toolIds: ['json-formatter', 'sql-formatter', 'json-csv-converter'],
       },
       {
         title: 'Encoders, Decoders & Parsers',
-        toolIds: ['base64', 'url-encoder', 'html-entities', 'hex-encoder'],
+        toolIds: ['base64', 'url-encoder', 'html-entity-encoder', 'url-parser'],
       },
       {
         title: 'Cryptography & Security Utilities',
@@ -179,6 +182,7 @@ export const MODULE_METADATA: Record<string, ModuleMetadata> = {
           'gradient-generator',
           'cron-builder',
           'markdown-preview',
+          'chmod-calculator',
         ],
       },
     ],

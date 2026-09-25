@@ -1,12 +1,8 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  RefreshCw, 
-  Clipboard, 
-  CheckCircle2, 
-  Info
-} from 'lucide-react';
+import { RefreshCw, CheckCircle2, Info } from 'lucide-react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
+import { Button, CopyButton } from '@/components/ui';
 
 export default function PasswordGenerator() {
   const [password, setPassword] = useState('');
@@ -16,7 +12,6 @@ export default function PasswordGenerator() {
   const [includeNumbers, setIncludeNumbers] = useState(true);
   const [includeSymbols, setIncludeSymbols] = useState(true);
   const [excludeSimilar, setExcludeSimilar] = useState(false);
-  
   const [copied, setCopied] = useState(false);
 
   // Password Generation Matrix
@@ -28,9 +23,9 @@ export default function PasswordGenerator() {
     let symbolChars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
 
     if (excludeSimilar) {
-      uppercaseChars = 'ABCDEFGHJKLMNPQRSTUVWXYZ'; // Exclude I, O
-      lowercaseChars = 'abcdefghijkmnopqrstuvwxyz'; // Exclude l
-      numberChars = '23456789'; // Exclude 0, 1
+      uppercaseChars = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
+      lowercaseChars = 'abcdefghijkmnopqrstuvwxyz';
+      numberChars = '23456789';
       symbolChars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
     }
 
@@ -72,13 +67,6 @@ export default function PasswordGenerator() {
     generatePassword();
   }, [generatePassword]);
 
-  const copyToClipboard = () => {
-    if (password === 'Select at least one option') return;
-    navigator.clipboard.writeText(password);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
   const strengthInfo = useMemo(() => {
     if (password === 'Select at least one option') {
       return { score: 0, label: 'Invalid Options', color: 'bg-gray-200', text: 'text-gray-400', entropy: 0 };
@@ -111,15 +99,15 @@ export default function PasswordGenerator() {
     } else if (score === 3) {
       label = 'Good / Decent';
       color = 'bg-amber-400';
-      text = 'text-amber-600';
+      text = 'text-amber-600 dark:text-amber-400';
     } else if (score === 4) {
       label = 'Strong / Secure';
       color = 'bg-emerald-500';
-      text = 'text-emerald-600';
+      text = 'text-emerald-600 dark:text-emerald-400';
     } else if (score === 5) {
       label = 'Military-Grade';
-      color = 'bg-indigo-600';
-      text = 'text-indigo-650 text-primary';
+      color = 'bg-primary';
+      text = 'text-primary';
     }
 
     return { score, label, color, text, entropy };
@@ -127,23 +115,25 @@ export default function PasswordGenerator() {
 
   return (
     <ToolPageWrapper toolId="password-generator">
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden grid grid-cols-1 lg:grid-cols-12 font-sans">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 w-full font-sans text-left">
         
-        {/* LEFT COLUMN: Parameters */}
-        <div className="lg:col-span-5 p-8 bg-gray-50/50 border-r border-gray-100 space-y-6">
-          <div className="space-y-1 text-left">
-            <span className="text-[10px] font-bold text-primary tracking-wider uppercase bg-primary/10 px-2 py-0.5 rounded-full">SECURITY NODE</span>
-            <h2 className="font-display text-xl font-bold text-gray-900">Secure Key Architect</h2>
-            <p className="text-xs text-gray-500 font-medium">Configure customized cryptographic entropy keys matching extreme corporate compliance models.</p>
+        {/* LEFT PANEL CARD: Parameters (5 cols) */}
+        <div className="lg:col-span-5 bg-bg-surface p-6 md:p-8 rounded-2xl border border-border-default shadow-sm flex flex-col justify-between gap-6 min-w-0">
+          <div className="space-y-2">
+            <span className="text-[10px] font-bold text-primary tracking-wider uppercase bg-primary/10 px-2.5 py-1 rounded-full inline-block">
+              SECURITY NODE
+            </span>
+            <p className="text-xs text-text-secondary font-medium pt-1 leading-relaxed">
+              Configure customized cryptographic entropy keys matching corporate compliance models.
+            </p>
           </div>
 
-          <div className="space-y-4 pt-2">
-            
-            {/* Length Slider */}
-            <div className="space-y-2 text-left">
+          <div className="space-y-5">
+            {/* Length Slider Container */}
+            <div className="p-4 bg-bg-surface-container-low rounded-xl border border-border-default space-y-3">
               <div className="flex justify-between items-center text-xs">
-                <span className="font-bold text-gray-700">Password Length</span>
-                <span className="font-mono font-bold text-primary">{length} Characters</span>
+                <span className="font-bold text-text-primary">Password Length</span>
+                <span className="font-mono font-bold text-primary text-sm">{length} Characters</span>
               </div>
               <input
                 type="range"
@@ -151,17 +141,16 @@ export default function PasswordGenerator() {
                 max="64"
                 value={length}
                 onChange={(e) => setLength(parseInt(e.target.value))}
-                className="w-full accent-primary h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                className="w-full accent-primary h-2 bg-border-default rounded-lg appearance-none cursor-pointer"
               />
             </div>
 
             {/* Checklist checkboxes */}
-            <div className="space-y-3.5 pt-2">
-              
-              <label className="flex items-center justify-between cursor-pointer group">
-                <div className="space-y-0.5 text-left">
-                  <span className="text-xs font-bold text-gray-800 block">Include Uppercase Letters</span>
-                  <span className="text-[10px] text-gray-400 font-mono">A-Z characters (e.g. G, T, R)</span>
+            <div className="space-y-2.5">
+              <label className="flex items-center justify-between p-3 bg-bg-surface-container-low hover:bg-bg-elevated rounded-xl border border-border-default transition-all cursor-pointer group">
+                <div className="space-y-0.5">
+                  <span className="text-xs font-bold text-text-primary block">Include Uppercase Letters</span>
+                  <span className="text-[10px] text-text-tertiary font-mono">A-Z characters</span>
                 </div>
                 <input
                   type="checkbox"
@@ -171,10 +160,10 @@ export default function PasswordGenerator() {
                 />
               </label>
 
-              <label className="flex items-center justify-between cursor-pointer group">
-                <div className="space-y-0.5 text-left">
-                  <span className="text-xs font-bold text-gray-800 block">Include Lowercase Letters</span>
-                  <span className="text-[10px] text-gray-400 font-mono">a-z characters (e.g. k, p, w)</span>
+              <label className="flex items-center justify-between p-3 bg-bg-surface-container-low hover:bg-bg-elevated rounded-xl border border-border-default transition-all cursor-pointer group">
+                <div className="space-y-0.5">
+                  <span className="text-xs font-bold text-text-primary block">Include Lowercase Letters</span>
+                  <span className="text-[10px] text-text-tertiary font-mono">a-z characters</span>
                 </div>
                 <input
                   type="checkbox"
@@ -184,10 +173,10 @@ export default function PasswordGenerator() {
                 />
               </label>
 
-              <label className="flex items-center justify-between cursor-pointer group">
-                <div className="space-y-0.5 text-left">
-                  <span className="text-xs font-bold text-gray-800 block">Include Numeric Digits</span>
-                  <span className="text-[10px] text-gray-400 font-mono">0-9 integers (e.g. 5, 8, 2)</span>
+              <label className="flex items-center justify-between p-3 bg-bg-surface-container-low hover:bg-bg-elevated rounded-xl border border-border-default transition-all cursor-pointer group">
+                <div className="space-y-0.5">
+                  <span className="text-xs font-bold text-text-primary block">Include Numeric Digits</span>
+                  <span className="text-[10px] text-text-tertiary font-mono">0-9 integers</span>
                 </div>
                 <input
                   type="checkbox"
@@ -197,10 +186,10 @@ export default function PasswordGenerator() {
                 />
               </label>
 
-              <label className="flex items-center justify-between cursor-pointer group">
-                <div className="space-y-0.5 text-left">
-                  <span className="text-xs font-bold text-gray-800 block">Include Special Symbols</span>
-                  <span className="text-[10px] text-gray-400 font-mono">Punctuation (e.g. @, #, $, &)</span>
+              <label className="flex items-center justify-between p-3 bg-bg-surface-container-low hover:bg-bg-elevated rounded-xl border border-border-default transition-all cursor-pointer group">
+                <div className="space-y-0.5">
+                  <span className="text-xs font-bold text-text-primary block">Include Special Symbols</span>
+                  <span className="text-[10px] text-text-tertiary font-mono">Punctuation (@, #, $, &)</span>
                 </div>
                 <input
                   type="checkbox"
@@ -210,49 +199,40 @@ export default function PasswordGenerator() {
                 />
               </label>
 
-              <div className="pt-2 border-t border-gray-100">
-                <label className="flex items-center justify-between cursor-pointer group">
-                  <div className="space-y-0.5 text-left">
-                    <span className="text-xs font-bold text-gray-700 block">Avoid Similar Characters</span>
-                    <span className="text-[10px] text-gray-400 font-medium">Excludes lookalikes (i, l, 1, o, 0, O)</span>
-                  </div>
-                  <input
-                    type="checkbox"
-                    checked={excludeSimilar}
-                    onChange={() => setExcludeSimilar(!excludeSimilar)}
-                    className="w-4 h-4 rounded text-primary focus:ring-primary accent-primary cursor-pointer"
-                  />
-                </label>
-              </div>
-
+              <label className="flex items-center justify-between p-3 bg-bg-surface-container-low hover:bg-bg-elevated rounded-xl border border-border-default transition-all cursor-pointer group">
+                <div className="space-y-0.5">
+                  <span className="text-xs font-bold text-text-primary block">Avoid Similar Characters</span>
+                  <span className="text-[10px] text-text-tertiary font-medium">Excludes (i, l, 1, o, 0, O)</span>
+                </div>
+                <input
+                  type="checkbox"
+                  checked={excludeSimilar}
+                  onChange={() => setExcludeSimilar(!excludeSimilar)}
+                  className="w-4 h-4 rounded text-primary focus:ring-primary accent-primary cursor-pointer"
+                />
+              </label>
             </div>
-
           </div>
         </div>
 
-        {/* RIGHT COLUMN: Output display & metrics */}
-        <div className="lg:col-span-7 p-8 flex flex-col justify-between space-y-6 text-left">
-          
-          <div className="flex justify-between items-center border-b border-gray-100 pb-2">
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Active Secret Key</span>
-            <div className="flex items-center gap-1.5 text-xs text-emerald-600 font-bold">
-              <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-              Active Decryption Shield
+        {/* RIGHT PANEL CARD: Output display & metrics (7 cols) */}
+        <div className="lg:col-span-7 bg-bg-surface p-6 md:p-8 rounded-2xl border border-border-default shadow-sm flex flex-col justify-between gap-6 min-w-0">
+          <div className="flex justify-between items-center border-b border-border-default pb-4 min-w-0">
+            <span className="text-xs font-bold text-text-tertiary uppercase tracking-wider shrink-0">Active Secret Key</span>
+            <div className="flex items-center gap-1.5 text-xs text-emerald-600 dark:text-emerald-400 font-bold shrink-0">
+              <CheckCircle2 size={16} className="text-emerald-500" />
+              <span>Decryption Shield Active</span>
             </div>
           </div>
 
-          <div className="space-y-4">
-            <div className="relative">
-              <div className="w-full bg-slate-900 border border-slate-800 rounded-xl px-5 py-4 font-mono text-base md:text-lg font-bold text-white pr-12 break-all text-center tracking-wide shadow-inner select-all">
+          <div className="space-y-4 min-w-0">
+            <div className="relative flex items-center bg-slate-900 border border-slate-800 rounded-xl px-5 py-4 shadow-inner overflow-hidden min-w-0">
+              <div className="w-full font-mono text-base md:text-lg font-bold text-slate-100 pr-12 break-all text-center tracking-wide select-all overflow-hidden">
                 {password}
               </div>
-              <button
-                onClick={copyToClipboard}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 p-2 rounded-lg bg-slate-800 text-slate-400 hover:text-white cursor-pointer hover:bg-slate-700 transition-colors"
-                title="Copy keys"
-              >
-                <Clipboard className="w-4 h-4" />
-              </button>
+              <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                <CopyButton text={password} size="sm" variant="ghost" />
+              </div>
             </div>
 
             <AnimatePresence>
@@ -261,42 +241,42 @@ export default function PasswordGenerator() {
                   initial={{ opacity: 0, y: -5 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -5 }}
-                  className="bg-emerald-500/10 text-emerald-600 border border-emerald-500/15 text-xs font-semibold px-4 py-2 rounded-lg text-center"
+                  className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 text-xs font-semibold px-4 py-2.5 rounded-lg text-center"
                 >
-                  Key hash successfully copied to clipboard system!
+                  Key hash copied to clipboard!
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
 
           {/* Strength indicators */}
-          <div className="space-y-4 p-4.5 bg-gray-50 border border-gray-100 rounded-xl">
-            <div className="flex justify-between items-center text-xs">
-              <span className="font-bold text-gray-500 uppercase tracking-wider">Entropy Security Index</span>
-              <span className={`font-mono font-bold text-[13px] ${strengthInfo.text} uppercase`}>
+          <div className="space-y-4 p-5 bg-bg-surface-container-low border border-border-default rounded-xl min-w-0">
+            <div className="flex justify-between items-center text-xs min-w-0 gap-2">
+              <span className="font-bold text-text-secondary uppercase tracking-wider truncate">Entropy Security Index</span>
+              <span className={`font-mono font-bold text-[13px] ${strengthInfo.text} uppercase shrink-0`}>
                 {strengthInfo.label}
               </span>
             </div>
 
-            <div className="grid grid-cols-5 gap-1.5">
+            <div className="grid grid-cols-5 gap-2">
               {[1, 2, 3, 4, 5].map((idx) => (
-                <div 
+                <div
                   key={idx}
-                  className={`h-2 rounded-full transition-all duration-500 ${
-                    idx <= strengthInfo.score ? strengthInfo.color : 'bg-gray-200'
+                  className={`h-2.5 rounded-full transition-all duration-500 ${
+                    idx <= strengthInfo.score ? strengthInfo.color : 'bg-border-default'
                   }`}
                 />
               ))}
             </div>
 
-            <div className="grid grid-cols-2 gap-4 pt-2 font-mono text-[10px] text-gray-500 font-medium">
-              <div className="space-y-0.5 text-left">
+            <div className="grid grid-cols-2 gap-4 pt-2 font-mono text-[10px] text-text-tertiary font-medium min-w-0">
+              <div className="space-y-1">
                 <span>SHANNON ENTROPY</span>
-                <span className="block text-gray-800 font-bold text-xs">{strengthInfo.entropy} Bits</span>
+                <span className="block text-text-primary font-bold text-xs">{strengthInfo.entropy} Bits</span>
               </div>
-              <div className="space-y-0.5 text-left">
-                <span>TIME TO CRACK</span>
-                <span className="block text-gray-800 font-bold text-xs">
+              <div className="space-y-1">
+                <span>ESTIMATED CRACK TIME</span>
+                <span className="block text-text-primary font-bold text-xs truncate">
                   {strengthInfo.score === 1 && '~3 minutes'}
                   {strengthInfo.score === 2 && '~6 hours'}
                   {strengthInfo.score === 3 && '~14 days'}
@@ -308,21 +288,22 @@ export default function PasswordGenerator() {
           </div>
 
           {/* Actions */}
-          <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
-            <div className="flex items-center gap-1 text-[10px] text-gray-400 font-semibold leading-none">
-              <Info className="w-3.5 h-3.5 text-primary shrink-0" />
+          <div className="pt-4 border-t border-border-default flex flex-wrap items-center justify-between gap-4 min-w-0">
+            <div className="flex items-center gap-1.5 text-[11px] text-text-tertiary font-medium">
+              <Info size={14} className="text-primary shrink-0" />
               <span>Cryptographically random calculations run fully client-side.</span>
             </div>
-            <button
+            <Button
+              variant="primary"
+              size="xs"
               onClick={generatePassword}
-              className="flex items-center gap-1.5 text-xs text-primary font-bold uppercase cursor-pointer hover:text-primary-container"
+              leftIcon={<RefreshCw size={14} />}
             >
-              <RefreshCw className="w-4 h-4 animate-hover-spin" />
-              Regenerate key
-            </button>
+              Regenerate Key
+            </Button>
           </div>
-
         </div>
+
       </div>
     </ToolPageWrapper>
   );

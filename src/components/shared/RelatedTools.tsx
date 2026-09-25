@@ -79,7 +79,7 @@ export function RelatedTools({ toolIds }: RelatedToolsProps) {
             <button
               onClick={scrollRight}
               aria-label="Scroll right"
-              className="absolute -right-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border bg-bg-elevated border-border-default text-text-secondary shadow-lg flex items-center justify-center transition-all hover:shadow-xl hover:scale-105 z-10"
+              className="absolute right-1 md:-right-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border bg-bg-elevated border-border-default text-text-secondary shadow-lg flex items-center justify-center transition-all hover:shadow-xl hover:scale-105 z-10"
             >
               <svg
                 className="w-5 h-5"

@@ -32,7 +32,7 @@ export default function FuelCostCalculator() {
         <div className="space-y-6">
           <Card className="space-y-6">
             <div
-              className="flex justify-between items-center border-b pb-4"
+              className="flex flex-wrap gap-3 justify-between items-center border-b pb-4"
               style={{ borderColor: 'var(--border-subtle)' }}
             >
               <h2 className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>

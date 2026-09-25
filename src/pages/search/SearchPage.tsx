@@ -189,7 +189,7 @@ export default function SearchPage() {
                             : 'bg-[var(--bg-surface)] text-[var(--text-tertiary)]'
                         )}
                       >
-                        {mod.toolCount}
+                        {TOOLS.filter((t) => t.module === mod.key).length}
                       </span>
                     </button>
                   );
