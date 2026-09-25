@@ -1,8 +1,8 @@
-import { useState, useMemo, useRef } from 'react';
+import { useState, useMemo } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
-import { Button, Card, CopyButton, Textarea } from '@/components/ui';
+import { MarkdownWorkspace } from '@/components/markdown/MarkdownWorkspace';
 import { renderMarkdown } from '@/utils/markdown';
-import { Printer, Code, Eye, FileText } from 'lucide-react';
+import { Printer } from 'lucide-react';
 
 export default function MarkdownToPdf() {
   const [markdown, setMarkdown] = useState(`# Project Status Report
@@ -23,10 +23,8 @@ This is a standard project status report generated dynamically from Markdown. Yo
 ## Notes
 All computations happen *locally* within the browser, keeping your documentation fully private and secure.`);
 
-  const [activeTab, setActiveTab] = useState<'editor' | 'preview'>('editor');
   const [pageSize, setPageSize] = useState<'A4' | 'Letter'>('A4');
   const [orientation, setOrientation] = useState<'portrait' | 'landscape'>('portrait');
-  const previewRef = useRef<HTMLIFrameElement>(null);
 
   const htmlContent = useMemo(() => renderMarkdown(markdown), [markdown]);
 
@@ -173,118 +171,43 @@ All computations happen *locally* within the browser, keeping your documentation
 
   return (
     <ToolPageWrapper toolId="markdown-to-pdf">
-      <div className="flex flex-col gap-6">
-        {/* Top Control Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-4 p-4 border rounded-xl bg-[var(--bg-surface)] border-[var(--border-default)]">
-          <div className="flex items-center gap-2 flex-wrap">
-            <button
-              onClick={() => setActiveTab('editor')}
-              className={`flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg transition-colors ${
-                activeTab === 'editor'
-                  ? 'bg-[var(--primary)] text-white'
-                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
-              }`}
-            >
-              <Code size={16} />
-              Markdown Editor
-            </button>
-            <button
-              onClick={() => setActiveTab('preview')}
-              className={`flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg transition-colors ${
-                activeTab === 'preview'
-                  ? 'bg-[var(--primary)] text-white'
-                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
-              }`}
-            >
-              <Eye size={16} />
-              Live Preview
-            </button>
-          </div>
-
-          <div className="flex items-center gap-4 flex-wrap">
-            {/* Page Size Selection */}
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>Page:</span>
-              <select
-                value={pageSize}
-                onChange={(e) => setPageSize(e.target.value as 'A4' | 'Letter')}
-                className="text-xs p-1.5 border rounded-md bg-[var(--bg-base)] text-[var(--text-primary)] border-[var(--border-default)] outline-none"
-              >
+      <div className="flex flex-col gap-4">
+        <div className="sk-mdw__bar sk-mdw__settings">
+          <div className="sk-mdw__actions">
+            <label className="sk-mdw__field">
+              <span>Page</span>
+              <select value={pageSize} onChange={(e) => setPageSize(e.target.value as 'A4' | 'Letter')} className="input-base">
                 <option value="A4">A4</option>
                 <option value="Letter">Letter</option>
               </select>
-            </div>
-
-            {/* Page Orientation Selection */}
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>Orient:</span>
+            </label>
+            <label className="sk-mdw__field">
+              <span>Orientation</span>
               <select
                 value={orientation}
                 onChange={(e) => setOrientation(e.target.value as 'portrait' | 'landscape')}
-                className="text-xs p-1.5 border rounded-md bg-[var(--bg-base)] text-[var(--text-primary)] border-[var(--border-default)] outline-none"
+                className="input-base"
               >
                 <option value="portrait">Portrait</option>
                 <option value="landscape">Landscape</option>
               </select>
-            </div>
-
-            <Button variant="secondary" size="sm" onClick={() => setMarkdown('')} disabled={!markdown}>
-              Clear
-            </Button>
-            <Button
-              variant="primary"
-              size="sm"
-              onClick={handlePrint}
-              disabled={!markdown}
-              className="flex items-center gap-2"
-            >
-              <Printer size={16} />
-              Print / Save as PDF
-            </Button>
+            </label>
           </div>
+          <button type="button" className="btn btn-primary" onClick={handlePrint} disabled={!markdown.trim()}>
+            <Printer size={16} aria-hidden="true" /> Print / Save as PDF
+          </button>
         </div>
 
-        {/* Core Editor / Preview Container */}
-        {activeTab === 'editor' ? (
-          <Card
-            className="flex flex-col gap-4"
-            style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}
-          >
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-bold flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
-                <FileText size={16} />
-                Markdown Code
-              </span>
-              <CopyButton text={markdown} size="sm" />
-            </div>
-            <Textarea
-              value={markdown}
-              onChange={(e) => setMarkdown(e.target.value)}
-              placeholder="Write your markdown document here..."
-              rows={18}
-              className="font-mono text-xs w-full p-3 border rounded-lg bg-[var(--bg-base)] text-[var(--text-primary)] border-[var(--border-default)] outline-none focus:border-[var(--primary)]"
-            />
-          </Card>
-        ) : (
-          <Card
-            className="flex flex-col h-[550px] p-0 overflow-hidden"
-            style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-default)' }}
-          >
-            <div className="p-3 border-b flex items-center justify-between bg-[var(--bg-surface)] border-[var(--border-default)]">
-              <span className="text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>
-                Styled PDF Document Preview
-              </span>
-              <CopyButton text={htmlContent} label="Copy HTML Output" size="sm" />
-            </div>
-            <iframe
-              ref={previewRef}
-              srcDoc={iframeSrcDoc}
-              title="Markdown PDF Sandbox Preview"
-              className="flex-1 w-full border-none bg-white"
-              sandbox="allow-same-origin"
-            />
-          </Card>
-        )}
+        <MarkdownWorkspace
+          value={markdown}
+          onChange={setMarkdown}
+          defaultFilename="document.md"
+          copyText={htmlContent}
+          copyLabel="Copy HTML"
+          previewTitle="PDF preview"
+          previewFlush
+          preview={<iframe srcDoc={iframeSrcDoc} title="PDF preview" sandbox="allow-same-origin" />}
+        />
       </div>
     </ToolPageWrapper>
   );

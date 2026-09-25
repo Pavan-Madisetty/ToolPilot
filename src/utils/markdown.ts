@@ -85,6 +85,6 @@ export function handleAnchorClick(e: { target: EventTarget | null; preventDefaul
     e.preventDefault();
     const id = decodeURIComponent(href.slice(1));
     const el = container.querySelector(`[id="${CSS.escape(id)}"]`) as HTMLElement | null;
-    if (el) container.scrollTo({ top: el.offsetTop - container.offsetTop - 8, behavior: 'smooth' });
+    if (el) container.scrollTo({ top: Math.max(0, el.offsetTop - 12), behavior: 'smooth' });
   }
 }

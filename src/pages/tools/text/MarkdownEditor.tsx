@@ -1,47 +1,24 @@
-import { useState, useMemo, useRef } from 'react';
-import { renderMarkdown, handleAnchorClick } from '@/utils/markdown';
+import { useState, useMemo } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
-import { CopyButton, Textarea } from '@/components/ui';
+import { MarkdownWorkspace } from '@/components/markdown/MarkdownWorkspace';
+import { renderMarkdown } from '@/utils/markdown';
+
+const SAMPLE =
+  '# Hello Toolskyt\n\nWrite Markdown on the left, or **Open file** to edit an existing `.md` document.\n\n- Free tools\n- Works offline\n- Your text never leaves the browser\n\n**Have fun compiling markdown!**\n';
 
 export default function MarkdownEditor() {
-  const [markdown, setMarkdown] = useState(
-    '# Hello Toolskyt\n\n- Free tools\n- Works offline\n\n**Have fun compiling markdown!**'
-  );
-
-  const htmlPreview = useMemo(() => renderMarkdown(markdown), [markdown]);
-  const previewRef = useRef<HTMLDivElement>(null);
+  const [markdown, setMarkdown] = useState(SAMPLE);
+  const html = useMemo(() => renderMarkdown(markdown), [markdown]);
 
   return (
     <ToolPageWrapper toolId="markdown-editor">
-      <div className="tool-layout lg:grid-cols-2">
-        {/* Editor panel */}
-        <Textarea
-          label="Markdown Input"
-          value={markdown}
-          onChange={(e) => setMarkdown(e.target.value)}
-          className="font-mono text-xs leading-relaxed h-[360px] resize-none"
-          aria-label="Markdown content input"
-        />
-
-        {/* Live Preview panel */}
-        <div className="flex flex-col gap-2">
-          <div className="flex items-center justify-between">
-            <span className="label">Preview Render</span>
-            {htmlPreview && <CopyButton text={htmlPreview} label="Copy HTML" />}
-          </div>
-          <div
-            ref={previewRef}
-            onClick={(e) => handleAnchorClick(e, previewRef.current)}
-            dangerouslySetInnerHTML={{ __html: htmlPreview }}
-            className="sk-md input-base overflow-y-auto h-[360px] max-w-none p-4"
-            style={{
-              borderColor: 'var(--border-default)',
-              background: 'var(--bg-surface)',
-            }}
-            aria-label="HTML preview output"
-          />
-        </div>
-      </div>
+      <MarkdownWorkspace
+        value={markdown}
+        onChange={setMarkdown}
+        copyText={html}
+        previewTitle="Preview"
+        preview={<div className="sk-md" dangerouslySetInnerHTML={{ __html: html }} />}
+      />
     </ToolPageWrapper>
   );
 }
