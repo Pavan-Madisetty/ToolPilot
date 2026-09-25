@@ -111,7 +111,7 @@ export default function LoanEligibilityCalculator() {
             </h3>
             <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
               Banks generally limit your total debt repayment obligation (current EMIs + new EMI) to
-              **50%** of your net monthly income.
+              <strong>50%</strong> of your net monthly income.
             </p>
             <div className="space-y-2.5">
               <div

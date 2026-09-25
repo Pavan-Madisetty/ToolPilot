@@ -148,7 +148,7 @@ function SignatureCanvas({ value, onChange }: SignatureCanvasProps) {
         <button
           type="button"
           onClick={handleClear}
-          className="absolute bottom-2 right-2 px-2 py-1 bg-white hover:bg-slate-100 text-slate-500 hover:text-slate-800 text-xs rounded border border-slate-200 shadow-sm cursor-pointer transition-colors"
+          className="absolute bottom-2 right-2 px-2 py-1 bg-bg-elevated hover:bg-slate-100 text-slate-500 hover:text-slate-800 text-xs rounded border border-slate-200 shadow-sm cursor-pointer transition-colors"
         >
           Clear
         </button>
@@ -385,7 +385,7 @@ export default function InvoiceGenerator() {
                         ? 'bg-[var(--primary)] text-white ring-4 ring-primary-subtle'
                         : isCompleted
                         ? 'bg-green-600 text-white'
-                        : 'bg-white dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-700 text-slate-500'
+                        : 'bg-bg-elevated dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-700 text-slate-500'
                     }`}
                   >
                     <span className="leading-none">{isCompleted ? '✓' : idx + 1}</span>
@@ -744,7 +744,7 @@ export default function InvoiceGenerator() {
                             <img
                               src={signatureImage}
                               alt="Signature preview"
-                              className="max-h-24 object-contain bg-white p-2 rounded border"
+                              className="max-h-24 object-contain bg-bg-elevated p-2 rounded border"
                               style={{ borderColor: 'var(--border-default)' }}
                             />
                             <Button
@@ -838,7 +838,7 @@ export default function InvoiceGenerator() {
               className="relative w-full max-w-5xl bg-slate-100 dark:bg-slate-900 rounded-2xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden border border-slate-200 dark:border-slate-800"
             >
               {/* Sticky Header */}
-              <div className="flex justify-between items-center px-6 py-4 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 shrink-0">
+              <div className="flex justify-between items-center px-6 py-4 bg-bg-elevated dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 shrink-0">
                 <h3 className="text-lg font-bold text-slate-800 dark:text-slate-150">
                   Invoice Preview (A4 Size)
                 </h3>
@@ -867,7 +867,7 @@ export default function InvoiceGenerator() {
                 {/* simulated A4 page */}
                 <div
                   id="printable-invoice"
-                  className="theme-paper w-full max-w-3xl bg-white shadow-xl text-left text-slate-800 border border-slate-200/80 box-border p-8 md:p-12 mx-auto rounded-xl flex flex-col min-h-[1000px]"
+                  className="theme-paper w-full max-w-3xl bg-bg-elevated shadow-xl text-left text-slate-800 border border-slate-200/80 box-border p-8 md:p-12 mx-auto rounded-xl flex flex-col min-h-[1000px]"
                 >
                     {/* Invoice Header */}
                     <div className="flex flex-col sm:flex-row justify-between items-start gap-4 pb-6 border-b border-slate-200">

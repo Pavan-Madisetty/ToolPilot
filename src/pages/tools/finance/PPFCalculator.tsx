@@ -162,7 +162,7 @@ export default function PPFCalculator() {
             </h3>
             <p className="text-xs text-slate-500 dark:text-slate-400">
               PPF interest rate is regulated by the Government of India and is currently set at
-              **7.1% p.a.** (compounded annually).
+              <strong>7.1% p.a.</strong> (compounded annually).
             </p>
           </div>
         </div>

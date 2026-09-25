@@ -114,6 +114,7 @@ export function Dropzone({
       >
         <input
           type="file"
+          aria-label="Choose file" tabIndex={-1}
           ref={fileInputRef}
           onChange={handleFileChange}
           accept={accept}

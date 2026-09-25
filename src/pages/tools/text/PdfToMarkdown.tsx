@@ -117,6 +117,7 @@ export default function PdfToMarkdown() {
           >
             <input
               type="file"
+              aria-label="Choose file" tabIndex={-1}
               ref={fileInputRef}
               onChange={handleFileChange}
               accept="application/pdf"

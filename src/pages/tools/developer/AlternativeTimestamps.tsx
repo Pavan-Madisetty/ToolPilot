@@ -201,9 +201,9 @@ export default function AlternativeTimestamps() {
           <section className="lg:col-span-8 space-y-6">
             
             {/* Main Input Box */}
-            <div className="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm transition-all duration-200">
+            <div className="bg-bg-elevated p-6 md:p-8 rounded-2xl border border-border-default shadow-sm transition-all duration-200">
               <div className="flex flex-col gap-4">
-                <label className="font-sans text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+                <label className="font-sans text-[11px] font-bold text-text-secondary uppercase tracking-wider">
                   Input Timestamp or Date String
                 </label>
                 
@@ -215,11 +215,11 @@ export default function AlternativeTimestamps() {
                       value={inputValue}
                       onChange={(e) => handleInputChange(e.target.value)}
                       placeholder="e.g., 1715842800 or 2024-05-16T07:00:00Z"
-                      className={`w-full h-14 bg-gray-50/50 px-4 pr-16 py-3 rounded-lg border ${
+                      className={`w-full h-14 bg-bg-inset/50 px-4 pr-16 py-3 rounded-lg border ${
                         isError 
                           ? 'border-red-200 focus:ring-red-100 focus:border-red-400' 
-                          : 'border-gray-200 focus:ring-2 focus:ring-primary/10 focus:border-primary'
-                      } outline-none transition-all text-sm font-sans font-medium text-gray-900`}
+                          : 'border-border-default focus:ring-2 focus:ring-primary/10 focus:border-primary'
+                      } outline-none transition-all text-sm font-sans font-medium text-text-primary`}
                     />
                     <button 
                       id="input-paste-btn"
@@ -259,26 +259,26 @@ export default function AlternativeTimestamps() {
                   </div>
 
                   {/* Preset Fast Actions */}
-                  <div className="flex gap-2 text-[10px] font-bold uppercase text-gray-400">
+                  <div className="flex gap-2 text-[10px] font-bold uppercase text-text-tertiary">
                     <span className="self-center">Presets:</span>
                     <button 
                       id="preset-current-btn"
                       onClick={() => handleInputChange(Math.floor(Date.now() / 1000).toString())}
-                      className="px-2 py-1 bg-gray-50 hover:bg-primary/5 hover:text-primary rounded transition-colors cursor-pointer border border-gray-100"
+                      className="px-2 py-1 bg-bg-inset hover:bg-primary/5 hover:text-primary rounded transition-colors cursor-pointer border border-border-default"
                     >
                       Now
                     </button>
                     <button 
                       id="preset-epoch-btn"
                       onClick={() => handleInputChange('1715842800')}
-                      className="px-2 py-1 bg-gray-50 hover:bg-primary/5 hover:text-primary rounded transition-colors cursor-pointer border border-gray-100"
+                      className="px-2 py-1 bg-bg-inset hover:bg-primary/5 hover:text-primary rounded transition-colors cursor-pointer border border-border-default"
                     >
                       Epoch Sample
                     </button>
                     <button 
                       id="preset-iso-btn"
                       onClick={() => handleInputChange('2024-05-16T07:00:00Z')}
-                      className="px-2 py-1 bg-gray-50 hover:bg-primary/5 hover:text-primary rounded transition-colors cursor-pointer border border-gray-100"
+                      className="px-2 py-1 bg-bg-inset hover:bg-primary/5 hover:text-primary rounded transition-colors cursor-pointer border border-border-default"
                     >
                       ISO Sample
                     </button>
@@ -291,101 +291,101 @@ export default function AlternativeTimestamps() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               
               {/* Unix Seconds Card */}
-              <div className="bg-white p-5 rounded-xl border border-gray-100 hover:border-primary/50 hover:shadow-md transition-all duration-200 group relative">
+              <div className="bg-bg-elevated p-5 rounded-xl border border-border-default hover:border-primary/50 hover:shadow-md transition-all duration-200 group relative">
                 <div className="flex justify-between items-center mb-3">
-                  <span className="font-sans text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+                  <span className="font-sans text-[11px] font-bold text-text-secondary uppercase tracking-wider">
                     Unix Seconds
                   </span>
                   <button 
                     id="copy-unix-seconds-btn"
                     onClick={() => handleCopy(results.unixSec, 'unixSec')}
-                    className="p-1.5 rounded-lg text-gray-400 hover:text-primary hover:bg-gray-50 transition-all cursor-pointer"
+                    className="p-1.5 rounded-lg text-text-tertiary hover:text-primary hover:bg-bg-inset transition-all cursor-pointer"
                     title="Copy Unix seconds"
                   >
                     {copiedStates.unixSec ? <Check className="w-4 h-4 text-success-emerald" /> : <Clipboard className="w-4 h-4" />}
                   </button>
                 </div>
-                <div className="font-mono text-xl md:text-2xl font-bold text-gray-900 select-all overflow-x-auto whitespace-nowrap scrollbar-none">
+                <div className="font-mono text-xl md:text-2xl font-bold text-text-primary select-all overflow-x-auto whitespace-nowrap scrollbar-none">
                   {results.unixSec}
                 </div>
               </div>
 
               {/* Unix Milliseconds Card */}
-              <div className="bg-white p-5 rounded-xl border border-gray-100 hover:border-primary/50 hover:shadow-md transition-all duration-200 group relative">
+              <div className="bg-bg-elevated p-5 rounded-xl border border-border-default hover:border-primary/50 hover:shadow-md transition-all duration-200 group relative">
                 <div className="flex justify-between items-center mb-3">
-                  <span className="font-sans text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+                  <span className="font-sans text-[11px] font-bold text-text-secondary uppercase tracking-wider">
                     Unix Milliseconds
                   </span>
                   <button 
                     id="copy-unix-ms-btn"
                     onClick={() => handleCopy(results.unixMs, 'unixMs')}
-                    className="p-1.5 rounded-lg text-gray-400 hover:text-primary hover:bg-gray-50 transition-all cursor-pointer"
+                    className="p-1.5 rounded-lg text-text-tertiary hover:text-primary hover:bg-bg-inset transition-all cursor-pointer"
                     title="Copy Unix milliseconds"
                   >
                     {copiedStates.unixMs ? <Check className="w-4 h-4 text-success-emerald" /> : <Clipboard className="w-4 h-4" />}
                   </button>
                 </div>
-                <div className="font-mono text-xl md:text-2xl font-bold text-gray-900 select-all overflow-x-auto whitespace-nowrap scrollbar-none">
+                <div className="font-mono text-xl md:text-2xl font-bold text-text-primary select-all overflow-x-auto whitespace-nowrap scrollbar-none">
                   {results.unixMs}
                 </div>
               </div>
 
               {/* ISO 8601 Card (Spans both columns) */}
-              <div className="bg-white p-5 rounded-xl border border-gray-100 hover:border-primary/50 hover:shadow-md transition-all duration-200 group relative md:col-span-2">
+              <div className="bg-bg-elevated p-5 rounded-xl border border-border-default hover:border-primary/50 hover:shadow-md transition-all duration-200 group relative md:col-span-2">
                 <div className="flex justify-between items-center mb-3">
-                  <span className="font-sans text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+                  <span className="font-sans text-[11px] font-bold text-text-secondary uppercase tracking-wider">
                     ISO 8601 String
                   </span>
                   <button 
                     id="copy-iso8601-btn"
                     onClick={() => handleCopy(results.iso, 'iso')}
-                    className="p-1.5 rounded-lg text-gray-400 hover:text-primary hover:bg-gray-50 transition-all cursor-pointer"
+                    className="p-1.5 rounded-lg text-text-tertiary hover:text-primary hover:bg-bg-inset transition-all cursor-pointer"
                     title="Copy ISO-8601"
                   >
                     {copiedStates.iso ? <Check className="w-4 h-4 text-success-emerald" /> : <Clipboard className="w-4 h-4" />}
                   </button>
                 </div>
-                <div className="font-mono text-lg md:text-2xl font-bold text-gray-900 break-all select-all">
+                <div className="font-mono text-lg md:text-2xl font-bold text-text-primary break-all select-all">
                   {results.iso}
                 </div>
               </div>
 
               {/* UTC String Card */}
-              <div className="bg-white p-5 rounded-xl border border-gray-100 hover:border-primary/50 hover:shadow-md transition-all duration-200 group relative">
+              <div className="bg-bg-elevated p-5 rounded-xl border border-border-default hover:border-primary/50 hover:shadow-md transition-all duration-200 group relative">
                 <div className="flex justify-between items-center mb-3">
-                  <span className="font-sans text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+                  <span className="font-sans text-[11px] font-bold text-text-secondary uppercase tracking-wider">
                     UTC String
                   </span>
                   <button 
                     id="copy-utc-string-btn"
                     onClick={() => handleCopy(results.utc, 'utc')}
-                    className="p-1.5 rounded-lg text-gray-400 hover:text-primary hover:bg-gray-50 transition-all cursor-pointer"
+                    className="p-1.5 rounded-lg text-text-tertiary hover:text-primary hover:bg-bg-inset transition-all cursor-pointer"
                     title="Copy UTC string"
                   >
                     {copiedStates.utc ? <Check className="w-4 h-4 text-success-emerald" /> : <Clipboard className="w-4 h-4" />}
                   </button>
                 </div>
-                <div className="font-sans text-sm md:text-base font-semibold text-gray-800 break-words select-all">
+                <div className="font-sans text-sm md:text-base font-semibold text-text-primary break-words select-all">
                   {results.utc}
                 </div>
               </div>
 
               {/* Local Time Card */}
-              <div className="bg-white p-5 rounded-xl border border-gray-100 hover:border-primary/50 hover:shadow-md transition-all duration-200 group relative">
+              <div className="bg-bg-elevated p-5 rounded-xl border border-border-default hover:border-primary/50 hover:shadow-md transition-all duration-200 group relative">
                 <div className="flex justify-between items-center mb-3">
-                  <span className="font-sans text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+                  <span className="font-sans text-[11px] font-bold text-text-secondary uppercase tracking-wider">
                     Local Time ({timezone})
                   </span>
                   <button 
                     id="copy-local-time-btn"
                     onClick={() => handleCopy(results.local, 'local')}
-                    className="p-1.5 rounded-lg text-gray-400 hover:text-primary hover:bg-gray-50 transition-all cursor-pointer"
+                    className="p-1.5 rounded-lg text-text-tertiary hover:text-primary hover:bg-bg-inset transition-all cursor-pointer"
                     title="Copy Local Time string"
                   >
                     {copiedStates.local ? <Check className="w-4 h-4 text-success-emerald" /> : <Clipboard className="w-4 h-4" />}
                   </button>
                 </div>
-                <div className="font-sans text-sm md:text-base font-semibold text-gray-800 break-words select-all">
+                <div className="font-sans text-sm md:text-base font-semibold text-text-primary break-words select-all">
                   {results.local}
                 </div>
               </div>
@@ -444,8 +444,8 @@ export default function AlternativeTimestamps() {
             </div>
 
             {/* Settings Card */}
-            <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm space-y-5">
-              <h3 className="font-display text-base font-bold text-gray-900 border-b border-gray-50 pb-2 flex items-center gap-1.5">
+            <div className="bg-bg-elevated p-6 rounded-xl border border-border-default shadow-sm space-y-5">
+              <h3 className="font-display text-base font-bold text-text-primary border-b border-gray-50 pb-2 flex items-center gap-1.5">
                 Display Settings
               </h3>
               
@@ -453,7 +453,7 @@ export default function AlternativeTimestamps() {
                 
                 {/* Timezone Select */}
                 <div className="space-y-2">
-                  <label className="font-sans text-[11px] font-bold text-gray-400 uppercase tracking-wider block">
+                  <label className="font-sans text-[11px] font-bold text-text-tertiary uppercase tracking-wider block">
                     Primary Timezone
                   </label>
                   <div className="relative">
@@ -461,7 +461,7 @@ export default function AlternativeTimestamps() {
                       id="timezone-select"
                       value={timezone}
                       onChange={(e) => setTimezone(e.target.value)}
-                      className="w-full bg-gray-50 border border-gray-200 rounded-lg px-3.5 py-2.5 text-xs font-semibold text-gray-700 outline-none hover:border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/5 transition-all appearance-none cursor-pointer"
+                      className="w-full bg-bg-inset border border-border-default rounded-lg px-3.5 py-2.5 text-xs font-semibold text-text-primary outline-none hover:border-border-strong focus:border-primary focus:ring-2 focus:ring-primary/5 transition-all appearance-none cursor-pointer"
                     >
                       <option value="UTC">UTC (Coordinated Universal Time)</option>
                       <option value="Local">Local System Time</option>
@@ -469,24 +469,24 @@ export default function AlternativeTimestamps() {
                       <option value="PST">PST (Pacific Standard Time - LA)</option>
                       <option value="IST">IST (Indian Standard Time - Kolkata)</option>
                     </select>
-                    <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                    <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-text-tertiary pointer-events-none" />
                   </div>
                 </div>
 
                 {/* Ticker Auto-Refresh Toggle */}
                 <div className="flex items-center justify-between pt-2 border-t border-gray-50">
-                  <span className="text-xs font-semibold text-gray-700">
+                  <span className="text-xs font-semibold text-text-primary">
                     Auto-Refresh Ticker
                   </span>
                   <button 
                     id="auto-refresh-toggle"
                     onClick={() => setAutoRefresh(!autoRefresh)}
                     className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 cursor-pointer outline-none ${
-                      autoRefresh ? 'bg-primary' : 'bg-gray-200'
+                      autoRefresh ? 'bg-primary' : 'bg-bg-inset'
                     }`}
                   >
                     <span 
-                      className={`inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform duration-200 ${
+                      className={`inline-block h-4 w-4 transform rounded-full bg-bg-elevated shadow transition-transform duration-200 ${
                         autoRefresh ? 'translate-x-6' : 'translate-x-1'
                       }`}
                     />
@@ -500,31 +500,31 @@ export default function AlternativeTimestamps() {
         </div>
 
         {/* Explanation Section */}
-        <section className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 items-center bg-white p-6 md:p-8 rounded-xl border border-gray-100 shadow-sm">
+        <section className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 items-center bg-bg-elevated p-6 md:p-8 rounded-xl border border-border-default shadow-sm">
           <div className="space-y-5">
-            <h2 className="font-display text-2xl font-bold text-gray-900">
+            <h2 className="font-display text-2xl font-bold text-text-primary">
               How Precision Conversions Work
             </h2>
-            <div className="space-y-4 text-gray-600 text-sm leading-relaxed">
+            <div className="space-y-4 text-text-secondary text-sm leading-relaxed">
               <p>
                 Our engine utilizes a multi-step detection pipeline to identify your input format. If the input is purely numeric, we check for digit length to differentiate between seconds, milliseconds, and microseconds.
               </p>
-              <ul className="space-y-3 pl-4 list-disc font-medium text-xs text-gray-500">
+              <ul className="space-y-3 pl-4 list-disc font-medium text-xs text-text-secondary">
                 <li>
-                  <span className="font-bold text-gray-900">Unix Epochs:</span> Measured as the number of seconds or milliseconds elapsed since January 1, 1970 (UTC).
+                  <span className="font-bold text-text-primary">Unix Epochs:</span> Measured as the number of seconds or milliseconds elapsed since January 1, 1970 (UTC).
                 </li>
                 <li>
-                  <span className="font-bold text-gray-900">ISO-8601:</span> The international standard for date and time formatting (<code className="font-mono bg-gray-50 px-1 py-0.5 rounded text-primary text-xs">YYYY-MM-DDTHH:MM:SSZ</code>).
+                  <span className="font-bold text-text-primary">ISO-8601:</span> The international standard for date and time formatting (<code className="font-mono bg-bg-inset px-1 py-0.5 rounded text-primary text-xs">YYYY-MM-DDTHH:MM:SSZ</code>).
                 </li>
                 <li>
-                  <span className="font-bold text-gray-900">Precision:</span> We support down to nanosecond precision, facilitating complex logging analysis and high-frequency trading debugging.
+                  <span className="font-bold text-text-primary">Precision:</span> We support down to nanosecond precision, facilitating complex logging analysis and high-frequency trading debugging.
                 </li>
               </ul>
             </div>
           </div>
           
           <div
-            className="rounded-xl overflow-hidden border border-gray-100 shadow-lg h-80 flex items-center justify-center text-center p-8"
+            className="rounded-xl overflow-hidden border border-border-default shadow-lg h-80 flex items-center justify-center text-center p-8"
             style={{ background: 'linear-gradient(135deg, #4648d4 0%, #7c3aed 100%)' }}
             role="img"
             aria-label="Timestamp conversion illustration"

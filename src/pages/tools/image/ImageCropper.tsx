@@ -156,10 +156,10 @@ export default function ImageCropper() {
                     }}
                   >
                     {/* Visual corner indicators */}
-                    <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[var(--primary)] bg-white -translate-x-[2px] -translate-y-[2px]" />
-                    <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-[var(--primary)] bg-white translate-x-[2px] -translate-y-[2px]" />
-                    <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-[var(--primary)] bg-white -translate-x-[2px] translate-y-[2px]" />
-                    <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[var(--primary)] bg-white translate-x-[2px] translate-y-[2px]" />
+                    <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[var(--primary)] bg-bg-elevated -translate-x-[2px] -translate-y-[2px]" />
+                    <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-[var(--primary)] bg-bg-elevated translate-x-[2px] -translate-y-[2px]" />
+                    <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-[var(--primary)] bg-bg-elevated -translate-x-[2px] translate-y-[2px]" />
+                    <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[var(--primary)] bg-bg-elevated translate-x-[2px] translate-y-[2px]" />
                   </div>
                 </div>
               </div>

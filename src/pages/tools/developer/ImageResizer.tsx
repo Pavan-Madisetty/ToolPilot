@@ -142,23 +142,24 @@ export default function ImageResizer() {
             
             {/* File Selection */}
             <div className="space-y-1.5">
-              <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Source Image File</label>
+              <label className="text-[10px] font-bold text-text-tertiary uppercase tracking-wider block">Source Image File</label>
               <div className="flex gap-2">
                 <button 
                   onClick={() => fileInputRef.current?.click()}
-                  className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-xs font-bold text-gray-700 hover:bg-gray-100 cursor-pointer transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 bg-bg-elevated border border-border-default rounded-lg text-xs font-bold text-text-primary hover:bg-bg-inset cursor-pointer transition-colors"
                 >
-                  <Upload className="w-4 h-4 text-gray-400" />
+                  <Upload className="w-4 h-4 text-text-tertiary" />
                   Select Image
                 </button>
                 <input
                   ref={fileInputRef}
                   type="file"
+                  aria-label="Choose file" tabIndex={-1}
                   accept="image/*"
                   onChange={handleFileChange}
                   className="hidden"
                 />
-                <span className="text-[11px] text-gray-500 font-mono truncate py-2 flex-grow max-w-[150px]">
+                <span className="text-[11px] text-text-secondary font-mono truncate py-2 flex-grow max-w-[150px]">
                   {imageName}
                 </span>
               </div>
@@ -166,7 +167,7 @@ export default function ImageResizer() {
 
             {/* Export format buttons */}
             <div className="space-y-1.5">
-              <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Target Export Format</label>
+              <label className="text-[10px] font-bold text-text-tertiary uppercase tracking-wider block">Target Export Format</label>
               <div className="grid grid-cols-3 gap-2">
                 {(['webp', 'png', 'jpeg'] as const).map((fmt) => (
                   <button
@@ -175,7 +176,7 @@ export default function ImageResizer() {
                     className={`py-1.5 rounded text-[10px] font-bold uppercase tracking-wider border cursor-pointer transition-all ${
                       format === fmt 
                         ? 'border-primary bg-primary/5 text-primary' 
-                        : 'border-gray-200 bg-white text-gray-500 hover:bg-gray-100'
+                        : 'border-border-default bg-bg-elevated text-text-secondary hover:bg-bg-inset'
                     }`}
                   >
                     {fmt}
@@ -187,7 +188,7 @@ export default function ImageResizer() {
             {/* Sizer layout dimensions */}
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Resize Dimensions</label>
+                <label className="text-[10px] font-bold text-text-tertiary uppercase tracking-wider block">Resize Dimensions</label>
                 <button 
                   onClick={() => {
                     setLockAspectRatio(!lockAspectRatio);
@@ -205,7 +206,7 @@ export default function ImageResizer() {
                     </>
                   ) : (
                     <>
-                      <Unlock className="w-3 h-3 text-gray-400" />
+                      <Unlock className="w-3 h-3 text-text-tertiary" />
                       Unlocked
                     </>
                   )}
@@ -214,22 +215,22 @@ export default function ImageResizer() {
 
               <div className="grid grid-cols-2 gap-3 font-mono">
                 <div className="space-y-1">
-                  <span className="text-[9px] font-bold text-gray-400">Width (px)</span>
+                  <span className="text-[9px] font-bold text-text-tertiary">Width (px)</span>
                   <input
                     type="number"
                     value={width || ''}
                     onChange={(e) => handleWidthChange(parseInt(e.target.value) || 0)}
-                    className="w-full bg-white border border-gray-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold outline-none focus:border-primary"
+                    className="w-full bg-bg-elevated border border-border-default rounded-lg px-2.5 py-1.5 text-xs font-semibold outline-none focus:border-primary"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <span className="text-[9px] font-bold text-gray-400">Height (px)</span>
+                  <span className="text-[9px] font-bold text-text-tertiary">Height (px)</span>
                   <input
                     type="number"
                     value={height || ''}
                     onChange={(e) => handleHeightChange(parseInt(e.target.value) || 0)}
-                    className="w-full bg-white border border-gray-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold outline-none focus:border-primary"
+                    className="w-full bg-bg-elevated border border-border-default rounded-lg px-2.5 py-1.5 text-xs font-semibold outline-none focus:border-primary"
                   />
                 </div>
               </div>
@@ -239,7 +240,7 @@ export default function ImageResizer() {
             {format !== 'png' && (
               <div className="space-y-2">
                 <div className="flex justify-between items-center text-xs">
-                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Compression Quality</span>
+                  <span className="text-[10px] font-bold text-text-tertiary uppercase tracking-wider">Compression Quality</span>
                   <span className="font-mono font-bold text-primary">{quality}%</span>
                 </div>
                 <input
@@ -248,20 +249,20 @@ export default function ImageResizer() {
                   max="100"
                   value={quality}
                   onChange={(e) => { setQuality(parseInt(e.target.value)); setDownloadUrl(null); }}
-                  className="w-full accent-primary h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                  className="w-full accent-primary h-1 bg-bg-inset rounded-lg appearance-none cursor-pointer"
                 />
               </div>
             )}
 
             {/* Original details box */}
-            <div className="p-3.5 bg-gray-100 rounded-lg text-xs font-medium text-gray-600 space-y-1 font-mono">
+            <div className="p-3.5 bg-bg-inset rounded-lg text-xs font-medium text-text-secondary space-y-1 font-mono">
               <div className="flex justify-between">
                 <span>Original Size:</span>
-                <span className="font-bold text-gray-900">{formatSize(originalSize)}</span>
+                <span className="font-bold text-text-primary">{formatSize(originalSize)}</span>
               </div>
               <div className="flex justify-between">
                 <span>Resolution:</span>
-                <span className="font-bold text-gray-900">{originalWidth} × {originalHeight}px</span>
+                <span className="font-bold text-text-primary">{originalWidth} × {originalHeight}px</span>
               </div>
             </div>
 
@@ -279,8 +280,8 @@ export default function ImageResizer() {
         {/* RIGHT COLUMN: Preview Sandbox (7 cols) */}
         <div className="lg:col-span-7 p-8 flex flex-col justify-between space-y-6">
           
-          <div className="flex justify-between items-center border-b border-gray-100 pb-2">
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Interactive Output Canvas</span>
+          <div className="flex justify-between items-center border-b border-border-default pb-2">
+            <span className="text-xs font-bold text-text-tertiary uppercase tracking-wider">Interactive Output Canvas</span>
             <div className="flex items-center gap-1 text-[11px] font-bold text-emerald-600 font-mono">
               <Maximize2 className="w-4 h-4 text-emerald-500" />
               100% Client-Side Sandbox
@@ -288,27 +289,27 @@ export default function ImageResizer() {
           </div>
 
           {/* Image Preview Window */}
-          <div className="flex-grow flex items-center justify-center min-h-[250px] bg-slate-50 border border-gray-100 rounded-xl relative overflow-hidden group">
+          <div className="flex-grow flex items-center justify-center min-h-[250px] bg-slate-50 border border-border-default rounded-xl relative overflow-hidden group">
             {imageSrc ? (
               <div className="p-4 max-h-[260px] flex items-center justify-center">
                 <img 
                   ref={imageRef}
                   src={imageSrc} 
                   alt="Uploaded Sandbox" 
-                  className="max-w-full max-h-[240px] rounded object-contain shadow-xs border border-gray-100 bg-white"
+                  className="max-w-full max-h-[240px] rounded object-contain shadow-xs border border-border-default bg-bg-elevated"
                 />
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center gap-2 text-gray-400">
+              <div className="flex flex-col items-center justify-center gap-2 text-text-tertiary">
                 <ImageIcon className="w-8 h-8 opacity-40 animate-pulse" />
-                <p className="text-xs font-bold text-gray-400">Sandbox Preview Ready</p>
+                <p className="text-xs font-bold text-text-tertiary">Sandbox Preview Ready</p>
               </div>
             )}
 
             {isProcessing && (
               <div className="absolute inset-0 bg-white/70 backdrop-blur-xs flex flex-col items-center justify-center gap-3">
                 <RefreshCw className="w-6 h-6 text-primary animate-spin" />
-                <span className="text-xs font-bold text-gray-800 uppercase tracking-widest font-mono">Executing Compression...</span>
+                <span className="text-xs font-bold text-text-primary uppercase tracking-widest font-mono">Executing Compression...</span>
               </div>
             )}
           </div>
@@ -325,12 +326,12 @@ export default function ImageResizer() {
                   className="w-full flex justify-between items-center bg-emerald-500/10 border border-emerald-500/20 p-3 rounded-lg"
                 >
                   <div className="text-left font-sans">
-                    <h4 className="text-xs font-bold text-gray-800 flex items-center gap-1.5">
+                    <h4 className="text-xs font-bold text-text-primary flex items-center gap-1.5">
                       <Check className="w-4.5 h-4.5 text-emerald-600" />
                       WebP Generation Complete!
                     </h4>
-                    <p className="text-[10px] text-gray-500 font-mono mt-0.5 font-medium">
-                      New Size: <span className="font-bold text-gray-900">{formatSize(compressedSize)}</span> 
+                    <p className="text-[10px] text-text-secondary font-mono mt-0.5 font-medium">
+                      New Size: <span className="font-bold text-text-primary">{formatSize(compressedSize)}</span> 
                       {compressionRatio && compressionRatio > 0 && (
                         <span> ({compressionRatio}% compression ratio)</span>
                       )}
@@ -347,7 +348,7 @@ export default function ImageResizer() {
                   </a>
                 </motion.div>
               ) : (
-                <div className="text-xs text-gray-400 font-medium italic text-left w-full flex items-center justify-center gap-1.5 bg-gray-50 p-3 border border-gray-100 rounded-lg">
+                <div className="text-xs text-text-tertiary font-medium italic text-left w-full flex items-center justify-center gap-1.5 bg-bg-inset p-3 border border-border-default rounded-lg">
                   <Zap className="w-4 h-4 text-amber-500 shrink-0" />
                   Select dimensions and click Compress to activate real WebP processing.
                 </div>

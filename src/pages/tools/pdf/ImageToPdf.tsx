@@ -264,6 +264,7 @@ export default function ImageToPdf() {
             </span>
             <input
               type="file"
+              aria-label="Choose file" tabIndex={-1}
               ref={fileInputRef}
               onChange={handleFileChange}
               accept="image/*"

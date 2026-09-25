@@ -101,11 +101,11 @@ export default function CompoundInterestCalculator() {
             {/* Initial Deposit */}
             <div className="space-y-2">
               <div className="flex justify-between items-center text-xs">
-                <span className="font-bold text-gray-700">Initial Deposit</span>
+                <span className="font-bold text-text-primary">Initial Deposit</span>
                 <span className="font-mono font-bold text-primary">{formatCurrency(initialDeposit)}</span>
               </div>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-text-tertiary">
                   <DollarSign className="w-3.5 h-3.5" />
                 </div>
                 <NumberField block value={initialDeposit} onChange={setInitialDeposit} min={0} max={100000000} decimals={0} className="!pl-8 !h-9 text-xs" />
@@ -117,18 +117,18 @@ export default function CompoundInterestCalculator() {
                 step="5000"
                 value={initialDeposit}
                 onChange={(e) => setInitialDeposit(parseInt(e.target.value))}
-                className="w-full accent-primary h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                className="w-full accent-primary h-1 bg-border-strong rounded-lg appearance-none cursor-pointer"
               />
             </div>
 
             {/* Monthly Contribution */}
             <div className="space-y-2">
               <div className="flex justify-between items-center text-xs">
-                <span className="font-bold text-gray-700">Monthly Contribution</span>
+                <span className="font-bold text-text-primary">Monthly Contribution</span>
                 <span className="font-mono font-bold text-primary">{formatCurrency(monthlyContribution)}/mo</span>
               </div>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-text-tertiary">
                   <TrendingUp className="w-3.5 h-3.5" />
                 </div>
                 <NumberField block value={monthlyContribution} onChange={setMonthlyContribution} min={0} max={10000000} decimals={0} className="!pl-8 !h-9 text-xs" />
@@ -140,18 +140,18 @@ export default function CompoundInterestCalculator() {
                 step="100"
                 value={monthlyContribution}
                 onChange={(e) => setMonthlyContribution(parseInt(e.target.value))}
-                className="w-full accent-primary h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                className="w-full accent-primary h-1 bg-border-strong rounded-lg appearance-none cursor-pointer"
               />
             </div>
 
             {/* Rate of Return */}
             <div className="space-y-2">
               <div className="flex justify-between items-center text-xs">
-                <span className="font-bold text-gray-700">Annual Return Rate</span>
+                <span className="font-bold text-text-primary">Annual Return Rate</span>
                 <span className="font-mono font-bold text-primary">{interestRate}%</span>
               </div>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-text-tertiary">
                   <Percent className="w-3.5 h-3.5" />
                 </div>
                 <NumberField block value={interestRate} onChange={setInterestRate} min={0} max={100} decimals={2} className="!pl-8 !h-9 text-xs" />
@@ -163,18 +163,18 @@ export default function CompoundInterestCalculator() {
                 step="0.1"
                 value={interestRate}
                 onChange={(e) => setInterestRate(parseFloat(e.target.value))}
-                className="w-full accent-primary h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                className="w-full accent-primary h-1 bg-border-strong rounded-lg appearance-none cursor-pointer"
               />
             </div>
 
             {/* Investment Horizon */}
             <div className="space-y-2">
               <div className="flex justify-between items-center text-xs">
-                <span className="font-bold text-gray-700">Investment Horizon</span>
+                <span className="font-bold text-text-primary">Investment Horizon</span>
                 <span className="font-mono font-bold text-primary">{years} Years</span>
               </div>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-text-tertiary">
                   <Calendar className="w-3.5 h-3.5" />
                 </div>
                 <NumberField block value={years} onChange={setYears} min={1} max={100} decimals={0} className="!pl-8 !h-9 text-xs" />
@@ -185,18 +185,18 @@ export default function CompoundInterestCalculator() {
                 max="50"
                 value={years}
                 onChange={(e) => setYears(parseInt(e.target.value))}
-                className="w-full accent-primary h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                className="w-full accent-primary h-1 bg-border-strong rounded-lg appearance-none cursor-pointer"
               />
             </div>
 
             {/* Compound & Tax rate row */}
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">Compounding</label>
+                <label className="text-[11px] font-bold text-text-tertiary uppercase tracking-wider block">Compounding</label>
                 <select
                   value={compoundFrequency}
                   onChange={(e) => setCompoundFrequency(parseInt(e.target.value))}
-                  className="w-full bg-white border border-gray-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-gray-600 outline-none cursor-pointer focus:border-primary"
+                  className="w-full bg-bg-elevated border border-border-default rounded-lg px-2.5 py-1.5 text-xs font-semibold text-text-secondary outline-none cursor-pointer focus:border-primary"
                 >
                   <option value={12}>Monthly (12x)</option>
                   <option value={4}>Quarterly (4x)</option>
@@ -207,10 +207,10 @@ export default function CompoundInterestCalculator() {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">Est. Tax Drag</label>
+                <label className="text-[11px] font-bold text-text-tertiary uppercase tracking-wider block">Est. Tax Drag</label>
                 <div className="relative">
                   <NumberField block value={taxRate} onChange={setTaxRate} min={0} max={50} decimals={0} className="!pl-8 !h-9 text-xs" />
-                  <span className="absolute right-3.5 top-2 text-gray-400 font-mono text-[10px] font-bold">%</span>
+                  <span className="absolute right-3.5 top-2 text-text-tertiary font-mono text-[10px] font-bold">%</span>
                 </div>
               </div>
             </div>
@@ -224,7 +224,7 @@ export default function CompoundInterestCalculator() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="bg-primary/5 p-4 rounded-xl border border-primary/10">
               <span className="text-[9px] font-bold text-primary uppercase tracking-wider block">Total Wealth</span>
-              <span className="text-xl font-display font-extrabold text-gray-900 block mt-1">
+              <span className="text-xl font-display font-extrabold text-text-primary block mt-1">
                 {formatCurrency(calculatedData.finalBalance)}
               </span>
             </div>
@@ -237,26 +237,26 @@ export default function CompoundInterestCalculator() {
             </div>
 
             <div className="bg-slate-500/5 p-4 rounded-xl border border-slate-500/10">
-              <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider block">Tax Drag Lost</span>
-              <span className="text-xl font-display font-extrabold text-slate-700 block mt-1">
+              <span className="text-[9px] font-bold text-text-secondary uppercase tracking-wider block">Tax Drag Lost</span>
+              <span className="text-xl font-display font-extrabold text-text-primary block mt-1">
                 {formatCurrency(calculatedData.totalTaxPaid)}
               </span>
             </div>
           </div>
 
           {/* View Switcher */}
-          <div className="flex justify-between items-center border-b border-gray-100 pb-2">
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Compound Curve</span>
-            <div className="flex items-center gap-1.5 bg-gray-105 p-0.5 bg-gray-100 rounded-lg font-sans">
+          <div className="flex justify-between items-center border-b border-border-default pb-2">
+            <span className="text-xs font-bold text-text-tertiary uppercase tracking-wider">Compound Curve</span>
+            <div className="flex items-center gap-1.5 bg-gray-105 p-0.5 bg-bg-inset rounded-lg font-sans">
               <button
                 onClick={() => setActiveView('chart')}
-                className={`px-3 py-1 text-[10px] font-bold rounded-md uppercase tracking-wider transition-all cursor-pointer ${activeView === 'chart' ? 'bg-white text-gray-800 shadow-xs' : 'text-gray-400 hover:text-gray-600'}`}
+                className={`px-3 py-1 text-[10px] font-bold rounded-md uppercase tracking-wider transition-all cursor-pointer ${activeView === 'chart' ? 'bg-bg-elevated text-text-primary shadow-xs' : 'text-text-tertiary hover:text-text-secondary'}`}
               >
                 Graph View
               </button>
               <button
                 onClick={() => setActiveView('table')}
-                className={`px-3 py-1 text-[10px] font-bold rounded-md uppercase tracking-wider transition-all cursor-pointer ${activeView === 'table' ? 'bg-white text-gray-800 shadow-xs' : 'text-gray-400 hover:text-gray-600'}`}
+                className={`px-3 py-1 text-[10px] font-bold rounded-md uppercase tracking-wider transition-all cursor-pointer ${activeView === 'table' ? 'bg-bg-elevated text-text-primary shadow-xs' : 'text-text-tertiary hover:text-text-secondary'}`}
               >
                 Spreadsheet
               </button>
@@ -329,7 +329,7 @@ export default function CompoundInterestCalculator() {
                   </div>
                 </div>
 
-                <div className="flex gap-4 text-[10px] font-semibold text-gray-500 justify-center">
+                <div className="flex gap-4 text-[10px] font-semibold text-text-secondary justify-center">
                   <div className="flex items-center gap-1.5">
                     <span className="w-2.5 h-2.5 rounded bg-primary" />
                     <span>Total Capital Accumulation</span>
@@ -341,9 +341,9 @@ export default function CompoundInterestCalculator() {
                 </div>
               </div>
             ) : (
-              <div className="w-full max-h-[220px] overflow-y-auto border border-gray-100 rounded-lg font-mono text-[11px]">
+              <div className="w-full max-h-[220px] overflow-y-auto border border-border-default rounded-lg font-mono text-[11px]">
                 <table className="w-full text-left border-collapse">
-                  <thead className="bg-gray-50 text-gray-500 uppercase text-[9px] font-bold sticky top-0 border-b border-gray-100">
+                  <thead className="bg-bg-inset text-text-secondary uppercase text-[9px] font-bold sticky top-0 border-b border-border-default">
                     <tr>
                       <th className="p-2.5 pl-4">Year</th>
                       <th className="p-2.5">Total Deposits</th>
@@ -351,13 +351,13 @@ export default function CompoundInterestCalculator() {
                       <th className="p-2.5 pr-4 text-right">Wealth Value</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-50 text-gray-600 font-medium">
+                  <tbody className="divide-y divide-gray-50 text-text-secondary font-medium">
                     {calculatedData.history.map((h) => (
-                      <tr key={h.year} className="hover:bg-slate-50/55">
-                        <td className="p-2.5 pl-4 font-bold text-gray-800">Yr {h.year}</td>
+                      <tr key={h.year} className="hover:bg-bg-inset">
+                        <td className="p-2.5 pl-4 font-bold text-text-primary">Yr {h.year}</td>
                         <td className="p-2.5">{formatCurrency(h.contributions)}</td>
                         <td className="p-2.5 text-emerald-650 text-emerald-600">{formatCurrency(h.interest)}</td>
-                        <td className="p-2.5 pr-4 text-right font-bold text-slate-950">{formatCurrency(h.balance)}</td>
+                        <td className="p-2.5 pr-4 text-right font-bold text-text-primary">{formatCurrency(h.balance)}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -367,7 +367,7 @@ export default function CompoundInterestCalculator() {
           </div>
 
           {/* Security */}
-          <div className="pt-4 border-t border-gray-100 flex items-center justify-between text-[11px] text-gray-400 font-medium">
+          <div className="pt-4 border-t border-border-default flex items-center justify-between text-[11px] text-text-tertiary font-medium">
             <div className="flex items-center gap-1.5">
               <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
               <span>Executed entirely offline using client-side matrices. No data transit.</span>

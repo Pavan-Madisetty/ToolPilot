@@ -125,7 +125,7 @@ export default function IncomeTaxCalculator() {
               Regime Type
             </h3>
             <p className="text-xs text-slate-500 dark:text-slate-400">
-              This calculation uses the **New Tax Regime** (FY 2024-25 / FY 2025-26) with standard
+              This calculation uses the <strong>New Tax Regime</strong> (FY 2024-25 / FY 2025-26) with standard
               deduction of ₹75,000 included automatically.
             </p>
           </div>

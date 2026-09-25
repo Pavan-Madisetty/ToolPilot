@@ -174,6 +174,7 @@ export default function Base64Tool() {
                 <input
                   ref={fileInputRef}
                   type="file"
+                  aria-label="Choose file" tabIndex={-1}
                   onChange={handleFileChange}
                   className="hidden"
                 />

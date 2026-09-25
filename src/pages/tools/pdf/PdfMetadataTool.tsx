@@ -114,12 +114,13 @@ export default function PdfMetadataTool() {
             onDrop={handleDrop}
             onClick={() => fileInputRef.current?.click()}
             className={`border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-all ${
-              dragActive ? 'border-primary bg-primary/5' : 'border-gray-200 hover:border-primary/50 hover:bg-gray-50/50'
+              dragActive ? 'border-primary bg-primary/5' : 'border-border-default hover:border-primary/50 hover:bg-bg-inset/50'
             }`}
           >
             <input
               ref={fileInputRef}
               type="file"
+              aria-label="Choose file" tabIndex={-1}
               multiple
               accept=".pdf"
               onChange={handleFileSelect}
@@ -130,28 +131,28 @@ export default function PdfMetadataTool() {
                 <Upload className="w-6 h-6" />
               </div>
               <div>
-                <p className="text-xs font-bold text-gray-800">Drag & Drop your PDFs here, or <span className="text-primary hover:underline">browse files</span></p>
-                <p className="text-[10px] text-gray-400 font-medium mt-1">Supports batch upload. Operations processed 100% locally.</p>
+                <p className="text-xs font-bold text-text-primary">Drag & Drop your PDFs here, or <span className="text-primary hover:underline">browse files</span></p>
+                <p className="text-[10px] text-text-tertiary font-medium mt-1">Supports batch upload. Operations processed 100% locally.</p>
               </div>
             </div>
           </div>
 
           {/* Uploaded Files Queue */}
           <div className="space-y-2.5">
-            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider">Document Queue ({files.length})</h3>
+            <h3 className="text-xs font-bold text-text-tertiary uppercase tracking-wider">Document Queue ({files.length})</h3>
             {files.length === 0 ? (
-              <div className="bg-gray-50 p-6 text-center rounded-xl text-xs text-gray-400 font-medium border border-gray-100">
+              <div className="bg-bg-inset p-6 text-center rounded-xl text-xs text-text-tertiary font-medium border border-border-default">
                 No documents added to the batch pipeline.
               </div>
             ) : (
               <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
                 {files.map((file) => (
-                  <div key={file.id} className="flex items-center justify-between p-3 bg-gray-50/50 hover:bg-gray-50 border border-gray-100 rounded-lg group">
+                  <div key={file.id} className="flex items-center justify-between p-3 bg-bg-inset/50 hover:bg-bg-inset border border-border-default rounded-lg group">
                     <div className="flex items-center gap-3">
                       <FileText className="w-5 h-5 text-red-500" />
                       <div>
-                        <h4 className="text-xs font-bold text-gray-800 line-clamp-1">{file.name}</h4>
-                        <p className="text-[10px] text-gray-400 font-medium font-mono">{file.size} • {file.pages} Pages</p>
+                        <h4 className="text-xs font-bold text-text-primary line-clamp-1">{file.name}</h4>
+                        <p className="text-[10px] text-text-tertiary font-medium font-mono">{file.size} • {file.pages} Pages</p>
                       </div>
                     </div>
                     <button 
@@ -159,7 +160,7 @@ export default function PdfMetadataTool() {
                         e.stopPropagation();
                         removeFile(file.id);
                       }}
-                      className="p-1 rounded text-gray-400 hover:text-red-500 hover:bg-gray-100 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                      className="p-1 rounded text-text-tertiary hover:text-red-500 hover:bg-bg-inset opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -171,65 +172,65 @@ export default function PdfMetadataTool() {
         </div>
 
         {/* Right Column: PDF settings configuration panel (5 cols) */}
-        <div className="lg:col-span-5 p-8 bg-gray-50/50 flex flex-col justify-between space-y-6">
+        <div className="lg:col-span-5 p-8 bg-bg-inset/50 flex flex-col justify-between space-y-6">
           <div className="space-y-5 text-left">
-            <div className="flex items-center gap-2 pb-2 border-b border-gray-200">
+            <div className="flex items-center gap-2 pb-2 border-b border-border-default">
               <Settings2 className="w-4.5 h-4.5 text-primary" />
-              <h3 className="font-display text-sm font-bold text-gray-800 font-display">Metadata Rules</h3>
+              <h3 className="font-display text-sm font-bold text-text-primary font-display">Metadata Rules</h3>
             </div>
 
             <div className="space-y-3">
               {/* Document Title */}
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Document Title</label>
+                <label className="text-[10px] font-bold text-text-tertiary uppercase tracking-wider block">Document Title</label>
                 <input
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="Title property"
-                  className="w-full bg-white border border-gray-200 rounded-lg px-3 py-1.5 text-xs font-semibold outline-none focus:border-primary"
+                  className="w-full bg-bg-elevated border border-border-default rounded-lg px-3 py-1.5 text-xs font-semibold outline-none focus:border-primary"
                 />
               </div>
 
               {/* Author */}
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Creator / Author</label>
+                <label className="text-[10px] font-bold text-text-tertiary uppercase tracking-wider block">Creator / Author</label>
                 <input
                   type="text"
                   value={author}
                   onChange={(e) => setAuthor(e.target.value)}
                   placeholder="Author property"
-                  className="w-full bg-white border border-gray-200 rounded-lg px-3 py-1.5 text-xs font-semibold outline-none focus:border-primary"
+                  className="w-full bg-bg-elevated border border-border-default rounded-lg px-3 py-1.5 text-xs font-semibold outline-none focus:border-primary"
                 />
               </div>
 
               {/* Subject */}
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Subject Descriptor</label>
+                <label className="text-[10px] font-bold text-text-tertiary uppercase tracking-wider block">Subject Descriptor</label>
                 <input
                   type="text"
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
                   placeholder="Subject property"
-                  className="w-full bg-white border border-gray-200 rounded-lg px-3 py-1.5 text-xs font-semibold outline-none focus:border-primary"
+                  className="w-full bg-bg-elevated border border-border-default rounded-lg px-3 py-1.5 text-xs font-semibold outline-none focus:border-primary"
                 />
               </div>
 
               {/* Keywords */}
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Keywords</label>
+                <label className="text-[10px] font-bold text-text-tertiary uppercase tracking-wider block">Keywords</label>
                 <input
                   type="text"
                   value={keywords}
                   onChange={(e) => setKeywords(e.target.value)}
                   placeholder="Keywords (comma-separated)"
-                  className="w-full bg-white border border-gray-200 rounded-lg px-3 py-1.5 text-xs font-semibold outline-none focus:border-primary"
+                  className="w-full bg-bg-elevated border border-border-default rounded-lg px-3 py-1.5 text-xs font-semibold outline-none focus:border-primary"
                 />
               </div>
 
               {/* Compression level buttons */}
               <div className="space-y-2 pt-2">
-                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Image Compression Mode</label>
+                <label className="text-[10px] font-bold text-text-tertiary uppercase tracking-wider block">Image Compression Mode</label>
                 <div className="grid grid-cols-3 gap-2">
                   {(['none', 'medium', 'maximum'] as const).map((level) => (
                     <button
@@ -238,7 +239,7 @@ export default function PdfMetadataTool() {
                       className={`py-1.5 rounded text-[10px] font-bold uppercase tracking-wide border cursor-pointer transition-all ${
                         compressLevel === level 
                           ? 'border-primary bg-primary/5 text-primary' 
-                          : 'border-gray-200 bg-white text-gray-500 hover:bg-gray-100'
+                          : 'border-border-default bg-bg-elevated text-text-secondary hover:bg-bg-inset'
                       }`}
                     >
                       {level === 'none' ? 'Original Size' : level === 'medium' ? 'Standard 150dpi' : 'Heavy 72dpi'}
@@ -248,19 +249,19 @@ export default function PdfMetadataTool() {
               </div>
 
               {/* Encrypt password block */}
-              <div className="pt-2 border-t border-gray-100">
+              <div className="pt-2 border-t border-border-default">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-gray-700 flex items-center gap-1.5">
-                    <Lock className="w-3.5 h-3.5 text-gray-400" />
+                  <span className="text-xs font-bold text-text-primary flex items-center gap-1.5">
+                    <Lock className="w-3.5 h-3.5 text-text-tertiary" />
                     PDF Password Security
                   </span>
                   <button 
                     onClick={() => setEnablePassword(!enablePassword)}
                     className={`relative inline-flex h-4 w-7 items-center rounded-full transition-colors cursor-pointer outline-none ${
-                      enablePassword ? 'bg-primary' : 'bg-gray-200'
+                      enablePassword ? 'bg-primary' : 'bg-bg-inset'
                     }`}
                   >
-                    <span className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${enablePassword ? 'translate-x-3.5' : 'translate-x-0.5'}`} />
+                    <span className={`inline-block h-3 w-3 transform rounded-full bg-bg-elevated transition-transform ${enablePassword ? 'translate-x-3.5' : 'translate-x-0.5'}`} />
                   </button>
                 </div>
 
@@ -277,7 +278,7 @@ export default function PdfMetadataTool() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Enter decryption password..."
-                        className="w-full bg-white border border-gray-200 rounded-lg px-3 py-1.5 text-xs font-semibold outline-none focus:border-primary"
+                        className="w-full bg-bg-elevated border border-border-default rounded-lg px-3 py-1.5 text-xs font-semibold outline-none focus:border-primary"
                       />
                     </motion.div>
                   )}
@@ -287,11 +288,11 @@ export default function PdfMetadataTool() {
           </div>
 
           {/* Action Button trigger */}
-          <div className="space-y-3 pt-4 border-t border-gray-200/60 font-sans">
+          <div className="space-y-3 pt-4 border-t border-border-default/60 font-sans">
             <button
               onClick={executeMetadataProcess}
               disabled={files.length === 0 || isProcessing}
-              className="w-full py-2.5 bg-primary hover:bg-primary-container disabled:bg-gray-200 disabled:text-gray-400 text-white rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer"
+              className="w-full py-2.5 bg-primary hover:bg-primary-container disabled:bg-bg-inset disabled:text-text-tertiary text-white rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer"
             >
               {isProcessing ? (
                 <>
@@ -318,8 +319,8 @@ export default function PdfMetadataTool() {
                   <div className="flex items-center gap-2">
                     <FileCheck className="w-4.5 h-4.5 text-emerald-600 animate-pulse" />
                     <div className="text-left">
-                      <h5 className="text-[11px] font-bold text-gray-800">Optimized Batch Ready</h5>
-                      <p className="text-[9px] text-gray-400 font-medium font-mono">Metadata injected • Saved ~34% space</p>
+                      <h5 className="text-[11px] font-bold text-text-primary">Optimized Batch Ready</h5>
+                      <p className="text-[9px] text-text-tertiary font-medium font-mono">Metadata injected • Saved ~34% space</p>
                     </div>
                   </div>
                   <button 

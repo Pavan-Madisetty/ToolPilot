@@ -146,10 +146,10 @@ export default function CryptoProfitCalculator() {
 
           <Callout tone="info" title="Indian Crypto Tax Policy">
             <p className="text-xs text-[var(--text-secondary)]">
-              Under Indian Income Tax rules, a flat **30% tax** is levied on all profits earned from
+              Under Indian Income Tax rules, a flat <strong>30% tax</strong> is levied on all profits earned from
               Virtual Digital Assets (VDAs) / Cryptocurrencies. Additionally, losses from one crypto
               asset cannot be set off against gains from another, and no deductions are allowed
-              other than the cost of acquisition. A **1% TDS** is also applicable on sell
+              other than the cost of acquisition. A <strong>1% TDS</strong> is also applicable on sell
               transactions.
             </p>
           </Callout>

@@ -173,7 +173,7 @@ const JsonTreeNode: React.FC<JsonTreeNodeProps> = ({
       );
     } else {
       valueElement = (
-        <span className="text-gray-500 font-semibold">
+        <span className="text-text-secondary font-semibold">
           <HighlightText text={String(value)} query={searchQuery} />
         </span>
       );
@@ -196,9 +196,9 @@ const JsonTreeNode: React.FC<JsonTreeNodeProps> = ({
       >
         <div className="flex items-center flex-wrap gap-x-1.5 w-full">
           {nameElement}
-          <span className="text-gray-400 dark:text-gray-500 font-mono">:</span>
+          <span className="text-text-tertiary dark:text-text-secondary font-mono">:</span>
           {valueElement}
-          {!isLast && <span className="text-gray-400 dark:text-gray-500 font-mono">,</span>}
+          {!isLast && <span className="text-text-tertiary dark:text-text-secondary font-mono">,</span>}
         </div>
       </div>
     );
@@ -257,37 +257,37 @@ const JsonTreeNode: React.FC<JsonTreeNodeProps> = ({
         {/* Toggle Arrow */}
         <button
           onClick={toggleExpand}
-          className="p-0.5 text-gray-400 hover:text-indigo-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-all cursor-pointer"
+          className="p-0.5 text-text-tertiary hover:text-indigo-500 hover:bg-bg-inset dark:hover:bg-gray-800 rounded transition-all cursor-pointer"
         >
           {isExpanded ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronRight className="w-3.5 h-3.5" />}
         </button>
 
         <div className="flex items-center gap-1.5 flex-wrap cursor-pointer" onClick={toggleExpand}>
           {nameElement}
-          <span className="text-gray-400 dark:text-gray-500 font-mono">:</span>
-          <span className="text-gray-400 dark:text-gray-500 font-mono font-bold">
+          <span className="text-text-tertiary dark:text-text-secondary font-mono">:</span>
+          <span className="text-text-tertiary dark:text-text-secondary font-mono font-bold">
             {isArray ? '[' : '{'}
           </span>
-          <span className="text-gray-400 dark:text-gray-500 text-[10px] bg-gray-50 dark:bg-gray-800 border border-gray-150 dark:border-gray-700 px-1 rounded font-semibold font-sans">
+          <span className="text-text-tertiary dark:text-text-secondary text-[10px] bg-bg-inset dark:bg-gray-800 border border-gray-150 dark:border-gray-700 px-1 rounded font-semibold font-sans">
             {size} {size === 1 ? 'item' : 'items'}
           </span>
           {!isExpanded && (
             <>
-              <span className="text-gray-400 dark:text-gray-500 font-mono">
+              <span className="text-text-tertiary dark:text-text-secondary font-mono">
                 {isArray ? ']' : '}'}
               </span>
-              {!isLast && <span className="text-gray-400 dark:text-gray-500 font-mono">,</span>}
+              {!isLast && <span className="text-text-tertiary dark:text-text-secondary font-mono">,</span>}
             </>
           )}
         </div>
       </div>
 
       {isExpanded && (
-        <div className="pl-tree-indent ml-2.5 border-l border-gray-200/60 dark:border-gray-800 hover:border-indigo-200 dark:hover:border-indigo-900 transition-colors flex flex-col gap-item-gap">
+        <div className="pl-tree-indent ml-2.5 border-l border-border-default/60 dark:border-gray-800 hover:border-indigo-200 dark:hover:border-indigo-900 transition-colors flex flex-col gap-item-gap">
           {renderChildren()}
-          <div className="py-tree-row-y text-gray-400 dark:text-gray-500 font-mono">
+          <div className="py-tree-row-y text-text-tertiary dark:text-text-secondary font-mono">
             {isArray ? ']' : '}'}
-            {!isLast && <span className="text-gray-400 dark:text-gray-500 font-mono">,</span>}
+            {!isLast && <span className="text-text-tertiary dark:text-text-secondary font-mono">,</span>}
           </div>
         </div>
       )}
@@ -307,10 +307,10 @@ export const JsonTreeViewer: React.FC<JsonTreeViewerProps> = ({
   if (!isObject) {
     // If not an object or array, show simple node or message
     return (
-      <div className="p-6 text-center text-gray-400 dark:text-gray-500 flex flex-col items-center justify-center gap-2">
-        <AlertCircle className="w-8 h-8 text-gray-300" />
+      <div className="p-6 text-center text-text-tertiary dark:text-text-secondary flex flex-col items-center justify-center gap-2">
+        <AlertCircle className="w-8 h-8 text-text-tertiary" />
         <span className="text-sm font-semibold">Primitive Value Found</span>
-        <span className="font-mono text-xs max-w-full break-all bg-gray-50 dark:bg-gray-800 p-2 border border-gray-200 dark:border-gray-700 rounded-lg">
+        <span className="font-mono text-xs max-w-full break-all bg-bg-inset dark:bg-gray-800 p-2 border border-border-default dark:border-gray-700 rounded-lg">
           {String(data)}
         </span>
       </div>
@@ -321,7 +321,7 @@ export const JsonTreeViewer: React.FC<JsonTreeViewerProps> = ({
 
   return (
     <div className="font-mono text-xs select-none p-item-gap antialiased leading-relaxed max-w-full text-slate-800 dark:text-slate-200">
-      <div className="text-gray-400 dark:text-gray-500 font-mono mb-1">
+      <div className="text-text-tertiary dark:text-text-secondary font-mono mb-1">
         {isArray ? '[' : '{'}
       </div>
       <div className="pl-2 flex flex-col gap-item-gap">
@@ -353,7 +353,7 @@ export const JsonTreeViewer: React.FC<JsonTreeViewerProps> = ({
               />
             ))}
       </div>
-      <div className="text-gray-400 dark:text-gray-500 font-mono mt-1">
+      <div className="text-text-tertiary dark:text-text-secondary font-mono mt-1">
         {isArray ? ']' : '}'}
       </div>
     </div>

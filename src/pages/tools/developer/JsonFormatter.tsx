@@ -312,7 +312,7 @@ export default function JsonFormatter() {
         className = "text-purple-400 dark:text-purple-400 font-bold";
       } else if (/null/.test(matchText)) {
         // Null
-        className = "text-gray-400 dark:text-gray-500 italic";
+        className = "text-text-tertiary dark:text-text-secondary italic";
       } else if (/[0-9]/.test(matchText)) {
         // Number
         className = "text-blue-400 dark:text-blue-400";
@@ -320,7 +320,7 @@ export default function JsonFormatter() {
         // Brackets
         className = "text-amber-400 dark:text-amber-400 font-bold";
       } else if (/:/.test(matchText)) {
-        className = "text-gray-400 dark:text-gray-500";
+        className = "text-text-tertiary dark:text-text-secondary";
       }
 
       elements.push(
@@ -349,11 +349,11 @@ export default function JsonFormatter() {
         {/* Workspace Dual-Pane Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-layout-gap min-h-[650px] lg:h-[700px] items-stretch">
           {/* LEFT PANEL - Raw Input Editor */}
-          <div className="lg:col-span-5 flex flex-col bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm h-full">
+          <div className="lg:col-span-5 flex flex-col bg-bg-elevated dark:bg-slate-900 border border-border-default dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm h-full">
             {/* Editor Toolbar */}
-            <div className="p-toolbar-padding border-b border-gray-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-x-toolbar-gap gap-y-2 bg-gray-50/50 dark:bg-slate-900/50">
+            <div className="p-toolbar-padding border-b border-border-default dark:border-slate-800 flex flex-wrap items-center justify-between gap-x-toolbar-gap gap-y-2 bg-bg-inset/50 dark:bg-slate-900/50">
               <div className="flex items-center gap-item-gap">
-                <span className="font-semibold text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider shrink-0">Raw JSON Input</span>
+                <span className="font-semibold text-xs text-text-secondary dark:text-text-tertiary uppercase tracking-wider shrink-0">Raw JSON Input</span>
                 {parsedData ? (
                   <span className="badge-status-valid shrink-0">
                     Valid
@@ -381,7 +381,7 @@ export default function JsonFormatter() {
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
-                <div className="h-4 w-px bg-gray-200 dark:bg-slate-800 self-center mx-0.5"></div>
+                <div className="h-4 w-px bg-bg-inset dark:bg-slate-800 self-center mx-0.5"></div>
                 <button
                   onClick={() => fileInputRef.current?.click()}
                   className="btn-icon-utility"
@@ -391,6 +391,7 @@ export default function JsonFormatter() {
                 </button>
                 <input
                   type="file"
+                  aria-label="Choose file" tabIndex={-1}
                   ref={fileInputRef}
                   onChange={handleFileUpload}
                   accept=".json,application/json"
@@ -416,7 +417,7 @@ export default function JsonFormatter() {
             </div>
 
             {/* Input Formatter Action Strip */}
-            <div className="px-toolbar-padding py-item-gap bg-gray-50/30 dark:bg-slate-900/30 border-b border-gray-100 dark:border-slate-800 flex flex-wrap gap-toolbar-gap items-center justify-between">
+            <div className="px-toolbar-padding py-item-gap bg-bg-inset/30 dark:bg-slate-900/30 border-b border-border-default dark:border-slate-800 flex flex-wrap gap-toolbar-gap items-center justify-between">
               <div className="flex gap-item-gap">
                 <button
                   disabled={!parsedData}
@@ -450,7 +451,7 @@ export default function JsonFormatter() {
               {/* Line Numbers column */}
               <div
                 ref={lineNumbersRef}
-                className="w-12 bg-gray-50/50 dark:bg-slate-900/30 text-gray-300 dark:text-gray-650 border-r border-gray-100 dark:border-slate-850 py-panel-padding text-right font-mono text-xs select-none overflow-y-hidden leading-relaxed"
+                className="w-12 bg-bg-inset/50 dark:bg-slate-900/30 text-text-tertiary dark:text-gray-650 border-r border-border-default dark:border-slate-850 py-panel-padding text-right font-mono text-xs select-none overflow-y-hidden leading-relaxed"
               >
                 {lineNumbers.map((line) => (
                   <div
@@ -473,7 +474,7 @@ export default function JsonFormatter() {
                 onChange={(e) => setInputVal(e.target.value)}
                 onScroll={handleScroll}
                 placeholder="Paste or write raw JSON here..."
-                className="flex-1 bg-transparent p-panel-padding font-mono text-xs leading-relaxed text-gray-800 dark:text-slate-100 outline-none resize-none overflow-y-auto select-text focus:ring-0"
+                className="flex-1 bg-transparent p-panel-padding font-mono text-xs leading-relaxed text-text-primary dark:text-slate-100 outline-none resize-none overflow-y-auto select-text focus:ring-0"
               />
             </div>
 
@@ -492,16 +493,16 @@ export default function JsonFormatter() {
           </div>
 
           {/* RIGHT PANEL - Viewer & Formatted Output tabs */}
-          <div className="lg:col-span-7 flex flex-col bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm h-full">
+          <div className="lg:col-span-7 flex flex-col bg-bg-elevated dark:bg-slate-900 border border-border-default dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm h-full">
             {/* Right Panel Tabs */}
-            <div className="border-b border-gray-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-toolbar-gap px-toolbar-padding bg-gray-50/50 dark:bg-slate-900/50">
+            <div className="border-b border-border-default dark:border-slate-800 flex flex-wrap items-center justify-between gap-toolbar-gap px-toolbar-padding bg-bg-inset/50 dark:bg-slate-900/50">
               <div className="flex">
                 <button
                   onClick={() => setActiveTab('viewer')}
                   className={`px-toolbar-padding py-3 text-xs font-bold uppercase tracking-wider border-b-2 transition-all cursor-pointer ${
                     activeTab === 'viewer'
                       ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400'
-                      : 'border-transparent text-gray-400 dark:text-gray-500 hover:text-gray-600'
+                      : 'border-transparent text-text-tertiary dark:text-text-secondary hover:text-text-secondary'
                   }`}
                 >
                   Viewer
@@ -511,7 +512,7 @@ export default function JsonFormatter() {
                   className={`px-toolbar-padding py-3 text-xs font-bold uppercase tracking-wider border-b-2 transition-all cursor-pointer ${
                     activeTab === 'formatted'
                       ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400'
-                      : 'border-transparent text-gray-400 dark:text-gray-500 hover:text-gray-600'
+                      : 'border-transparent text-text-tertiary dark:text-text-secondary hover:text-text-secondary'
                   }`}
                 >
                   Formatted
@@ -521,7 +522,7 @@ export default function JsonFormatter() {
                   className={`px-toolbar-padding py-3 text-xs font-bold uppercase tracking-wider border-b-2 transition-all cursor-pointer ${
                     activeTab === 'minified'
                       ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400'
-                      : 'border-transparent text-gray-400 dark:text-gray-500 hover:text-gray-600'
+                      : 'border-transparent text-text-tertiary dark:text-text-secondary hover:text-text-secondary'
                   }`}
                 >
                   Minified
@@ -555,17 +556,17 @@ export default function JsonFormatter() {
             {activeTab === 'viewer' && (
               <div className="flex-1 flex flex-col overflow-hidden min-h-[300px]">
                 {/* 1. Stack/Path Breadcrumbs indicator */}
-                <div className="px-toolbar-padding py-toolbar-gap bg-indigo-50/40 dark:bg-indigo-950/10 border-b border-gray-100 dark:border-slate-800/80 flex items-center justify-between gap-toolbar-gap text-xs">
+                <div className="px-toolbar-padding py-toolbar-gap bg-indigo-50/40 dark:bg-indigo-950/10 border-b border-border-default dark:border-slate-800/80 flex items-center justify-between gap-toolbar-gap text-xs">
                   <div className="flex items-center gap-item-gap overflow-hidden w-full">
                     <span className="font-bold text-[10px] uppercase text-indigo-500 tracking-wider shrink-0 select-none">
                       Stack Path:
                     </span>
                     {selectedPath ? (
-                      <span className="font-mono text-gray-700 dark:text-slate-200 select-all truncate bg-white dark:bg-slate-850 px-2 py-0.5 border border-indigo-100/50 dark:border-slate-800 rounded shadow-sm">
+                      <span className="font-mono text-text-primary dark:text-slate-200 select-all truncate bg-bg-elevated dark:bg-slate-850 px-2 py-0.5 border border-indigo-100/50 dark:border-slate-800 rounded shadow-sm">
                         {formatPathString(selectedPath, true)}
                       </span>
                     ) : (
-                      <span className="text-gray-400 dark:text-gray-500 italic truncate select-none">
+                      <span className="text-text-tertiary dark:text-text-secondary italic truncate select-none">
                         Click on any JSON tree key to select its code path
                       </span>
                     )}
@@ -594,7 +595,7 @@ export default function JsonFormatter() {
                 </div>
 
                 {/* 2. Tree Search & Global controls */}
-                <div className="px-toolbar-padding py-toolbar-gap border-b border-gray-100 dark:border-slate-800 bg-gray-50/20 dark:bg-slate-900/20 flex flex-col sm:flex-row gap-toolbar-gap justify-between items-stretch sm:items-center">
+                <div className="px-toolbar-padding py-toolbar-gap border-b border-border-default dark:border-slate-800 bg-bg-inset/20 dark:bg-slate-900/20 flex flex-col sm:flex-row gap-toolbar-gap justify-between items-stretch sm:items-center">
                   {/* Search Bar */}
                   <div className="relative flex-1">
                     <Search className="custom-search-icon" />
@@ -608,7 +609,7 @@ export default function JsonFormatter() {
                     {treeSearchQuery && (
                       <button
                         onClick={() => setTreeSearchQuery('')}
-                        className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] text-gray-400 hover:text-gray-600 bg-gray-200 dark:bg-slate-700 px-1.5 py-0.5 rounded cursor-pointer z-20"
+                        className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] text-text-tertiary hover:text-text-secondary bg-bg-inset dark:bg-slate-700 px-1.5 py-0.5 rounded cursor-pointer z-20"
                       >
                         Clear
                       </button>
@@ -633,7 +634,7 @@ export default function JsonFormatter() {
                 </div>
 
                 {/* 3. Tree Content */}
-                <div className="flex-1 overflow-auto p-panel-padding bg-gray-50/10 dark:bg-slate-900/10">
+                <div className="flex-1 overflow-auto p-panel-padding bg-bg-inset/10 dark:bg-slate-900/10">
                   {parsedData ? (
                     <JsonTreeViewer
                       key={`${treeKey}-${indentSize}-${sortKeys}`}
@@ -646,7 +647,7 @@ export default function JsonFormatter() {
                       }}
                     />
                   ) : (
-                    <div className="h-full flex flex-col items-center justify-center text-center p-panel-padding text-gray-400">
+                    <div className="h-full flex flex-col items-center justify-center text-center p-panel-padding text-text-tertiary">
                       <FileJson className="w-12 h-12 text-gray-200 dark:text-slate-800 mb-3" />
                       <span className="text-sm font-semibold mb-1">No JSON structured data</span>
                       <span className="text-xs max-w-sm">
@@ -662,17 +663,17 @@ export default function JsonFormatter() {
             {activeTab === 'formatted' && (
               <div className="flex-1 flex flex-col overflow-hidden min-h-[300px]">
                 {/* Formatting Controls Bar */}
-                <div className="px-toolbar-padding py-toolbar-gap border-b border-gray-100 dark:border-slate-800 bg-gray-50/20 dark:bg-slate-900/20 flex flex-wrap gap-toolbar-gap items-center justify-between text-xs">
+                <div className="px-toolbar-padding py-toolbar-gap border-b border-border-default dark:border-slate-800 bg-bg-inset/20 dark:bg-slate-900/20 flex flex-wrap gap-toolbar-gap items-center justify-between text-xs">
                   <div className="flex items-center gap-toolbar-gap flex-wrap">
                     {/* Indent select */}
                     <div className="flex items-center gap-item-gap">
-                      <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">
+                      <span className="text-[10px] font-bold text-text-tertiary uppercase tracking-wider">
                         Indent:
                       </span>
                       <select
                         value={indentSize}
                         onChange={(e) => setIndentSize(Number(e.target.value))}
-                        className="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-800 rounded px-1.5 py-0.5 font-semibold text-gray-600 dark:text-gray-300 outline-none cursor-pointer text-xs"
+                        className="bg-bg-inset dark:bg-slate-800 border border-border-default dark:border-slate-800 rounded px-1.5 py-0.5 font-semibold text-text-secondary dark:text-text-tertiary outline-none cursor-pointer text-xs"
                       >
                         <option value={2}>2 Spaces</option>
                         <option value={4}>4 Spaces</option>
@@ -686,9 +687,9 @@ export default function JsonFormatter() {
                         type="checkbox"
                         checked={sortKeys}
                         onChange={(e) => setSortKeys(e.target.checked)}
-                        className="rounded border-gray-300 dark:border-slate-850 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                        className="rounded border-border-strong dark:border-slate-850 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
                       />
-                      <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">
+                      <span className="text-[10px] font-bold text-text-tertiary uppercase tracking-wider">
                         Sort Keys
                       </span>
                     </label>
@@ -700,7 +701,7 @@ export default function JsonFormatter() {
                   {parsedData ? (
                     highlightJsonJSX(formattedOutput)
                   ) : (
-                    <div className="h-full flex flex-col items-center justify-center text-center p-panel-padding text-gray-400">
+                    <div className="h-full flex flex-col items-center justify-center text-center p-panel-padding text-text-tertiary">
                       <FileJson className="w-12 h-12 text-slate-800 mb-3" />
                       <span className="text-sm font-semibold mb-1">No Formatted Output</span>
                       <span className="text-xs">Correct the input syntax error to see formatted output.</span>
@@ -714,7 +715,7 @@ export default function JsonFormatter() {
             {activeTab === 'minified' && (
               <div className="flex-1 flex flex-col overflow-hidden min-h-[300px]">
                 {/* Minifier Controls */}
-                <div className="px-toolbar-padding py-toolbar-gap border-b border-gray-100 dark:border-slate-800 bg-gray-50/20 dark:bg-slate-900/20 flex gap-toolbar-gap items-center justify-between text-xs">
+                <div className="px-toolbar-padding py-toolbar-gap border-b border-border-default dark:border-slate-800 bg-bg-inset/20 dark:bg-slate-900/20 flex gap-toolbar-gap items-center justify-between text-xs">
                   <div className="flex items-center gap-toolbar-gap">
                     {/* Sort keys toggle */}
                     <label className="flex items-center gap-item-gap cursor-pointer">
@@ -722,9 +723,9 @@ export default function JsonFormatter() {
                         type="checkbox"
                         checked={sortKeys}
                         onChange={(e) => setSortKeys(e.target.checked)}
-                        className="rounded border-gray-300 dark:border-slate-850 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                        className="rounded border-border-strong dark:border-slate-850 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
                       />
-                      <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">
+                      <span className="text-[10px] font-bold text-text-tertiary uppercase tracking-wider">
                         Sort Keys
                       </span>
                     </label>
@@ -740,7 +741,7 @@ export default function JsonFormatter() {
                       className="w-full h-full bg-transparent border-none text-slate-200 font-mono text-xs leading-relaxed outline-none select-all resize-none overflow-y-auto"
                     />
                   ) : (
-                    <div className="h-full flex flex-col items-center justify-center text-center p-panel-padding text-gray-400">
+                    <div className="h-full flex flex-col items-center justify-center text-center p-panel-padding text-text-tertiary">
                       <FileJson className="w-12 h-12 text-slate-800 mb-3" />
                       <span className="text-sm font-semibold mb-1">No Minified Output</span>
                       <span className="text-xs">Correct the input syntax error to see minified output.</span>
@@ -756,21 +757,21 @@ export default function JsonFormatter() {
       {/* URL IMPORT MODAL */}
       {showUrlModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/55 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-2xl p-6 max-w-md w-full shadow-2xl flex flex-col gap-4 animate-scaleUp">
+          <div className="bg-bg-elevated dark:bg-slate-900 border border-border-default dark:border-slate-800 rounded-2xl p-6 max-w-md w-full shadow-2xl flex flex-col gap-4 animate-scaleUp">
             <div className="flex items-center justify-between">
-              <h3 className="font-display font-bold text-base text-gray-900 dark:text-gray-100">Fetch JSON from URL</h3>
+              <h3 className="font-display font-bold text-base text-text-primary dark:text-gray-100">Fetch JSON from URL</h3>
               <button
                 onClick={() => {
                   setShowUrlModal(false);
                   setImportUrl('');
                 }}
-                className="text-gray-400 hover:text-gray-600 text-sm font-bold bg-gray-100 dark:bg-slate-800 p-1.5 rounded-lg cursor-pointer"
+                className="text-text-tertiary hover:text-text-secondary text-sm font-bold bg-bg-inset dark:bg-slate-800 p-1.5 rounded-lg cursor-pointer"
               >
                 ✕
               </button>
             </div>
 
-            <p className="text-xs text-gray-500 dark:text-gray-400 leading-normal">
+            <p className="text-xs text-text-secondary dark:text-text-tertiary leading-normal">
               Provide a valid HTTP/HTTPS URL returning JSON content. Browser CORS policies may apply.
             </p>
 
@@ -779,7 +780,7 @@ export default function JsonFormatter() {
               placeholder="https://api.example.com/data.json"
               value={importUrl}
               onChange={(e) => setImportUrl(e.target.value)}
-              className="w-full p-3 bg-gray-50 dark:bg-slate-850 border border-gray-200 dark:border-slate-800 rounded-xl text-xs outline-none text-gray-700 dark:text-slate-200 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/10"
+              className="w-full p-3 bg-bg-inset dark:bg-slate-850 border border-border-default dark:border-slate-800 rounded-xl text-xs outline-none text-text-primary dark:text-slate-200 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/10"
             />
 
             <div className="flex gap-2 justify-end mt-2">
@@ -788,7 +789,7 @@ export default function JsonFormatter() {
                   setShowUrlModal(false);
                   setImportUrl('');
                 }}
-                className="px-4 py-2 border border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-slate-850 text-gray-650 dark:text-gray-400 text-xs font-semibold rounded-xl cursor-pointer"
+                className="px-4 py-2 border border-border-default dark:border-gray-800 hover:bg-bg-inset dark:hover:bg-slate-850 text-gray-650 dark:text-text-tertiary text-xs font-semibold rounded-xl cursor-pointer"
               >
                 Cancel
               </button>
