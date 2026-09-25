@@ -2,8 +2,10 @@ import { useState, useMemo } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
+import { AmortizationTable } from '@/components/finance/AmortizationTable';
 import { Slider, Button } from '@/components/ui';
 import { Download } from 'lucide-react';
+import { buildSchedule } from '@/utils/loanSchedule';
 import { useChartTheme } from '@/hooks/useChartTheme';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -24,54 +26,21 @@ export default function EducationLoanCalculator() {
   const [moratoriumYears, setMoratoriumYears] = useState(1); // 1 year moratorium (interest accrued only)
 
   const emiData = useMemo(() => {
-    // Moratorium calculations: interest is accrued during study/moratorium period and added to principal
-    const mMonths = moratoriumYears * 12;
-    const rMonthly = rate / 12 / 100;
-
-    // Accrued principal at the end of moratorium period
-    let revisedPrincipal = principal;
-    if (rMonthly > 0) {
-      revisedPrincipal = principal * Math.pow(1 + rMonthly, mMonths);
-    }
-
-    const nRepayment = tenureYears * 12;
-
-    if (rMonthly === 0) {
-      const emi = revisedPrincipal / nRepayment;
-      return {
-        monthlyEMI: emi,
-        totalAmount: revisedPrincipal,
-        totalInterest: revisedPrincipal - principal,
-        schedule: [],
-      };
-    }
-
-    const emi =
-      (revisedPrincipal * rMonthly * Math.pow(1 + rMonthly, nRepayment)) /
-      (Math.pow(1 + rMonthly, nRepayment) - 1);
-    const totalAmount = emi * nRepayment;
-    const totalInterest = totalAmount + (revisedPrincipal - principal) - principal;
-
-    const schedule = [];
-    let balance = revisedPrincipal;
-    for (let month = 1; month <= nRepayment; month++) {
-      const interest = balance * rMonthly;
-      const princ = emi - interest;
-      balance -= princ;
-      schedule.push({
-        month,
-        emi,
-        principal: princ,
-        interest,
-        balance: Math.max(0, balance),
-      });
-    }
-
+    // Interest accrues during the moratorium and is capitalised; EMIs then repay the grown balance.
+    const sched = buildSchedule({
+      principal,
+      annualRate: rate,
+      months: tenureYears * 12,
+      moratoriumMonths: moratoriumYears * 12,
+      startDate: new Date(),
+    });
     return {
-      monthlyEMI: emi,
-      totalAmount: totalAmount + (revisedPrincipal - principal),
-      totalInterest,
-      schedule,
+      monthlyEMI: sched.emi,
+      totalAmount: sched.totalPaid,
+      totalInterest: sched.totalInterest,
+      schedule: sched.rows
+        .filter((r) => r.phase === 'repayment')
+        .map((r, i) => ({ month: i + 1, emi: r.emi, principal: r.principal, interest: r.interest, balance: r.balance })),
     };
   }, [principal, rate, tenureYears, moratoriumYears]);
 
@@ -220,6 +189,13 @@ export default function EducationLoanCalculator() {
           </div>
         </div>
       </div>
+      <AmortizationTable
+        principal={principal}
+        annualRate={rate}
+        months={tenureYears * 12}
+        moratoriumMonths={moratoriumYears * 12}
+        csvName="Education_Loan"
+      />
     </ToolPageWrapper>
   );
 }

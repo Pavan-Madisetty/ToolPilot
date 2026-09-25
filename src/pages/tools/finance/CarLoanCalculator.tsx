@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
+import { AmortizationTable } from '@/components/finance/AmortizationTable';
 import { Slider, Button } from '@/components/ui';
 import { Download } from 'lucide-react';
 import { useChartTheme } from '@/hooks/useChartTheme';
@@ -204,6 +205,12 @@ export default function CarLoanCalculator() {
           </div>
         </div>
       </div>
+      <AmortizationTable
+        principal={principal}
+        annualRate={rate}
+        months={tenureYears*12}
+        csvName="Car_Loan"
+      />
     </ToolPageWrapper>
   );
 }

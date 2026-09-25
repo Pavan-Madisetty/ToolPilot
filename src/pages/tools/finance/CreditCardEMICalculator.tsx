@@ -10,6 +10,7 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
+import { AmortizationTable } from '@/components/finance/AmortizationTable';
 import { Slider, ResultBox, Callout } from '@/components/ui';
 import { useChartTheme } from '@/hooks/useChartTheme';
 
@@ -172,6 +173,7 @@ export default function CreditCardEMICalculator() {
           </Callout>
         </div>
       </div>
+      <AmortizationTable principal={balance} annualRate={rate} months={months} csvName="Credit_Card_EMI" />
     </ToolPageWrapper>
   );
 }
