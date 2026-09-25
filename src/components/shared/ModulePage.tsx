@@ -8,6 +8,7 @@ import { ToolCard } from '@/components/ui/ToolCard';
 import { ModulePageWrapper } from '@/components/shared/ModulePageWrapper';
 import { Accordion } from '@/components/ui/Accordion';
 import { LucideIcon } from '@/components/shared/LucideIcon';
+import { AdRenderer } from '@/components/shared/AdRenderer';
 
 interface ModulePageProps {
   moduleKey: string;
@@ -193,6 +194,8 @@ export function ModulePage({ moduleKey }: ModulePageProps) {
           </div>
         )}
       </section>
+
+      <AdRenderer slotId="module-inline" />
 
       {/* ── Why use ── */}
       {metadata.whyUse.length > 0 && (

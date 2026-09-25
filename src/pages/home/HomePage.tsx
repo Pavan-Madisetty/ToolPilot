@@ -10,6 +10,7 @@ import { LucideIcon } from '@/components/shared/LucideIcon';
 import { POPULAR_TOOLS, TOOL_BY_ID, TOOLS_BY_MODULE, TOOL_COUNT_LABEL, LIVE_TOOL_COUNT } from '@/config/tools';
 import type { ToolConfig } from '@/types';
 import { ToolCard } from '@/components/ui/ToolCard';
+import { AdRenderer } from '@/components/shared/AdRenderer';
 import { useRuntimeConfig } from '@/context/RuntimeConfigContext';
 
 // ─────────────────────────────────────────────
@@ -295,6 +296,8 @@ export default function HomePage() {
               </div>
             </section>
           )}
+
+          <AdRenderer slotId="home-inline" />
 
           {/* ── Why Toolskyt ────────────────────── */}
           {(config.homepage?.visibleSections?.highlights ?? true) && (

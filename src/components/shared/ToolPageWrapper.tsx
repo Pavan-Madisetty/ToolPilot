@@ -191,6 +191,9 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
         {/* Tool Application sandbox */}
         <div className="sk-toolbody">{children}</div>
 
+        {/* Ad: below the tool, clear of its controls, above the reading content */}
+        {!isComingSoon(tool.id) && <AdRenderer slotId="tool-below" />}
+
         {/* Rich SEO Content Explanatory Copy Section */}
         {(tool.longDescription || tool.benefits || tool.howToSteps || tool.faq) && (
           <article className="tool-about-article">
@@ -393,8 +396,8 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
           </article>
         )}
 
-        {/* Dynamic Ad Slot */}
-        <AdRenderer slotId="tools-sidebar-top" className="mt-12" />
+        {/* Ad: end of page, before related tools */}
+        {!isComingSoon(tool.id) && tool.faq && <AdRenderer slotId="tool-bottom" />}
 
         {/* Related Tools */}
         {tool.relatedTools && tool.relatedTools.length > 0 && (

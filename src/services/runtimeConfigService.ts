@@ -19,6 +19,7 @@ export const DEFAULT_CONFIG: FullRuntimeConfig = {
   },
   ads: {
     global: { enabled: true },
+    adsense: { enabled: false, client: '' },
     slots: {},
   },
   homepage: {

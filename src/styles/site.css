@@ -2038,3 +2038,46 @@ a.sk-chip:hover {
   border-color: var(--primary);
   background: var(--primary-subtle);
 }
+
+
+/* ── Advertising (AdSense) ──────────────────────────────── */
+.sk-ad {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  max-width: 100%;
+  margin: 40px auto;
+  overflow: hidden;
+  contain: layout paint;
+}
+.sk-ad__label {
+  align-self: center;
+  margin-bottom: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted, #94a3b8);
+}
+.sk-ad__test {
+  display: grid;
+  place-items: center;
+  border: 1.5px dashed var(--border-strong, #cbd5e1);
+  border-radius: 12px;
+  font-size: 13px;
+  color: var(--text-muted, #94a3b8);
+}
+.sk-ad__img img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  max-height: 250px;
+  margin: 0 auto;
+  border-radius: 12px;
+}
+@media print {
+  .sk-ad {
+    display: none !important;
+  }
+}

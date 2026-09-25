@@ -138,7 +138,7 @@ export function PrivacyPage() {
       title="Privacy Policy"
       crumb="Privacy"
       path="/privacy"
-      description="Toolskyt is a client-side platform that never sends your data to servers."
+      description="Toolskyt processes your files and inputs in your browser and never sends them to our servers. Read how advertising and cookies work."
       lead="The short version: your files and inputs stay in your browser."
     >
       <div className="sk-prose">
@@ -149,9 +149,24 @@ export function PrivacyPage() {
           </strong>{' '}
           No files or text inputs are ever sent to our servers.
         </p>
-        <h2>Tracking</h2>
+        <h2>Advertising</h2>
         <p>
-          We do not use tracking cookies or analytics profiling, and we do not sell user data. Preferences such
+          Toolskyt is free and may show ads served by Google AdSense. Google and its partners may use cookies
+          or similar identifiers to serve and measure ads, including personalised ads where the law allows.
+          Ads are separate from the tools: the files and text you enter into a tool are never shared with
+          advertisers. You can manage ad personalisation at{' '}
+          <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer">
+            adssettings.google.com
+          </a>{' '}
+          and read how Google uses data at{' '}
+          <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">
+            policies.google.com
+          </a>
+          .
+        </p>
+        <h2>Cookies and preferences</h2>
+        <p>
+          Apart from advertising, we do not use tracking cookies or analytics profiling, and we do not sell user data. Preferences such
           as your theme, favourites and recently used tools are stored only in your browser's local storage and
           can be cleared at any time from your browser settings.
         </p>

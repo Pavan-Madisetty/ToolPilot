@@ -32,6 +32,19 @@ import {
 } from '../src/utils/seo';
 
 const DIST = resolve('dist');
+
+// AdSense: publish ads.txt for the publisher ID in public/config/ads.json. The ownership meta tag
+// lives in index.html so every page (including 404) carries it.
+const adsCfg = (() => {
+  try {
+    return JSON.parse(readFileSync(resolve('public/config/ads.json'), 'utf-8')).adsense as
+      | { enabled?: boolean; client?: string }
+      | undefined;
+  } catch {
+    return undefined;
+  }
+})();
+const ADSENSE_ID = /^ca-pub-\d{16}$/.test(adsCfg?.client ?? '') ? (adsCfg.client as string) : null;
 const ROBOTS_INDEX = 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
 const ROBOTS_NOINDEX = 'noindex, follow';
 
@@ -430,6 +443,11 @@ function main() {
       true
     )
   );
+
+  if (ADSENSE_ID) {
+    write('ads.txt', `google.com, ${ADSENSE_ID.replace('ca-', '')}, DIRECT, f08c47fec0942fa0\n`);
+    console.log('Wrote ads.txt');
+  }
 
   console.log(`Prerendered ${pages.length + 2} pages into dist/`);
 }

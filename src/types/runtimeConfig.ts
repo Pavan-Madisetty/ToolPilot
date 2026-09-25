@@ -28,13 +28,30 @@ export interface AdSlotConfig {
   linkUrl?: string;
   alt?: string;
   style?: Record<string, string>;
+  /** Space reserved for the ad so the page never jumps when it loads (px). */
+  minHeight?: number;
+  /** AdSense ad format, default "auto". */
+  format?: 'auto' | 'rectangle' | 'horizontal' | 'vertical' | 'fluid';
+}
+
+export interface AdsenseConfig {
+  /** Master switch for Google AdSense. Keep false until the AdSense account is approved. */
+  enabled: boolean;
+  /** Publisher ID, e.g. ca-pub-1234567890123456 */
+  client: string;
+  /** Request non-personalised ads only. */
+  nonPersonalized?: boolean;
+  /** Earliest the ad script may load after the page has finished loading (ms). */
+  loadDelayMs?: number;
 }
 
 export interface AdsConfig {
   global: {
     enabled: boolean;
+    /** Shows labelled placeholders instead of real ads, so you can preview the layout. */
     testMode?: boolean;
   };
+  adsense?: AdsenseConfig;
   slots: Record<string, AdSlotConfig>;
 }
 

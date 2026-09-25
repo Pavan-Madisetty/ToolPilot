@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Breadcrumb } from '@/components/ui/Breadcrumb';
 import { ToolCard } from '@/components/ui/ToolCard';
+import { AdRenderer } from '@/components/shared/AdRenderer';
 import { MODULES } from '@/config/modules';
 import { TOOLS, isComingSoon, LIVE_TOOL_COUNT } from '@/config/tools';
 import { SITE_URL, OG_IMAGE, breadcrumbSchema, ALL_TOOLS_TITLE, allToolsDescription } from '@/utils/seo';
@@ -45,8 +46,10 @@ export default function AllToolsPage() {
             sign-up and run entirely in your browser.
           </p>
         </header>
-        {groups.map(({ module, tools }) => (
-          <section key={module.key} className="sk-group" aria-labelledby={`grp-${module.key}`}>
+        {groups.map(({ module, tools }, i) => (
+          <div key={module.key}>
+          {i === 3 && <AdRenderer slotId="alltools-inline" />}
+          <section className="sk-group" aria-labelledby={`grp-${module.key}`}>
             <div className="sk-group__head">
               <h2 id={`grp-${module.key}`} className="sk-group__title">
                 <Link to={module.slug}>{module.name}</Link>
@@ -59,6 +62,7 @@ export default function AllToolsPage() {
               ))}
             </div>
           </section>
+          </div>
         ))}
       </div>
     </>
