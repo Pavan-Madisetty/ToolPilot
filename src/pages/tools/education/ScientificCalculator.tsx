@@ -23,7 +23,7 @@ const evaluateExpression = (expr: string, degMode: boolean): string => {
     .replace(/ln/g, 'Math.log')
     .replace(/sqrt/g, 'Math.sqrt')
     .replace(/π/g, 'Math.PI')
-    .replace(/e/g, 'Math.E')
+    .replace(/(?<![A-Za-z])e(?![A-Za-z])/g, 'Math.E')
     .replace(/\^/g, '**')
     .replace(/fact/g, 'factorial')
     .replace(/×/g, '*')

@@ -235,16 +235,16 @@ const BASE_TOOLS: ToolConfig[] = [
   {
     id: 'income-tax-calculator',
     name: 'Income Tax Calculator',
-    description: 'Calculate income tax under old and new tax regime for FY 2024-25',
+    description: 'Calculate income tax under the new regime with slabs, standard deduction and cess (FY 2024-25)',
     module: 'finance',
     slug: '/finance/income-tax-calculator',
     icon: 'DocumentChartBarIcon',
-    tags: ['income tax', 'tax', 'itr', 'old regime', 'new regime'],
+    tags: ['income tax', 'tax', 'itr', 'new regime'],
     isPopular: true,
     isFeatured: true,
-    metaTitle: 'Income Tax Calculator FY 2024-25 - Old & New Regime | Toolskyt',
+    metaTitle: 'Income Tax Calculator FY 2024-25 - New Regime | Toolskyt',
     metaDescription:
-      'Calculate income tax for FY 2024-25 under both old and new tax regime. Compare and choose the best regime.',
+      'Free income tax calculator for the new tax regime (FY 2024-25 slabs): standard deduction, rebate, cess and effective tax rate. Runs in your browser.',
     keywords: [
       'income tax calculator',
       'tax calculator india',
@@ -318,16 +318,16 @@ const BASE_TOOLS: ToolConfig[] = [
   {
     id: 'currency-converter',
     name: 'Currency Converter',
-    description: 'Convert between 170+ world currencies with live rates',
+    description: 'Convert between major currencies (USD, INR, EUR, GBP, JPY, AUD, CAD, SGD) with indicative rates',
     module: 'finance',
     slug: '/finance/currency-converter',
     icon: 'GlobeAltIcon',
     tags: ['currency', 'forex', 'exchange rate', 'usd', 'inr', 'eur'],
     isPopular: true,
     isFeatured: true,
-    metaTitle: 'Currency Converter - Convert 170+ Currencies | Toolskyt',
+    metaTitle: 'Currency Converter - USD, INR, EUR, GBP & More | Toolskyt',
     metaDescription:
-      'Free currency converter with 170+ currencies. Convert USD to INR, EUR to USD and more with up-to-date rates.',
+      'Free currency converter for USD, INR, EUR, GBP, JPY, AUD, CAD and SGD using indicative rates. Not for trading or remittance decisions.',
     keywords: [
       'currency converter',
       'forex converter',
@@ -430,7 +430,7 @@ const BASE_TOOLS: ToolConfig[] = [
   {
     id: 'bill-splitter',
     name: 'Bill Splitter',
-    description: 'Split bills among multiple people with custom shares',
+    description: 'Split a bill equally among any number of people, with tip',
     module: 'finance',
     slug: '/finance/bill-splitter',
     icon: 'UsersIcon',
@@ -696,8 +696,8 @@ const BASE_TOOLS: ToolConfig[] = [
   {
     id: 'uuid-generator',
     name: 'UUID Generator',
-    description: 'Generate UUIDs (v1, v4, v5) individually or in bulk',
-    longDescription: 'Generate universally unique identifiers (UUIDs) locally. Toolskyt supports v1 (timestamp-based), v4 (fully random), and v5 (namespace SHA-1) configurations. Ideal for generating test keys, database IDs, and software identifiers.',
+    description: 'Generate UUIDs (v1 and v4) individually or in bulk',
+    longDescription: 'Generate universally unique identifiers (UUIDs) locally. Toolskyt supports v1 (timestamp-based) and v4 (fully random) UUIDs. Ideal for generating test keys, database IDs, and software identifiers.',
     module: 'developer',
     slug: '/developer/uuid-generator',
     icon: 'FingerPrintIcon',
@@ -705,7 +705,7 @@ const BASE_TOOLS: ToolConfig[] = [
     isPopular: true,
     metaTitle: 'UUID Generator - Generate UUIDs Online | Toolskyt',
     metaDescription:
-      'Generate UUID v1, v4, v5 instantly. Bulk generate multiple UUIDs. Copy with one click.',
+      'Generate UUID v1 and v4 instantly. Bulk generate multiple UUIDs. Copy with one click.',
     keywords: ['uuid generator', 'guid generator', 'random uuid', 'generate uuid online'],
     relatedTools: ['hash-generator', 'password-generator'],
     benefits: [
@@ -777,14 +777,14 @@ const BASE_TOOLS: ToolConfig[] = [
   {
     id: 'alternative-timestamps',
     name: 'Alternative Timestamps Converter',
-    description: 'Convert between LDAP, Chrome, NTP, Cocoa, GPS, and Unix epoch timestamps',
+    description: 'Convert Unix timestamps (seconds, ms, µs, ns) to readable dates, with LDAP, WebKit, NTP and Cocoa epoch offsets explained',
     module: 'developer',
     slug: '/developer/alternative-timestamps',
     icon: 'ClockIcon',
     tags: ['timestamp', 'epoch', 'ldap', 'chrome webkit', 'ntp', 'ticks', 'cocoa'],
-    metaTitle: 'Alternative Timestamps Converter - LDAP, WebKit, Cocoa, NTP | Toolskyt',
+    metaTitle: 'Timestamp Converter - Unix Epoch Seconds, ms, µs, ns | Toolskyt',
     metaDescription:
-      'Free multi-epoch converter. Translate between Windows LDAP, Chrome/WebKit, .NET Ticks, NTP, Cocoa Core Data, GPS, and Unix timestamps.',
+      'Free epoch converter: auto-detects Unix seconds, milliseconds, microseconds and nanoseconds and shows UTC, local and ISO time. Includes LDAP, WebKit, NTP and Cocoa epoch offsets.',
     keywords: [
       'alternative epoch',
       'ldap timestamp',
@@ -800,7 +800,7 @@ const BASE_TOOLS: ToolConfig[] = [
   {
     id: 'color-picker',
     name: 'Color Picker & Converter',
-    description: 'Pick colors and convert between HEX, RGB, HSL, HSV formats',
+    description: 'Pick colors and convert between HEX, RGB and HSL formats',
     module: 'developer',
     slug: '/developer/color-picker',
     icon: 'SwatchIcon',
@@ -808,7 +808,7 @@ const BASE_TOOLS: ToolConfig[] = [
     isPopular: true,
     metaTitle: 'Color Picker & Converter - HEX RGB HSL | Toolskyt',
     metaDescription:
-      'Free color picker. Convert colors between HEX, RGB, HSL, HSV formats. Pick any color from palette.',
+      'Free color picker. Convert colors between HEX, RGB and HSL formats. Copy CSS-ready values.',
     keywords: ['color picker', 'color converter', 'hex to rgb', 'rgb to hex', 'hsl converter'],
     relatedTools: ['gradient-generator'],
   },
@@ -992,15 +992,15 @@ const BASE_TOOLS: ToolConfig[] = [
   {
     id: 'barcode-generator',
     name: 'Barcode Generator',
-    description: 'Generate barcodes in various formats (EAN, UPC, CODE128)',
+    description: 'Generate Code 128 barcodes and download as SVG',
     module: 'image',
     slug: '/image/barcode-generator',
     icon: 'QrCodeIcon',
-    tags: ['barcode', 'ean', 'upc', 'code128', 'isbn'],
+    tags: ['barcode', 'code128', 'svg'],
     metaTitle: 'Barcode Generator - Create Barcodes Online Free | Toolskyt',
     metaDescription:
-      'Generate barcodes in EAN-13, EAN-8, UPC-A, CODE-128, CODE-39 formats. Download as SVG or PNG.',
-    keywords: ['barcode generator', 'create barcode', 'ean barcode', 'upc barcode'],
+      'Generate Code 128 barcodes online and download them as SVG. Free, private, runs in your browser.',
+    keywords: ['barcode generator', 'create barcode', 'code 128 barcode', 'svg barcode'],
     relatedTools: ['qr-generator'],
   },
   {
@@ -1131,7 +1131,7 @@ const BASE_TOOLS: ToolConfig[] = [
   {
     id: 'markdown-editor',
     name: 'Markdown Editor',
-    description: 'Full-featured Markdown editor with live preview and export',
+    description: 'Markdown editor with live preview, open-file support and .md export',
     module: 'text',
     slug: '/text/markdown-editor',
     icon: 'PencilSquareIcon',
@@ -1644,7 +1644,7 @@ const BASE_TOOLS: ToolConfig[] = [
   {
     id: 'checklist',
     name: 'Checklist',
-    description: 'Create and share reusable checklists for any task',
+    description: 'Create reusable checklists for any task, saved in your browser',
     module: 'productivity',
     slug: '/productivity/checklist',
     icon: 'ClipboardDocumentCheckIcon',
@@ -1657,7 +1657,7 @@ const BASE_TOOLS: ToolConfig[] = [
   {
     id: 'notes',
     name: 'Notes',
-    description: 'Rich-text notes editor with folders and local storage',
+    description: 'Simple notes editor that saves in your browser',
     module: 'productivity',
     slug: '/productivity/notes',
     icon: 'DocumentTextIcon',
@@ -1775,7 +1775,7 @@ const BASE_TOOLS: ToolConfig[] = [
   {
     id: 'unit-converter',
     name: 'Unit Converter',
-    description: 'Convert between 100+ units of length, weight, temperature and more',
+    description: 'Convert between common units of length, weight, temperature and volume',
     module: 'education',
     slug: '/education/unit-converter',
     icon: 'ArrowsRightLeftIcon',
@@ -1784,7 +1784,7 @@ const BASE_TOOLS: ToolConfig[] = [
     isFeatured: true,
     metaTitle: 'Unit Converter - Convert All Units Online | Toolskyt',
     metaDescription:
-      'Free unit converter. Convert length, weight, temperature, speed, volume and 100+ more units.',
+      'Free unit converter for length, weight, temperature and volume. See dedicated converters for area, speed, time and data storage.',
     keywords: ['unit converter', 'unit conversion', 'metric converter', 'measurement converter'],
     relatedTools: ['length-converter', 'weight-converter', 'temperature-converter'],
   },
@@ -2052,14 +2052,14 @@ const BASE_TOOLS: ToolConfig[] = [
   {
     id: 'roi-calculator',
     name: 'ROI Calculator',
-    description: 'Calculate Return on Investment and payback period',
+    description: 'Calculate Return on Investment (ROI) and net profit',
     module: 'business',
     slug: '/business/roi-calculator',
     icon: 'ArrowTrendingUpIcon',
     tags: ['roi', 'return on investment', 'profit', 'payback', 'business'],
     metaTitle: 'ROI Calculator - Calculate Return on Investment | Toolskyt',
     metaDescription:
-      'Calculate ROI (Return on Investment), net profit and payback period for any investment.',
+      'Calculate ROI (Return on Investment) and net profit for any investment.',
     keywords: [
       'roi calculator',
       'return on investment calculator',
@@ -2071,7 +2071,7 @@ const BASE_TOOLS: ToolConfig[] = [
   {
     id: 'profit-margin',
     name: 'Profit Margin Calculator',
-    description: 'Calculate gross, net and operating profit margins',
+    description: 'Calculate gross profit margin and markup from cost and selling price',
     module: 'business',
     slug: '/business/profit-margin',
     icon: 'ChartBarIcon',

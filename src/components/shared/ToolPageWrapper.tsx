@@ -9,8 +9,7 @@ import { Heart, Share2, FileText, Sliders, Eye, Download } from 'lucide-react';
 import { Accordion } from '@/components/ui/Accordion';
 import { clsx } from 'clsx';
 import { useUIStore } from '@/stores/uiStore';
-import { SEO_CONTENTS } from '@/config/seoContents';
-import { getFallbackSEOContent } from '@/utils/seoGenerator';
+import { resolveToolContent } from '@/utils/toolContent';
 import { MODULE_MAP, getModuleColors } from '@/config/modules';
 import { ToolSwitcher } from './ToolSwitcher';
 import { LucideIcon } from './LucideIcon';
@@ -27,9 +26,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
   const tool = useMemo(() => {
     const baseTool = TOOL_BY_ID[toolId];
     if (!baseTool) return null;
-    const seoDetails = SEO_CONTENTS[baseTool.id] || {};
-    const fallbackDetails = getFallbackSEOContent(baseTool);
-    return { ...baseTool, ...fallbackDetails, ...seoDetails };
+    return resolveToolContent(baseTool);
   }, [toolId]);
 
   const { recordVisit } = useHistoryStore();

@@ -19,19 +19,19 @@
 - [EPF Calculator](https://toolskyt.com/finance/epf-calculator): Calculate Employee Provident Fund corpus and returns
 - [Retirement Calculator](https://toolskyt.com/finance/retirement-calculator): Plan your retirement corpus and monthly income needs
 - [GST Calculator](https://toolskyt.com/finance/gst-calculator): Calculate GST amount for goods and services instantly
-- [Income Tax Calculator](https://toolskyt.com/finance/income-tax-calculator): Calculate income tax under old and new tax regime for FY 2024-25
+- [Income Tax Calculator](https://toolskyt.com/finance/income-tax-calculator): Calculate income tax under the new regime with slabs, standard deduction and cess (FY 2024-25)
 - [Salary Calculator](https://toolskyt.com/finance/salary-calculator): Calculate take-home salary from CTC with all deductions
 - [HRA Calculator](https://toolskyt.com/finance/hra-calculator): Calculate HRA exemption under Section 10(13A)
 - [Compound Interest Calculator](https://toolskyt.com/finance/compound-interest-calculator): Calculate compound interest with different compounding frequencies
 - [Simple Interest Calculator](https://toolskyt.com/finance/simple-interest-calculator): Calculate simple interest on principal amount
-- [Currency Converter](https://toolskyt.com/finance/currency-converter): Convert between 170+ world currencies with live rates
+- [Currency Converter](https://toolskyt.com/finance/currency-converter): Convert between major currencies (USD, INR, EUR, GBP, JPY, AUD, CAD, SGD) with indicative rates
 - [Inflation Calculator](https://toolskyt.com/finance/inflation-calculator): Calculate the future value of money adjusted for inflation
 - [Budget Planner](https://toolskyt.com/finance/budget-planner): Create a monthly budget and track income vs expenses
 - [Gratuity Calculator](https://toolskyt.com/finance/gratuity-calculator): Calculate gratuity amount under Payment of Gratuity Act
 - [Stock Average Calculator](https://toolskyt.com/finance/stock-average-calculator): Calculate average purchase price of stocks across multiple buys
 - [Brokerage Calculator](https://toolskyt.com/finance/brokerage-calculator): Calculate brokerage fees, STT, and other charges for stock trading
 - [Tip Calculator](https://toolskyt.com/finance/tip-calculator): Calculate tip amount and split the bill among friends
-- [Bill Splitter](https://toolskyt.com/finance/bill-splitter): Split bills among multiple people with custom shares
+- [Bill Splitter](https://toolskyt.com/finance/bill-splitter): Split a bill equally among any number of people, with tip
 - [Expense Tracker](https://toolskyt.com/finance/expense-tracker): Track daily expenses and view spending by category
 - [Savings Planner](https://toolskyt.com/finance/savings-planner): Plan and track your savings goals with timeline
 - [Net Worth Calculator](https://toolskyt.com/finance/net-worth-calculator): Calculate your total net worth from assets and liabilities
@@ -51,12 +51,12 @@
 - [Base64 Encoder / Decoder](https://toolskyt.com/developer/base64): Encode and decode Base64 strings and files
 - [URL Encoder / Decoder](https://toolskyt.com/developer/url-encoder): Encode and decode URLs and query parameters
 - [JWT Decoder & Inspector](https://toolskyt.com/developer/jwt-decoder): Decode and inspect JWT tokens with claims validation
-- [UUID Generator](https://toolskyt.com/developer/uuid-generator): Generate UUIDs (v1, v4, v5) individually or in bulk
+- [UUID Generator](https://toolskyt.com/developer/uuid-generator): Generate UUIDs (v1 and v4) individually or in bulk
 - [Hash Generator](https://toolskyt.com/developer/hash-generator): Generate MD5, SHA-1, SHA-256, SHA-512 hashes
 - [Regex Tester](https://toolskyt.com/developer/regex-tester): Test and debug regular expressions with real-time match highlighting
 - [Timestamp Converter](https://toolskyt.com/developer/timestamp-converter): Convert between Unix timestamps and human-readable dates
-- [Alternative Timestamps Converter](https://toolskyt.com/developer/alternative-timestamps): Convert between LDAP, Chrome, NTP, Cocoa, GPS, and Unix epoch timestamps
-- [Color Picker & Converter](https://toolskyt.com/developer/color-picker): Pick colors and convert between HEX, RGB, HSL, HSV formats
+- [Alternative Timestamps Converter](https://toolskyt.com/developer/alternative-timestamps): Convert Unix timestamps (seconds, ms, µs, ns) to readable dates, with LDAP, WebKit, NTP and Cocoa epoch offsets explained
+- [Color Picker & Converter](https://toolskyt.com/developer/color-picker): Pick colors and convert between HEX, RGB and HSL formats
 - [SQL Formatter](https://toolskyt.com/developer/sql-formatter): Format and beautify SQL queries with keyword highlighting
 - [Diff Checker](https://toolskyt.com/developer/diff-checker): Compare two texts or code blocks side-by-side
 - [Password Generator](https://toolskyt.com/developer/password-generator): Generate strong, secure passwords with custom rules
@@ -85,7 +85,7 @@
 - [Image Compressor](https://toolskyt.com/image/compress): Compress images and reduce file size without quality loss
 - [Image Cropper](https://toolskyt.com/image/crop): Crop images to custom dimensions or preset aspect ratios
 - [QR Code Generator](https://toolskyt.com/image/qr-generator): Generate QR codes for URLs, text, contact, WiFi and more
-- [Barcode Generator](https://toolskyt.com/image/barcode-generator): Generate barcodes in various formats (EAN, UPC, CODE128)
+- [Barcode Generator](https://toolskyt.com/image/barcode-generator): Generate Code 128 barcodes and download as SVG
 - [Image to JPG Converter](https://toolskyt.com/image/jpg-converter): Convert PNG, WEBP, GIF images to JPG format
 - [Image to WEBP Converter](https://toolskyt.com/image/webp-converter): Convert images to WEBP format for web optimization
 - [Color Palette Extractor](https://toolskyt.com/image/color-palette): Extract dominant colors from any image
@@ -100,7 +100,7 @@
 - [Case Converter](https://toolskyt.com/text/case-converter): Convert text between UPPER, lower, Title, camelCase, snake_case
 - [Slug Generator](https://toolskyt.com/text/slug-generator): Generate URL-friendly slugs from any text
 - [Text Diff](https://toolskyt.com/text/text-diff): Compare two text blocks and highlight differences
-- [Markdown Editor](https://toolskyt.com/text/markdown-editor): Full-featured Markdown editor with live preview and export
+- [Markdown Editor](https://toolskyt.com/text/markdown-editor): Markdown editor with live preview, open-file support and .md export
 - [Text to Emoji Translator](https://toolskyt.com/text/text-to-emoji): Translate words to emojis or spell text using emoji blocks
 - [Stylish Text Generator](https://toolskyt.com/text/stylish-text): Convert regular text into stylish fonts and Unicode symbols
 - [Emoji Search & Copy](https://toolskyt.com/text/emoji-search): Search, browse, and copy emojis with skin tone support
@@ -127,8 +127,8 @@
 
 - [Invoice Generator](https://toolskyt.com/business/invoice-generator): Create professional invoices and download as PDF
 - [GST Invoice Generator](https://toolskyt.com/business/gst-invoice): Create GST-compliant invoices with CGST, SGST, IGST calculation
-- [ROI Calculator](https://toolskyt.com/business/roi-calculator): Calculate Return on Investment and payback period
-- [Profit Margin Calculator](https://toolskyt.com/business/profit-margin): Calculate gross, net and operating profit margins
+- [ROI Calculator](https://toolskyt.com/business/roi-calculator): Calculate Return on Investment (ROI) and net profit
+- [Profit Margin Calculator](https://toolskyt.com/business/profit-margin): Calculate gross profit margin and markup from cost and selling price
 - [Break-Even Calculator](https://toolskyt.com/business/break-even): Calculate break-even point in units and revenue
 - [Quotation Generator](https://toolskyt.com/business/quotation-generator): Create professional price quotations for clients
 - [Markup Calculator](https://toolskyt.com/business/markup-calculator): Convert between cost, price, markup % and margin %
@@ -141,8 +141,8 @@
 - [Stopwatch](https://toolskyt.com/productivity/stopwatch): Precise stopwatch with lap times and history
 - [Countdown Timer](https://toolskyt.com/productivity/countdown): Count down to any date or set a custom duration timer
 - [To-Do List](https://toolskyt.com/productivity/todo): Simple, powerful to-do list with priorities and due dates
-- [Checklist](https://toolskyt.com/productivity/checklist): Create and share reusable checklists for any task
-- [Notes](https://toolskyt.com/productivity/notes): Rich-text notes editor with folders and local storage
+- [Checklist](https://toolskyt.com/productivity/checklist): Create reusable checklists for any task, saved in your browser
+- [Notes](https://toolskyt.com/productivity/notes): Simple notes editor that saves in your browser
 - [Habit Tracker](https://toolskyt.com/productivity/habit-tracker): Track daily habits and build streaks with visual progress
 - [Eisenhower Matrix](https://toolskyt.com/productivity/eisenhower-matrix): Prioritise tasks by urgency and importance — saved locally in your browser
 - [Random Picker Wheel](https://toolskyt.com/productivity/random-picker): Spin a wheel to pick a random name, option or winner
@@ -155,7 +155,7 @@
 - [Percentage Calculator](https://toolskyt.com/education/percentage-calculator): Calculate percentage, percentage change, and percentage of total
 - [CGPA Calculator](https://toolskyt.com/education/cgpa-calculator): Calculate CGPA and percentage for Indian university system
 - [GPA Calculator](https://toolskyt.com/education/gpa-calculator): Calculate semester GPA with letter grades and credit hours
-- [Unit Converter](https://toolskyt.com/education/unit-converter): Convert between 100+ units of length, weight, temperature and more
+- [Unit Converter](https://toolskyt.com/education/unit-converter): Convert between common units of length, weight, temperature and volume
 - [Quadratic Equation Solver](https://toolskyt.com/education/quadratic-solver): Solve ax² + bx + c = 0 with discriminant, roots and vertex
 - [Prime, GCD & LCM Calculator](https://toolskyt.com/education/prime-factorization): Prime factorisation, primality test, GCD and LCM of numbers
 - [Statistics Calculator](https://toolskyt.com/education/statistics-calculator): Mean, median, mode, standard deviation, quartiles and more for a dataset

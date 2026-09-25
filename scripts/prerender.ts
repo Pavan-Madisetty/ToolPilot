@@ -13,8 +13,7 @@ import { resolve, dirname } from 'path';
 import { TOOLS, isComingSoon, LIVE_TOOL_COUNT } from '../src/config/tools';
 import { MODULES } from '../src/config/modules';
 import { MODULE_METADATA } from '../src/config/moduleMetadata';
-import { SEO_CONTENTS } from '../src/config/seoContents';
-import { getFallbackSEOContent } from '../src/utils/seoGenerator';
+import { resolveToolContent } from '../src/utils/toolContent';
 import {
   SITE_URL,
   OG_IMAGE,
@@ -220,7 +219,7 @@ ${
 }
 
 function toolPage(base: (typeof TOOLS)[number]): Page {
-  const tool = { ...base, ...getFallbackSEOContent(base), ...(SEO_CONTENTS[base.id] || {}) };
+  const tool = resolveToolContent(base);
   const url = toolUrl(tool.slug);
   const mName = moduleName(tool.module);
   const related = (tool.relatedTools || [])

@@ -27,7 +27,7 @@ export const SEO_CONTENTS: Record<string, Partial<ToolConfig>> = {
     examples: [
       {
         input: 'Principal: ₹10,00,000, Interest Rate: 8.5%, Tenure: 120 Months (10 Years)',
-        output: 'Monthly EMI: ₹12,399, Total Interest: ₹4,87,838, Total Repayment: ₹14,87,838',
+        output: 'Monthly EMI: ₹12,399, Total Interest: ₹4,87,828, Total Repayment: ₹14,87,828',
       },
     ],
     howToSteps: [
@@ -381,16 +381,16 @@ export const SEO_CONTENTS: Record<string, Partial<ToolConfig>> = {
   },
   'alternative-timestamps': {
     longDescription:
-      'A multi-epoch timestamp converter that decodes alternative time formats such as Windows LDAP/Active Directory, Chrome/WebKit, .NET Ticks, NTP, Cocoa, GPS, and Unix epoch timestamps into readable dates and vice-versa.',
+      'A timestamp converter that auto-detects Unix epoch values in seconds, milliseconds, microseconds and nanoseconds and shows them as UTC, local and ISO dates. It also documents the epoch offsets used by Windows LDAP/Active Directory, Chrome/WebKit, NTP and Apple Cocoa so you can convert those values by hand.',
     benefits: [
-      'Multi-Format: View what a timestamp translates to across 8 different system epochs simultaneously.',
+      'Clear Output: View a timestamp as UTC, local time and ISO 8601 at once.',
       'Auto-Parsing: Detects and processes microsecond and nanosecond precisions automatically.',
       'Developer friendly: Easily copy code snippets and values in one click.',
     ],
     howToSteps: [
       { name: 'Enter Timestamp', text: 'Paste any numerical timestamp value.' },
-      { name: 'Select System', text: 'Choose the source format (e.g. LDAP ticks, Unix seconds, NTP).' },
-      { name: 'View Results', text: 'Instantly view comparison across all formats, UTC, local, and ISO times.' },
+      { name: 'Check the Precision', text: 'The tool detects whether the value is in seconds, milliseconds, microseconds or nanoseconds.' },
+      { name: 'View Results', text: 'Instantly view the date in UTC, local and ISO formats.' },
     ],
   },
 
