@@ -1,5 +1,7 @@
-import * as Icons from 'lucide-react';
-import { CSSProperties } from 'react';
+import type { CSSProperties } from 'react';
+import { CircleHelp } from 'lucide-react';
+import { ICON_MAPPING } from './iconMapping';
+import { ICON_REGISTRY } from './iconRegistry';
 
 interface LucideIconProps {
   name: string;
@@ -12,111 +14,23 @@ interface LucideIconProps {
   fallback?: string;
 }
 
-const ICON_MAPPING: Record<string, string> = {
-  CurrencyRupeeIcon: 'IndianRupee',
-  HomeIcon: 'Home',
-  TruckIcon: 'Car',
-  UserIcon: 'User',
-  AcademicCapIcon: 'GraduationCap',
-  CheckBadgeIcon: 'CheckSquare',
-  ChartBarIcon: 'BarChart2',
-  BanknotesIcon: 'Banknote',
-  ArrowTrendingUpIcon: 'TrendingUp',
-  ShieldCheckIcon: 'ShieldCheck',
-  BuildingOfficeIcon: 'Building2',
-  SunIcon: 'Sun',
-  ReceiptPercentIcon: 'Percent',
-  DocumentChartBarIcon: 'FileSpreadsheet',
-  CreditCardIcon: 'CreditCard',
-  HomeModernIcon: 'Home',
-  CalculatorIcon: 'Calculator',
-  GlobeAltIcon: 'Globe',
-  GiftIcon: 'Gift',
-  ChartBarSquareIcon: 'BarChart3',
-  ArrowsRightLeftIcon: 'ArrowLeftRight',
-  UsersIcon: 'Users',
-  ClipboardDocumentListIcon: 'ClipboardList',
-  PresentationChartBarIcon: 'Presentation',
-  ScaleIcon: 'Scale',
-  StarIcon: 'Star',
-  CurrencyBitcoinIcon: 'Bitcoin',
-  ArrowPathIcon: 'RefreshCw',
-  ChartPieIcon: 'PieChart',
-  CodeBracketIcon: 'Code',
-  LinkIcon: 'Link',
-  ShieldCheck: 'Shield',
-  FingerPrintIcon: 'Fingerprint',
-  LockClosedIcon: 'Lock',
-  MagnifyingGlassIcon: 'Search',
-  ClockIcon: 'Clock',
-  SwatchIcon: 'Palette',
-  CircleStackIcon: 'Database',
-  DocumentDuplicateIcon: 'Copy',
-  KeyIcon: 'Key',
-  DocumentTextIcon: 'FileText',
-  PaintBrushIcon: 'Paintbrush',
-  ArrowsPointingOutIcon: 'Expand',
-  ArchiveBoxIcon: 'Archive',
-  ScissorsIcon: 'Scissors',
-  QrCodeIcon: 'QrCode',
-  PhotoIcon: 'Image',
-  WindowIcon: 'Layout',
-  SparklesIcon: 'Sparkles',
-  HeartIcon: 'Heart',
-  WrenchScrewdriverIcon: 'Wrench',
-  MapIcon: 'Map',
-  BriefcaseIcon: 'Briefcase',
-  DocumentIcon: 'File',
-  PresentationChartLineIcon: 'LineChart',
-  AdjustmentsHorizontalIcon: 'SlidersHorizontal',
-  PencilSquareIcon: 'SquarePen',
-  FaceSmileIcon: 'Smile',
-  LanguageIcon: 'Languages',
-  QuestionMarkCircleIcon: 'CircleHelp',
-  CommandLineIcon: 'Terminal',
-  EnvelopeIcon: 'Mail',
-  PaperAirplaneIcon: 'Send',
-  ClipboardDocumentCheckIcon: 'ClipboardCheck',
-  FireIcon: 'Flame',
-  HashtagIcon: 'Hash',
-  ReceiptRefundIcon: 'Receipt',
-};
-
-type IconComponentType = React.ComponentType<{
-  size?: number;
-  className?: string;
-  strokeWidth?: number;
-  style?: CSSProperties;
-  'aria-hidden'?: boolean | 'true' | 'false';
-}>;
-
-const ICONS = Icons as unknown as Record<string, IconComponentType>;
-
+/**
+ * Renders a Lucide icon by name. Icons come from an explicit registry (see
+ * iconRegistry.ts) so the bundle only contains icons that are actually used.
+ */
 export function LucideIcon({
   name,
-  fallback,
   size = 20,
   className,
   strokeWidth = 2,
   style,
   'aria-hidden': ariaHidden = true,
+  fallback,
 }: LucideIconProps) {
   const IconComponent =
-    ICONS[ICON_MAPPING[name] || name] ?? (fallback ? ICONS[ICON_MAPPING[fallback] || fallback] : undefined);
-
-  if (!IconComponent) {
-    // Fallback icon
-    return (
-      <Icons.HelpCircle
-        size={size}
-        className={className}
-        strokeWidth={strokeWidth}
-        style={style}
-        aria-hidden={ariaHidden}
-      />
-    );
-  }
-
+    ICON_REGISTRY[ICON_MAPPING[name] || name] ??
+    (fallback ? ICON_REGISTRY[ICON_MAPPING[fallback] || fallback] : undefined) ??
+    CircleHelp;
   return (
     <IconComponent
       size={size}

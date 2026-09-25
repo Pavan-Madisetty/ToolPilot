@@ -24,7 +24,7 @@ export const DEFAULT_CONFIG: FullRuntimeConfig = {
   homepage: {
     hero: {
       title: 'Your Complete Digital Toolkit',
-      subtitle: '100+ free browser tools. No signup. No tracking. Works offline.',
+      subtitle: 'Free browser tools. No signup. No tracking. Works offline.',
     },
     visibleSections: {
       hero: true,
@@ -39,8 +39,8 @@ export const DEFAULT_CONFIG: FullRuntimeConfig = {
   },
   seo: {
     homepage: {
-      metaTitle: 'Toolskyt — 100+ Free Online Tools for Finance, Developer, PDF & More',
-      metaDescription: 'Free online browser tools. No signup. No tracking. Works offline. Complete tools for finance, developer utilities, PDF editing, text conversion, and travel estimation.',
+      metaTitle: 'Free Online Tools — Calculators, PDF, JSON & More | Toolskyt',
+      metaDescription: 'Free online tools that run in your browser: EMI and SIP calculators, PDF and image tools, JSON formatter, converters and more. No sign-up, no uploads.',
       keywords: ['online tools', 'emi calculator', 'sip calculator', 'json formatter', 'resume builder'],
     },
   },

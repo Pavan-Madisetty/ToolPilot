@@ -1,5 +1,15 @@
+# Toolskyt — all content is public and free to crawl.
 User-agent: *
 Allow: /
-Disallow: /search
+
+# AI / answer-engine crawlers are welcome too
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
 
 Sitemap: https://toolskyt.com/sitemap.xml

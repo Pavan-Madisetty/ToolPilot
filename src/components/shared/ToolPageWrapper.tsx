@@ -15,6 +15,7 @@ import { MODULE_MAP, getModuleColors } from '@/config/modules';
 import { ToolSwitcher } from './ToolSwitcher';
 import { LucideIcon } from './LucideIcon';
 import { Link } from 'react-router-dom';
+import { fitTitle, toolUrl, webAppSchema as buildWebApp, breadcrumbSchema as buildBreadcrumb, faqSchema as buildFaq, howToSchema as buildHowTo, SITE_URL } from '@/utils/seo';
 
 interface ToolPageWrapperProps {
   toolId: string;
@@ -100,99 +101,37 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
   // Structured Data Schema Generators
   // ─────────────────────────────────────────────
 
-  const webAppSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'WebApplication',
-    name: tool.name,
-    description: tool.description,
-    url: `https://toolskyt.com${tool.slug}`,
-    applicationCategory: 'UtilityApplication',
-    operatingSystem: 'All',
-    browserRequirements: 'Requires JavaScript. Requires HTML5.',
-    offers: {
-      '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'USD',
-    },
-  };
-
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: 'https://toolskyt.com/',
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: moduleName,
-        item: `https://toolskyt.com${moduleSlug}`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: tool.name,
-        item: `https://toolskyt.com${tool.slug}`,
-      },
-    ],
-  };
-
-  const faqSchema = tool.faq
-    ? {
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: tool.faq.map((item) => ({
-          '@type': 'Question',
-          name: item.question,
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: item.answer,
-          },
-        })),
-      }
-    : null;
-
-  const howToSchema = tool.howToSteps
-    ? {
-        '@context': 'https://schema.org',
-        '@type': 'HowTo',
-        name: `How to use ${tool.name}`,
-        description: tool.description,
-        step: tool.howToSteps.map((step, idx) => ({
-          '@type': 'HowToStep',
-          position: idx + 1,
-          name: step.name,
-          text: step.text,
-        })),
-      }
-    : null;
+  const webAppSchema = buildWebApp(tool);
+  const breadcrumbSchema = buildBreadcrumb([
+    { name: 'Home', url: `${SITE_URL}/` },
+    { name: moduleName, url: `${SITE_URL}${moduleSlug}/` },
+    { name: tool.name, url: toolUrl(tool.slug) },
+  ]);
+  const faqSchema = buildFaq(tool.faq);
+  const howToSchema = buildHowTo(tool.name, tool.description, tool.howToSteps);
 
   return (
     <>
       <Helmet>
-        <title>{tool.metaTitle}</title>
+        <title>{fitTitle(tool.metaTitle)}</title>
         <meta name="description" content={tool.metaDescription} />
         <meta name="keywords" content={tool.keywords.join(', ')} />
-        <link rel="canonical" href={`https://toolskyt.com${tool.slug}`} />
+        <link rel="canonical" href={toolUrl(tool.slug)} />
 
         {/* Robots — placeholder tools stay out of the index until shipped */}
         <meta name="robots" content={isComingSoon(tool.id) ? 'noindex, follow' : 'index, follow'} />
 
         {/* Open Graph */}
-        <meta property="og:title" content={tool.metaTitle} />
+        <meta property="og:title" content={fitTitle(tool.metaTitle)} />
         <meta property="og:description" content={tool.metaDescription} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`https://toolskyt.com${tool.slug}`} />
+        <meta property="og:url" content={toolUrl(tool.slug)} />
         <meta property="og:image" content="https://toolskyt.com/og-image.png" />
         <meta property="og:site_name" content="Toolskyt" />
 
         {/* Twitter */}
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content={tool.metaTitle} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={fitTitle(tool.metaTitle)} />
         <meta name="twitter:description" content={tool.metaDescription} />
         <meta name="twitter:image" content="https://toolskyt.com/og-image.png" />
 

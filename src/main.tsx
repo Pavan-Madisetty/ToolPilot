@@ -49,6 +49,9 @@ const theme = parsed?.state?.theme ?? 'light';
 document.documentElement.setAttribute('data-theme', theme);
 if (theme === 'dark') document.documentElement.classList.add('dark');
 
+// Static SEO tags written at build time are replaced by react-helmet once the app mounts.
+document.head.querySelectorAll('[data-prerender]').forEach((el) => el.remove());
+
 const root = document.getElementById('root');
 if (!root) throw new Error('Root element not found');
 

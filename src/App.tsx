@@ -11,6 +11,7 @@ import { ToastContainer } from '@/components/ui/ToastContainer';
 // ─────────────────────────────────────────────
 const HomePage = lazy(() => import('@/pages/home/HomePage'));
 const SearchPage = lazy(() => import('@/pages/search/SearchPage'));
+const AllToolsPage = lazy(() => import('@/pages/all-tools/AllToolsPage'));
 const ToolFallback = lazy(() => import('@/pages/tools/ToolFallback'));
 import { EXTRA_ROUTES } from '@/pages/tools/extraRoutes';
 
@@ -231,6 +232,15 @@ export default function App() {
                 element={
                   <Suspense fallback={<PageLoader />}>
                     <SearchPage />
+                  </Suspense>
+                }
+              />
+
+              <Route
+                path="all-tools"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <AllToolsPage />
                   </Suspense>
                 }
               />

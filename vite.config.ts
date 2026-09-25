@@ -14,11 +14,12 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'robots.txt'],
       manifest: {
-        name: 'Toolskyt — 100+ Free Online Tools',
+        name: 'Toolskyt — Free Online Tools',
+        id: '/',
         short_name: 'Toolskyt',
         description:
-          "The world's largest browser-based productivity platform with 100+ free tools for Finance, Developer, PDF, Image, Text, AI, and more.",
-        theme_color: '#3B82F6',
+          "Free online tools that run in your browser: finance calculators, PDF and image tools, JSON formatter, converters and more. No sign-up, no uploads.",
+        theme_color: '#4f46e5',
         background_color: '#ffffff',
         display: 'standalone',
         orientation: 'portrait-primary',
@@ -26,6 +27,11 @@ export default defineConfig({
         scope: '/',
         lang: 'en',
         categories: ['productivity', 'utilities', 'finance'],
+        shortcuts: [
+          { name: 'All tools', url: '/all-tools' },
+          { name: 'EMI Calculator', url: '/finance/emi-calculator' },
+          { name: 'JSON Formatter', url: '/developer/json-formatter' },
+        ],
         icons: [
           {
             src: 'pwa-64x64.png',
@@ -41,7 +47,13 @@ export default defineConfig({
             src: 'pwa-512x512.png',
             sizes: '512x512',
             type: 'image/png',
-            purpose: 'any maskable',
+            purpose: 'any',
+          },
+          {
+            src: 'maskable-icon-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable',
           },
         ],
       },
@@ -100,28 +112,16 @@ export default defineConfig({
     target: 'es2020',
     rollupOptions: {
       output: {
+        // Keep only the always-needed shell libraries in named chunks. Everything else
+        // (pdf-lib, pdf.js, chart.js, …) is left to Rollup so it is only downloaded by
+        // the tools that import it — this keeps the first page load small.
         manualChunks(id) {
-          if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
-              return 'vendor-react';
-            }
-            if (id.includes('framer-motion') || id.includes('@heroicons') || id.includes('lucide-react')) {
-              return 'vendor-ui';
-            }
-            if (id.includes('react-hook-form') || id.includes('zod')) {
-              return 'vendor-forms';
-            }
-            if (id.includes('zustand')) {
-              return 'vendor-state';
-            }
-            if (id.includes('chart.js') || id.includes('react-chartjs-2')) {
-              return 'vendor-charts';
-            }
-            if (id.includes('date-fns')) {
-              return 'vendor-date';
-            }
-            return 'vendor-other';
+          if (!id.includes('node_modules')) return undefined;
+          if (/[\\/]node_modules[\\/](react|react-dom|scheduler|react-router|react-router-dom)[\\/]/.test(id)) {
+            return 'vendor-react';
           }
+          if (/[\\/]node_modules[\\/]framer-motion[\\/]/.test(id)) return 'vendor-motion';
+          return undefined;
         },
       },
     },

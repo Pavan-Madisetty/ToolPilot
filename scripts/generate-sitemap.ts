@@ -1,76 +1,66 @@
 /* eslint-disable no-console */
 import { writeFileSync, mkdirSync, existsSync } from 'fs';
 import { resolve } from 'path';
+import { execSync } from 'child_process';
 import { TOOLS, isComingSoon } from '../src/config/tools';
 import { MODULES } from '../src/config/modules';
+import { SITE_URL, moduleUrl } from '../src/utils/seo';
 
-const DOMAIN = 'https://toolskyt.com';
+/** lastmod = date of the latest commit (stable between builds), falling back to today. */
+function lastmod(): string {
+  try {
+    const d = execSync('git log -1 --format=%cs', { stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim();
+    if (/^\d{4}-\d{2}-\d{2}$/.test(d)) return d;
+  } catch {
+    /* not a git checkout */
+  }
+  return new Date().toISOString().split('T')[0];
+}
 
 function generateSitemap() {
-  console.log('Generating sitemap.xml...');
-
-  const today = new Date().toISOString().split('T')[0];
-
-  const pages = [
-    { loc: `${DOMAIN}/`, changefreq: 'daily', priority: '1.0', lastmod: today },
-    // Company / static pages
-    { loc: `${DOMAIN}/about`, changefreq: 'monthly', priority: '0.5', lastmod: today },
-    { loc: `${DOMAIN}/blog`, changefreq: 'weekly', priority: '0.6', lastmod: today },
-    { loc: `${DOMAIN}/privacy`, changefreq: 'yearly', priority: '0.3', lastmod: today },
-    { loc: `${DOMAIN}/terms`, changefreq: 'yearly', priority: '0.3', lastmod: today },
-    { loc: `${DOMAIN}/contact`, changefreq: 'monthly', priority: '0.4', lastmod: today }
+  const mod = lastmod();
+  // Canonical URLs only, matching <link rel="canonical"> on each page.
+  const urls: string[] = [
+    `${SITE_URL}/`,
+    `${SITE_URL}/all-tools`,
+    ...MODULES.map((m) => moduleUrl(m.slug)),
+    ...TOOLS.filter((t) => !isComingSoon(t.id)).map((t) => `${SITE_URL}${t.slug}`),
+    `${SITE_URL}/about`,
+    `${SITE_URL}/contact`,
+    `${SITE_URL}/privacy`,
+    `${SITE_URL}/terms`,
   ];
 
-  // Category/Module pages
-  for (const mod of MODULES) {
-    pages.push({
-      loc: `${DOMAIN}${mod.slug}`,
-      changefreq: 'weekly',
-      priority: '0.8',
-      lastmod: today
-    });
-  }
-
-  // Tool pages — skip "coming soon" placeholders (they are noindex'd,
-  // so keep them out of the sitemap to send a consistent SEO signal).
-  for (const tool of TOOLS) {
-    if (isComingSoon(tool.id)) continue;
-    pages.push({
-      loc: `${DOMAIN}${tool.slug}`,
-      changefreq: 'weekly',
-      priority: '0.7',
-      lastmod: today
-    });
-  }
-
-  const xmlItems = pages.map(page => `
-  <url>
-    <loc>${page.loc}</loc>
-    <lastmod>${page.lastmod}</lastmod>
-    <changefreq>${page.changefreq}</changefreq>
-    <priority>${page.priority}</priority>
-  </url>`).join('');
-
-  const xmlContent = `<?xml version="1.0" encoding="UTF-8"?>
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${xmlItems}
+${urls.map((u) => `  <url>\n    <loc>${u}</loc>\n    <lastmod>${mod}</lastmod>\n  </url>`).join('\n')}
 </urlset>
 `;
 
-  // Ensure public directory exists
-  if (!existsSync(resolve('public'))) {
-    mkdirSync(resolve('public'));
-  }
+  if (!existsSync(resolve('public'))) mkdirSync(resolve('public'));
+  writeFileSync(resolve('public/sitemap.xml'), xml, 'utf-8');
+  if (existsSync(resolve('dist'))) writeFileSync(resolve('dist/sitemap.xml'), xml, 'utf-8');
+  // llms.txt — concise, crawlable index for AI assistants / answer engines.
+  const llms = [
+    '# Toolskyt',
+    '',
+    '> Free online tools that run entirely in your browser: finance calculators, PDF and image tools, developer utilities, converters and more. No sign-up, no uploads, no tracking.',
+    '',
+    `- [All tools](${SITE_URL}/all-tools): full A–Z directory`,
+    '',
+    ...MODULES.flatMap((m) => [
+      `## ${m.name}`,
+      '',
+      ...TOOLS.filter((t) => t.module === m.key && !isComingSoon(t.id)).map(
+        (t) => `- [${t.name}](${SITE_URL}${t.slug}): ${t.description}`
+      ),
+      '',
+    ]),
+  ].join('\n');
+  writeFileSync(resolve('public/llms.txt'), llms, 'utf-8');
+  if (existsSync(resolve('dist'))) writeFileSync(resolve('dist/llms.txt'), llms, 'utf-8');
 
-  // Write to public/sitemap.xml
-  writeFileSync(resolve('public/sitemap.xml'), xmlContent.trim(), 'utf-8');
-  console.log('Successfully generated public/sitemap.xml');
-
-  // If dist/ exists, write to dist/sitemap.xml as well
-  if (existsSync(resolve('dist'))) {
-    writeFileSync(resolve('dist/sitemap.xml'), xmlContent.trim(), 'utf-8');
-    console.log('Successfully generated dist/sitemap.xml');
-  }
+  console.log(`Sitemap: ${urls.length} URLs (lastmod ${mod})`);
 }
 
 generateSitemap();

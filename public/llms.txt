@@ -1,0 +1,201 @@
+# Toolskyt
+
+> Free online tools that run entirely in your browser: finance calculators, PDF and image tools, developer utilities, converters and more. No sign-up, no uploads, no tracking.
+
+- [All tools](https://toolskyt.com/all-tools): full A–Z directory
+
+## Finance
+
+- [EMI Calculator](https://toolskyt.com/finance/emi-calculator): Calculate your monthly loan EMI with amortization schedule
+- [Home Loan Calculator](https://toolskyt.com/finance/home-loan-calculator): Calculate home loan EMI, interest & total repayment amount
+- [Car Loan Calculator](https://toolskyt.com/finance/car-loan-calculator): Calculate car loan EMI and total cost of vehicle financing
+- [Personal Loan Calculator](https://toolskyt.com/finance/personal-loan-calculator): Calculate personal loan EMI for unsecured credit
+- [Education Loan Calculator](https://toolskyt.com/finance/education-loan-calculator): Calculate student loan EMI with moratorium period
+- [Loan Eligibility Calculator](https://toolskyt.com/finance/loan-eligibility-calculator): Check your maximum loan eligibility based on income
+- [SIP Calculator](https://toolskyt.com/finance/sip-calculator): Calculate SIP returns for systematic investment plans
+- [FD Calculator](https://toolskyt.com/finance/fd-calculator): Calculate fixed deposit maturity amount and interest earned
+- [RD Calculator](https://toolskyt.com/finance/rd-calculator): Calculate recurring deposit maturity amount
+- [PPF Calculator](https://toolskyt.com/finance/ppf-calculator): Calculate Public Provident Fund maturity with year-wise breakdown
+- [EPF Calculator](https://toolskyt.com/finance/epf-calculator): Calculate Employee Provident Fund corpus and returns
+- [Retirement Calculator](https://toolskyt.com/finance/retirement-calculator): Plan your retirement corpus and monthly income needs
+- [GST Calculator](https://toolskyt.com/finance/gst-calculator): Calculate GST amount for goods and services instantly
+- [Income Tax Calculator](https://toolskyt.com/finance/income-tax-calculator): Calculate income tax under old and new tax regime for FY 2024-25
+- [Salary Calculator](https://toolskyt.com/finance/salary-calculator): Calculate take-home salary from CTC with all deductions
+- [HRA Calculator](https://toolskyt.com/finance/hra-calculator): Calculate HRA exemption under Section 10(13A)
+- [Compound Interest Calculator](https://toolskyt.com/finance/compound-interest-calculator): Calculate compound interest with different compounding frequencies
+- [Simple Interest Calculator](https://toolskyt.com/finance/simple-interest-calculator): Calculate simple interest on principal amount
+- [Currency Converter](https://toolskyt.com/finance/currency-converter): Convert between 170+ world currencies with live rates
+- [Inflation Calculator](https://toolskyt.com/finance/inflation-calculator): Calculate the future value of money adjusted for inflation
+- [Budget Planner](https://toolskyt.com/finance/budget-planner): Create a monthly budget and track income vs expenses
+- [Gratuity Calculator](https://toolskyt.com/finance/gratuity-calculator): Calculate gratuity amount under Payment of Gratuity Act
+- [Stock Average Calculator](https://toolskyt.com/finance/stock-average-calculator): Calculate average purchase price of stocks across multiple buys
+- [Brokerage Calculator](https://toolskyt.com/finance/brokerage-calculator): Calculate brokerage fees, STT, and other charges for stock trading
+- [Tip Calculator](https://toolskyt.com/finance/tip-calculator): Calculate tip amount and split the bill among friends
+- [Bill Splitter](https://toolskyt.com/finance/bill-splitter): Split bills among multiple people with custom shares
+- [Expense Tracker](https://toolskyt.com/finance/expense-tracker): Track daily expenses and view spending by category
+- [Savings Planner](https://toolskyt.com/finance/savings-planner): Plan and track your savings goals with timeline
+- [Net Worth Calculator](https://toolskyt.com/finance/net-worth-calculator): Calculate your total net worth from assets and liabilities
+- [Gold Investment Calculator](https://toolskyt.com/finance/gold-investment-calculator): Calculate gold investment returns and compare with other assets
+- [Crypto Profit Calculator](https://toolskyt.com/finance/crypto-profit-calculator): Calculate cryptocurrency profit/loss and tax implications
+- [Subscription Tracker](https://toolskyt.com/finance/subscription-tracker): Track all your recurring subscriptions and monthly costs
+- [Credit Card EMI Calculator](https://toolskyt.com/finance/credit-card-emi): Calculate credit card EMI and compare with paying full amount
+- [Mutual Fund Calculator](https://toolskyt.com/finance/mutual-fund-calculator): Calculate mutual fund returns for lump sum investments
+- [Loan Comparison Tool](https://toolskyt.com/finance/loan-comparison): Compare multiple loan offers side-by-side
+- [Lumpsum Calculator](https://toolskyt.com/finance/lumpsum-calculator): Estimate the future value of a one-time investment with yearly growth chart
+- [SWP Calculator](https://toolskyt.com/finance/swp-calculator): Plan a Systematic Withdrawal Plan — see how long your corpus lasts
+- [CAGR Calculator](https://toolskyt.com/finance/cagr-calculator): Compute compound annual growth rate between two values
+
+## Developer
+
+- [JSON Formatter & Validator](https://toolskyt.com/developer/json-formatter): Format, validate, and beautify JSON with syntax highlighting
+- [Base64 Encoder / Decoder](https://toolskyt.com/developer/base64): Encode and decode Base64 strings and files
+- [URL Encoder / Decoder](https://toolskyt.com/developer/url-encoder): Encode and decode URLs and query parameters
+- [JWT Decoder & Inspector](https://toolskyt.com/developer/jwt-decoder): Decode and inspect JWT tokens with claims validation
+- [UUID Generator](https://toolskyt.com/developer/uuid-generator): Generate UUIDs (v1, v4, v5) individually or in bulk
+- [Hash Generator](https://toolskyt.com/developer/hash-generator): Generate MD5, SHA-1, SHA-256, SHA-512 hashes
+- [Regex Tester](https://toolskyt.com/developer/regex-tester): Test and debug regular expressions with real-time match highlighting
+- [Timestamp Converter](https://toolskyt.com/developer/timestamp-converter): Convert between Unix timestamps and human-readable dates
+- [Alternative Timestamps Converter](https://toolskyt.com/developer/alternative-timestamps): Convert between LDAP, Chrome, NTP, Cocoa, GPS, and Unix epoch timestamps
+- [Color Picker & Converter](https://toolskyt.com/developer/color-picker): Pick colors and convert between HEX, RGB, HSL, HSV formats
+- [SQL Formatter](https://toolskyt.com/developer/sql-formatter): Format and beautify SQL queries with keyword highlighting
+- [Diff Checker](https://toolskyt.com/developer/diff-checker): Compare two texts or code blocks side-by-side
+- [Password Generator](https://toolskyt.com/developer/password-generator): Generate strong, secure passwords with custom rules
+- [Lorem Ipsum Generator](https://toolskyt.com/developer/lorem-ipsum): Generate Lorem Ipsum placeholder text of any length
+- [Gradient Generator](https://toolskyt.com/developer/gradient-generator): Create CSS gradients visually and copy the CSS code
+- [Cron Expression Builder](https://toolskyt.com/developer/cron-builder): Build and validate cron expressions with human-readable descriptions
+- [Markdown Preview](https://toolskyt.com/developer/markdown-preview): Write and preview Markdown with live rendering
+- [HTML Entity Encoder/Decoder](https://toolskyt.com/developer/html-entity-encoder): Escape or unescape HTML entities safely in your browser
+- [JSON ⇄ CSV Converter](https://toolskyt.com/developer/json-csv-converter): Convert JSON arrays to CSV and CSV back to JSON, with nested-key flattening
+- [Chmod Calculator](https://toolskyt.com/developer/chmod-calculator): Build Unix file permissions visually — octal, symbolic and command output
+- [URL Parser](https://toolskyt.com/developer/url-parser): Break a URL into protocol, host, path, query params and hash
+
+## PDF Tools
+
+- [HTML to PDF Converter](https://toolskyt.com/pdf/html-to-pdf): Convert HTML and CSS code to a downloadable PDF document
+- [Image to PDF Converter](https://toolskyt.com/pdf/image-to-pdf): Convert JPG, PNG, and WebP images to a single PDF document
+- [Markdown to PDF Converter](https://toolskyt.com/pdf/markdown-to-pdf): Convert Markdown documents into clean, styled PDF reports
+- [PDF Metadata & Compression](https://toolskyt.com/pdf/pdf-metadata): View and edit PDF document metadata properties client-side
+- [Merge PDF](https://toolskyt.com/pdf/merge): Combine multiple PDF files into one — reorder before merging
+- [Split & Extract PDF Pages](https://toolskyt.com/pdf/split): Extract page ranges or split a PDF into separate files
+- [Rotate PDF Pages](https://toolskyt.com/pdf/rotate): Rotate all or selected PDF pages by 90°, 180° or 270°
+
+## Image Tools
+
+- [Image Resizer](https://toolskyt.com/image/resize): Resize images to any dimension while maintaining aspect ratio
+- [Image Compressor](https://toolskyt.com/image/compress): Compress images and reduce file size without quality loss
+- [Image Cropper](https://toolskyt.com/image/crop): Crop images to custom dimensions or preset aspect ratios
+- [QR Code Generator](https://toolskyt.com/image/qr-generator): Generate QR codes for URLs, text, contact, WiFi and more
+- [Barcode Generator](https://toolskyt.com/image/barcode-generator): Generate barcodes in various formats (EAN, UPC, CODE128)
+- [Image to JPG Converter](https://toolskyt.com/image/jpg-converter): Convert PNG, WEBP, GIF images to JPG format
+- [Image to WEBP Converter](https://toolskyt.com/image/webp-converter): Convert images to WEBP format for web optimization
+- [Color Palette Extractor](https://toolskyt.com/image/color-palette): Extract dominant colors from any image
+- [Favicon Generator](https://toolskyt.com/image/favicon-generator): Generate favicon.ico and all required sizes from any image
+- [Image to Base64](https://toolskyt.com/image/image-to-base64): Turn an image into a Base64 data URI, CSS or HTML snippet
+- [Rotate & Flip Image](https://toolskyt.com/image/rotate-flip): Rotate by 90° steps or any angle and flip horizontally or vertically
+- [Image Filters](https://toolskyt.com/image/image-filters): Brightness, contrast, grayscale, sepia, blur and more — live preview
+
+## Text Tools
+
+- [Word Counter](https://toolskyt.com/text/word-counter): Count words, characters, sentences, paragraphs and reading time
+- [Case Converter](https://toolskyt.com/text/case-converter): Convert text between UPPER, lower, Title, camelCase, snake_case
+- [Slug Generator](https://toolskyt.com/text/slug-generator): Generate URL-friendly slugs from any text
+- [Text Diff](https://toolskyt.com/text/text-diff): Compare two text blocks and highlight differences
+- [Markdown Editor](https://toolskyt.com/text/markdown-editor): Full-featured Markdown editor with live preview and export
+- [Text to Emoji Translator](https://toolskyt.com/text/text-to-emoji): Translate words to emojis or spell text using emoji blocks
+- [Stylish Text Generator](https://toolskyt.com/text/stylish-text): Convert regular text into stylish fonts and Unicode symbols
+- [Emoji Search & Copy](https://toolskyt.com/text/emoji-search): Search, browse, and copy emojis with skin tone support
+- [PDF to Markdown](https://toolskyt.com/text/pdf-to-markdown): Convert PDF document text to clean Markdown formatting
+- [Numbers to Words Converter](https://toolskyt.com/text/numbers-to-words): Convert numbers to English words and Chinese characters
+- [Detect Language](https://toolskyt.com/text/detect-language): Identify the language of any text block instantly
+- [Remove Spaces & Clean Text](https://toolskyt.com/text/remove-spaces): Remove double spaces, tabs, and excess line breaks
+- [Read Math Expressions](https://toolskyt.com/text/read-math-expressions): Convert mathematical equations into English words
+- [Multilingual Date Converter](https://toolskyt.com/text/date-converter): Convert and format dates across calendars and languages
+- [Sort & Dedupe Lines](https://toolskyt.com/text/text-sorter): Sort, reverse, shuffle and remove duplicate lines instantly
+- [Find & Replace](https://toolskyt.com/text/find-replace): Bulk find and replace with regex, case and whole-word options
+- [Readability Checker](https://toolskyt.com/text/readability-checker): Flesch reading ease, grade level and Gunning Fog score for any text
+
+## AI Writing
+
+- [AI Prompt Builder](https://toolskyt.com/ai/prompt-builder): Build powerful, structured prompts for ChatGPT, Gemini, Claude
+- [Email Writer](https://toolskyt.com/ai/email-writer): Generate professional emails with AI-powered templates
+- [Resume Builder](https://toolskyt.com/ai/resume-builder): Create a professional resume with ATS-friendly templates
+- [Cover Letter Generator](https://toolskyt.com/ai/cover-letter): Generate a personalized cover letter for any job application
+- [Text Summarizer](https://toolskyt.com/ai/text-summarizer): Offline extractive summariser — keeps the most important sentences
+- [Keyword Extractor](https://toolskyt.com/ai/keyword-extractor): Find the most frequent keywords and density in any text — SEO friendly
+
+## Business
+
+- [Invoice Generator](https://toolskyt.com/business/invoice-generator): Create professional invoices and download as PDF
+- [GST Invoice Generator](https://toolskyt.com/business/gst-invoice): Create GST-compliant invoices with CGST, SGST, IGST calculation
+- [ROI Calculator](https://toolskyt.com/business/roi-calculator): Calculate Return on Investment and payback period
+- [Profit Margin Calculator](https://toolskyt.com/business/profit-margin): Calculate gross, net and operating profit margins
+- [Break-Even Calculator](https://toolskyt.com/business/break-even): Calculate break-even point in units and revenue
+- [Quotation Generator](https://toolskyt.com/business/quotation-generator): Create professional price quotations for clients
+- [Markup Calculator](https://toolskyt.com/business/markup-calculator): Convert between cost, price, markup % and margin %
+- [Email Signature Generator](https://toolskyt.com/business/email-signature): Design a clean HTML email signature you can paste into any mail client
+- [Meeting Cost Calculator](https://toolskyt.com/business/meeting-cost): See what a meeting really costs, live, based on attendee salaries
+
+## Productivity
+
+- [Pomodoro Timer](https://toolskyt.com/productivity/pomodoro): Focus timer with 25-minute work sessions and break reminders
+- [Stopwatch](https://toolskyt.com/productivity/stopwatch): Precise stopwatch with lap times and history
+- [Countdown Timer](https://toolskyt.com/productivity/countdown): Count down to any date or set a custom duration timer
+- [To-Do List](https://toolskyt.com/productivity/todo): Simple, powerful to-do list with priorities and due dates
+- [Checklist](https://toolskyt.com/productivity/checklist): Create and share reusable checklists for any task
+- [Notes](https://toolskyt.com/productivity/notes): Rich-text notes editor with folders and local storage
+- [Habit Tracker](https://toolskyt.com/productivity/habit-tracker): Track daily habits and build streaks with visual progress
+- [Eisenhower Matrix](https://toolskyt.com/productivity/eisenhower-matrix): Prioritise tasks by urgency and importance — saved locally in your browser
+- [Random Picker Wheel](https://toolskyt.com/productivity/random-picker): Spin a wheel to pick a random name, option or winner
+- [Work Hours Calculator](https://toolskyt.com/productivity/hours-calculator): Total hours worked from start/end times with breaks — timesheet ready
+
+## Education
+
+- [Scientific Calculator](https://toolskyt.com/education/scientific-calculator): Full scientific calculator with trig, log, power functions
+- [Age Calculator](https://toolskyt.com/education/age-calculator): Calculate exact age in years, months, days from date of birth
+- [Percentage Calculator](https://toolskyt.com/education/percentage-calculator): Calculate percentage, percentage change, and percentage of total
+- [CGPA Calculator](https://toolskyt.com/education/cgpa-calculator): Calculate CGPA and percentage for Indian university system
+- [GPA Calculator](https://toolskyt.com/education/gpa-calculator): Calculate semester GPA with letter grades and credit hours
+- [Unit Converter](https://toolskyt.com/education/unit-converter): Convert between 100+ units of length, weight, temperature and more
+- [Quadratic Equation Solver](https://toolskyt.com/education/quadratic-solver): Solve ax² + bx + c = 0 with discriminant, roots and vertex
+- [Prime, GCD & LCM Calculator](https://toolskyt.com/education/prime-factorization): Prime factorisation, primality test, GCD and LCM of numbers
+- [Statistics Calculator](https://toolskyt.com/education/statistics-calculator): Mean, median, mode, standard deviation, quartiles and more for a dataset
+
+## Travel
+
+- [Time Zone Converter](https://toolskyt.com/travel/timezone-converter): Convert time between world time zones instantly
+- [Fuel Cost Calculator](https://toolskyt.com/travel/fuel-cost): Calculate fuel cost for road trips based on distance and mileage
+- [Speed, Distance & Time](https://toolskyt.com/travel/speed-distance-time): Solve for speed, distance or travel time — with ETA
+- [Trip Budget Planner](https://toolskyt.com/travel/trip-budget): Plan travel spending by category, per person and per day
+
+## Health
+
+- [BMI Calculator](https://toolskyt.com/health/bmi-calculator): Calculate Body Mass Index with healthy weight range
+- [BMR Calculator](https://toolskyt.com/health/bmr-calculator): Calculate Basal Metabolic Rate and daily calorie needs
+- [Calorie Calculator](https://toolskyt.com/health/calorie-calculator): Calculate daily calorie needs for weight loss, gain or maintenance
+- [Water Intake Calculator](https://toolskyt.com/health/water-intake): Daily hydration target based on weight, activity and climate
+- [Ideal Weight Calculator](https://toolskyt.com/health/ideal-weight): Ideal body weight (Devine) and healthy BMI range for your height
+- [Body Fat Calculator](https://toolskyt.com/health/body-fat): Estimate body fat percentage with the U.S. Navy method
+- [Heart Rate Zones](https://toolskyt.com/health/heart-rate-zones): Training zones from age and resting heart rate (Karvonen)
+
+## Utilities
+
+- [Random Number Generator](https://toolskyt.com/utilities/random-number): Generate random numbers with custom range and quantity
+- [Color Converter](https://toolskyt.com/utilities/color-converter): Convert colors between HEX, RGB, HSL, HSV, CMYK
+- [Date Difference Calculator](https://toolskyt.com/utilities/date-difference): Calculate days, months and years between two dates
+- [Discount Calculator](https://toolskyt.com/utilities/discount-calculator): Calculate discounted price, savings and percentage off
+- [Dice Roller & Coin Flip](https://toolskyt.com/utilities/dice-coin): Roll up to 10 dice of any size or flip coins — cryptographically random
+- [Text to Speech](https://toolskyt.com/utilities/text-to-speech): Read text aloud using your device’s built-in voices — nothing leaves your browser
+- [Screen & Browser Info](https://toolskyt.com/utilities/device-info): See your screen resolution, viewport, pixel ratio, language and browser details
+
+## Converters
+
+- [Length Converter](https://toolskyt.com/convert/length): Convert between meters, feet, inches, miles, km and all length units
+- [Weight Converter](https://toolskyt.com/convert/weight): Convert between kg, pounds, grams, ounces, tons
+- [Temperature Converter](https://toolskyt.com/convert/temperature): Convert between Celsius, Fahrenheit, and Kelvin
+- [Data Storage Converter](https://toolskyt.com/convert/data-storage): Convert between bytes, KB, MB, GB, TB
+- [Area Converter](https://toolskyt.com/convert/area): Convert between m², hectares, acres, sq ft, sq yd and more
+- [Volume Converter](https://toolskyt.com/convert/volume): Convert litres, millilitres, gallons, cups, tablespoons and cubic units
+- [Speed Converter](https://toolskyt.com/convert/speed): Convert km/h, mph, m/s, knots and Mach
+- [Time Converter](https://toolskyt.com/convert/time): Convert seconds, minutes, hours, days, weeks, months and years
+- [Number Base Converter](https://toolskyt.com/convert/number-base): Binary, octal, decimal, hex and any base up to 36 — arbitrary precision
+- [Roman Numeral Converter](https://toolskyt.com/convert/roman-numerals): Convert numbers to Roman numerals and back (1–3999)

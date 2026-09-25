@@ -487,11 +487,6 @@ a.sk-chip:hover {
     display: none;
   }
 }
-@media (min-width: 1024px) {
-  .sk-burger {
-    display: none;
-  }
-}
 
 .sk-backdrop {
   position: fixed;

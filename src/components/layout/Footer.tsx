@@ -13,6 +13,7 @@ const POPULAR = [
 ];
 
 const COMPANY = [
+  { label: 'All tools (A–Z)', to: '/all-tools' },
   { label: 'About', to: '/about' },
   { label: 'Contact & support', to: '/contact' },
   { label: 'Privacy policy', to: '/privacy' },
