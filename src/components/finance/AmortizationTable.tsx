@@ -1,6 +1,7 @@
 import { Fragment, useMemo, useState } from 'react';
 import { CalendarDays, ChevronDown, Download } from 'lucide-react';
 import { clsx } from 'clsx';
+import { DatePicker } from '@/components/ui/DatePicker';
 import {
   buildSchedule,
   groupByYear,
@@ -40,7 +41,6 @@ export function AmortizationTable({ principal, annualRate, months, moratoriumMon
   const [open, setOpen] = useState<Set<string>>(new Set());
 
   const startDate = useMemo(() => parseDateInput(startValue) ?? new Date(), [startValue]);
-  const dateValid = parseDateInput(startValue) !== null;
 
   const schedule = useMemo(
     () => buildSchedule({ principal, annualRate, months, moratoriumMonths, startDate }),
@@ -138,19 +138,19 @@ export function AmortizationTable({ principal, annualRate, months, moratoriumMon
       </div>
 
       <div className="sk-amort__controls">
-        <label className="sk-amort__field">
-          <span>
+        <div className="sk-amort__field">
+          <label htmlFor="loan-start-date">
             <CalendarDays size={14} aria-hidden="true" /> Loan start date
-          </span>
-          <input
-            type="date"
+          </label>
+          <DatePicker
+            id="loan-start-date"
             value={startValue}
             min="1990-01-01"
             max="2100-12-31"
-            onChange={(e) => setStartValue(e.target.value)}
-            aria-invalid={!dateValid}
+            onChange={(v) => v && setStartValue(v)}
+            aria-label="Loan start date"
           />
-        </label>
+        </div>
 
         <div className="sk-amort__seg" role="group" aria-label="Schedule view">
           {(['yearly', 'monthly'] as const).map((v) => (

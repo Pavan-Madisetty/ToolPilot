@@ -1,3 +1,4 @@
+import { NumberField } from '@/components/ui/NumberField';
 import { useState, useMemo } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Input, ResultBox } from '@/components/ui';
@@ -71,13 +72,10 @@ export default function TipCalculator() {
             </div>
           </div>
 
-          <Input
-            label="Number of People"
-            type="number"
-            min={1}
-            value={people === 0 ? '' : people}
-            onChange={(e) => setPeople(Math.max(1, Number(e.target.value)))}
-          />
+          <div className="form-group w-full">
+            <label className="label" htmlFor="tip-people">Number of People</label>
+            <NumberField block id="tip-people" value={people} onChange={setPeople} min={1} max={1000} decimals={0} />
+          </div>
         </div>
 
         {/* Output cards layout */}

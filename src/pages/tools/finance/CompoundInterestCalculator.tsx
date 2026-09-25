@@ -1,3 +1,4 @@
+import { NumberField } from '@/components/ui/NumberField';
 import { useState, useMemo } from 'react';
 import { DollarSign, TrendingUp, Percent, Calendar, ShieldCheck } from 'lucide-react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
@@ -107,12 +108,7 @@ export default function CompoundInterestCalculator() {
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
                   <DollarSign className="w-3.5 h-3.5" />
                 </div>
-                <input
-                  type="number"
-                  value={initialDeposit}
-                  onChange={(e) => setInitialDeposit(Math.max(0, parseInt(e.target.value) || 0))}
-                  className="w-full bg-white border border-gray-200 rounded-lg pl-8 pr-3 py-1.5 text-xs font-semibold outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all"
-                />
+                <NumberField block value={initialDeposit} onChange={setInitialDeposit} min={0} max={100000000} decimals={0} className="!pl-8 !h-9 text-xs" />
               </div>
               <input
                 type="range"
@@ -135,12 +131,7 @@ export default function CompoundInterestCalculator() {
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
                   <TrendingUp className="w-3.5 h-3.5" />
                 </div>
-                <input
-                  type="number"
-                  value={monthlyContribution}
-                  onChange={(e) => setMonthlyContribution(Math.max(0, parseInt(e.target.value) || 0))}
-                  className="w-full bg-white border border-gray-200 rounded-lg pl-8 pr-3 py-1.5 text-xs font-semibold outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all"
-                />
+                <NumberField block value={monthlyContribution} onChange={setMonthlyContribution} min={0} max={10000000} decimals={0} className="!pl-8 !h-9 text-xs" />
               </div>
               <input
                 type="range"
@@ -163,13 +154,7 @@ export default function CompoundInterestCalculator() {
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
                   <Percent className="w-3.5 h-3.5" />
                 </div>
-                <input
-                  type="number"
-                  step="0.1"
-                  value={interestRate}
-                  onChange={(e) => setInterestRate(Math.max(0, parseFloat(e.target.value) || 0))}
-                  className="w-full bg-white border border-gray-200 rounded-lg pl-8 pr-3 py-1.5 text-xs font-semibold outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all"
-                />
+                <NumberField block value={interestRate} onChange={setInterestRate} min={0} max={100} decimals={2} className="!pl-8 !h-9 text-xs" />
               </div>
               <input
                 type="range"
@@ -192,12 +177,7 @@ export default function CompoundInterestCalculator() {
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
                   <Calendar className="w-3.5 h-3.5" />
                 </div>
-                <input
-                  type="number"
-                  value={years}
-                  onChange={(e) => setYears(Math.max(1, parseInt(e.target.value) || 1))}
-                  className="w-full bg-white border border-gray-200 rounded-lg pl-8 pr-3 py-1.5 text-xs font-semibold outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all"
-                />
+                <NumberField block value={years} onChange={setYears} min={1} max={100} decimals={0} className="!pl-8 !h-9 text-xs" />
               </div>
               <input
                 type="range"
@@ -229,14 +209,7 @@ export default function CompoundInterestCalculator() {
               <div className="space-y-1.5">
                 <label className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">Est. Tax Drag</label>
                 <div className="relative">
-                  <input
-                    type="number"
-                    min="0"
-                    max="50"
-                    value={taxRate}
-                    onChange={(e) => setTaxRate(Math.min(50, Math.max(0, parseInt(e.target.value) || 0)))}
-                    className="w-full bg-white border border-gray-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold outline-none focus:border-primary"
-                  />
+                  <NumberField block value={taxRate} onChange={setTaxRate} min={0} max={50} decimals={0} className="!pl-8 !h-9 text-xs" />
                   <span className="absolute right-3.5 top-2 text-gray-400 font-mono text-[10px] font-bold">%</span>
                 </div>
               </div>

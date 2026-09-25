@@ -1,3 +1,5 @@
+import { useNumericDraft } from '@/hooks/useNumericDraft';
+
 export interface SliderProps {
   label: string;
   value: number;
@@ -9,6 +11,12 @@ export interface SliderProps {
   error?: string;
   disabled?: boolean;
 }
+
+const fmt = (n: number) => new Intl.NumberFormat('en-IN', { maximumFractionDigits: 2 }).format(n);
+const decimalsOf = (step: number) => {
+  const s = String(step);
+  return s.includes('.') ? s.split('.')[1].length : 0;
+};
 
 export function Slider({
   label,
@@ -22,39 +30,26 @@ export function Slider({
   disabled = false,
 }: SliderProps) {
   const sliderId = `slider_${label.replace(/\s+/g, '_').toLowerCase()}`;
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let num = Number(e.target.value);
-    if (isNaN(num)) return;
-    if (num > max) num = max;
-    if (num < min) num = min;
-    onChange(num);
-  };
+  const pct = max > min ? Math.min(100, Math.max(0, ((value - min) / (max - min)) * 100)) : 0;
+  const draft = useNumericDraft({ value, onChange, min, max, decimals: Math.max(2, decimalsOf(step)) });
 
   return (
     <div className="form-group w-full">
-      {/* Label and Input value side by side */}
-      <div className="flex items-center justify-between gap-4 mb-1">
+      {/* Label and number box side by side */}
+      <div className="flex items-center justify-between gap-3 mb-2">
         <label htmlFor={sliderId} className="label mb-0">
           {label}
         </label>
-        <div className="flex items-center gap-1.5 max-w-[120px]">
+        <div className={`sk-numfield sk-numfield--slider ${draft.outOfRange ? 'is-out' : ''}`}>
           <input
-            type="number"
+            {...draft.inputProps}
             disabled={disabled}
-            value={value}
-            min={min}
-            max={max}
-            step={step}
-            onChange={handleInputChange}
-            className="input-base text-right font-semibold py-1 px-2 text-xs disabled:opacity-50"
-            aria-label={`${label} numeric input`}
+            value={draft.display}
+            className="sk-numfield__input"
+            aria-label={`${label} value`}
+            aria-invalid={draft.outOfRange || undefined}
           />
-          {suffix && (
-            <span className="text-xs font-semibold text-text-tertiary">
-              {suffix}
-            </span>
-          )}
+          {suffix && <span className="sk-numfield__affix">{suffix}</span>}
         </div>
       </div>
 
@@ -67,30 +62,35 @@ export function Slider({
           min={min}
           max={max}
           step={step}
-          value={value}
+          value={Math.min(max, Math.max(min, value))}
           onChange={(e) => onChange(Number(e.target.value))}
           className="flex-1 h-1.5 rounded-lg bg-bg-surface appearance-none cursor-pointer accent-primary focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
           style={{
-            background: `linear-gradient(to right, var(--primary) 0%, var(--primary) ${
-              ((value - min) / (max - min)) * 100
-            }%, var(--border-default) ${((value - min) / (max - min)) * 100}%, var(--border-default) 100%)`,
+            background: `linear-gradient(to right, var(--primary) 0%, var(--primary) ${pct}%, var(--border-default) ${pct}%, var(--border-default) 100%)`,
           }}
         />
       </div>
 
       {/* Min / Max values display */}
-      <div
-        className="flex items-center justify-between text-[11px] mt-1 text-text-tertiary"
-      >
+      <div className="flex items-center justify-between text-[11px] mt-1 text-text-tertiary">
         <span>
-          {min}
+          {fmt(min)}
           {suffix}
         </span>
         <span>
-          {max}
+          {fmt(max)}
           {suffix}
         </span>
       </div>
+
+      {/* Range hint while the typed value is outside the allowed range */}
+      {draft.outOfRange && !error && (
+        <span className="sk-numfield__hint" role="status">
+          Allowed range: {fmt(min)}
+          {suffix} to {fmt(max)}
+          {suffix}. It will be adjusted when you finish typing.
+        </span>
+      )}
 
       {/* Error Message */}
       {error && (

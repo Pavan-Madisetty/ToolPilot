@@ -2,6 +2,8 @@ export { Button } from './Button';
 export { Input } from './Input';
 export { Select } from './Select';
 export { Slider } from './Slider';
+export { NumberField } from './NumberField';
+export { DatePicker } from './DatePicker';
 export { Switch } from './Switch';
 export { Dialog } from './Dialog';
 export { Skeleton } from './Skeleton';

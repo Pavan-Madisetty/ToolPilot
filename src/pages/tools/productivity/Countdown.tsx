@@ -1,6 +1,7 @@
+import { NumberField } from '@/components/ui/NumberField';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
-import { Button, Card, Input } from '@/components/ui';
+import { Button, Card } from '@/components/ui';
 import { Play, Pause, X, BellOff, Volume2 } from 'lucide-react';
 
 type Mode = 'duration' | 'target';
@@ -235,37 +236,18 @@ export default function Countdown() {
           <div className="flex-1">
             {mode === 'duration' ? (
               <div className="grid grid-cols-3 gap-4" style={{ opacity: isActive ? 0.6 : 1 }}>
-                <Input
-                  label="Hours"
-                  type="number"
-                  min={0}
-                  max={23}
-                  value={hours}
-                  onChange={(e) => setHours(Math.max(0, parseInt(e.target.value) || 0))}
-                  disabled={isActive}
-                />
-                <Input
-                  label="Minutes"
-                  type="number"
-                  min={0}
-                  max={59}
-                  value={minutes}
-                  onChange={(e) =>
-                    setMinutes(Math.min(59, Math.max(0, parseInt(e.target.value) || 0)))
-                  }
-                  disabled={isActive}
-                />
-                <Input
-                  label="Seconds"
-                  type="number"
-                  min={0}
-                  max={59}
-                  value={seconds}
-                  onChange={(e) =>
-                    setSeconds(Math.min(59, Math.max(0, parseInt(e.target.value) || 0)))
-                  }
-                  disabled={isActive}
-                />
+                <div className="form-group w-full">
+                  <label className="label" htmlFor="cd-hours">Hours</label>
+                  <NumberField block id="cd-hours" value={hours} onChange={setHours} min={0} max={23} decimals={0} disabled={isActive} />
+                </div>
+                <div className="form-group w-full">
+                  <label className="label" htmlFor="cd-minutes">Minutes</label>
+                  <NumberField block id="cd-minutes" value={minutes} onChange={setMinutes} min={0} max={59} decimals={0} disabled={isActive} />
+                </div>
+                <div className="form-group w-full">
+                  <label className="label" htmlFor="cd-seconds">Seconds</label>
+                  <NumberField block id="cd-seconds" value={seconds} onChange={setSeconds} min={0} max={59} decimals={0} disabled={isActive} />
+                </div>
               </div>
             ) : (
               <div className="flex flex-col gap-1" style={{ opacity: isActive ? 0.6 : 1 }}>

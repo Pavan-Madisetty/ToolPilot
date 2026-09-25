@@ -5,8 +5,8 @@ ToolPilot is a modern web application for developer, productivity, PDF, conversi
 
 ## Git & Workflow Guidelines
 
-### Header Navigation Rule
-- **Header Navigation:** DO NOT render navigation menus (such as "Tools", "Categories", "Blog", "About", "Pricing") in the header bar. Keep the header layout extremely clean, limited to the Logo on the left, Search bar in the center-right, and action icons on the right.
+### Header Navigation
+- The header shows the logo, an "All tools" mega-menu with category links (Finance, Developer, PDF, Image, Text), search and action icons. Keep this navigation.
 
 ### Staging, Committing & Pushing to GitHub
 When the user asks to push changes to GitHub:

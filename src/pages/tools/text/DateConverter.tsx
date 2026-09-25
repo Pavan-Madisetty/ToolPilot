@@ -1,3 +1,4 @@
+import { DatePicker } from '@/components/ui/DatePicker';
 import { useState } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { CopyButton } from '@/components/ui';
@@ -118,12 +119,7 @@ export default function DateConverter() {
           {/* Gregorian Date Picker input */}
           <div className="md:col-span-6 space-y-1">
             <label className="text-xs font-semibold text-[var(--text-secondary)]">Pick Date (Gregorian)</label>
-            <input
-              type="date"
-              value={inputDate}
-              onChange={(e) => setInputDate(e.target.value)}
-              className="w-full px-4 rounded-xl border border-[var(--border-default)] bg-[var(--bg-elevated)] text-[var(--text-primary)] focus:outline-none focus:ring-4 focus:ring-[var(--primary)]/10 focus:border-[var(--primary)] font-medium h-12 text-sm"
-            />
+            <DatePicker block value={inputDate} onChange={(v) => v && setInputDate(v)} aria-label="Pick date (Gregorian)" />
           </div>
 
           {/* Target Language Toggle list */}

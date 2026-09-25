@@ -1,3 +1,4 @@
+import { NumberField } from '@/components/ui/NumberField';
 import { useState } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Button, Select, Switch, CopyButton, Textarea } from '@/components/ui';
@@ -202,16 +203,7 @@ export default function LoremIpsum() {
             <label htmlFor="count-input" className="label">
               Amount
             </label>
-            <input
-              id="count-input"
-              type="number"
-              min={1}
-              max={100}
-              value={count}
-              onChange={(e) => setCount(Math.max(1, Number(e.target.value)))}
-              className="input-base"
-              aria-label="Placeholder amount"
-            />
+            <NumberField block id="count-input" value={count} onChange={setCount} min={1} max={100} decimals={0} aria-label="Placeholder amount" />
           </div>
 
           {/* Unit selection drop down */}

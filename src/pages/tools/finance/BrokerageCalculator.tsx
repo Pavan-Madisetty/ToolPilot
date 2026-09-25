@@ -1,3 +1,4 @@
+import { NumberField } from '@/components/ui/NumberField';
 import { useState, useMemo } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Input, Select, ResultBox } from '@/components/ui';
@@ -95,13 +96,10 @@ export default function BrokerageCalculator() {
             />
           </div>
 
-          <Input
-            label="Quantity"
-            type="number"
-            value={quantity}
-            onChange={(e) => setQuantity(Math.max(1, Number(e.target.value)))}
-            min={1}
-          />
+          <div className="form-group w-full">
+            <label className="label" htmlFor="brk-qty">Quantity</label>
+            <NumberField block id="brk-qty" value={quantity} onChange={setQuantity} min={1} max={100000000} decimals={0} />
+          </div>
         </div>
 
         {/* Right Side: Results */}

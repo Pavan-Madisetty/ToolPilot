@@ -1,6 +1,7 @@
+import { NumberField } from '@/components/ui/NumberField';
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
-import { Card, Button, Input } from '@/components/ui';
+import { Card, Button } from '@/components/ui';
 import { Play, Pause, RotateCcw, SkipForward, Settings, Volume2, VolumeX, Award } from 'lucide-react';
 import { useUIStore } from '@/stores/uiStore';
 
@@ -297,42 +298,51 @@ export default function PomodoroTimer() {
               Interval Durations (Minutes)
             </h3>
             <div className="grid grid-cols-3 gap-4">
-              <Input
-                label="Work Focus"
-                type="number"
-                min={1}
-                max={120}
-                value={workDuration}
-                onChange={(e) => {
-                  const val = Math.max(1, Number(e.target.value));
-                  setWorkDuration(val);
-                  if (mode === 'work') setSecondsRemaining(val * 60);
-                }}
-              />
-              <Input
-                label="Short Break"
-                type="number"
-                min={1}
-                max={60}
-                value={shortDuration}
-                onChange={(e) => {
-                  const val = Math.max(1, Number(e.target.value));
-                  setShortDuration(val);
-                  if (mode === 'short') setSecondsRemaining(val * 60);
-                }}
-              />
-              <Input
-                label="Long Break"
-                type="number"
-                min={1}
-                max={120}
-                value={longDuration}
-                onChange={(e) => {
-                  const val = Math.max(1, Number(e.target.value));
-                  setLongDuration(val);
-                  if (mode === 'long') setSecondsRemaining(val * 60);
-                }}
-              />
+              <div className="form-group w-full">
+                <label className="label" htmlFor="pomo-workDuration">Work Focus</label>
+                <NumberField
+                  block
+                  id="pomo-workDuration"
+                  value={workDuration}
+                  min={1}
+                  max={120}
+                  decimals={0}
+                  onChange={(val) => {
+                    setWorkDuration(val);
+                    if (mode === 'work') setSecondsRemaining(val * 60);
+                  }}
+                />
+              </div>
+              <div className="form-group w-full">
+                <label className="label" htmlFor="pomo-shortDuration">Short Break</label>
+                <NumberField
+                  block
+                  id="pomo-shortDuration"
+                  value={shortDuration}
+                  min={1}
+                  max={60}
+                  decimals={0}
+                  onChange={(val) => {
+                    setShortDuration(val);
+                    if (mode === 'short') setSecondsRemaining(val * 60);
+                  }}
+                />
+              </div>
+              <div className="form-group w-full">
+                <label className="label" htmlFor="pomo-longDuration">Long Break</label>
+                <NumberField
+                  block
+                  id="pomo-longDuration"
+                  value={longDuration}
+                  min={1}
+                  max={120}
+                  decimals={0}
+                  onChange={(val) => {
+                    setLongDuration(val);
+                    if (mode === 'long') setSecondsRemaining(val * 60);
+                  }}
+                />
+              </div>
             </div>
           </Card>
         )}

@@ -1,4 +1,5 @@
-import { InputHTMLAttributes, forwardRef, useId } from 'react';
+import { ChangeEvent, InputHTMLAttributes, forwardRef, useId } from 'react';
+import { DatePicker } from './DatePicker';
 import { clsx } from 'clsx';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -16,6 +17,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const defaultId = useId();
     const inputId = id ?? defaultId;
     const errorId = `${inputId}_error`;
+
+    // Dates use the site's own calendar instead of the browser's inconsistent native picker.
+    // The value stays a yyyy-mm-dd string and onChange still receives e.target.value.
+    const isDate = type === 'date';
     const helperId = `${inputId}_helper`;
 
     return (
@@ -33,6 +38,21 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         )}
 
         {/* Input */}
+        {isDate ? (
+          <DatePicker
+            id={inputId}
+            block
+            value={String(props.value ?? '')}
+            min={props.min as string | undefined}
+            max={props.max as string | undefined}
+            disabled={props.disabled}
+            aria-label={props['aria-label']}
+            className={className}
+            onChange={(v) =>
+              props.onChange?.({ target: { value: v }, currentTarget: { value: v } } as unknown as ChangeEvent<HTMLInputElement>)
+            }
+          />
+        ) : (
         <input
           id={inputId}
           ref={ref}
@@ -51,6 +71,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           )}
           {...props}
         />
+        )}
 
         {/* Error message */}
         {error && (

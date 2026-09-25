@@ -482,6 +482,11 @@ a.sk-chip:hover {
     width: 260px;
   }
 }
+@media (min-width: 1024px) {
+  .sk-burger {
+    display: none;
+  }
+}
 @media (max-width: 767px) {
   .sk-hide-sm {
     display: none;
@@ -1706,16 +1711,6 @@ a.sk-chip:hover {
   border-top: 1px solid rgba(255, 255, 255, 0.09);
   font-size: 13px;
 }
-.sk-footer__gh {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--footer-text);
-  text-decoration: none;
-}
-.sk-footer__gh:hover {
-  color: #fff;
-}
 
 @media (prefers-reduced-motion: reduce) {
   .sk-tool,
@@ -2123,7 +2118,7 @@ a.sk-chip:hover {
   flex-direction: column;
   gap: 6px;
 }
-.sk-amort__field > span {
+.sk-amort__field > label {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -2131,27 +2126,6 @@ a.sk-chip:hover {
   font-weight: 700;
   letter-spacing: 0.02em;
   color: var(--text-tertiary);
-}
-.sk-amort__field input {
-  height: 40px;
-  padding: 0 12px;
-  border: 1px solid var(--border-strong);
-  border-radius: 10px;
-  background: var(--bg-elevated);
-  color: var(--text-primary);
-  font: inherit;
-  font-size: 14px;
-  color-scheme: light;
-}
-[data-theme='dark'] .sk-amort__field input {
-  color-scheme: dark;
-}
-.sk-amort__field input:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 1px;
-}
-.sk-amort__field input[aria-invalid='true'] {
-  border-color: #ef4444;
 }
 .sk-amort__seg {
   display: inline-flex;
@@ -2349,4 +2323,240 @@ a.sk-chip:hover {
 }
 [data-theme='dark'] .sk-amort__tag {
   color: #fbbf24;
+}
+
+/* ── Numeric fields ─────────────────────────────────────── */
+.sk-numfield {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--border-default);
+  border-radius: 10px;
+  background: var(--bg-elevated);
+  transition: border-color 0.12s, box-shadow 0.12s;
+}
+.sk-numfield:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.16);
+}
+.sk-numfield.is-out {
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.16);
+}
+.sk-numfield__input {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}
+.sk-numfield__input:disabled {
+  opacity: 0.5;
+}
+.sk-numfield__affix {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+.sk-numfield--slider {
+  width: 168px;
+  max-width: 55%;
+  height: 38px;
+}
+.sk-numfield__hint {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #b45309;
+}
+[data-theme='dark'] .sk-numfield__hint {
+  color: #fbbf24;
+}
+
+/* ── Date picker ────────────────────────────────────────── */
+.sk-dp {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 220px;
+}
+.sk-dp__field {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  background: var(--bg-elevated);
+  transition: border-color 0.12s, box-shadow 0.12s;
+}
+.sk-dp__field:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.16);
+}
+.sk-dp__field input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0 4px 0 12px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}
+.sk-dp__field input[aria-invalid='true'] {
+  color: #dc2626;
+}
+.sk-dp__toggle {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 100%;
+  color: var(--text-tertiary);
+  border-radius: 0 9px 9px 0;
+}
+.sk-dp__toggle:hover {
+  color: var(--primary);
+}
+.sk-dp__pop {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 60;
+  width: 308px;
+  max-width: calc(100vw - 32px);
+  padding: 14px;
+  border: 1px solid var(--border-default);
+  border-radius: 16px;
+  background: var(--bg-elevated);
+  box-shadow: 0 18px 48px rgba(15, 22, 41, 0.22);
+}
+.sk-dp__pop.is-right {
+  left: auto;
+  right: 0;
+}
+.sk-dp__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.sk-dp__nav {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  color: var(--text-secondary);
+}
+.sk-dp__nav:hover {
+  background: var(--bg-inset);
+  color: var(--primary);
+}
+.sk-dp__selects {
+  display: flex;
+  flex: 1;
+  gap: 6px;
+  justify-content: center;
+}
+.sk-dp__selects select {
+  height: 34px;
+  padding: 0 8px;
+  border: 1px solid var(--border-default);
+  border-radius: 9px;
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.sk-dp__week,
+.sk-dp__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+.sk-dp__week {
+  margin: 12px 0 4px;
+}
+.sk-dp__week span {
+  text-align: center;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text-tertiary);
+}
+.sk-dp__day {
+  height: 36px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}
+.sk-dp__day:hover:not(:disabled) {
+  background: var(--bg-inset);
+}
+.sk-dp__day.is-out {
+  color: var(--text-disabled);
+  font-weight: 500;
+}
+.sk-dp__day.is-today {
+  box-shadow: inset 0 0 0 1.5px var(--primary);
+}
+.sk-dp__day.is-selected {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: none;
+}
+.sk-dp__day:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+.sk-dp__day:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.sk-dp__foot {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-default);
+}
+.sk-dp__foot button {
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary);
+}
+.sk-dp__foot button:hover {
+  background: var(--bg-inset);
+}
+
+.sk-dp--block {
+  display: block;
+  max-width: none;
+}
+
+.sk-numfield--block {
+  display: flex;
+  width: 100%;
+}
+.sk-numfield--block .sk-numfield__input {
+  text-align: left;
 }
