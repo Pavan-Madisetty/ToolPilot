@@ -11,7 +11,10 @@ import { clsx } from 'clsx';
 import { useUIStore } from '@/stores/uiStore';
 import { SEO_CONTENTS } from '@/config/seoContents';
 import { getFallbackSEOContent } from '@/utils/seoGenerator';
-import { MODULE_MAP } from '@/config/modules';
+import { MODULE_MAP, getModuleColors } from '@/config/modules';
+import { ToolSwitcher } from './ToolSwitcher';
+import { LucideIcon } from './LucideIcon';
+import { Link } from 'react-router-dom';
 
 interface ToolPageWrapperProps {
   toolId: string;
@@ -86,6 +89,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
   const moduleConfig = MODULE_MAP[tool.module as keyof typeof MODULE_MAP];
   const moduleName = moduleConfig ? moduleConfig.name : tool.module.charAt(0).toUpperCase() + tool.module.slice(1);
   const moduleSlug = moduleConfig ? moduleConfig.slug : `/${tool.module}`;
+  const moduleColors = getModuleColors(tool.module);
 
   const breadcrumbItems = [
     { label: moduleName, href: moduleSlug },
@@ -199,59 +203,54 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
         {howToSchema && <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>}
       </Helmet>
 
-      <div className="container-module py-8 font-sans text-left">
-        <Breadcrumb items={breadcrumbItems} />
+      <div className="sk-container sk-toolpage">
+        <div className="sk-toolpage__top">
+          <Breadcrumb items={breadcrumbItems} />
+          <ToolSwitcher key={tool.id} toolId={tool.id} moduleKey={tool.module} />
+        </div>
 
         {/* Tool Header */}
-        <header className="mb-10 mt-6">
-          <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
-            <div className="flex-1 space-y-2">
-              <div className="flex flex-wrap items-center gap-3">
-                <h1 className="font-display text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 leading-tight">
-                  {tool.name}
-                </h1>
-                <span className="tool-header-badge">
-                  {tool.module}
-                </span>
-              </div>
-              <p className="text-sm text-gray-500 max-w-2xl leading-relaxed font-medium">
-                {tool.description}
-              </p>
-            </div>
-
-            {/* Quick Actions */}
-            <div className="flex items-center gap-2.5 shrink-0 self-start md:self-center font-sans">
-              <button
-                onClick={() => toggleFavorite(tool.id)}
-                className={clsx(
-                  'btn-favorite',
-                  favorited && 'is-active',
-                  'px-4 py-2 rounded-full border text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer active:scale-95 flex items-center gap-1.5'
-                )}
-                aria-label={favorited ? 'Remove from favorites' : 'Add to favorites'}
+        <header className="sk-toolhead">
+          <span
+            className="sk-toolhead__icon"
+            style={{ background: moduleColors.bg, color: moduleColors.accent, borderColor: moduleColors.border }}
+            aria-hidden="true"
+          >
+            <LucideIcon name={tool.icon} fallback={moduleConfig?.icon} size={26} strokeWidth={2} />
+          </span>
+          <div className="sk-toolhead__text">
+            <div className="sk-toolhead__title-row">
+              <h1 className="sk-toolhead__title">{tool.name}</h1>
+              <Link
+                to={moduleSlug}
+                className="sk-chip"
+                style={{ background: moduleColors.bg, color: moduleColors.accent, borderColor: moduleColors.border }}
               >
-                <Heart
-                  size={16}
-                  strokeWidth={2.5}
-                  className={clsx({ 'fill-current text-danger': favorited })}
-                />
-                <span>{favorited ? 'Favorited' : 'Favorite'}</span>
-              </button>
-
-              <button
-                onClick={handleShare}
-                className="btn-share px-4 py-2 rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50 hover:text-gray-900 shadow-sm text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer active:scale-95 flex items-center gap-1.5"
-                aria-label="Share tool"
-              >
-                <Share2 size={16} strokeWidth={2.5} />
-                <span>Share</span>
-              </button>
+                {moduleName}
+              </Link>
             </div>
+            <p className="sk-toolhead__desc">{tool.description}</p>
+          </div>
+          <div className="sk-toolhead__actions">
+            <button
+              type="button"
+              onClick={() => toggleFavorite(tool.id)}
+              className={clsx('sk-btn sk-btn--ghost', favorited && 'is-active')}
+              aria-pressed={favorited}
+              aria-label={favorited ? 'Remove from favorites' : 'Add to favorites'}
+            >
+              <Heart size={16} className={clsx(favorited && 'fill-current')} aria-hidden="true" />
+              <span>{favorited ? 'Saved' : 'Save'}</span>
+            </button>
+            <button type="button" onClick={handleShare} className="sk-btn sk-btn--ghost" aria-label="Share tool">
+              <Share2 size={16} aria-hidden="true" />
+              <span>Share</span>
+            </button>
           </div>
         </header>
 
         {/* Tool Application sandbox */}
-        <div className="min-h-[400px]">{children}</div>
+        <div className="sk-toolbody">{children}</div>
 
         {/* Rich SEO Content Explanatory Copy Section */}
         {(tool.longDescription || tool.benefits || tool.howToSteps || tool.faq) && (
@@ -313,7 +312,7 @@ export function ToolPageWrapper({ toolId, children }: ToolPageWrapperProps) {
             {/* How to use / Step by Step instructions */}
             {tool.howToSteps && (
               <section className="flex flex-col gap-4">
-                <h2 className="font-display text-xl font-bold text-gray-900 dark:text-slate-100">
+                <h2 className="text-h3 font-display text-text-primary">
                   How to Use {tool.name}
                 </h2>
                 <div className="step-cards-grid">

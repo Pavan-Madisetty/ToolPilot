@@ -1,70 +1,50 @@
-import { useCallback, useState, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Zap, Shield, Wifi, ArrowRight, Star, Clock } from 'lucide-react';
+import { Search, Zap, WifiOff, ArrowRight, Star, Clock, Sparkles, Lock, Layers } from 'lucide-react';
 
 import { useSearchStore } from '@/stores/uiStore';
 import { useFavoritesStore, useHistoryStore } from '@/stores/userStore';
-import { MODULES, getModuleEmoji } from '@/config/modules';
-import { POPULAR_TOOLS, TOOL_BY_ID, TOOLS_BY_MODULE, TOOL_COUNT_LABEL } from '@/config/tools';
+import { MODULES, getModuleColors } from '@/config/modules';
+import { LucideIcon } from '@/components/shared/LucideIcon';
+import { POPULAR_TOOLS, TOOL_BY_ID, TOOLS_BY_MODULE, TOOL_COUNT_LABEL, LIVE_TOOL_COUNT } from '@/config/tools';
 import type { ToolConfig } from '@/types';
 import { ToolCard } from '@/components/ui/ToolCard';
 import { useRuntimeConfig } from '@/context/RuntimeConfigContext';
-import { AdRenderer } from '@/components/shared/AdRenderer';
 
 // ─────────────────────────────────────────────
-// Animation Variants
+// Static content
 // ─────────────────────────────────────────────
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const } },
-};
+const QUICK_LINKS = [
+  { label: 'EMI Calculator', to: '/finance/emi-calculator' },
+  { label: 'JSON Formatter', to: '/developer/json-formatter' },
+  { label: 'Merge PDF', to: '/pdf/merge' },
+  { label: 'Compress Image', to: '/image/image-compress' },
+  { label: 'Word Counter', to: '/text/word-counter' },
+  { label: 'QR Code', to: '/image/qr-generator' },
+];
 
-const staggerContainer = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } },
-};
-
-const cardVariant = {
-  hidden: { opacity: 0, y: 24, scale: 0.97 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as const },
-  },
-};
-
-// ─────────────────────────────────────────────
-// Feature Highlights
-// ─────────────────────────────────────────────
 const FEATURES = [
   {
-    icon: Shield,
-    title: 'Privacy First',
+    icon: Lock,
+    title: 'Private by design',
     description:
-      'All processing happens in your browser. No data ever leaves your device. We have zero tracking, zero ads, zero analytics.',
-    color: '#10b981',
-    bg: 'rgba(16, 185, 129, 0.08)',
-    border: 'rgba(16, 185, 129, 0.2)',
+      'Files and text are processed on your device. Nothing is uploaded, so sensitive documents never leave your browser.',
   },
   {
     icon: Zap,
-    title: 'Lightning Fast',
-    description:
-      'Optimized for performance with Lighthouse score 95+. Instant results with no server round-trips. Everything runs locally.',
-    color: '#f59e0b',
-    bg: 'rgba(245, 158, 11, 0.08)',
-    border: 'rgba(245, 158, 11, 0.2)',
+    title: 'Instant results',
+    description: 'No queues, no waiting on a server. Results update as you type, even for large inputs.',
   },
   {
-    icon: Wifi,
-    title: 'Works Offline',
-    description: `Full PWA support — install Toolskyt on your device and use every tool without an internet connection.`,
-    color: 'var(--text-link)',
-    bg: 'rgba(79, 70, 229, 0.08)',
-    border: 'rgba(79, 70, 229, 0.2)',
+    icon: WifiOff,
+    title: 'Works offline',
+    description: 'Install Toolskyt as an app and keep using your favourite tools without a connection.',
+  },
+  {
+    icon: Layers,
+    title: 'Free, no account',
+    description: 'Every tool is free to use with no sign-up, no limits and no watermarks.',
   },
 ];
 
@@ -109,7 +89,6 @@ export default function HomePage() {
   const setIsOpen = useSearchStore((s) => s.setIsOpen);
   const { favorites } = useFavoritesStore();
   const { history } = useHistoryStore();
-  const [activeModuleKey, setActiveModuleKey] = useState<string>('popular');
 
   const openSearch = useCallback(() => setIsOpen(true), [setIsOpen]);
 
@@ -156,271 +135,202 @@ export default function HomePage() {
         <script type="application/ld+json">{JSON.stringify(JSON_LD_ORGANIZATION)}</script>
       </Helmet>
 
-      <div className="homepage">
-        {/* Workspace section / Hero */}
+      <div className="sk-home">
+        {/* ── Hero ───────────────────────────────── */}
         {(config.homepage?.visibleSections?.hero ?? true) && (
-          <section className="workspace-header" aria-label="Hero">
-            <div className="workspace-header__pattern" aria-hidden="true" />
-            <div className="workspace-header__content">
-              <div className="workspace-header__badge">
-                <span>🚀 browser-based</span>
-              </div>
-              <h1 className="workspace-header__title text-h1">
-                {config.homepage?.hero?.title || `${TOOL_COUNT_LABEL} Free Online Tools`}
+          <section className="sk-hero" aria-label="Welcome">
+            <div className="sk-container sk-hero__inner">
+              <span className="sk-eyebrow">
+                <Sparkles size={14} aria-hidden="true" /> Free · Private · Works offline
+              </span>
+              <h1 className="sk-hero__title">
+                {config.homepage?.hero?.title || (
+                  <>
+                    Free online tools that run <span className="sk-gradient-text">right in your browser</span>
+                  </>
+                )}
               </h1>
-              <p className="workspace-header__desc text-body-large">
-                {config.homepage?.hero?.subtitle || "Secure, fast, and local browser-based utility tools. No signup, no tracking, works completely offline."}
+              <p className="sk-hero__sub">
+                {config.homepage?.hero?.subtitle ||
+                  'Calculators, converters, PDF and image utilities, developer tools and more. No sign-up, no uploads, no tracking.'}
               </p>
-              <div className="workspace-header__search-wrap">
-                <button
-                  type="button"
-                  onClick={openSearch}
-                  className="workspace-header__search-bar"
-                  aria-label="Search all tools"
-                >
-                  <Search className="workspace-header__search-icon w-5 h-5" aria-hidden="true" />
-                  <span className="workspace-header__search-placeholder">
-                    Search {TOOL_COUNT_LABEL} tools...
-                  </span>
-                  <kbd className="workspace-header__search-kbd">⌘K</kbd>
-                </button>
+
+              <button type="button" onClick={openSearch} className="sk-hero__search" aria-label="Search all tools">
+                <Search size={20} aria-hidden="true" />
+                <span>
+                  Search {LIVE_TOOL_COUNT} tools<em className="sk-hide-xs"> — try “EMI”, “JSON” or “merge pdf”</em>
+                </span>
+                <kbd>⌘K</kbd>
+              </button>
+
+              <div className="sk-hero__quick">
+                <span>Popular:</span>
+                {QUICK_LINKS.map((q) => (
+                  <Link key={q.to} to={q.to} className="sk-pill">
+                    {q.label}
+                  </Link>
+                ))}
               </div>
-              
-              {/* Dynamic Ad below Hero */}
-              <AdRenderer slotId="homepage-hero-bottom" className="mt-8" />
+
+              <dl className="sk-stats">
+                <div>
+                  <dt>Free tools</dt>
+                  <dd>{LIVE_TOOL_COUNT}</dd>
+                </div>
+                <div>
+                  <dt>Categories</dt>
+                  <dd>{MODULES.length}</dd>
+                </div>
+                <div>
+                  <dt>Files uploaded</dt>
+                  <dd>0</dd>
+                </div>
+                <div>
+                  <dt>Sign-ups required</dt>
+                  <dd>0</dd>
+                </div>
+              </dl>
             </div>
           </section>
         )}
 
-        {/* ── Favorites ─────────────────────────── */}
-        <AnimatePresence>
+        <div className="sk-container sk-home__sections">
+          {/* ── Favorites ───────────────────────── */}
           {(config.homepage?.visibleSections?.favorites ?? true) && favoriteTools.length > 0 && (
-            <motion.section
-              id="favorites"
-              className="section container-app"
-              aria-labelledby="favorites-heading"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
-            >
-              <div className="section__header">
+            <section id="favorites" className="sk-section" aria-labelledby="favorites-heading">
+              <div className="sk-section__head">
                 <div>
-                  <h2 id="favorites-heading" className="section__title">
-                    <Star
-                      size={20}
-                      aria-hidden="true"
-                      className="section__title-icon"
-                      style={{ color: '#f59e0b' }}
-                    />
-                    Your Favorites
+                  <h2 id="favorites-heading" className="sk-section__title">
+                    <Star size={20} aria-hidden="true" className="text-warning" /> Your favorites
                   </h2>
-                  <p className="section__subtitle">Tools you've starred for quick access</p>
+                  <p className="sk-section__sub">Tools you've saved for quick access</p>
                 </div>
               </div>
-              <motion.div
-                className="tools-grid"
-                variants={staggerContainer}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: '-50px' }}
-              >
+              <div className="sk-grid">
                 {favoriteTools.map((tool) => (
                   <ToolCard key={tool.id} tool={tool} />
                 ))}
-              </motion.div>
-            </motion.section>
+              </div>
+            </section>
           )}
-        </AnimatePresence>
 
-        {/* ── Workspace Categories & Tools Grid ── */}
-        {(config.homepage?.visibleSections?.categories ?? true) && (
-          <section className="section container-app" aria-labelledby="workspace-tools-heading">
-            <motion.div
-              className="section__header"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-80px' }}
-              variants={fadeUp}
-            >
-              <div>
-                <h2 id="workspace-tools-heading" className="section__title">
-                  Workspace Categories
-                </h2>
-                <p className="section__subtitle">
-                  Select a category to explore secure, browser-based productivity tools
-                </p>
-              </div>
-              <Link to="/search" className="section__view-all" aria-label="Browse all tools index">
-                Search index <ArrowRight size={16} aria-hidden="true" />
-              </Link>
-            </motion.div>
-
-            {/* Module Selector Tabs */}
-            <div className="workspace-tabs-container">
-              <div className="workspace-tabs" role="tablist" aria-label="Tool modules">
-                <button
-                  type="button"
-                  onClick={() => setActiveModuleKey('popular')}
-                  className={`workspace-tab ${activeModuleKey === 'popular' ? 'workspace-tab--active' : ''}`}
-                  aria-selected={activeModuleKey === 'popular'}
-                  role="tab"
-                >
-                  <span className="workspace-tab__emoji" aria-hidden="true">
-                    🔥
-                  </span>
-                  <span className="workspace-tab__name">Popular Tools</span>
-                </button>
-                {activeModules.map((mod) => {
-                  const isActive = activeModuleKey === mod.key;
-                  return (
-                    <button
-                      key={mod.key}
-                      type="button"
-                      onClick={() => setActiveModuleKey(mod.key)}
-                      className={`workspace-tab ${isActive ? 'workspace-tab--active' : ''}`}
-                      aria-selected={isActive}
-                      role="tab"
-                    >
-                      <span className="workspace-tab__emoji" aria-hidden="true">
-                        {getModuleEmoji(mod.key)}
-                      </span>
-                      <span className="workspace-tab__name">{mod.name}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Tools Grid */}
-            <motion.div
-              key={activeModuleKey}
-              className="tools-grid mt-6"
-              variants={staggerContainer}
-              initial="hidden"
-              animate="visible"
-            >
-              {(activeModuleKey === 'popular'
-                ? trendingToolsList
-                : TOOLS_BY_MODULE[activeModuleKey] || []
-              ).map((tool) => (
-                <ToolCard key={tool.id} tool={tool} />
-              ))}
-            </motion.div>
-          </section>
-        )}
-
-        {/* ── Feature Highlights ────────────────── */}
-        {(config.homepage?.visibleSections?.highlights ?? true) && (
-          <section className="section container-app" aria-labelledby="features-heading">
-            <motion.div
-              className="section__header section__header--center"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-80px' }}
-              variants={fadeUp}
-            >
-              <div>
-                <h2 id="features-heading" className="section__title">
-                  Why Toolskyt?
-                </h2>
-                <p className="section__subtitle">Built with your privacy and performance in mind</p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              className="features-grid"
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-60px' }}
-            >
-              {FEATURES.map((feat) => (
-                <motion.div
-                  key={feat.title}
-                  className="feature-card"
-                  variants={cardVariant}
-                  whileHover={{ y: -6, scale: 1.02 }}
-                  style={
-                    {
-                      '--feature-color': feat.color,
-                      '--feature-bg': feat.bg,
-                      '--feature-border': feat.border,
-                    } as React.CSSProperties
-                  }
-                >
-                  <div className="feature-card__icon-wrap" aria-hidden="true">
-                    <feat.icon size={24} />
-                  </div>
-                  <h3 className="feature-card__title">{feat.title}</h3>
-                  <p className="feature-card__desc">{feat.description}</p>
-                </motion.div>
-              ))}
-            </motion.div>
-          </section>
-        )}
-
-        {/* ── Recently Used (Bottom) ────────────── */}
-        <AnimatePresence>
+          {/* ── Recently used ───────────────────── */}
           {(config.homepage?.visibleSections?.recentlyUsed ?? true) && recentTools.length > 0 && (
-            <motion.section
-              className="section container-app"
-              aria-labelledby="recent-heading"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
-            >
-              <div className="section__header">
+            <section className="sk-section" aria-labelledby="recent-heading">
+              <div className="sk-section__head">
                 <div>
-                  <h2 id="recent-heading" className="section__title">
-                    <Clock size={20} aria-hidden="true" className="section__title-icon" />
-                    Recently Used
+                  <h2 id="recent-heading" className="sk-section__title">
+                    <Clock size={20} aria-hidden="true" className="text-primary" /> Pick up where you left off
                   </h2>
-                  <p className="section__subtitle">Pick up where you left off</p>
                 </div>
               </div>
-              <motion.div
-                className="tools-grid tools-grid--compact"
-                variants={staggerContainer}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: '-50px' }}
-              >
+              <div className="sk-grid sk-grid--compact">
                 {recentTools.map((tool) => (
                   <ToolCard key={tool.id} tool={tool} compact />
                 ))}
-              </motion.div>
-            </motion.section>
+              </div>
+            </section>
           )}
-        </AnimatePresence>
 
-        {/* ── CTA Banner ────────────────────────── */}
-        <section className="cta-banner" aria-labelledby="cta-heading">
-          <motion.div
-            className="cta-banner__inner container-app"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={fadeUp}
-          >
-            <h2 id="cta-heading" className="cta-banner__title">
-              Ready to explore {TOOL_COUNT_LABEL} tools?
-            </h2>
-            <p className="cta-banner__desc">
-              All free. All private. All right here in your browser.
-            </p>
-            <button
-              type="button"
-              onClick={openSearch}
-              className="cta-banner__btn"
-              id="cta-search-btn"
-              aria-label="Search for tools"
-            >
-              <Search size={18} aria-hidden="true" />
-              Search Tools
+          {/* ── Categories ──────────────────────── */}
+          {(config.homepage?.visibleSections?.categories ?? true) && (
+            <section className="sk-section" aria-labelledby="categories-heading">
+              <div className="sk-section__head">
+                <div>
+                  <h2 id="categories-heading" className="sk-section__title">Browse by category</h2>
+                  <p className="sk-section__sub">Find the right tool faster — every category is a click away</p>
+                </div>
+                <Link to="/search" className="sk-link-arrow">
+                  View all tools <ArrowRight size={16} aria-hidden="true" />
+                </Link>
+              </div>
+              <div className="sk-cat-grid">
+                {activeModules.map((mod) => {
+                  const c = getModuleColors(mod.key);
+                  const count = TOOLS_BY_MODULE[mod.key]?.length ?? 0;
+                  return (
+                    <Link
+                      key={mod.key}
+                      to={mod.slug}
+                      className="sk-cat"
+                      style={{ ['--cat-accent' as string]: c.accent, ['--cat-bg' as string]: c.bg }}
+                    >
+                      <span className="sk-cat__icon" aria-hidden="true">
+                        <LucideIcon name={mod.icon} size={22} strokeWidth={2} />
+                      </span>
+                      <span className="sk-cat__name">{mod.name}</span>
+                      <span className="sk-cat__desc">{mod.description}</span>
+                      <span className="sk-cat__foot">
+                        {count} tools <ArrowRight size={14} aria-hidden="true" />
+                      </span>
+                    </Link>
+                  );
+                })}
+                <Link to="/search" className="sk-cat sk-cat--all">
+                  <span className="sk-cat__name">Not sure where to look?</span>
+                  <span className="sk-cat__desc">
+                    Search all {LIVE_TOOL_COUNT} tools by name or keyword and jump straight to the one you need.
+                  </span>
+                  <span className="sk-cat__foot">
+                    Search all tools <ArrowRight size={14} aria-hidden="true" />
+                  </span>
+                </Link>
+              </div>
+            </section>
+          )}
+
+          {/* ── Popular tools ───────────────────── */}
+          {(config.homepage?.visibleSections?.popularTools ?? true) && (
+            <section className="sk-section" aria-labelledby="popular-heading">
+              <div className="sk-section__head">
+                <div>
+                  <h2 id="popular-heading" className="sk-section__title">Most-used tools</h2>
+                  <p className="sk-section__sub">What people reach for every day</p>
+                </div>
+              </div>
+              <div className="sk-grid">
+                {trendingToolsList.map((tool) => (
+                  <ToolCard key={tool.id} tool={tool} />
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* ── Why Toolskyt ────────────────────── */}
+          {(config.homepage?.visibleSections?.highlights ?? true) && (
+            <section className="sk-section" aria-labelledby="features-heading">
+              <div className="sk-section__head sk-section__head--center">
+                <div>
+                  <h2 id="features-heading" className="sk-section__title">Why people choose Toolskyt</h2>
+                  <p className="sk-section__sub">Simple, fast and respectful of your data</p>
+                </div>
+              </div>
+              <div className="sk-features">
+                {FEATURES.map((feat) => (
+                  <div key={feat.title} className="sk-feature">
+                    <span className="sk-feature__icon" aria-hidden="true">
+                      <feat.icon size={22} />
+                    </span>
+                    <h3>{feat.title}</h3>
+                    <p>{feat.description}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+        </div>
+
+        {/* ── CTA ───────────────────────────────── */}
+        <section className="sk-container sk-cta-wrap" aria-labelledby="cta-heading">
+          <div className="sk-cta">
+            <div>
+              <h2 id="cta-heading">Can't find what you need?</h2>
+              <p>Search across all {LIVE_TOOL_COUNT} tools — results appear as you type.</p>
+            </div>
+            <button type="button" onClick={openSearch} className="sk-btn sk-btn--light sk-btn--lg">
+              <Search size={18} aria-hidden="true" /> Search tools
             </button>
-          </motion.div>
+          </div>
         </section>
       </div>
     </>

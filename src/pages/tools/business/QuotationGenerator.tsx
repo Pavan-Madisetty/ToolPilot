@@ -314,7 +314,7 @@ export default function QuotationGenerator() {
           {/* Printable Quotation View */}
           <div
             id="printable-quotation"
-            className="p-6 md:p-8 rounded-2xl bg-white dark:bg-slate-900 border text-black dark:text-white"
+            className="theme-paper p-6 md:p-8 rounded-2xl border"
             style={{ borderColor: 'var(--border-default)' }}
           >
             <div

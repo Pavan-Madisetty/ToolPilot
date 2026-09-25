@@ -305,7 +305,7 @@ export default function GstInvoice() {
           {/* Printable Invoice Display */}
           <div
             id="printable-invoice"
-            className="p-6 md:p-8 rounded-2xl bg-white dark:bg-slate-900 border text-black dark:text-white"
+            className="theme-paper p-6 md:p-8 rounded-2xl border"
             style={{ borderColor: 'var(--border-default)' }}
           >
             <div
@@ -372,8 +372,8 @@ export default function GstInvoice() {
             </div>
 
             {/* Invoice items list */}
-            <div className="py-6">
-              <table className="w-full text-left text-sm">
+            <div className="py-6 overflow-x-auto">
+              <table className="w-full min-w-[520px] text-left text-sm">
                 <thead>
                   <tr
                     className="border-b"

@@ -1,190 +1,97 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { TOOL_COUNT_LABEL } from '@/config/tools';
-import { useUIStore } from '@/stores/uiStore';
+import { ShieldCheck } from 'lucide-react';
+import { MODULES } from '@/config/modules';
+import { LIVE_TOOL_COUNT } from '@/config/tools';
+
+const POPULAR = [
+  { label: 'EMI Calculator', to: '/finance/emi-calculator' },
+  { label: 'JSON Formatter', to: '/developer/json-formatter' },
+  { label: 'Merge PDF', to: '/pdf/merge' },
+  { label: 'QR Code Generator', to: '/image/qr-generator' },
+  { label: 'Word Counter', to: '/text/word-counter' },
+  { label: 'Password Generator', to: '/developer/password-generator' },
+];
+
+const COMPANY = [
+  { label: 'About', to: '/about' },
+  { label: 'Contact & support', to: '/contact' },
+  { label: 'Privacy policy', to: '/privacy' },
+  { label: 'Terms of service', to: '/terms' },
+];
 
 export function Footer() {
-  const currentYear = new Date().getFullYear();
-  const { addToast } = useUIStore();
-  const [email, setEmail] = useState('');
-
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email.trim()) return;
-
-    addToast({
-      type: 'success',
-      title: 'Subscribed Successfully',
-      message: `You have joined the Toolskyt newsletter as ${email.trim()}!`,
-    });
-    setEmail('');
-  };
-
+  const half = Math.ceil(MODULES.length / 2);
   return (
-    <footer className="footer-section">
-      <div className="footer-max-width">
-        <div className="footer-grid">
-          {/* Brand & Newsletter Column */}
-          <div className="footer-col">
-            <Link
-              to="/"
-              className="footer-brand-title select-none"
-              id="footer-brand"
-            >
-              Tool<span className="text-[#6366F1]">skyt</span>
+    <footer className="sk-footer" role="contentinfo">
+      <div className="sk-container">
+        <div className="sk-footer__grid">
+          <div className="sk-footer__brand">
+            <Link to="/" className="sk-logo sk-logo--light" aria-label="Toolskyt — home">
+              <span className="sk-logo__mark" aria-hidden="true">T</span>
+              <span className="sk-logo__word">Tool<span>skyt</span></span>
             </Link>
-            <p className="footer-brand-desc">
-              The world's premium browser-based productivity platform. Over {TOOL_COUNT_LABEL} free, secure, and lightning-fast developer tools, finance converters, and image processors. 100% offline-ready and private.
+            <p>
+              {LIVE_TOOL_COUNT} free tools for finance, development, documents and everyday work.
+              Everything runs in your browser, so your files and data stay on your device.
             </p>
-            
-            {/* Newsletter Subscription */}
-            <form onSubmit={handleNewsletterSubmit} className="footer-newsletter-form">
-              <span className="footer-heading">
-                Subscribe to updates
-              </span>
-              <div className="footer-newsletter-box">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  className="footer-newsletter-input"
-                  required
-                  aria-label="Newsletter email address"
-                />
-                <button
-                  type="submit"
-                  className="footer-newsletter-btn"
-                >
-                  Join
-                </button>
-              </div>
-            </form>
-
-            {/* Social Icons */}
-            <div className="footer-social-row">
-              <a
-                href="https://x.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter"
-                className="footer-social-icon"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                </svg>
-              </a>
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                className="footer-social-icon"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.603-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
-                </svg>
-              </a>
+            <div className="sk-footer__trust">
+              <ShieldCheck size={16} aria-hidden="true" /> No sign-up · No uploads · No tracking
             </div>
           </div>
 
-          {/* Modules Column */}
-          <div className="footer-col">
-            <h4 className="footer-heading">Product Modules</h4>
-            <ul className="footer-link-list">
-              <li>
-                <Link to="/developer" className="footer-link">
-                  Developer Utilities
-                </Link>
-              </li>
-              <li>
-                <Link to="/finance" className="footer-link">
-                  Finance & Tax Converters
-                </Link>
-              </li>
-              <li>
-                <Link to="/pdf" className="footer-link">
-                  PDF & Document Tools
-                </Link>
-              </li>
-              <li>
-                <Link to="/image" className="footer-link">
-                  Image & Design Tools
-                </Link>
-              </li>
-              <li>
-                <Link to="/productivity" className="footer-link">
-                  Productivity Tools
-                </Link>
-              </li>
+          <nav aria-label="Categories" className="sk-footer__col">
+            <h2>Categories</h2>
+            <ul>
+              {MODULES.slice(0, half).map((m) => (
+                <li key={m.key}><Link to={m.slug}>{m.name}</Link></li>
+              ))}
             </ul>
-          </div>
+          </nav>
 
-          {/* Developer Utilities Column */}
-          <div className="footer-col">
-            <h4 className="footer-heading">Popular Developer Tools</h4>
-            <ul className="footer-link-list">
-              <li>
-                <Link to="/developer/alternative-timestamps" className="footer-link">
-                  Unix Timestamp Converter
-                </Link>
-              </li>
-              <li>
-                <Link to="/developer/json-formatter" className="footer-link">
-                  JSON Formatter & Validator
-                </Link>
-              </li>
-              <li>
-                <Link to="/developer/jwt-decoder" className="footer-link">
-                  Client-Side JWT Debugger
-                </Link>
-              </li>
-              <li>
-                <Link to="/developer/base64" className="footer-link">
-                  Base64 Encoder & Decoder
-                </Link>
-              </li>
-              <li>
-                <Link to="/image/qr-generator" className="footer-link">
-                  High-Resolution QR Generator
-                </Link>
-              </li>
+          <nav aria-label="More categories" className="sk-footer__col">
+            <h2 aria-hidden="true">&nbsp;</h2>
+            <ul>
+              {MODULES.slice(half).map((m) => (
+                <li key={m.key}><Link to={m.slug}>{m.name}</Link></li>
+              ))}
             </ul>
-          </div>
+          </nav>
 
-          {/* Legal & Platform Column */}
-          <div className="footer-col">
-            <h4 className="footer-heading">Platform Information</h4>
-            <ul className="footer-link-list">
-              <li><Link to="/about" className="footer-link">About Us</Link></li>
-              <li><Link to="/privacy" className="footer-link">Privacy & Cookies Policy</Link></li>
-              <li><Link to="/terms" className="footer-link">Terms of Service</Link></li>
-              <li><Link to="/contact" className="footer-link">Contact & Support</Link></li>
-              <li>
-                <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className="footer-link">
-                  XML Sitemap
-                </a>
-              </li>
+          <nav aria-label="Popular tools" className="sk-footer__col">
+            <h2>Popular tools</h2>
+            <ul>
+              {POPULAR.map((p) => (
+                <li key={p.to}><Link to={p.to}>{p.label}</Link></li>
+              ))}
             </ul>
-          </div>
+          </nav>
+
+          <nav aria-label="Company" className="sk-footer__col">
+            <h2>Company</h2>
+            <ul>
+              {COMPANY.map((p) => (
+                <li key={p.to}><Link to={p.to}>{p.label}</Link></li>
+              ))}
+              <li><a href="/sitemap.xml" target="_blank" rel="noopener noreferrer">Sitemap</a></li>
+            </ul>
+          </nav>
         </div>
 
-        {/* SEO Text Footer block */}
-        <div className="footer-seo-container">
-          <p className="footer-seo-paragraph">
-            <span className="font-semibold text-slate-200">Search Engine Optimization (SEO) Context:</span> Toolskyt is an all-in-one suite built for developers, designers, and financial planners. Featuring local browser compilation with zero server latency, users can instantly convert epoch times, inspect decrypted JWT signature blocks, compress high-definition PNGs, and generate vector QR matrices.
-          </p>
-          <p className="footer-seo-paragraph">
-            Every calculation, encryption, conversion, and validation operates with zero server transit. No data ever leaves your device, conforming to rigorous modern web security guidelines. Perfect for offline usage as a Progressive Web Application (PWA).
-          </p>
-          <div className="footer-copyright-bar">
-            <span>© {currentYear} Toolskyt. All rights reserved.</span>
-            <span>Made with ❤️ for productivity</span>
-          </div>
+        <div className="sk-footer__bar">
+          <span>© {new Date().getFullYear()} Toolskyt. All rights reserved.</span>
+          <a
+            href="https://github.com/Pavan-Madisetty/ToolPilot"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Toolskyt on GitHub"
+            className="sk-footer__gh"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.35.96.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
+            </svg>{' '}GitHub
+          </a>
         </div>
       </div>
     </footer>
   );
 }
-
-export default Footer;

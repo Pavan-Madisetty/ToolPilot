@@ -351,8 +351,8 @@ export default function JsonFormatter() {
           {/* LEFT PANEL - Raw Input Editor */}
           <div className="lg:col-span-5 flex flex-col bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm h-full">
             {/* Editor Toolbar */}
-            <div className="p-toolbar-padding border-b border-gray-100 dark:border-slate-800 flex items-center justify-between gap-toolbar-gap bg-gray-50/50 dark:bg-slate-900/50">
-              <div className="flex items-center gap-item-gap overflow-hidden">
+            <div className="p-toolbar-padding border-b border-gray-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-x-toolbar-gap gap-y-2 bg-gray-50/50 dark:bg-slate-900/50">
+              <div className="flex items-center gap-item-gap">
                 <span className="font-semibold text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider shrink-0">Raw JSON Input</span>
                 {parsedData ? (
                   <span className="badge-status-valid shrink-0">

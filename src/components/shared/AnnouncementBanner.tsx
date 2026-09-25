@@ -52,46 +52,37 @@ export function AnnouncementBanner() {
       bg: 'bg-info-subtle',
       text: 'text-info',
       border: 'border-info-subtle',
-      icon: <Info size={16} className="text-info mt-0.5" />,
+      icon: <Info size={16} className="text-white" />,
     },
     warning: {
       bg: 'bg-warning-subtle',
       text: 'text-warning',
       border: 'border-warning-subtle',
-      icon: <AlertTriangle size={16} className="text-warning mt-0.5" />,
+      icon: <AlertTriangle size={16} className="text-white" />,
     },
     error: {
       bg: 'bg-danger-subtle',
       text: 'text-danger',
       border: 'border-danger-subtle',
-      icon: <AlertOctagon size={16} className="text-danger mt-0.5" />,
+      icon: <AlertOctagon size={16} className="text-white" />,
     },
     success: {
       bg: 'bg-success-subtle',
       text: 'text-success',
       border: 'border-success-subtle',
-      icon: <CheckCircle2 size={16} className="text-success mt-0.5" />,
+      icon: <CheckCircle2 size={16} className="text-white" />,
     },
   };
 
   const style = typeStyles[activeBanner.type as keyof typeof typeStyles] || typeStyles.info;
 
   return (
-    <div
-      className={`border-b px-4 py-2 text-center text-xs font-medium flex items-center justify-center gap-2 transition-all ${style.bg} ${style.text} ${style.border}`}
-      role="alert"
-    >
-      <div className="flex items-center gap-2 max-w-4xl mx-auto flex-1 justify-center leading-relaxed">
-        {style.icon}
-        <span>{activeBanner.text}</span>
-      </div>
+    <div className={`sk-banner sk-banner--${activeBanner.type}`} role="status">
+      {style.icon}
+      <span>{activeBanner.text}</span>
       {activeBanner.dismissible && (
-        <button
-          onClick={handleDismiss}
-          className="p-1 hover:bg-black/5 dark:hover:bg-white/5 rounded transition-colors shrink-0 text-current"
-          aria-label="Dismiss announcement"
-        >
-          <X size={14} />
+        <button type="button" onClick={handleDismiss} aria-label="Dismiss announcement">
+          <X size={14} aria-hidden="true" />
         </button>
       )}
     </div>

@@ -1,8 +1,4 @@
 {
-  "hero": {
-    "title": "High-Performance\nCorporate Developer Suite",
-    "subtitle": "The ultimate offline-capable repository of high-end tools. Zero-latency conversions, cryptographically secure keys, and lossless file optimizations executed completely inside your browser."
-  },
   "visibleSections": {
     "hero": true,
     "categories": true,
@@ -14,8 +10,16 @@
   "trendingTools": [
     "emi-calculator",
     "json-formatter",
-    "resume-builder",
-    "sip-calculator"
+    "pdf-merge",
+    "image-compress",
+    "qr-generator",
+    "word-counter",
+    "password-generator",
+    "sip-calculator",
+    "gst-calculator",
+    "age-calculator",
+    "unit-converter",
+    "base64"
   ],
   "featuredTools": [
     "base64",

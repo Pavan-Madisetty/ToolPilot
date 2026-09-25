@@ -8,6 +8,8 @@ interface LucideIconProps {
   strokeWidth?: number;
   style?: CSSProperties;
   'aria-hidden'?: boolean | 'true' | 'false';
+  /** Icon name to use when `name` does not resolve (defaults to a help icon). */
+  fallback?: string;
 }
 
 const ICON_MAPPING: Record<string, string> = {
@@ -66,30 +68,41 @@ const ICON_MAPPING: Record<string, string> = {
   BriefcaseIcon: 'Briefcase',
   DocumentIcon: 'File',
   PresentationChartLineIcon: 'LineChart',
+  AdjustmentsHorizontalIcon: 'SlidersHorizontal',
+  PencilSquareIcon: 'SquarePen',
+  FaceSmileIcon: 'Smile',
+  LanguageIcon: 'Languages',
+  QuestionMarkCircleIcon: 'CircleHelp',
+  CommandLineIcon: 'Terminal',
+  EnvelopeIcon: 'Mail',
+  PaperAirplaneIcon: 'Send',
+  ClipboardDocumentCheckIcon: 'ClipboardCheck',
+  FireIcon: 'Flame',
+  HashtagIcon: 'Hash',
+  ReceiptRefundIcon: 'Receipt',
 };
+
+type IconComponentType = React.ComponentType<{
+  size?: number;
+  className?: string;
+  strokeWidth?: number;
+  style?: CSSProperties;
+  'aria-hidden'?: boolean | 'true' | 'false';
+}>;
+
+const ICONS = Icons as unknown as Record<string, IconComponentType>;
 
 export function LucideIcon({
   name,
+  fallback,
   size = 20,
   className,
   strokeWidth = 2,
   style,
   'aria-hidden': ariaHidden = true,
 }: LucideIconProps) {
-  // Resolve mapping
-  const resolvedName = ICON_MAPPING[name] || name;
-  
-  // Find component in Icons bundle
-  const IconComponent = (Icons as unknown as Record<
-    string,
-    React.ComponentType<{
-      size?: number;
-      className?: string;
-      strokeWidth?: number;
-      style?: CSSProperties;
-      'aria-hidden'?: boolean | 'true' | 'false';
-    }>
-  >)[resolvedName];
+  const IconComponent =
+    ICONS[ICON_MAPPING[name] || name] ?? (fallback ? ICONS[ICON_MAPPING[fallback] || fallback] : undefined);
 
   if (!IconComponent) {
     // Fallback icon

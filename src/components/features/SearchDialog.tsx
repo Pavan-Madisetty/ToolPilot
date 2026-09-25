@@ -3,27 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X, Sparkles, Clock } from 'lucide-react';
 import { useSearchStore } from '@/stores/uiStore';
-import { MODULE_MAP } from '@/config/modules';
+import { MODULE_MAP, MODULES, getModuleColors } from '@/config/modules';
+import { TOOL_BY_ID } from '@/config/tools';
+import { LucideIcon } from '@/components/shared/LucideIcon';
 import { clsx } from 'clsx';
 
-function getCategoryEmoji(moduleKey: string): string {
-  const emojis: Record<string, string> = {
-    finance: '💵',
-    developer: '💻',
-    pdf: '📄',
-    image: '🖼️',
-    text: '✍️',
-    ai: '🤖',
-    business: '💼',
-    productivity: '⏱️',
-    education: '🎓',
-    travel: '✈️',
-    health: '❤️',
-    utilities: '⚙️',
-    conversion: '⚖️',
-  };
-  return emojis[moduleKey] || '🔧';
-}
+const QUICK_IDS = ['emi-calculator', 'json-formatter', 'pdf-merge', 'image-compress', 'word-counter', 'qr-generator'];
 
 export function SearchDialog() {
   const { query, results, isOpen, setIsOpen, setQuery, clearSearch } = useSearchStore();
@@ -32,7 +17,7 @@ export function SearchDialog() {
   const navigate = useNavigate();
 
   const [isFocused, setIsFocused] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(-1);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [isPending, startTransition] = useTransition();
 
   // Load recent searches from localStorage (guard against corrupt/malformed data)
@@ -61,7 +46,7 @@ export function SearchDialog() {
   );
 
   const handleInputChange = (val: string) => {
-    setActiveIndex(-1);
+    setActiveIndex(0);
     startTransition(() => {
       setQuery(val);
     });
@@ -235,13 +220,37 @@ export function SearchDialog() {
                       </div>
                     </div>
                   ) : (
-                    <div className="py-8 px-4 text-center">
-                      <p className="text-sm font-semibold mb-1 text-text-secondary">
-                        Type at least 2 characters to search
-                      </p>
-                      <p className="text-xs text-text-tertiary">
-                        Try searching "EMI", "JSON", "Base64", "Word Counter"
-                      </p>
+                    <div className="sk-qs">
+                      <p className="sk-qs__label">Popular tools</p>
+                      <div className="sk-qs__list">
+                        {QUICK_IDS.map((id) => TOOL_BY_ID[id]).filter(Boolean).map((t) => (
+                          <button
+                            key={t.id}
+                            type="button"
+                            className="sk-qs__item"
+                            onClick={() => handleResultSelect(t.slug, t.name)}
+                          >
+                            <LucideIcon name={t.icon} fallback={MODULE_MAP[t.module]?.icon} size={16} />
+                            {t.name}
+                          </button>
+                        ))}
+                      </div>
+                      <p className="sk-qs__label">Browse categories</p>
+                      <div className="sk-qs__list">
+                        {MODULES.map((m) => (
+                          <button
+                            key={m.key}
+                            type="button"
+                            className="sk-pill"
+                            onClick={() => {
+                              navigate(m.slug);
+                              setIsOpen(false);
+                            }}
+                          >
+                            {m.name}
+                          </button>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>
@@ -269,8 +278,12 @@ export function SearchDialog() {
                           )}
                         >
                           <div className="flex items-center gap-3 min-w-0 flex-1">
-                            <span className="text-lg shrink-0" aria-hidden="true">
-                              {getCategoryEmoji(tool.module)}
+                            <span
+                              className="sk-mega__icon"
+                              style={{ background: getModuleColors(tool.module).bg, color: getModuleColors(tool.module).accent }}
+                              aria-hidden="true"
+                            >
+                              <LucideIcon name={tool.icon} fallback={moduleConfig?.icon} size={18} strokeWidth={2.2} />
                             </span>
                             <div className="min-w-0 flex-1 pr-2">
                               <p className="search-modal-title">
@@ -282,7 +295,14 @@ export function SearchDialog() {
                             </div>
                           </div>
                           {moduleConfig && (
-                            <span className={clsx('badge shrink-0', `module-badge-${tool.module}`)}>
+                            <span
+                              className="sk-chip shrink-0"
+                              style={{
+                                background: getModuleColors(tool.module).bg,
+                                color: getModuleColors(tool.module).accent,
+                                borderColor: getModuleColors(tool.module).border,
+                              }}
+                            >
                               {moduleConfig.name}
                             </span>
                           )}

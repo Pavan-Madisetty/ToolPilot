@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import '@fontsource-variable/inter';
+import '@fontsource-variable/plus-jakarta-sans';
+import '@fontsource-variable/jetbrains-mono';
 import './index.css';
+import './styles/site.css';
 
 // Migrate localStorage keys from old brand (toolpilot_*) to new brand (toolskyt_*)
 const legacyKeys = [

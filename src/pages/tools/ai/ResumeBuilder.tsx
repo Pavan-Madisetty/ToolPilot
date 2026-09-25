@@ -389,7 +389,7 @@ ${
 
   // 6. High-Compliance ATS (Clean layouts, minimal graphics)
   const renderAts = () => (
-    <div className="flex flex-col gap-4 font-sans text-xs text-left text-black bg-white p-2">
+    <div className="theme-paper flex flex-col gap-4 font-sans text-xs text-left text-black bg-white p-2">
       <div>
         <h1 className="text-xl font-bold uppercase">{name || 'Your Name'}</h1>
         <p className="text-[10px] mt-1 text-slate-700">

@@ -867,7 +867,7 @@ export default function InvoiceGenerator() {
                 {/* simulated A4 page */}
                 <div
                   id="printable-invoice"
-                  className="w-full max-w-3xl bg-white shadow-xl text-left text-slate-800 border border-slate-200/80 box-border p-8 md:p-12 mx-auto rounded-xl flex flex-col min-h-[1000px]"
+                  className="theme-paper w-full max-w-3xl bg-white shadow-xl text-left text-slate-800 border border-slate-200/80 box-border p-8 md:p-12 mx-auto rounded-xl flex flex-col min-h-[1000px]"
                 >
                     {/* Invoice Header */}
                     <div className="flex flex-col sm:flex-row justify-between items-start gap-4 pb-6 border-b border-slate-200">

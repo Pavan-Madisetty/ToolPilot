@@ -1,47 +1,38 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Sun, Moon, Menu, X, Heart, Folder } from 'lucide-react';
+import { Search, Sun, Moon, Menu, X, Heart, ChevronDown, ArrowRight } from 'lucide-react';
+import { clsx } from 'clsx';
 import { useThemeStore } from '@/stores/themeStore';
 import { useSearchStore } from '@/stores/uiStore';
-import { MODULES } from '@/config/modules';
-import { clsx } from 'clsx';
+import { MODULES, getModuleColors } from '@/config/modules';
+import { TOOLS_BY_MODULE, LIVE_TOOL_COUNT } from '@/config/tools';
+import { LucideIcon } from '@/components/shared/LucideIcon';
+
+/** Categories promoted to the top bar; everything else lives in the "All tools" menu. */
+const PRIMARY_NAV = ['finance', 'developer', 'pdf', 'image', 'text'] as const;
 
 export function Header() {
   const { theme, toggleTheme } = useThemeStore();
-  const { setIsOpen: setSearchOpen } = useSearchStore();
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isSearchFocused, setIsSearchFocused] = useState(false);
-  const location = useLocation();
-
-  const getSearchPlaceholder = () => {
-    const path = location.pathname;
-    if (path.startsWith('/developer')) return 'Search developer tools...';
-    if (path.startsWith('/finance')) return 'Search finance tools...';
-    if (path.startsWith('/pdf')) return 'Search pdf tools...';
-    if (path.startsWith('/image')) return 'Search image tools...';
-    if (path.startsWith('/text')) return 'Search text tools...';
-    if (path.startsWith('/ai')) return 'Search ai tools...';
-    if (path.startsWith('/business')) return 'Search business tools...';
-    if (path.startsWith('/productivity')) return 'Search productivity tools...';
-    return 'Search tools...';
-  };
-
+  const setSearchOpen = useSearchStore((s) => s.setIsOpen);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
-  const toggleBtnRef = useRef<HTMLButtonElement>(null);
+  const drawerBtnRef = useRef<HTMLButtonElement>(null);
 
-  /* ── scroll shadow ─────────────────────────────────────── */
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 4);
+    const onScroll = () => setScrolled(window.scrollY > 4);
+    onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  /* ── ⌘K / Ctrl+K shortcut ──────────────────────────────── */
+  // ⌘K / Ctrl+K opens search.
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
         setSearchOpen(true);
       }
@@ -50,294 +41,234 @@ export function Header() {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [setSearchOpen]);
 
-  /* ── lock body scroll while drawer is open ──────────────── */
   useEffect(() => {
-    document.body.style.overflow = isDrawerOpen ? 'hidden' : '';
+    document.body.style.overflow = drawerOpen ? 'hidden' : '';
     return () => {
       document.body.style.overflow = '';
     };
-  }, [isDrawerOpen]);
+  }, [drawerOpen]);
 
-  /* ── close drawer on outside click or Escape ────────────── */
+  // Dismiss mega-menu / drawer on outside click or Escape.
   useEffect(() => {
-    const onMouseDown = (e: MouseEvent) => {
+    if (!menuOpen && !drawerOpen) return;
+    const onDown = (e: MouseEvent) => {
+      const t = e.target as Node;
+      if (menuOpen && menuRef.current && !menuRef.current.contains(t)) setMenuOpen(false);
       if (
+        drawerOpen &&
         drawerRef.current &&
-        !drawerRef.current.contains(e.target as Node) &&
-        toggleBtnRef.current &&
-        !toggleBtnRef.current.contains(e.target as Node)
-      ) {
-        setIsDrawerOpen(false);
+        !drawerRef.current.contains(t) &&
+        !drawerBtnRef.current?.contains(t)
+      )
+        setDrawerOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMenuOpen(false);
+        setDrawerOpen(false);
       }
     };
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setIsDrawerOpen(false);
-    };
-    if (isDrawerOpen) {
-      document.addEventListener('mousedown', onMouseDown);
-      window.addEventListener('keydown', onKeyDown);
-    }
+    document.addEventListener('mousedown', onDown);
+    window.addEventListener('keydown', onKey);
     return () => {
-      document.removeEventListener('mousedown', onMouseDown);
-      window.removeEventListener('keydown', onKeyDown);
+      document.removeEventListener('mousedown', onDown);
+      window.removeEventListener('keydown', onKey);
     };
-  }, [isDrawerOpen]);
+  }, [menuOpen, drawerOpen]);
 
-  /* ── Shared icon-button class ──────────────────────────── */
-  const iconBtnClass =
-    'w-10 h-10 rounded-full flex items-center justify-center hover:bg-primary/5 text-text-secondary hover:text-primary transition-all duration-200 cursor-pointer active:scale-95';
+  const primary = PRIMARY_NAV.map((k) => MODULES.find((m) => m.key === k)).filter(
+    (m): m is (typeof MODULES)[number] => Boolean(m)
+  );
 
   return (
     <>
-      {/* ════════════════════════  HEADER BAR  ════════════════════════ */}
-      <header
-        role="banner"
-        className={clsx(
-          'sticky top-0 z-50 h-16 border-b border-border-default backdrop-blur-xl transition-shadow',
-          isScrolled ? 'shadow-sm' : 'shadow-none'
-        )}
-        style={{ background: 'var(--header-bg)' }}
-      >
-        <div className="container-app h-16 flex items-center justify-between">
-          {/* LEFT ZONE: Logo */}
-          <div className="flex items-center gap-8 h-full shrink-0">
-            <Link
-              to="/"
-              className="flex items-center gap-2 select-none cursor-pointer font-display text-xl font-extrabold tracking-tight"
-              aria-label="Toolskyt — Home"
-            >
-              <div
-                className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white text-sm font-black shadow-sm shrink-0"
-                aria-hidden="true"
+      <header className={clsx('sk-header', scrolled && 'sk-header--scrolled')} role="banner">
+        <div className="sk-container sk-header__inner">
+          <Link to="/" className="sk-logo" aria-label="Toolskyt — home">
+            <span className="sk-logo__mark" aria-hidden="true">
+              T
+            </span>
+            <span className="sk-logo__word">
+              Tool<span>skyt</span>
+            </span>
+          </Link>
+
+          <nav className="sk-nav" aria-label="Primary">
+            <div className="sk-nav__menu" ref={menuRef}>
+              <button
+                type="button"
+                className={clsx('sk-nav__link sk-nav__trigger', menuOpen && 'is-active')}
+                aria-expanded={menuOpen}
+                aria-haspopup="true"
+                onClick={() => setMenuOpen((v) => !v)}
               >
-                T
-              </div>
-              <span className="leading-none flex items-center">
-                <span className="text-text-primary">Tool</span>
-                <span className="text-primary">skyt</span>
-              </span>
-            </Link>
-          </div>
+                All tools
+                <ChevronDown size={15} aria-hidden="true" className={clsx(menuOpen && 'rotate-180')} />
+              </button>
 
-          {/* CENTER-RIGHT ZONE: Search Field */}
-          <div className="hidden md:flex flex-1 justify-end max-w-[420px] lg:max-w-none mr-4 lg:mr-8">
-            <button
-              type="button"
-              onClick={() => setSearchOpen(true)}
-              onFocus={() => setIsSearchFocused(true)}
-              onBlur={() => setIsSearchFocused(false)}
-              aria-label="Search tools (⌘K)"
-              className={clsx(
-                'flex items-center w-[320px] h-10 px-3.5 rounded-full border cursor-text transition-all outline-none select-none bg-bg-base',
-                isSearchFocused
-                  ? 'border-primary ring-4 ring-primary/5'
-                  : 'border-border-default hover:border-border-strong hover:shadow-xs'
-              )}
-            >
-              <Search
-                size={16}
-                className="shrink-0 text-text-disabled"
-                aria-hidden="true"
-              />
-              <span className="flex-1 text-left text-xs font-semibold text-text-disabled ml-3">
-                {getSearchPlaceholder()}
-              </span>
-              <kbd className="inline-flex items-center justify-center h-5 px-1.5 rounded-[var(--radius-sm)] border text-[10px] font-sans font-bold bg-bg-surface border-border-default text-text-disabled uppercase">
-                ⌘K
-              </kbd>
-            </button>
-          </div>
-
-          {/* RIGHT ZONE: Icons Cluster & Theme toggle */}
-          <nav aria-label="Site actions" className="hidden md:flex items-center gap-4 shrink-0 font-sans">
-            {/* Favorites heart */}
-            <Link
-              to="/#favorites"
-              aria-label="View favorite tools"
-              className={iconBtnClass}
-            >
-              <Heart size={20} strokeWidth={2} aria-hidden="true" />
-            </Link>
-
-            {/* Theme toggle */}
-            <button
-              type="button"
-              onClick={toggleTheme}
-              aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
-              className={iconBtnClass}
-            >
-              <motion.div
-                key={theme}
-                initial={{ rotate: -90, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                transition={{ duration: 0.18 }}
-                className="flex items-center justify-center w-full h-full"
-              >
-                {theme === 'light' ? (
-                  <Moon size={20} strokeWidth={2} aria-hidden="true" />
-                ) : (
-                  <Sun size={20} strokeWidth={2} aria-hidden="true" />
+              <AnimatePresence>
+                {menuOpen && (
+                  <motion.div
+                    className="sk-mega"
+                    initial={{ opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.14 }}
+                  >
+                    <div className="sk-mega__grid">
+                      {MODULES.map((mod) => {
+                        const c = getModuleColors(mod.key);
+                        return (
+                          <Link key={mod.key} to={mod.slug} className="sk-mega__item" onClick={() => setMenuOpen(false)}>
+                            <span
+                              className="sk-mega__icon"
+                              style={{ background: c.bg, color: c.accent }}
+                              aria-hidden="true"
+                            >
+                              <LucideIcon name={mod.icon} size={18} strokeWidth={2.2} />
+                            </span>
+                            <span className="sk-mega__text">
+                              <span className="sk-mega__name">
+                                {mod.name}
+                                <em>{TOOLS_BY_MODULE[mod.key]?.length ?? 0}</em>
+                              </span>
+                              <span className="sk-mega__desc">{mod.description}</span>
+                            </span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                    <Link to="/search" className="sk-mega__all" onClick={() => setMenuOpen(false)}>
+                      Browse all {LIVE_TOOL_COUNT} tools <ArrowRight size={15} aria-hidden="true" />
+                    </Link>
+                  </motion.div>
                 )}
-              </motion.div>
-            </button>
+              </AnimatePresence>
+            </div>
 
-            {/* Sign in action */}
-            <Link
-              to="/signin"
-              className="text-xs font-bold uppercase tracking-wider text-text-secondary hover:text-primary transition-colors px-3 py-2 cursor-pointer"
-            >
-              Sign in
-            </Link>
-
-            {/* Tablet Hamburger Menu */}
-            <button
-              ref={toggleBtnRef}
-              type="button"
-              onClick={() => setIsDrawerOpen(true)}
-              aria-label="Open navigation menu"
-              className={clsx(iconBtnClass, 'lg:hidden')}
-            >
-              <Menu size={20} strokeWidth={2} aria-hidden="true" />
-            </button>
+            {primary.map((mod) => (
+              <NavLink
+                key={mod.key}
+                to={mod.slug}
+                className={({ isActive }) => clsx('sk-nav__link', isActive && 'is-active')}
+              >
+                {mod.name.replace(/ Tools$/, '')}
+              </NavLink>
+            ))}
           </nav>
 
-          {/* Mobile Actions Right */}
-          <nav aria-label="Site actions" className="flex md:hidden items-center gap-4 shrink-0">
+          <div className="sk-header__actions">
             <button
               type="button"
+              className="sk-search-btn"
+              onClick={() => setSearchOpen(true)}
+              aria-label="Search tools (Ctrl or Command + K)"
+            >
+              <Search size={16} aria-hidden="true" />
+              <span>Search tools…</span>
+              <kbd>⌘K</kbd>
+            </button>
+
+            <button
+              type="button"
+              className="sk-icon-btn sk-search-icon"
               onClick={() => setSearchOpen(true)}
               aria-label="Search tools"
-              className={iconBtnClass}
             >
-              <Search size={20} strokeWidth={2} aria-hidden="true" />
+              <Search size={19} aria-hidden="true" />
+            </button>
+
+            <Link to="/#favorites" className="sk-icon-btn sk-hide-sm" aria-label="Favorite tools">
+              <Heart size={19} aria-hidden="true" />
+            </Link>
+
+            <button
+              type="button"
+              className="sk-icon-btn"
+              onClick={toggleTheme}
+              aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+            >
+              {theme === 'light' ? <Moon size={19} aria-hidden="true" /> : <Sun size={19} aria-hidden="true" />}
             </button>
 
             <button
-              ref={toggleBtnRef}
+              ref={drawerBtnRef}
               type="button"
-              onClick={() => setIsDrawerOpen(true)}
+              className="sk-icon-btn sk-burger"
+              onClick={() => setDrawerOpen(true)}
               aria-label="Open menu"
-              className={iconBtnClass}
+              aria-expanded={drawerOpen}
             >
-              <Menu size={20} strokeWidth={2} aria-hidden="true" />
+              <Menu size={20} aria-hidden="true" />
             </button>
-          </nav>
+          </div>
         </div>
       </header>
 
-      {/* ════════════════════════  MOBILE DRAWER  ════════════════════ */}
       <AnimatePresence>
-        {isDrawerOpen && (
+        {drawerOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
-              key="drawer-backdrop"
+              key="backdrop"
+              className="sk-backdrop"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.18 }}
-              className="fixed inset-0 z-40 bg-bg-overlay backdrop-blur-sm"
               aria-hidden="true"
-              onClick={() => setIsDrawerOpen(false)}
             />
-
-            {/* Drawer Panel */}
             <motion.div
+              key="drawer"
               ref={drawerRef}
-              key="drawer-panel"
-              id="mobile-drawer"
+              className="sk-drawer"
               role="dialog"
               aria-modal="true"
               aria-label="Site navigation"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
-              transition={{ type: 'spring', stiffness: 320, damping: 32 }}
-              className="fixed top-0 right-0 bottom-0 z-50 w-[320px] flex flex-col overflow-hidden bg-bg-elevated border-l border-border-default shadow-xl"
+              transition={{ type: 'spring', stiffness: 340, damping: 34 }}
             >
-              {/* Drawer Header */}
-              <div className="flex items-center justify-between px-5 h-16 shrink-0 border-b border-border-default">
-                <span className="font-bold text-body text-text-primary">Navigation</span>
-                <button
-                  type="button"
-                  onClick={() => setIsDrawerOpen(false)}
-                  aria-label="Close menu"
-                  className={iconBtnClass}
-                >
-                  <X size={20} strokeWidth={2} />
+              <div className="sk-drawer__head">
+                <span className="sk-drawer__title">Browse tools</span>
+                <button type="button" className="sk-icon-btn" onClick={() => setDrawerOpen(false)} aria-label="Close menu">
+                  <X size={20} aria-hidden="true" />
                 </button>
               </div>
 
-              {/* Drawer Search */}
-              <div className="px-4 pt-4">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSearchOpen(true);
-                    setIsDrawerOpen(false);
-                  }}
-                  className="flex items-center gap-3 w-full h-11 px-4 rounded-[var(--radius-md)] border border-border-default bg-bg-base text-left hover:border-primary transition-colors cursor-pointer"
-                >
-                  <Search size={16} strokeWidth={2} className="text-text-disabled shrink-0" />
-                  <span className="text-caption text-text-disabled">Search tools…</span>
-                </button>
-              </div>
+              <button
+                type="button"
+                className="sk-drawer__search"
+                onClick={() => {
+                  setDrawerOpen(false);
+                  setSearchOpen(true);
+                }}
+              >
+                <Search size={16} aria-hidden="true" />
+                Search {LIVE_TOOL_COUNT} tools…
+              </button>
 
-              {/* Drawer Content */}
-              <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-6">
-                {/* Favorites */}
-                <div>
-                  <div className="flex flex-col gap-0.5">
-                    <Link
-                      to="/#favorites"
-                      onClick={() => setIsDrawerOpen(false)}
-                      className="flex items-center gap-3 px-3 py-2.5 text-caption font-semibold text-text-secondary hover:text-primary hover:bg-bg-surface rounded-lg transition-colors cursor-pointer"
-                    >
-                      <Heart size={18} strokeWidth={2} className="text-text-tertiary shrink-0" />
-                      <span>Favorites</span>
+              <div className="sk-drawer__list">
+                {MODULES.map((mod) => {
+                  const c = getModuleColors(mod.key);
+                  return (
+                    <Link key={mod.key} to={mod.slug} className="sk-drawer__item" onClick={() => setDrawerOpen(false)}>
+                      <span className="sk-mega__icon" style={{ background: c.bg, color: c.accent }} aria-hidden="true">
+                        <LucideIcon name={mod.icon} size={18} strokeWidth={2.2} />
+                      </span>
+                      <span className="sk-drawer__name">{mod.name}</span>
+                      <em>{TOOLS_BY_MODULE[mod.key]?.length ?? 0}</em>
                     </Link>
-                  </div>
-                </div>
-
-                {/* Explore Categories */}
-                <div>
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-text-tertiary px-3 mb-2">
-                    Explore Categories
-                  </div>
-                  <div className="flex flex-col gap-0.5">
-                    {MODULES.map((mod) => (
-                      <Link
-                        key={mod.key}
-                        to={mod.slug}
-                        onClick={() => setIsDrawerOpen(false)}
-                        className="flex items-center gap-3 px-3 py-2.5 text-caption font-semibold text-text-secondary hover:text-primary hover:bg-bg-surface rounded-lg transition-colors cursor-pointer"
-                      >
-                        <Folder size={18} strokeWidth={2} className="text-text-tertiary shrink-0" />
-                        <span>{mod.name}</span>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
+                  );
+                })}
               </div>
 
-              {/* Drawer Footer */}
-              <div className="px-5 py-4 border-t border-border-default shrink-0 flex flex-col gap-2 bg-bg-surface">
-                <button
-                  type="button"
-                  onClick={toggleTheme}
-                  className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-caption font-semibold text-text-secondary hover:text-primary hover:bg-bg-elevated transition-colors cursor-pointer"
-                >
-                  {theme === 'light' ? (
-                    <>
-                      <Moon size={18} strokeWidth={2} className="text-text-tertiary" />
-                      <span>Switch to Dark Mode</span>
-                    </>
-                  ) : (
-                    <>
-                      <Sun size={18} strokeWidth={2} className="text-text-tertiary" />
-                      <span>Switch to Light Mode</span>
-                    </>
-                  )}
+              <div className="sk-drawer__foot">
+                <Link to="/#favorites" className="sk-drawer__foot-link" onClick={() => setDrawerOpen(false)}>
+                  <Heart size={16} aria-hidden="true" /> Favorites
+                </Link>
+                <button type="button" className="sk-drawer__foot-link" onClick={toggleTheme}>
+                  {theme === 'light' ? <Moon size={16} aria-hidden="true" /> : <Sun size={16} aria-hidden="true" />}
+                  {theme === 'light' ? 'Dark mode' : 'Light mode'}
                 </button>
               </div>
             </motion.div>

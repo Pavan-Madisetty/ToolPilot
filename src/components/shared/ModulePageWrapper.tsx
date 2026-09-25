@@ -37,7 +37,7 @@ export function ModulePageWrapper({
 
   if (!isEnabled) {
     return (
-      <div className="container-module py-16 text-center">
+      <div className="sk-container py-16 text-center">
         <Breadcrumb items={[{ label: moduleName }]} />
         <div className="py-20 text-center border border-border-default bg-bg-elevated rounded-2xl mt-8">
           <div className="text-6xl mb-4" aria-hidden="true">
@@ -128,10 +128,8 @@ export function ModulePageWrapper({
         <script type="application/ld+json">{JSON.stringify(collectionSchema)}</script>
       </Helmet>
 
-      <div className="container-module py-8">
-        <div className="mb-6">
-          <Breadcrumb items={[{ label: moduleName }]} />
-        </div>
+      <div className="sk-container sk-modpage">
+        <Breadcrumb items={[{ label: moduleName }]} />
         {children}
       </div>
     </>

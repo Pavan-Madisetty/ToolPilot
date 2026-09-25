@@ -69,7 +69,7 @@ export default function DataStorageConverter() {
         <div className="space-y-6">
           <Card className="space-y-6">
             <div
-              className="flex justify-between items-center border-b pb-4"
+              className="flex flex-wrap justify-between items-center gap-3 border-b pb-4"
               style={{ borderColor: 'var(--border-subtle)' }}
             >
               <h2 className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>

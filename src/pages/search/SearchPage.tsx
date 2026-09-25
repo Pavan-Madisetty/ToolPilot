@@ -1,11 +1,10 @@
 import { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { Sparkles, Search } from 'lucide-react';
+import { Sparkles, Search, X } from 'lucide-react';
 import { TOOLS, TOOL_COUNT_LABEL } from '@/config/tools';
 import { MODULES } from '@/config/modules';
 import { ToolCard } from '@/components/ui/ToolCard';
-import { EmptyState } from '@/components/ui/EmptyState';
 import type { ToolConfig } from '@/types';
 import { Breadcrumb } from '@/components/ui/Breadcrumb';
 import { clsx } from 'clsx';
@@ -93,131 +92,87 @@ export default function SearchPage() {
         <meta name="twitter:image" content="https://toolskyt.com/og-image.png" />
       </Helmet>
 
-      <div className="container-app py-8">
+      <div className="sk-container sk-modpage">
         <Breadcrumb items={[{ label: 'Search' }]} />
 
-        {/* Heading */}
-        <div className="mb-6 mt-4">
-          <h1 className="text-3xl font-extrabold" style={{ color: 'var(--text-primary)' }}>
-            {queryParam ? 'Search Results' : 'Search Tools'}
-          </h1>
-          <p className="text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>
-            {queryParam
-              ? `Found ${filteredTools.length} tools matching your query`
-              : 'Explore the largest collection of free browser-based productivity tools.'}
+        <header className="sk-page__head sk-page__head--tight">
+          <h1>{queryParam ? `Results for “${queryParam}”` : 'Search all tools'}</h1>
+          <p>
+            {queryParam || moduleParam
+              ? `${filteredTools.length} ${filteredTools.length === 1 ? 'tool' : 'tools'} found`
+              : `Browse all ${TOOLS.length} free tools, or narrow them down with a keyword or category.`}
           </p>
+        </header>
+
+        <div className="sk-modhero__search sk-search-page__input">
+          <Search size={18} aria-hidden="true" />
+          <input
+            type="search"
+            value={queryParam}
+            onChange={(e) => handleQueryChange(e.target.value)}
+            placeholder={`Search ${TOOLS.length} tools by name or keyword…`}
+            aria-label="Search tools"
+            autoFocus
+          />
+          {queryParam && (
+            <button type="button" onClick={() => handleQueryChange('')} aria-label="Clear search">
+              <X size={16} aria-hidden="true" />
+            </button>
+          )}
         </div>
 
-        {/* Search input field */}
-        <div className="mb-6 w-full max-w-xl">
-          <div
-            className="flex items-center gap-3 px-4 py-3 border rounded-xl shadow-sm focus-within:ring-2 focus-within:ring-[var(--primary)]"
-            style={{
-              background: 'var(--bg-elevated)',
-              borderColor: 'var(--border-default)',
-            }}
-          >
-            <Search className="w-5 h-5 shrink-0 text-[var(--text-tertiary)]" />
-            <input
-              type="text"
-              value={queryParam}
-              onChange={(e) => handleQueryChange(e.target.value)}
-              placeholder={`Search ${TOOL_COUNT_LABEL} tools...`}
-              className="flex-1 bg-transparent border-none outline-none text-sm font-medium"
-              style={{ color: 'var(--text-primary)' }}
-              aria-label="Search tools input"
-            />
-          </div>
-        </div>
-
-        {/* Trending suggestions */}
-        <div className="mb-8 flex flex-wrap items-center gap-2">
-          <span
-            className="text-xs font-semibold flex items-center gap-1"
-            style={{ color: 'var(--text-tertiary)' }}
-          >
-            <Sparkles size={14} className="text-yellow-500" />
-            Trending:
+        <div className="sk-modhero__quick sk-search-page__trending">
+          <span>
+            <Sparkles size={14} aria-hidden="true" /> Trending:
           </span>
           {TRENDING_KEYWORDS.map((kw) => (
-            <button
-              key={kw}
-              onClick={() => handleQueryChange(kw)}
-              className="px-2.5 py-1 text-xs rounded-lg border hover:border-[var(--border-focus)] hover:text-[var(--text-link)] transition-colors cursor-pointer"
-              style={{
-                background: 'var(--bg-surface)',
-                borderColor: 'var(--border-default)',
-                color: 'var(--text-secondary)',
-              }}
-            >
+            <button key={kw} type="button" className="sk-pill" onClick={() => handleQueryChange(kw)}>
               {kw}
             </button>
           ))}
         </div>
 
-        {/* Main Search Panel Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Filters Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="card lg:sticky lg:top-24 hover:translate-y-0 hover:shadow-md p-5 md:p-6">
-              <div
-                className="text-xs font-bold uppercase tracking-wider mb-4"
-                style={{ color: 'var(--text-tertiary)', letterSpacing: '0.05em' }}
+        <div className="sk-search-page__layout">
+          <aside className="sk-filter" aria-label="Filter by category">
+            <h2 className="sk-filter__title">Categories</h2>
+            <div className="sk-filter__list">
+              <button
+                type="button"
+                className={clsx('sk-filter__item', !moduleParam && 'is-active')}
+                onClick={() => updateSearchParams(queryParam, '')}
               >
-                Filter by Category
-              </div>
-              <div className="space-y-1">
-                {MODULES.map((mod) => {
-                  const isActive = moduleParam === mod.key;
-                  return (
-                    <button
-                      key={mod.key}
-                      onClick={() => handleModuleSelect(mod.key)}
-                      className={clsx(
-                        'w-full flex items-center justify-between px-3 py-2.5 text-xs font-semibold rounded-xl text-left transition-all duration-150 cursor-pointer',
-                        isActive
-                          ? 'bg-[rgba(99,102,241,0.08)] text-[var(--primary)]'
-                          : 'text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] hover:text-[var(--text-primary)]'
-                      )}
-                    >
-                      <span>{mod.name}</span>
-                      <span
-                        className={clsx(
-                          'px-2 py-0.5 rounded-full text-[10px] font-bold',
-                          isActive
-                            ? 'bg-[rgba(99,102,241,0.15)] text-[var(--primary)]'
-                            : 'bg-[var(--bg-surface)] text-[var(--text-tertiary)]'
-                        )}
-                      >
-                        {TOOLS.filter((t) => t.module === mod.key).length}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
+                <span>All tools</span>
+                <em>{TOOLS.length}</em>
+              </button>
+              {MODULES.map((mod) => (
+                <button
+                  key={mod.key}
+                  type="button"
+                  className={clsx('sk-filter__item', moduleParam === mod.key && 'is-active')}
+                  aria-pressed={moduleParam === mod.key}
+                  onClick={() => handleModuleSelect(mod.key)}
+                >
+                  <span>{mod.name}</span>
+                  <em>{TOOLS.filter((t) => t.module === mod.key).length}</em>
+                </button>
+              ))}
             </div>
-          </div>
+          </aside>
 
-          {/* Tool Grid Results */}
-          <div className="lg:col-span-3">
+          <div>
             {filteredTools.length === 0 ? (
-              <EmptyState
-                icon="🔍"
-                title="No tools found"
-                description="No matching tools found for your query. Try clearing filters or try other keywords."
-                action={
-                  (queryParam || moduleParam) && (
-                    <button
-                      onClick={() => setSearchParams({})}
-                      className="btn btn-secondary btn-sm cursor-pointer"
-                    >
-                      Clear Filters
-                    </button>
-                  )
-                }
-              />
+              <div className="sk-empty sk-empty--card">
+                <Search size={28} aria-hidden="true" />
+                <h3>No tools found</h3>
+                <p>Try a different keyword or clear the filters.</p>
+                {(queryParam || moduleParam) && (
+                  <button type="button" onClick={() => setSearchParams({})} className="sk-btn sk-btn--ghost">
+                    Clear filters
+                  </button>
+                )}
+              </div>
             ) : (
-              <div className="tools-grid">
+              <div className="sk-grid sk-grid--results">
                 {filteredTools.map((tool) => (
                   <ToolCard key={tool.id} tool={tool} />
                 ))}
