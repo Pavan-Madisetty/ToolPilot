@@ -1,4 +1,5 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef } from 'react';
+import { renderMarkdown, handleAnchorClick } from '@/utils/markdown';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { CopyButton, Textarea } from '@/components/ui';
 
@@ -7,33 +8,8 @@ export default function MarkdownEditor() {
     '# Hello Toolskyt\n\n- Free tools\n- Works offline\n\n**Have fun compiling markdown!**'
   );
 
-  // Simple client-side Markdown to HTML compiler (avoids external library dependencies)
-  const htmlPreview = useMemo(() => {
-    // Escape HTML first so raw tags in user input can never execute
-    // (e.g. `<img src=x onerror=...>`). Markdown syntax is applied afterwards.
-    let html = markdown
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
-
-    // Headers
-    html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
-    html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
-    html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
-
-    // Bold & Italics
-    html = html.replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>');
-    html = html.replace(/\*(.*)\*/gim, '<em>$1</em>');
-
-    // Unordered lists
-    html = html.replace(/^- (.*$)/gim, '<ul><li>$1</li></ul>');
-    html = html.replace(/<\/ul>\s*<ul>/g, ''); // merge lists
-
-    // Paragraph lines
-    html = html.replace(/^\s*(\b.*$)/gim, '<p>$1</p>');
-
-    return html;
-  }, [markdown]);
+  const htmlPreview = useMemo(() => renderMarkdown(markdown), [markdown]);
+  const previewRef = useRef<HTMLDivElement>(null);
 
   return (
     <ToolPageWrapper toolId="markdown-editor">
@@ -54,8 +30,10 @@ export default function MarkdownEditor() {
             {htmlPreview && <CopyButton text={htmlPreview} label="Copy HTML" />}
           </div>
           <div
+            ref={previewRef}
+            onClick={(e) => handleAnchorClick(e, previewRef.current)}
             dangerouslySetInnerHTML={{ __html: htmlPreview }}
-            className="input-base overflow-y-auto h-[360px] prose dark:prose-invert max-w-none text-sm p-4"
+            className="sk-md input-base overflow-y-auto h-[360px] max-w-none p-4"
             style={{
               borderColor: 'var(--border-default)',
               background: 'var(--bg-surface)',

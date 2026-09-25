@@ -1,6 +1,7 @@
 import { useState, useMemo, useRef } from 'react';
 import { ToolPageWrapper } from '@/components/shared/ToolPageWrapper';
 import { Button, Card, CopyButton, Textarea } from '@/components/ui';
+import { renderMarkdown } from '@/utils/markdown';
 import { Printer, Code, Eye, FileText } from 'lucide-react';
 
 export default function MarkdownToPdf() {
@@ -27,61 +28,7 @@ All computations happen *locally* within the browser, keeping your documentation
   const [orientation, setOrientation] = useState<'portrait' | 'landscape'>('portrait');
   const previewRef = useRef<HTMLIFrameElement>(null);
 
-  // Simple client-side Markdown to HTML compiler
-  const htmlContent = useMemo(() => {
-    let html = markdown;
-
-    // Escaping HTML entities to prevent raw HTML execution inside Markdown unless intended
-    html = html
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
-
-    // Headers
-    html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
-    html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
-    html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
-    html = html.replace(/^#### (.*$)/gim, '<h4>$1</h4>');
-
-    // Bold & Italics
-    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-    html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
-
-    // Blockquotes
-    html = html.replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>');
-
-    // Unordered lists
-    html = html.replace(/^- (.*$)/gim, '<ul><li>$1</li></ul>');
-    html = html.replace(/<\/ul>\s*<ul>/g, ''); // merge lists
-
-    // Ordered lists
-    html = html.replace(/^\d+\.\s(.*$)/gim, '<ol><li>$1</li></ol>');
-    html = html.replace(/<\/ol>\s*<ol>/g, ''); // merge lists
-
-    // Horizontal rules
-    html = html.replace(/^---$/gim, '<hr/>');
-
-    // Paragraph lines - wrap any non-empty line that doesn't start with block element
-    const lines = html.split('\n');
-    const processedLines = lines.map(line => {
-      const trimmed = line.trim();
-      if (!trimmed) return '';
-      if (
-        trimmed.startsWith('<h') ||
-        trimmed.startsWith('<ul') ||
-        trimmed.startsWith('<ol') ||
-        trimmed.startsWith('<li') ||
-        trimmed.startsWith('<blockquote') ||
-        trimmed.startsWith('<hr')
-      ) {
-        return line;
-      }
-      return `<p>${line}</p>`;
-    });
-    html = processedLines.join('\n');
-
-    return html;
-  }, [markdown]);
+  const htmlContent = useMemo(() => renderMarkdown(markdown), [markdown]);
 
   const cssStyles = `
     body {
@@ -133,10 +80,34 @@ All computations happen *locally* within the browser, keeping your documentation
       background-color: #e1e4e6;
       border: 0;
     }
+    ul { list-style: disc; } ol { list-style: decimal; }
+    li > ul, li > ol { margin: 0.3em 0 0; }
+    li:has(> input[type="checkbox"]) { list-style: none; margin-left: -1.4em; }
+    a { color: #0b57d0; text-decoration: underline; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.88em; background: #f3f4f6; border: 1px solid #e5e7eb;
+      padding: 0.1em 0.35em; border-radius: 4px;
+    }
+    pre {
+      background: #f6f8fa; border: 1px solid #e5e7eb; border-radius: 6px;
+      padding: 12px 14px; margin: 0 0 1em; white-space: pre-wrap; word-break: break-word;
+    }
+    pre code { background: none; border: 0; padding: 0; }
+    table { border-collapse: collapse; width: 100%; margin: 0 0 1em; font-size: 0.9em; table-layout: auto; }
+    th, td { border: 1px solid #d0d7de; padding: 6px 10px; text-align: start; vertical-align: top; overflow-wrap: anywhere; }
+    th { background: #f3f4f6; font-weight: 700; }
+    tr:nth-child(even) td { background: #fafbfc; }
+    td:first-child a { white-space: nowrap; }
+    img { max-width: 100%; height: auto; }
+    h4, h5, h6 { margin: 1.2em 0 0.5em; }
     @media print {
-      body {
-        padding: 0;
-      }
+      body { padding: 0; }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      h1, h2, h3, h4 { break-after: avoid; }
+      tr, pre, blockquote, img { break-inside: avoid; }
+      thead { display: table-header-group; }
+      a { color: #0b57d0; }
     }
   `;
 

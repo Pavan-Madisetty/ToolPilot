@@ -2560,3 +2560,44 @@ a.sk-chip:hover {
 .sk-numfield--block .sk-numfield__input {
   text-align: left;
 }
+
+/* Single focus indicator: the wrapper shows the ring, so the inner input must
+   never draw the global :focus-visible outline as well. */
+.sk-numfield .sk-numfield__input,
+.sk-numfield .sk-numfield__input:focus,
+.sk-numfield .sk-numfield__input:focus-visible,
+.sk-dp__field input,
+.sk-dp__field input:focus,
+.sk-dp__field input:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* ── Rendered Markdown (previewer / editor) ─────────────── */
+.sk-md { color: var(--text-primary); font-size: 14px; line-height: 1.65; overflow-wrap: anywhere; }
+.sk-md > :first-child { margin-top: 0; }
+.sk-md h1, .sk-md h2, .sk-md h3, .sk-md h4, .sk-md h5, .sk-md h6 { font-weight: 700; line-height: 1.25; margin: 1.4em 0 0.6em; scroll-margin-top: 8px; }
+.sk-md h1 { font-size: 1.7em; padding-bottom: 0.3em; border-bottom: 1px solid var(--border-default); }
+.sk-md h2 { font-size: 1.35em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border-default); }
+.sk-md h3 { font-size: 1.15em; }
+.sk-md h4 { font-size: 1em; }
+.sk-md p, .sk-md ul, .sk-md ol, .sk-md blockquote, .sk-md pre, .sk-md table { margin: 0 0 1em; }
+.sk-md ul { list-style: disc; padding-inline-start: 1.5em; }
+.sk-md ol { list-style: decimal; padding-inline-start: 1.6em; }
+.sk-md li { margin: 0.2em 0; }
+.sk-md li > ul, .sk-md li > ol { margin: 0.2em 0 0; }
+.sk-md li:has(> input[type='checkbox']) { list-style: none; margin-inline-start: -1.2em; }
+.sk-md input[type='checkbox'] { margin-inline-end: 0.5em; accent-color: var(--primary); }
+.sk-md a { color: var(--text-link); text-decoration: underline; text-underline-offset: 2px; }
+.sk-md blockquote { padding: 0.1em 1em; color: var(--text-secondary); border-inline-start: 3px solid var(--border-strong); }
+.sk-md code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.88em; padding: 0.15em 0.4em; background: var(--bg-inset); border: 1px solid var(--border-default); border-radius: 5px; }
+.sk-md pre { padding: 12px 14px; background: var(--bg-inset); border: 1px solid var(--border-default); border-radius: 10px; overflow-x: auto; }
+.sk-md pre code { padding: 0; background: none; border: 0; font-size: 12.5px; }
+.sk-md hr { border: 0; border-top: 1px solid var(--border-default); margin: 1.5em 0; }
+.sk-md img { max-width: 100%; height: auto; border-radius: 6px; }
+.sk-md .sk-md__table { overflow-x: auto; margin: 0 0 1em; }
+.sk-md table { border-collapse: collapse; width: 100%; font-size: 0.93em; display: block; overflow-x: auto; }
+.sk-md th, .sk-md td { border: 1px solid var(--border-default); padding: 7px 11px; text-align: start; vertical-align: top; }
+.sk-md th { background: var(--bg-inset); font-weight: 700; white-space: nowrap; }
+.sk-md tbody tr:nth-child(even) td { background: color-mix(in srgb, var(--bg-inset) 45%, transparent); }
+.sk-md td:first-child a { white-space: nowrap; }
