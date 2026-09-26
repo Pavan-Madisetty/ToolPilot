@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { LogoMark } from '@/components/brand/LogoMark';
 import { Link, NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Sun, Moon, Menu, X, Heart, ChevronDown, ArrowRight } from 'lucide-react';
@@ -85,9 +86,7 @@ export function Header() {
       <header className={clsx('sk-header', scrolled && 'sk-header--scrolled')} role="banner">
         <div className="sk-container sk-header__inner">
           <Link to="/" className="sk-logo" aria-label="Toolskyt — home">
-            <span className="sk-logo__mark" aria-hidden="true">
-              T
-            </span>
+            <LogoMark size={34} className="sk-logo__mark" />
             <span className="sk-logo__word">
               Tool<span>skyt</span>
             </span>

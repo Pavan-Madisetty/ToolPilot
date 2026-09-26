@@ -73,7 +73,7 @@ const JSON_LD_ORGANIZATION = {
   '@type': 'Organization',
   name: 'Toolskyt',
   url: 'https://toolskyt.com',
-  logo: 'https://toolskyt.com/favicon.svg',
+  logo: 'https://toolskyt.com/pwa-512x512.png',
   sameAs: ['https://github.com/Pavan-Madisetty/ToolPilot'],
   contactPoint: {
     '@type': 'ContactPoint',

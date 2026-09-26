@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ShieldCheck } from 'lucide-react';
+import { LogoMark } from '@/components/brand/LogoMark';
 import { MODULES } from '@/config/modules';
 import { LIVE_TOOL_COUNT } from '@/config/tools';
 
@@ -28,7 +29,7 @@ export function Footer() {
         <div className="sk-footer__grid">
           <div className="sk-footer__brand">
             <Link to="/" className="sk-logo sk-logo--light" aria-label="Toolskyt — home">
-              <span className="sk-logo__mark" aria-hidden="true">T</span>
+              <LogoMark size={34} className="sk-logo__mark" />
               <span className="sk-logo__word">Tool<span>skyt</span></span>
             </Link>
             <p>
