@@ -104,32 +104,32 @@ export const FAQS: FaqMap = {
     {
       question: 'How do I compare two texts and see the differences?',
       answer:
-        'Paste the original text on the left and the changed version on the right. The Diff Output below compares them line by line. Unchanged lines appear grey, removed lines are red with a minus sign, and added lines are green with a plus sign. It updates as you type.',
+        'Paste the original on the left and the revised version on the right, then press Compare. Lines that match are lined up side by side, and within changed lines the words that were added, removed or reworded are highlighted, so you can review an edit the way you would with tracked changes.',
     },
     {
-      question: 'Does this diff tool compare by line or by word?',
+      question: 'Does this tool compare by line or by word?',
       answer:
-        'By line, and by position. Line 1 is compared with line 1, line 2 with line 2, and so on. A line that differs is shown as one removed line and one added line, with no highlighting of the individual words that changed inside it.',
+        'It aligns the texts line by line, then highlights the changed words inside each line. Switch to Chars to see single-letter edits such as typos or punctuation. Inserted or deleted lines are detected properly, so one new line does not make the rest of the text look changed.',
     },
     {
-      question: 'Why does one inserted line mark everything after it as changed?',
+      question: 'Can I accept or reject individual changes?',
       answer:
-        'Because lines are matched by position, not aligned by content. If you insert a line near the top, every later line shifts down and no longer matches its counterpart. For best results compare texts with the same line structure, or compare shorter sections at a time.',
-    },
-    {
-      question: 'Can I compare code or configuration files with it?',
-      answer:
-        'Yes, for short files. Paste both versions and the monospaced output shows which lines differ, including changes in indentation or trailing spaces. For long files with inserted or moved blocks, a dedicated diff tool that aligns matching lines, like Git, will give cleaner results.',
-    },
-    {
-      question: 'What do the red and green lines mean in a diff?',
-      answer:
-        'Red lines starting with a minus sign exist only in the original text, so they were removed or changed. Green lines starting with a plus sign exist only in the modified text, so they were added or are the new wording. Grey lines are identical in both.',
+        'Yes. Select a change and choose Keep Original, Keep Revised or Keep both, or use the arrows in the middle gutter. Both sides update instantly, and Undo, Redo and Reset let you change your mind. When every change is resolved, copy or download the merged text.',
     },
     {
       question: 'Is whitespace or letter case ignored when comparing?',
       answer:
-        'No. The comparison is an exact match, so an extra space, a different capital letter or a different line ending makes that line show as changed. If you want to ignore formatting differences, tidy both texts first, for example with the Remove Spaces tool.',
+        'Only if you want it to be. Turn on Ignore whitespace to skip differences in spacing and indentation, and Ignore case to treat capital and small letters as the same. Both are off by default so that every edit is visible.',
+    },
+    {
+      question: 'What do the red and green highlights mean?',
+      answer:
+        'Red marks text that exists only in the original, so it was removed or replaced. Green marks text that exists only in the revised version, so it was added. Striped grey space shows where a line exists on one side only, keeping the two columns aligned.',
+    },
+    {
+      question: 'Can I compare long documents?',
+      answer:
+        'Yes. The panes are sized like an A4 page and scroll, and very long texts automatically hide long runs of unchanged lines so you only see the edits. Click a folded section to expand it, or turn off Only changes to see everything.',
     },
   ],
 

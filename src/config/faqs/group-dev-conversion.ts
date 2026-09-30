@@ -301,27 +301,31 @@ export const FAQS: FaqMap = {
   'diff-checker': [
     {
       question: 'How do I compare two texts or files online?',
-      answer: 'Paste the original text on the left and the changed version on the right, then click compare. The result lists each line as unchanged, added or removed with line numbers, so you can spot differences at a glance. It is useful for code, config files, contracts and drafts.',
+      answer: 'Paste or open the original on the left and the changed version on the right, then press Compare (or Ctrl/Cmd+Enter). Matching lines are aligned side by side, removed lines are red, added lines are green, and the exact characters that changed inside a line are highlighted. Everything runs in your browser.',
     },
     {
-      question: 'Does the diff work line by line or by character?',
-      answer: 'It compares line by line. If any character in a line changes, the old line is shown as removed and the new line as added, rather than highlighting the exact changed word inside the line. Split long lines first if you need finer detail.',
+      question: 'How do I merge changes from one side to the other?',
+      answer: 'Click a change to select it, then choose Keep Original, Keep Changed or Keep both. You can also use the arrow buttons in the middle gutter: the right arrow copies the left version across, the left arrow copies the right version back. Undo, redo and Reset let you back out of any merge.',
     },
     {
-      question: 'Why does a line show as changed when it looks identical?',
-      answer: 'Invisible differences count. Trailing spaces, tabs versus spaces, different line endings (Windows CRLF versus Unix LF), or lookalike Unicode characters make lines unequal. Clean up whitespace in both versions and compare again to see whether the difference disappears.',
+      question: 'How do I jump to the next difference?',
+      answer: 'Use the up and down buttons next to the change counter, or press Alt+Down and Alt+Up. The selected change is outlined and scrolled into view. The coloured ruler on the right edge shows where every change sits in the file; click a mark to jump straight to it.',
     },
     {
-      question: 'What do the added and removed colors mean?',
-      answer: 'Added lines exist only in the modified text, while removed lines exist only in the original text. Unchanged lines appear in both. This is the same idea as a Git diff, where lines marked with a plus are added and lines marked with a minus are deleted.',
+      question: 'Can I ignore whitespace or letter case?',
+      answer: 'Yes. Turn on Ignore whitespace to treat lines that differ only in spaces, tabs or indentation as equal, and Ignore case to treat upper and lower case as the same. Line endings (Windows CRLF versus Unix LF) are always treated as equal.',
     },
     {
-      question: 'Can I compare code with this tool?',
-      answer: 'Yes. It works with any plain text, including source code, JSON, SQL and configuration files. Format both versions the same way first, for example with a JSON formatter, so that layout differences are not reported as changes.',
+      question: 'Does it compare line by line or character by character?',
+      answer: 'Both. Lines are aligned first using the same algorithm as Git (Myers diff), so an inserted line does not throw off the rest of the file. Inside each changed line you can highlight the differing words or individual characters with the Words and Chars switch.',
     },
     {
-      question: 'How is a diff checker different from Git diff?',
-      answer: 'Git diff compares files inside a repository and tracks history, while this tool compares two pieces of text you paste in, with no repository needed. It is quicker for a one-off comparison, but it does not handle binary files or a three-way merge.',
+      question: 'Can I save the merged result or a patch file?',
+      answer: 'Yes. Each side has Copy and Download buttons, and once every change is resolved both sides match and you can copy the result in one click. The .patch button downloads a standard unified diff that works with git apply and the patch command.',
+    },
+    {
+      question: 'Are my files uploaded when I compare them?',
+      answer: 'No. Files you open or drop are read by your browser and compared locally, so nothing is sent to a server. That makes it safe for source code, contracts and configuration files that contain private data. Files up to 5 MB can be opened.',
     },
   ],
 
@@ -592,6 +596,60 @@ export const FAQS: FaqMap = {
     {
       question: 'What is the difference between &nbsp; and a normal space?',
       answer: 'A non-breaking space (&nbsp;) looks like a space but stops a line from wrapping there, and browsers do not collapse several of them into one. A normal space can be collapsed and wrapped. On decoding, this tool turns &nbsp; into a regular space character.',
+    },
+  ],
+
+  'json-toon-converter': [
+    {
+      question: 'What is TOON format?',
+      answer: 'TOON (Token-Oriented Object Notation) is a compact, human-readable way to write JSON data for large language models. It uses indentation like YAML for nesting and a table-like layout for arrays of objects, declaring the field names once instead of repeating them in every row.',
+    },
+    {
+      question: 'How do I convert JSON to TOON?',
+      answer: 'Paste JSON into the left panel or open a .json file and the TOON version appears on the right as you type. Choose a comma, tab or pipe delimiter and 2 or 4 space indentation, then copy the result or download it as a .toon file.',
+    },
+    {
+      question: 'How much does TOON reduce LLM token usage?',
+      answer: 'It depends on the shape of your data. Arrays of objects with the same fields save the most, often 30 to 60 percent against formatted JSON, because keys are written once as a header. Deeply nested or irregular data saves less. The tool shows an estimated saving for your exact input.',
+    },
+    {
+      question: 'Can I convert TOON back to JSON?',
+      answer: 'Yes. Switch to TOON to JSON, paste TOON text and get pretty or minified JSON. Strict mode checks that each array has the number of items its [N] header declares, which catches truncated or hand-edited data. The conversion is lossless for any valid JSON.',
+    },
+    {
+      question: 'Which delimiter should I use for TOON?',
+      answer: 'Comma is the default and the most readable. Tab often tokenises more efficiently and avoids quoting values that contain commas, such as addresses. Pipe is a good middle ground when your text has both commas and tabs. Values that contain the active delimiter are quoted automatically.',
+    },
+    {
+      question: 'Is my JSON sent to a server or an AI model?',
+      answer: 'No. The conversion runs entirely in your browser using the TOON reference library, so your data never leaves your device. Token counts are estimated locally too, which is why they are approximate rather than exact for a specific model.',
+    },
+  ],
+
+  'json-compare': [
+    {
+      question: 'How do I compare two JSON files online?',
+      answer: 'Paste or open one JSON document on each side and press Compare. Both are validated, formatted the same way and compared side by side, with changed values highlighted. A table below lists every path that was added, removed or changed, such as owner.email or features[3].',
+    },
+    {
+      question: 'Does key order matter when comparing JSON?',
+      answer: 'Not with Sort keys turned on, which is the default. Object keys are sorted alphabetically on both sides before comparing, so {"a":1,"b":2} and {"b":2,"a":1} are reported as equal. Turn it off if you need to see key order changes too.',
+    },
+    {
+      question: 'Can I ignore the order of items in an array?',
+      answer: 'Yes. Turn on Ignore array order and array items are sorted before comparing, so the same items in a different order are treated as equal. Leave it off when order is meaningful, for example in a list of steps or a sorted result set.',
+    },
+    {
+      question: 'What does type changed mean in the results?',
+      answer: 'It means the value at that path changed kind, not just value, for example from the boolean true to the string "true", or from a number to null. These are easy to miss by eye but often break code that reads the JSON, so they are listed separately.',
+    },
+    {
+      question: 'Can I merge two JSON documents?',
+      answer: 'Yes. Step through the differences and keep the left version, the right version or both for each change, with undo and reset. When you are done, copy or download either side. Check the merged file with the JSON Formatter if you kept both versions of a block.',
+    },
+    {
+      question: 'What happens if one of the JSON documents is invalid?',
+      answer: 'The comparison stops and tells you which side is invalid and the line and column of the problem, such as a trailing comma or a missing quote. Fix it in the editor and press Compare again. Nothing is uploaded; parsing happens in your browser.',
     },
   ],
 

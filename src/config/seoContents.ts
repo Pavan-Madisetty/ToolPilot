@@ -429,14 +429,82 @@ export const SEO_CONTENTS: Record<string, Partial<ToolConfig>> = {
   },
   'text-diff': {
     longDescription:
-      'A Text Diff checker performs side-by-side or unified comparisons between two versions of a document, highlighting added, modified, or deleted segments.',
+      'Text Diff compares two versions of a document the way an editor reviews tracked changes. Lines are aligned with the same algorithm Git uses, then the added, removed and reworded words inside each line are highlighted. You can accept or reject each change, undo any step and copy the merged text, all without uploading anything.',
     benefits: [
-      'Spot Changes: Highlight precise additions and deletions in color-coded formats.',
-      'Draft Versioning: Compare old drafts against new ones instantly.',
+      'Review edits fast: every added, removed and reworded word is highlighted in place.',
+      'Merge selectively: keep the original, the revision or both for each change.',
+      'Private by design: documents are compared in your browser and never uploaded.',
+    ],
+    features: [
+      'Side-by-side or unified view with aligned lines and word or character highlights.',
+      'Next/previous change navigation, overview ruler and keyboard shortcuts.',
+      'Undo, redo and reset, plus copy, download and .patch export.',
     ],
     howToSteps: [
-      { name: 'Enter Original Text', text: 'Paste the base version in the left panel.' },
-      { name: 'Enter Modified Text', text: 'Paste the updated version in the right panel.' },
+      { name: 'Add both versions', text: 'Paste or drop the original on the left and the revised text on the right.' },
+      { name: 'Compare', text: 'Press Compare (Ctrl/Cmd+Enter) to align the texts and highlight every change.' },
+      { name: 'Review and merge', text: 'Step through changes and choose Keep Original, Keep Revised or Keep both.' },
+      { name: 'Export', text: 'Copy or download the merged text once every change is resolved.' },
+    ],
+  },
+  'diff-checker': {
+    longDescription:
+      'Diff Checker is a side-by-side compare and merge tool for text and code. It aligns matching lines with the Myers diff algorithm (the one Git uses), highlights the exact characters that changed, and lets you merge each change from one side to the other with undo, redo and reset. Both editors are sized like an A4 page so long files stay readable.',
+    benefits: [
+      'Spot every change: line alignment plus character-level highlights inside modified lines.',
+      'Merge like a desktop tool: copy changes across with one click, keep both, or take a whole side.',
+      'Works offline and privately: files are read and compared in your browser only.',
+    ],
+    features: [
+      'Split and unified layouts, ignore whitespace and ignore case options.',
+      'Change counter with next/previous navigation, overview ruler and keyboard shortcuts.',
+      'Open or drop files, copy or download each side, export a unified .patch.',
+    ],
+    tips: [
+      'Double-click any line in the comparison to jump straight to it in the editor.',
+      'Turn on Only changes to fold long unchanged sections in big files.',
+      'For JSON, use JSON Compare so key order and formatting are ignored automatically.',
+    ],
+    howToSteps: [
+      { name: 'Add both files', text: 'Paste text or open files on the Original and Changed sides.' },
+      { name: 'Compare', text: 'Press Compare (Ctrl/Cmd+Enter) to see aligned, highlighted differences.' },
+      { name: 'Navigate', text: 'Use the arrows or Alt+Up/Down to move between changes.' },
+      { name: 'Merge and export', text: 'Keep a side for each change, then copy or download the result or a .patch.' },
+    ],
+  },
+  'json-toon-converter': {
+    longDescription:
+      'TOON (Token-Oriented Object Notation) is a compact encoding of the JSON data model designed for LLM prompts. It keeps objects readable with indentation and turns arrays of similar objects into tables with a single header, so repeated keys, braces and quotes disappear. This converter uses the official TOON reference library to convert JSON to TOON and back, and estimates how many tokens you save.',
+    benefits: [
+      'Cut prompt costs: tabular data often needs 30–60% fewer tokens than formatted JSON.',
+      'Lossless round trip: decode TOON back to identical JSON at any time.',
+      'Private: conversion happens in your browser, nothing is sent to a model or server.',
+    ],
+    features: [
+      'Comma, tab or pipe delimiters and 2 or 4 space indentation.',
+      'Live token and character comparison against formatted and minified JSON.',
+      'Strict TOON validation with line numbers, file open and .toon/.json download.',
+    ],
+    howToSteps: [
+      { name: 'Paste JSON', text: 'Paste JSON or open a .json file in the input panel.' },
+      { name: 'Pick options', text: 'Choose a delimiter and indentation for the TOON output.' },
+      { name: 'Check the saving', text: 'Compare the estimated tokens for TOON and JSON above the editors.' },
+      { name: 'Copy or reverse', text: 'Copy or download the TOON, or switch to TOON → JSON to decode it.' },
+    ],
+  },
+  'json-compare': {
+    longDescription:
+      'JSON Compare finds the real differences between two JSON documents. Both sides are validated and normalised — keys sorted, and optionally arrays too — so formatting and key order never show up as changes. You get an aligned side-by-side diff you can merge, plus a table of every changed path with its old and new value.',
+    benefits: [
+      'Only meaningful changes: key order and whitespace are ignored automatically.',
+      'Path-level report: see exactly which fields were added, removed or changed type.',
+      'Merge and export: resolve each difference and download the merged JSON.',
+    ],
+    howToSteps: [
+      { name: 'Add two JSON documents', text: 'Paste or open JSON on the left and right.' },
+      { name: 'Choose options', text: 'Keep Sort keys on, and turn on Ignore array order if order does not matter.' },
+      { name: 'Compare', text: 'Press Compare to validate, normalise and diff both documents.' },
+      { name: 'Review', text: 'Read the structural changes table and merge differences as needed.' },
     ],
   },
   'markdown-editor': {

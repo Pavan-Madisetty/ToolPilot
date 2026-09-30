@@ -23,6 +23,8 @@ export const EXTRA_ROUTES: ExtraRoute[] = [
   r('developer/json-csv-converter', () => import('./developer/JsonCsvConverter')),
   r('developer/chmod-calculator', () => import('./developer/ChmodCalculator')),
   r('developer/url-parser', () => import('./developer/UrlParser')),
+  r('developer/json-to-toon', () => import('./developer/JsonToonConverter')),
+  r('developer/json-compare', () => import('./developer/JsonCompare')),
   // Text
   r('text/text-sorter', () => import('./text/TextSorter')),
   r('text/find-replace', () => import('./text/FindReplace')),

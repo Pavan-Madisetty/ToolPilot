@@ -155,7 +155,7 @@ export const MODULE_METADATA: Record<string, ModuleMetadata> = {
     categories: [
       {
         title: 'Code Formatters & Beautifiers',
-        toolIds: ['json-formatter', 'sql-formatter', 'json-csv-converter'],
+        toolIds: ['json-formatter', 'json-compare', 'json-toon-converter', 'sql-formatter', 'json-csv-converter'],
       },
       {
         title: 'Encoders, Decoders & Parsers',

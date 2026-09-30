@@ -58,7 +58,7 @@
 - [Alternative Timestamps Converter](https://toolskyt.com/developer/alternative-timestamps): Convert Unix timestamps (seconds, ms, µs, ns) to readable dates, with LDAP, WebKit, NTP and Cocoa epoch offsets explained
 - [Color Picker & Converter](https://toolskyt.com/developer/color-picker): Pick colors and convert between HEX, RGB and HSL formats
 - [SQL Formatter](https://toolskyt.com/developer/sql-formatter): Format and beautify SQL queries with keyword highlighting
-- [Diff Checker](https://toolskyt.com/developer/diff-checker): Compare two texts or code blocks side-by-side
+- [Diff Checker & Merge](https://toolskyt.com/developer/diff-checker): Compare two texts or code files side by side, then merge changes line by line
 - [Password Generator](https://toolskyt.com/developer/password-generator): Generate strong, secure passwords with custom rules
 - [Lorem Ipsum Generator](https://toolskyt.com/developer/lorem-ipsum): Generate Lorem Ipsum placeholder text of any length
 - [Gradient Generator](https://toolskyt.com/developer/gradient-generator): Create CSS gradients visually and copy the CSS code
@@ -68,6 +68,8 @@
 - [JSON ⇄ CSV Converter](https://toolskyt.com/developer/json-csv-converter): Convert JSON arrays to CSV and CSV back to JSON, with nested-key flattening
 - [Chmod Calculator](https://toolskyt.com/developer/chmod-calculator): Build Unix file permissions visually — octal, symbolic and command output
 - [URL Parser](https://toolskyt.com/developer/url-parser): Break a URL into protocol, host, path, query params and hash
+- [JSON to TOON Converter](https://toolskyt.com/developer/json-to-toon): Convert JSON to TOON (Token-Oriented Object Notation) and back — cut LLM prompt tokens
+- [JSON Compare](https://toolskyt.com/developer/json-compare): Compare two JSON documents — ignores key order, lists every changed path, merge side by side
 
 ## PDF Tools
 
@@ -99,7 +101,7 @@
 - [Word Counter](https://toolskyt.com/text/word-counter): Count words, characters, sentences, paragraphs and reading time
 - [Case Converter](https://toolskyt.com/text/case-converter): Convert text between UPPER, lower, Title, camelCase, snake_case
 - [Slug Generator](https://toolskyt.com/text/slug-generator): Generate URL-friendly slugs from any text
-- [Text Diff](https://toolskyt.com/text/text-diff): Compare two text blocks and highlight differences
+- [Text Diff](https://toolskyt.com/text/text-diff): Compare two drafts word by word, highlight every edit and merge the ones you want
 - [Markdown Editor](https://toolskyt.com/text/markdown-editor): Markdown editor with live preview, open-file support and .md export
 - [Text to Emoji Translator](https://toolskyt.com/text/text-to-emoji): Translate words to emojis or spell text using emoji blocks
 - [Stylish Text Generator](https://toolskyt.com/text/stylish-text): Convert regular text into stylish fonts and Unicode symbols
